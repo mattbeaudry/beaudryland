@@ -13,3 +13,5 @@ Major Features
 - Enemies with simple AI
 - Projectiles
 - Saving and loading a player & game with php/MySQL
+- On screen control pad for touch devices
+- Basic animation for player item swing, transportation items, projectiles and animated map features
