@@ -1,0 +1,1570 @@
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    /* resize: vertical; */
+}
+
+/* ==========================================================================
+   Chrome Frame prompt
+   ========================================================================== */
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles: Matt Beaudry
+   ========================================================================== */
+
+
+/* COLORS */
+
+@white: #fff;
+@black: #000;
+@grass-green: #36ac2a;
+@snow-white: #f5fdff;
+@sand: #d9cfa2;
+
+/* BASE STYLES */
+
+
+body {
+	font-family: helvetica, verdana;
+	padding-bottom: 40px;
+}
+h1, h2 {
+	font-family: "Press Start 2P", helvetica, verdana;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+a {
+	color:#666;
+}
+a:hover {
+	color:#000;
+}
+hr {
+	width:90%;
+	margin:20px auto;
+}
+
+
+
+/* THE WEBSITE */
+
+
+.container {
+	width: 800px;
+	margin: 0 auto;
+}
+.horizonal-spacing {
+	margin-bottom: 30px;
+}
+.logo-beaudryland img {
+	width:38px;
+	height:38px;
+	margin-right:20px;
+	margin-top:-21px;
+}
+.logo-beaudryland a {
+	text-decoration:none;
+	color:#111;
+}
+.the-fucking-header {
+	margin:0 auto 40px;
+}
+.page-home .the-fucking-header {
+	margin-bottom:0px;
+	text-align: center;
+}
+.page-home .the-fucking-header p {
+	width:80%;
+	margin:0 auto 30px;
+}
+.page-game .the-fucking-header {
+	margin-bottom:0px;
+	padding-top: 280px;
+}
+.beaudryland-nav {
+	margin-bottom: 80px;
+}
+.beaudryland-nav > ul {
+	list-style: none;
+	padding:0;
+	float:left;
+	width:100%;
+	margin:0px;
+	
+}
+.beaudryland-nav  ul  li {
+	display: block;
+	float: left;
+	margin-right: 20px;
+}
+.beaudryland-nav  ul  li  a {
+	display: inline;
+	padding: 10px 20px;
+	background-color: #eee;
+}
+.the-fucking-gameinfo {
+	text-align:left;
+	width:800px;
+	margin:0 auto;
+}
+.the-fucking-gameinfo section {
+	margin:40px 0;
+}
+.the-fucking-gameinfo .recent-updates {
+	margin-bottom:80px;
+}
+.banner-beaudryland {
+	background-color: #eee;
+	margin-top:40px;
+	width:800px;
+}
+.beaudrylandlogin {
+	text-align: right;
+}
+.beaudrylandlogin .button {
+	float:right;
+	width:40%;
+}
+.beaudrylandregister .button {
+	width:40%;
+}
+.beaudrylandlogin input {
+	float:right;
+	margin-right:20px !important;
+}
+.beaudrylandregister input {
+	float:left;
+	margin-left:20px !important;
+}
+.the-fucking-login > form {
+	float:left;
+	width:50%;
+}
+.the-fucking-login input {
+	width:60%;
+}
+.link-savemap {
+	padding: 0 5px;
+	text-decoration: underline;
+	cursor: pointer;
+	color: #fff !important;
+	
+}
+.link-savemap a,
+.link-whatis a {
+	color: #fff !important;
+	background-color: #000 !important;
+}
+.the-fucking-login input {
+	height: 25px;
+	padding-left: 6px;
+	border: solid 1px #ddd;
+}
+.the-fucking-login .button {
+	height: 32px;
+	padding: 0 30px;
+	margin: 0px;
+	border: none;
+	color: #fff;
+	background-color: #000;
+}
+.recent-updates {
+	background-color:#ddd;
+	padding:10px 20px;
+}
+.the-fucking-login .form-field {
+	margin-bottom:10px;
+}
+.error-login {
+	float: right;
+	width: 100%;
+	padding: 5px 20px 10px;
+}
+.error-register {
+	float: left;
+	width: 100%;
+	padding: 5px 0px 10px 20px;
+}
+.mapnav {
+	margin:10px auto;
+	text-align: center;
+}
+.item-formulas {
+	list-style: none;
+	padding: 0px;
+}
+.item-formulas > li {
+	margin-bottom: 5px;
+}
+.item-formulas > li img {
+	width: 40px;
+	height: 40px;
+}
+
+
+	
+/* THE MAP */
+
+
+
+.the-fucking-map,
+.the-fucking-winter-map,
+.the-fucking-beach-map {
+	width:400px;
+	height:400px;
+	margin:0px auto;
+}
+.user-map {
+	width:800px;
+	height:600px;
+	margin:40px auto;
+}
+.the-fucking-map-gallery {
+}
+.the-fucking-map-gallery h3 {
+	position: absolute;
+	font-family: "Press Start 2P", helvetica, verdana;
+	font-weight: 400;
+	text-transform: uppercase;
+	background-color: rgba(255,255,255,1);
+	padding: 4px 4px 0;
+	margin-left: 20px;
+	float:left;
+	z-index:10;
+}
+.gallery-map-wrap {
+	float:left;
+	margin-top: -88px;
+	width:800px;
+}
+.page-mapgallery h2 {
+	margin-bottom: 50px;
+}
+
+
+
+/* THE BLOCKS */
+
+
+
+.block {
+	width: 20px;
+	/*border: solid #fff;
+	border-width: 0 1px 1px 0;*/
+	height: 20px;
+	float: left;
+}
+.block-dirt {
+	background:#6a4107 url(../img/block-dirt.png) no-repeat;
+	background-size: contain;
+}
+.block-grass {
+	background:@grass-green url(../img/block-grass.png) no-repeat;
+	background-size: contain;
+}
+.block-water {
+	background:#00a2ff url(../img/block-water.png) no-repeat;
+	background-size: contain;
+}
+.block-tree {
+	background: url(../img/block-tree.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-tree, .map-forest .block-tree {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-tree, .map-winter .block-tree {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-tree, .map-beach .block-tree {
+	background-color:@sand;
+}
+.block-wood {
+	background:#916d33 url(../img/block-wood.png) no-repeat;
+	background-size: contain;
+}
+.block-rock {
+	background: url(../img/block-rock.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-rock, .map-forest .block-rock {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-rock, .map-winter .block-rock {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-rock, .map-beach .block-rock {
+	background-color:@sand;
+}
+.block-hole {
+	background:@grass-green url(../img/block-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-shovel {
+	background:#ddd url(../img/item-shovel.png) no-repeat;
+	background-size: contain;
+}
+.block-sword {
+	background:#ddd url(../img/item-sword.png) no-repeat;
+	background-size: contain;
+}
+.block-fire {
+	background: url(../img/item-fire-3.gif) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-fire, .map-forest .block-fire {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-fire, .map-winter .block-fire {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-fire, .map-beach .block-fire {
+	background-color:@sand;
+}
+.block-door,
+.block-door-closed {
+	background: url(../img/item-door-closed.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-door,
+.the-fucking-map .block-door-closed,
+.map-forest .block-door,
+.map-forest .block-door-closed {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-door,
+.the-fucking-winter-map .block-door-closed,
+.map-winter .block-door,
+.map-winte .block-door-closed {
+	background-color:@snow-white;
+}
+.block-door-open {
+	background:@grass-green url(../img/item-door-open.png) no-repeat;
+	background-size: contain;
+}
+.block-guitar {
+	background:#ddd url(../img/item-guitar.png) no-repeat;
+	background-size: contain;
+}
+.block-diamond-hole {
+	background:@grass-green url(../img/block-diamond-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-diamond {
+	background:url(../img/block-diamond.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-diamond, .map-forest .block-diamond {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-diamond, .map-winter .block-diamond {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-diamond, .map-beach .block-diamond {
+	background-color:@sand;
+}
+.block-gold-hole {
+	background: @snow-white url(../img/block-gold-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-gold {
+	background:url(../img/block-gold.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-gold, .map-forest .block-gold {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-gold, .map-winter .block-gold {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-gold, .map-beach .block-gold {
+	background-color:@sand;
+}
+.block-silver-hole {
+	background: @snow-white url(../img/block-silver-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-silver {
+	background: url(../img/block-silver.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-silver, .map-forest .block-silver {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-silver, .map-winter .block-silver {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-silver, .map-beach .block-silver {
+	background-color:@sand;
+}
+.block-frisbee {
+	background: #ddd url(../img/item-frisbee.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-frisbee {
+	width:20px;
+	height:20px;
+	position:relative;
+	background: url(../img/item-frisbee.gif) no-repeat;
+	background-size: contain;
+	margin-top:-20px;
+}
+.the-fucking-spear {
+	width:20px;
+	height:20px;
+	position:relative;
+	background: url(../img/item-spear.png) no-repeat;
+	background-size: contain;
+	margin-top:-20px;
+}
+.block-snow {
+	background: @snow-white url(../img/block-snow.png) no-repeat;
+	background-size: contain;
+}
+.block-ice {
+	background: @snow-white url(../img/block-ice.png) no-repeat;
+	background-size: contain;
+}
+.block-pinetree {
+	background: url(../img/block-pinetree.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-pinetree, .map-forest .block-pinetree {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-pinetree, .map-winter .block-pinetree {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-pinetree, .map-beach .block-pinetree {
+	background-color:@sand;
+}
+.block-icerock {
+	background: url(../img/block-icerock.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-icerock, .map-forest .block-icerock {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-icerock, .map-winter .block-icerock {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-icerock, .map-beach .block-icerock {
+	background-color:@sand;
+}
+.block-frozendirt {
+	background: @snow-white url(../img/block-frozendirt.png) no-repeat;
+	background-size: contain;
+}
+.block-snowhole {
+	background: @snow-white url(../img/block-snowhole.png) no-repeat;
+	background-size: contain;
+}
+.block-skiis {
+	background: @snow-white url(../img/item-skiis.png) no-repeat;
+	background-size: contain;
+}
+.block-bike {
+	background: @snow-white url(../img/item-bike.png) no-repeat;
+	background-size: contain;
+}
+.block-sand {
+	background: @sand url(../img/block-sand.png) no-repeat;
+	background-size: contain;
+}
+.block-sandstone {
+	background: url(../img/block-sandstone.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-sandstone, .map-forest .block-sandstone {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-sandstone, .map-winter .block-sandstone {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-sandstone, .map-beach .block-sandstone {
+	background-color:@sand;
+}
+.block-sandhole {
+	background: @sand url(../img/block-sandhole.png) no-repeat;
+	background-size: contain;
+}
+.block-wetsand {
+	background: @sand url(../img/block-wetsand.png) no-repeat;
+	background-size: contain;
+}
+.block-wave {
+	background: #00a2ff url(../img/block-wave.png) no-repeat;
+	background-size: contain;
+}
+.block-palmtree {
+	background: url(../img/block-palmtree.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-palmtree, .map-forest .block-palmtree {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-palmtree, .map-winter .block-palmtree {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-palmtree, .map-beach .block-palmtree {
+	background-color:@sand;
+}
+.block-clay-hole {
+	background: @snow-white url(../img/block-clay-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-clay {
+	background:url(../img/block-clay.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-clay, .map-forest .block-clay {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-clay, .map-winter .block-clay {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-clay, .map-beach .block-clay {
+	background-color:@sand;
+}
+.block-oil-hole {
+	background: @snow-white url(../img/block-oil-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-oil {
+	background:url(../img/block-oil.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-oil, .map-forest .block-oil {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-oil, .map-winter .block-oil {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-oil, .map-beach .block-oil {
+	background-color:@sand;
+}
+.block-rockbrick {
+	background:url(../img/block-rockbrick.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-rockbrick, .map-forest .block-rockbrick {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-rockbrick, .map-winter .block-rockbrick {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-rockbrick, .map-beach .block-rockbrick {
+	background-color:@sand;
+}
+.block-icerockbrick {
+	background:url(../img/block-icerockbrick.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-icerockbrick, .map-forest .block-icerockbrick {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-icerockbrick, .map-winter .block-icerockbrick {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-icerockbrick, .map-beach .block-icerockbrick {
+	background-color:@sand;
+}
+.block-sandstonebrick {
+	background:url(../img/block-sandstonebrick.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-sandstonebrick, .map-forest .block-sandstonebrick {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-sandstonebrick, .map-winter .block-sandstonebrick {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-sandstonebrick, .map-beach .block-sandstonebrick {
+	background-color:@sand;
+}
+.block-claybrick {
+	background:url(../img/block-claybrick.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-claybrick, .map-forest .block-claybrick {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-claybrick, .map-winter .block-claybrick {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-claybrick, .map-beach .block-claybrick {
+	background-color:@sand;
+}
+.block-road {
+	background:url(../img/block-road.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-road, .map-forest .block-road {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-road, .map-winter .block-road {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-road, .map-beach .block-road {
+	background-color:@sand;
+}
+.block-car {
+	background:url(../img/item-car.png) no-repeat;
+	background-size: contain;
+}
+.block-canoe {
+	background:url(../img/item-canoe.png) no-repeat;
+	background-size: contain;
+}
+.block-piano {
+	background:url(../img/item-piano.png) no-repeat;
+	background-size: contain;
+}
+.block-spear {
+	background:url(../img/item-spear.png) no-repeat;
+	background-size: contain;
+}
+.block-sign {
+	background:url(../img/item-sign.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-sign, .map-forest .block-sign {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-sign, .map-winter .block-sign {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-sign, .map-beach .block-sign {
+	background-color:@sand;
+}
+.block-axe {
+	background:url(../img/item-axe.png) no-repeat;
+	background-size: contain;
+}
+
+/* THE PLAYER */
+
+
+
+.the-fucking-player {
+	width:20px;
+	height:20px;
+	position:relative;
+	left:300px;
+	top:300px;
+	background:url(../img/player-down.png) no-repeat;
+	background-size: contain !important;
+}
+.player-direction-up { background:url(../img/player-up.png) no-repeat; }
+.player-direction-down { background:url(../img/player-down.png) no-repeat; }
+.player-direction-left { background:url(../img/player-left.png) no-repeat; }
+.player-direction-right { background:url(../img/player-right.png) no-repeat; }
+
+.player-direction-up-sword { background:url(../img/player-up-sword.png) no-repeat; }
+.player-direction-down-sword { background:url(../img/player-down-sword.png) no-repeat; }
+.player-direction-left-sword { background:url(../img/player-left-sword.png) no-repeat; }
+.player-direction-right-sword { background:url(../img/player-right-sword.png) no-repeat; }
+
+.player-direction-up-sword-swing { background:url(../img/player-up-sword-swing.png) no-repeat; }
+.player-direction-down-sword-swing { background:url(../img/player-down-sword-swing.png) no-repeat; }
+.player-direction-left-sword-swing { background:url(../img/player-left-sword-swing.png) no-repeat; }
+.player-direction-right-sword-swing { background:url(../img/player-right-sword-swing.png) no-repeat; }
+
+.player-direction-up-shovel { background:url(../img/player-up-shovel.png) no-repeat; }
+.player-direction-down-shovel { background:url(../img/player-down-shovel.png) no-repeat; }
+.player-direction-left-shovel { background:url(../img/player-left-shovel.png) no-repeat; }
+.player-direction-right-shovel { background:url(../img/player-right-shovel.png) no-repeat; }
+
+.player-direction-up-shovel-swing { background:url(../img/player-up-shovel-swing.png) no-repeat !important; }
+.player-direction-down-shovel-swing { background:url(../img/player-down-shovel-swing.png) no-repeat; }
+.player-direction-left-shovel-swing { background:url(../img/player-left-shovel-swing.png) no-repeat; }
+.player-direction-right-shovel-swing { background:url(../img/player-right-shovel-swing.png) no-repeat; }
+
+.player-direction-up-bike { background:url(../img/player-up-bike.png) no-repeat; }
+.player-direction-down-bike { background:url(../img/player-down-bike.png) no-repeat; }
+.player-direction-left-bike { background:url(../img/player-left-bike.png) no-repeat; }
+.player-direction-right-bike { background:url(../img/player-right-bike.png) no-repeat; }
+
+.player-direction-up-skiis { background:url(../img/player-up-skiis.png) no-repeat; }
+.player-direction-down-skiis { background:url(../img/player-down-skiis.png) no-repeat; }
+.player-direction-left-skiis { background:url(../img/player-left-skiis.png) no-repeat; }
+.player-direction-right-skiis { background:url(../img/player-right-skiis.png) no-repeat; }
+
+.player-direction-up-canoe { background:url(../img/player-up-canoe.png) no-repeat; }
+.player-direction-down-canoe { background:url(../img/player-down-canoe.png) no-repeat; }
+.player-direction-left-canoe { background:url(../img/player-left-canoe.png) no-repeat; }
+.player-direction-right-canoe { background:url(../img/player-right-canoe.png) no-repeat; }
+
+.player-direction-up-car { background:url(../img/player-up-car.png) no-repeat; }
+.player-direction-down-car { background:url(../img/player-down-car.png) no-repeat; }
+.player-direction-left-car { background:url(../img/player-left-car.png) no-repeat; }
+.player-direction-right-car { background:url(../img/player-right-car.png) no-repeat; }
+
+.speech-bubble {
+	position:absolute;
+	background:#fff;
+	top:-80px;
+	left:-20px;
+	padding:20px;
+	border: 1px solid #333;
+}
+.bubble-form {
+	
+}
+.bubble-text {
+	border:none;
+}
+.bubble-text:focus {
+	background-color:#fff;
+}
+
+/* THE ENEMY */
+
+.the-fucking-enemy {
+	width:20px;
+	height:20px;
+	margin-top:-20px; /* enemy stacking bug fix */
+	position:relative;
+	left:300px;
+	top:20px;
+	background:#36ac2a url(../img/enemy-down.png) no-repeat;
+	background-size: contain !important;
+}
+.enemy-direction-up {
+	background:url(../img/enemy-up.png) no-repeat;
+}
+.enemy-direction-down {
+	background:url(../img/enemy-down.png) no-repeat;
+}
+.enemy-direction-left {
+	background:url(../img/enemy-left.png) no-repeat;
+}
+.enemy-direction-right {
+	background:url(../img/enemy-right.png) no-repeat;
+}
+
+/* INVENTORY */
+
+.the-fucking-inventory > div,
+.the-fucking-crafting-table > div,
+.the-fucking-crafted-item > div {
+	padding-top:10px;
+	text-align:center;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor:pointer;
+}
+.the-fucking-inventory > .empty,
+.the-fucking-crafting-table > .empty,
+.the-fucking-crafted-item > .empty {
+	cursor:default;
+	background-color: transparent;
+	color: transparent;
+}
+.the-fucking-inventory {
+	color: white;
+	margin: 3px auto;
+	background-color: transparent;
+}
+.the-fucking-inventory > div {
+	border: solid 2px transparent;
+	float: left;
+	width: 40px!important;
+	padding-top: 40px;
+	height: 15px!important;
+	color: #000;
+	background-color: transparent;
+	margin-bottom: 3px;
+	margin-right: 3px;
+	font-family: "Press Start 2P",helvetica,verdana;
+	font-size: 0.8em;
+	line-height: 1.4;
+}
+.the-fucking-inventory .empty {
+	display: none;
+}
+.the-fucking-inventory .selected-item {
+	border:dashed 2px #000;
+	
+}
+.sticky-inventory {
+	position: fixed;
+	width: 100%;
+	background-color: rgba(255,255,255,0.9);
+	border-bottom: solid 1px #ddd;
+}
+
+
+
+/* THE CRAFTING TABLE */
+
+
+
+.the-fucking-crafting-table {
+	float: left;
+	color: white;
+	margin-right: 5px;
+	border: solid 2px black;
+}
+.the-fucking-crafted-item {
+	float: left;
+	width: 50px;
+	height: 50px;
+	color: white;
+	border: solid 2px black;
+}
+.the-fucking-crafting-table > div,
+.the-fucking-crafted-item > div {
+	width:50px;
+	height:40px;
+	float:left;
+}
+.the-fucking-crafting-table > .slot-1 { border-right:0px; margin-bottom:0px; }
+.the-fucking-crafting-table > .slot-2 { border-left:0px; border-right:0px; margin-bottom:0px; }
+.the-fucking-crafting-table > .slot-3 { border-left:0px; }
+
+
+
+/* CONTROLLER */
+
+
+
+.the-fucking-controller {
+	width:800px;
+	height:540px;
+	margin:0 auto;
+	display:none;
+	position:fixed;
+	bottom:0;
+}
+.the-fucking-controller a {
+	/*background-color:#fff;*/
+}
+.btn-up, .btn-down, .btn-left, .btn-right {
+	display:block;
+	position:relative;
+	width:160px;
+	height:160px;
+	border:solid 5px rgba(130,130,130,0.5);
+	border-radius:50%;
+}
+.btn-up {
+	left:160px;
+	top:20px;
+}
+.btn-down {
+	left:160px;
+	top:180px;
+}
+.btn-left {
+	left: 0px;
+	top: -143px;
+}
+.btn-right {
+	left:320px;
+	top:-303px;
+}
+.btn-a {
+	display:block;
+	position:relative;
+	width:220px;
+	height:220px;
+	left: 70%;
+	top: -520px;
+	border:solid 5px #ddd;
+	border-radius:50%;
+}
+
+
+
+/* THE BLOCKS */
+
+
+
+.block {
+	width:20px;
+	height:20px;
+	float:left;
+}
+.block-dirt {
+	background:#6a4107 url(../img/block-dirt.png) no-repeat;
+	background-size: contain;
+}
+.block-grass {
+	background:@grass-green url(../img/block-grass.png) no-repeat;
+	background-size: contain;
+}
+.block-water {
+	background:#00a2ff url(../img/block-water.png) no-repeat;
+	background-size: contain;
+}
+.block-tree {
+	background: url(../img/block-tree.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-tree, .map-forest .block-tree {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-tree, .map-winter .block-tree {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-tree, .map-beach .block-tree {
+	background-color:@sand;
+}
+.block-wood {
+	background:#916d33 url(../img/block-wood.png) no-repeat;
+	background-size: contain;
+}
+.block-rock {
+	background: url(../img/block-rock.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-rock, .map-forest .block-rock {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-rock, .map-winter .block-rock {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-rock, .map-beach .block-rock {
+	background-color:@sand;
+}
+.block-hole {
+	background:@grass-green url(../img/block-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-shovel {
+	background:#ddd url(../img/item-shovel.png) no-repeat;
+	background-size: contain;
+}
+.block-sword {
+	background:#ddd url(../img/item-sword.png) no-repeat;
+	background-size: contain;
+}
+.block-fire {
+	background: url(../img/item-fire-3.gif) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-fire, .map-forest .block-fire {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-fire, .map-winter .block-fire {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-fire, .map-beach .block-fire {
+	background-color:@sand;
+}
+.block-door,
+.block-door-closed {
+	background: url(../img/item-door-closed.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-door,
+.the-fucking-map .block-door-closed,
+.map-forest .block-door,
+.map-forest .block-door-closed {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-door,
+.the-fucking-winter-map .block-door-closed,
+.map-winter .block-door,
+.map-winte .block-door-closed {
+	background-color:@snow-white;
+}
+.block-door-open {
+	background:@grass-green url(../img/item-door-open.png) no-repeat;
+	background-size: contain;
+}
+.block-guitar {
+	background:#ddd url(../img/item-guitar.png) no-repeat;
+	background-size: contain;
+}
+.block-diamond-hole {
+	background:@grass-green url(../img/block-diamond-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-diamond {
+	background:url(../img/block-diamond.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-diamond, .map-forest .block-diamond {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-diamond, .map-winter .block-diamond {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-diamond, .map-beach .block-diamond {
+	background-color:@sand;
+}
+.block-gold-hole {
+	background: @snow-white url(../img/block-gold-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-gold {
+	background:url(../img/block-gold.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-gold, .map-forest .block-gold {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-gold, .map-winter .block-gold {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-gold, .map-beach .block-gold {
+	background-color:@sand;
+}
+.block-silver-hole {
+	background: @snow-white url(../img/block-silver-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-silver {
+	background: url(../img/block-silver.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-silver, .map-forest .block-silver {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-silver, .map-winter .block-silver {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-silver, .map-beach .block-silver {
+	background-color:@sand;
+}
+.block-frisbee {
+	background: #ddd url(../img/item-frisbee.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-frisbee {
+	width:20px;
+	height:20px;
+	position:relative;
+	background: url(../img/item-frisbee.gif) no-repeat;
+	background-size: contain;
+	margin-top:-20px;
+}
+.the-fucking-spear {
+	width:20px;
+	height:20px;
+	position:relative;
+	background: url(../img/item-spear.png) no-repeat;
+	background-size: contain;
+	margin-top:-20px;
+}
+.block-snow {
+	background: @snow-white url(../img/block-snow.png) no-repeat;
+	background-size: contain;
+}
+.block-ice {
+	background: @snow-white url(../img/block-ice.png) no-repeat;
+	background-size: contain;
+}
+.block-pinetree {
+	background: url(../img/block-pinetree.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-pinetree, .map-forest .block-pinetree {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-pinetree, .map-winter .block-pinetree {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-pinetree, .map-beach .block-pinetree {
+	background-color:@sand;
+}
+.block-icerock {
+	background: url(../img/block-icerock.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-icerock, .map-forest .block-icerock {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-icerock, .map-winter .block-icerock {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-icerock, .map-beach .block-icerock {
+	background-color:@sand;
+}
+.block-frozendirt {
+	background: @snow-white url(../img/block-frozendirt.png) no-repeat;
+	background-size: contain;
+}
+.block-snowhole {
+	background: @snow-white url(../img/block-snowhole.png) no-repeat;
+	background-size: contain;
+}
+.block-skiis {
+	background: @snow-white url(../img/item-skiis.png) no-repeat;
+	background-size: contain;
+}
+.block-bike {
+	background: @snow-white url(../img/item-bike.png) no-repeat;
+	background-size: contain;
+}
+.block-sand {
+	background: @sand url(../img/block-sand.png) no-repeat;
+	background-size: contain;
+}
+.block-sandstone {
+	background: url(../img/block-sandstone.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-sandstone, .map-forest .block-sandstone {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-sandstone, .map-winter .block-sandstone {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-sandstone, .map-beach .block-sandstone {
+	background-color:@sand;
+}
+.block-sandhole {
+	background: @sand url(../img/block-sandhole.png) no-repeat;
+	background-size: contain;
+}
+.block-wetsand {
+	background: @sand url(../img/block-wetsand.png) no-repeat;
+	background-size: contain;
+}
+.block-wave {
+	background: #00a2ff url(../img/block-wave.png) no-repeat;
+	background-size: contain;
+}
+.block-palmtree {
+	background: url(../img/block-palmtree.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-palmtree, .map-forest .block-palmtree {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-palmtree, .map-winter .block-palmtree {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-palmtree, .map-beach .block-palmtree {
+	background-color:@sand;
+}
+.block-clay-hole {
+	background: @snow-white url(../img/block-clay-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-clay {
+	background:url(../img/block-clay.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-clay, .map-forest .block-clay {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-clay, .map-winter .block-clay {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-clay, .map-beach .block-clay {
+	background-color:@sand;
+}
+.block-oil-hole {
+	background: @snow-white url(../img/block-oil-hole.png) no-repeat;
+	background-size: contain;
+}
+.block-oil {
+	background:url(../img/block-oil.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-oil, .map-forest .block-oil {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-oil, .map-winter .block-oil {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-oil, .map-beach .block-oil {
+	background-color:@sand;
+}
+.block-rockbrick {
+	background:url(../img/block-rockbrick.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-rockbrick, .map-forest .block-rockbrick {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-rockbrick, .map-winter .block-rockbrick {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-rockbrick, .map-beach .block-rockbrick {
+	background-color:@sand;
+}
+.block-icerockbrick {
+	background:url(../img/block-icerockbrick.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-icerockbrick, .map-forest .block-icerockbrick {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-icerockbrick, .map-winter .block-icerockbrick {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-icerockbrick, .map-beach .block-icerockbrick {
+	background-color:@sand;
+}
+.block-sandstonebrick {
+	background:url(../img/block-sandstonebrick.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-sandstonebrick, .map-forest .block-sandstonebrick {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-sandstonebrick, .map-winter .block-sandstonebrick {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-sandstonebrick, .map-beach .block-sandstonebrick {
+	background-color:@sand;
+}
+.block-claybrick {
+	background:url(../img/block-claybrick.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-claybrick, .map-forest .block-claybrick {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-claybrick, .map-winter .block-claybrick {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-claybrick, .map-beach .block-claybrick {
+	background-color:@sand;
+}
+.block-road {
+	background:url(../img/block-road.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-road, .map-forest .block-road {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-road, .map-winter .block-road {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-road, .map-beach .block-road {
+	background-color:@sand;
+}
+.block-car {
+	background:url(../img/item-car.png) no-repeat;
+	background-size: contain;
+}
+.block-canoe {
+	background:url(../img/item-canoe.png) no-repeat;
+	background-size: contain;
+}
+.block-piano {
+	background:url(../img/item-piano.png) no-repeat;
+	background-size: contain;
+}
+.block-spear {
+	background:url(../img/item-spear.png) no-repeat;
+	background-size: contain;
+}
+.block-sign {
+	background:url(../img/item-sign.png) no-repeat;
+	background-size: contain;
+}
+.the-fucking-map .block-sign, .map-forest .block-sign {
+	background-color:@grass-green;
+}
+.the-fucking-winter-map .block-sign, .map-winter .block-sign {
+	background-color:@snow-white;
+}
+.the-fucking-beach-map .block-sign, .map-beach .block-sign {
+	background-color:@sand;
+}
+.block-axe {
+	background:url(../img/item-axe.png) no-repeat;
+	background-size: contain;
+}
+
+
+
+
+
+@media only screen and (min-width: 1000px)  {
+    /* Style adjustments for viewports that meet the condition */
+    .the-fucking-controller {
+    	display:none;
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min-resolution: 144dpi)  {
+    /* Style adjustments for viewports that meet the condition */
+    .the-fucking-controller {
+    	display:block;
+    }
+}
+
+
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   Theses examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min-resolution: 144dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
