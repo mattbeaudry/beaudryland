@@ -45,7 +45,7 @@ var gridunitpx = 20; //must change this px value in css as well
 var mapwidth = 40;
 var mapheight = 30;
 var enemyspeed = 200;
-var animalspeed = 500;
+var animalspeed = 1000;
 var projectilespeed = 50;
 var bikespeed = 100;
 var totalmapblocks = mapwidth * mapheight;
@@ -499,21 +499,25 @@ initAnimalBrain = function(id) {
 			trace(animalPath);
 			trace("animallastpos="+animalPath[n-1]);
 
-			//is player stuck? move random direction
-			if (animalPath[n-1]==animalPath[n]) {
 
-				trace("animal STUCK");
+
+			//is animal stuck? move random direction
+			//if (animalPath[n-1]==animalPath[n]) {
+
+				//trace("animal STUCK");
 
 				var randomDirection = Math.floor(Math.random() * 4) + 1;
 				switch(randomDirection){
-					case 1: moveObjectUp(id, "animal"); break;
-					case 2: moveObjectDown(id, "animal"); break;
-					case 3: moveObjectLeft(id, "animal"); break;
-					case 4: moveObjectRight(id, "animal"); break;
+					case 1: moveObjectUp(id, "deer"); break;
+					case 2: moveObjectDown(id, "deer"); break;
+					case 3: moveObjectLeft(id, "deer"); break;
+					case 4: moveObjectRight(id, "deer"); break;
 				}
-			}
+			//}
 
 			trace("-----");
+
+			/*
 			var PEx = playerX - animalX; var PEy = animalY - playerY;
 			var posPEx = Math.abs(PEx); var posPEy = Math.abs(PEy);
 			
@@ -537,6 +541,7 @@ initAnimalBrain = function(id) {
 					moveObjectDown(id, "animal");
 				}
 			}
+			*/
 			
 			//limit
 			if (t > maxthoughts) {
@@ -1043,6 +1048,17 @@ changeObjectDirection = function(id, direction, name) {
 			if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-right"+playergraphic); }
 			break;
 	}
+
+	/*
+	var mobgraphic;
+	if ( name == 'enemy' || name == 'animal' ){ 
+		mobgraphic = "-"+selecteditem;
+	} else {
+		mobgraphic = "";
+	}
+	*/
+
+
 };
 getObjectDirection = function(id, name) {
 	var direction;
