@@ -19,7 +19,11 @@
 /////////////
 
 
-
+var mobtypes = new Array(
+	/*players*/		"player",
+	/*enemies*/		"enemy",
+	/*animals*/		"deer"
+);
 var blocktypes = new Array(
 	/*forest map*/	"grass", "dirt", "water", "tree", "rock", "hole",
 	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
@@ -41,6 +45,7 @@ var gridunitpx = 20; //must change this px value in css as well
 var mapwidth = 40;
 var mapheight = 30;
 var enemyspeed = 200;
+var animalspeed = 500;
 var projectilespeed = 50;
 var bikespeed = 100;
 var totalmapblocks = mapwidth * mapheight;
@@ -83,18 +88,22 @@ loadGame = function(){
 	trace("load game");
     $.post('php/loadmap.php', {maptype:'forest'}, function(data) {
     	if (data == false){
+
     		trace("new user");
     		loadNewMap();
     		createPlayer();
+
     	} else {
     		
     		loadMap('forest');
+
     		$.post('php/loadmap.php', {maptype:'winter'}, function(data) {
     			if (data){
     				trace("loadwintermap");
     				loadMap('winter');
     			}
 			});
+
 			$.post('php/loadmap.php', {maptype:'beach'}, function(data) {
 				if (data){
 					trace("loadbeachmap");
@@ -103,6 +112,7 @@ loadGame = function(){
 			});
 			
 			loadPlayer();
+
     	}	
     });
 };
@@ -344,7 +354,7 @@ loadPlayer = function(id) {
 
 
 /////////////
-//  ENEMY
+//  ENEMY & ANIMALS
 /////////////
 
 
@@ -355,6 +365,10 @@ createEnemy = function() {
 	//var enemystartblock = 0;
 	$('.the-fucking-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-enemy enemy-direction-down"></div>');
 	initEnemyBrain(id);
+};
+killEnemy = function(id) {
+	trace("Kill Enemy id: "+id);
+	$('.objectid-'+id).remove();
 };
 initEnemyBrain = function(id) {
 
@@ -369,7 +383,7 @@ initEnemyBrain = function(id) {
 	function anEnemyThought() {
 
 		//check if enemy isnt dead
-		if ($('.objectid-'+id).length != 0) {   
+		if ($('.objectid-'+id).length != 0) {
 	
 			var enemyrandom = Math.random();
 			//var enemydirection;
@@ -440,10 +454,108 @@ initEnemyBrain = function(id) {
 		clearTimeout(enemybrain);
 	}
 };
-killEnemy = function(id) {
-	trace("Kill Enemy id: "+id);
+
+
+
+
+killAnimal = function(id) {
+	trace("Kill Animal id: "+id);
 	$('.objectid-'+id).remove();
 };
+createAnimal = function() {
+
+	var id = uniqueObjectID();
+	trace("Create Animal "+id);
+	//var enemystartblock = 0;
+	$('.the-fucking-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-deer deer-direction-down"></div>');
+	initAnimalBrain(id);
+	
+};
+initAnimalBrain = function(id) {
+
+	trace("start brain program for animal id:"+id);
+	var t = 0;
+	var maxthoughts = 100;
+	var animalbrain = setTimeout(anAnimalThought, animalspeed);
+	
+	//collection of thoughts
+	var animalPath = Array();
+	
+	function anAnimalThought() {
+
+		//check if enemy isnt dead
+		if ($('.objectid-'+id).length != 0) {
+	
+			var animalrandom = Math.random();
+			//var enemydirection;
+			var animalX = getObjectCurrentCol(id); var animalY = getObjectCurrentRow(id);
+			var playerX = getObjectCurrentCol(1); var playerY = getObjectCurrentRow(1);
+			
+			var n = animalPath.length;
+			animalPath.push(animalX+"-"+animalY);
+
+			trace("-----");
+			trace('animalthoughtid-'+n);
+			trace(animalPath);
+			trace("animallastpos="+animalPath[n-1]);
+
+			//is player stuck? move random direction
+			if (animalPath[n-1]==animalPath[n]) {
+
+				trace("animal STUCK");
+
+				var randomDirection = Math.floor(Math.random() * 4) + 1;
+				switch(randomDirection){
+					case 1: moveObjectUp(id, "animal"); break;
+					case 2: moveObjectDown(id, "animal"); break;
+					case 3: moveObjectLeft(id, "animal"); break;
+					case 4: moveObjectRight(id, "animal"); break;
+				}
+			}
+
+			trace("-----");
+			var PEx = playerX - animalX; var PEy = animalY - playerY;
+			var posPEx = Math.abs(PEx); var posPEy = Math.abs(PEy);
+			
+			if ( (PEx == 0) && (PEy == 0)){
+				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
+				trace("found the player, kill player!");
+			} else if (posPEx >= posPEy) {
+				if (PEx >= 0) { 
+					//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
+					moveObjectRight(id, "animal");
+				} else { 
+					//trace("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
+					moveObjectLeft(id, "animal");
+				}
+			} else {
+				if (PEy >= 0) { 
+					//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
+					moveObjectUp(id, "animal");
+				} else { 
+					//trace("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
+					moveObjectDown(id, "animal");
+				}
+			}
+			
+			//limit
+			if (t > maxthoughts) {
+				trace("Animal terminated");
+				stopAnimalBrain();
+				killAnimal(id);
+			} else {
+				t++;
+				animalbrain = setTimeout(anAnimalThought, animalspeed); // repeat thought
+			}
+
+		}
+		
+	}
+	function stopAnimalBrain() {
+		clearTimeout(animalbrain);
+	}
+};
+
 
 
 
@@ -631,6 +743,7 @@ setupMouseEvents = function() {
 		$(this).addClass('selected-item');
 		var selecteditem = $(this).attr('data-blocktype');
 		if ( selecteditem == "sword" ) { createEnemy(); }
+		if ( selecteditem == "spear" ) { createAnimal(); }
 		
 		//clear animation classes
 		$.each(directions, function(i, v) {
