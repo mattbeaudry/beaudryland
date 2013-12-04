@@ -24,37 +24,4 @@
         
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
-    <body class="page-game">
     
-	    <div class="the-fucking-header container horizonal-spacing clearfix">
-	    
-            <h1 class="logo-beaudryland"><a href="http://www.beaudryland.com"><img src="img/block-tree.png" title="Beaudryland Tree Logo" />Beaudryland</a></h1>
-            
-            <div class="the-fucking-user clearfix">
-                <nav class="beaudryland-nav">
-                  <ul>
-                    <li class="link-savemap">
-                      <div class="button-wrap">
-                        <a>Save</a>
-                      </div>
-                    </li>
-                    <li class="link-logout">
-                      <div class="button-wrap">
-                        <a href="logout.php">Logout</a>
-                      </div>
-                    </li>
-                    <li class="link-multiplayer">
-                      <div class="button-wrap">
-                        <a target="_blank" href="mapgallery.php">Globe</a>
-                      </div>
-                    </li>
-                    <li class="link-help">
-                      <div class="button-wrap">
-                        <a href="#help">Help</a>
-                      </div>
-                    </li>
-                  </ul>
-                </nav>
-            </div>
-            
-        </div>

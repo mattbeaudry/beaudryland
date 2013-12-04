@@ -5,16 +5,17 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 }
 ?>
 <?php include 'header.php'; ?> 
+	<body class="page-game container">
 
-	    <div class="maps-wrap container clearfix">
+	    <div class="maps-wrap clearfix">
 	    
 	    	<div class="the-fucking-map" data-maptype="forest"></div>
 	    	
 	    </div>
 		   
-		<div class="sticky-inventory">
+		<div class="sticky-inventory ">
 		
-		    <div class="the-fucking-inventory container clearfix">
+		    <div class="the-fucking-inventory clearfix">
 		    	<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>
 		    	<div class="slot-2 empty" data-blocktype="empty">0</div>
 		    	<div class="slot-3 empty" data-blocktype="empty">0</div>
@@ -61,7 +62,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		    	<div class="slot-44 empty" data-blocktype="empty">0</div>
 		    </div>
 		    
-			<div class="crafting-table-wrap container horizonal-spacing clearfix">
+			<div class="crafting-table-wrap horizonal-spacing clearfix">
 			    <div class="the-fucking-crafting-table">
 			    
 			    	<div class="slot-1 empty" data-blocktype="empty"></div>
@@ -75,7 +76,36 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 			    	<div class="slot empty" data-blocktype="empty"></div>
 			    	
 			    </div>
+
 		    </div>
+
+		    <div class="the-fucking-navigation clearfix">
+                <nav class="beaudryland-nav">
+                  <ul>
+                    <li class="link-savemap">
+                      <div class="button-wrap">
+                        <a>Save</a>
+                      </div>
+                    </li>
+                    <li class="link-logout">
+                      <div class="button-wrap">
+                        <a href="logout.php">Logout</a>
+                      </div>
+                    </li>
+                    <li class="link-multiplayer">
+                      <div class="button-wrap">
+                        <a target="_blank" href="mapgallery.php">Globe</a>
+                      </div>
+                    </li>
+                    <li class="link-help">
+                      <div class="button-wrap">
+                        <a href="#help">Help</a>
+                      </div>
+                    </li>
+                  </ul>
+                </nav>
+            </div>
+
 		</div>
 
 	    
@@ -97,8 +127,6 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
         	<div href="javascript:void(0)" class="btn-a"></div>
         	
         </div>
-        
-        
         
                
         <div class="the-fucking-gameinfo">
