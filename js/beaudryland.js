@@ -1170,8 +1170,8 @@ playerPrimaryAction = function() {
 			changeBlockType(block, "grass");
 		} else if ( (selecteditem == "axe") && (blocktype == "fire") ) {
 			addToInventory("fire", 1);
-			changeBlockType(block, "dirt");
-			growGrass(block);
+			changeBlockType(block, "grass");
+			//growGrass(block);
 
 		//open/close doors
 		} else if (blocktype == "door") {
@@ -1196,11 +1196,11 @@ playerPrimaryAction = function() {
 				trace("diamond!");
 				changeBlockType(block, "diamond-hole");
 			} else {
-				changeBlockType(block, "hole");
+				changeBlockType(block, "dirt");
 			}
 			addToInventory(blocktype, 5);
 			addToInventory('dirt', 5);
-			growGrass(block);
+			//growGrass(block);
 
 		//digging - winter map
 		} else if ( getSelectedItem() == "shovel" && ( blocktype == "snow" || blocktype == "frozendirt" || blocktype == "ice" ) ){
@@ -1213,11 +1213,11 @@ playerPrimaryAction = function() {
 				trace("silver!");
 				changeBlockType(block, "silver-hole");
 			} else {
-				changeBlockType(block, "snowhole");
+				changeBlockType(block, "frozendirt");
 			}
 			addToInventory(blocktype, 5);
 			addToInventory('frozendirt', 5);
-			growGrass(block);
+			//growGrass(block);
 
 		//digging - beach map
 		} else if ( getSelectedItem() == "shovel" && ( blocktype == "sand" || blocktype == "wetsand" ) ){
@@ -1230,11 +1230,11 @@ playerPrimaryAction = function() {
 				trace("clay!");
 				changeBlockType(block, "clay-hole");
 			} else {
-				changeBlockType(block, "sandhole");
+				changeBlockType(block, "wetsand");
 			}
 			addToInventory(blocktype, 5);
 			addToInventory('wetsand', 5);
-			growGrass(block);
+			//growGrass(block);
 
 		//filling water/holes
 		} else if ( (blocktype == "hole") || (blocktype == "water") || (blocktype == "snowhole") || (blocktype == "wave") || (blocktype == "sandhole") ) {
@@ -1338,14 +1338,14 @@ playerPrimaryAction = function() {
 			(blocktype == "claybrick") ||
 			(blocktype == "road") ){
 			var changeblocktotype = "dirt";
-			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "hole"; } 
-			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "snowhole"; } 
-			else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "snowhole"; }
-			else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "sandhole"; }
-			else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "sandhole"; }
+			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "dirt"; } 
+			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "frozendirt"; } 
+			else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "frozendirt"; }
+			else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "wetsand"; }
+			else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "wetsand"; }
 			addToInventory(blocktype, "5");
 			changeBlockType(block, changeblocktotype);
-			growGrass(block);
+			//growGrass(block);
 		}
 
 	});
