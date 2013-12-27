@@ -36,10 +36,9 @@ var blocktypes = new Array(
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
 );
-var allblockclasses = "";
-$.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
+var allblockclasses = ""; $.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
 
-var craftableblockclasses = "";
+//var craftableblockclasses = "";
 var inventoryslots = 44;
 var gridunitpx = 20; //must change this px value in css as well
 var mapwidth = 40;
@@ -75,6 +74,11 @@ $(document).ready(function() {
 	setupMouseEvents();
 	setupControlPadEvents();
 });
+
+window.onbeforeunload = confirmExit;
+function confirmExit() {
+	return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
+}
 
 
 
@@ -168,6 +172,9 @@ saveMap = function(){
     for (i=0; i<=total; i++){
     	var blocktype = $('.the-fucking-map div:eq('+i+')').attr('data-blocktype');
 		mapblocks[i] = blocktype;
+		/*if (blocktype == sign) {
+				
+		}*/
 	}
 	var jsonmapblocks = JSON.stringify(mapblocks);
     $.post('php/savemap.php', {mapdata: jsonmapblocks, maptype:'forest'}, function(data) {
@@ -181,10 +188,11 @@ saveMap = function(){
 		for (i=0; i<=total; i++){
 			var blocktype = $('.the-fucking-winter-map div:eq('+i+')').attr('data-blocktype');
 			//snowing on blocks and cleaning up map
-			if (blocktype == "dirt") { blocktype = "snow"; }
+			/*if (blocktype == "dirt") { blocktype = "snow"; }
 			if (blocktype == "hole") { blocktype = "snow"; }
 			if (blocktype == "frozendirt") { blocktype = "snow"; }
-			if (blocktype == "icehole") { blocktype = "snow"; }
+			if (blocktype == "icehole") { blocktype = "snow"; }*/
+
 			wintermapblocks[i] = blocktype;
 		}
     	//alert("winter map exists");
@@ -918,6 +926,10 @@ moveObjectUp = function(id, name) {
 	} else {
 		trace("Can't move object:"+id+" up -- y="+y);	
 	}
+	if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 60) ) {
+		var y = $(window).scrollTop(); 
+		$("html, body").animate({ scrollTop: y - 250 }, 600);
+	}
 };
 moveObjectDown = function(id, name) {
 	changeObjectDirection(id, "down", name);
@@ -931,6 +943,10 @@ moveObjectDown = function(id, name) {
 		var block = getObjectCurrentBlock(id);
 	} else {
 		trace("Can't move object:"+id+" down -- y="+y);	
+	}
+	if ( $('.the-fucking-player').offset().top > ($(window).scrollTop() + $(window).height() - 60) ) {
+		var y = $(window).scrollTop(); 
+		$("html, body").animate({ scrollTop: y + 250 }, 600);
 	}
 };
 objectCollisionDetection = function(id, direction) {
