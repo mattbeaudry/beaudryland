@@ -73,8 +73,12 @@ $(document).ready(function() {
 	setupKeyboardEvents();
 	setupMouseEvents();
 	setupControlPadEvents();
+
+	//testing
+	drawNewSpaceMap();
 });
 
+//alert/ask player to save before they close the page
 window.onbeforeunload = confirmExit;
 function confirmExit() {
 	return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
@@ -172,9 +176,6 @@ saveMap = function(){
     for (i=0; i<=total; i++){
     	var blocktype = $('.the-fucking-map div:eq('+i+')').attr('data-blocktype');
 		mapblocks[i] = blocktype;
-		/*if (blocktype == sign) {
-				
-		}*/
 	}
 	var jsonmapblocks = JSON.stringify(mapblocks);
     $.post('php/savemap.php', {mapdata: jsonmapblocks, maptype:'forest'}, function(data) {
@@ -270,7 +271,6 @@ drawNewWinterMap = function() {
 	}
 	$('.the-fucking-winter-map').html(mapdata);
 };
-/*
 drawNewSpaceMap = function() {
 	// LOAD SPACE MAP FUNCTION
 	$('.maps-wrap').append('<div class="the-fucking-space-map" data-maptype="space"></div>');
@@ -289,7 +289,6 @@ drawNewSpaceMap = function() {
 	}
 	$('.the-fucking-space-map').html(mapdata);
 };
-*/
 changeBlockType = function(block, newtype) {
 	trace("8-changing block "+block+" to "+newtype);
 	$('.block:eq('+block+')').removeClass(allblockclasses);
@@ -332,7 +331,33 @@ savePlayer = function() {
 	});
 	trace("saved inventory");
 	inventoryItems = JSON.stringify(inventoryItems);
-	$.post('php/saveplayer.php', {inventory: inventoryItems, playerdiv: playerdiv, selecteditem: selecteditem }, function(data) {
+
+	//saving signs
+	var signs = new Array();
+	$('.maps-wrap .block-sign').each(function(index) {
+		var blockid = $(this).attr('data-blockid');
+		var signmessage = $(this).attr('data-text');
+		//trace("inventory slot "+index+" = "+amount+blocktype);
+		signs[index] = {id:blockid, text:signmessage};
+	});
+	trace("saved signs");
+	signs = JSON.stringify(signs);
+
+/*
+	var signmessages = new Array();
+	for (i=1; i<=inventoryslots; i++){ 
+		inventoryItems[i]=new Object();
+	}
+    for (i=0; i<=total; i++){
+    	var blocktype = $('.the-fucking-map div:eq('+i+')').attr('data-blocktype');
+		mapblocks[i] = blocktype;
+		if (blocktype == sign) {
+			var signmsg = $('.the-fucking-map div:eq('+i+')').attr('data-text');
+		}
+	}
+	signmessages = JSON.stringify(signmessages);
+*/
+	$.post('php/saveplayer.php', {inventory: inventoryItems, playerdiv: playerdiv, selecteditem: selecteditem, signs: signs}, function(data) {
         trace("saved player: "+data);
     });
 };
@@ -926,7 +951,7 @@ moveObjectUp = function(id, name) {
 	} else {
 		trace("Can't move object:"+id+" up -- y="+y);	
 	}
-	if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 60) ) {
+	if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 180) ) {
 		var y = $(window).scrollTop(); 
 		$("html, body").animate({ scrollTop: y - 250 }, 600);
 	}
