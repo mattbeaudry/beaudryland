@@ -861,38 +861,37 @@ hr {
 .block-sign {
   background: url(../img/item-sign.png) no-repeat;
 }
+.the-fucking-space-map {
+  background: #000;
+}
 .block-space {
-  background: #000000 url(../img/block-space.png) no-repeat;
+  background: url(../img/block-space.png) no-repeat;
 }
 .block-star {
-  background: #000000 url(../img/block-star.png) no-repeat;
+  background: url(../img/block-star.png) no-repeat;
 }
 .block-bluegalaxy {
-  background: #000000 url(../img/block-bluegalaxy.png) no-repeat;
+  background: url(../img/block-bluegalaxy.png) no-repeat;
+  -webkit-animation: spin 40s linear infinite;
 }
 .block-redgalaxy {
-  background: #000000 url(../img/block-redgalaxy.png) no-repeat;
+  background: url(../img/block-redgalaxy.png) no-repeat;
+  -webkit-animation: spin 40s linear infinite;
 }
 .block-earth {
-  background: #000000 url(../img/block-earth.png) no-repeat;
+  background: url(../img/block-earth.png) no-repeat;
+  -webkit-animation: spin 20s linear infinite;
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 .block-sun {
-  background: #000000 url(../img/block-sun.png) no-repeat;
+  background: url(../img/block-sun.png) no-repeat;
 }
 .block-rocket {
   background: url(../img/item-rocket.png) no-repeat;
-}
-.block-rocket-right {
-  background: url(../img/item-rocket-right.png) no-repeat;
-}
-.block-rocket-left {
-  background: url(../img/item-rocket-left.png) no-repeat;
-}
-.block-rocket-up {
-  background: url(../img/item-rocket-up.png) no-repeat;
-}
-.block-rocket-down {
-  background: url(../img/item-rocket-down.png) no-repeat;
 }
 .block {
   background-size: contain !important;
@@ -1038,6 +1037,18 @@ hr {
 }
 .player-direction-right-car {
   background: url(../img/player-right-car.png) no-repeat;
+}
+.player-direction-up-rocket {
+  background: url(../img/player-up-rocket.png) no-repeat;
+}
+.player-direction-down-rocket {
+  background: url(../img/player-down-rocket.png) no-repeat;
+}
+.player-direction-left-rocket {
+  background: url(../img/player-left-rocket.png) no-repeat;
+}
+.player-direction-right-rocket {
+  background: url(../img/player-right-rocket.png) no-repeat;
 }
 .speech-bubble {
   position: absolute;

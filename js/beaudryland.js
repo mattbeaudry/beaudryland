@@ -31,7 +31,7 @@ var blocktypes = new Array(
 	/*items*/     	"shovel", "wood", "fire", "door", "door-open", "frisbee", "sign",
 	/*weapons*/		"sword", "spear", "axe",
 	/*instruments*/ "guitar", "piano",
-	/*transport*/	"bike", "skiis", "canoe", "car",
+	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
@@ -286,8 +286,11 @@ drawNewSpaceMap = function() {
 		var blocktype;
 		if (r<0.9) { blocktype = "space"; }
 		else if (r>0.98) { blocktype = "star"; }
-		else if (r>0.96) { blocktype = "galaxy"; }
-		else { blocktype = "earth"; }
+		else if (r>0.976) { blocktype = "bluegalaxy"; }
+		else if (r>0.972) { blocktype = "redgalaxy"; }
+		else if (r>0.968) { blocktype = "earth"; }
+		else if (r>0.966) { blocktype = "sun"; }
+		else { blocktype = "space"; }
 		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-space-map').html(mapdata);
@@ -801,7 +804,7 @@ setupMouseEvents = function() {
 		//items that are crafting ingredients
 		if ((blocktype == 'tree') || (blocktype == 'rock') || (blocktype == 'wood') || (blocktype == 'diamond') || (blocktype == 'icerock') ||
 		    (blocktype == 'silver') || (blocktype == 'gold') || (blocktype == 'clay') || (blocktype == 'oil') || (blocktype == 'sandstone') ||
-		    (blocktype == '') || (blocktype == '') || (blocktype == '') || (blocktype == '') || (blocktype == '')) {
+		    (blocktype == 'fire') || (blocktype == '') || (blocktype == '') || (blocktype == '') || (blocktype == '')) {
 		    if ( $(this).attr('data-blocktype') != "empty" ){
 		    	var blocktype = $(this).attr('data-blocktype');
 		    	moveItemToCraftingTable(blocktype);
@@ -811,6 +814,7 @@ setupMouseEvents = function() {
 		$('.the-fucking-inventory > div').removeClass("selected-item");
 		$(this).addClass('selected-item');
 		var selecteditem = $(this).attr('data-blocktype');
+
 		if ( selecteditem == "sword" ) { createEnemy(); }
 		if ( selecteditem == "spear" ) { createAnimal(); }
 		
@@ -826,10 +830,11 @@ setupMouseEvents = function() {
 			$('.the-fucking-player').removeClass("player-direction-"+v+"-skiis");
 			$('.the-fucking-player').removeClass("player-direction-"+v+"-car");
 			$('.the-fucking-player').removeClass("player-direction-"+v+"-canoe");
+			$('.the-fucking-player').removeClass("player-direction-"+v+"-rocket");
 			
 		});
 		
-		if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "canoe" || selecteditem == "car" ){
+		if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "canoe" || selecteditem == "car" || selecteditem == "rocket" ){
 			trace("selected item has animation");
 			$('.the-fucking-player').addClass("player-direction-"+playerdirection+"-"+selecteditem);
 		}
@@ -1017,8 +1022,27 @@ objectCollisionDetection = function(id, direction) {
 		case "right": block = block; break;
 	}
 
+
+	//space travel
+	if (selecteditem == "rocket" && $('.block:eq('+block+')').hasClass('block-space')) {
+		return false;
+	} else if (selecteditem == "rocket") {
+		return true;
+	//space
+	} else if ( $('.block:eq('+block+')').hasClass('block-space') ) {
+		return true;
+	} else if ( $('.block:eq('+block+')').hasClass('block-star') ) {
+		return true;
+	} else if ( $('.block:eq('+block+')').hasClass('block-redgalaxy') ) {
+		return true;
+	} else if ( $('.block:eq('+block+')').hasClass('block-bluegalaxy') ) {
+		return true;
+	} else if ( $('.block:eq('+block+')').hasClass('block-sun') ) {
+		return true;
+	} else if ( $('.block:eq('+block+')').hasClass('block-earth') ) {
+		return true;
 	//canoeing
-	if (selecteditem == "canoe" && $('.block:eq('+block+')').hasClass('block-water')) {
+	} else if (selecteditem == "canoe" && $('.block:eq('+block+')').hasClass('block-water')) {
 		return false;
 	} else if (selecteditem == "canoe") {
 		return true;
@@ -1077,9 +1101,6 @@ objectCollisionDetection = function(id, direction) {
 	//Bike Riding?
 	//Skiiing?
 	//Canoeing
-	} else if ($('.block:eq('+block+')').hasClass('block-water') && (selecteditem == "canoe") ) {
-		alert("selecteditem");
-		return true;
 	//Driving
 
 	// Walkable land
@@ -1092,7 +1113,7 @@ changeObjectDirection = function(id, direction, name) {
 	var selecteditem = getSelectedItem();
 	//animated items
 	var playergraphic;
-	if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "car" || selecteditem == "canoe" && name == "player" ){ 
+	if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "car" || selecteditem == "canoe" || selecteditem == "rocket" && name == "player" ){ 
 		playergraphic = "-"+selecteditem;
 	} else {
 		playergraphic = "";
@@ -1703,6 +1724,7 @@ checkCraftingTableForItem = function() {
 		case "treetreesilver": createCraftedItem("spear",1); break;
 		case "woodwoodtree": createCraftedItem("sign",5); break;
 		case "rockrocktree": createCraftedItem("axe",1); break;
+		case "silveroilfire": createCraftedItem("rocket",1); break;
 		default:
 			$('.the-fucking-crafted-item > .slot').removeClass(allblockclasses);
 			$('.the-fucking-crafted-item > .slot').addClass("empty");
