@@ -5,7 +5,7 @@
 //  
 //	Matt Beaudry
 //	
-//	Summer 2013
+//	2014
 //	
 //////////////////////////
 ////////////////////////*/
@@ -58,6 +58,8 @@ uniqueObjectID = function() {
 	objectsArray.push(id);
 	return id;
 };
+
+var globalmapblockcount = 0;
 
 
 
@@ -131,7 +133,8 @@ loadMap = function(maptype){
 		var mapdata = "";
 		var total = totalmapblocks;
 		for (i=0; i<total; i++){
-			mapdata += '<div data-blockid="'+i+'" data-blocktype="'+mapblocks[i]+'" data-blockhealth="10" class="block block-'+mapblocks[i]+'"></div>';
+			mapdata += '<div data-blockid="'+globalmapblockcount+'" data-blocktype="'+mapblocks[i]+'" data-blockhealth="10" class="block block-'+mapblocks[i]+'"></div>';
+			globalmapblockcount++;
 		}
 		if (maptype == 'forest'){
 			$('.the-fucking-map').html(mapdata);
@@ -343,20 +346,23 @@ savePlayer = function() {
 	trace("saved signs");
 	signs = JSON.stringify(signs);
 
-/*
-	var signmessages = new Array();
-	for (i=1; i<=inventoryslots; i++){ 
-		inventoryItems[i]=new Object();
-	}
-    for (i=0; i<=total; i++){
-    	var blocktype = $('.the-fucking-map div:eq('+i+')').attr('data-blocktype');
-		mapblocks[i] = blocktype;
-		if (blocktype == sign) {
-			var signmsg = $('.the-fucking-map div:eq('+i+')').attr('data-text');
+	trace('signs'+signs);
+
+	/*
+		var signmessages = new Array();
+		for (i=1; i<=inventoryslots; i++){ 
+			inventoryItems[i]=new Object();
 		}
-	}
-	signmessages = JSON.stringify(signmessages);
-*/
+	    for (i=0; i<=total; i++){
+	    	var blocktype = $('.the-fucking-map div:eq('+i+')').attr('data-blocktype');
+			mapblocks[i] = blocktype;
+			if (blocktype == sign) {
+				var signmsg = $('.the-fucking-map div:eq('+i+')').attr('data-text');
+			}
+		}
+		signmessages = JSON.stringify(signmessages);
+	*/
+
 	$.post('php/saveplayer.php', {inventory: inventoryItems, playerdiv: playerdiv, selecteditem: selecteditem, signs: signs}, function(data) {
         trace("saved player: "+data);
     });
@@ -381,7 +387,30 @@ loadPlayer = function(id) {
 		trace("loading selected item");
     	$('.the-fucking-inventory div').not('.the-fucking-inventory .block-'+selecteditem).removeClass('selected-item');
     	$('.the-fucking-inventory .block-'+selecteditem).addClass('selected-item');
+
+    	// LOADING SIGNS
+    	var signs = JSON.parse(data.signs);
+    	trace('loading signs...'+signs);
+
+    	for (var j=0;j<signs.length;j++){
+    		var signid = signs[j].id;
+    		var signtext = signs[j].text;
+    		if (signtext!=null) {
+
+    		}
+    		//$("ul").find("[data-slide='" + current + "']");
+    		trace($(".maps-wrap").find("[data-blockid='"+signid+"']"));
+    		trace(signid+'--'+signtext);
+    		trace($('.block').find("[data-blockid='"+signid+"']").data("text",signtext) );
+    		$('.block').find("[data-blockid='"+signid+"']").data("text",signtext);
+    		trace('');
+
+
+
+    	}
+
     }, "json");
+
 };
 
 
@@ -483,9 +512,11 @@ initEnemyBrain = function(id) {
 		}
 		
 	}
+
 	function stopEnemyBrain() {
 		clearTimeout(enemybrain);
 	}
+
 };
 
 

@@ -20,13 +20,14 @@ if($result->num_rows > 0) {
 		$inventory = $row['inventory'];
 		$playerdiv = $row['playerdiv'];
 		$selecteditem = $row['selecteditem'];
+		$signs = $row['signs'];
 	}
 }
 
 //$playerdata = array("inventory" => $inventory, "playerdiv" => $playerdiv, "selecteditem" => $selecteditem);
 $playerdata = array("inventory" => $inventory, "playerdiv" => $playerdiv, "selecteditem" => $selecteditem);
 
-echo json_encode(array("inventory" => $inventory, "playerdiv" => $playerdiv, "selecteditem" => $selecteditem));
+echo json_encode(array("inventory" => $inventory, "playerdiv" => $playerdiv, "selecteditem" => $selecteditem, "signs" => $signs));
 //echo json_encode($playerdata);
 //echo $inventory;
 //echo $playerdata;
