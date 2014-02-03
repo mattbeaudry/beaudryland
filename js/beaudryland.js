@@ -396,20 +396,26 @@ loadPlayer = function(id) {
     	trace('loading signs...'+signs);
 
     	for (var j=0;j<signs.length;j++){
+
     		var signid = signs[j].id;
     		var signtext = signs[j].text;
     		if (signtext!=null) {
+    			//trace($(".maps-wrap").find("[data-blockid='"+signid+"']"));
+    			trace(signid+'--'+signtext);
+    			//trace($('.block').find("[data-blockid='"+signid+"']").data("text",signtext) );
 
+    			var sign = $('.the-fucking-map').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
+
+    			console.log(sign);
+
+
+
+    			//sign[0].attr('data-blocktype',signtext);
+    			//$('.block').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
+    			trace('');
     		}
     		//$("ul").find("[data-slide='" + current + "']");
-    		trace($(".maps-wrap").find("[data-blockid='"+signid+"']"));
-    		trace(signid+'--'+signtext);
-    		trace($('.block').find("[data-blockid='"+signid+"']").data("text",signtext) );
-    		$('.block').find("[data-blockid='"+signid+"']").data("text",signtext);
-    		trace('');
-
-
-
+    		
     	}
 
     }, "json");
