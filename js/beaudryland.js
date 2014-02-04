@@ -1457,7 +1457,7 @@ throwFrisbee = function(startblock, direction) {
 	//$('.the-fucking-frisbee').remove();
 	var playerdirection = getObjectDirection(1, "player");
 	var id = uniqueObjectID();
-	$('.the-fucking-map').append('<div data-id='+id+' class="the-fucking-frisbee objectid-'+id+' frisbee-direction-'+playerdirection+'"></div>');
+	$('.the-fucking-map').append('<div data-id='+id+' class=" the-fucking-frisbee objectid-'+id+' frisbee-direction-'+playerdirection+'"></div>');
 	initProjectile("frisbee", startblock, direction, id);
 };
 throwSpear = function(startblock, direction) {
@@ -1466,7 +1466,7 @@ throwSpear = function(startblock, direction) {
 	//$('.the-fucking-frisbee').remove();
 	var playerdirection = getObjectDirection(1, "player");
 	var id = uniqueObjectID();
-	$('.the-fucking-map').append('<div data-id='+id+' class="the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'"></div>');
+	$('.the-fucking-map').append('<div data-id='+id+' class=" the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'"></div>');
 	initProjectile("spear", startblock, direction, id);
 };
 initProjectile = function(name, startblock, direction, id) {

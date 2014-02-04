@@ -21,6 +21,7 @@
 		<link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/blocks.css">
         
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
