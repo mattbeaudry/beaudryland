@@ -646,9 +646,30 @@ initAnimalBrain = function(id) {
 
 drawInputBubble = function(object, text) {
 	if (text) {
-		$('.the-fucking-'+object).append('<div class="speech-bubble">'+text+'</div>');
+		//$('.the-fucking-'+object).append('<div class="speech-bubble">'+text+'</div>');
+		var html = '<div class="bubble-wrap">';
+				html += '<a href="#" class="bubble-link bubble-save">';
+		  			html += '';
+		    			
+		  			html += '';
+		  		html += '</a>';
+		  	html += '<span class="bubble-hangdown-1"></span>';
+		  	html += '<span class="bubble-hangdown-2"></span>';
+		html += '</div>';	
+		$('.the-fucking-'+object).append(html);	
 	} else {
-		$('.the-fucking-'+object).append('<div class="speech-bubble"><form class="bubble-form" action="submit"><textarea class="bubble-text" rows="2" cols="30"></textarea></form></div>');
+		//$('.the-fucking-'+object).append('<div class="speech-bubble"><form class="bubble-form" action="submit"><textarea class="bubble-text" rows="2" cols="30"></textarea></form></div>');
+		var html = '<div class="bubble-wrap">';
+				html += '<div class="bubble-link">';
+		  			html += '<form class="bubble-form" action="submit">';
+		    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
+		    			html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
+		  			html += '</form>';
+		  		html += '</div>';
+		  	html += '<span class="bubble-hangdown-1"></span>';
+		  	html += '<span class="bubble-hangdown-2"></span>';
+		html += '</div>';
+		$('.the-fucking-'+object).append(html);
 	}
 	/*
 	$('.bubble-form').submit(function(e) {
@@ -690,11 +711,24 @@ writeTextToSign = function() {
 	}*/
 };
 placeSign = function(objectid, block) {
-	var html = '<div class="speech-bubble">';
+	/*var html = '<div class="speech-bubble">';
 	html    +=   '<form class="bubble-form" action="submit">';
 	html    +=     '<textarea class="bubble-text" rows="2" cols="30"></textarea>';
 	html    +=   '</form>';
 	html    += '</div>';
+	$('.objectid-'+objectid).append(html);*/
+
+	var html = '<div class="bubble-wrap">';
+				html += '<div class="bubble-link">';
+		  			html += '<form class="bubble-form" action="submit">';
+		    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
+		    			html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
+		  			html += '</form>';
+		  		html += '</div>';
+		  	html += '<span class="bubble-hangdown-1"></span>';
+		  	html += '<span class="bubble-hangdown-2"></span>';
+		html += '</div>';
+
 	$('.objectid-'+objectid).append(html);
 	$('.bubble-text').focus();
 };
