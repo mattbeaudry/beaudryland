@@ -65,9 +65,9 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 			<div class="crafting-table-wrap horizonal-spacing clearfix">
 			    <div class="the-fucking-crafting-table">
 			    
-			    	<div class="slot-1 empty" data-blocktype="empty"></div>
-			    	<div class="slot-2 empty" data-blocktype="empty"></div>
-			    	<div class="slot-3 empty" data-blocktype="empty"></div>
+			    	<div class="block slot-1 empty" data-blocktype="empty"></div>
+			    	<div class="block slot-2 empty" data-blocktype="empty"></div>
+			    	<div class="block slot-3 empty" data-blocktype="empty"></div>
 			    	
 			    </div>
 			    <!--<img src="img/arrow-right.png">-->

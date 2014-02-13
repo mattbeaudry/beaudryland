@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
+@import url('http://fonts.googleapis.com/css?family=Press+Start+2P');
 /*
  * HTML5 Boilerplate
  *
@@ -84,6 +84,7 @@ textarea {
 /* ==========================================================================
    Author's custom styles: Matt Beaudry
    ========================================================================== */
+/* FONTS */
 /* COLORS */
 /* BASE STYLES */
 body {

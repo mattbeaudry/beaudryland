@@ -10,18 +10,8 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
-html,
-button,
-input,
-select,
-textarea {
-    color: #222;
-}
-
-body {
-    font-size: 1em;
-    line-height: 1.4;
-}
+html, button, input, select, textarea { color: #222; }
+body { font-size: 1em; line-height: 1.4; }
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -29,25 +19,15 @@ body {
  * Customize the background color to match your design.
  */
 
-::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
+::-moz-selection { background: #b3d4fc; text-shadow: none; } 
+::selection { background: #b3d4fc; text-shadow: none; }
 
 /*
  * A better looking default horizontal rule
  */
 
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
+hr { display: block; height: 1px;
+    border: 0; border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0;
 }
@@ -101,6 +81,11 @@ textarea {
    ========================================================================== */
 
 
+/* FONTS */
+
+@import url('http://fonts.googleapis.com/css?family=Press+Start+2P');
+
+
 /* COLORS */
 
 @white: #fff;
@@ -135,7 +120,6 @@ hr {
 
 
 /* THE WEBSITE */
-
 
 .container {
 	width: 800px;
@@ -580,8 +564,6 @@ hr {
 .bubble-text:focus {
 	background-color:#fff;
 }
-@import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
-
 .bubble-wrap, .bubble-link {
   background-color:#000;
   color: #fff;
