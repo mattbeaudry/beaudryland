@@ -12,7 +12,8 @@ if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Beaudryland</title>
-        <meta name="description" content="jQuery/CSS Minecraft inspired game">
+        
+        <meta name="description" content="javascript/CSS game">
         <meta name="viewport" content="user-scalable=no,width=device-width">
         
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
@@ -21,10 +22,12 @@ if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
 		<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png" />
 		<link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png" />
+
 		<link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-
+        <link rel="stylesheet" href="css/blocks.css">
+        
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     

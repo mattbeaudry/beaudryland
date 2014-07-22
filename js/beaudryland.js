@@ -75,9 +75,8 @@ $(document).ready(function() {
 	setupKeyboardEvents();
 	setupMouseEvents();
 	setupControlPadEvents();
-
 	//testing
-	drawNewSpaceMap();
+	//drawNewSpaceMap();
 });
 
 //alert/ask player to save before they close the page
