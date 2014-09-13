@@ -5,6 +5,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 }
 ?>
 <?php include 'header.php'; ?> 
+
 	<body class="page-game container">
 
 	    <div class="maps-wrap clearfix">
