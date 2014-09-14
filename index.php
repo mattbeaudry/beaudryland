@@ -64,7 +64,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 
 			<article>
 				<h3>Beaudryland v0.6 - September 2014</h3>
-				<ul> 
+				<ul class="multi-column-2"> 
 					<li>space map: space, star, earth, sun, the planets, red galaxy, blue galaxy</li>
 					<li>new items: </li>
 					<li>new treasure: </li>
@@ -78,9 +78,11 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
         	</article>
 
 			<article>
-				<img class="banner-beaudryland" src="img/banner-beaudryland-0.5.png" title="Beaudryland Banner" />
 				<h3>Beaudryland v0.5 - December 2013</h3>
-				<ul>
+
+				<img class="banner-beaudryland" src="img/banner-beaudryland-0.5.png" title="Beaudryland Banner" />
+				
+				<ul class="multi-column-2">
 					<li>beach map: sand, plamtrees, sandstone, wetsand, animated waves</li>
 					<li>new items: keyboard, signs, axe, spear</li>
 					<li>new treasure: oil, clay</li>
@@ -89,9 +91,11 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
         	</article>
         	
         	<article>
+        		<h3>Beaudryland v0.4 - March 2013</h3>
+
         		<img class="banner-beaudryland" src="img/banner-beaudryland-0.4.png">
-	        	<h3>Beaudryland v0.4 - March 2013</h3>
-	        	<ul>
+	        	
+	        	<ul class="multi-column-2">
 	        		<li>safer/smarter map and inventory saving</li>
 	        		<li>game now open to new users through register form on homepage</li>
 	        		<li>new map: winter</li>
@@ -110,9 +114,10 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 	        </article>
 		
         	<article>
+        		
+        		<h3>Beaudryland v0.3 - Jan 15, 2013</h3>
         		<img class="banner-beaudryland" src="img/banner-beaudryland-0.3.png">
-        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.3/">Beaudryland v0.3</a> - Jan 15, 2013</h3>
-        		<ul>
+        		<ul class="multi-column-2">
         			<li>updated inventory/crafting system</li>
         			<li>inventory function arrows used for crafting</li>
         			<li>inventory items are selectable</li>
@@ -137,7 +142,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 			
         	<article>
         		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.2/">Beaudryland v0.2</a> - Dec 24, 2012</h3>
-        		<ul>
+        		<ul class="multi-column-2">
         			<li>player graphics</li>
         			<li>map terrain graphics</li>
         			<li>collect rocks</li>
@@ -153,7 +158,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
         
         	<article>
         		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.1/">Beaudryland v0.1</a> - Dec 17, 2012</h3>
-        		<ul>
+        		<ul class="multi-column-2">
         			<li>random map generation</li>
         			<li>terrain blocks (grass, trees, water, rocks)</li>
         			<li>player movement</li>

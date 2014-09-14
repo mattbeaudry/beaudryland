@@ -100,6 +100,7 @@ h3 {
 }
 a {
   color: #666;
+  color: #1AA00F;
 }
 a:hover {
   color: #000;
@@ -333,13 +334,24 @@ hr {
 .the-fucking-gameinfo section {
   margin: 40px 0;
 }
+.the-fucking-gameinfo article {
+  margin: 60px 0;
+  border: solid 4px #ddd;
+  padding: 0 20px;
+}
+.the-fucking-gameinfo h3 {
+  text-align: center;
+}
+.the-fucking-gameinfo h3 a {
+  color: #000;
+}
 .the-fucking-gameinfo .recent-updates {
   margin-bottom: 80px;
 }
 .banner-beaudryland {
   background-color: #eee;
-  margin-top: 40px;
-  width: 800px;
+  width: 100%;
+  margin-top: 10px;
 }
 .beaudrylandlogin {
   text-align: right;
@@ -358,6 +370,10 @@ hr {
 .beaudrylandregister input {
   float: left;
   margin-left: 20px !important;
+}
+.beaudrylandlogin input:-webkit-autofill,
+.beaudrylandregister input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 .the-fucking-login > form {
   float: left;
@@ -380,13 +396,11 @@ hr {
   color: #cc0000;
 }
 .the-fucking-login input {
-  height: 25px;
-  padding-left: 6px;
   border: solid 1px #ddd;
+  padding: 10px 12px;
 }
 .the-fucking-login .button {
-  height: 32px;
-  padding: 0 30px;
+  padding: 10px 12px;
   margin: 0px;
   border: none;
   color: #fff;
