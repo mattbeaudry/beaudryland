@@ -848,11 +848,14 @@ setupKeyboardEvents = function() {
 				break;
 			case 32: /* SPACE */
 				if (disablekeyboardevents == false) {
+
 					if ($('.speech-bubble').length == 0){
 						playerPrimaryAction(); 
+						event.preventDefault();
 					} else {
-						alert("speech buddle!");
+						event.preventDefault();
 					}
+
 				}
 				break;
 			case 13: /* ENTER */
@@ -900,11 +903,14 @@ setupKeyboardEvents = function() {
 			
 		}
 	}, false);
+
 	//prevent keys from scrolling page
 	$(document).keydown(function (e) {
+
 	    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
-	    if ( ((key == 37) || (key == 38) || (key == 39) || (key == 40) || (key == 32)) && (e.target.className != null))
+	    if ( ((key == 37) || (key == 38) || (key == 39) || (key == 40) /*|| (key == 32)*/) && (e.target.className != null))
 	       e.preventDefault();
+
 	});
 	
 };
