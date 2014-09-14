@@ -345,6 +345,11 @@ hr {
 .the-fucking-gameinfo h3 a {
   color: #000;
 }
+.the-fucking-gameinfo ul {
+  list-style-position: inside;
+  list-style-type: square;
+  padding: 0;
+}
 .the-fucking-gameinfo .recent-updates {
   margin-bottom: 80px;
 }
@@ -689,7 +694,6 @@ hr {
   top: -150px;
   left: -90px;
   width: 240px;
-  height: 100px;
   background-color: #000;
   color: #fff;
   font-family: "Press Start 2P", sans-serif;
@@ -699,6 +703,7 @@ hr {
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
+  padding: 10px;
 }
 .bubble-wrap:before,
 .bubble-wrap:after {
@@ -715,6 +720,10 @@ hr {
 }
 .bubble-wrap:after {
   bottom: -5px;
+}
+.bubble-wrap h3 {
+  font-size: 0.8em;
+  margin-top: 0;
 }
 .bubble-link {
   /*
