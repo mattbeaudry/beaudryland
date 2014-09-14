@@ -369,13 +369,13 @@ savePlayer = function() {
 	$('.maps-wrap .block-sign').each(function(index) {
 		var blockid = $(this).attr('data-blockid');
 		var signmessage = $(this).attr('data-text');
-		//trace("inventory slot "+index+" = "+amount+blocktype);
+		trace("signid:"+blockid+"---"+signmessage);
 		signs[index] = {id:blockid, text:signmessage};
 	});
 	trace("saved signs");
 	signs = JSON.stringify(signs);
 
-	trace('signs'+signs);
+	//trace('signs'+signs);
 
 	/*
 		var signmessages = new Array();
@@ -430,15 +430,15 @@ loadPlayer = function(id) {
     			trace(signid+'--'+signtext);
     			//trace($('.block').find("[data-blockid='"+signid+"']").data("text",signtext) );
 
-    			var sign = $('.the-fucking-map').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
+    			$('.maps-wrap').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
 
-    			console.log(sign);
+    			//console.log(sign);
 
 
 
     			//sign[0].attr('data-blocktype',signtext);
     			//$('.block').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
-    			trace('');
+    			//trace('');
     		}
     		//$("ul").find("[data-slide='" + current + "']");
     		
@@ -859,7 +859,10 @@ setupKeyboardEvents = function() {
 				}
 				break;
 			case 13: /* ENTER */
-				//writeTextToSign();
+				if ($('.speech-bubble').length == 0){
+					$('.bubble-form').submit();
+					event.preventDefault();
+				} 
 				break;
 			case 69: // E 
 				//playMusic();
