@@ -442,13 +442,14 @@ hr {
   margin-bottom: 15px;
   background-color: #eee;
   padding: 20px;
+  list-style: none;
 }
 .item-formulas h3 {
   margin-top: 0;
 }
 .item-formulas ul {
   margin-bottom: 0;
-  list-style: square;
+  list-style-type: square;
 }
 .item-formulas li img {
   width: 30px;
@@ -706,6 +707,7 @@ hr {
   text-transform: uppercase;
   text-decoration: none;
   padding: 10px;
+  z-index: 1;
 }
 .bubble-wrap:before,
 .bubble-wrap:after {

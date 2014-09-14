@@ -303,6 +303,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		        		<img src="img/item-spear.png" title="Spear">
 		        		<ul>
 		        			<li>can be thrown</li>
+		        			<li>selecting the spear with spawn an animal</li>
 		        		</ul>
 		        	</li>
 		        	<li>
@@ -439,7 +440,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
         	?>
         </div>
 
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.0.0.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.js"><\/script>')</script>
         <script src="js/vendor/jquery.color.js"></script>
         <script src="js/vendor/timbre.js"></script>
         <script src="js/plugins.js"></script>
