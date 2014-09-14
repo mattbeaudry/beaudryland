@@ -292,6 +292,10 @@ hr {
   text-transform: uppercase;
   text-decoration: none;
   margin-top: 10px;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
 }
 .button-wrap,
 .button-wrap a {
