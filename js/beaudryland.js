@@ -73,6 +73,7 @@ var bikespeed = 100;
 var totalmapblocks = mapwidth * mapheight;
 var mapwidthpx = mapwidth * gridunitpx;
 var mapheightpx = mapheight * gridunitpx;
+var disablekeyboardevents = false;
 
 var objectsArray = [0,2,3];
 uniqueObjectID = function() {
@@ -668,7 +669,7 @@ initAnimalBrain = function(id) {
 
 
 
-
+/*
 drawInputBubble = function(object, text) {
 	if (text) {
 		//$('.the-fucking-'+object).append('<div class="speech-bubble">'+text+'</div>');
@@ -696,20 +697,23 @@ drawInputBubble = function(object, text) {
 		html += '</div>';
 		$('.the-fucking-'+object).append(html);
 	}
-	/*
-	$('.bubble-form').submit(function(e) {
-		var message = $('.bubble-text').html();
-		drawInputBubble(object, message);
-	});
-	*/
+
 	$('.bubble-text').focus();
 	
-	//setTimeout('$(".speech-bubble").remove();', 1000);
+	setTimeout('$(".speech-bubble").remove();', 1000);
 };
+
 drawThoughtBubble = function(object, text) {
 	$('.the-fucking-'+object).append('<div class="speech-bubble">'+text+'</div>');
 	setTimeout('$(".speech-bubble").remove();', 1000);
 };
+$( "#target" ).submit(function( event ) {
+  alert( "Handler for .submit() called." );
+  event.preventDefault();
+});
+*/
+
+/*
 writeTextToSign = function() {
 	if ($('.speech-bubble').length > 0){
 		var message = $('.bubble-text').val();
@@ -731,10 +735,11 @@ writeTextToSign = function() {
 
 		$('.speech-bubble').remove();
 	} 
-	/*else {
-		drawInputBubble("player");
-	}*/
+	//else {
+		//drawInputBubble("player");
+	//}
 };
+*/
 placeSign = function(objectid, block) {
 
 	/*var html = '<div class="speech-bubble">';
@@ -746,58 +751,108 @@ placeSign = function(objectid, block) {
 
 	var html = '<div class="bubble-wrap">';
 				html += '<div class="bubble-link">';
-		  			html += '<form class="bubble-form" action="submit">';
+		  			html += '<form class="bubble-form" action="#">';
 		    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
 		    			html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
+		    			html += '<input type="submit" value="Write Message" >';
 		  			html += '</form>';
 		  		html += '</div>';
 		  	html += '<span class="bubble-hangdown-1"></span>';
 		  	html += '<span class="bubble-hangdown-2"></span>';
+		  	html += '<span class="bubble-hangdown-3"></span>';
+		  	html += '<span class="bubble-hangdown-4"></span>';
 		html += '</div>';
 
 	$('.objectid-'+objectid).append(html);
+	$('.bubble-form').submit(function(e) {
+
+		var message = $('.bubble-text').val();
+
+		//find block that the player is facing
+		var id = 1;
+		var direction = getObjectDirection(id, "player");
+		var block = getObjectCurrentBlock(id);
+		switch (direction) {
+			case "up": block = block - (mapwidth+1); break;
+			case "down": block = block + (mapwidth-1); break;
+			case "left": block = block - 2; break;
+			case "right": block = block; break;
+		}
+		
+		$('.block:eq('+block+')').attr("data-text", message);
+		//$('.block:eq('+block+')').remove();
+
+		console.log('write message to block #: ' + block);
+		console.log('write message: ' + message);
+
+		$('.bubble-wrap').remove();
+		disablekeyboardevents = false;
+
+		event.preventDefault();
+
+	});
+
+	disablekeyboardevents = true;
+
 	$('.bubble-text').focus();
+
+	
+
 };
 readSign = function(block) {
 	var message = $('.block:eq('+block+')').attr("data-text");
 	alert(message);
 };
+
+
 setupKeyboardEvents = function() {
 	trace("Keyboard Events");
 	window.addEventListener('keydown', function(event) {
 		var selecteditem = getSelectedItem();
 		switch (event.keyCode) {
 			case 37: /* LEFT ARROW */
-				if (selecteditem == "guitar") { playSound(880); } 
-				else if (selecteditem == "piano") { playSound(880); } 
-				else if (selecteditem == "bike") { rideBike("left"); } 
-				else if (selecteditem == "skiis") { rideSkiis("left"); }
-				else { moveObjectLeft(1, "player"); }
+				if (disablekeyboardevents == false) {
+					if (selecteditem == "guitar") { playSound(880); } 
+					else if (selecteditem == "piano") { playSound(880); } 
+					else if (selecteditem == "bike") { rideBike("left"); } 
+					else if (selecteditem == "skiis") { rideSkiis("left"); }
+					else { moveObjectLeft(1, "player"); }
+				}
 				break;
 			case 38: /* UP ARROW */
-				if (selecteditem == "guitar") { playSound(1320); } 
-				else if (selecteditem == "piano") { playSound(1320); } 
-				else if (selecteditem == "bike") { rideBike("up"); } 
-				else if (selecteditem == "skiis") { rideSkiis("up"); }
-				else { moveObjectUp(1, "player"); }
+				if (disablekeyboardevents == false) {
+					if (selecteditem == "guitar") { playSound(1320); } 
+					else if (selecteditem == "piano") { playSound(1320); } 
+					else if (selecteditem == "bike") { rideBike("up"); } 
+					else if (selecteditem == "skiis") { rideSkiis("up"); }
+					else { moveObjectUp(1, "player"); }
+				}
 				break;
 			case 39: /* RIGHT ARROW */
-				if (selecteditem == "guitar") { playSound(1100); }
-				else if (selecteditem == "piano") { playSound(1100); }
-				else if (selecteditem == "bike") { rideBike("right"); }
-				else if (selecteditem == "skiis") { rideSkiis("right"); }
-				else { moveObjectRight(1, "player"); }
+				if (disablekeyboardevents == false) {
+					if (selecteditem == "guitar") { playSound(1100); }
+					else if (selecteditem == "piano") { playSound(1100); }
+					else if (selecteditem == "bike") { rideBike("right"); }
+					else if (selecteditem == "skiis") { rideSkiis("right"); }
+					else { moveObjectRight(1, "player"); }
+				}
 				break;
 			case 40: /* DOWN ARROW */
-				if (selecteditem == "guitar") { playSound(660); } 
-				else if (selecteditem == "piano") { playSound(660); } 
-				else if (selecteditem == "bike") { rideBike("down"); } 
-				else if (selecteditem == "skiis") { rideSkiis("down"); }
-				else { moveObjectDown(1, "player"); }
+				if (disablekeyboardevents == false) {
+					if (selecteditem == "guitar") { playSound(660); } 
+					else if (selecteditem == "piano") { playSound(660); } 
+					else if (selecteditem == "bike") { rideBike("down"); } 
+					else if (selecteditem == "skiis") { rideSkiis("down"); }
+					else { moveObjectDown(1, "player"); }
+				}
 				break;
 			case 32: /* SPACE */
-				if ($('.speech-bubble').length == 0){
-					playerPrimaryAction(); 
+				if (disablekeyboardevents == false) {
+					if ($('.speech-bubble').length == 0){
+						playerPrimaryAction(); 
+					} else {
+						alert("speech buddle!");
+					}
 				}
 				break;
 			case 13: /* ENTER */
@@ -852,6 +907,12 @@ setupKeyboardEvents = function() {
 	       e.preventDefault();
 	});
 	
+};
+enableKeyboardEvents = function() {
+	disablekeyboardevents = false;
+};
+disableKeyboardEvents = function() {
+	disablekeyboardevents = true;
 };
 
 

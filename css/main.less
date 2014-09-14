@@ -101,7 +101,7 @@ body {
 	font-family: helvetica, verdana;
 	padding-bottom: 40px;
 }
-h1, h2 {
+h1, h2, h3 {
 	font-family: "Press Start 2P", helvetica, verdana;
 	font-weight: 400;
 	text-transform: uppercase;
@@ -429,10 +429,19 @@ hr {
 }
 .item-formulas > li {
 	margin-bottom: 15px;
+	background-color:#eee;
+	padding: 20px;
 }
-.item-formulas > li img {
-	width: 40px;
-	height: 40px;
+.item-formulas h3 {
+	margin-top:0;
+}
+.item-formulas ul {
+	margin-bottom:0;
+	list-style:square;
+}
+.item-formulas li img {
+	width: 30px;
+	height: 30px;
 }
 .dev-console {
 	list-style:none;
@@ -450,9 +459,9 @@ hr {
 		font-family: "Press Start 2P", sans-serif;
 		font-weight: normal;
 		font-size: 10px;
-		line-height:1.3em;
+		line-height:1em;
 		text-transform: uppercase;
-		padding:5px 10px;
+		padding:7px 10px 5px;
 		margin:0 5px 5px 0;
 		&:hover {
 			background-color:#000;
@@ -507,12 +516,7 @@ hr {
 
 
 
-
-
-
-
 /* THE PLAYER */
-
 
 
 .the-fucking-player {
@@ -584,6 +588,12 @@ hr {
 .player-direction-left-rocket { background:url(../img/player-left-rocket.png) no-repeat; }
 .player-direction-right-rocket { background:url(../img/player-right-rocket.png) no-repeat; }
 
+
+
+
+/* TEXT BUBBLES */
+
+
 .speech-bubble {
 	position:absolute;
 	background:#fff;
@@ -599,9 +609,24 @@ hr {
 	border:none;
 }
 .bubble-text:focus {
-	background-color:transparent;
+	background-color: rgba(255,255,255,0.3);
 }
-.bubble-wrap, .bubble-link {
+.bubble-form input[type="submit"]{
+	background-color:#fff;
+	color:#000;
+	font-family: "Press Start 2P", helvetica, verdana;
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size:12px;
+	border:none;
+	padding:5px 10px;
+}
+.bubble-wrap {
+	position: absolute;
+	top:-150px;
+	left:-90px;
+	width: 240px;
+	height: 100px;
 	background-color:#000;
 	color: #fff;
 	font-family: "Press Start 2P", sans-serif;
@@ -612,48 +637,76 @@ hr {
 	text-transform: uppercase;
 	text-decoration: none;
 }
-.bubble-wrap {
-	position: relative;
-	width: 240px;
-	height: 100px;
-	margin-bottom:80px;
+.bubble-wrap:before,
+.bubble-wrap:after {
+	display:block;
+	content:"";
+	width:230px;
+	height:5px;
+	position:absolute;
+	left:5px;
+	background-color:#000;
+}
+.bubble-wrap:before {
+	top:-5px;
+}
+.bubble-wrap:after {
+	bottom:-5px;
 }
 .bubble-link {
+	/*
 	position: absolute;
 	width: 240px;
 	height: 100px;
-	top: -130px;
-	left: -100px;
+	*/
 }
+/*
 :hover.bubble-link { background-color:#333; }
 :active.bubble-link { background-color:#777; }
-
-.bubble-hangdown-1 {
+*/
+.bubble-hangdown-1,
+.bubble-hangdown-2,
+.bubble-hangdown-3,
+.bubble-hangdown-4 {
 	display:block;
-	height:10px;
-	width:20px;
-	margin:11px 0 0 110px;
+	position:absolute;
 	background-color:#000;
+	height:10px;
+	left: 100px;
+}
+.bubble-hangdown-1 {
+	width:20px;
+	bottom: -10px;
 }
 .bubble-hangdown-2 {
-	display:block;
-	height:10px;
-	width:10px;
-	margin:0px 0 0 110px;
-	background-color:#000;
+	width:15px;
+	bottom: -20px;
 }
+.bubble-hangdown-3 {
+	width:10px;
+	bottom: -30px;
+}
+.bubble-hangdown-4 {
+	width:5px;
+	bottom: -40px;
+}
+
 .bubble-input {
 	font-family: "Press Start 2P", sans-serif;
 	font-weight: normal;
-	font-size:1em;
+	font-size:0.8em;
 	border: none;
 	background-color: rgba(255,255,255,0.3);
 	color: #fff;
-	height:48px;
-	width:80%;
+	height:60px;
+	width:90%;
 }
 
+
+
 /* THE ENEMY */
+
+
 
 .the-fucking-enemy {
 	width:20px;
@@ -678,7 +731,11 @@ hr {
 	background:url(../img/enemy-right.png) no-repeat;
 }
 
+
+
 /* THE ANIMALS */
+
+
 
 .the-fucking-deer {
 	width:20px;
