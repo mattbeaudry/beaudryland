@@ -40,8 +40,9 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 	        <p>See what people are building in Beaudryland at the <a href="mapgallery.php">Map Gallery</a>.</p>
 	        
 	        <div class="the-fucking-login clearfix">
-	        
+	        	
 		        <form class="beaudrylandlogin" name="beaudrylandlogin" method="post" action="checklogin.php">
+		        	<!--<h3>Login</h3>-->
 					<input class="form-field" name="username" type="text" id="username" placeholder="username">
 					<input class="form-field" name="password" type="password" id="password" placeholder="password">
 					<?php if ($error == "loginfailed"){ ?><span class="error error-login">Login Failed.</span><?php } ?>
@@ -49,6 +50,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 				</form>
 		
 				<form class="beaudrylandregister" name="beaudrylandregister" method="post" action="php/createnewuser.php">
+					<!--<h3>Register</h3>-->
 					<input class="form-field required" name="new_username" type="text" id="new_username" placeholder="username">
 					<input class="form-field required" name="new_password" type="password" id="new_password" placeholder="password">
 					<input class="form-field email" name="new_email" type="text" id="new_email" placeholder="email">
@@ -63,7 +65,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		<section class="the-fucking-gameinfo">
 
 			<article>
-				<h3>Beaudryland v0.6 - September 2014</h3>
+				<h3>Beaudryland v0.6<br>September 2014</h3>
 				<ul class="multi-column-2"> 
 					<li>space map: space, star, earth, sun, the planets, red galaxy, blue galaxy</li>
 					<li>new items: </li>
@@ -78,7 +80,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
         	</article>
 
 			<article>
-				<h3>Beaudryland v0.5 - December 2013</h3>
+				<h3>Beaudryland v0.5<br>December 2013<br>The Beach Update</h3>
 
 				<img class="banner-beaudryland" src="img/banner-beaudryland-0.5.png" title="Beaudryland Banner" />
 				
@@ -87,11 +89,13 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 					<li>new items: keyboard, signs, axe, spear</li>
 					<li>new treasure: oil, clay</li>
 					<li>new blocks: rockbricks, icerockbricks, sandstone, claybrick</li>
+					<li>car and roads</li>
+					<li>projectiles: throwable items (spear and frisbee)</li>
 				</ul>
         	</article>
         	
         	<article>
-        		<h3>Beaudryland v0.4 - March 2013</h3>
+        		<h3>Beaudryland v0.4<br>March 2013<br>The Winter Update</h3>
 
         		<img class="banner-beaudryland" src="img/banner-beaudryland-0.4.png">
 	        	
@@ -115,7 +119,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		
         	<article>
         		
-        		<h3>Beaudryland v0.3 - Jan 15, 2013</h3>
+        		<h3>Beaudryland v0.3<br>Jan 15, 2013<br>The Items Update</h3>
         		<img class="banner-beaudryland" src="img/banner-beaudryland-0.3.png">
         		<ul class="multi-column-2">
         			<li>updated inventory/crafting system</li>
@@ -141,7 +145,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
         	</article>
 			
         	<article>
-        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.2/">Beaudryland v0.2</a> - Dec 24, 2012</h3>
+        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.2/">Beaudryland v0.2</a><br>Dec 24, 2012<br>The Texture Update</h3>
         		<ul class="multi-column-2">
         			<li>player graphics</li>
         			<li>map terrain graphics</li>
@@ -157,7 +161,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
         	</article>
         
         	<article>
-        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.1/">Beaudryland v0.1</a> - Dec 17, 2012</h3>
+        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.1/">Beaudryland v0.1</a><br>Dec 17, 2012<br>The Game Engine Update</h3>
         		<ul class="multi-column-2">
         			<li>random map generation</li>
         			<li>terrain blocks (grass, trees, water, rocks)</li>
