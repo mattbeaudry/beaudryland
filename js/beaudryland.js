@@ -1,7 +1,7 @@
 /*////////////////////////
 //////////////////////////
 //
-//	Beaudryland 5
+//	Beaudryland v0.6
 //  
 //	Matt Beaudry
 //	
@@ -9,6 +9,29 @@
 //	
 //////////////////////////
 ////////////////////////*/
+
+
+/****************
+
+TABLE OF CONTENTS
+-----------------
+
+GAME SETTINGS & GLOBALS
+GAME LOGIC
+MAPS
+PLAYER
+ENEMY & ANIMALS
+KEYBOARD EVENTS
+MOUSE EVENTS
+CONTROL PAD EVENTS
+COLLISION DETECTION
+PLAYER PRIMARY ACTION
+ANIMATION & PROJECTILES
+INVENTORY / CRAFTING
+SOUND
+HELPER FUNCTIONS
+
+****************/
 
 
 
@@ -77,14 +100,16 @@ $(document).ready(function() {
 	setupControlPadEvents();
 	
 	//testing
-	drawNewSpaceMap();
+	//drawNewSpaceMap();
 });
 
 //alert/ask player to save before they close the page
+/*
 window.onbeforeunload = confirmExit;
 function confirmExit() {
 	return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
 }
+*/
 
 
 
@@ -1471,7 +1496,7 @@ playerPrimaryAction = function() {
 
 
 /////////////
-// ANIMATION & PRJECTILES
+// ANIMATION & PROJECTILES
 /////////////
 
 

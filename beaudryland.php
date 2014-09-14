@@ -83,14 +83,12 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		    <div class="the-fucking-navigation clearfix">
                 <nav class="beaudryland-nav">
                   <ul>
+                  	<li class="nav-username">
+                  		<?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} ?>
+                  	</li>
                     <li class="link-savemap">
                       <div class="button-wrap">
                         <a>Save</a>
-                      </div>
-                    </li>
-                    <li class="link-logout">
-                      <div class="button-wrap">
-                        <a href="logout.php">Logout</a>
                       </div>
                     </li>
                     <li class="link-multiplayer">
@@ -101,6 +99,11 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
                     <li class="link-help">
                       <div class="button-wrap">
                         <a href="#help">Help</a>
+                      </div>
+                    </li>
+                    <li class="link-logout">
+                      <div class="button-wrap">
+                        <a href="logout.php">Logout</a>
                       </div>
                     </li>
                   </ul>

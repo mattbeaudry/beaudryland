@@ -281,6 +281,16 @@ hr {
   margin-right: 10px;
   margin-bottom: 10px;
 }
+.nav-username {
+  color: #999;
+  font-family: "Press Start 2P", sans-serif;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 1.3em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: 10px;
+}
 .button-wrap,
 .button-wrap a {
   background-color: #000;
@@ -614,7 +624,7 @@ hr {
   border: none;
 }
 .bubble-text:focus {
-  background-color: #fff;
+  background-color: transparent;
 }
 .bubble-wrap,
 .bubble-link {

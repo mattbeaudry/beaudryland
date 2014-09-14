@@ -1,15 +1,11 @@
 <?php 
-if ( isset($_GET['error']) ) { 
-	$error = $_GET['error']; 
-} else {
-	$error = "";
-}
+if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 ?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -41,7 +37,7 @@ if ( isset($_GET['error']) ) {
 	        
 	        <p><strong>What is Beaudryland?</strong><br />Beaudryland is a Minecraft inspired javascript game that is in the early stages of development. You can contact <a href="http://www.mattbeaudry.com">Matt Beaudry</a> on <a href="http://www.twitter.com/mattbeaudry">Twitter</a> or at beaudrymatt@gmail.com for help, questions and suggestions.</p>
 	        
-	        <p>See what people are doing in Beaudryland at the <a href="mapgallery.php">Map Gallery</a>.</p>
+	        <p>See what people are building in Beaudryland at the <a href="mapgallery.php">Map Gallery</a>.</p>
 	        
 	        <div class="the-fucking-login clearfix">
 	        
@@ -67,37 +63,34 @@ if ( isset($_GET['error']) ) {
 		<section class="the-fucking-gameinfo">
 
 			<article>
+				<h3>Beaudryland v0.6 - September 2014</h3>
+				<ul> 
+					<li>space map: space, star, earth, sun, the planets, red galaxy, blue galaxy</li>
+					<li>new items: </li>
+					<li>new treasure: </li>
+					<li>new blocks: </li>
+					<li>new transport: rocket</li>
+					<li>write/read messages on signs</li>
+					<li>inventory and site redesign</li>
+					<li>animal &amp; hunting</li>
+					<li>new animation engine</li>
+				</ul>
+        	</article>
 
+			<article>
 				<img class="banner-beaudryland" src="img/banner-beaudryland-0.5.png" title="Beaudryland Banner" />
 				<h3>Beaudryland v0.5 - December 2013</h3>
-				<article>
-					
-					<ul>
-						<li>beach map: sand, plamtrees, sandstone, wetsand, animated waves</li>
-						<li>new items: keyboard, signs, axe, spear</li>
-						<li>new treasure: oil, clay</li>
-						<li>new blocks: rockbricks, icerockbricks, sandstone, claybrick</li>
-						<li>new transport: canoe, car, roads</li>
-						<li>major code refactoring</li>
-						<li>write messages on signs</li>
-						<li>inventory and site redesign</li>
-						<!--
-							smarter enemies
-							
-
-						-->
-					</ul>
-				</article>
-				
+				<ul>
+					<li>beach map: sand, plamtrees, sandstone, wetsand, animated waves</li>
+					<li>new items: keyboard, signs, axe, spear</li>
+					<li>new treasure: oil, clay</li>
+					<li>new blocks: rockbricks, icerockbricks, sandstone, claybrick</li>
+				</ul>
         	</article>
-        	
-        	
         	
         	<article>
         		<img class="banner-beaudryland" src="img/banner-beaudryland-0.4.png">
-        	
 	        	<h3>Beaudryland v0.4 - March 2013</h3>
-	        	
 	        	<ul>
 	        		<li>safer/smarter map and inventory saving</li>
 	        		<li>game now open to new users through register form on homepage</li>
