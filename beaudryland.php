@@ -13,6 +13,30 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    	<div class="the-fucking-map" data-maptype="forest"></div>
 	    	
 	    </div>
+
+	    <div class="the-fucking-dev-panel">
+	    	<h2>Developer Console</h2>
+	    	<nav>
+	    		<ul class="dev-console clearfix">
+	    			<li><a href="javascript:void(0);" onclick="playMusic();return false">Play Sound</a></li>
+	    			<li><a href="javascript:void(0);" onclick="playMusic();return false">Enable Keyboard Events</a></li>
+	    			<li><a href="javascript:void(0);" onclick="playMusic();return false">Disable Keyboard Events</a></li>
+	    			<li><a href="javascript:void(0);" onclick="createEnemy();return false">Create Enemy</a></li>
+	    			<li><a href="javascript:void(0);" onclick="killEnemy();return false">Kill Enemy</a></li>
+	    			<li><a href="javascript:void(0);" onclick="createAnimal();return false">Create Animal</a></li>
+	    			<li><a href="javascript:void(0);" onclick="killAnimal();return false">Kill Animal</a></li>
+	    			<li><a href="javascript:void(0);" onclick="saveMap();return false">Save Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="drawNewWinterMap();return false">Draw New Winter Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="drawNewBeachMap();return false">Draw New Beach Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
+	    			<!--
+		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
+		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
+		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
+	    			-->
+	    		</ul>
+	    	</nav>
+	    </div>
 		   
 		<div class="sticky-inventory ">
 		

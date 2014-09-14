@@ -423,6 +423,29 @@ hr {
   width: 40px;
   height: 40px;
 }
+.dev-console {
+  list-style: none;
+  padding: 0;
+}
+.dev-console li {
+  display: inline-block;
+}
+.dev-console a {
+  display: inline-block;
+  color: #fff;
+  background-color: #999;
+  text-decoration: none;
+  font-family: "Press Start 2P", sans-serif;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 1.3em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  margin: 0 5px 5px 0;
+}
+.dev-console a:hover {
+  background-color: #000;
+}
 /* THE MAP */
 .maps-wrap {
   padding-top: 170px;
@@ -615,7 +638,7 @@ hr {
 .speech-bubble {
   position: absolute;
   background: #fff;
-  top: -80px;
+  top: -200px;
   left: -20px;
   padding: 20px;
   border: 1px solid #333;
@@ -645,13 +668,11 @@ hr {
   margin-bottom: 80px;
 }
 .bubble-link {
-  display: block;
   position: absolute;
-  width: 230px;
-  height: 110px;
-  margin-left: 5px;
-  margin-top: -5px;
-  padding-top: 9px;
+  width: 240px;
+  height: 100px;
+  top: -130px;
+  left: -100px;
 }
 :hover.bubble-link {
   background-color: #333;

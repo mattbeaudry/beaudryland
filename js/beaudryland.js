@@ -736,6 +736,7 @@ writeTextToSign = function() {
 	}*/
 };
 placeSign = function(objectid, block) {
+
 	/*var html = '<div class="speech-bubble">';
 	html    +=   '<form class="bubble-form" action="submit">';
 	html    +=     '<textarea class="bubble-text" rows="2" cols="30"></textarea>';
@@ -781,9 +782,9 @@ setupKeyboardEvents = function() {
 				else { moveObjectUp(1, "player"); }
 				break;
 			case 39: /* RIGHT ARROW */
-				if (selecteditem == "guitar") { playSound(1100); } 
-				else if (selecteditem == "piano") { playSound(1100); } 
-				else if (selecteditem == "bike") { rideBike("right"); } 
+				if (selecteditem == "guitar") { playSound(1100); }
+				else if (selecteditem == "piano") { playSound(1100); }
+				else if (selecteditem == "bike") { rideBike("right"); }
 				else if (selecteditem == "skiis") { rideSkiis("right"); }
 				else { moveObjectRight(1, "player"); }
 				break;
@@ -800,38 +801,38 @@ setupKeyboardEvents = function() {
 				}
 				break;
 			case 13: /* ENTER */
-				writeTextToSign();
+				//writeTextToSign();
 				break;
 			case 69: // E 
-				playMusic();
+				//playMusic();
 				break;
 
 			/*
 			case 77: // M
 				createEnemy();
 				break;
-			case 75: // K 
+			case 75: // K
 				killEnemy(1);
 				break;
-			case 66: // B 
+			case 66: // B
 				saveMap();
 				break;
-			case 67: // C 
+			case 67: // C
 				loadMap();
 				break;
-			case 65: // A 
+			case 65: // A
 				moveMap();
 				break;
-			case 68: // D 
+			case 68: // D
 				stopMap();
 				break;
-			case 69: // E 
+			case 69: // E
 				playMusic();
 				break;
-			case 70: // F 
+			case 70: // F
 				startWaves();
 				break;
-			case 71: // G 
+			case 71: // G
 				drawNewWinterMap();
 				drawNewBeachMap();
 				break;
@@ -839,7 +840,7 @@ setupKeyboardEvents = function() {
 				g 71
 				h 72
 				i 73
-				*/	
+				*/
 
 			
 		}
