@@ -419,6 +419,72 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		        			<li>can be placed on map</li>
 		        		</ul>
 		        	</li>
+		        	<li>
+		        		<h3>Table</h3>
+		        		<img src="img/block-tree.png" title="Tree">
+		        		<img src="img/block-pinetree.png" title="Pinetree">
+		        		<img src="img/block-tree.png" title="Tree">
+		        		<img src="img/arrow-right.png">
+		        		<img src="img/item-table.png" title="Table">
+		        		<ul>
+		        			<li>can be placed on map</li>
+		        		</ul>
+		        	</li>
+		        	<li>
+		        		<h3>Chair</h3>
+		        		<img src="img/block-pinetree.png" title="Pinetree">
+		        		<img src="img/block-wood.png" title="Wood">
+		        		<img src="img/block-wood.png" title="Wood">
+		        		<img src="img/arrow-right.png">
+		        		<img src="img/item-chair.png" title="Chair">
+		        		<ul>
+		        			<li>can be placed on map</li>
+		        		</ul>
+		        	</li>
+		        	<li>
+		        		<h3>Chest</h3>
+		        		<img src="img/block-pinetree.png" title="Pinetree">
+		        		<img src="img/block-pinetree.png" title="Pinetree">
+		        		<img src="img/block-pinetree.png" title="Pinetree">
+		        		<img src="img/arrow-right.png">
+		        		<img src="img/item-chest.png" title="Chest">
+		        		<ul>
+		        			<li>can be placed on map</li>
+		        		</ul>
+		        	</li>
+		        	<li>
+		        		<h3>Bed</h3>
+		        		<img src="img/block-wood.png" title="Wood">
+		        		<img src="img/block-pinetree.png" title="Pinetree">
+		        		<img src="img/block-wood.png" title="Wood">
+		        		<img src="img/arrow-right.png">
+		        		<img src="img/item-bed.png" title="Bed">
+		        		<ul>
+		        			<li>can be placed on map</li>
+		        		</ul>
+		        	</li>
+		        	<li>
+		        		<h3>Telescope</h3>
+		        		<img src="img/block-diamond.png" title="Diamond">
+		        		<img src="img/block-silver.png" title="Silver">
+		        		<img src="img/block-gold.png" title="Gold">
+		        		<img src="img/arrow-right.png">
+		        		<img src="img/item-telescope.png" title="Telescope">
+		        		<ul>
+		        			<li>can be placed on map</li>
+		        		</ul>
+		        	</li>
+		        	<li>
+		        		<h3>Computer</h3>
+		        		<img src="img/block-diamond.png" title="Diamond">
+		        		<img src="img/block-silver.png" title="Silver">
+		        		<img src="img/block-diamond.png" title="Diamond">
+		        		<img src="img/arrow-right.png">
+		        		<img src="img/item-computer.png" title="Computer">
+		        		<ul>
+		        			<li>can be placed on map</li>
+		        		</ul>
+		        	</li>
 		        	
 
 		        </ul>

@@ -37,6 +37,16 @@ HELPER FUNCTIONS
 
 
 
+// ITEM PROPERTIES
+// ---------------
+// - is placeable
+// - can be picked up
+// - can be walked through
+// - is a crafting ingredient
+
+
+
+
 /////////////
 //  GAME SETTINGS & GLOBALS
 /////////////
@@ -52,8 +62,10 @@ var blocktypes = new Array(
 	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
 	/*beach map*/  	"sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
 	/*items*/     	"shovel", "wood", "fire", "door", "door-open", "frisbee", "sign",
+	/*furniture*/	"table","chair","chest","bed",
 	/*weapons*/		"sword", "spear", "axe",
 	/*instruments*/ "guitar", "piano",
+	/*technology*/	"telescope","computer",
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
@@ -986,7 +998,7 @@ setupMouseEvents = function() {
 		//items that are crafting ingredients
 		if ((blocktype == 'tree') || (blocktype == 'rock') || (blocktype == 'wood') || (blocktype == 'diamond') || (blocktype == 'icerock') ||
 		    (blocktype == 'silver') || (blocktype == 'gold') || (blocktype == 'clay') || (blocktype == 'oil') || (blocktype == 'sandstone') ||
-		    (blocktype == 'fire') || (blocktype == '') || (blocktype == '') || (blocktype == '') || (blocktype == '')) {
+		    (blocktype == 'fire') || (blocktype == 'pinetree') || (blocktype == '') || (blocktype == '') || (blocktype == '')) {
 		    if ( $(this).attr('data-blocktype') != "empty" ){
 		    	var blocktype = $(this).attr('data-blocktype');
 		    	moveItemToCraftingTable(blocktype);
@@ -1529,7 +1541,8 @@ playerPrimaryAction = function() {
 			trace('blocktype is '+blocktype);
 			//trace('blocktype is '+blocktype);
 			//placable blocks: trees, rocks, wood, fire, doors, dirt, water, frozendirt, snow, diamond, gold, 
-			//pinetree, rockbrick, icerockbrick, claybrick, sandstonebrick, road
+			//pinetree, rockbrick, icerockbrick, claybrick, sandstonebrick, road,
+			//bed, table, chair, chest, telescope, computer
 			if ( 	selecteditem == "rock" ||
 					selecteditem == "tree" ||
 					selecteditem == "wood" ||
@@ -1559,17 +1572,24 @@ playerPrimaryAction = function() {
 					selecteditem == "sandstonebrick" ||
 					selecteditem == "claybrick" ||
 					selecteditem == "sandstonebrick" ||
-					selecteditem == "sign"
+					selecteditem == "sign" ||
+					selecteditem == "table" ||
+					selecteditem == "bed" ||
+					selecteditem == "chair" ||
+					selecteditem == "chest" ||
+					selecteditem == "telescope" ||
+					selecteditem == "computer"
+
 				){
 
-				//placing/writing on a sign
-				if (selecteditem == "sign"){
-					placeSign(1, block);
-				}
-				
-				trace('a placable item is selected');
-				removeFromInventory(selecteditem);
-				changeBlockType(block, selecteditem);
+					//placing/writing on a sign
+					if (selecteditem == "sign"){
+						placeSign(1, block);
+					}
+					
+					trace('a placable item is selected');
+					removeFromInventory(selecteditem);
+					changeBlockType(block, selecteditem);
 			}
 
 		//picking up items & blocks	
@@ -1595,7 +1615,15 @@ playerPrimaryAction = function() {
 			(blocktype == "icerockbrick") ||
 			(blocktype == "sandstonebrick") ||
 			(blocktype == "claybrick") ||
-			(blocktype == "road") ){
+			(blocktype == "road") ||
+			(blocktype == "chair") ||
+			(blocktype == "table") ||
+			(blocktype == "chest") ||
+			(blocktype == "bed") ||
+			(blocktype == "telescope") ||
+			(blocktype == "computer")
+
+			){
 			var changeblocktotype = "dirt";
 			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "dirt"; } 
 			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "frozendirt"; } 
@@ -1907,6 +1935,14 @@ checkCraftingTableForItem = function() {
 		case "woodwoodtree": createCraftedItem("sign",5); break;
 		case "rockrocktree": createCraftedItem("axe",1); break;
 		case "silveroilfire": createCraftedItem("rocket",1); break;
+
+		case "treepinetreetree": createCraftedItem("table",5); break;
+		case "pinetreewoodwood": createCraftedItem("chair",5); break;
+		case "pinetreepinetreepinetree": createCraftedItem("bed",5); break;
+		case "woodpinetreewood": createCraftedItem("chest",5); break;
+		case "diamondsilvergold": createCraftedItem("telescope",1); break;
+		case "diamondsilverdiamond": createCraftedItem("computer",1); break;
+
 		default:
 			$('.the-fucking-crafted-item > .slot').removeClass(allblockclasses);
 			$('.the-fucking-crafted-item > .slot').addClass("empty");
