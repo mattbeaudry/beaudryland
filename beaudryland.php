@@ -183,7 +183,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		        
 		        <p>The item formulas are not very intuitive yet, so for now I will list them here.</p>
 		        
-		        <ul class="item-formulas multi-column-2">
+		        <ul class="item-formulas">
 		        	<li>
 		        		<h3>Wood</h3>
 		        		<img src="img/block-tree.png" title="Tree">
