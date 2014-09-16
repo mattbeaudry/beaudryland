@@ -11,38 +11,24 @@
 ////////////////////////*/
 
 
-/****************
+//////////////
+//  TABLE OF CONTENTS
+//////////// 
 
-TABLE OF CONTENTS
------------------
-
+/*
 GAME SETTINGS & GLOBALS
 GAME LOGIC
 MAPS
 PLAYER
 ENEMY & ANIMALS
-KEYBOARD EVENTS
-MOUSE EVENTS
-CONTROL PAD EVENTS
+KEYBOARD, MOUSE & CONTROL PAD EVENTS
 COLLISION DETECTION
 PLAYER PRIMARY ACTION
 ANIMATION & PROJECTILES
 INVENTORY / CRAFTING
 SOUND
 HELPER FUNCTIONS
-
-****************/
-
-
-
-
-
-// ITEM PROPERTIES
-// ---------------
-// - is placeable
-// - can be picked up
-// - can be walked through
-// - is a crafting ingredient
+*/
 
 
 
@@ -52,12 +38,12 @@ HELPER FUNCTIONS
 /////////////
 
 
-var mobtypes = new Array(
+var mobtypes = new Array (
 	/*players*/		"player",
 	/*enemies*/		"enemy",
 	/*animals*/		"deer"
 );
-var blocktypes = new Array(
+var blocktypes = new Array (
 	/*forest map*/	"grass", "dirt", "water", "tree", "rock", "hole",
 	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
 	/*beach map*/  	"sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
@@ -71,7 +57,42 @@ var blocktypes = new Array(
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
 );
-var allblockclasses = ""; $.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
+var allblockclasses = ""; 
+$.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
+var isplaceable = new Array (
+	/*forest map*/	"grass", "dirt", "water", "tree", "rock",
+	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock",
+	/*beach map*/  	"sand", "wetsand", "palmtree", "sandstone",
+	/*items*/     	"wood", "fire", "door", "sign",
+	/*furniture*/	"table","chair","chest","bed",
+	/*technology*/	"telescope","computer",
+	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
+	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
+);
+var isingredient = new Array (
+	/*forest map*/	"tree", "rock",
+	/*winter map*/  "pinetree", "icerock",
+	/*beach map*/  	"palmtree", 
+	/*items*/     	"wood", "fire",
+	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay"
+);
+/* isequipable is used for items with player graphics */
+var isequipable = new Array (
+	/*items*/     	"shovel",
+	/*weapons*/		"sword", "axe",
+	/*transport*/	"bike", "skiis", "canoe", "car", "rocket"
+);
+var iscollectable = new Array (
+	/*forest map*/	"tree", "rock",
+	/*winter map*/  "pinetree", "icerock",
+	/*beach map*/  	"palmtree", "sandstone",
+	/*items*/     	"wood", "fire",
+	/*furniture*/	"table","chair","chest","bed",
+	/*technology*/	"telescope","computer",
+	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
+	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
+	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
+);
 
 //var craftableblockclasses = "";
 var inventoryslots = 44;
@@ -457,7 +478,6 @@ loadPlayer = function(id) {
     	}
 
     }, "json");
-
 };
 
 
@@ -563,7 +583,6 @@ initEnemyBrain = function(id) {
 	function stopEnemyBrain() {
 		clearTimeout(enemybrain);
 	}
-
 };
 
 
@@ -580,7 +599,6 @@ createAnimal = function() {
 	//var enemystartblock = 0;
 	$('.the-fucking-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-deer deer-direction-down"></div>');
 	initAnimalBrain(id);
-	
 };
 initAnimalBrain = function(id) {
 
@@ -679,79 +697,6 @@ initAnimalBrain = function(id) {
 //  KEYBOARD EVENTS
 /////////////
 
-
-
-/*
-drawInputBubble = function(object, text) {
-	if (text) {
-		//$('.the-fucking-'+object).append('<div class="speech-bubble">'+text+'</div>');
-		var html = '<div class="bubble-wrap">';
-				html += '<a href="#" class="bubble-link bubble-save">';
-		  			html += '';
-		    			
-		  			html += '';
-		  		html += '</a>';
-		  	html += '<span class="bubble-hangdown-1"></span>';
-		  	html += '<span class="bubble-hangdown-2"></span>';
-		html += '</div>';	
-		$('.the-fucking-'+object).append(html);	
-	} else {
-		//$('.the-fucking-'+object).append('<div class="speech-bubble"><form class="bubble-form" action="submit"><textarea class="bubble-text" rows="2" cols="30"></textarea></form></div>');
-		var html = '<div class="bubble-wrap">';
-				html += '<div class="bubble-link">';
-		  			html += '<form class="bubble-form" action="submit">';
-		    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
-		    			html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
-		  			html += '</form>';
-		  		html += '</div>';
-		  	html += '<span class="bubble-hangdown-1"></span>';
-		  	html += '<span class="bubble-hangdown-2"></span>';
-		html += '</div>';
-		$('.the-fucking-'+object).append(html);
-	}
-
-	$('.bubble-text').focus();
-	
-	setTimeout('$(".speech-bubble").remove();', 1000);
-};
-
-drawThoughtBubble = function(object, text) {
-	$('.the-fucking-'+object).append('<div class="speech-bubble">'+text+'</div>');
-	setTimeout('$(".speech-bubble").remove();', 1000);
-};
-$( "#target" ).submit(function( event ) {
-  alert( "Handler for .submit() called." );
-  event.preventDefault();
-});
-*/
-
-/*
-writeTextToSign = function() {
-	if ($('.speech-bubble').length > 0){
-		var message = $('.bubble-text').val();
-		trace("sign message:"+message);
-
-		//find block that the player is facing
-		var id = 1;
-		var direction = getObjectDirection(id, "player");
-		var block = getObjectCurrentBlock(id);
-
-		switch (direction) {
-			case "up": block = block - (mapwidth+1); break;
-			case "down": block = block + (mapwidth-1); break;
-			case "left": block = block - 2; break;
-			case "right": block = block; break;
-		}
-		
-		$('.block:eq('+block+')').attr("data-text", message);
-
-		$('.speech-bubble').remove();
-	} 
-	//else {
-		//drawInputBubble("player");
-	//}
-};
-*/
 placeSign = function(objectid, block) {
 
 	/*var html = '<div class="speech-bubble">';
@@ -807,9 +752,6 @@ placeSign = function(objectid, block) {
 	disablekeyboardevents = true;
 
 	$('.bubble-text').focus();
-
-	
-
 };
 readSign = function(block) {
 	var message = $('.block:eq('+block+')').attr("data-text");
@@ -857,12 +799,7 @@ readSign = function(block) {
 		event.preventDefault();
 
 	});
-
-
-	
 };
-
-
 setupKeyboardEvents = function() {
 	trace("Keyboard Events");
 	window.addEventListener('keydown', function(event) {
@@ -996,9 +933,7 @@ setupMouseEvents = function() {
 	$('.the-fucking-inventory > div').on("click", function() {
 		var blocktype = $(this).attr('data-blocktype');
 		//items that are crafting ingredients
-		if ((blocktype == 'tree') || (blocktype == 'rock') || (blocktype == 'wood') || (blocktype == 'diamond') || (blocktype == 'icerock') ||
-		    (blocktype == 'silver') || (blocktype == 'gold') || (blocktype == 'clay') || (blocktype == 'oil') || (blocktype == 'sandstone') ||
-		    (blocktype == 'fire') || (blocktype == 'pinetree') || (blocktype == '') || (blocktype == '') || (blocktype == '')) {
+		if ( $.inArray(blocktype, isingredient) > -1 ) {
 		    if ( $(this).attr('data-blocktype') != "empty" ){
 		    	var blocktype = $(this).attr('data-blocktype');
 		    	moveItemToCraftingTable(blocktype);
@@ -1028,7 +963,7 @@ setupMouseEvents = function() {
 			
 		});
 		
-		if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "canoe" || selecteditem == "car" || selecteditem == "rocket" ){
+		if ( $.inArray(selecteditem, isequipable) > -1 ){
 			trace("selected item has animation");
 			$('.the-fucking-player').addClass("player-direction-"+playerdirection+"-"+selecteditem);
 		}
@@ -1344,8 +1279,6 @@ changeObjectDirection = function(id, direction, name) {
 		mobgraphic = "";
 	}
 	*/
-
-
 };
 getObjectDirection = function(id, name) {
 	var direction;
@@ -1537,93 +1470,20 @@ playerPrimaryAction = function() {
 		     (blocktype == "snow") || (blocktype == "frozendirt") || (blocktype == "ice") ||
 		     (blocktype == "sand") || (blocktype == "wetsand") || (blocktype == "water") ) {
 			//check for selected placable block in inventory
-			trace('selected item is '+selecteditem);
-			trace('blocktype is '+blocktype);
+			//trace('selected item is '+selecteditem);
 			//trace('blocktype is '+blocktype);
-			//placable blocks: trees, rocks, wood, fire, doors, dirt, water, frozendirt, snow, diamond, gold, 
-			//pinetree, rockbrick, icerockbrick, claybrick, sandstonebrick, road,
-			//bed, table, chair, chest, telescope, computer
-			if ( 	selecteditem == "rock" ||
-					selecteditem == "tree" ||
-					selecteditem == "wood" ||
-					selecteditem == "fire" ||
-					selecteditem == "door" ||
-					selecteditem == "grass" ||
-					selecteditem == "water" ||
-					selecteditem == "ice" ||
-					selecteditem == "dirt" ||
-					selecteditem == "frozendirt" ||
-					selecteditem == "snow" ||
-					selecteditem == "pinetree" ||
-					selecteditem == "icerock" ||
-					selecteditem == "silver" ||
-					selecteditem == "gold" ||
-					selecteditem == "diamond" ||
-					selecteditem == "sand" ||
-					selecteditem == "wetsand" ||
-					selecteditem == "palmtree" ||
-					selecteditem == "sandstone" ||
-					selecteditem == "snow" ||
-					selecteditem == "oil" ||
-					selecteditem == "clay" ||
-					selecteditem == "road" ||
-					selecteditem == "rockbrick" ||
-					selecteditem == "icerockbrick" ||
-					selecteditem == "sandstonebrick" ||
-					selecteditem == "claybrick" ||
-					selecteditem == "sandstonebrick" ||
-					selecteditem == "sign" ||
-					selecteditem == "table" ||
-					selecteditem == "bed" ||
-					selecteditem == "chair" ||
-					selecteditem == "chest" ||
-					selecteditem == "telescope" ||
-					selecteditem == "computer"
-
-				){
-
-					//placing/writing on a sign
-					if (selecteditem == "sign"){
-						placeSign(1, block);
-					}
-					
-					trace('a placable item is selected');
-					removeFromInventory(selecteditem);
-					changeBlockType(block, selecteditem);
+			if ( $.inArray(selecteditem, isplaceable) > -1 ){
+				//placing/writing on a sign
+				if (selecteditem == "sign"){
+					placeSign(1, block);
+				}
+				trace('a placable item is selected');
+				removeFromInventory(selecteditem);
+				changeBlockType(block, selecteditem);
 			}
 
 		//picking up items & blocks	
-		} else if ((blocktype == "tree") ||
-			(blocktype == "rock") ||
-			(blocktype == "wood") ||
-			(blocktype == "diamond") ||
-			(blocktype == "diamond-hole") ||
-			(blocktype == "gold") ||
-			(blocktype == "gold-hole") ||
-			(blocktype == "silver") ||
-			(blocktype == "silver-hole") ||
-			(blocktype == "pinetree") ||
-			(blocktype == "icerock") ||
-			(blocktype == "pinetree") ||
-			(blocktype == "sandstone") ||
-			(blocktype == "oil") ||
-			(blocktype == "oil-hole") ||
-			(blocktype == "clay") ||
-			(blocktype == "clay-hole") ||
-			(blocktype == "palmtree") ||
-			(blocktype == "rockbrick") ||
-			(blocktype == "icerockbrick") ||
-			(blocktype == "sandstonebrick") ||
-			(blocktype == "claybrick") ||
-			(blocktype == "road") ||
-			(blocktype == "chair") ||
-			(blocktype == "table") ||
-			(blocktype == "chest") ||
-			(blocktype == "bed") ||
-			(blocktype == "telescope") ||
-			(blocktype == "computer")
-
-			){
+		} else if ($.inArray(blocktype, iscollectable) > -1){
 			var changeblocktotype = "dirt";
 			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "dirt"; } 
 			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "frozendirt"; } 

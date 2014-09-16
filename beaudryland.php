@@ -84,6 +84,12 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		    	<div class="slot-42 empty" data-blocktype="empty">0</div>
 		    	<div class="slot-43 empty" data-blocktype="empty">0</div>
 		    	<div class="slot-44 empty" data-blocktype="empty">0</div>
+		    	<div class="slot-45 empty" data-blocktype="empty">0</div>
+		    	<div class="slot-46 empty" data-blocktype="empty">0</div>
+		    	<div class="slot-47 empty" data-blocktype="empty">0</div>
+		    	<div class="slot-48 empty" data-blocktype="empty">0</div>
+		    	<div class="slot-49 empty" data-blocktype="empty">0</div>
+		    	<div class="slot-50 empty" data-blocktype="empty">0</div>
 		    </div>
 		    
 			<div class="crafting-table-wrap horizonal-spacing clearfix">

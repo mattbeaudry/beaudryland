@@ -1,3 +1,79 @@
+
+<script>
+
+/*
+drawInputBubble = function(object, text) {
+	if (text) {
+		//$('.the-fucking-'+object).append('<div class="speech-bubble">'+text+'</div>');
+		var html = '<div class="bubble-wrap">';
+				html += '<a href="#" class="bubble-link bubble-save">';
+		  			html += '';
+		    			
+		  			html += '';
+		  		html += '</a>';
+		  	html += '<span class="bubble-hangdown-1"></span>';
+		  	html += '<span class="bubble-hangdown-2"></span>';
+		html += '</div>';	
+		$('.the-fucking-'+object).append(html);	
+	} else {
+		//$('.the-fucking-'+object).append('<div class="speech-bubble"><form class="bubble-form" action="submit"><textarea class="bubble-text" rows="2" cols="30"></textarea></form></div>');
+		var html = '<div class="bubble-wrap">';
+				html += '<div class="bubble-link">';
+		  			html += '<form class="bubble-form" action="submit">';
+		    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
+		    			html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
+		  			html += '</form>';
+		  		html += '</div>';
+		  	html += '<span class="bubble-hangdown-1"></span>';
+		  	html += '<span class="bubble-hangdown-2"></span>';
+		html += '</div>';
+		$('.the-fucking-'+object).append(html);
+	}
+
+	$('.bubble-text').focus();
+	
+	setTimeout('$(".speech-bubble").remove();', 1000);
+};
+
+drawThoughtBubble = function(object, text) {
+	$('.the-fucking-'+object).append('<div class="speech-bubble">'+text+'</div>');
+	setTimeout('$(".speech-bubble").remove();', 1000);
+};
+$( "#target" ).submit(function( event ) {
+  alert( "Handler for .submit() called." );
+  event.preventDefault();
+});
+*/
+
+/*
+writeTextToSign = function() {
+	if ($('.speech-bubble').length > 0){
+		var message = $('.bubble-text').val();
+		trace("sign message:"+message);
+
+		//find block that the player is facing
+		var id = 1;
+		var direction = getObjectDirection(id, "player");
+		var block = getObjectCurrentBlock(id);
+
+		switch (direction) {
+			case "up": block = block - (mapwidth+1); break;
+			case "down": block = block + (mapwidth-1); break;
+			case "left": block = block - 2; break;
+			case "right": block = block; break;
+		}
+		
+		$('.block:eq('+block+')').attr("data-text", message);
+
+		$('.speech-bubble').remove();
+	} 
+	//else {
+		//drawInputBubble("player");
+	//}
+};
+*/
+
+</script>
 <nav class="beaudryland-nav">
 	<ul class="clearfix">
 		<li class="link-savemap"><a>save game</a></li>
