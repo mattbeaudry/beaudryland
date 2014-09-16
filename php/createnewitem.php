@@ -5,16 +5,20 @@ session_start();
 
 $newitemname = $_POST['name'];
 $newitemslug = $_POST['slug'];
+$recipe = $_POST['recipe'];
+$properties = $_POST['properties'];
 
 $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
 if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
 
 $newitemname = stripslashes($newitemname);
 $newitemslug = stripslashes($newitemslug);
+$recipe = stripslashes($recipe);
+$properties = stripslashes($properties);
 
 $result = $mysqli->query(
 	"INSERT INTO beaudryland_items 
-	(name,slug) VALUES ('".$newitemname."','".$newitemslug."')"
+	(name,slug,recipe,properties) VALUES ('".$newitemname."','".$newitemslug."','".$recipe."','".$properties."')"
 ) or die(mysql_error() );
 
 if($result){

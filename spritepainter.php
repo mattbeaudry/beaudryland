@@ -1,3 +1,9 @@
+<?php
+include 'config.php';
+ob_start();
+session_start();
+?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -32,11 +38,16 @@
     width:50%;
     padding-left:20px;
 }
+.panel-bottom {
+    float:left;
+    width:100%;
+}
 .the-fucking-canvas {
     border:solid 2px #000;
     padding:10px;
     display:inline-block;
     width:180px;
+
 }
 .canvas-pixel {
     float:left;
@@ -44,6 +55,7 @@
     height:30px;
     border:solid 2px #000;
     cursor:pointer;
+    background-color:#fff;
 }
 .color-code {
 
@@ -72,9 +84,57 @@ input[type="text"] {
 #itemsvg {
     width: 154px;
     height: 154px;
-    background-color: #ddd;
     border: solid 2px #000;
+    background-color:#fff;
     border-width: 3px 2px 2px 2px;
+}
+.color-palette {
+    margin:5px 0;
+}
+.color-palette span {
+    display:inline-block;
+    width:20px;
+    height:20px;
+    cursor:pointer;
+}
+.color-palette span:hover {
+    border:dashed 2px #000;
+}
+.pine { background-color:#0b3607; }
+.tree { background-color:#195513; }
+.grass { background-color:#36ac2a; }
+
+.hole { background-color:#1d1101; }
+.trunk { background-color:#362001; }
+.dirt { background-color:#6a4107; }
+.wood { background-color:#916d33; }
+.board { background-color:#c59f42; }
+.sand { background-color:#d8cea0; }
+
+.ocean { background-color:#068bd7; }
+.water { background-color:#00a2ff; }
+.diamond { background-color:#47d0f3; }
+.ice { background-color:#d4f4fc; }
+.snow { background-color:#f5fdff; }
+
+.brick { background-color:#bd401a; }
+.red { background-color:#d93b0a; }
+.fire { background-color:#d94e03; }
+.clay { background-color:#d7710d; }
+.gold { background-color:#e6bb27; }
+
+.black { background-color:#000000; }
+.road { background-color:#313131; }
+.rock { background-color:#606469; }
+.silver { background-color:#cbcbcb; }
+
+section {
+    background-color:#efefef;
+    padding:20px 20px 20px;
+    margin-bottom:40px;
+}
+section h2 {
+    margin-top:0px;
 }
 
 </style>
@@ -125,8 +185,37 @@ input[type="text"] {
                 <section>
                     <h2>Color Selector</h2>
                     <form class="color-code">
-                        <input type="text" name="hexcode" placeholder="#000000" value="#000000">
+                        <input class="form-color" type="text" name="hexcode" placeholder="#000000" value="#000000">
                     </form>
+                    <div class="color-palette">
+                        <span class="pine"></span>
+                        <span class="tree"></span>
+                        <span class="grass"></span>
+                        <br>
+                        <span class="hole"></span>
+                        <span class="trunk"></span>
+                        <span class="dirt"></span>
+                        <span class="wood"></span>
+                        <span class="board"></span>
+                        <span class="sand"></span>
+                        <br>
+                        <span class="ocean"></span>
+                        <span class="water"></span>
+                        <span class="diamond"></span>
+                        <span class="ice"></span>
+                        <span class="snow"></span>
+                        <br>
+                        <span class="brick"></span>
+                        <span class="red"></span>
+                        <span class="fire"></span>
+                        <span class="clay"></span>
+                        <span class="gold"></span>
+                        <br>
+                        <span class="black"></span>
+                        <span class="road"></span>
+                        <span class="rock"></span>
+                        <span class="silver"></span>
+                    </div>
                 </section>
 
                 <section>
@@ -135,15 +224,15 @@ input[type="text"] {
                         <ul>
                             <li>
                                 <label for="name"></label>
-                                <input type="text" name="name" placeholder="Item Name">
+                                <input class="form-name" type="text" name="name" placeholder="Item Name">
                             </li>
                             <li>
                                 <label for="slug"></label>
-                                <input type="text" name="slug" placeholder="item-slug">
+                                <input class="form-slug" type="text" name="slug" placeholder="item-slug">
                             </li>
                             <li>
-                                <label for="recipe-1">Crafting Recipe:</label><br>
-                                <select name="recipe-1">
+                                <label>Crafting Recipe:</label><br>
+                                <select class="form-recipe-1" name="recipe-1">
                                     <option value="tree">tree</option>
                                     <option value="rock">rock</option>
                                     <option value="pinetree">pinetree</option>
@@ -157,7 +246,7 @@ input[type="text"] {
                                     <option value="oil">oil</option>
                                     <option value="clay">clay</option>
                                 </select>
-                                <select name="recipe-2">
+                                <select class="form-recipe-2" name="recipe-2">
                                     <option value="tree">tree</option>
                                     <option value="rock">rock</option>
                                     <option value="pinetree">pinetree</option>
@@ -171,7 +260,7 @@ input[type="text"] {
                                     <option value="oil">oil</option>
                                     <option value="clay">clay</option>
                                 </select>
-                                <select name="recipe-3">
+                                <select class="form-recipe-3" name="recipe-3">
                                     <option value="tree">tree</option>
                                     <option value="rock">rock</option>
                                     <option value="pinetree">pinetree</option>
@@ -189,10 +278,10 @@ input[type="text"] {
                             <li>
                                 <fieldset>
                                     <legend for="properties">Properties:</legend>
-                                    <input type="checkbox" name="properties" value="isplaceable"> Is Placeable<br>
-                                    <input type="checkbox" name="properties" value="isingredient"> Is Ingredient<br>
-                                    <input type="checkbox" name="properties" value="isequipable"> Is Equipable<br>
-                                    <input type="checkbox" name="properties" value="iscollectable"> Is Collectable<br>
+                                    <input class="form-property" type="checkbox" name="properties" value="isplaceable"> Is Placeable<br>
+                                    <input class="form-property" type="checkbox" name="properties" value="isingredient"> Is Ingredient<br>
+                                    <input class="form-property" type="checkbox" name="properties" value="isequipable"> Is Equipable<br>
+                                    <input class="form-property" type="checkbox" name="properties" value="iscollectable"> Is Collectable<br>
                                 </fieldset>
                             </li>
                             <li>
@@ -202,20 +291,47 @@ input[type="text"] {
                     </form>
                 </section>
             </div>
-            <div class="panel-right">
 
+            <div class="panel-right">
                 <section>
                     <h2>Generated Item</h2>
                     <div id="itemsvg"></div>
+                </section>
+
+                <section>
+                    <h2>Items List</h2>
+
+
+<?php
+
+    $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
+    if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
+
+    if ( $result = $mysqli->query("SELECT * FROM beaudryland_items") ) {
+        if($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $name = $row['name'];
+                $slug = $row['slug'];
+                $recipe = $row['recipe'];
+                echo 'Name: '.$name.'<br>';
+                echo 'Slug: '.$slug.'<br>';
+                echo 'Recipe: '.$recipe;
+                echo '<br><br>';
+            }
+        }
+    } else {
+        mysql_error();
+    }
+
+?>
+
+
                 </section>
             </div>
 
 		</div>
         
-        <!--
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        -->
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.js"><\/script>')</script>
+        <script src="js/vendor/jquery-2.1.1.js"></script>
         <script src="js/vendor/jquery.color.js"></script>
         <script src="js/vendor/raphael-min.js"></script>
         <script src="js/plugins.js"></script>
@@ -230,24 +346,35 @@ $('.canvas-pixel').on("click", function() {
     $(this).css("background-color",colorcode);
     $(this).attr("data-color",colorcode);
 });
-/*
+
+$('.color-palette span').on("click", function() {
+    var color = $(this).css("background-color");
+    $('.color-code .form-color').css("background-color", color);
+    $('.color-code .form-color').val(color);
+});
+
 $('.item-builder').submit(function(e) {
     createSVG();
+    var name = $('.item-builder .form-name').val();
+    var slug = $('.item-builder .form-slug').val();
+    var recipe1 = $('.item-builder .form-recipe-1').val();
+    var recipe2 = $('.item-builder .form-recipe-2').val();
+    var recipe3 = $('.item-builder .form-recipe-3').val();
+    var recipe = recipe1+recipe2+recipe3;
+    $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe}, function(data) {
+        //alert("saved item");
+
+    });
     event.preventDefault();
 });
-*/
 
 var paper;
-
 var createSVG = function() {
-
     $('#itemsvg svg').remove();
-
     paper = Raphael(document.getElementById('itemsvg'), 150, 150);
     var pixels = [];
     var x = 0;
     var y = 0;
-
     $('.canvas-pixel').each(function(i) {
         var color = $(this).attr("data-color");
         //color = hexc(color);
@@ -262,35 +389,21 @@ var createSVG = function() {
             } else {
                 x = (i%5) * 30;
             }
-
-            
         }
-
-        //var x = (i%5) * 30;
-        //var y = 0;
         pixels[i] = paper.rect(x, y, 30, 30);
-        //pixels[i] = paper.rect(0, 0, 30, 30);
         pixels[i].attr("fill", color);
         pixels[i].attr("stroke", color);
     });
-
-    //var rectangle1 = paper.rect(0, 0, 30, 30);
-    //rectangle1.attr("fill", "#000");
-    //rectangle1.attr("stroke", "#000");
-
 };
 
 </script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. 
-        <script>
-        	/*
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-            */
-        </script>
-        -->
+
+
     </body>
 </html>
+
+<?php 
+    $mysqli->close();
+    ob_end_flush();
+?>
