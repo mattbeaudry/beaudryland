@@ -27,13 +27,13 @@ $result = $mysqli->query(
 ) or die(mysql_error() );
 
 // redirect
-
+/*
 if($result){
 	header("location:../spritepainter.php");
 } else {
 	header("location:../spritepainter.php?error=registerfailed");
 }
-
+*/
 
 $mysqli->close();
 ob_end_flush();

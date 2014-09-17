@@ -45,14 +45,12 @@ session_start();
 .pixelpainter-nav ul {
     list-style:none;
     padding:0;
-
 }
 .the-fucking-canvas {
     border:solid 2px #000;
     padding:10px;
     display:inline-block;
     width:180px;
-
 }
 .canvas-pixel {
     float:left;
@@ -60,7 +58,7 @@ session_start();
     height:30px;
     border:solid 2px #000;
     cursor:pointer;
-    background-color:#fff;
+    background-color:transparent;
 }
 .color-code {
 
@@ -138,6 +136,7 @@ input[type="text"] {
 .rock { background-color:#606469; }
 .silver { background-color:#cbcbcb; }
 .white { background-color:#fff; }
+.transparent { background-color:transparent;border:dotted 2px #000; }
 
 section {
     background-color:#efefef;
@@ -234,6 +233,7 @@ section h2 {
                         <span class="rock"></span>
                         <span class="silver"></span>
                         <span class="white"></span>
+                        <span class="transparent"></span>
                     </div>
                 </section>
 
@@ -330,7 +330,7 @@ section h2 {
     $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
     if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
 
-    if ( $result = $mysqli->query("SELECT * FROM beaudryland_items") ) {
+    if ( $result = $mysqli->query("SELECT * FROM beaudryland_items ORDER BY itemid DESC") ) {
         if($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $name = $row['name'];
@@ -340,8 +340,8 @@ section h2 {
                 //echo 'Name: '.$name.'<br>';
                 //echo 'Slug: '.$slug.'<br>';
                 //echo 'Recipe: '.$recipe.'<br>';
-                echo '<div class="svg-wrap">'.$svg.'</div><br>';
-                echo '<br>';
+                echo '<div class="svg-wrap">'.$svg.'</div>';
+                //echo '<br>';
             }
         }
     } else {
@@ -390,7 +390,7 @@ $('.color-palette span').on("click", function() {
 $('.item-builder').submit(function(e) {
     createSVG();
     var svg = $('#itemsvg').html();
-    //alert(svg);
+    //console.log(svg);
     var name = $('.item-builder .form-name').val();
     var slug = $('.item-builder .form-slug').val();
     var recipe1 = $('.item-builder .form-recipe-1').val();
@@ -398,10 +398,12 @@ $('.item-builder').submit(function(e) {
     var recipe3 = $('.item-builder .form-recipe-3').val();
     var recipe = recipe1+recipe2+recipe3;
     $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe, image:svg}, function(data) {
-        //alert("saved item");
+        //console.log(svg);
     });
+    location.reload();
     //header("location:spritepainter.php");
     event.preventDefault();
+    location.reload();
 });
 
 var paper;
