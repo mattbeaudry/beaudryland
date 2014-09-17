@@ -399,8 +399,8 @@ $('.item-builder').submit(function(e) {
     var recipe = recipe1+recipe2+recipe3;
     $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe, image:svg}, function(data) {
         //alert("saved item");
-
     });
+    //header("location:spritepainter.php");
     event.preventDefault();
 });
 
