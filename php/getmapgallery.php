@@ -3,6 +3,7 @@ include '../config.php';
 ob_start();
 session_start();
 $username = $_SESSION['username'];
+$mapdata = "";
 
 $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
 if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
@@ -24,12 +25,12 @@ if($forestmaps->num_rows > 0) {
 		
 		$mapblocks = json_decode($forestrows['mapdata']);
 		
-		echo '<article class="gallery-map-wrap map-forest">';
-		echo '<h3>'.$forestrows['user'].'land</h3>';
+		$mapdata .= '<article class="gallery-map-wrap map-forest">';
+		$mapdata .= '<h3>'.$forestrows['user'].'land</h3>';
 		foreach($mapblocks as $blocktype) {
-		    echo '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
+		    $mapdata .= '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
 		}
-		echo '</article>';
+		$mapdata .= '</article>';
 		
 	}
 	
@@ -52,12 +53,12 @@ if($wintermaps->num_rows > 0) {
 		
 		$mapblocks = json_decode($winterrows['mapdata']);
 		
-		echo '<article class="gallery-map-wrap map-winter">';
-		echo '<h3>'.$winterrows['user'].'land</h3>';
+		$mapdata .= '<article class="gallery-map-wrap map-winter">';
+		$mapdata .= '<h3>'.$winterrows['user'].'land</h3>';
 		foreach($mapblocks as $blocktype) {
-		    echo '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
+		    $mapdata .= '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
 		}
-		echo '</article>';
+		$mapdata .= '</article>';
 		
 		//echo $row['mapdata'];
 		
@@ -82,18 +83,20 @@ if($beachmaps->num_rows > 0) {
 		
 		$mapblocks = json_decode($beachrows['mapdata']);
 		
-		echo '<article class="gallery-map-wrap map-beach">';
-		echo '<h3>'.$beachrows['user'].'land</h3>';
+		$mapdata .= '<article class="gallery-map-wrap map-beach">';
+		$mapdata .= '<h3>'.$beachrows['user'].'land</h3>';
 		foreach($mapblocks as $blocktype) {
-		    echo '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
+		    $mapdata .= '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
 		}
-		echo '</article>';
+		$mapdata .= '</article>';
 		
 		//echo $row['mapdata'];
 		
 	}
 	
 }
+
+echo $mapdata;
 
 $mysqli->close();
 ob_end_flush();
