@@ -42,6 +42,11 @@ session_start();
     float:left;
     width:100%;
 }
+.pixelpainter-nav ul {
+    list-style:none;
+    padding:0;
+
+}
 .the-fucking-canvas {
     border:solid 2px #000;
     padding:10px;
@@ -88,6 +93,11 @@ input[type="text"] {
     background-color:#fff;
     border-width: 3px 2px 2px 2px;
 }
+.svg-wrap {
+    display:inline;
+    float:left;
+    margin:20px;
+}
 .color-palette {
     margin:5px 0;
 }
@@ -127,6 +137,7 @@ input[type="text"] {
 .road { background-color:#313131; }
 .rock { background-color:#606469; }
 .silver { background-color:#cbcbcb; }
+.white { background-color:#fff; }
 
 section {
     background-color:#efefef;
@@ -180,6 +191,13 @@ section h2 {
                         <div class="canvas-pixel" data-pixel="24" data-color="transparent"></div>
                         <div class="canvas-pixel" data-pixel="25" data-color="transparent"></div>
             		</div>
+                    <nav class="pixelpainter-nav">
+                        <ul>
+                            <li><a href="#" class="button-reset">Reset</a></li>
+                            <li><a href="#" class="button-preview">Preview</a></li>
+                        </ul>
+                    </nav>
+
                 </section>
 
                 <section>
@@ -215,10 +233,20 @@ section h2 {
                         <span class="road"></span>
                         <span class="rock"></span>
                         <span class="silver"></span>
+                        <span class="white"></span>
                     </div>
                 </section>
 
+               
+            </div>
+
+            <div class="panel-right">
                 <section>
+                    <h2>Generated Item</h2>
+                    <div id="itemsvg"></div>
+                </section>
+
+                 <section>
                     <h2>Item Info</h2>
                     <form class="item-builder" action="php/createnewitem.php" method="post">
                         <ul>
@@ -290,17 +318,12 @@ section h2 {
                         </ul>
                     </form>
                 </section>
+
             </div>
 
-            <div class="panel-right">
-                <section>
-                    <h2>Generated Item</h2>
-                    <div id="itemsvg"></div>
-                </section>
-
-                <section>
+            <div >
+                <section class="panel-bottom clearfix">
                     <h2>Items List</h2>
-
 
 <?php
 
@@ -313,10 +336,12 @@ section h2 {
                 $name = $row['name'];
                 $slug = $row['slug'];
                 $recipe = $row['recipe'];
-                echo 'Name: '.$name.'<br>';
-                echo 'Slug: '.$slug.'<br>';
-                echo 'Recipe: '.$recipe;
-                echo '<br><br>';
+                $svg = $row['image'];
+                //echo 'Name: '.$name.'<br>';
+                //echo 'Slug: '.$slug.'<br>';
+                //echo 'Recipe: '.$recipe.'<br>';
+                echo '<div class="svg-wrap">'.$svg.'</div><br>';
+                echo '<br>';
             }
         }
     } else {
@@ -339,12 +364,21 @@ section h2 {
     
 <script>
 
-$('.canvas-pixel').on("click", function() {
+$('.canvas-pixel').on("click", function() { 
     var pixelid = $(this).attr("data-pixel");
     var colorcode = $('.color-code input').val();
     // validate hex code
     $(this).css("background-color",colorcode);
     $(this).attr("data-color",colorcode);
+});
+
+$('.button-reset').on("click", function(){
+    $('.canvas-pixel').css("background-color","transparent");
+    $('.canvas-pixel').attr("data-color","transparent");
+});
+
+$('.button-preview').on("click", function(){
+    createSVG();
 });
 
 $('.color-palette span').on("click", function() {
@@ -355,13 +389,15 @@ $('.color-palette span').on("click", function() {
 
 $('.item-builder').submit(function(e) {
     createSVG();
+    var svg = $('#itemsvg').html();
+    //alert(svg);
     var name = $('.item-builder .form-name').val();
     var slug = $('.item-builder .form-slug').val();
     var recipe1 = $('.item-builder .form-recipe-1').val();
     var recipe2 = $('.item-builder .form-recipe-2').val();
     var recipe3 = $('.item-builder .form-recipe-3').val();
     var recipe = recipe1+recipe2+recipe3;
-    $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe}, function(data) {
+    $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe, image:svg}, function(data) {
         //alert("saved item");
 
     });
