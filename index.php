@@ -42,7 +42,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 	        <div class="the-fucking-login clearfix">
 	        	
 		        <form class="beaudrylandlogin" name="beaudrylandlogin" method="post" action="checklogin.php">
-		        	<h3>Login</h3>
+		        	<h3>Existing Land</h3>
 					<input class="form-field" name="username" type="text" id="username" placeholder="username">
 					<input class="form-field" name="password" type="password" id="password" placeholder="password">
 					<?php if ($error == "loginfailed"){ ?><span class="error error-login">Login Failed.</span><?php } ?>
@@ -50,10 +50,16 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 				</form>
 		
 				<form class="beaudrylandregister" name="beaudrylandregister" method="post" action="php/createnewuser.php">
-					<h3>Register</h3>
+					<h3>Create New Land</h3>
 					<input class="form-field required" name="new_username" type="text" id="new_username" placeholder="username">
 					<input class="form-field required" name="new_password" type="password" id="new_password" placeholder="password">
 					<!--<input class="form-field email" name="new_email" type="text" id="new_email" placeholder="email">-->
+					<!--
+					<fieldset class="maptype">
+						<input type="radio" name="maptype" value="Creative">Start with nothing<br>
+						<input type="radio" name="maptype" value="Creative">Start with all items and maps<br>
+					</fieldset>
+					-->
 					<?php if ($error == "registerfailed"){ ?><span class="error error-login">Register Failed.</span><?php } ?>
 					<input class="button" type="submit" name="newuser" value="register">
 				</form>

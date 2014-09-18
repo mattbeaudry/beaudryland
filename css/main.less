@@ -375,43 +375,63 @@ hr {
 	margin-top:10px;
 }
 .beaudrylandlogin {
-	text-align: right;
+	
 }
-.beaudrylandlogin .button {
-	float:right;
-	width:40%;
-}
+.beaudrylandlogin .button,
 .beaudrylandregister .button {
-	width:40%;
+	display:inline-block;
+	position:relative;
 }
+/*
+.beaudrylandlogin .button:before,
+.beaudrylandregister .button:before {
+	display:block;
+	content:"";
+	width:95%;
+	height:5px;
+	background-color:#000;
+	position:absolute;
+	top:-5px;
+	left:5px;
+}
+*/
 .beaudrylandlogin input {
-	float:right;
-	margin-right:20px !important;
+
 }
 .beaudrylandregister input {
-	float:left;
-	margin-left:20px !important;
+	
 }
 .beaudrylandlogin input:-webkit-autofill,
 .beaudrylandregister input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 .the-fucking-login > form {
-	float:left;
 	width:50%;
+	float:left;
+	margin:0;
+	padding:0px 40px;
 }
 .the-fucking-login input {
-	width:60%;
+	width:100%;
+}
+.the-fucking-login input[type="radio"] {
+	width:auto;
+	margin:0 8px 10px;
+}
+.the-fucking-login .maptype {
+	text-align:left;
 }
 .link-savemap {
 	padding: 0 5px;
 	text-decoration: underline;
 }
-.link-savemap a, .link-savemap a:hover {
+.link-savemap a, 
+.link-savemap a:hover {
 	color: #00cc00;
 	cursor: pointer;
 }
-.link-logout a, .link-logout a:hover {
+.link-logout a, 
+.link-logout a:hover {
 	color: #cc0000;
 }
 .the-fucking-login input {
