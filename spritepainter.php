@@ -46,6 +46,10 @@ session_start();
     list-style:none;
     padding:0;
 }
+.pixelpainter-nav li {
+    display:inline-block;
+    margin-right:10px;
+}
 .the-fucking-canvas {
     border:solid 2px #000;
     padding:10px;
@@ -102,13 +106,18 @@ input[type="text"] {
     shape-rendering: crispEdges;
 }
 .color-palette {
-    margin:5px 0;
+    margin: 5px 0;
+    border: solid 2px #000;
+    padding: 2px;
+    width:180px;
 }
 .color-palette span {
     display:inline-block;
     width:20px;
     height:20px;
     cursor:pointer;
+    float:left;
+    margin-right:2px;
 }
 .color-palette span:hover {
     border:dashed 2px #000;
@@ -151,6 +160,9 @@ section {
 section h2 {
     margin-top:0px;
 }
+.form-color {
+    width: 180px;
+}
 
 </style>
 
@@ -163,7 +175,17 @@ section h2 {
 
             <div class="panel-left">
                 <section>
+
                     <h2>Pixel Painter</h2>
+
+                    <nav class="pixelpainter-nav">
+                        <ul>
+                            <li><a href="#" class="button-reset">Reset</a></li>
+                            <li><a href="#" class="button-preview">Preview</a></li>
+                             <li><a href="#" class="button-saveitem">Save Item</a></li>
+                        </ul>
+                    </nav>
+
             		<div class="the-fucking-canvas clearfix">
                         <div class="canvas-pixel" data-pixel="1" data-color="transparent"></div>
                         <div class="canvas-pixel" data-pixel="2" data-color="transparent"></div>
@@ -195,21 +217,12 @@ section h2 {
                         <div class="canvas-pixel" data-pixel="24" data-color="transparent"></div>
                         <div class="canvas-pixel" data-pixel="25" data-color="transparent"></div>
             		</div>
-                    <nav class="pixelpainter-nav">
-                        <ul>
-                            <li><a href="#" class="button-reset">Reset</a></li>
-                            <li><a href="#" class="button-preview">Preview</a></li>
-                        </ul>
-                    </nav>
 
-                </section>
-
-                <section>
-                    <h2>Color Selector</h2>
                     <form class="color-code">
                         <input class="form-color" type="text" name="hexcode" placeholder="#000000" value="#000000">
                     </form>
-                    <div class="color-palette">
+
+                    <div class="color-palette clearfix">
                         <span class="pine"></span>
                         <span class="tree"></span>
                         <span class="grass"></span>
@@ -247,7 +260,7 @@ section h2 {
 
             <div class="panel-right">
                 <section>
-                    <h2>Generated Item</h2>
+                    <h2>Preview</h2>
                     <div id="itemsvg"></div>
                     <div class="iteminfo">
 
@@ -267,61 +280,60 @@ section h2 {
                                 <input class="form-slug" type="text" name="slug" placeholder="item-slug">
                             </li>
                             <li>
-                                <label>Crafting Recipe:</label><br>
-                                <select class="form-recipe-1" name="recipe-1">
-                                    <option value="tree">tree</option>
-                                    <option value="rock">rock</option>
-                                    <option value="pinetree">pinetree</option>
-                                    <option value="icerock">icerock</option>
-                                    <option value="palmtree">palmtree</option>
-                                    <option value="wood">wood</option>
-                                    <option value="fire">fire</option>
-                                    <option value="diamond">diamond</option>
-                                    <option value="gold">gold</option>
-                                    <option value="silver">silver</option>
-                                    <option value="oil">oil</option>
-                                    <option value="clay">clay</option>
-                                </select>
-                                <select class="form-recipe-2" name="recipe-2">
-                                    <option value="tree">tree</option>
-                                    <option value="rock">rock</option>
-                                    <option value="pinetree">pinetree</option>
-                                    <option value="icerock">icerock</option>
-                                    <option value="palmtree">palmtree</option>
-                                    <option value="wood">wood</option>
-                                    <option value="fire">fire</option>
-                                    <option value="diamond">diamond</option>
-                                    <option value="gold">gold</option>
-                                    <option value="silver">silver</option>
-                                    <option value="oil">oil</option>
-                                    <option value="clay">clay</option>
-                                </select>
-                                <select class="form-recipe-3" name="recipe-3">
-                                    <option value="tree">tree</option>
-                                    <option value="rock">rock</option>
-                                    <option value="pinetree">pinetree</option>
-                                    <option value="icerock">icerock</option>
-                                    <option value="palmtree">palmtree</option>
-                                    <option value="wood">wood</option>
-                                    <option value="fire">fire</option>
-                                    <option value="diamond">diamond</option>
-                                    <option value="gold">gold</option>
-                                    <option value="silver">silver</option>
-                                    <option value="oil">oil</option>
-                                    <option value="clay">clay</option>
-                                </select>
-                            </li>
-                            <li>
                                 <fieldset>
                                     <legend for="properties">Properties:</legend>
-                                    <input class="form-property" type="checkbox" name="properties" value="isplaceable"> Is Placeable<br>
+                                    <input class="form-property" type="checkbox" name="properties" value="isplaceable" checked> Is Placeable<br>
                                     <input class="form-property" type="checkbox" name="properties" value="isingredient"> Is Ingredient<br>
-                                    <input class="form-property" type="checkbox" name="properties" value="isequipable"> Is Equipable<br>
-                                    <input class="form-property" type="checkbox" name="properties" value="iscollectable"> Is Collectable<br>
+                                    <!--<input class="form-property" type="checkbox" name="properties" value="isequipable"> Is Equipable<br>-->
+                                    <input class="form-property" type="checkbox" name="properties" value="iscollectable" checked> Is Collectable<br>
+                                    <input class="form-property" type="checkbox" name="properties" value="iscollectable" checked> Is Craftable <em>(Recipe Below)</em><br>
+                                
+                                    <select class="form-recipe-1" name="recipe-1">
+                                        <option value="tree">tree</option>
+                                        <option value="rock">rock</option>
+                                        <option value="pinetree">pinetree</option>
+                                        <option value="icerock">icerock</option>
+                                        <option value="palmtree">palmtree</option>
+                                        <option value="wood">wood</option>
+                                        <option value="fire">fire</option>
+                                        <option value="diamond">diamond</option>
+                                        <option value="gold">gold</option>
+                                        <option value="silver">silver</option>
+                                        <option value="oil">oil</option>
+                                        <option value="clay">clay</option>
+                                    </select>
+                                    <select class="form-recipe-2" name="recipe-2">
+                                        <option value="tree">tree</option>
+                                        <option value="rock">rock</option>
+                                        <option value="pinetree">pinetree</option>
+                                        <option value="icerock">icerock</option>
+                                        <option value="palmtree">palmtree</option>
+                                        <option value="wood">wood</option>
+                                        <option value="fire">fire</option>
+                                        <option value="diamond">diamond</option>
+                                        <option value="gold">gold</option>
+                                        <option value="silver">silver</option>
+                                        <option value="oil">oil</option>
+                                        <option value="clay">clay</option>
+                                    </select>
+                                    <select class="form-recipe-3" name="recipe-3">
+                                        <option value="tree">tree</option>
+                                        <option value="rock">rock</option>
+                                        <option value="pinetree">pinetree</option>
+                                        <option value="icerock">icerock</option>
+                                        <option value="palmtree">palmtree</option>
+                                        <option value="wood">wood</option>
+                                        <option value="fire">fire</option>
+                                        <option value="diamond">diamond</option>
+                                        <option value="gold">gold</option>
+                                        <option value="silver">silver</option>
+                                        <option value="oil">oil</option>
+                                        <option value="clay">clay</option>
+                                    </select>
                                 </fieldset>
                             </li>
                             <li>
-                                <input type="submit" class="create-image" value="Generate Item">
+                                <input type="submit" class="create-image" value="Save Item">
                             </li>
                         </ul>
                     </form>
@@ -331,7 +343,7 @@ section h2 {
 
             <div >
                 <section class="panel-bottom clearfix">
-                    <h2>Items List</h2>
+                    <h2>Item Gallery</h2>
 
 <?php
 
@@ -399,6 +411,25 @@ $('.color-palette span').on("click", function() {
 });
 
 $('.item-builder').submit(function(e) {
+    itemPreview();
+    var svg = $('#itemsvg').html();
+    //console.log(svg);
+    var name = $('.item-builder .form-name').val();
+    var slug = $('.item-builder .form-slug').val();
+    var recipe1 = $('.item-builder .form-recipe-1').val();
+    var recipe2 = $('.item-builder .form-recipe-2').val();
+    var recipe3 = $('.item-builder .form-recipe-3').val();
+    var recipe = recipe1+recipe2+recipe3;
+    $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe, image:svg}, function(data) {
+        //console.log(svg);
+    });
+    location.reload();
+    //header("location:spritepainter.php");
+    event.preventDefault();
+    location.reload();
+});
+
+$('.button-saveitem').on("click", function() {
     itemPreview();
     var svg = $('#itemsvg').html();
     //console.log(svg);
