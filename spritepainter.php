@@ -85,16 +85,21 @@ input[type="text"] {
     border:none;
 }
 #itemsvg {
-    width: 154px;
-    height: 154px;
-    border: solid 2px #000;
-    background-color:#fff;
-    border-width: 3px 2px 2px 2px;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    display: inline-block;
+}
+#itemsvg svg {
+    width:100%;
+    height:100%;
+    shape-rendering: crispEdges;
 }
 .svg-wrap {
     display:inline;
     float:left;
     margin:20px;
+    shape-rendering: crispEdges;
 }
 .color-palette {
     margin:5px 0;
@@ -244,6 +249,9 @@ section h2 {
                 <section>
                     <h2>Generated Item</h2>
                     <div id="itemsvg"></div>
+                    <div class="iteminfo">
+
+                    </div>
                 </section>
 
                  <section>
@@ -337,11 +345,14 @@ section h2 {
                 $slug = $row['slug'];
                 $recipe = $row['recipe'];
                 $svg = $row['image'];
-                //echo 'Name: '.$name.'<br>';
-                //echo 'Slug: '.$slug.'<br>';
-                //echo 'Recipe: '.$recipe.'<br>';
-                echo '<div class="svg-wrap">'.$svg.'</div>';
-                //echo '<br>';
+                $infohtml = '';
+                //$infohtml += 'Slug: '.$slug.'<br>';
+                //$infohtml += 'Recipe: '.$recipe.'<br>';
+                $infohtml .= '<div class="svg-wrap">';
+                $infohtml .= $svg;
+                $infohtml .= '<br>'.$name;
+                $infohtml .= '</div>';
+                echo $infohtml;
             }
         }
     } else {
@@ -378,7 +389,7 @@ $('.button-reset').on("click", function(){
 });
 
 $('.button-preview').on("click", function(){
-    createSVG();
+    itemPreview();
 });
 
 $('.color-palette span').on("click", function() {
@@ -388,7 +399,7 @@ $('.color-palette span').on("click", function() {
 });
 
 $('.item-builder').submit(function(e) {
-    createSVG();
+    itemPreview();
     var svg = $('#itemsvg').html();
     //console.log(svg);
     var name = $('.item-builder .form-name').val();
@@ -406,10 +417,26 @@ $('.item-builder').submit(function(e) {
     location.reload();
 });
 
+var itemPreview = function() {
+    createSVG();
+    var name = $('.item-builder .form-name').val();
+    var slug = $('.item-builder .form-slug').val();
+    var recipe1 = $('.item-builder .form-recipe-1').val();
+    var recipe2 = $('.item-builder .form-recipe-2').val();
+    var recipe3 = $('.item-builder .form-recipe-3').val();
+    var recipe = recipe1+recipe2+recipe3;
+};
+
 var paper;
 var createSVG = function() {
     $('#itemsvg svg').remove();
-    paper = Raphael(document.getElementById('itemsvg'), 150, 150);
+    var w = 30;
+    var h = 30;
+    var pixelwidth = w / 5;
+    //paper = Raphael(document.getElementById('itemsvg'), 30, 30);
+    paper = Raphael(document.getElementById('itemsvg'));
+    paper.setViewBox(0, 0, w, h, true);
+    paper.canvas.setAttribute('preserveAspectRatio', 'none');
     var pixels = [];
     var x = 0;
     var y = 0;
@@ -422,17 +449,46 @@ var createSVG = function() {
         } else {
             if (i%5 == 0){
                 //multiple of 5 or 0]
-                y = y + 30;
+                y = y + pixelwidth;
                 x = 0;
             } else {
-                x = (i%5) * 30;
+                x = (i%5) * pixelwidth;
             }
         }
-        pixels[i] = paper.rect(x, y, 30, 30);
+        pixels[i] = paper.rect(x, y, pixelwidth, pixelwidth);
         pixels[i].attr("fill", color);
         pixels[i].attr("stroke", color);
     });
 };
+
+
+
+/*
+var w = 600;
+var h = 400;
+var paper = Raphael("wrap");
+paper.setViewBox(0,0,w,h,true);
+
+// ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
+var svg = document.querySelector("svg");
+svg.removeAttribute("width");
+svg.removeAttribute("height");
+
+
+// draw some random vectors:
+var path = "M " + w / 2 + " " + h / 2;
+for (var i = 0; i < 100; i++){
+    var x = Math.random() * w;
+    var y = Math.random() * h;
+    paper.circle(x,y,
+                 Math.random() * 60 + 2).
+                 attr("fill", "rgb("+Math.random() * 255+",0,0)").
+                 attr("opacity", 0.5);
+    path += "L " + x + " " + y + " ";
+}
+paper.path(path).attr("stroke","#ffffff").attr("stroke-opacity", 0.2);
+paper.text(200,100,"Resize the window").attr("font","30px Arial").attr("fill","#ffffff");
+*/
 
 </script>
 
