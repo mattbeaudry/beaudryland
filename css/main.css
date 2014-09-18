@@ -528,6 +528,15 @@ hr {
   margin-top: -88px;
   width: 800px;
 }
+.gallery-map-wrap.map-forest {
+  background-color: #36ac2a;
+}
+.gallery-map-wrap.map-winter {
+  background-color: #f5fdff;
+}
+.gallery-map-wrap.map-beach {
+  background-color: #d9cfa2;
+}
 .page-mapgallery h2 {
   margin-bottom: 50px;
 }
