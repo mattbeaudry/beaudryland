@@ -147,6 +147,30 @@ function confirmExit() {
 
 
 
+
+/////////////
+//  CHEATS 
+/////////////
+
+var getAllItems = function() {
+	var inventoryhtml = '';
+	$.each(blocktypes, function(index, value) {
+		inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
+		if(index==0){ inventoryhtml += 'selected-item'; }
+		inventoryhtml += '" data-blocktype="'+value+'">99</div>';
+	});
+	$('.the-fucking-inventory').html(inventoryhtml);
+	setupMouseEvents();
+	/*for 
+
+	'<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>'
+	'<div class="slot-2 empty" data-blocktype="empty">0</div>''*/
+};
+
+
+
+
+
 /////////////
 //  MAPS
 /////////////

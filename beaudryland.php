@@ -28,6 +28,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    			<li><a href="javascript:void(0);" onclick="drawNewWinterMap();return false">Draw New Winter Map</a></li>
 	    			<li><a href="javascript:void(0);" onclick="drawNewBeachMap();return false">Draw New Beach Map</a></li>
 	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
 	    			<!--
 		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
 		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
