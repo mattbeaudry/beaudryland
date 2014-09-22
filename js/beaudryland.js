@@ -296,6 +296,7 @@ setMapSize = function() {
 	$('.the-fucking-map').css("height", mapheightpx+"px");
 };
 loadNewMap = function(type) {
+	var maphtml = "";
 	for (var f = 0; f <= (totalmapblocks - 1); f++){
 		//random block generation
 		var r = Math.random();
@@ -304,8 +305,54 @@ loadNewMap = function(type) {
 		else if (r>0.98) { blocktype = "rock"; }
 		else if (r>0.8) { blocktype = "tree"; }
 		else { blocktype = "water"; }
-		$('.the-fucking-map').append('<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>');
+		maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
+	$('.the-fucking-map').append(maphtml);
+
+
+	/* FOREST BIOME */
+
+	var terrainblocks = ["water","tree","grass"];
+	$.each(terrainblocks, function(index, value){
+
+		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+
+		changeBlockType(randomblockid, value);
+
+		changeBlockType( (randomblockid-1), value);
+		changeBlockType( (randomblockid-2), value);
+		changeBlockType( (randomblockid-3), value);
+		changeBlockType( (randomblockid-4), value);
+
+		changeBlockType( (randomblockid-1+mapwidth), value);
+		changeBlockType( (randomblockid-2+mapwidth), value);
+		changeBlockType( (randomblockid-3+mapwidth), value);
+		changeBlockType( (randomblockid-4+mapwidth), value);
+		changeBlockType( (randomblockid-5+mapwidth), value);
+
+		changeBlockType( (randomblockid-1-mapwidth), value);
+		changeBlockType( (randomblockid-2-mapwidth), value);
+		changeBlockType( (randomblockid-3-mapwidth), value);
+		changeBlockType( (randomblockid-4-mapwidth), value);
+		changeBlockType( (randomblockid-5-mapwidth), value);
+		changeBlockType( (randomblockid-6-mapwidth), value);
+		changeBlockType( (randomblockid-7-mapwidth), value);
+
+		changeBlockType( (randomblockid-1+mapwidth*2), value);
+		changeBlockType( (randomblockid-2+mapwidth*2), value);
+		changeBlockType( (randomblockid-3+mapwidth*2), value);
+		changeBlockType( (randomblockid-4+mapwidth*2), value);
+		changeBlockType( (randomblockid-5+mapwidth*2), value);
+		
+		changeBlockType( (randomblockid-1-mapwidth*2), value);
+		changeBlockType( (randomblockid-2-mapwidth*2), value);
+		changeBlockType( (randomblockid-3-mapwidth*2), value);
+		changeBlockType( (randomblockid-4-mapwidth*2), value);
+		changeBlockType( (randomblockid-5-mapwidth*2), value);
+		changeBlockType( (randomblockid-6-mapwidth*2), value);
+
+	});
+
 };
 saveMap = function(){
 	trace("save map");
