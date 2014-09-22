@@ -1,17 +1,24 @@
 <?php
 session_start();
 if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
-	header("location:loginregister.php");
+	header("location:index.php");
 }
 ?>
+<script>
+	<?php 
+	if (isset($_GET['maptype'])){
+		$maptype = $_GET['maptype'];
+		echo "var maptype = '".$maptype."';";
+		//echo "alert(maptype);";
+	}
+	?>
+</script>
 <?php include 'header.php'; ?> 
 
 	<body class="page-game container">
 
 	    <div class="maps-wrap clearfix">
-	    
 	    	<div class="the-fucking-map" data-maptype="forest"></div>
-	    	
 	    </div>
 
 	    <div class="the-fucking-dev-panel">

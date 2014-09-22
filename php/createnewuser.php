@@ -6,6 +6,7 @@ session_start();
 $newusername = $_POST['new_username'];
 $newpassword = $_POST['new_password'];
 $newemail = $_POST['new_email'];
+$maptype = $_POST['maptype'];
 
 $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
 if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
@@ -22,10 +23,13 @@ $result = $mysqli->query(
 if($result){
 	session_start();
 	$_SESSION["username"] = $newusername;
-	header("location:../beaudryland.php");
+	$url = "location:../beaudryland.php";
+	if (isset($maptype)){ $url .= "?maptype=".$maptype; }
+	header($url);
 } else {
 	//echo "Create new user function failed.";
-	header("location:../index.php?error=registerfailed");
+	$url = "location:../index.php?error=registerfailed";
+	header($url);
 }
 
 $mysqli->close();

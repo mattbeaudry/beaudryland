@@ -15,11 +15,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
         <meta name="viewport" content="width=device-width">
         
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="apple-touch-icon-144x144-precomposed.png" />
-        <link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png" />
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 		
 		<link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
@@ -54,12 +50,10 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 					<input class="form-field required" name="new_username" type="text" id="new_username" placeholder="username">
 					<input class="form-field required" name="new_password" type="password" id="new_password" placeholder="password">
 					<!--<input class="form-field email" name="new_email" type="text" id="new_email" placeholder="email">-->
-					<!--
 					<fieldset class="maptype">
-						<input type="radio" name="maptype" value="Creative">Start with nothing<br>
-						<input type="radio" name="maptype" value="Creative">Start with all items and maps<br>
+						<input type="radio" name="maptype" value="game" checked>Start with nothing. Read signs for clues.<br>
+						<input type="radio" name="maptype" value="creative">Start with all items and maps.<br>
 					</fieldset>
-					-->
 					<?php if ($error == "registerfailed"){ ?><span class="error error-login">Register Failed.</span><?php } ?>
 					<input class="button" type="submit" name="newuser" value="register">
 				</form>
@@ -71,28 +65,34 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		<section class="the-fucking-gameinfo">
 
 			<article>
-				<h3>Beaudryland v0.6<br>September 2014</h3>
-				<ul class="multi-column-2"> 
-					<li>space map: space, star, earth, sun, the planets, red galaxy, blue galaxy</li>
-					<li>new items: </li>
+				<h3>Beaudryland v0.6<br>September 2014 <br>The Space Update</h3>
+				<ul class="multi-column-2">
+					<li>space map: space, star, earth, sun, planets, galaxies</li>
+					<li>new items: signs, rocket, bed, table, chair, chest, telescope, computer, 2D printer</li>
 					<li>new treasure: </li>
-					<li>new blocks: </li>
-					<li>new transport: rocket</li>
 					<li>write/read messages on signs</li>
-					<li>inventory and site redesign</li>
+					<li>iOS app and mobile optimization</li>
+					<li>creative and story modes</li>
+					<li>item creation tool</li>
+					<!--
+					IDEAS:
 					<li>animal &amp; hunting</li>
 					<li>new animation engine</li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					-->
 				</ul>
         	</article>
 
 			<article>
 				<h3>Beaudryland v0.5<br>December 2013<br>The Beach Update</h3>
-
 				<img class="banner-beaudryland" src="img/banner-beaudryland-0.5.png" title="Beaudryland Banner" />
-				
 				<ul class="multi-column-2">
 					<li>beach map: sand, plamtrees, sandstone, wetsand, animated waves</li>
-					<li>new items: keyboard, signs, axe, spear</li>
+					<li>new items: keyboard, axe, spear</li>
 					<li>new treasure: oil, clay</li>
 					<li>new blocks: rockbricks, icerockbricks, sandstone, claybrick</li>
 					<li>car and roads</li>

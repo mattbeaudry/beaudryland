@@ -21,7 +21,7 @@ GAME LOGIC
 MAPS
 PLAYER
 ENEMY & ANIMALS
-KEYBOARD, MOUSE & CONTROL PAD EVENTS
+KEYBOARD, MOUSE, TOUCH & CONTROL PAD EVENTS
 COLLISION DETECTION
 PLAYER PRIMARY ACTION
 ANIMATION & PROJECTILES
@@ -127,6 +127,7 @@ var globalmapblockcount = 0;
 
 
 $(document).ready(function() {
+
 	setMapSize();
 	loadGame();
 	setupKeyboardEvents();
@@ -144,6 +145,94 @@ function confirmExit() {
 	return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
 }
 */
+
+var loadNewGame = function() {
+	trace("new user & brand new map");
+	trace("map type is "+maptype);
+    loadNewMap();
+    createPlayer();
+    if (maptype == 'creative'){
+    	drawNewWinterMap();
+	    drawNewBeachMap();
+	    drawNewSpaceMap();
+	    getAllItems();
+    } else if (maptype == 'game') {
+    	createForestSigns();
+    	createAnimal();
+    	createAnimal();
+    }
+};
+loadGame = function(){
+	trace("load game");
+    $.post('php/loadmap.php', {maptype:'forest'}, function(data) {
+    	if (data == false){
+    		loadNewGame();
+    	} else {
+    	    loadMap('forest');
+    		$.post('php/loadmap.php', {maptype:'winter'}, function(data) {
+    			if (data){
+    				trace("loadwintermap");
+    				loadMap('winter');
+    			}
+			});
+			$.post('php/loadmap.php', {maptype:'beach'}, function(data) {
+				if (data){
+					trace("loadbeachmap");
+					loadMap('beach');
+				}
+			});
+			loadPlayer();
+    	}	
+    });
+};
+
+
+
+
+//////////
+//  STORY
+//////////
+
+createForestSigns = function(){
+	trace("add forest sign clues");
+	 var forestSigns = [
+	 	"You shall collect trees and rocks to create wood and other items.",
+	 	"You shall build a shovel in order to find treasure.",
+	 	"You shall build a guitar in order to unlock a new area."
+	 ];
+	 $.each(forestSigns,function(index,value){
+	 	var blockid = Math.floor((Math.random() * totalmapblocks) + 1);
+	 	changeBlockType(blockid,"sign");
+	 	$('.the-fucking-map .block:eq('+blockid+')').attr("data-text", value);
+	 });
+};
+createWinterSigns = function(){
+	trace("add winter sign clues");
+	 var forestSigns = [
+	 	"Message 1",
+	 	"Message 2",
+	 	"Message 3"
+	 ];
+	 $.each(forestSigns,function(index,value){
+	 	var blockid = Math.floor((Math.random() * totalmapblocks) + 1);
+	 	changeBlockType(blockid,"sign");
+	 	$('.the-fucking-winter-map .block:eq('+blockid+')').attr("data-text", value);
+	 });
+};
+createBeachSigns = function(){
+	trace("add beach sign clues");
+	var forestSigns = [
+		"Message 1",
+		"Message 2",
+		"Message 3"
+	];
+	$.each(forestSigns,function(index,value){
+		var blockid = Math.floor((Math.random() * totalmapblocks) + 1);
+		changeBlockType(blockid,"sign");
+		$('.the-fucking-beach-map .block:eq('+blockid+')').attr("data-text", value);
+	});
+};
+
 
 
 
@@ -175,40 +264,6 @@ var getAllItems = function() {
 //  MAPS
 /////////////
 
-
-
-loadGame = function(){
-	trace("load game");
-    $.post('php/loadmap.php', {maptype:'forest'}, function(data) {
-    	if (data == false){
-
-    		trace("new user");
-    		loadNewMap();
-    		createPlayer();
-
-    	} else {
-    		
-    		loadMap('forest');
-
-    		$.post('php/loadmap.php', {maptype:'winter'}, function(data) {
-    			if (data){
-    				trace("loadwintermap");
-    				loadMap('winter');
-    			}
-			});
-
-			$.post('php/loadmap.php', {maptype:'beach'}, function(data) {
-				if (data){
-					trace("loadbeachmap");
-					loadMap('beach');
-				}
-			});
-			
-			loadPlayer();
-
-    	}	
-    });
-};
 loadMap = function(maptype){
 	$.post('php/loadmap.php', {maptype:maptype}, function(data) {
 		trace("existing user");
@@ -608,10 +663,6 @@ initEnemyBrain = function(id) {
 		clearTimeout(enemybrain);
 	}
 };
-
-
-
-
 killAnimal = function(id) {
 	trace("Kill Animal id: "+id);
 	$('.objectid-'+id).remove();
@@ -713,6 +764,8 @@ initAnimalBrain = function(id) {
 		clearTimeout(animalbrain);
 	}
 };
+
+
 
 
 
@@ -831,9 +884,9 @@ setupKeyboardEvents = function() {
 		switch (event.keyCode) {
 			case 37: /* LEFT ARROW */
 				if (disablekeyboardevents == false) {
-					if (selecteditem == "guitar") { playSound(880); } 
-					else if (selecteditem == "piano") { playSound(880); } 
-					else if (selecteditem == "bike") { rideBike("left"); } 
+					if (selecteditem == "guitar") { playSound(880); }
+					else if (selecteditem == "piano") { playSound(880); }
+					else if (selecteditem == "bike") { rideBike("left"); }
 					else if (selecteditem == "skiis") { rideSkiis("left"); }
 					else { moveObjectLeft(1, "player"); }
 				}
@@ -944,9 +997,53 @@ disableKeyboardEvents = function() {
 };
 
 
+/////////////
+//  CONTROL PAD EVENTS
+/////////////
+
+
+
+setupControlPadEvents = function() {
+	trace("Control Pad Events");
+	var selecteditem;
+	//alert(selecteditem);
+	$('.btn-up').on("touchstart", function() { 
+		selecteditem = getSelectedItem();
+		if (selecteditem == "guitar") { playSound(1320); } 
+		else if (selecteditem == "bike") { rideBike("up"); } 
+		else if (selecteditem == "skiis") { rideSkiis("up"); }
+		else { moveObjectUp(1, "player"); }
+	});
+	$('.btn-down').on("touchstart", function() { 
+		selecteditem = getSelectedItem();
+		if (selecteditem == "guitar") { playSound(660); } 
+		else if (selecteditem == "bike") { rideBike("down"); } 
+		else if (selecteditem == "skiis") { rideSkiis("down"); }
+		else { moveObjectDown(1, "player"); } 
+	});
+	$('.btn-left').on("touchstart", function() { 
+		selecteditem = getSelectedItem();
+		if (selecteditem == "guitar") { playSound(880); } 
+		else if (selecteditem == "bike") { rideBike("left"); } 
+		else if (selecteditem == "skiis") { rideSkiis("left"); }
+		else { moveObjectLeft(1, "player"); }
+	});
+	$('.btn-right').on("touchstart", function() { 
+		selecteditem = getSelectedItem();
+		if (selecteditem == "guitar") { playSound(1100); } 
+		else if (selecteditem == "bike") { rideBike("right"); } 
+		else if (selecteditem == "skiis") { rideSkiis("right"); }
+		else { moveObjectRight(1, "player"); }
+	});
+	$('.btn-a').on("touchstart", function() { 
+		playerPrimaryAction(); 
+	});
+};
+
+
 
 /////////////
-//  MOUSE EVENTS
+//  MOUSE & TOUCH EVENTS
 /////////////
 
 
@@ -1025,51 +1122,6 @@ setupMouseEvents = function() {
 		setTimeout(enableSaving, 2500);
 		savePlayer();
 		saveMap();
-	});
-};
-
-
-
-/////////////
-//  CONTROL PAD EVENTS
-/////////////
-
-
-
-setupControlPadEvents = function() {
-	trace("Control Pad Events");
-	var selecteditem;
-	//alert(selecteditem);
-	$('.btn-up').on("touchstart", function() { 
-		selecteditem = getSelectedItem();
-		if (selecteditem == "guitar") { playSound(1320); } 
-		else if (selecteditem == "bike") { rideBike("up"); } 
-		else if (selecteditem == "skiis") { rideSkiis("up"); }
-		else { moveObjectUp(1, "player"); }
-	});
-	$('.btn-down').on("touchstart", function() { 
-		selecteditem = getSelectedItem();
-		if (selecteditem == "guitar") { playSound(660); } 
-		else if (selecteditem == "bike") { rideBike("down"); } 
-		else if (selecteditem == "skiis") { rideSkiis("down"); }
-		else { moveObjectDown(1, "player"); } 
-	});
-	$('.btn-left').on("touchstart", function() { 
-		selecteditem = getSelectedItem();
-		if (selecteditem == "guitar") { playSound(880); } 
-		else if (selecteditem == "bike") { rideBike("left"); } 
-		else if (selecteditem == "skiis") { rideSkiis("left"); }
-		else { moveObjectLeft(1, "player"); }
-	});
-	$('.btn-right').on("touchstart", function() { 
-		selecteditem = getSelectedItem();
-		if (selecteditem == "guitar") { playSound(1100); } 
-		else if (selecteditem == "bike") { rideBike("right"); } 
-		else if (selecteditem == "skiis") { rideSkiis("right"); }
-		else { moveObjectRight(1, "player"); }
-	});
-	$('.btn-a').on("touchstart", function() { 
-		playerPrimaryAction(); 
 	});
 };
 
@@ -1521,6 +1573,8 @@ playerPrimaryAction = function() {
 
 	});
 };
+
+
 
 
 
