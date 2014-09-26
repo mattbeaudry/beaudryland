@@ -48,10 +48,10 @@ var blocktypes = new Array (
 	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
 	/*beach map*/  	"sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
 	/*items*/     	"shovel", "wood", "fire", "door", "door-open", "frisbee", "sign",
-	/*furniture*/	"table","chair","chest","bed",
+	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*weapons*/		"sword", "spear", "axe",
-	/*instruments*/ "guitar", "piano",
-	/*technology*/	"telescope","computer",
+	/*instruments*/ "guitar", "piano","bassdrum","snare","hithat","cymbal","tom",
+	/*technology*/	"telescope","computer","2dprinter",
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
@@ -64,8 +64,9 @@ var isplaceable = new Array (
 	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock",
 	/*beach map*/  	"sand", "wetsand", "palmtree", "sandstone",
 	/*items*/     	"wood", "fire", "door", "sign",
-	/*furniture*/	"table","chair","chest","bed",
-	/*technology*/	"telescope","computer",
+	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
+	/*technology*/	"telescope","computer","2dprinter",
+	/*instrument*/	"guitar", "piano","bassdrum","snare","hithat","cymbal","tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
 );
@@ -87,9 +88,10 @@ var iscollectable = new Array (
 	/*winter map*/  "pinetree", "icerock",
 	/*beach map*/  	"palmtree", "sandstone",
 	/*items*/     	"wood", "fire",
-	/*furniture*/	"table","chair","chest","bed",
-	/*technology*/	"telescope","computer",
+	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
+	/*technology*/	"telescope","computer","2dprinter",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
+	/*instrument*/	"guitar", "piano","bassdrum","snare","hithat","cymbal","tom",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
 );
@@ -313,7 +315,7 @@ loadNewMap = function(type) {
 
 	/* FOREST BIOME */
 
-	var terrainblocks = ["water","tree","grass"];
+	var terrainblocks = ["water","tree","grass","water","pinetree","grass"];
 	$.each(terrainblocks, function(index, value){
 
 		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
