@@ -156,6 +156,7 @@ var loadNewGame = function() {
 	    drawNewBeachMap();
 	    drawNewSpaceMap();
 	    getAllItems();
+	    createForestSigns();
     } else if (maptype == 'game') {
     	createForestSigns();
     	createAnimal();
