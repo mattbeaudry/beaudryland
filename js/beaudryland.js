@@ -50,7 +50,7 @@ var blocktypes = new Array (
 	/*items*/     	"shovel", "wood", "fire", "door", "door-open", "frisbee", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*weapons*/		"sword", "spear", "axe",
-	/*instruments*/ "guitar", "piano","bassdrum","snare","hithat","cymbal","tom",
+	/*instruments*/ "guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
 	/*technology*/	"telescope","computer","2dprinter",
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
@@ -66,7 +66,7 @@ var isplaceable = new Array (
 	/*items*/     	"wood", "fire", "door", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*technology*/	"telescope","computer","2dprinter",
-	/*instrument*/	"guitar", "piano","bassdrum","snare","hithat","cymbal","tom",
+	/*instrument*/	"guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
 );
@@ -91,7 +91,7 @@ var iscollectable = new Array (
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*technology*/	"telescope","computer","2dprinter",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*instrument*/	"guitar", "piano","bassdrum","snare","hithat","cymbal","tom",
+	/*instrument*/	"guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
 );
