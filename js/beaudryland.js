@@ -616,6 +616,99 @@ loadPlayer = function(id) {
     }, "json");
 };
 
+moveObjectToBlock = function(id, destinationblock) {
+
+	trace("move object ID#"+id+" to block"+destinationblock);
+	var t = 0;
+	var maxthoughts = 100;
+	var objectbrain = setTimeout(anObjectMovement, enemyspeed);
+	
+	//collection of thoughts
+	var objectPath = Array();
+	
+	function anObjectMovement() {
+
+		//check if enemy isnt dead
+		if ($('.objectid-'+id).length != 0) {
+	
+			//var enemyrandom = Math.random();
+			//var enemydirection;
+			var objectX = getObjectCurrentCol(id); 
+			var objectY = getObjectCurrentRow(id);
+			//var destinationblockX = getObjectCurrentCol(1); 
+			//var destinationblockY = getObjectCurrentRow(1);
+			var destinationblockX = 3; 
+			var destinationblockY = 3;
+			
+			var n = objectPath.length;
+			objectPath.push(destinationblockX+"-"+destinationblockY);
+
+			trace("-----");
+			trace('objectmovementid-'+n);
+			trace(objectPath);
+			trace("objectlastpos="+objectPath[n-1]);
+
+			//is player stuck? move random direction
+			if (objectPath[n-1]==objectPath[n]) {
+
+				trace("OBJECT STUCK");
+
+				var randomDirection = Math.floor(Math.random() * 4) + 1;
+				switch(randomDirection){
+					case 1: moveObjectUp(id, "player"); break;
+					case 2: moveObjectDown(id, "player"); break;
+					case 3: moveObjectLeft(id, "player"); break;
+					case 4: moveObjectRight(id, "player"); break;
+				}
+			}
+
+			trace("-----");
+			var PEx = destinationblockX - objectX; 
+			var PEy = objectY - destinationblockY;
+			var posPEx = Math.abs(PEx); 
+			var posPEy = Math.abs(PEy);
+			
+			if ( (PEx == 0) && (PEy == 0)){
+				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
+				trace("reached destination block, stop moving");
+				stopObjectMovement();
+			} else if (posPEx >= posPEy) {
+				if (PEx >= 0) { 
+					//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
+					moveObjectRight(id, "player");
+				} else { 
+					//trace("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
+					moveObjectLeft(id, "player");
+				}
+			} else {
+				if (PEy >= 0) { 
+					//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
+					moveObjectUp(id, "player");
+				} else { 
+					//trace("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
+					moveObjectDown(id, "player");
+				}
+			}
+			
+			//limit
+			if (t > maxthoughts) {
+				//trace("Enemy terminated");
+				stopObjectMovement();
+				//killEnemy(id);
+			} else {
+				t++;
+				objectbrain = setTimeout(anObjectMovement, enemyspeed); // repeat thought
+			}
+
+		}
+		
+	}
+
+	function stopObjectMovement() {
+		clearTimeout(objectbrain);
+	}
+};
+
 
 
 /////////////
@@ -1249,10 +1342,12 @@ moveObjectUp = function(id, name) {
 	} else {
 		trace("Can't move object:"+id+" up -- y="+y);	
 	}
+	/*
 	if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 180) ) {
 		var y = $(window).scrollTop(); 
 		$("html, body").animate({ scrollTop: y - 250 }, 600);
 	}
+	*/
 };
 moveObjectDown = function(id, name) {
 	changeObjectDirection(id, "down", name);
@@ -1267,10 +1362,12 @@ moveObjectDown = function(id, name) {
 	} else {
 		trace("Can't move object:"+id+" down -- y="+y);	
 	}
+	/*
 	if ( $('.the-fucking-player').offset().top > ($(window).scrollTop() + $(window).height() - 60) ) {
 		var y = $(window).scrollTop(); 
 		$("html, body").animate({ scrollTop: y + 250 }, 600);
 	}
+	*/
 };
 objectCollisionDetection = function(id, direction) {
 	var block = getObjectCurrentBlock(id);
@@ -2030,6 +2127,13 @@ getBlockTopByID = function(block) {
 	//trace("block "+block+", row"+row+", toppx"+toppx);
 	return toppx;
 };
+/*
+getBlockCurrentCol = function(block) {
+	var left = getBlockLeftByID();
+	console.log("XXX-LEFT:"+left)
+
+}
+*/
 getObjectCurrentPositionX = function(id) {
 	var x = $('.objectid-'+id).css("left");
 	//trace("X--"+x);

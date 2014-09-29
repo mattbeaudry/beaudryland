@@ -184,25 +184,25 @@
 }
 /* musical instruments */
 .block-guitar {
-  background: #dddddd url(../img/item-guitar.png) no-repeat;
+  background: url(../img/item-guitar.png) no-repeat;
 }
 .block-piano {
   background: url(../img/item-piano.png) no-repeat;
 }
 .block-bassdrum {
-  background: #dddddd url(../img/item-bassdrum.png) no-repeat;
+  background: url(../img/item-bassdrum.png) no-repeat;
 }
 .block-snare {
   background: url(../img/item-snare.png) no-repeat;
 }
 .block-tom {
-  background: #dddddd url(../img/item-tom.png) no-repeat;
+  background: url(../img/item-tom.png) no-repeat;
 }
 .block-hihat {
   background: url(../img/item-hihat.png) no-repeat;
 }
 .block-cymbal {
-  background: #dddddd url(../img/item-cymbal.png) no-repeat;
+  background: url(../img/item-cymbal.png) no-repeat;
 }
 /* furniture */
 .block-table {
