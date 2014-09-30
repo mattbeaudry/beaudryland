@@ -949,6 +949,7 @@ hr {
   width: 800px;
   height: 160px;
   margin: 0 auto;
+  display: none;
 }
 .btn-up,
 .btn-down,
@@ -1016,17 +1017,19 @@ hr {
   bottom: 40px;
   right: 5px;
 }
+.btn-inv {
+  display: none;
+  height: 35px;
+  width: 45px;
+  top: 9px;
+  right: 5px;
+  z-index: 2;
+}
 @media only screen and (min-width: 1000px) {
-  /* Style adjustments for viewports that meet the condition */
-  .the-fucking-controller {
-    display: none;
-  }
+  
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
-  /* Style adjustments for viewports that meet the condition */
-  .the-fucking-controller {
-    display: block;
-  }
+  
 }
 /* ==========================================================================
    Helper classes

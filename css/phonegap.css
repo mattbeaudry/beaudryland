@@ -35,6 +35,13 @@
 .the-fucking-navigation {
   float: none;
 }
+.the-fucking-controller {
+  display: block;
+  width: 320px;
+}
+.btn-inv {
+  display: block;
+}
 /* HELP AND ITEM FORMULAS */
 .item-formulas > li {
   width: 100%;
