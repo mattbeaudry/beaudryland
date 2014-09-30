@@ -99,15 +99,10 @@ var iscollectable = new Array (
 //var craftableblockclasses = "";
 var inventoryslots = 44;
 var gridunitpx = 20; //must change this px value in css as well
-var mapwidth = 40;
-var mapheight = 30;
 var enemyspeed = 200;
 var animalspeed = 1000;
 var projectilespeed = 50;
 var bikespeed = 100;
-var totalmapblocks = mapwidth * mapheight;
-var mapwidthpx = mapwidth * gridunitpx;
-var mapheightpx = mapheight * gridunitpx;
 var disablekeyboardevents = false;
 
 var objectsArray = [0,2,3];
@@ -122,31 +117,188 @@ var globalmapblockcount = 0;
 
 
 
+
 /////////////
 //  GAME LOGIC
 /////////////
 
+/* PHONEGAP / IPHONE ONLY */
+if ( $('body').hasClass("version-phonegap") ){
+
+	/* MOBILE */
+	var mapwidth = 16;
+	var mapheight = 75;
+
+	$(document).ready(function() {
+
+		console.log("MOBILE VERSION");
+
+		setMapSize();
+	    loadNewMap();
+	    createPlayer();
+		
+	    //websql_openDatabase();
+	    //websql_createTable();
+	    /*
+	    drawNewWinterMap();
+	    drawNewBeachMap();
+	    drawNewSpaceMap();
+	    */
+	    
+	    //websql_loadMap();
+
+		setupKeyboardEvents();
+		setupMouseEvents();
+		setupControlPadEvents();
+
+	});
+
+	jQuery('.inventory-close').on("click", function(){
+		toggleInventory();
+	});
+	var toggleInventory = function() {
+		$('.sticky-inventory').fadeToggle(0);
+	}; 
+
+	var db;
+	var shortName='beaudryland';
+	var version='0.1';
+	var displayName='beaudryland';
+	var maxSize = 65536;
+
+	var hideControlPad = function() {
+		$('.the-fucking-controller').fadeToggle();
+	};
+
+	var websql_openDatabase = function() {
+		db = openDatabase(shortName,version,displayName,maxSize);
+	};
+
+	var websql_createTable = function() {
+		 db.transaction(
+			function(transaction) {
+				transaction.executeSql(
+		            'CREATE TABLE IF NOT EXISTS beaudryland_maps ' +
+					' (mapid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
+					' username TEXT NOT NULL,' +
+					' mapdata TEXT NOT NULL);'
+				);
+			}
+		 );
+	};
+
+	var websql_insertRow = function() {
+		 var username = "matt";
+		 var mapdata = '<div class="block block-grass" data-blocktype="grass"></div>';
+		 db.transaction(
+			function(transaction) {
+				console.log('Attempting to insert ' + username + ' and mapdata');
+				transaction.executeSql(
+					'INSERT INTO beaudryland_maps (username,mapdata) VALUES (?,?);',
+					[username,mapdata],
+					null,
+					errorHandler
+				);
+			}
+		 );
+	};
+
+	var websql_selectRow = function() {
+		 db.transaction(
+			function(transaction) {
+					transaction.executeSql(
+						'SELECT mapid, username, mapdata FROM beaudryland_maps;',
+						[],
+						function (transaction, result) {
+							for (var i=0; i < result.rows.length; i++) {
+								var row = result.rows.item(i);
+								console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+							}
+						},
+						errorHandler
+					);
+			}
+		 );
+	};
+
+	// This function here is used to write out any errors I get to the console.
+	function errorHandler(transaction, error) {
+		console.log('Oops. Error was '+error.message+' (Code '+error.code+')');
+		return true;
+	}
+
+	//save map
+	var websql_saveMap = function() {
+		var username = "username";
+		var mapdata = $('.maps-wrap').html();
+
+		db.transaction(
+			function(transaction) {
+				console.log('Attempting to insert ' + username + ' and mapdata');
+				transaction.executeSql(
+					'INSERT INTO beaudryland_maps (username,mapdata) VALUES (?,?);',
+					[username,mapdata],
+					null,
+					errorHandler
+				);
+			}
+		);
+	};
+
+	//load map
+	var websql_loadMap = function() {
+		 db.transaction(
+			function(transaction) {
+					transaction.executeSql(
+						'SELECT mapid, username, mapdata FROM beaudryland_maps;',
+						[],
+						function (transaction, result) {
+							for (var i=0; i < result.rows.length; i++) {
+								$('.maps-wrap').html("");
+								var row = result.rows.item(i);
+								console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+								$('.maps-wrap').html(row.mapdata);
+							}
+						},
+						errorHandler
+					);
+			}
+		 );
+	};
 
 
-$(document).ready(function() {
+/* DESKTOP ONLY */
 
-	setMapSize();
-	loadGame();
-	setupKeyboardEvents();
-	setupMouseEvents();
-	setupControlPadEvents();
-	
-	//testing
-	//drawNewSpaceMap();
-});
+} else if ( $('body').hasClass("version-desktop") ) {
 
-//alert/ask player to save before they close the page
-/*
-window.onbeforeunload = confirmExit;
-function confirmExit() {
-	return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
+	var mapwidth = 40;
+	var mapheight = 30;
+
+	$(document).ready(function() {
+
+		console.log("DESKTOP VERSION");
+
+		setMapSize();
+		loadGame();
+
+		//load NewGame() ???
+
+		setupKeyboardEvents();
+		setupMouseEvents();
+		setupControlPadEvents();
+
+	});
+
+	//alert/ask player to save before they close the page
+	/*
+	window.onbeforeunload = confirmExit;
+	function confirmExit() {
+		return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
+	}
+	*/
+
 }
-*/
+
 
 var loadNewGame = function() {
 	trace("new user & brand new map");
@@ -190,6 +342,11 @@ loadGame = function(){
 };
 
 
+/* VARIABLES THAT NEED TO BE CRATED AFTER GAME LOGIC RUNS */
+
+var totalmapblocks = mapwidth * mapheight;
+var mapwidthpx = mapwidth * gridunitpx;
+var mapheightpx = mapheight * gridunitpx;
 
 
 //////////
@@ -209,6 +366,7 @@ createForestSigns = function(){
 	 	$('.the-fucking-map .block:eq('+blockid+')').attr("data-text", value);
 	 });
 };
+/*
 createWinterSigns = function(){
 	trace("add winter sign clues");
 	 var forestSigns = [
@@ -235,7 +393,7 @@ createBeachSigns = function(){
 		$('.the-fucking-beach-map .block:eq('+blockid+')').attr("data-text", value);
 	});
 };
-
+*/
 
 
 
@@ -301,15 +459,21 @@ loadMap = function(maptype){
 	});
 };
 setMapSize = function() {
-	trace("Render Map");
+	trace("Set Map Size");
 	$('.the-fucking-map').css("width", mapwidthpx+"px");
 	$('.the-fucking-map').css("height", mapheightpx+"px");
 };
 loadNewMap = function(type) {
+
+	console.log("about to create new forest map");
+
 	var maphtml = "";
+
 	for (var f = 0; f <= (totalmapblocks - 1); f++){
 		//random block generation
 		var r = Math.random();
+		console.log("asdfasdf"+r);
+		console.log("sdfasd");
 		var blocktype;
 		if (r<0.7) { blocktype = "grass"; }
 		else if (r>0.98) { blocktype = "rock"; }
@@ -319,9 +483,11 @@ loadNewMap = function(type) {
 	}
 	$('.the-fucking-map').append(maphtml);
 
+	console.log("why didnt it work?");
 
 	/* FOREST BIOME */
 
+	/*
 	var terrainblocks = ["water","tree","grass","water","pinetree","grass"];
 	$.each(terrainblocks, function(index, value){
 
@@ -362,6 +528,7 @@ loadNewMap = function(type) {
 		changeBlockType( (randomblockid-6-mapwidth*2), value);
 
 	});
+	*/
 
 };
 saveMap = function(){

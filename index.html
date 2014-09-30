@@ -1,26 +1,52 @@
-<?php
-session_start();
-if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
-	header("location:index.php");
-}
-?>
-<script>
-	<?php 
-		if (isset($_GET['maptype'])){
-			$maptype = $_GET['maptype'];
-			echo "var maptype = '".$maptype."';";
-			//echo "alert(maptype);";
-		}
-	?>
-</script>
-<?php include 'header.php'; ?> 
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Beaudryland</title>
+        
+        <meta name="description" content="javascript/CSS game">
+        <meta name="viewport" content="user-scalable=no,width=device-width">
+        
+        <link href="favicon.ico" rel="icon" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
-	<body class="page-game container version-desktop">
+		<link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/blocks.css">
+
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <!-- PHONGAP ONLY -->
+        <link rel="stylesheet" href="css/phonegap.css">
+        
+    </head>
+
+	<body class="page-game container version-phonegap">
 
 	    <div class="maps-wrap clearfix">
-	    	<div class="the-fucking-map" data-maptype="forest"></div>
+	    	<div class="the-fucking-map clearfix" data-maptype="forest"></div>
 	    </div>
 
+	    <div class="ios-console">
+	    	<h2>iOS Developer Console</h2>
+	    	<nav>
+	    		<ul class="dev-console clearfix">
+	    			<li><a href="javascript:void(0);" onclick="hideControlPad();return false">Disable Control Pad</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_openDatabase();return false">Open/Create Database</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_createTable();return false">Create Table</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_insertRow();return false">Insert Row</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_selectRow();return false">Select Row</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_saveMap();return false">Save Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_loadMap();return false">Load Map</a></li>
+	    		</ul>
+	    	</nav>
+	    </div>
+	
 	    <div class="the-fucking-dev-panel">
 	    	<h2>Developer Console</h2>
 	    	<nav>
@@ -36,18 +62,28 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    			<li><a href="javascript:void(0);" onclick="drawNewBeachMap();return false">Draw New Beach Map</a></li>
 	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
 	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
-	    			<li><a href="javascript:void(0);" onclick="moveObjectToBlock(1,'3x3');return false">Move Player To Block 3x3</a></li>
-	    			<!--
-		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
-		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
-		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
-	    			-->
 	    		</ul>
 	    	</nav>
 	    </div>
+	
 		   
 		<div class="sticky-inventory ">
-		
+		    
+		    
+			<div class="crafting-table-wrap horizonal-spacing clearfix">
+			    <div class="the-fucking-crafting-table">
+			    	<div class="block slot-1 empty" data-blocktype="empty"></div>
+			    	<div class="block slot-2 empty" data-blocktype="empty"></div>
+			    	<div class="block slot-3 empty" data-blocktype="empty"></div>
+			    </div>
+			    <!--<img src="img/arrow-right.png">-->
+			    <div class="the-fucking-crafted-item">
+			    	<div class="slot empty" data-blocktype="empty"></div>
+			    </div>
+
+			    <!--<div class="inventory-close">close</div>-->
+		    </div>
+
 		    <div class="the-fucking-inventory clearfix">
 		    	<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>
 		    	<div class="slot-2 empty" data-blocktype="empty">0</div>
@@ -100,29 +136,30 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		    	<div class="slot-49 empty" data-blocktype="empty">0</div>
 		    	<div class="slot-50 empty" data-blocktype="empty">0</div>
 		    </div>
-		    
-			<div class="crafting-table-wrap horizonal-spacing clearfix">
-			    <div class="the-fucking-crafting-table">
-			    
-			    	<div class="block slot-1 empty" data-blocktype="empty"></div>
-			    	<div class="block slot-2 empty" data-blocktype="empty"></div>
-			    	<div class="block slot-3 empty" data-blocktype="empty"></div>
-			    	
-			    </div>
-			    <!--<img src="img/arrow-right.png">-->
-			    <div class="the-fucking-crafted-item">
-			    
-			    	<div class="slot empty" data-blocktype="empty"></div>
-			    	
-			    </div>
-
-		    </div>
 
 		    <div class="the-fucking-navigation clearfix">
                 <nav class="beaudryland-nav">
                   <ul>
+                    <li class="on-savemap-mobile">
+                      <div class="button-wrap">
+                        <a>Save</a>
+                      </div>
+                    </li>
+                    <li class="link-help">
+                      <div class="button-wrap">
+                        <a href="#help">Help</a>
+                      </div>
+                    </li>
+                  </ul>
+                </nav>
+            </div>
+
+		   <!--
+		    <div class="the-fucking-navigation clearfix">
+                <nav class="beaudryland-nav">
+                  <ul>
                   	<li class="nav-username">
-                  		<?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} ?>
+                  		username
                   	</li>
                     <li class="link-savemap">
                       <div class="button-wrap">
@@ -147,10 +184,10 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
                   </ul>
                 </nav>
             </div>
+        	-->
 
 		</div>
 
-	    
 	    <!--
         <nav class="mapnav">
 	        <a class="link-mapanimate-start" href="javascript:moveMap()">Animate Map</a> | 
@@ -159,18 +196,17 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
         -->
         
         <div class="the-fucking-controller">
-        
         	<div class="d-pad">
-        		<div href="javascript:void(0)" class="btn-up"></div>
-        		<div href="javascript:void(0)" class="btn-down"></div>
-        		<div href="javascript:void(0)" class="btn-left"></div>
-        		<div href="javascript:void(0)" class="btn-right"></div>
+        		<div class="btn-up"></div>
+        		<div class="btn-down"></div>
+        		<div class="btn-left"></div>
+        		<div class="btn-right"></div>
         	</div>
-        	<div href="javascript:void(0)" class="btn-a"></div>
-        	
+        	<div class="btn-a"></div>
+        	<div onclick="toggleInventory();return false" class="btn-inv"></div>
         </div>
         
-               
+
         <div class="the-fucking-gameinfo">
 
         	<section>
@@ -507,26 +543,29 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		    </section>
 
 		</div>
+	
         
         <!--
         //Dirty way to preload images
         -->
+        <!--
         <div class="preload-images visuallyhidden">
-        	<?php 
+        	<?php /*
         	foreach(glob('img/*.*') as $filename){
         	     echo '<img src="'.$filename.'" />';
         	}
-        	?>
+        	*/ ?>
         </div>
+    	-->
 
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.js"><\/script>')</script>
+        <script src="js/vendor/jquery-2.1.1.js"></script>
         <script src="js/vendor/jquery.color.js"></script>
         <script src="js/vendor/timbre.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/beaudryland.js"></script>
 
         <script type="text/javascript">
-        
+        /*
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-37415514-1']);
 		  _gaq.push(['_trackPageview']);
@@ -536,7 +575,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
-		
+		*/
 		</script>
         
     </body>

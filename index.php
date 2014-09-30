@@ -23,7 +23,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
         
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
-    <body class="page-home">
+    <body class="page-home version-desktop">
         
         <div class="the-fucking-header container">
         
