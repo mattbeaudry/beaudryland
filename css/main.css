@@ -944,34 +944,39 @@ hr {
 }
 /* CONTROLLER */
 .the-fucking-controller {
+  display: none;
   position: fixed;
   bottom: 0;
-  width: 800px;
-  height: 160px;
+  width: 320px;
+  height: 100%;
   margin: 0 auto;
-  display: none;
+  pointer-events: none;
 }
 .btn-up,
 .btn-down,
 .btn-left,
 .btn-right,
-.btn-a {
+.btn-a,
+.btn-inv {
   display: block;
   position: absolute;
   height: 40px;
   width: 50px;
   background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
 }
 .btn-up:before,
 .btn-down:before,
 .btn-left:before,
 .btn-right:before,
 .btn-a:before,
+.btn-inv:before,
 .btn-up:after,
 .btn-down:after,
 .btn-left:after,
 .btn-right:after,
-.btn-a:after {
+.btn-a:after,
+.btn-inv:after {
   display: block;
   width: 80%;
   height: 10%;
@@ -983,7 +988,8 @@ hr {
 .btn-down:before,
 .btn-left:before,
 .btn-right:before,
-.btn-a:before {
+.btn-a:before,
+.btn-inv:before {
   left: 10%;
   top: -10%;
 }
@@ -991,7 +997,8 @@ hr {
 .btn-down:after,
 .btn-left:after,
 .btn-right:after,
-.btn-a:after {
+.btn-a:after,
+.btn-inv:after {
   left: 10%;
   bottom: -10%;
 }
@@ -1014,11 +1021,10 @@ hr {
 .btn-a {
   width: 100px;
   height: 80px;
-  bottom: 40px;
+  bottom: 35px;
   right: 5px;
 }
 .btn-inv {
-  display: none;
   height: 35px;
   width: 45px;
   top: 9px;
