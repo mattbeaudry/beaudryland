@@ -34,17 +34,6 @@ body {
   text-shadow: none;
 }
 /*
- * A better looking default horizontal rule
- */
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
-}
-/*
  * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
  */
 img {
@@ -106,13 +95,38 @@ a:hover {
   color: #000;
 }
 hr {
-  width: 90%;
-  margin: 20px auto;
+  border-color: #000;
+  border-width: 3px;
+  width: 96%;
+  margin: 40px auto;
 }
-/* THE WEBSITE */
+hr:before {
+  display: block;
+  content: "";
+  width: 102%;
+  margin-left: -1%;
+  height: 7px;
+  background-color: black;
+}
+/* GRID */
 .container {
   width: 800px;
   margin: 0 auto;
+}
+.row {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.col-2 {
+  width: 50%;
+  float: left;
+}
+.col-left {
+  padding: 0 6%  0 2%;
+}
+.col-right {
+  padding: 0 2% 0 6%;
 }
 .multi-column-2 {
   -moz-column-count: 2;
@@ -123,125 +137,10 @@ hr {
 
   column-count: 2;
 }
-/*
-  Simple Grid
-  Learn More - http://dallasbass.com/simple-grid-a-lightweight-responsive-css-grid/
-  Project Page - http://thisisdallas.github.com/Simple-Grid/
-  Author - Dallas Bass
-  Site - dallasbass.com
-*/
-[class*='col-'] {
-  float: left;
-  padding-right: 20px;
-}
-[class*='col-']:last-of-type {
-  padding-right: 0px;
-}
-.grid {
-  width: 100%;
-  max-width: 1140px;
-  min-width: 755px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-.grid:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.grid-pad {
-  padding: 20px 0 0px 20px;
-}
-.grid-pad > [class*='col-']:last-of-type {
-  padding-right: 20px;
-}
-.push-right {
-  float: right;
-}
-/* Content Columns */
-.col-1-1 {
-  width: 100%;
-}
-.col-2-3,
-.col-8-12 {
-  width: 66.66%;
-}
-.col-1-2,
-.col-6-12 {
-  width: 50%;
-}
-.col-1-3,
-.col-4-12 {
-  width: 33.33%;
-}
-.col-1-4,
-.col-3-12 {
-  width: 25%;
-}
-.col-1-5 {
-  width: 20%;
-}
-.col-1-6,
-.col-2-12 {
-  width: 16.667%;
-}
-.col-1-7 {
-  width: 14.28%;
-}
-.col-1-8 {
-  width: 12.5%;
-}
-.col-1-9 {
-  width: 11.1%;
-}
-.col-1-10 {
-  width: 10%;
-}
-.col-1-11 {
-  width: 9.09%;
-}
-.col-1-12 {
-  width: 8.33%;
-}
-/* Layout Columns */
-.col-11-12 {
-  width: 91.66%;
-}
-.col-10-12 {
-  width: 83.333%;
-}
-.col-9-12 {
-  width: 75%;
-}
-.col-5-12 {
-  width: 41.66%;
-}
-.col-7-12 {
-  width: 58.33%;
-}
-@media handheld, only screen and (max-width: 767px) {
-  .grid {
-    width: 100%;
-    min-width: 0;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-  [class*='col-'] {
-    width: auto;
-    float: none;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
 .horizonal-spacing {
   margin-bottom: 10px;
 }
+/* THE WEBSITE */
 .logo-beaudryland img {
   width: 80px;
   height: 80px;
@@ -255,16 +154,8 @@ hr {
   text-decoration: none;
   color: #111;
 }
-.the-fucking-header {
-  margin: 0 auto 40px;
-}
 .page-home .the-fucking-header {
   margin-bottom: 0px;
-  text-align: center;
-}
-.page-home .the-fucking-header p {
-  width: 80%;
-  margin: 0 auto 30px;
 }
 .page-game .the-fucking-header {
   padding-top: 160px;
@@ -331,7 +222,6 @@ hr {
   background-color: #777;
 }
 .the-fucking-gameinfo {
-  text-align: left;
   width: 100%;
   margin: 0 auto;
 }
@@ -343,9 +233,6 @@ hr {
   border: solid 4px #eee;
   background-color: #eee;
   padding: 20px 40px;
-}
-.the-fucking-gameinfo h3 {
-  text-align: center;
 }
 .the-fucking-gameinfo h3 a {
   color: #000;
@@ -386,10 +273,7 @@ hr {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 .the-fucking-login > form {
-  width: 50%;
-  float: left;
   margin: 0;
-  padding: 0px 40px;
 }
 .the-fucking-login input {
   width: 100%;
@@ -424,6 +308,8 @@ hr {
   border: none;
   color: #fff;
   background-color: #000;
+  font-family: "Press Start 2P", sans-serif;
+  width: auto;
 }
 .recent-updates {
   background-color: #ddd;
@@ -433,7 +319,6 @@ hr {
   margin-bottom: 10px;
 }
 .error-login {
-  float: right;
   width: 100%;
   padding: 5px 20px 10px;
   color: #d10808;
@@ -503,8 +388,8 @@ hr {
 .the-fucking-map,
 .the-fucking-winter-map,
 .the-fucking-beach-map {
-  width: 400px;
-  height: 400px;
+  width: 800px;
+  height: 600px;
   margin: 0px auto;
 }
 .user-map {
