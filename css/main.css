@@ -97,7 +97,7 @@ a:hover {
 hr {
   border-color: #000;
   border-width: 3px;
-  width: 96%;
+  width: 100%;
   margin: 40px auto;
 }
 hr:before {
@@ -230,9 +230,6 @@ hr:before {
 }
 .the-fucking-gameinfo article {
   margin: 60px 0;
-  border: solid 4px #eee;
-  background-color: #eee;
-  padding: 20px 40px;
 }
 .the-fucking-gameinfo h3 a {
   color: #000;
