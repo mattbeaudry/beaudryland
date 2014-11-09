@@ -501,9 +501,27 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		        		</ul>
 		        	</li>
 		        	
-
 		        </ul>
 		        
+		    </section>
+
+		    <section>
+		    
+		        <h2>Achievements</h2>
+		        
+		        <ul class="item-achievements">
+		        	<li>
+		        		<img src="img/icon-check-grey.png">
+		        		<h3>Cut Wood</h3>
+		        		<p>Cut down trees and use them to create wood blocks.</p>
+		        	</li>
+		        	<li>
+		        		<img src="img/icon-check-green.png">
+		        		<h3>Make Fire</h3>
+		        		<p>Use rocks and wood to create a fire.</p>
+		        	</li>
+		        </ul>
+
 		    </section>
 
 		</div>

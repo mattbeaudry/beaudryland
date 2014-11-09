@@ -113,8 +113,10 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 							<li>iOS app</li>
 							<li>creative and story modes</li>
 							<li>item builder tool</li>
-							<li>better random terrain generation</li>
+							<li>more interesting random terrain generatio (lakes, firest etc.)</li>
 							<li>moose</li>
+							<li>achievements</li>
+
 							<!--
 							IDEAS:
 							<li>animal &amp; hunting</li>

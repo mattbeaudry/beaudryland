@@ -487,8 +487,8 @@ loadNewMap = function(type) {
 
 	/* FOREST BIOME */
 
-	/*
-	var terrainblocks = ["water","tree","grass","water","pinetree","grass"];
+	
+	var terrainblocks = ["water","tree","grass","water","tree","grass"];
 	$.each(terrainblocks, function(index, value){
 
 		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
@@ -528,7 +528,7 @@ loadNewMap = function(type) {
 		changeBlockType( (randomblockid-6-mapwidth*2), value);
 
 	});
-	*/
+	
 
 };
 saveMap = function(){
