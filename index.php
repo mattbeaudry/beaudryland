@@ -110,7 +110,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 							<li>new items: signs, rocket, bed, table, chair, chest, telescope, computer, 2D printer</li>
 							<!--<li>new treasure: </li>-->
 							<li>write/read messages on signs</li>
-							<li>iOS app</li>
+							<li>iOS app in the app store (coming soon)</li>
 							<li>creative and story modes</li>
 							<li>item builder tool</li>
 							<li>more interesting random terrain generatio (lakes, firest etc.)</li>

@@ -1224,31 +1224,6 @@ displayDialog = function(text) {
 	});
 };
 
-/*
-var achievements = {
-    "employees": [
-        {
-            "firstName": "John",
-            "lastName": "Doe"
-        },
-        {
-            "firstName": "Anna",
-            "lastName": "Smith"
-        },
-        {
-            "firstName": "Peter",
-            "lastName": "Jones"
-        }
-    ]
-}
-var jsonData = {};
-    columnsResult.forEach(function(column) 
-    {
-        var columnName = column.metadata.colName;
-        jsonData[columnName] = column.value;
-    });
-    viewData.employees.push(jsonData);
-*/
 
 var achievements = [
         {
@@ -1280,12 +1255,12 @@ var achievements = [
             "slug", "jammingout",
             "description": "Build a guitar or keyboard.",
             "status": "incompleted"
-        },
+        }
     ]
 }
 
 // fill in the achivement in page content
-
+// for loop for above object
 
 
 completeAchievement = function(achievement) {
