@@ -104,7 +104,7 @@ var animalspeed = 1000;
 var projectilespeed = 50;
 var bikespeed = 100;
 var disablekeyboardevents = false;
-
+var playerid = 1;
 var objectsArray = [0,2,3];
 uniqueObjectID = function() {
 	var id = objectsArray.length + 1;
@@ -789,6 +789,13 @@ moveObjectToBlock = function(id, destinationblock) {
 	var t = 0;
 	var maxthoughts = 100;
 	var objectbrain = setTimeout(anObjectMovement, enemyspeed);
+
+	var destinationblockX = destinationblock % mapwidth;
+	var destinationblockY = parseInt(destinationblock / mapwidth);
+
+	trace("destinationblock:"+destinationblock);
+	trace("destinationblockX:"+destinationblockX);
+	trace("destinationblockY:"+destinationblockY);
 	
 	//collection of thoughts
 	var objectPath = Array();
@@ -804,22 +811,23 @@ moveObjectToBlock = function(id, destinationblock) {
 			var objectY = getObjectCurrentRow(id);
 			//var destinationblockX = getObjectCurrentCol(1); 
 			//var destinationblockY = getObjectCurrentRow(1);
-			var destinationblockX = 3; 
-			var destinationblockY = 3;
-			
+
+			//var destinationblockX = 3; 
+			//var destinationblockY = 3;
+
 			var n = objectPath.length;
 			objectPath.push(destinationblockX+"-"+destinationblockY);
 
-			trace("-----");
-			trace('objectmovementid-'+n);
-			trace(objectPath);
-			trace("objectlastpos="+objectPath[n-1]);
+			//trace("-----");
+			//trace('objectmovementid-'+n);
+			//trace(objectPath);
+			//trace("objectlastpos="+objectPath[n-1]);
 
 			//is player stuck? move random direction
 			if (objectPath[n-1]==objectPath[n]) {
 
-				trace("OBJECT STUCK");
-
+				//trace("OBJECT STUCK");
+				
 				var randomDirection = Math.floor(Math.random() * 4) + 1;
 				switch(randomDirection){
 					case 1: moveObjectUp(id, "player"); break;
@@ -829,18 +837,18 @@ moveObjectToBlock = function(id, destinationblock) {
 				}
 			}
 
-			trace("-----");
-			var PEx = destinationblockX - objectX; 
-			var PEy = objectY - destinationblockY;
-			var posPEx = Math.abs(PEx); 
-			var posPEy = Math.abs(PEy);
+			//trace("-----");
+			var xDifference = destinationblockX - objectX; 
+			var yDifference = objectY - destinationblockY;
+			var xDifference = Math.abs(xDifference); 
+			var yDifference = Math.abs(yDifference);
 			
-			if ( (PEx == 0) && (PEy == 0)){
+			if ( (xDifference == 0) && (yDifference == 0) ){
 				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
-				trace("reached destination block, stop moving");
+				//trace("reached destination block, stop moving");
 				stopObjectMovement();
-			} else if (posPEx >= posPEy) {
-				if (PEx >= 0) { 
+			} else if (xDifference >= yDifference) {
+				if (xDifference >= 0) { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
 					moveObjectRight(id, "player");
 				} else { 
@@ -848,7 +856,7 @@ moveObjectToBlock = function(id, destinationblock) {
 					moveObjectLeft(id, "player");
 				}
 			} else {
-				if (PEy >= 0) { 
+				if (yDifference >= 0) { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
 					moveObjectUp(id, "player");
 				} else { 
@@ -858,7 +866,7 @@ moveObjectToBlock = function(id, destinationblock) {
 			}
 			
 			//limit
-			if (t > maxthoughts) {
+			if (t > mapwidth) {
 				//trace("Enemy terminated");
 				stopObjectMovement();
 				//killEnemy(id);
@@ -1224,7 +1232,7 @@ displayDialog = function(text) {
 	});
 };
 
-
+/*
 var achievements = [
         {
             "title": "Cutting Wood",
@@ -1258,6 +1266,7 @@ var achievements = [
         }
     ]
 }
+*/
 
 // fill in the achivement in page content
 // for loop for above object
@@ -1450,6 +1459,8 @@ setupControlPadEvents = function() {
 setupMouseEvents = function() {
 	trace("Mouse Events");
 	var directions = ["up","down","left","right"];
+
+	// SELECT AN ITEM IN THE INVENTORY
 	$('.the-fucking-inventory > div').on("click", function() {
 		var blocktype = $(this).attr('data-blocktype');
 		//items that are crafting ingredients
@@ -1489,6 +1500,8 @@ setupMouseEvents = function() {
 		}
 		
 	});
+
+	// REMOVE ITEMS FROM CRAFTING TABLE
 	$('.the-fucking-crafting-table > div').on("click", function() {
 		var blocktype = $(this).attr('data-blocktype');
 		if (blocktype != "empty"){
@@ -1501,6 +1514,8 @@ setupMouseEvents = function() {
 			checkCraftingTableForItem();
 		}
 	});
+
+	// MOVE THE CRAFTED ITEM TO INVENTORY
 	$('.the-fucking-crafted-item > div').on("click", function() {
 		if (!$('.the-fucking-crafted-item > div').hasClass("empty")){
 			var blocktype = $(this).attr('data-blocktype');
@@ -1513,6 +1528,8 @@ setupMouseEvents = function() {
 			checkCraftingTableForItem();
 		}
 	});
+
+	//SAVE THE MAPS AND PLAYER DATA
 	$('.link-savemap').on("mousedown", function(){
 		$('.link-savemap a').html('Saving');
 		enableSaving = function() {
@@ -1522,6 +1539,19 @@ setupMouseEvents = function() {
 		savePlayer();
 		saveMap();
 	});
+
+	//MOVE PLAYER TO BLOCK
+	$('.the-fucking-map .block').on("click", function() {
+		if (typeof stopObjectMovement === 'undefined') {
+		    // variable is undefined
+		} else {
+			stopObjectMovement();
+		}
+		var blockid = $(this).attr("data-blockid");
+		trace("goto block id:"+blockid);
+		moveObjectToBlock(1, blockid);
+	});
+
 };
 
 

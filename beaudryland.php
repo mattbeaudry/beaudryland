@@ -36,7 +36,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    			<li><a href="javascript:void(0);" onclick="drawNewBeachMap();return false">Draw New Beach Map</a></li>
 	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
 	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
-	    			<li><a href="javascript:void(0);" onclick="moveObjectToBlock(1,'3x3');return false">Move Player To Block 3x3</a></li>
+	    			<li><a href="javascript:void(0);" onclick="moveObjectToBlock(1,'78');return false">Move Player To Block 78</a></li>
 	    			<li><a href="javascript:void(0);" onclick="displayDialog('You achieved the achievement!');return false">Achievement Notification</a></li>
 	    			<!--
 		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
@@ -140,6 +140,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
                         <a href="#help">Help</a>
                       </div>
                     </li>
+                    <!--
                     <li class="link-items">
                       <div class="button-wrap">
                         <a href="#items">Items</a>
@@ -150,6 +151,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
                         <a href="#help">Goals</a>
                       </div>
                     </li>
+                	-->
                     <li class="link-logout">
                       <div class="button-wrap">
                         <a href="logout.php">Logout</a>

@@ -50,8 +50,12 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 									<input class="form-field required" name="new_password" type="password" id="new_password" placeholder="password">
 									<!--<input class="form-field email" name="new_email" type="text" id="new_email" placeholder="email">-->
 									<fieldset class="maptype">
-										<input type="radio" name="maptype" value="game" checked>Start with nothing. Read signs for clues.<br>
-										<input type="radio" name="maptype" value="creative">Start with all items and maps.<br>
+										<label>
+											<input type="radio" name="maptype" value="game" checked>Start with nothing. Read signs for clues.<br>
+										</label>
+										<label>
+											<input type="radio" name="maptype" value="creative">Start with all items and maps.<br>
+										</label>
 									</fieldset>
 									<?php if ($error == "registerfailed"){ ?><span class="error error-login">Register Failed.</span><?php } ?>
 									<input class="button" type="submit" name="newuser" value="Create Land">
