@@ -1224,6 +1224,75 @@ displayDialog = function(text) {
 	});
 };
 
+/*
+var achievements = {
+    "employees": [
+        {
+            "firstName": "John",
+            "lastName": "Doe"
+        },
+        {
+            "firstName": "Anna",
+            "lastName": "Smith"
+        },
+        {
+            "firstName": "Peter",
+            "lastName": "Jones"
+        }
+    ]
+}
+var jsonData = {};
+    columnsResult.forEach(function(column) 
+    {
+        var columnName = column.metadata.colName;
+        jsonData[columnName] = column.value;
+    });
+    viewData.employees.push(jsonData);
+*/
+
+var achievements = [
+        {
+            "title": "Cutting Wood",
+            "slug", "cuttingwood",
+            "description": "Cut down trees and use them to create wood blocks.",
+            "status": "incompleted"
+        },
+        {
+            "title": "Keeping Warm",
+            "slug", "keepingwarm",
+            "description": "Use rocks and wood to build a fire.",
+            "status": "incompleted"
+        },
+        {
+            "title": "Taking Shelter",
+            "slug", "takingshelter",
+            "description": "Build a door and use some wood or solid blocks to create a cabin.",
+            "status": "incompleted"
+        },
+        {
+            "title": "Treasure Hunter",
+            "slug", "treasurehunter",
+            "description": "Build a shovel and dig for treasure.",
+            "status": "incompleted"
+        },
+        {
+            "title": "Jamming Out",
+            "slug", "jammingout",
+            "description": "Build a guitar or keyboard.",
+            "status": "incompleted"
+        },
+    ]
+}
+
+// fill in the achivement in page content
+
+
+
+completeAchievement = function(achievement) {
+
+
+
+};
 
 
 

@@ -454,3 +454,38 @@ return $result;
 $mysqli->close();
 ob_end_flush();
 ?>
+
+
+
+
+		   <!--
+		    <div class="the-fucking-navigation clearfix">
+                <nav class="beaudryland-nav">
+                  <ul>
+                  	<li class="nav-username">
+                  		username
+                  	</li>
+                    <li class="link-savemap">
+                      <div class="button-wrap">
+                        <a>Save</a>
+                      </div>
+                    </li>
+                    <li class="link-multiplayer">
+                      <div class="button-wrap">
+                        <a target="_blank" href="mapgallery.php">Globe</a>
+                      </div>
+                    </li>
+                    <li class="link-help">
+                      <div class="button-wrap">
+                        <a href="#help">Help</a>
+                      </div>
+                    </li>
+                    <li class="link-logout">
+                      <div class="button-wrap">
+                        <a href="logout.php">Logout</a>
+                      </div>
+                    </li>
+                  </ul>
+                </nav>
+            </div>
+        	-->
