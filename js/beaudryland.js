@@ -465,15 +465,15 @@ setMapSize = function() {
 };
 loadNewMap = function(type) {
 
-	console.log("about to create new forest map");
+	//console.log("about to create new forest map");
 
 	var maphtml = "";
 
 	for (var f = 0; f <= (totalmapblocks - 1); f++){
 		//random block generation
 		var r = Math.random();
-		console.log("asdfasdf"+r);
-		console.log("sdfasd");
+		//console.log("asdfasdf"+r);
+		//console.log("sdfasd");
 		var blocktype;
 		if (r<0.7) { blocktype = "grass"; }
 		else if (r>0.98) { blocktype = "rock"; }
@@ -483,7 +483,7 @@ loadNewMap = function(type) {
 	}
 	$('.the-fucking-map').append(maphtml);
 
-	console.log("why didnt it work?");
+	//console.log("why didnt it work?");
 
 	/* FOREST BIOME */
 
@@ -1084,12 +1084,10 @@ initAnimalBrain = function(id) {
 
 
 
-
-
-
 /////////////
-//  KEYBOARD EVENTS
+//  SIGNS
 /////////////
+
 
 placeSign = function(objectid, block) {
 
@@ -1194,6 +1192,46 @@ readSign = function(block) {
 
 	});
 };
+
+
+
+/////////////
+//  ACHIEVEMENTS & NOTIFICATIONS
+/////////////
+
+displayDialog = function(text) {
+
+	console.log("displayDialog");
+
+	var html = '<div class="bubble-wrap bubble-dialog">';
+				html += '<div class="bubble-link">';
+		  			html += '<form class="bubble-form" action="#">';
+		  				html += '<h3>'+text+'</h3>';
+		    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
+		    			//html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
+		    			html += '<input type="submit" value="Okay!" >';
+		  			html += '</form>';
+		  		html += '</div>';
+		html += '</div>';
+
+	$('.page-game').append(html);
+
+	$('.bubble-dialog .bubble-form').submit(function(e) {
+
+		$('.bubble-wrap').remove();
+		event.preventDefault();
+
+	});
+};
+
+
+
+
+
+/////////////
+//  KEYBOARD EVENTS
+/////////////
+
 setupKeyboardEvents = function() {
 	trace("Keyboard Events");
 	window.addEventListener('keydown', function(event) {

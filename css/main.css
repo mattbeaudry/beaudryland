@@ -378,6 +378,21 @@ hr:before {
 .dev-console a:hover {
   background-color: #000;
 }
+.item-achievements {
+  list-style: none;
+  padding: 0;
+}
+.item-achievements li {
+  background-color: #eee;
+  padding: 10px 20px;
+  margin: 0 3.33333333% 3.33333333% 0;
+  width: 30%;
+  float: left;
+  color: #bbb;
+}
+.item-achievements .completed {
+  color: #000;
+}
 /* THE MAP */
 .maps-wrap {
   padding-top: 170px;
@@ -685,6 +700,13 @@ hr:before {
   color: #fff;
   height: 60px;
   width: 90%;
+}
+.bubble-dialog {
+  position: fixed;
+  top: 230px;
+  left: 50%;
+  width: 240px;
+  margin-left: -120px;
 }
 /* THE ENEMY */
 .the-fucking-enemy {

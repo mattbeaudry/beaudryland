@@ -37,6 +37,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
 	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
 	    			<li><a href="javascript:void(0);" onclick="moveObjectToBlock(1,'3x3');return false">Move Player To Block 3x3</a></li>
+	    			<li><a href="javascript:void(0);" onclick="displayDialog('You achieved the achievement!');return false">Achievement Notification</a></li>
 	    			<!--
 		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
 		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
@@ -511,15 +512,32 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		        
 		        <ul class="item-achievements">
 		        	<li>
-		        		<img src="img/icon-check-grey.png">
-		        		<h3>Cut Wood</h3>
+		        		<!--<img src="img/icon-check-grey.png">-->
+		        		<h3>Cutting Wood</h3>
 		        		<p>Cut down trees and use them to create wood blocks.</p>
 		        	</li>
 		        	<li>
-		        		<img src="img/icon-check-green.png">
-		        		<h3>Make Fire</h3>
-		        		<p>Use rocks and wood to create a fire.</p>
+		        		<h3>Keeping Warm</h3>
+		        		<p>Use rocks and wood to build a fire.</p>
 		        	</li>
+		        	<li>
+		        		<h3>Taking Shelter</h3>
+		        		<p>Build a door and use some wood or solid blocks to create a cabin.</p>
+		        	</li>
+		        	<li>
+		        		<h3>Treasure Hunter</h3>
+		        		<p>Build a shovel and dig for treasure.</p>
+		        	</li>
+		        	<li>
+		        		<h3>Jamming Out</h3>
+		        		<p>Build a guitar or keyboard.</p>
+		        	</li>
+		        	<!--
+		        	<li>
+		        		<h3></h3>
+		        		<p></p>
+		        	</li>
+		        	-->
 		        </ul>
 
 		    </section>
