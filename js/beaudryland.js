@@ -783,6 +783,7 @@ loadPlayer = function(id) {
     }, "json");
 };
 
+
 moveObjectToBlock = function(id, destinationblock) {
 
 	trace("move object ID#"+id+" to block"+destinationblock);
@@ -790,12 +791,12 @@ moveObjectToBlock = function(id, destinationblock) {
 	var maxthoughts = 100;
 	var objectbrain = setTimeout(anObjectMovement, enemyspeed);
 
-	var destinationblockX = destinationblock % mapwidth;
-	var destinationblockY = parseInt(destinationblock / mapwidth);
+	var destinationblockColumn = destinationblock % mapwidth;
+	var destinationblockRow = parseInt(destinationblock / mapwidth);
 
 	trace("destinationblock:"+destinationblock);
-	trace("destinationblockX:"+destinationblockX);
-	trace("destinationblockY:"+destinationblockY);
+	trace("destinationblockCol:"+destinationblockColumn);
+	trace("destinationblockRow:"+destinationblockRow);
 	
 	//collection of thoughts
 	var objectPath = Array();
@@ -805,49 +806,32 @@ moveObjectToBlock = function(id, destinationblock) {
 		//check if enemy isnt dead
 		if ($('.objectid-'+id).length != 0) {
 	
-			//var enemyrandom = Math.random();
-			//var enemydirection;
 			var objectX = getObjectCurrentCol(id); 
 			var objectY = getObjectCurrentRow(id);
-			//var destinationblockX = getObjectCurrentCol(1); 
-			//var destinationblockY = getObjectCurrentRow(1);
-
-			//var destinationblockX = 3; 
-			//var destinationblockY = 3;
 
 			var n = objectPath.length;
-			objectPath.push(destinationblockX+"-"+destinationblockY);
+			objectPath.push(objectX+"-"+objectY);
 
-			//trace("-----");
-			//trace('objectmovementid-'+n);
-			//trace(objectPath);
-			//trace("objectlastpos="+objectPath[n-1]);
-
-			//is player stuck? move random direction
+			//if player stuck abort!
 			if (objectPath[n-1]==objectPath[n]) {
 
-				//trace("OBJECT STUCK");
+				alert("OBJECT STUCK, ABORTING");
 				
-				var randomDirection = Math.floor(Math.random() * 4) + 1;
-				switch(randomDirection){
-					case 1: moveObjectUp(id, "player"); break;
-					case 2: moveObjectDown(id, "player"); break;
-					case 3: moveObjectLeft(id, "player"); break;
-					case 4: moveObjectRight(id, "player"); break;
-				}
+				stopObjectMovement();
+
 			}
 
-			//trace("-----");
-			var xDifference = destinationblockX - objectX; 
-			var yDifference = objectY - destinationblockY;
-			var xDifference = Math.abs(xDifference); 
-			var yDifference = Math.abs(yDifference);
+			var xDifference = destinationblockColumn - objectX; 
+			var yDifference = objectY - destinationblockRow;
+			var POSxDifference = Math.abs(xDifference); 
+			var POSyDifference = Math.abs(yDifference);
 			
 			if ( (xDifference == 0) && (yDifference == 0) ){
 				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
 				//trace("reached destination block, stop moving");
+				alert("i made it to the spot you clicked!");
 				stopObjectMovement();
-			} else if (xDifference >= yDifference) {
+			} else if (POSxDifference >= POSyDifference) {
 				if (xDifference >= 0) { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
 					moveObjectRight(id, "player");
@@ -865,8 +849,10 @@ moveObjectToBlock = function(id, destinationblock) {
 				}
 			}
 			
+			
 			//limit
-			if (t > mapwidth) {
+
+			if (t > 5) {
 				//trace("Enemy terminated");
 				stopObjectMovement();
 				//killEnemy(id);
@@ -880,6 +866,7 @@ moveObjectToBlock = function(id, destinationblock) {
 	}
 
 	function stopObjectMovement() {
+		alert("stop tha shit!");
 		clearTimeout(objectbrain);
 	}
 };
