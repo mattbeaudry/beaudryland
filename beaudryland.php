@@ -204,6 +204,44 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		        </ul>
 		        
 		    </section>
+
+		     <section>
+
+		    	<a id="achievements"></a>
+		    
+		        <h2>Achievements</h2>
+		        
+		        <ul class="item-achievements">
+		        	<li class="achievement-cuttingwood">
+		        		<!--<img src="img/icon-check-grey.png">-->
+		        		<h3>Cutting Wood</h3>
+		        		<p>Cut down trees and use them to create wood blocks.</p>
+		        	</li>
+		        	<li class="achievement-keepingwarm">
+		        		<h3>Keeping Warm</h3>
+		        		<p>Use rocks and wood to build a fire.</p>
+		        	</li>
+		        	<li class="achievement-takingshelter">
+		        		<h3>Taking Shelter</h3>
+		        		<p>Build a door and use some wood or solid blocks to create a cabin.</p>
+		        	</li>
+		        	<li class="achievement-treasurehunter">
+		        		<h3>Treasure Hunter</h3>
+		        		<p>Build a shovel and dig for treasure.</p>
+		        	</li>
+		        	<li class="achievement-jammingout">
+		        		<h3>Jamming Out</h3>
+		        		<p>Build a guitar or keyboard.</p>
+		        	</li>
+		        	<!--
+		        	<li>
+		        		<h3></h3>
+		        		<p></p>
+		        	</li>
+		        	-->
+		        </ul>
+
+		    </section>
 		   
 		    <section>
 
@@ -520,43 +558,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		        
 		    </section>
 
-		    <section>
-
-		    	<a id="achievements"></a>
-		    
-		        <h2>Achievements</h2>
-		        
-		        <ul class="item-achievements">
-		        	<li class="achievement-cuttingwood">
-		        		<!--<img src="img/icon-check-grey.png">-->
-		        		<h3>Cutting Wood</h3>
-		        		<p>Cut down trees and use them to create wood blocks.</p>
-		        	</li>
-		        	<li class="achievement-keepingwarm">
-		        		<h3>Keeping Warm</h3>
-		        		<p>Use rocks and wood to build a fire.</p>
-		        	</li>
-		        	<li class="achievement-takingshelter">
-		        		<h3>Taking Shelter</h3>
-		        		<p>Build a door and use some wood or solid blocks to create a cabin.</p>
-		        	</li>
-		        	<li class="achievement-treasurehunter">
-		        		<h3>Treasure Hunter</h3>
-		        		<p>Build a shovel and dig for treasure.</p>
-		        	</li>
-		        	<li class="achievement-jammingout">
-		        		<h3>Jamming Out</h3>
-		        		<p>Build a guitar or keyboard.</p>
-		        	</li>
-		        	<!--
-		        	<li>
-		        		<h3></h3>
-		        		<p></p>
-		        	</li>
-		        	-->
-		        </ul>
-
-		    </section>
+		   
 
 		</div>
         

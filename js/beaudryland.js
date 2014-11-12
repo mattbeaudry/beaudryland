@@ -119,7 +119,7 @@ var globalmapblockcount = 0;
 
 
 /////////////
-//  GAME LOGIC
+//  *GAME LOGIC
 /////////////
 
 /* PHONEGAP / IPHONE ONLY */
@@ -342,7 +342,7 @@ loadGame = function(){
 };
 
 
-/* VARIABLES THAT NEED TO BE CRATED AFTER GAME LOGIC RUNS */
+/* VARIABLES THAT NEED TO BE CREATED AFTER GAME LOGIC RUNS */
 
 var totalmapblocks = mapwidth * mapheight;
 var mapwidthpx = mapwidth * gridunitpx;
@@ -350,7 +350,7 @@ var mapheightpx = mapheight * gridunitpx;
 
 
 //////////
-//  STORY
+//  *STORY
 //////////
 
 createForestSigns = function(){
@@ -399,7 +399,7 @@ createBeachSigns = function(){
 
 
 /////////////
-//  CHEATS 
+//  *CHEATS 
 /////////////
 
 var getAllItems = function() {
@@ -429,7 +429,7 @@ var getAllItems = function() {
 
 
 /////////////
-//  MAPS
+//  *MAPS
 /////////////
 
 loadMap = function(maptype){
@@ -616,6 +616,48 @@ drawNewBeachMap = function() {
 		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-beach-map').html(mapdata);
+
+	var terrainblocks = ["sandstone","palmtree","wetsand"];
+	$.each(terrainblocks, function(index, value){
+
+		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+
+		changeBlockType(randomblockid, value);
+
+		changeBlockType( (randomblockid-1), value);
+		changeBlockType( (randomblockid-2), value);
+		changeBlockType( (randomblockid-3), value);
+		changeBlockType( (randomblockid-4), value);
+
+		changeBlockType( (randomblockid-1+mapwidth), value);
+		changeBlockType( (randomblockid-2+mapwidth), value);
+		changeBlockType( (randomblockid-3+mapwidth), value);
+		changeBlockType( (randomblockid-4+mapwidth), value);
+		changeBlockType( (randomblockid-5+mapwidth), value);
+
+		changeBlockType( (randomblockid-1-mapwidth), value);
+		changeBlockType( (randomblockid-2-mapwidth), value);
+		changeBlockType( (randomblockid-3-mapwidth), value);
+		changeBlockType( (randomblockid-4-mapwidth), value);
+		changeBlockType( (randomblockid-5-mapwidth), value);
+		changeBlockType( (randomblockid-6-mapwidth), value);
+		changeBlockType( (randomblockid-7-mapwidth), value);
+
+		changeBlockType( (randomblockid-1+mapwidth*2), value);
+		changeBlockType( (randomblockid-2+mapwidth*2), value);
+		changeBlockType( (randomblockid-3+mapwidth*2), value);
+		changeBlockType( (randomblockid-4+mapwidth*2), value);
+		changeBlockType( (randomblockid-5+mapwidth*2), value);
+		
+		changeBlockType( (randomblockid-1-mapwidth*2), value);
+		changeBlockType( (randomblockid-2-mapwidth*2), value);
+		changeBlockType( (randomblockid-3-mapwidth*2), value);
+		changeBlockType( (randomblockid-4-mapwidth*2), value);
+		changeBlockType( (randomblockid-5-mapwidth*2), value);
+		changeBlockType( (randomblockid-6-mapwidth*2), value);
+
+	});
+
 	startWaves();
 };
 drawNewWinterMap = function() {
@@ -635,6 +677,48 @@ drawNewWinterMap = function() {
 		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-winter-map').html(mapdata);
+
+	var terrainblocks = ["sandstone","pinetree","ice"];
+	$.each(terrainblocks, function(index, value){
+
+		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+
+		changeBlockType(randomblockid, value);
+
+		changeBlockType( (randomblockid-1), value);
+		changeBlockType( (randomblockid-2), value);
+		changeBlockType( (randomblockid-3), value);
+		changeBlockType( (randomblockid-4), value);
+
+		changeBlockType( (randomblockid-1+mapwidth), value);
+		changeBlockType( (randomblockid-2+mapwidth), value);
+		changeBlockType( (randomblockid-3+mapwidth), value);
+		changeBlockType( (randomblockid-4+mapwidth), value);
+		changeBlockType( (randomblockid-5+mapwidth), value);
+
+		changeBlockType( (randomblockid-1-mapwidth), value);
+		changeBlockType( (randomblockid-2-mapwidth), value);
+		changeBlockType( (randomblockid-3-mapwidth), value);
+		changeBlockType( (randomblockid-4-mapwidth), value);
+		changeBlockType( (randomblockid-5-mapwidth), value);
+		changeBlockType( (randomblockid-6-mapwidth), value);
+		changeBlockType( (randomblockid-7-mapwidth), value);
+
+		changeBlockType( (randomblockid-1+mapwidth*2), value);
+		changeBlockType( (randomblockid-2+mapwidth*2), value);
+		changeBlockType( (randomblockid-3+mapwidth*2), value);
+		changeBlockType( (randomblockid-4+mapwidth*2), value);
+		changeBlockType( (randomblockid-5+mapwidth*2), value);
+		
+		changeBlockType( (randomblockid-1-mapwidth*2), value);
+		changeBlockType( (randomblockid-2-mapwidth*2), value);
+		changeBlockType( (randomblockid-3-mapwidth*2), value);
+		changeBlockType( (randomblockid-4-mapwidth*2), value);
+		changeBlockType( (randomblockid-5-mapwidth*2), value);
+		changeBlockType( (randomblockid-6-mapwidth*2), value);
+
+	});
+
 };
 drawNewSpaceMap = function() {
 	// LOAD SPACE MAP FUNCTION
@@ -667,7 +751,7 @@ changeBlockType = function(block, newtype) {
 
 
 /////////////
-//  PLAYER
+//  *PLAYER
 /////////////
 
 
@@ -1191,7 +1275,7 @@ readSign = function(block) {
 
 
 /////////////
-//  ACHIEVEMENTS & NOTIFICATIONS
+//  *ACHIEVEMENTS & NOTIFICATIONS
 /////////////
 
 displayDialog = function(text) {
@@ -1269,7 +1353,7 @@ completeAchievement = function(achievement) {
 
 
 /////////////
-//  KEYBOARD EVENTS
+//  *KEYBOARD EVENTS
 /////////////
 
 setupKeyboardEvents = function() {
@@ -1393,7 +1477,7 @@ disableKeyboardEvents = function() {
 
 
 /////////////
-//  CONTROL PAD EVENTS
+//  *CONTROL PAD EVENTS
 /////////////
 
 
@@ -1438,7 +1522,7 @@ setupControlPadEvents = function() {
 
 
 /////////////
-//  MOUSE & TOUCH EVENTS
+//  *MOUSE & TOUCH EVENTS
 /////////////
 
 
@@ -1544,7 +1628,7 @@ setupMouseEvents = function() {
 
 
 /////////////
-//  COLLISION DETECTION
+//  *COLLISION DETECTION
 /////////////
 
 
@@ -1802,7 +1886,7 @@ getObjectDirection = function(id, name) {
 
 
 /////////////
-//  PLAYER PRIMARY ACTION
+//  *PLAYER PRIMARY ACTION
 /////////////
 
 
@@ -1999,7 +2083,7 @@ playerPrimaryAction = function() {
 
 
 /////////////
-// ANIMATION & PROJECTILES
+// *ANIMATION & PROJECTILES
 /////////////
 
 
@@ -2188,7 +2272,7 @@ rideSkiis = function(direction) {
 
 
 /////////////
-//  INVENTORY / CRAFTING
+//  *INVENTORY / CRAFTING
 /////////////
 
 
@@ -2312,7 +2396,7 @@ checkCraftingTableForItem = function() {
 
 
 /////////////
-//  SOUND
+//  *SOUND
 /////////////
 
 
@@ -2362,7 +2446,7 @@ playMusic = function(){
 
 
 /////////////
-//  HELPER FUNCTIONS
+//  *HELPER FUNCTIONS
 /////////////
 
 
