@@ -32,21 +32,21 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		        <h1 class="logo-beaudryland">
 		        	<a href="http://www.beaudryland.com"><img src="img/block-tree.png" title="Beaudryland Tree Logo" />Beaudryland</a>
 		        </h1>
-			    
+					    
 			    <div class="clearfix">
 
-			    	<div class="row">
+			    	<div class="row beaudryland-panel">
 
 			    		<div class="col-2 col-left">
 			    			<h2>New?</h2>
 							<p><strong>What is Beaudryland?</strong> <br>Beaudryland is a Minecraft inspired javascript game that is in the early stages of development.</p>
-							<p>You can contact <a href="http://www.mattbeaudry.com">Matt Beaudry</a> on <a href="http://www.twitter.com/mattbeaudry">Twitter</a> or at beaudrymatt@gmail.com for help, questions and suggestions.</p>
+							<p>You can contact <a href="http://www.mattbeaudry.com">Matt Beaudry</a> on <a href="http://www.twitter.com/mattbeaudry">Twitter</a> or at <a href="mailto:beaudrymatt@gmail.com">beaudrymatt@gmail.com</a> for help, questions and suggestions.</p>
 						</div>
 						<div class="col-2 col-right">
 							<div class="the-fucking-login clearfix">
 								<form class="beaudrylandregister" name="beaudrylandregister" method="post" action="php/createnewuser.php">
 									<h3>Create New Land</h3>
-									<input class="form-field required" name="new_username" type="text" id="new_username" placeholder="username">
+									<input class="form-field required" name="new_username" type="text" id="new_username" placeholder="land name">
 									<input class="form-field required" name="new_password" type="password" id="new_password" placeholder="password">
 									<!--<input class="form-field email" name="new_email" type="text" id="new_email" placeholder="email">-->
 									<fieldset class="maptype">
@@ -66,9 +66,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 
 			    	</div>
 
-			    	<hr>
-
-			    	<div class="row">
+			    	<div class="row beaudryland-panel">
 					    <div class="col-2 col-left">
 					    						        
 					        <h2>Returning?</h2>
@@ -81,7 +79,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 					        <div class="the-fucking-login clearfix">
 						        <form class="beaudrylandlogin" name="beaudrylandlogin" method="post" action="checklogin.php">
 						        	<h3>Revisit Your Land</h3>
-									<input class="form-field" name="username" type="text" id="username" placeholder="username">
+									<input class="form-field" name="username" type="text" id="username" placeholder="land name">
 									<input class="form-field" name="password" type="password" id="password" placeholder="password">
 									<?php if ($error == "loginfailed"){ ?><span class="error error-login">Login Failed.</span><?php } ?>
 									<input class="button" type="submit" name="submit" value="Enter Land">
@@ -91,23 +89,14 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 						</div>
 		        	</div>
 
-		        	<hr> 
 		        </div>
 			</div>
 			
 			<section class="the-fucking-gameinfo">
 
-				<div class="clearfix">
-					<div class="col-2 col-left">
-						<h2>Update History</h2>
-					</div>
-				</div>
-
-				<hr> 
-
 				<div class="col-left">
-
-					<article>
+					<h2>Update History</h2>
+					<article class="beaudryland-panel">
 						<h3>Beaudryland v0.6<br>Fall 2014 <br>The Space Update</h3>
 						<ul class="multi-column-2">
 							<li>space map: space, star, earth, sun, planets, galaxies</li>
@@ -134,9 +123,8 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 						</ul>
 		        	</article>
 		        </div>
-		        <hr> 
 		        <div class="col-left">
-					<article>
+					<article class="beaudryland-panel">
 						<h3>Beaudryland v0.5<br>December 2013<br>The Beach Update</h3>
 						<img class="banner-beaudryland" src="img/banner-beaudryland-0.5.png" title="Beaudryland Banner" />
 						<ul class="multi-column-2">
@@ -149,9 +137,8 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 						</ul>
 		        	</article>
 		        </div>
-		        <hr> 
 		        <div class="col-left">
-		        	<article>
+		        	<article class="beaudryland-panel">
 		        		<h3>Beaudryland v0.4<br>March 2013<br>The Winter Update</h3>
 
 		        		<img class="banner-beaudryland" src="img/banner-beaudryland-0.4.png">
@@ -174,9 +161,8 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 			        	</ul>
 			        </article>
 				</div>
-		        <hr> 
 		        <div class="col-left">
-		        	<article>
+		        	<article class="beaudryland-panel">
 		        		
 		        		<h3>Beaudryland v0.3<br>January, 2013<br>The Items Update</h3>
 		        		<img class="banner-beaudryland" src="img/banner-beaudryland-0.3.png">
@@ -203,9 +189,8 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		        		</ul>
 		        	</article>
 				</div>
-		        <hr> 
 		        <div class="col-left">
-		        	<article>
+		        	<article class="beaudryland-panel">
 		        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.2/">Beaudryland v0.2</a><br>December 24, 2012<br>The Texture Update</h3>
 		        		<ul class="multi-column-2">
 		        			<li>player graphics</li>
@@ -221,9 +206,8 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		        		</ul>
 		        	</article>
 		        </div>
-		        <hr> 
 		        <div class="col-left"> 
-		        	<article>
+		        	<article class="beaudryland-panel">
 		        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.1/">Beaudryland v0.1</a><br>Dec 17, 2012<br>The Game Engine Update</h3>
 		        		<ul class="multi-column-2">
 		        			<li>random map generation</li>
@@ -238,7 +222,6 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		        		</ul>
 		        	</article>
 		        </div>
-	        	<hr>
 	        	<p>&copy; 2014 <a href="http://www.mattbeaudry.com">Matt Beaudry</a></p>
 	        </section>
         

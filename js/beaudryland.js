@@ -612,12 +612,13 @@ drawNewBeachMap = function() {
 			if (r<=0.98) { blocktype = "water"; }
 			else if (r>0.98) { blocktype = "wave"; }
 		}
-		trace(blocktype+rowposition+maphalf);
+		//trace(blocktype+rowposition+maphalf);
 		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-beach-map').html(mapdata);
 
 	var terrainblocks = ["sandstone","palmtree","wetsand"];
+	
 	$.each(terrainblocks, function(index, value){
 
 		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
@@ -742,7 +743,7 @@ drawNewSpaceMap = function() {
 	$('.the-fucking-space-map').html(mapdata);
 };
 changeBlockType = function(block, newtype) {
-	trace("8-changing block "+block+" to "+newtype);
+	//trace("8-changing block "+block+" to "+newtype);
 	$('.block:eq('+block+')').removeClass(allblockclasses);
 	$('.block:eq('+block+')').addClass("block block-"+newtype);
 	$('.block:eq('+block+')').attr("data-blocktype", newtype);
