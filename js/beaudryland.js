@@ -762,6 +762,29 @@ changeBlockType = function(block, newtype) {
 //  *PLAYER
 /////////////
 
+refillHearts = function() {
+	$('.the-fucking-hearts ul').html('<li></li><li></li><li></li><li></li><li></li>');
+};
+addHeart = function() {
+	$('.the-fucking-hearts ul').append('<li></li>');
+};
+removeHeart = function() {
+	var hearts = totalHearts();
+	if (hearts > 1) {
+		$('.the-fucking-hearts li').last().remove();
+	} else {
+		$('.the-fucking-hearts li').remove();
+		gameOver();
+	}
+};
+gameOver = function() {
+	alert("Game Over!");
+	refillHearts();
+};
+totalHearts = function() {
+	var hearts = $('.the-fucking-hearts li').length;
+	return hearts;
+};
 
 
 createPlayer = function(id) {
@@ -1033,6 +1056,7 @@ initEnemyBrain = function(id) {
 			if ( (PEx == 0) && (PEy == 0)){
 				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
 				trace("found the player, kill player!");
+				removeHeart();
 			} else if (posPEx >= posPEy) {
 				if (PEx >= 0) { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
@@ -1966,6 +1990,12 @@ playerPrimaryAction = function() {
 			addToInventory("fire", 1);
 			changeBlockType(block, "grass");
 			//growGrass(block);
+
+		//eating for hearts
+		} else if (selecteditem == "heart") {
+			addHeart();
+		} else if (selecteditem == "apple") {
+			addHeart();
 
 		//open/close doors
 		} else if (blocktype == "door") {
