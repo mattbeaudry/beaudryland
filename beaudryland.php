@@ -213,55 +213,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 					<li>Thanks for taking part in the Beaudryland experiment.</li>
 		        </ul>
 		        
-		    </section>
-
-		     <section>
-
-		    	<a id="achievements"></a>
-		    
-		        <h2>Achievements</h2>
-		        
-		        <ul class="item-achievements clearfix">
-		        	<li data-achievementid="1" class="achievement-cuttingwood status-completed">
-		        		<!--<img src="img/icon-check-grey.png">-->
-		        		<h3>Genesis</h3>
-		        		<p>Created a new game and generated a randomized map.</p>
-		        	</li>
-		        	<li data-achievementid="3" class="achievement-cuttingwood">
-		        		<!--<img src="img/icon-check-grey.png">-->
-		        		<h3>Cutting Wood</h3>
-		        		<p>Cut down trees and use them to create wood blocks.</p>
-		        	</li>
-		        	<li data-achievementid="2" class="achievement-keepingwarm">
-		        		<h3>Keeping Warm</h3>
-		        		<p>Use rocks and wood to build a fire.</p>
-		        	</li>
-		        	<li data-achievementid="2" class="achievement-cuttingwood">
-		        		<!--<img src="img/icon-check-grey.png">-->
-		        		<h3>Save you Game</h3>
-		        		<p>Save your game for the first time. You should do tbis periodically whikle playing.</p>
-		        	</li>
-		        	<li data-achievementid="4" class="achievement-treasurehunter">
-		        		<h3>Treasure Hunter</h3>
-		        		<p>Build a shovel, learn how to dig, and find some treasure.</p>
-		        	</li>
-		        	<li data-achievementid="3" class="achievement-takingshelter">
-		        		<h3>Taking Shelter</h3>
-		        		<p>Build a door and use some wood or solid blocks to create a cabin.</p>
-		        	</li>
-		        	<li data-achievementid="5" class="achievement-jammingout">
-		        		<h3>Jamming Out</h3>
-		        		<p>Build a guitar or keyboard.</p>
-		        	</li>
-		        	<!--
-		        	<li>
-		        		<h3></h3>
-		        		<p></p>
-		        	</li>
-		        	-->
-		        </ul>
-
-		    </section>
+		    </section> 
 		   
 		    <section>
 
@@ -598,6 +550,21 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
         <script src="js/vendor/timbre.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/beaudryland.js"></script>
+
+         <!-- BEAUDRYLAND SOURCE CODE 
+        <script src="js/beaudryland.js"></script>
+        <script src="js/beaudryland-settings.js"></script>
+        <script src="js/beaudryland-game.js"></script>
+        <script src="js/beaudryland-map.js"></script>
+        <script src="js/beaudryland-player.js"></script>
+        <script src="js/beaudryland-ai.js"></script>
+        <script src="js/beaudryland-control.js"></script>
+        <script src="js/beaudryland-movement.js"></script>
+        <script src="js/beaudryland-action.js"></script>
+        <script src="js/beaudryland-inventory.js"></script>
+        <script src="js/beaudryland-sound.js"></script>
+        <script src="js/beaudryland-helper.js"></script>
+        -->
 
         <script type="text/javascript">
         

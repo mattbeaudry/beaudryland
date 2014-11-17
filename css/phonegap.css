@@ -47,4 +47,11 @@
   margin-right: 0%;
   min-height: 0;
 }
+.item-achievements li {
+  margin: 0 0 3.33333333% 0;
+  width: 100%;
+  float: left;
+  color: #bbb;
+  border: solid 5px #ccc;
+}
 /*}*/

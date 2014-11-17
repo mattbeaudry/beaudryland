@@ -898,6 +898,7 @@ loadPlayer = function(id) {
     }, "json");
 };
 
+var objectbrain;
 
 moveObjectToBlock = function(id, destinationblock) {
 
@@ -906,7 +907,7 @@ moveObjectToBlock = function(id, destinationblock) {
 	trace("move object ID#"+id+" to block"+destinationblock);
 	var t = 0;
 	var maxthoughts = 100;
-	var objectbrain = setTimeout(anObjectMovement, enemyspeed);
+	objectbrain = setTimeout(anObjectMovement, enemyspeed);
 
 	var destinationblockColumn = destinationblock % mapwidth;
 	var destinationblockRow = parseInt(destinationblock / mapwidth);
@@ -917,6 +918,11 @@ moveObjectToBlock = function(id, destinationblock) {
 	
 	//collection of thoughts
 	var objectPath = Array();
+
+	function stopObjectMovement() {
+		//alert("stop tha shit!");
+		clearTimeout(objectbrain);
+	}
 	
 	function anObjectMovement() {
 
@@ -932,7 +938,7 @@ moveObjectToBlock = function(id, destinationblock) {
 			//if player stuck abort!
 			if (objectPath[n-1]==objectPath[n]) {
 
-				//alert("OBJECT STUCK, ABORTING");
+				alert("OBJECT STUCK, ABORTING");
 				
 				stopObjectMovement();
 
@@ -982,10 +988,7 @@ moveObjectToBlock = function(id, destinationblock) {
 		
 	}
 
-	function stopObjectMovement() {
-		//alert("stop tha shit!");
-		clearTimeout(objectbrain);
-	}
+	
 };
 
 
