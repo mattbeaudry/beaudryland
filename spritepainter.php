@@ -88,16 +88,22 @@ input[type="text"] {
     padding:5px 10px;
     border:none;
 }
-#itemsvg {
+#itemsvg,
+#itemsvg-large {
     width: 30px;
     height: 30px;
     background-color: #fff;
     display: inline-block;
 }
-#itemsvg svg {
+#itemsvg svg,
+#itemsvg-large svg {
     width:100%;
     height:100%;
     shape-rendering: crispEdges;
+}
+#itemsvg-large {
+    width:180px;
+    height:180px;
 }
 .svg-wrap {
     display:inline;
@@ -262,9 +268,8 @@ section h2 {
                 <section>
                     <h2>Preview</h2>
                     <div id="itemsvg"></div>
-                    <div class="iteminfo">
-
-                    </div>
+                    <div id="itemsvg-large"></div>
+                    <div class="iteminfo"></div>
                 </section>
 
                  <section>

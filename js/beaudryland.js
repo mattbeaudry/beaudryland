@@ -313,11 +313,20 @@ var loadNewGame = function() {
     loadNewMap();
     createPlayer();
     if (maptype == 'creative'){
+    	
     	drawNewWinterMap();
 	    drawNewBeachMap();
 	    drawNewSpaceMap();
 	    getAllItems();
 	    createForestSigns();
+
+	    // MAP OVERLAY
+	    var overlayhtml = "";
+	    for (var f = 0; f <= (totalmapblocks - 1); f++){
+			overlayhtml += '<div data-overlayblockid="'+f+'" class="block block-dark"></div>';
+		}
+		$('.the-fucking-map-overlay').append(overlayhtml);
+
     } else if (maptype == 'game') {
     	createForestSigns();
     	createAnimal();
@@ -475,12 +484,11 @@ loadNewMap = function(type) {
 	//console.log("about to create new forest map");
 
 	var maphtml = "";
+	var overlayhtml = "";
 
 	for (var f = 0; f <= (totalmapblocks - 1); f++){
 		//random block generation
 		var r = Math.random();
-		//console.log("asdfasdf"+r);
-		//console.log("sdfasd");
 		var blocktype;
 		if (r<0.7) { blocktype = "grass"; }
 		else if (r>0.98) { blocktype = "rock"; }
@@ -488,13 +496,13 @@ loadNewMap = function(type) {
 		else { blocktype = "water"; }
 		maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
+
 	$('.the-fucking-map').append(maphtml);
 
 	//console.log("why didnt it work?");
 
 	/* FOREST BIOME */
 
-	
 	var terrainblocks = ["water","tree","grass","water","tree","grass","appletree"];
 	$.each(terrainblocks, function(index, value){
 
@@ -535,7 +543,8 @@ loadNewMap = function(type) {
 		changeBlockType( (randomblockid-6-mapwidth*2), value);
 
 	});
-	
+
+
 
 };
 saveMap = function(){
@@ -938,7 +947,7 @@ moveObjectToBlock = function(id, destinationblock) {
 			//if player stuck abort!
 			if (objectPath[n-1]==objectPath[n]) {
 
-				alert("OBJECT STUCK, ABORTING");
+				trace("OBJECT STUCK, ABORTING");
 				
 				stopObjectMovement();
 

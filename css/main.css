@@ -1011,6 +1011,18 @@ hr:before {
 .the-fucking-hearts li.empty {
   background: url('../svg/item-heartgrey.svg') no-repeat;
 }
+/* NIGHT TIME */
+.the-fucking-map-overlay {
+  background-color: #ddd;
+  position: absolute;
+  z-index: 0;
+  width: 800px;
+  height: 600px;
+}
+.block-dark {
+  opacity: 1;
+  background-color: #000;
+}
 @media only screen and (min-width: 1000px) {
   
 }
