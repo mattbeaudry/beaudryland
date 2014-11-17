@@ -94,36 +94,38 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 			
 			<section class="the-fucking-gameinfo">
 
-				<div class="col-left">
 					<h2>Update History</h2>
 					<article class="beaudryland-panel">
 						<h3>Beaudryland v0.6<br>Fall 2014 <br>The Space Update</h3>
 						<ul class="multi-column-2">
-							<li>space map: space, star, earth, sun, planets, galaxies</li>
-							<li>new items: signs, rocket, bed, table, chair, chest, telescope, computer, 2D printer</li>
-							<!--<li>new treasure: </li>-->
+							<li>the space map: space, star, earth, sun, planets, galaxies</li>
+							<li>new items: signs, telescope, computer, 2D printer, rocket</li>
+							<li>furniture! table, chair, chest, bed, sink, bathtub, toilet</li>
+							<li>the drum kit! hithat, bass drum, snare, tom and cymbal</ll>
 							<li>write/read messages on signs</li>
 							<li>iOS app in the app store (coming soon)</li>
-							<li>creative and story modes</li>
-							<li>item builder tool</li>
-							<li>more interesting random terrain generatio (lakes, firest etc.)</li>
+							<li>creative and story game modes</li>
+							<li>item builder tool! design your own items and blocks and add them to the game</li>
+							<li>more interesting random terrain generation (lakes, forests etc.)</li>
 							<li>moose</li>
-							<li>achievements</li>
+							<li>achievements!</li>
+							<li>life gauge and hearts! enemies can hurt you now</li>
+							<li>apple trees and apples! eat apples to restore hearts</li>
 
 							<!--
-							IDEAS:
+							IN THE WORKS:
 							<li>animal &amp; hunting</li>
 							<li>new animation engine</li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
+							<li>clock and game timer</li>
+							<li>requestAnimationFrame for all animation</li>
+							<li>night time! lighting effects overlay</li>
+							<li>musical instruments will be playable</li>
+							<li>airplane</li>
+							<li>more weapons</li>
 							-->
 						</ul>
 		        	</article>
-		        </div>
-		        <div class="col-left">
+		 
 					<article class="beaudryland-panel">
 						<h3>Beaudryland v0.5<br>December 2013<br>The Beach Update</h3>
 						<img class="banner-beaudryland" src="img/banner-beaudryland-0.5.png" title="Beaudryland Banner" />
@@ -136,8 +138,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 							<li>projectiles: throwable items (spear and frisbee)</li>
 						</ul>
 		        	</article>
-		        </div>
-		        <div class="col-left">
+		     
 		        	<article class="beaudryland-panel">
 		        		<h3>Beaudryland v0.4<br>March 2013<br>The Winter Update</h3>
 
@@ -160,8 +161,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 			        		<li>placing water</li>
 			        	</ul>
 			        </article>
-				</div>
-		        <div class="col-left">
+		
 		        	<article class="beaudryland-panel">
 		        		
 		        		<h3>Beaudryland v0.3<br>January, 2013<br>The Items Update</h3>
@@ -188,8 +188,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 							<li>throwable frisbee</li>
 		        		</ul>
 		        	</article>
-				</div>
-		        <div class="col-left">
+			
 		        	<article class="beaudryland-panel">
 		        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.2/">Beaudryland v0.2</a><br>December 24, 2012<br>The Texture Update</h3>
 		        		<ul class="multi-column-2">
@@ -205,8 +204,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		        			<li>craftable fire with animation</li>
 		        		</ul>
 		        	</article>
-		        </div>
-		        <div class="col-left"> 
+		  
 		        	<article class="beaudryland-panel">
 		        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.1/">Beaudryland v0.1</a><br>Dec 17, 2012<br>The Game Engine Update</h3>
 		        		<ul class="multi-column-2">
@@ -221,8 +219,14 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		        			<li>onscreen controller for touch devices</li>
 		        		</ul>
 		        	</article>
-		        </div>
-	        	<p>&copy; 2014 <a href="http://www.mattbeaudry.com">Matt Beaudry</a></p>
+		       
+	        	
+	        </section>
+
+	        <section class="beaudryland-panel">
+	        	<h3>&copy; <?php echo date('Y'); ?> <a href="http://www.mattbeaudry.com">Matt Beaudry</a><br><br>
+	        		<a href="https://github.com/mattbeaudry/beaudryland">github</a>
+	        	</h3>
 	        </section>
         
         </div>
