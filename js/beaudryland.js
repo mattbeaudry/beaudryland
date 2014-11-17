@@ -55,7 +55,9 @@ var blocktypes = new Array (
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
+	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
+
+	"appletree", "heart", "apple"
 );
 var allblockclasses = ""; 
 $.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
@@ -68,12 +70,14 @@ var isplaceable = new Array (
 	/*technology*/	"telescope","computer","2dprinter",
 	/*instrument*/	"guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
+	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
+
+	"appletree"
 );
 var isingredient = new Array (
 	/*forest map*/	"tree", "rock",
 	/*winter map*/  "pinetree", "icerock",
-	/*beach map*/  	"palmtree", 
+	/*beach map*/  	"palmtree",
 	/*items*/     	"wood", "fire",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay"
 );
@@ -93,13 +97,16 @@ var iscollectable = new Array (
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*instrument*/	"guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
+	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
+
+	"appletree","heart","apple"
 );
 
 //var craftableblockclasses = "";
 var inventoryslots = 44;
 var gridunitpx = 20; //must change this px value in css as well
 var enemyspeed = 200;
+var playerspeed = 50;
 var animalspeed = 1000;
 var projectilespeed = 50;
 var bikespeed = 100;
@@ -488,7 +495,7 @@ loadNewMap = function(type) {
 	/* FOREST BIOME */
 
 	
-	var terrainblocks = ["water","tree","grass","water","tree","grass"];
+	var terrainblocks = ["water","tree","grass","water","tree","grass","appletree"];
 	$.each(terrainblocks, function(index, value){
 
 		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
@@ -871,6 +878,8 @@ loadPlayer = function(id) {
 
 moveObjectToBlock = function(id, destinationblock) {
 
+	stopObjectMovement();
+
 	trace("move object ID#"+id+" to block"+destinationblock);
 	var t = 0;
 	var maxthoughts = 100;
@@ -900,7 +909,7 @@ moveObjectToBlock = function(id, destinationblock) {
 			//if player stuck abort!
 			if (objectPath[n-1]==objectPath[n]) {
 
-				alert("OBJECT STUCK, ABORTING");
+				//alert("OBJECT STUCK, ABORTING");
 				
 				stopObjectMovement();
 
@@ -914,7 +923,7 @@ moveObjectToBlock = function(id, destinationblock) {
 			if ( (xDifference == 0) && (yDifference == 0) ){
 				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
 				//trace("reached destination block, stop moving");
-				alert("i made it to the spot you clicked!");
+				//alert("i made it to the spot you clicked!");
 				stopObjectMovement();
 			} else if (POSxDifference >= POSyDifference) {
 				if (xDifference >= 0) { 
@@ -937,13 +946,13 @@ moveObjectToBlock = function(id, destinationblock) {
 			
 			//limit
 
-			if (t > 5) {
+			if (t > 10) {
 				//trace("Enemy terminated");
 				stopObjectMovement();
 				//killEnemy(id);
 			} else {
 				t++;
-				objectbrain = setTimeout(anObjectMovement, enemyspeed); // repeat thought
+				objectbrain = setTimeout(anObjectMovement, playerspeed); // repeat thought
 			}
 
 		}
@@ -951,7 +960,7 @@ moveObjectToBlock = function(id, destinationblock) {
 	}
 
 	function stopObjectMovement() {
-		alert("stop tha shit!");
+		//alert("stop tha shit!");
 		clearTimeout(objectbrain);
 	}
 };
@@ -1895,15 +1904,15 @@ getObjectDirection = function(id, name) {
 playerPrimaryAction = function() {
 
 	var id = 1;
-	trace("Player primary action");
+	//trace("Player primary action");
 	//find block that the player is facing
 	var direction = getObjectDirection(id, "player");
 	var playerblock = getObjectCurrentBlock(id);
 	var block = getObjectCurrentBlock(id);
 	
-	trace("1-"+direction);
-	trace("2-"+playerblock);
-	trace("3-"+block);
+	//trace("1-"+direction);
+	//trace("2-"+playerblock);
+	//trace("3-"+block);
 	
 	var selecteditem = getSelectedItem();
 	switch (direction) {
@@ -1913,10 +1922,10 @@ playerPrimaryAction = function() {
 		case "right": block = block; break;
 	}
 	
-	trace("4-hitblock "+block);
+	//trace("4-hitblock "+block);
 	
 	var blocktype = getBlockType(block);
-	trace("5-blocktype "+blocktype);
+	//trace("5-blocktype "+blocktype);
 
 	//item swing animations
 	if (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe"){
@@ -1927,7 +1936,7 @@ playerPrimaryAction = function() {
 			$(".the-fucking-player").removeClass("player-direction-"+direction+"-"+selecteditem+"-swing");
 		}	
 		var playerblock = getObjectCurrentBlock(id);	
-		trace("5-playerblock "+playerblock);
+		//trace("5-playerblock "+playerblock);
 
 		//killing the enemy
 		if ($('.the-fucking-enemy').length != 0) {
@@ -2074,6 +2083,11 @@ playerPrimaryAction = function() {
 			addToInventory(blocktype, "5");
 			changeBlockType(block, changeblocktotype);
 			//growGrass(block);
+
+			//appletrees give player apples
+			if (blocktype == "appletree") {
+				addToInventory("apple", "5");
+			}
 		}
 
 	});

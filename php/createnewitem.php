@@ -35,6 +35,24 @@ if($result){
 }
 */
 
+// save svg to file here 
+//$file = 'item-'.$newitemslug.'.txt';
+
+$svgfile = '../svg/item-'.$newitemslug.'.svg';
+$currentfile = file_get_contents($svgfile);
+$currentfile = $image;
+file_put_contents($svgfile, $currentfile);
+
+$cssfile = '../css/svg-items.css';
+$currentcss = file_get_contents($cssfile);
+$currentcss .= '.block-'.$newitemslug.' { background-image:url('.$svgfile.');'.' }' . PHP_EOL;
+file_put_contents($cssfile, $currentcss);
+
+/*
+echo $result;
+return $result;
+*/
+
 $mysqli->close();
 ob_end_flush();
 ?>

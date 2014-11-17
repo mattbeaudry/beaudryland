@@ -48,11 +48,10 @@ textarea {
     /* resize: vertical; */
 }
 
-
 *, *:after, *:before {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* ==========================================================================
@@ -173,15 +172,15 @@ hr:before {
 	content:"";
 	background-color:#000;
 	position:absolute;
-	width:96%;
-	height:4%;
-	left:2%;
+	width:98%;
+	height:2%;
+	left:1%;
 }
 .beaudryland-panel:before {
-	top:-4%;
+	top:-2%;
 }
 .beaudryland-panel:after {
-	bottom:-4%;
+	bottom:-2%;
 }
 .logo-beaudryland img {
 	width:80px;
@@ -872,7 +871,7 @@ hr:before {
 .the-fucking-controller {
 	display:none;
 	position:fixed;
-	bottom:0;
+	bottom: 40px;
 	width: 320px;
 	height: 100%;
 	margin:0 auto;
@@ -931,6 +930,35 @@ hr:before {
 	top:9px;
 	right:5px;
 	z-index:2;
+}
+
+
+
+/* THE HEARTS */
+
+.the-fucking-hearts {
+	position:fixed;
+	bottom:0;
+	width:100%;
+	padding:5px 10px;
+	ul {
+		list-style:none;
+		padding:0;
+		margin:0;
+	}
+	li {
+		width:30px;
+		height:30px;
+		float: left;
+		background:url('../svg/item-heart.svg') no-repeat;
+		background-size:30px 30px;
+		margin-right:5px;
+
+		&.empty {
+			background:url('../svg/item-heartgrey.svg') no-repeat;
+		}
+	}
+
 }
 
 

@@ -17,6 +17,16 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 
 	<body class="page-game container version-desktop">
 
+		<div class="the-fucking-hearts">
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+
 	    <div class="maps-wrap clearfix">
 	    	<div class="the-fucking-map" data-maptype="forest"></div>
 	    </div>
