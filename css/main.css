@@ -376,10 +376,14 @@ hr:before {
   padding: 20px;
   list-style: none;
   width: 30%;
-  margin-right: 3%;
-  margin-bottom: 3%;
-  float: left;
-  min-height: 280px;
+  margin-right: 2%;
+  margin-bottom: 6%;
+  /* float: left; */
+
+  /* min-height: 280px; */
+
+  display: inline-block;
+  vertical-align: top;
 }
 .item-formulas h3 {
   margin-top: 0;
@@ -422,10 +426,12 @@ hr:before {
 .item-achievements li {
   background-color: #eee;
   padding: 10px 20px;
-  margin: 0 3.33333333% 3.33333333% 0;
+  margin: 0 2% 3.33333333% 0;
   width: 30%;
-  float: left;
-  color: #bbb;
+  /* float: left; */
+
+  display: inline-block;
+  vertical-align: top;
   border: solid 5px #ccc;
 }
 .item-achievements .status-completed {
