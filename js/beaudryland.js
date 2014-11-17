@@ -327,6 +327,52 @@ var loadNewGame = function() {
 		}
 		$('.the-fucking-map-overlay').append(overlayhtml);
 
+
+		// turn on a light at random block
+
+		changeOverlayBlockOpacity = function(block, opacity) {
+			//trace("8-changing block "+block+" to "+newtype);
+			$('.the-fucking-map-overlay .block:eq('+block+')').css("opacity",opacity);
+		};
+		
+		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+		var value = 0;
+
+		changeOverlayBlockOpacity(randomblockid, value);
+
+		changeOverlayBlockOpacity( (randomblockid-1), value);
+		changeOverlayBlockOpacity( (randomblockid-2), value);
+		changeOverlayBlockOpacity( (randomblockid-3), value);
+		changeOverlayBlockOpacity( (randomblockid-4), value);
+
+		changeOverlayBlockOpacity( (randomblockid-1+mapwidth), value);
+		changeOverlayBlockOpacity( (randomblockid-2+mapwidth), value);
+		changeOverlayBlockOpacity( (randomblockid-3+mapwidth), value);
+		changeOverlayBlockOpacity( (randomblockid-4+mapwidth), value);
+
+		changeOverlayBlockOpacity( (randomblockid-1-mapwidth), value);
+		changeOverlayBlockOpacity( (randomblockid-2-mapwidth), value);
+		changeOverlayBlockOpacity( (randomblockid-3-mapwidth), value);
+		changeOverlayBlockOpacity( (randomblockid-4-mapwidth), value);
+		changeOverlayBlockOpacity( (randomblockid-5-mapwidth), value);
+		changeOverlayBlockOpacity( (randomblockid-6-mapwidth), value);
+		changeOverlayBlockOpacity( (randomblockid-7-mapwidth), value);
+
+		changeOverlayBlockOpacity( (randomblockid-1+mapwidth*2), value);
+		changeOverlayBlockOpacity( (randomblockid-2+mapwidth*2), value);
+		changeOverlayBlockOpacity( (randomblockid-3+mapwidth*2), value);
+		changeOverlayBlockOpacity( (randomblockid-4+mapwidth*2), value);
+		changeOverlayBlockOpacity( (randomblockid-5+mapwidth*2), value);
+		
+		changeOverlayBlockOpacity( (randomblockid-1-mapwidth*2), value);
+		changeOverlayBlockOpacity( (randomblockid-2-mapwidth*2), value);
+		changeOverlayBlockOpacity( (randomblockid-3-mapwidth*2), value);
+		changeOverlayBlockOpacity( (randomblockid-4-mapwidth*2), value);
+		changeOverlayBlockOpacity( (randomblockid-5-mapwidth*2), value);
+		changeOverlayBlockOpacity( (randomblockid-6-mapwidth*2), value);
+
+
+
     } else if (maptype == 'game') {
     	createForestSigns();
     	createAnimal();
