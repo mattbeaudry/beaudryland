@@ -324,6 +324,12 @@ var nightTime = function() {
 
 };
 
+var clearLighting = function() {
+
+	$('.the-fucking-map-overlay .block-dark').css("opacity",1);
+
+};
+
 var lightUpBlock = function() {
 
 	console.log ("the light!");
@@ -1806,6 +1812,8 @@ moveObjectLeft = function(id, name) {
 	} else {
 		trace("Can't move object:"+id+" left -- x="+x);	
 	}
+	clearLighting();
+	lightUpBlock();
 };
 moveObjectRight = function(id, name) {
 	changeObjectDirection(id, "right", name);
@@ -1820,6 +1828,8 @@ moveObjectRight = function(id, name) {
 	} else {
 		trace("Can't move object:"+id+" right -- x="+x);	
 	}
+	clearLighting();
+	lightUpBlock();
 };
 moveObjectUp = function(id, name) {
 	changeObjectDirection(id, "up", name);
@@ -1840,6 +1850,8 @@ moveObjectUp = function(id, name) {
 		$("html, body").animate({ scrollTop: y - 250 }, 600);
 	}
 	*/
+	clearLighting();
+	lightUpBlock();
 };
 moveObjectDown = function(id, name) {
 	changeObjectDirection(id, "down", name);
@@ -1860,6 +1872,8 @@ moveObjectDown = function(id, name) {
 		$("html, body").animate({ scrollTop: y + 250 }, 600);
 	}
 	*/
+	clearLighting();
+	lightUpBlock();
 };
 objectCollisionDetection = function(id, direction) {
 	var block = getObjectCurrentBlock(id);
