@@ -51,6 +51,9 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
 	    			<li><a href="javascript:void(0);" onclick="moveObjectToBlock(1,'78');return false">Move Player To Block 78</a></li>
 	    			<li><a href="javascript:void(0);" onclick="displayDialog('You achieved the achievement!');return false">Achievement Notification</a></li>
+	    			<li><a href="javascript:void(0);" onclick="displayDialog();return false">Achievement Notification</a></li>
+	    			<li><a href="javascript:void(0);" onclick="nightTime();return false">Night Time (lighting tests)</a></li>
+	    			<li><a href="javascript:void(0);" onclick="lightUpBlock();return false">Light up Player</a></li>
 	    			<!--
 		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
 		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>

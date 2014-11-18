@@ -306,6 +306,101 @@ if ( $('body').hasClass("version-phonegap") ){
 
 }
 
+var changeOverlayBlockOpacity = function(block, opacity) {
+	//trace("8-changing block "+block+" to "+newtype);
+	$('.the-fucking-map-overlay .block:eq('+block+')').css("opacity",opacity);
+};
+
+var nightTime = function() {
+
+	console.log ("night time");
+	// MAP OVERLAY
+    var overlayhtml = "";
+    for (var f = 0; f <= (totalmapblocks - 1); f++){
+		overlayhtml += '<div data-overlayblockid="'+f+'" class="block block-dark"></div>';
+	}
+	$('.the-fucking-map-overlay').fadeIn();
+	$('.the-fucking-map-overlay').append(overlayhtml);
+
+};
+
+var lightUpBlock = function() {
+
+	console.log ("the light!");
+
+	//var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+	var playerblockid = getObjectCurrentBlock("1") - 1;
+
+	var value = 0;
+
+	changeOverlayBlockOpacity(playerblockid, value);
+
+	// layer 1 of pixels surrounding lightsource
+	changeOverlayBlockOpacity(playerblockid-1, value);
+	changeOverlayBlockOpacity(playerblockid+1, value);
+	changeOverlayBlockOpacity(playerblockid-mapwidth, value);
+	changeOverlayBlockOpacity(playerblockid+mapwidth, value);
+
+	// layer 2 of pixels surrounding lightsource
+	changeOverlayBlockOpacity(playerblockid-2, 0.2);
+	changeOverlayBlockOpacity(playerblockid+2, 0.2);
+	changeOverlayBlockOpacity(playerblockid-mapwidth-1, 0.2);
+	changeOverlayBlockOpacity(playerblockid-mapwidth+1, 0.2);
+	changeOverlayBlockOpacity(playerblockid+mapwidth-1, 0.2);
+	changeOverlayBlockOpacity(playerblockid+mapwidth+1, 0.2);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*2), 0.2);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*2), 0.2);
+
+	// layer 2 of pixels surrounding lightsource
+	changeOverlayBlockOpacity(playerblockid-3, 0.4);
+	changeOverlayBlockOpacity(playerblockid+3, 0.4);
+	changeOverlayBlockOpacity(playerblockid-mapwidth-2, 0.4);
+	changeOverlayBlockOpacity(playerblockid-mapwidth+2, 0.4);
+	changeOverlayBlockOpacity(playerblockid+mapwidth-2, 0.4);
+	changeOverlayBlockOpacity(playerblockid+mapwidth+2, 0.4);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*2)+1, 0.4);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*2)-1, 0.4);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*2)+1, 0.4);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*2)-1, 0.4);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*3), 0.4);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*3), 0.4);
+
+	// layer 3 of pixels surrounding lightsource
+	changeOverlayBlockOpacity(playerblockid-4, 0.6);
+	changeOverlayBlockOpacity(playerblockid+4, 0.6);
+	changeOverlayBlockOpacity(playerblockid-mapwidth-3, 0.6);
+	changeOverlayBlockOpacity(playerblockid-mapwidth+3, 0.6);
+	changeOverlayBlockOpacity(playerblockid+mapwidth-3, 0.6);
+	changeOverlayBlockOpacity(playerblockid+mapwidth+3, 0.6);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*2)+2, 0.6);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*2)-2, 0.6);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*2)+2, 0.6);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*2)-2, 0.6);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*3)+1, 0.6);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*3)-1, 0.6);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)+1, 0.6);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)-1, 0.6);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*4), 0.6);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*4), 0.6);
+
+	// layer 4 of pixels surrounding lightsource
+	changeOverlayBlockOpacity(playerblockid-4, 0.8);
+	changeOverlayBlockOpacity(playerblockid+4, 0.8);
+	changeOverlayBlockOpacity(playerblockid-mapwidth-3, 0.8);
+	changeOverlayBlockOpacity(playerblockid-mapwidth+3, 0.8);
+	changeOverlayBlockOpacity(playerblockid+mapwidth-3, 0.8);
+	changeOverlayBlockOpacity(playerblockid+mapwidth+3, 0.8);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*2)+2, 0.8);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*2)-2, 0.8);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*2)+2, 0.8);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*2)-2, 0.8);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*3)+1, 0.8);
+	changeOverlayBlockOpacity(playerblockid+(mapwidth*3)-1, 0.8);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)+1, 0.8);
+	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)-1, 0.8);
+
+};
+
 
 var loadNewGame = function() {
 	trace("new user & brand new map");
@@ -320,63 +415,18 @@ var loadNewGame = function() {
 	    getAllItems();
 	    createForestSigns();
 
-	    // MAP OVERLAY
-	    var overlayhtml = "";
-	    for (var f = 0; f <= (totalmapblocks - 1); f++){
-			overlayhtml += '<div data-overlayblockid="'+f+'" class="block block-dark"></div>';
-		}
-		$('.the-fucking-map-overlay').append(overlayhtml);
-
-
-		// turn on a light at random block
-
-		changeOverlayBlockOpacity = function(block, opacity) {
-			//trace("8-changing block "+block+" to "+newtype);
-			$('.the-fucking-map-overlay .block:eq('+block+')').css("opacity",opacity);
-		};
-		
-		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
-		var value = 0;
-
-		changeOverlayBlockOpacity(randomblockid, value);
-
-		changeOverlayBlockOpacity( (randomblockid-1), value);
-		changeOverlayBlockOpacity( (randomblockid-2), value);
-		changeOverlayBlockOpacity( (randomblockid-3), value);
-		changeOverlayBlockOpacity( (randomblockid-4), value);
-
-		changeOverlayBlockOpacity( (randomblockid-1+mapwidth), value);
-		changeOverlayBlockOpacity( (randomblockid-2+mapwidth), value);
-		changeOverlayBlockOpacity( (randomblockid-3+mapwidth), value);
-		changeOverlayBlockOpacity( (randomblockid-4+mapwidth), value);
-
-		changeOverlayBlockOpacity( (randomblockid-1-mapwidth), value);
-		changeOverlayBlockOpacity( (randomblockid-2-mapwidth), value);
-		changeOverlayBlockOpacity( (randomblockid-3-mapwidth), value);
-		changeOverlayBlockOpacity( (randomblockid-4-mapwidth), value);
-		changeOverlayBlockOpacity( (randomblockid-5-mapwidth), value);
-		changeOverlayBlockOpacity( (randomblockid-6-mapwidth), value);
-		changeOverlayBlockOpacity( (randomblockid-7-mapwidth), value);
-
-		changeOverlayBlockOpacity( (randomblockid-1+mapwidth*2), value);
-		changeOverlayBlockOpacity( (randomblockid-2+mapwidth*2), value);
-		changeOverlayBlockOpacity( (randomblockid-3+mapwidth*2), value);
-		changeOverlayBlockOpacity( (randomblockid-4+mapwidth*2), value);
-		changeOverlayBlockOpacity( (randomblockid-5+mapwidth*2), value);
-		
-		changeOverlayBlockOpacity( (randomblockid-1-mapwidth*2), value);
-		changeOverlayBlockOpacity( (randomblockid-2-mapwidth*2), value);
-		changeOverlayBlockOpacity( (randomblockid-3-mapwidth*2), value);
-		changeOverlayBlockOpacity( (randomblockid-4-mapwidth*2), value);
-		changeOverlayBlockOpacity( (randomblockid-5-mapwidth*2), value);
-		changeOverlayBlockOpacity( (randomblockid-6-mapwidth*2), value);
-
-
+	    //testing
+	    /*
+	    nightTime();
+	    lightUpBlock();
+	    */
 
     } else if (maptype == 'game') {
+
     	createForestSigns();
     	createAnimal();
     	createAnimal();
+    	
     }
 };
 loadGame = function(){
