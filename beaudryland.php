@@ -26,11 +26,11 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 				<li></li>
 			</ul>
 		</div>
-
+		<div class="the-fucking-map-overlay">
+    		
+    	</div>
 	    <div class="maps-wrap clearfix">
-	    	<div class="the-fucking-map-overlay">
-	    		
-	    	</div>
+	    	
 	    	<div class="the-fucking-map" data-maptype="forest"></div>
 	    </div>
 

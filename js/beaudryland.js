@@ -124,6 +124,32 @@ var globalmapblockcount = 0;
 
 
 
+/////////////
+//  *ANIMATION & TIME
+/////////////
+
+
+
+var count = 0;
+var seconds = 0;
+
+function newAnimationFrame() {
+  count++;
+  
+  //run every second
+  if ((count%60) == 0){
+     //world clock
+    seconds++;
+    console.log('time since game started: '+seconds+' seconds');
+  }
+      
+  //call loop again
+  window.requestAnimationFrame(newAnimationFrame);
+}
+// start time!
+newAnimationFrame();
+
+
 
 /////////////
 //  *GAME LOGIC
@@ -862,9 +888,9 @@ drawNewSpaceMap = function() {
 };
 changeBlockType = function(block, newtype) {
 	//trace("8-changing block "+block+" to "+newtype);
-	$('.block:eq('+block+')').removeClass(allblockclasses);
-	$('.block:eq('+block+')').addClass("block block-"+newtype);
-	$('.block:eq('+block+')').attr("data-blocktype", newtype);
+	$('.maps-wrap .block:eq('+block+')').removeClass(allblockclasses);
+	$('.maps-wrap .block:eq('+block+')').addClass("block block-"+newtype);
+	$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
 };
 
 
@@ -1355,8 +1381,8 @@ placeSign = function(objectid, block) {
 			case "right": block = block; break;
 		}
 		
-		$('.block:eq('+block+')').attr("data-text", message);
-		//$('.block:eq('+block+')').remove();
+		$('.maps-wrap .block:eq('+block+')').attr("data-text", message);
+		//$('.maps-wrap .block:eq('+block+')').remove();
 
 		console.log('write message to block #: ' + block);
 		console.log('write message: ' + message);
@@ -1373,7 +1399,7 @@ placeSign = function(objectid, block) {
 	$('.bubble-text').focus();
 };
 readSign = function(block) {
-	var message = $('.block:eq('+block+')').attr("data-text");
+	var message = $('.maps-wrap .block:eq('+block+')').attr("data-text");
 	//alert(message);
 	var html = '<div class="bubble-wrap">';
 				html += '<div class="bubble-link">';
@@ -1407,8 +1433,8 @@ readSign = function(block) {
 			case "right": block = block; break;
 		}
 		
-		$('.block:eq('+block+')').attr("data-text", message);
-		//$('.block:eq('+block+')').remove();
+		$('.maps-wrap .block:eq('+block+')').attr("data-text", message);
+		//$('.maps-wrap .block:eq('+block+')').remove();
 
 		//console.log('write message to block #: ' + block);
 		//console.log('write message: ' + message);
@@ -1889,45 +1915,45 @@ objectCollisionDetection = function(id, direction) {
 
 
 	//space travel
-	if (selecteditem == "rocket" && $('.block:eq('+block+')').hasClass('block-space')) {
+	if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+block+')').hasClass('block-space')) {
 		return false;
 	} else if (selecteditem == "rocket") {
 		return true;
 	//space
-	} else if ( $('.block:eq('+block+')').hasClass('block-space') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-space') ) {
 		return true;
-	} else if ( $('.block:eq('+block+')').hasClass('block-star') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-star') ) {
 		return true;
-	} else if ( $('.block:eq('+block+')').hasClass('block-redgalaxy') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-redgalaxy') ) {
 		return true;
-	} else if ( $('.block:eq('+block+')').hasClass('block-bluegalaxy') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-bluegalaxy') ) {
 		return true;
-	} else if ( $('.block:eq('+block+')').hasClass('block-sun') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-sun') ) {
 		return true;
-	} else if ( $('.block:eq('+block+')').hasClass('block-earth') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-earth') ) {
 		return true;
 	//canoeing
-	} else if (selecteditem == "canoe" && $('.block:eq('+block+')').hasClass('block-water')) {
+	} else if (selecteditem == "canoe" && $('.maps-wrap .block:eq('+block+')').hasClass('block-water')) {
 		return false;
 	} else if (selecteditem == "canoe") {
 		return true;
 	// Water
-	} else if ( $('.block:eq('+block+')').hasClass('block-water') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-water') ) {
 		return true;
 	// Tree	
-	} else if ( $('.block:eq('+block+')').hasClass('block-tree') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-tree') ) {
 		return true;
 	// Rock
-	} else if ( $('.block:eq('+block+')').hasClass('block-rock') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-rock') ) {
 		return true;
 	// Wood
-	} else if ( $('.block:eq('+block+')').hasClass('block-wood') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-wood') ) {
 		return true;
 	// Fire
-	} else if ( $('.block:eq('+block+')').hasClass('block-fire') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-fire') ) {
 		return true;
 	// Closed Door
-	} else if ( $('.block:eq('+block+')').hasClass('block-door') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-door') ) {
 		return true;
 	// Map right border	
 	} else if ( (direction == "right" ) && (col>=mapwidth) ) {
@@ -1942,25 +1968,25 @@ objectCollisionDetection = function(id, direction) {
 	} else if ( (direction == "down" ) && (row>=(mapheight*3)) ) {
 		return true;	
 	// PineTree	
-	} else if ( $('.block:eq('+block+')').hasClass('block-pinetree') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-pinetree') ) {
 		return true;
 	// IceRock
-	} else if ( $('.block:eq('+block+')').hasClass('block-icerock') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-icerock') ) {
 		return true;
 	// PalmTree
-	} else if ( $('.block:eq('+block+')').hasClass('block-palmtree') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-palmtree') ) {
 		return true;
 	// RockBrick
-	} else if ( $('.block:eq('+block+')').hasClass('block-rockbrick') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-rockbrick') ) {
 		return true;
 	// IceRockBrick
-	} else if ( $('.block:eq('+block+')').hasClass('block-icerockbrick') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-icerockbrick') ) {
 		return true;
 	// ClayBrick
-	} else if ( $('.block:eq('+block+')').hasClass('block-claybrick') ) {
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-claybrick') ) {
 		return true;
 	// Ice Sliding
-	//} else if ( $('.block:eq('+block+')').hasClass('block-ice') ) {
+	//} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-ice') ) {
 		//slidePlayer();
 		//return true;
 	//Bike Riding?
@@ -2097,8 +2123,8 @@ playerPrimaryAction = function() {
 		}  
 	}
 	
-	$('.block:eq('+block+')').animate({ opacity: 0.9 }, 50, function() {
-		$('.block:eq('+block+')').css("opacity","1");
+	$('.maps-wrap .block:eq('+block+')').animate({ opacity: 0.9 }, 50, function() {
+		$('.maps-wrap .block:eq('+block+')').css("opacity","1");
 		var selecteditem = getSelectedItem();
 
 		//use axe to collect doors, signs and other mechnism objects
@@ -2257,7 +2283,7 @@ playerPrimaryAction = function() {
 
 growGrass = function(block) {
 	trace("growing grass at block" + block);
-	$('.block:eq('+block+')').animate({
+	$('.maps-wrap .block:eq('+block+')').animate({
       	backgroundColor: "#36ac2a"
   	}, 10000, function() {
   		trace("grass has been grown at block "+block+", calling changeBlockType()");
@@ -2626,7 +2652,7 @@ getSelectedItem = function() {
 	return blocktype;
 };
 getBlockType = function(block) {
-	var blocktype = $('.block:eq('+block+')').attr("data-blocktype");
+	var blocktype = $('.maps-wrap .block:eq('+block+')').attr("data-blocktype");
 	//trace("getblocktype() blocknumber:"+block+", blocktype:"+blocktype);
 	return blocktype;
 };
