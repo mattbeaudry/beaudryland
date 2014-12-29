@@ -1085,6 +1085,8 @@ moveObjectToBlock = function(id, destinationblock) {
 			var yDifference = objectY - destinationblockRow;
 			var POSxDifference = Math.abs(xDifference); 
 			var POSyDifference = Math.abs(yDifference);
+			var r = MAth.random(10);
+			alert('r');
 			
 			if ( (xDifference == 0) && (yDifference == 0) ){
 				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");

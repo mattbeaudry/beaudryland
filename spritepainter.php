@@ -180,9 +180,9 @@ section h2 {
             <h1>Item Builder</h1>
 
             <div class="panel-left">
-                <section>
 
-                    <h2>Pixel Painter</h2>
+                <section>
+                    <h2>Item Builder</h2>
 
                     <nav class="pixelpainter-nav">
                         <ul>
@@ -493,7 +493,7 @@ var createSVG = function() {
         }
         pixels[i] = paper.rect(x, y, pixelwidth, pixelwidth);
         pixels[i].attr("fill", color);
-        pixels[i].attr("stroke", color);
+        pixels[i].attr("stroke", "transparent");
     });
 };
 
