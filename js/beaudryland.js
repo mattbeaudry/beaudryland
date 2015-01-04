@@ -47,6 +47,7 @@ var blocktypes = new Array (
 	/*forest map*/	"grass", "dirt", "water", "tree", "rock", "hole",
 	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
 	/*beach map*/  	"sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
+	/*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
 	/*items*/     	"shovel", "wood", "fire", "door", "door-open", "frisbee", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*weapons*/		"sword", "spear", "axe",
@@ -101,6 +102,27 @@ var iscollectable = new Array (
 
 	"appletree","heart","apple"
 );
+
+var objecttypes = new Array (
+    "player-direction-up","player-direction-down","player-direction-left","player-direction-right",
+    "player-direction-up-sword","player-direction-down-sword","player-direction-left-sword ","player-direction-right-sword",
+    "player-direction-up-sword-swing","player-direction-down-sword-swing","player-direction-left-sword-swing","player-direction-right-sword-swing",
+    "player-direction-up-shovel","player-direction-down-shovel","player-direction-left-shovel","player-direction-right-shovel",
+    "player-direction-up-shovel-swing","player-direction-down-shovel-swing","player-direction-left-shovel-swing","player-direction-right-shovel-swing",
+    "player-direction-up-axe","player-direction-down-axe","player-direction-left-axe","player-direction-right-axe",
+    "player-direction-up-axe-swing","player-direction-down-axe-swing","player-direction-left-axe-swing","player-direction-right-axe-swing",
+    "player-direction-up-bike","player-direction-down-bike","player-direction-left-bike","player-direction-right-bike",
+    "player-direction-up-skiis","player-direction-down-skiis","player-direction-left-skiis","player-direction-right-skiis",
+    "player-direction-up-canoe","player-direction-down-canoe","player-direction-left-canoe","player-direction-right-canoe",
+    "player-direction-up-car","player-direction-down-car", "player-direction-left-car","player-direction-right-car",
+    "player-direction-up-rocket","player-direction-down-rocket","player-direction-left-rocket","player-direction-right-rocket",
+    "enemy-direction-up","enemy-direction-down","enemy-direction-left","enemy-direction-right",
+    "deer-direction-up","deer-direction-down","deer-direction-left","deer-direction-right"
+);
+var objectshtml = ""; 
+$.each(objecttypes, function(i, v) { 
+    objectshtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>'; 
+});
 
 //var craftableblockclasses = "";
 var inventoryslots = 44;
