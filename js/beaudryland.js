@@ -156,6 +156,7 @@ newAnimationFrame();
 /////////////
 
 /* PHONEGAP / IPHONE ONLY */
+
 if ( $('body').hasClass("version-phonegap") ){
 
 	/* MOBILE */
@@ -323,12 +324,36 @@ if ( $('body').hasClass("version-phonegap") ){
 	});
 
 	//alert/ask player to save before they close the page
-	/*
+	
 	window.onbeforeunload = confirmExit;
 	function confirmExit() {
 		return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
 	}
-	*/
+
+/* MULTIPLAYER ONLY */
+
+} else if ( $('body').hasClass("version-multiplayer") ) {
+	
+	var mapwidth = 40;
+	var mapheight = 30;
+
+	$(document).ready(function() {
+
+		console.log("MULTIPLAYER VERSION");
+
+		setMapSize();
+		//loadGame();
+
+		//load NewGame() ???
+
+		setupKeyboardEvents();
+		//setupMouseEvents();
+		//setupControlPadEvents();
+
+	});
+
+	//alert/ask player to save before they close the page
+	
 
 }
 
@@ -630,7 +655,7 @@ loadNewMap = function(type) {
 	//console.log("why didnt it work?");
 
 	/* FOREST BIOME */
-
+	/*
 	var terrainblocks = ["water","tree","grass","water","tree","grass","appletree"];
 	$.each(terrainblocks, function(index, value){
 
@@ -671,7 +696,7 @@ loadNewMap = function(type) {
 		changeBlockType( (randomblockid-6-mapwidth*2), value);
 
 	});
-
+*/
 
 
 };
@@ -1085,8 +1110,8 @@ moveObjectToBlock = function(id, destinationblock) {
 			var yDifference = objectY - destinationblockRow;
 			var POSxDifference = Math.abs(xDifference); 
 			var POSyDifference = Math.abs(yDifference);
-			var r = MAth.random(10);
-			alert('r');
+			var r = Math.random();
+			alert(r);
 			
 			if ( (xDifference == 0) && (yDifference == 0) ){
 				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");

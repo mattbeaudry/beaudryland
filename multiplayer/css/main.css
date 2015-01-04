@@ -1,0 +1,1194 @@
+@import url('http://fonts.googleapis.com/css?family=Press+Start+2P');
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+html,
+button,
+input,
+select,
+textarea {
+  color: #222;
+}
+body {
+  font-size: 1em;
+  line-height: 1.4;
+}
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate.
+ * Customize the background color to match your design.
+ */
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+img {
+  vertical-align: middle;
+}
+/*
+ * Remove default fieldset styles.
+ */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+/*
+ * Allow only vertical resizing of textareas.
+ */
+textarea {
+  /* resize: vertical; */
+
+}
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* ==========================================================================
+   Chrome Frame prompt
+   ========================================================================== */
+.chromeframe {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+/* ==========================================================================
+   Author's custom styles: Matt Beaudry
+   ========================================================================== */
+/* FONTS */
+/* COLORS */
+/* BASE STYLES */
+body {
+  font-family: helvetica, verdana;
+  padding-bottom: 40px;
+  /*
+	font-family: "Press Start 2P", helvetica, verdana;
+	font-weight: 400;
+	font-size:0.8em;
+	text-transform: uppercase;
+	*/
+
+}
+h1,
+h2,
+h3 {
+  font-family: "Press Start 2P", helvetica, verdana;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+a {
+  color: #666;
+  color: #1AA00F;
+}
+a:hover {
+  color: #000;
+}
+hr {
+  border-color: #000;
+  border-width: 3px;
+  width: 100%;
+  margin: 40px auto;
+}
+hr:before {
+  display: block;
+  content: "";
+  width: 102%;
+  margin-left: -1%;
+  height: 7px;
+  background-color: black;
+}
+/* GRID */
+.container {
+  width: 800px;
+  margin: 0 auto;
+}
+.row {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.col-2 {
+  width: 50%;
+  float: left;
+}
+.col-left {
+  padding: 0 6%  0 2%;
+}
+.col-right {
+  padding: 0 2% 0 6%;
+}
+.multi-column-2 {
+  -moz-column-count: 2;
+  /* Firefox */
+
+  -webkit-column-count: 2;
+  /* Safari and Chrome */
+
+  column-count: 2;
+}
+.horizonal-spacing {
+  margin-bottom: 10px;
+}
+/* THE WEBSITE */
+.beaudryland-panel {
+  position: relative;
+  background-color: #eee;
+  color: #000;
+  padding: 40px;
+  margin: 30px 0;
+}
+.beaudryland-panel a:hover {
+  color: #45EA37;
+}
+.beaudryland-panel:before,
+.beaudryland-panel:after {
+  display: block;
+  content: "";
+  background-color: #eee;
+  position: absolute;
+  width: 98%;
+  height: 2%;
+  left: 1%;
+}
+.beaudryland-panel:before {
+  top: -2%;
+}
+.beaudryland-panel:after {
+  bottom: -2%;
+}
+.logo-beaudryland img {
+  width: 80px;
+  height: 80px;
+  margin-right: 40px;
+  margin-top: -34px;
+}
+.logo-beaudryland {
+  font-size: 3.6em;
+}
+.logo-beaudryland a {
+  text-decoration: none;
+  color: #111;
+}
+.page-home .the-fucking-header {
+  margin-bottom: 0px;
+}
+.page-game .the-fucking-header {
+  padding-top: 160px;
+}
+.the-fucking-navigation {
+  float: right;
+  margin-top: 5px;
+}
+.beaudryland-nav > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.beaudryland-nav ul li {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.nav-username {
+  color: #999;
+  font-family: "Press Start 2P", sans-serif;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 1.3em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: 10px;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+.button-wrap,
+.button-wrap a {
+  background-color: #000;
+  text-align: center;
+  color: #fff;
+  font-family: "Press Start 2P", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.3em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.button-wrap {
+  position: relative;
+  width: 110px;
+  height: 30px;
+}
+.button-wrap a {
+  display: block;
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  margin-left: 5px;
+  margin-top: -5px;
+  padding-top: 12px;
+}
+.button-wrap a:hover {
+  background-color: #333;
+  color: #fff;
+}
+.button-wrap a:active {
+  background-color: #777;
+}
+.the-fucking-gameinfo {
+  width: 100%;
+  margin: 0 auto;
+}
+.the-fucking-gameinfo section {
+  margin: 40px 0;
+}
+.the-fucking-gameinfo article {
+  margin: 60px 0;
+}
+.the-fucking-gameinfo h2 {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 2em;
+}
+.the-fucking-gameinfo h3 a {
+  color: #000;
+}
+.the-fucking-gameinfo ul {
+  list-style-position: inside;
+  list-style-type: square;
+  padding: 0;
+}
+.the-fucking-gameinfo .recent-updates {
+  margin-bottom: 80px;
+}
+.banner-beaudryland {
+  background-color: #eee;
+  width: 100%;
+  margin-top: 10px;
+}
+.beaudrylandlogin .button,
+.beaudrylandregister .button {
+  display: inline-block;
+  position: relative;
+}
+/*
+.beaudrylandlogin .button:before,
+.beaudrylandregister .button:before {
+	display:block;
+	content:"";
+	width:95%;
+	height:5px;
+	background-color:#000;
+	position:absolute;
+	top:-5px;
+	left:5px;
+}
+*/
+.beaudrylandlogin input:-webkit-autofill,
+.beaudrylandregister input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+.the-fucking-login > form {
+  margin: 0;
+}
+.the-fucking-login input {
+  width: 100%;
+}
+.the-fucking-login input[type="radio"] {
+  width: auto;
+  margin: 0 8px 10px;
+}
+.the-fucking-login .maptype {
+  text-align: left;
+}
+.maptype label {
+  cursor: pointer;
+}
+.link-savemap {
+  padding: 0 5px;
+  text-decoration: underline;
+}
+.link-savemap a,
+.link-savemap a:hover {
+  color: #00cc00;
+  cursor: pointer;
+}
+.link-logout a,
+.link-logout a:hover {
+  color: #cc0000;
+}
+.the-fucking-login input {
+  border: solid 1px #ddd;
+  padding: 10px 12px;
+}
+.the-fucking-login .button {
+  padding: 20px 25px;
+  margin: 10px 0;
+  border: none;
+  color: #000;
+  background-color: #fff;
+  font-family: "Press Start 2P", sans-serif;
+  width: auto;
+}
+.recent-updates {
+  background-color: #ddd;
+  padding: 10px 20px;
+}
+.the-fucking-login .form-field {
+  margin-bottom: 10px;
+}
+.error-login {
+  width: 100%;
+  padding: 5px 20px 10px;
+  color: #d10808;
+}
+.error-register {
+  float: left;
+  width: 100%;
+  padding: 5px 0px 10px 20px;
+}
+.mapnav {
+  margin: 10px auto;
+  text-align: center;
+}
+.item-formulas {
+  list-style: none;
+  padding: 0px;
+}
+.item-formulas > li {
+  margin-bottom: 15px;
+  background-color: #eee;
+  border: solid 5px #ddd;
+  padding: 20px;
+  list-style: none;
+  width: 30%;
+  margin-right: 2%;
+  margin-bottom: 6%;
+  /* float: left; */
+
+  /* min-height: 280px; */
+
+  display: inline-block;
+  vertical-align: top;
+}
+.item-formulas h3 {
+  margin-top: 0;
+}
+.item-formulas ul {
+  margin-bottom: 0;
+  list-style-type: square;
+}
+.item-formulas li img {
+  width: 30px;
+  height: 30px;
+}
+.dev-console {
+  list-style: none;
+  padding: 0;
+}
+.dev-console li {
+  display: inline-block;
+}
+.dev-console a {
+  display: inline-block;
+  color: #fff;
+  background-color: #999;
+  text-decoration: none;
+  font-family: "Press Start 2P", sans-serif;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 1em;
+  text-transform: uppercase;
+  padding: 7px 10px 5px;
+  margin: 0 5px 5px 0;
+}
+.dev-console a:hover {
+  background-color: #000;
+}
+.item-achievements {
+  list-style: none;
+  padding: 0;
+}
+.item-achievements li {
+  background-color: #eee;
+  padding: 10px 20px;
+  margin: 0 2% 3.33333333% 0;
+  width: 30%;
+  /* float: left; */
+
+  display: inline-block;
+  vertical-align: top;
+  border: solid 5px #ccc;
+}
+.item-achievements .status-completed {
+  color: #000;
+  border: solid 5px #36ac2a;
+}
+/* THE MAP */
+.maps-wrap {
+  padding-top: 200px;
+}
+.the-fucking-map,
+.the-fucking-winter-map,
+.the-fucking-beach-map {
+  width: 800px;
+  height: 600px;
+  margin: 0px auto;
+}
+.user-map {
+  width: 800px;
+  height: 600px;
+  margin: 40px auto;
+}
+.the-fucking-map-gallery h3 {
+  position: absolute;
+  font-family: "Press Start 2P", helvetica, verdana;
+  font-weight: 400;
+  text-transform: uppercase;
+  background-color: #ffffff;
+  padding: 4px 4px 0;
+  margin-left: 20px;
+  float: left;
+  z-index: 10;
+}
+.gallery-map-wrap {
+  float: left;
+  margin-top: -88px;
+  width: 800px;
+}
+.gallery-map-wrap.map-forest {
+  background-color: #36ac2a;
+}
+.gallery-map-wrap.map-winter {
+  background-color: #f5fdff;
+}
+.gallery-map-wrap.map-beach {
+  background-color: #d9cfa2;
+}
+.page-mapgallery h2 {
+  margin-bottom: 50px;
+}
+/* THE PLAYER */
+.the-fucking-player {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: 300px;
+  top: 300px;
+  background: url(../img/player-down.png) no-repeat;
+  background-size: contain !important;
+}
+.player-direction-up {
+  background: url(../img/player-up.png) no-repeat;
+}
+.player-direction-down {
+  background: url(../img/player-down.png) no-repeat;
+}
+.player-direction-left {
+  background: url(../img/player-left.png) no-repeat;
+}
+.player-direction-right {
+  background: url(../img/player-right.png) no-repeat;
+}
+.player-direction-up-sword {
+  background: url(../img/player-up-sword.png) no-repeat;
+}
+.player-direction-down-sword {
+  background: url(../img/player-down-sword.png) no-repeat;
+}
+.player-direction-left-sword {
+  background: url(../img/player-left-sword.png) no-repeat;
+}
+.player-direction-right-sword {
+  background: url(../img/player-right-sword.png) no-repeat;
+}
+.player-direction-up-sword-swing {
+  background: url(../img/player-up-sword-swing.png) no-repeat;
+}
+.player-direction-down-sword-swing {
+  background: url(../img/player-down-sword-swing.png) no-repeat;
+}
+.player-direction-left-sword-swing {
+  background: url(../img/player-left-sword-swing.png) no-repeat;
+}
+.player-direction-right-sword-swing {
+  background: url(../img/player-right-sword-swing.png) no-repeat;
+}
+.player-direction-up-shovel {
+  background: url(../img/player-up-shovel.png) no-repeat;
+}
+.player-direction-down-shovel {
+  background: url(../img/player-down-shovel.png) no-repeat;
+}
+.player-direction-left-shovel {
+  background: url(../img/player-left-shovel.png) no-repeat;
+}
+.player-direction-right-shovel {
+  background: url(../img/player-right-shovel.png) no-repeat;
+}
+.player-direction-up-shovel-swing {
+  background: url(../img/player-up-shovel-swing.png) no-repeat;
+}
+.player-direction-down-shovel-swing {
+  background: url(../img/player-down-shovel-swing.png) no-repeat;
+}
+.player-direction-left-shovel-swing {
+  background: url(../img/player-left-shovel-swing.png) no-repeat;
+}
+.player-direction-right-shovel-swing {
+  background: url(../img/player-right-shovel-swing.png) no-repeat;
+}
+.player-direction-up-axe {
+  background: url(../img/player-up-axe.png) no-repeat;
+}
+.player-direction-down-axe {
+  background: url(../img/player-down-axe.png) no-repeat;
+}
+.player-direction-left-axe {
+  background: url(../img/player-left-axe.png) no-repeat;
+}
+.player-direction-right-axe {
+  background: url(../img/player-right-axe.png) no-repeat;
+}
+.player-direction-up-axe-swing {
+  background: url(../img/player-up-axe-swing.png) no-repeat;
+}
+.player-direction-down-axe-swing {
+  background: url(../img/player-down-axe-swing.png) no-repeat;
+}
+.player-direction-left-axe-swing {
+  background: url(../img/player-left-axe-swing.png) no-repeat;
+}
+.player-direction-right-axe-swing {
+  background: url(../img/player-right-axe-swing.png) no-repeat;
+}
+.player-direction-up-bike {
+  background: url(../img/player-up-bike.png) no-repeat;
+}
+.player-direction-down-bike {
+  background: url(../img/player-down-bike.png) no-repeat;
+}
+.player-direction-left-bike {
+  background: url(../img/player-left-bike.png) no-repeat;
+}
+.player-direction-right-bike {
+  background: url(../img/player-right-bike.png) no-repeat;
+}
+.player-direction-up-skiis {
+  background: url(../img/player-up-skiis.png) no-repeat;
+}
+.player-direction-down-skiis {
+  background: url(../img/player-down-skiis.png) no-repeat;
+}
+.player-direction-left-skiis {
+  background: url(../img/player-left-skiis.png) no-repeat;
+}
+.player-direction-right-skiis {
+  background: url(../img/player-right-skiis.png) no-repeat;
+}
+.player-direction-up-canoe {
+  background: url(../img/player-up-canoe.png) no-repeat;
+}
+.player-direction-down-canoe {
+  background: url(../img/player-down-canoe.png) no-repeat;
+}
+.player-direction-left-canoe {
+  background: url(../img/player-left-canoe.png) no-repeat;
+}
+.player-direction-right-canoe {
+  background: url(../img/player-right-canoe.png) no-repeat;
+}
+.player-direction-up-car {
+  background: url(../img/player-up-car.png) no-repeat;
+}
+.player-direction-down-car {
+  background: url(../img/player-down-car.png) no-repeat;
+}
+.player-direction-left-car {
+  background: url(../img/player-left-car.png) no-repeat;
+}
+.player-direction-right-car {
+  background: url(../img/player-right-car.png) no-repeat;
+}
+.player-direction-up-rocket {
+  background: url(../img/player-up-rocket.png) no-repeat;
+}
+.player-direction-down-rocket {
+  background: url(../img/player-down-rocket.png) no-repeat;
+}
+.player-direction-left-rocket {
+  background: url(../img/player-left-rocket.png) no-repeat;
+}
+.player-direction-right-rocket {
+  background: url(../img/player-right-rocket.png) no-repeat;
+}
+/* TEXT BUBBLES */
+.speech-bubble {
+  position: absolute;
+  background: #fff;
+  top: -200px;
+  left: -20px;
+  padding: 20px;
+  border: 1px solid #333;
+}
+.bubble-text {
+  border: none;
+}
+.bubble-text:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.bubble-form input[type="submit"] {
+  background-color: #fff;
+  color: #000;
+  font-family: "Press Start 2P", helvetica, verdana;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 12px;
+  border: none;
+  padding: 5px 10px;
+}
+.bubble-wrap {
+  position: absolute;
+  top: -150px;
+  left: -90px;
+  width: 240px;
+  background-color: #000;
+  color: #fff;
+  font-family: "Press Start 2P", sans-serif;
+  font-weight: normal;
+  font-size: 1.1em;
+  line-height: 1.3em;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px;
+  z-index: 1;
+}
+.bubble-wrap:before,
+.bubble-wrap:after {
+  display: block;
+  content: "";
+  width: 230px;
+  height: 5px;
+  position: absolute;
+  left: 5px;
+  background-color: #000;
+}
+.bubble-wrap:before {
+  top: -5px;
+}
+.bubble-wrap:after {
+  bottom: -5px;
+}
+.bubble-wrap h3 {
+  font-size: 0.8em;
+  margin-top: 0;
+}
+.bubble-link {
+  /*
+	position: absolute;
+	width: 240px;
+	height: 100px;
+	*/
+
+}
+/*
+:hover.bubble-link { background-color:#333; }
+:active.bubble-link { background-color:#777; }
+*/
+.bubble-hangdown-1,
+.bubble-hangdown-2,
+.bubble-hangdown-3,
+.bubble-hangdown-4 {
+  display: block;
+  position: absolute;
+  background-color: #000;
+  height: 10px;
+  left: 100px;
+}
+.bubble-hangdown-1 {
+  width: 20px;
+  bottom: -10px;
+}
+.bubble-hangdown-2 {
+  width: 15px;
+  bottom: -20px;
+}
+.bubble-hangdown-3 {
+  width: 10px;
+  bottom: -30px;
+}
+.bubble-hangdown-4 {
+  width: 5px;
+  bottom: -40px;
+}
+.bubble-input {
+  font-family: "Press Start 2P", sans-serif;
+  font-weight: normal;
+  font-size: 0.8em;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  height: 60px;
+  width: 90%;
+}
+.bubble-dialog {
+  position: fixed;
+  top: 230px;
+  left: 50%;
+  width: 240px;
+  margin-left: -120px;
+}
+/* THE ENEMY */
+.the-fucking-enemy {
+  width: 20px;
+  height: 20px;
+  margin-top: -20px;
+  /* enemy stacking bug fix */
+
+  position: relative;
+  left: 300px;
+  top: 20px;
+  background: #36ac2a url(../img/enemy-down.png) no-repeat;
+  background-size: contain !important;
+}
+.enemy-direction-up {
+  background: url(../img/enemy-up.png) no-repeat;
+}
+.enemy-direction-down {
+  background: url(../img/enemy-down.png) no-repeat;
+}
+.enemy-direction-left {
+  background: url(../img/enemy-left.png) no-repeat;
+}
+.enemy-direction-right {
+  background: url(../img/enemy-right.png) no-repeat;
+}
+/* THE ANIMALS */
+.the-fucking-deer {
+  width: 20px;
+  height: 20px;
+  margin-top: -20px;
+  /* deer stacking bug fix */
+
+  position: relative;
+  left: 300px;
+  top: 20px;
+  background: #36ac2a url(../img/deer-down.png) no-repeat;
+  background-size: contain !important;
+}
+.deer-direction-up {
+  background: url(../img/deer-up.png) no-repeat;
+}
+.deer-direction-down {
+  background: url(../img/deer-down.png) no-repeat;
+}
+.deer-direction-left {
+  background: url(../img/deer-left.png) no-repeat;
+}
+.deer-direction-right {
+  background: url(../img/deer-right.png) no-repeat;
+}
+/* INVENTORY */
+.the-fucking-inventory > div,
+.the-fucking-crafting-table > div,
+.the-fucking-crafted-item > div {
+  padding-top: 10px;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.the-fucking-inventory > .empty,
+.the-fucking-crafting-table > .empty,
+.the-fucking-crafted-item > .empty {
+  cursor: default;
+  background-color: transparent;
+  color: transparent;
+}
+.the-fucking-inventory {
+  color: white;
+  margin: 3px auto;
+  background-color: transparent;
+}
+.the-fucking-inventory > div {
+  border: solid 2px transparent;
+  float: left;
+  width: 28px !important;
+  padding-top: 24px;
+  color: #999;
+  background-color: transparent;
+  margin-bottom: 15px;
+  margin-right: 3px;
+  font-family: "Press Start 2P", helvetica, verdana;
+  font-size: 8px;
+  line-height: 1.8;
+}
+.the-fucking-inventory > div:hover {
+  border: dashed 2px #000;
+}
+.the-fucking-inventory .empty {
+  display: none;
+}
+.the-fucking-inventory .selected-item {
+  border: dashed 2px #000;
+}
+.sticky-inventory {
+  position: fixed;
+  width: 800px;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  /*border-bottom: solid 1px #ddd;*/
+
+}
+/* THE CRAFTING TABLE */
+.crafting-table-wrap {
+  float: left;
+}
+.the-fucking-crafting-table {
+  float: left;
+  color: white;
+  margin-right: 5px;
+  border: solid 2px black;
+}
+.the-fucking-crafted-item {
+  float: left;
+  width: 44px;
+  height: 44px;
+  color: white;
+  border: solid 2px black;
+}
+.the-fucking-crafting-table > div,
+.the-fucking-crafted-item > div {
+  width: 40px;
+  height: 40px;
+  float: left;
+}
+.the-fucking-crafting-table > .slot-1 {
+  border-right: 0px;
+  margin-bottom: 0px;
+}
+.the-fucking-crafting-table > .slot-2 {
+  border-left: 0px;
+  border-right: 0px;
+  margin-bottom: 0px;
+}
+.the-fucking-crafting-table > .slot-3 {
+  border-left: 0px;
+}
+/* CONTROLLER */
+.the-fucking-controller {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  width: 320px;
+  height: 100%;
+  margin: 0 auto;
+  pointer-events: none;
+}
+.btn-up,
+.btn-down,
+.btn-left,
+.btn-right,
+.btn-a,
+.btn-inv {
+  display: block;
+  position: absolute;
+  height: 40px;
+  width: 50px;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+}
+.btn-up:before,
+.btn-down:before,
+.btn-left:before,
+.btn-right:before,
+.btn-a:before,
+.btn-inv:before,
+.btn-up:after,
+.btn-down:after,
+.btn-left:after,
+.btn-right:after,
+.btn-a:after,
+.btn-inv:after {
+  display: block;
+  width: 80%;
+  height: 10%;
+  position: absolute;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.btn-up:before,
+.btn-down:before,
+.btn-left:before,
+.btn-right:before,
+.btn-a:before,
+.btn-inv:before {
+  left: 10%;
+  top: -10%;
+}
+.btn-up:after,
+.btn-down:after,
+.btn-left:after,
+.btn-right:after,
+.btn-a:after,
+.btn-inv:after {
+  left: 10%;
+  bottom: -10%;
+}
+.btn-up {
+  left: 50px;
+  bottom: 100px;
+}
+.btn-down {
+  left: 50px;
+  bottom: 10px;
+}
+.btn-left {
+  left: 5px;
+  bottom: 55px;
+}
+.btn-right {
+  left: 95px;
+  bottom: 55px;
+}
+.btn-a {
+  width: 100px;
+  height: 80px;
+  bottom: 35px;
+  right: 5px;
+}
+.btn-inv {
+  height: 35px;
+  width: 45px;
+  top: 49px;
+  right: 5px;
+  z-index: 2;
+}
+/* THE HEARTS */
+.the-fucking-hearts {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 5px 10px;
+}
+.the-fucking-hearts ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.the-fucking-hearts li {
+  width: 30px;
+  height: 30px;
+  float: left;
+  background: url('../svg/item-heart.svg') no-repeat;
+  background-size: 30px 30px;
+  margin-right: 5px;
+}
+.the-fucking-hearts li.empty {
+  background: url('../svg/item-heartgrey.svg') no-repeat;
+}
+/* NIGHT TIME */
+.the-fucking-map-overlay {
+  position: absolute;
+  z-index: 0;
+  width: 800px;
+  height: 600px;
+  margin-top: 200px;
+  display: none;
+}
+.block-dark {
+  opacity: 0.9;
+  background-color: #000;
+}
+@media only screen and (min-width: 1000px) {
+  
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+  
+}
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+/*
+ * Image replacement
+ */
+.ir {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  /* IE 6/7 fallback */
+
+  *text-indent: -9999px;
+}
+.ir:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 100%;
+}
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+.invisible {
+  visibility: hidden;
+}
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.clearfix:after {
+  clear: both;
+}
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.clearfix {
+  *zoom: 1;
+}
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   Theses examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+  /* Style adjustments for high resolution devices */
+}
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster: h5bp.com/s */
+  
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  /*
+       * Don't show links for images, or javascript/internal links
+       */
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */
+  
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  @page  {
+    margin: 0.5cm;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}

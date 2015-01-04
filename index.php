@@ -9,7 +9,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Beaudryland</title>
+        <title>Beaudryland Login</title>
         
         <meta name="description" content="javascript/CSS game">
         <meta name="viewport" content="width=device-width">

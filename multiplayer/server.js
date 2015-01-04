@@ -4,12 +4,15 @@ var clients = [];
 /* Create an http server to serve the client.html file */
 var http = require("http");
 var fs = require("fs");
+var firstuser = true;
 var httpServer = http.createServer(function(request, response) {
     fs.readFile(__dirname + "/client.html", "utf8", function(error, content) {
         response.writeHeader(200, {"Content-Type": "text/html"});
         response.end(content);
     });
 }).listen(process.env.PORT || 1337);
+
+//app.use(express.static(path.join(__dirname, 'css')));
 
 /* Listen for and handle socket.io connections */
 var io = require("socket.io").listen(httpServer);
@@ -33,6 +36,11 @@ io.sockets.on("connection", function(socket) {
 
             // Callback to the user with a successful flag and the list of clients
             callback(true, clients);
+
+            // if first user, create game
+            if (firstuser == true) {
+                firstuser = false;
+            }
 
         // If the nickname is already in use, reject the request to join
         } else {
@@ -58,6 +66,14 @@ io.sockets.on("connection", function(socket) {
     
         //if (socket.nick && message) {
             io.sockets.emit("moveplayer", {sender: socket.nick, position: position});
+        //}
+        
+    });
+
+    socket.on("updatemap", function(mapdata) {
+    
+        //if (socket.nick && message) {
+            io.sockets.emit("updatemap", {sender: socket.nick, mapdata: mapdata});
         //}
         
     });

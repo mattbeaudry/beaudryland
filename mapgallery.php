@@ -11,7 +11,7 @@ if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Beaudryland</title>
+        <title>Beaudryland Map Gallery</title>
         
         <meta name="description" content="javascript/CSS game">
         <meta name="viewport" content="user-scalable=no,width=device-width">

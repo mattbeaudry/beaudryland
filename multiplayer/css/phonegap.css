@@ -1,0 +1,57 @@
+/* PHONEGAP OPTIMIZATION */
+/*@media only screen and (max-width: 800px) {*/
+.container {
+  width: 320px;
+  max-width: none;
+}
+.maps-wrap {
+  padding-top: 0;
+}
+.the-fucking-map,
+.the-fucking-winter-map,
+.the-fucking-beach-map {
+  width: 320px;
+  height: auto;
+  margin: 0px auto;
+}
+.sticky-inventory {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  transition: none;
+}
+.the-fucking-inventory {
+  max-width: 320px;
+  margin: 0 auto;
+}
+.crafting-table-wrap {
+  width: 320px;
+  margin: 5px auto;
+  float: none;
+}
+.the-fucking-navigation {
+  float: none;
+}
+.the-fucking-controller {
+  display: block;
+  width: 320px;
+}
+.btn-inv {
+  display: block;
+}
+/* HELP AND ITEM FORMULAS */
+.item-formulas > li {
+  width: 100%;
+  margin-right: 0%;
+  min-height: 0;
+}
+.item-achievements li {
+  margin: 0 0 3.33333333% 0;
+  width: 100%;
+  float: left;
+  color: #bbb;
+  border: solid 5px #ccc;
+}
+/*}*/

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Beaudryland</title>
+        <title>Beaudryland Game</title>
         
         <meta name="description" content="javascript/CSS game">
         <meta name="viewport" content="user-scalable=no,width=device-width">
@@ -26,4 +26,3 @@
         
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
-    
