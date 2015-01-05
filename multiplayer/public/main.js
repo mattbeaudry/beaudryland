@@ -198,7 +198,7 @@ $(function() {
     var usernameshtml = '';
     $.each(usernames, function(i, user) {
         usernameshtml += '<li>'+user+'</li>';
-        createPlayer(user);
+        //createPlayerDiv(user);
     });
     $('.user-list ul').html(usernameshtml);
   }
@@ -207,10 +207,10 @@ $(function() {
     // Display the list of connected users on the page
     var usernameshtml = '';
     $.each(usernames, function(i, user) {
-        usernameshtml += '<div class="player player-'+user+'"></div>';
+        usernameshtml += '<div class="player player-'+user+' the-fucking-player"></div>';
     });
     $('.the-players').html(usernameshtml);
-    
+
     // Draw Player characters
     $.each(usernames, function(i, user) {
         $('.player-'+user).css("top","0px");
@@ -220,10 +220,59 @@ $(function() {
     });
   }
 
-  function createPlayer(name) {
-    $('.the-players').append('<div class="player player-'+name+'"></div>');
-    
+  function movePlayer(direction) {
+                  
+    var currentPosX = $('.player-'+username).css('left');
+    var currentPosY = $('.player-'+username).css('top');
+
+    if (direction == "right" || direction == "left") {
+
+      currentPosX = stripPX(currentPosX);
+      if (direction == "right") {
+        currentPosX = currentPosX + 20;
+      } else {
+        currentPosX = currentPosX - 20; 
+      }
+      currentPosX = addPX(currentPosX);
+      $('.player-'+username).css('left',currentPosX);
+      
+    } else if (direction == "up" || direction == "down") {
+
+      currentPosY = stripPX(currentPosY); 
+      if (direction == "down") {
+        currentPosY = currentPosY + 20; 
+      } else {
+        currentPosY = currentPosY - 20; 
+      }
+      currentPosY = addPX(currentPosY);
+      $('.player-'+username).css('top',currentPosY);
+      
+    }
+
+    var position = new Array();
+    position[0] = currentPosX;
+    position[1] = currentPosY;
+    position[2] = username;
+
+    //var jsonposition = JSON.stringify(position);
+    socket.emit("moveplayer", position);
+
   }
+
+  /* Move a player */
+  socket.on("moveplayer", function(position) {
+
+    var playername = position.position[2];
+    var playerclass = ".player-"+playername;
+    var playerleft = position.position[0];
+    var playertop = position.position[1];
+
+    console.log("Move "+playername+": "+playerleft+playertop);
+
+    $(playerclass).css('left',playerleft);
+    $(playerclass).css('top',playertop);
+    
+  });
 
 
   // Keyboard events
@@ -242,6 +291,23 @@ $(function() {
       } else {
         setUsername();
       }
+    }
+  });
+
+  window.addEventListener('keydown', function(event) {
+    switch (event.keyCode) {
+      case 37: /* LEFT ARROW */
+        movePlayer("left");
+        break;
+      case 38: /* UP ARROW */
+        movePlayer("up");
+        break;
+      case 39: /* RIGHT ARROW */
+        movePlayer("right");
+        break;
+      case 40: /* DOWN ARROW */
+        movePlayer("down");
+        break;
     }
   });
 
@@ -351,6 +417,8 @@ $(function() {
     console.log('mapdata:'+data.mapdata);
     //drawMap(data.mapdata);
   });
+                                
+  
 
 });
 

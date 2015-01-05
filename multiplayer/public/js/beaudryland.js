@@ -368,7 +368,7 @@ if ( $('body').hasClass("version-phonegap") ){
 
 		//load NewGame() ???
 
-		setupKeyboardEvents();
+		//setupKeyboardEvents();
 		//setupMouseEvents();
 		//setupControlPadEvents();
 
