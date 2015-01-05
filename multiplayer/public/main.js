@@ -193,6 +193,38 @@ $(function() {
     alert("DRAW MAP");
   }
 
+  function listUsers (usernames) {
+    // Display the list of connected users on the page
+    var usernameshtml = '';
+    $.each(usernames, function(i, user) {
+        usernameshtml += '<li>'+user+'</li>';
+        createPlayer(user);
+    });
+    $('.user-list ul').html(usernameshtml);
+  }
+
+  function listPlayers (usernames) {
+    // Display the list of connected users on the page
+    var usernameshtml = '';
+    $.each(usernames, function(i, user) {
+        usernameshtml += '<div class="player player-'+user+'"></div>';
+    });
+    $('.the-players').html(usernameshtml);
+    
+    // Draw Player characters
+    $.each(usernames, function(i, user) {
+        $('.player-'+user).css("top","0px");
+        $('.player-'+user).css("left","0px");
+        var color = getUsernameColor(user);
+        $('.player-'+user).css("backgroundColor",color);
+    });
+  }
+
+  function createPlayer(name) {
+    $('.the-players').append('<div class="player player-'+name+'"></div>');
+    
+  }
+
 
   // Keyboard events
 
@@ -229,6 +261,8 @@ $(function() {
     $inputMessage.focus();
   });
 
+
+
   // Socket events
 
   // Whenever the server emits 'login', log the login message
@@ -246,10 +280,11 @@ $(function() {
     } else {
       console.log('I am NOT the first user so the map already exists, and I only need to receive map');
       //alert("test is mapdata exists:"+socket.mapdata);
-
       socket.emit('load mapdata');
-
     }
+
+    listUsers(data.usernames);
+    listPlayers(data.usernames);
 
   });
 
@@ -262,6 +297,8 @@ $(function() {
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     addParticipantsMessage(data);
+    listUsers(data.usernames);
+    listPlayers(data.usernames);
   });
 
   // Whenever the server emits 'user left', log it in the chat body
@@ -269,6 +306,8 @@ $(function() {
     log(data.username + ' left');
     addParticipantsMessage(data);
     removeChatTyping(data);
+    listUsers(data.usernames);
+    listPlayers(data.usernames);
   });
 
   // Whenever the server emits 'typing', show the typing message
@@ -311,7 +350,6 @@ $(function() {
     console.log('socketdata:'+socket.mapdata);
     console.log('mapdata:'+data.mapdata);
     //drawMap(data.mapdata);
-
   });
 
 });

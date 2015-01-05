@@ -52,14 +52,23 @@ io.on('connection', function (socket) {
     ++numUsers;
     addedUser = true;
     socket.emit('login', {
-      numUsers: numUsers
+      numUsers: numUsers,
+      usernames: usernames
     });
     // echo globally (all clients) that a person has connected
     socket.broadcast.emit('user joined', {
       username: socket.username,
-      numUsers: numUsers
+      numUsers: numUsers,
+      usernames: usernames
     });
   });
+
+
+
+
+
+
+
 
   // first user joins, setup game and map
   socket.on('setup game', function () {
@@ -93,6 +102,15 @@ io.on('connection', function (socket) {
     });
   });
 
+  socket.on("moveplayer", function(position) {
+      io.sockets.emit("moveplayer", {sender: socket.nick, position: position});
+  });
+
+
+
+
+
+
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
     socket.broadcast.emit('typing', {
@@ -117,7 +135,8 @@ io.on('connection', function (socket) {
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
         username: socket.username,
-        numUsers: numUsers
+        numUsers: numUsers,
+        usernames: usernames
       });
     }
   });

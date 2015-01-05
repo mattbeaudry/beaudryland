@@ -148,15 +148,32 @@ ul {
   width: 100%;
 }
 
+.user-list {
+  position:absolute;
+  top:0;
+  right:40px;
+}
+
 /* MAP */
 
 .maps-wrap {
   width:800px;
   height:600px;
   position:absolute;
-  top:80px;
+  top:20px;
   left:50%;
   margin-left:-400px;
   background-color:#000;
   padding-top:0;
+}
+
+/* PLAYERS */
+
+.player {
+  background-color:black;
+  width:20px;
+  height:20px;
+  position:relative;
+  top:80px;
+  left:200px;
 }
