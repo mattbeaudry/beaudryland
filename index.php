@@ -73,6 +73,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 					    	<p>See what people are building in Beaudryland at the <a href="mapgallery.php">Map Gallery</a>.</p>
 					    	<p>Create your own items for the game with the <a href="spritepainter.php">Item Builder</a>.</p>
 					    	<p>Create your own maps for the game with the <a href="mapeditor.php">Map Editor</a>.</p>
+					    	<p>Play with a very early demo of <a href="https://rocky-escarpment-1406.herokuapp.com/">Beaudryland Multiplayer</a>.</p>
 					        
 					    </div>
 					    <div class="col-2 col-right">
