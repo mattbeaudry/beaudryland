@@ -491,8 +491,10 @@ var loadNewGame = function() {
     	drawNewWinterMap();
 	    drawNewBeachMap();
 	    drawNewSpaceMap();
-	    getAllItems();
 	    createForestSigns();
+	    createWinterSigns();
+	    createBeachSigns();
+	    getAllItems();
 
 	    //testing
 	    /*
@@ -533,8 +535,7 @@ loadGame = function(){
 };
 
 
-/* VARIABLES THAT NEED TO BE CREATED AFTER GAME LOGIC RUNS */
-
+/* VARIABLES THAT NEED TO BE CREATED AFTER GAME LOGIC RUNS */                
 var totalmapblocks = mapwidth * mapheight;
 var mapwidthpx = mapwidth * gridunitpx;
 var mapheightpx = mapheight * gridunitpx;
@@ -566,7 +567,7 @@ createWinterSigns = function(){
 	 ];
 	 $.each(forestSigns,function(index,value){
 	 	var blockid = Math.floor((Math.random() * totalmapblocks) + 1);
-	 	changeBlockType(blockid,"sign");
+	 	changeBlockType(blockid,"sign","winter");
 	 	$('.the-fucking-winter-map .block:eq('+blockid+')').attr("data-text", value);
 	 });
 };
@@ -579,7 +580,7 @@ createBeachSigns = function(){
 	];
 	$.each(forestSigns,function(index,value){
 		var blockid = Math.floor((Math.random() * totalmapblocks) + 1);
-		changeBlockType(blockid,"sign");
+		changeBlockType(blockid,"sign","beach");
 		$('.the-fucking-beach-map .block:eq('+blockid+')').attr("data-text", value);
 	});
 };
@@ -599,7 +600,6 @@ var getAllItems = function() {
 		 value != "silver-hole" &&
 		 value != "oil-hole" &&
 		 value != "clay-hole" ){
-
 			inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
 			if(index==0){ inventoryhtml += 'selected-item'; }
 			inventoryhtml += '" data-blocktype="'+value+'">99</div>';
@@ -608,11 +608,9 @@ var getAllItems = function() {
 	$('.the-fucking-inventory').html(inventoryhtml);
 	setupMouseEvents();
 	/*for 
-
 	'<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>'
 	'<div class="slot-2 empty" data-blocktype="empty">0</div>''*/
 };
-
 
 
 
@@ -727,7 +725,6 @@ drawNewWinterMap = function() {
 			changeBlockType((randomblockid+offset), value, "winter");
 		});
 	});
-
 };
 drawNewBeachMap = function() {
 
@@ -920,7 +917,7 @@ savePlayer = function() {
 		var signmessage = $(this).attr('data-text');
 		trace("signid:"+blockid+"---"+signmessage);
 		signs[index] = {id:blockid, text:signmessage};
-	});
+	});           
 	trace("saved signs");
 	signs = JSON.stringify(signs);
 
@@ -1015,7 +1012,7 @@ moveObjectToBlock = function(id, destinationblock) {
 	trace("destinationblockRow:"+destinationblockRow);
 	
 	//collection of thoughts
-	var objectPath = Array();
+	var objectPath = [];
 
 	function stopObjectMovement() {
 		//alert("stop tha shit!");
@@ -1024,68 +1021,59 @@ moveObjectToBlock = function(id, destinationblock) {
 	
 	function anObjectMovement() {
 
-		//check if enemy isnt dead
-		if ($('.objectid-'+id).length != 0) {
-	
-			var objectX = getObjectCurrentCol(id); 
-			var objectY = getObjectCurrentRow(id);
+		var objectX = getObjectCurrentCol(id); 
+		var objectY = getObjectCurrentRow(id);
+		var n = objectPath.length;
+		objectPath.push(objectX+"-"+objectY);
 
-			var n = objectPath.length;
-			objectPath.push(objectX+"-"+objectY);
+		//if player stuck abort!
+		if (objectPath[n-1] == objectPath[n]) {
+			trace("OBJECT STUCK, ABORTING");
+			stopObjectMovement();
+			return;
+		}
 
-			//if player stuck abort!
-			if (objectPath[n-1]==objectPath[n]) {
-
-				trace("OBJECT STUCK, ABORTING");
-				
-				stopObjectMovement();
-
+		var xDifference = destinationblockColumn - objectX;
+		var yDifference = objectY - destinationblockRow;
+		var POSxDifference = Math.abs(xDifference);
+		var POSyDifference = Math.abs(yDifference);
+		//var r = Math.random();
+		//alert(r);
+		
+		if ( (xDifference == 0) && (yDifference == 0) ){
+			//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
+			trace("reached destination block, stop moving");
+			//alert("i made it to the spot you clicked!");
+			stopObjectMovement();
+		} else if (POSxDifference >= POSyDifference) {
+			if (xDifference >= 0) { 
+				//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
+				moveObjectRight(id, "player");
+			} else { 
+				//trace("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
+				moveObjectLeft(id, "player");
 			}
-
-			var xDifference = destinationblockColumn - objectX; 
-			var yDifference = objectY - destinationblockRow;
-			var POSxDifference = Math.abs(xDifference); 
-			var POSyDifference = Math.abs(yDifference);
-			var r = Math.random();
-			alert(r);
-			
-			if ( (xDifference == 0) && (yDifference == 0) ){
-				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
-				//trace("reached destination block, stop moving");
-				//alert("i made it to the spot you clicked!");
-				stopObjectMovement();
-			} else if (POSxDifference >= POSyDifference) {
-				if (xDifference >= 0) { 
-					//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
-					moveObjectRight(id, "player");
-				} else { 
-					//trace("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
-					moveObjectLeft(id, "player");
-				}
-			} else {
-				if (yDifference >= 0) { 
-					//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
-					moveObjectUp(id, "player");
-				} else { 
-					//trace("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
-					moveObjectDown(id, "player");
-				}
+		} else {
+			if (yDifference >= 0) { 
+				//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
+				moveObjectUp(id, "player");
+			} else { 
+				//trace("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
+				moveObjectDown(id, "player");
 			}
-			
-			
-			//limit
-
-			if (t > 10) {
-				//trace("Enemy terminated");
-				stopObjectMovement();
-				//killEnemy(id);
-			} else {
-				t++;
-				objectbrain = setTimeout(anObjectMovement, playerspeed); // repeat thought
-			}
-
 		}
 		
+		//limit
+
+		if (t > 10) {
+			//trace("Enemy terminated");
+			stopObjectMovement();
+			//killEnemy(id);
+		} else {
+			t++;
+			objectbrain = setTimeout(anObjectMovement, playerspeed); // repeat thought
+		}
+	
 	}
 
 	
@@ -1667,6 +1655,14 @@ setupControlPadEvents = function() {
 setupMouseEvents = function() {
 	trace("Mouse Events");
 	var directions = ["up","down","left","right"];
+
+	// NAVIGATION TOGGLE
+	$('.nav-toggle-inventory').on("click", function() {
+		$('.the-fucking-inventory').slideToggle();
+	});
+	$('.nav-toggle-menu').on("click", function() {
+		$('.beaudryland-nav').fadeToggle();
+	});
 
 	// SELECT AN ITEM IN THE INVENTORY
 	$('.the-fucking-inventory > div').on("click", function() {
@@ -2563,10 +2559,12 @@ playSound = function(freq) {
 	//unlock winter map
 	if ((guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
 		drawNewWinterMap(); 
+		createWinterSigns();
 		guitarFirstNote = false; 
 	}
 	if ((keyboardFirstNote == true) && ($('.the-fucking-beach-map').length == 0)){ 
 		drawNewBeachMap(); 
+		createBeachSigns();
 		keyboardFirstNote = false; 
 	}
 	sin = T("sin", freq);

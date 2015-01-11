@@ -62,9 +62,30 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    	</nav>
 	    </div>
 		   
-		<div class="sticky-inventory ">
+		<div class="sticky-inventory clearfix">
 		
-		    <div class="the-fucking-inventory clearfix">
+			<div class="crafting-table-wrap horizonal-spacing clearfix">
+			    <div class="the-fucking-crafting-table">
+			    	<div class="block slot-1 empty" data-blocktype="empty"></div>
+			    	<div class="block slot-2 empty" data-blocktype="empty"></div>
+			    	<div class="block slot-3 empty" data-blocktype="empty"></div>
+			    </div>
+			    <!--<img src="img/arrow-right.png">-->
+			    <div class="the-fucking-crafted-item">
+			    	<div class="slot empty" data-blocktype="empty"></div>
+			    </div>
+			    <div class="nav-username">
+              		<?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} ?>
+              	</div>
+              	<div class="nav-buttons">
+              		<ul>
+              			<li><a class="nav-toggle-inventory button-black" href="javascript:void(0);">INV</a></li>
+              			<li><a class="nav-toggle-menu button-black" href="javascript:void(0);">MENU</a></li>
+              		</ul>
+              	</div>
+		    </div>
+
+        	<div class="the-fucking-inventory clearfix">
 		    	<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>
 		    	<div class="slot-2 empty" data-blocktype="empty">0</div>
 		    	<div class="slot-3 empty" data-blocktype="empty">0</div>
@@ -116,57 +137,37 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		    	<div class="slot-49 empty" data-blocktype="empty">0</div>
 		    	<div class="slot-50 empty" data-blocktype="empty">0</div>
 		    </div>
-		    
-			<div class="crafting-table-wrap horizonal-spacing clearfix">
-			    <div class="the-fucking-crafting-table">
-			    
-			    	<div class="block slot-1 empty" data-blocktype="empty"></div>
-			    	<div class="block slot-2 empty" data-blocktype="empty"></div>
-			    	<div class="block slot-3 empty" data-blocktype="empty"></div>
-			    	
-			    </div>
-			    <!--<img src="img/arrow-right.png">-->
-			    <div class="the-fucking-crafted-item">
-			    
-			    	<div class="slot empty" data-blocktype="empty"></div>
-			    	
-			    </div>
 
-		    </div>
-
-		    <div class="the-fucking-navigation clearfix">
+		     <div class="the-fucking-navigation clearfix">
                 <nav class="beaudryland-nav">
                   <ul>
-                  	<li class="nav-username">
-                  		<?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} ?>
-                  	</li>
                     <li class="link-savemap">
                       <div class="button-wrap">
                         <a>Save</a>
                       </div>
                     </li>
+                    <!--
                     <li class="link-multiplayer">
                       <div class="button-wrap">
                         <a target="_blank" href="mapgallery.php">Globe</a>
                       </div>
                     </li>
+                	-->
                     <li class="link-help">
                       <div class="button-wrap">
                         <a href="#help">Help</a>
                       </div>
                     </li>
-                    <!--
                     <li class="link-items">
                       <div class="button-wrap">
                         <a href="#items">Items</a>
                       </div>
                     </li>
                     <li class="link-help">
-                      <div class="button-wrap">
-                        <a href="#help">Goals</a>
+                      <div class="button-wrap button-wrap-large">
+                        <a href="#help">Achievements</a>
                       </div>
                     </li>
-                	-->
                     <li class="link-logout">
                       <div class="button-wrap">
                         <a href="logout.php">Logout</a>
