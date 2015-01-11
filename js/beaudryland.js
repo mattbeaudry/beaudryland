@@ -652,6 +652,18 @@ setMapSize = function() {
 	$('.the-fucking-map').css("width", mapwidthpx+"px");
 	$('.the-fucking-map').css("height", mapheightpx+"px");
 };
+changeBlockType = function(block, newtype, maptype) {
+	//trace("8-changing block "+block+" to "+newtype);
+	if (maptype) {
+		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').removeClass(allblockclasses);
+		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').addClass("block block-"+newtype);
+		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').attr("data-blocktype", newtype);
+	} else {
+		$('.maps-wrap .block:eq('+block+')').removeClass(allblockclasses);
+		$('.maps-wrap .block:eq('+block+')').addClass("block block-"+newtype);
+		$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
+	}
+};
 loadNewMap = function(type) {
 	//console.log("about to create new forest map");
 	var maphtml = "";
@@ -668,7 +680,7 @@ loadNewMap = function(type) {
 	}
 	$('.the-fucking-map').append(maphtml);
 	/* CREATE MAP TERRAIN FEATURES */
-	var terrainblocks = ["water","tree","grass","water","tree","grass","grass"];
+	var terrainblocks = ["water","tree","grass","water","tree","grass","grass","appletree"];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
 		var terrainarray = [
@@ -682,6 +694,110 @@ loadNewMap = function(type) {
 			changeBlockType((randomblockid+offset), value, "forest");
 		});
 	});
+};
+drawNewWinterMap = function() {
+	/* LOAD WINTER MAP FUNCTION */
+	$('.maps-wrap').append('<div class="the-fucking-winter-map" data-maptype="winter"></div>');
+	$('.the-fucking-winter-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-winter-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "snow"; }
+		else if (r>0.98) { blocktype = "icerock"; }
+		else if (r>0.96) { blocktype = "pinetree"; }
+		else { blocktype = "ice"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-winter-map').html(mapdata);
+	/* CREATE MAP TERRAIN FEATURES */
+	var terrainblocks = ["pinetree","ice", "ice", "pinetree", "snow"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+		var terrainarray = [
+		0, -1, -2, -3, -4,
+		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
+		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
+		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
+		];
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "winter");
+		});
+	});
+
+};
+drawNewBeachMap = function() {
+
+	/* LOAD BEACH MAP FUNCTION */
+	$('.maps-wrap').append('<div class="the-fucking-beach-map" data-maptype="beach"></div>');
+	$('.the-fucking-beach-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-beach-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	var maphalf = 0.5 * mapwidth;
+	var shoreedge = maphalf;
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		var rowposition = f % mapwidth;
+		if (rowposition == 0) {
+			shoreedge = parseInt(Math.random() * 3) + 2;
+			trace(shoreedge);
+		}
+		if (rowposition <= (maphalf-shoreedge)) {
+			if (r<0.96) { blocktype = "sand"; }
+			else if (r>0.98) { blocktype = "sandstone"; }
+			else if (r>0.96) { blocktype = "palmtree"; }
+		} else {
+			if (r<=0.98) { blocktype = "water"; }
+			else if (r>0.98) { blocktype = "wave"; }
+		}
+		//trace(blocktype+rowposition+maphalf);
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-beach-map').html(mapdata);
+	/* CREATE MAP TERRAIN FEATURES */
+	/*
+	var terrainblocks = ["sandstone","palmtree","wetsand"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+		var terrainarray = [
+		0, -1, -2, -3, -4,
+		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
+		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
+		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
+		];
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "beach");
+		});
+	});
+	*/
+	startWaves();
+};
+drawNewSpaceMap = function() {
+	// LOAD SPACE MAP FUNCTION
+	$('.maps-wrap').append('<div class="the-fucking-space-map" data-maptype="space"></div>');
+	$('.the-fucking-space-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-space-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "space"; }
+		else if (r>0.98) { blocktype = "star"; }
+		else if (r>0.976) { blocktype = "bluegalaxy"; }
+		else if (r>0.972) { blocktype = "redgalaxy"; }
+		else if (r>0.968) { blocktype = "earth"; }
+		else if (r>0.966) { blocktype = "sun"; }
+		else { blocktype = "space"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-space-map').html(mapdata);
 };
 saveMap = function(){
 	trace("save map");
@@ -738,120 +854,7 @@ saveMap = function(){
 	}
     $('.the-fucking-map').append(playerdiv);
 };
-drawNewWinterMap = function() {
-	/* LOAD WINTER MAP FUNCTION */
-	$('.maps-wrap').append('<div class="the-fucking-winter-map" data-maptype="winter"></div>');
-	$('.the-fucking-winter-map').css("width", mapwidthpx+"px");
-	$('.the-fucking-winter-map').css("height", mapheightpx+"px");
-	var mapdata = "";
-	for (var f = 0; f <= (totalmapblocks - 1); f++){
-		//random block generation
-		var r = Math.random();
-		var blocktype;
-		if (r<0.9) { blocktype = "snow"; }
-		else if (r>0.98) { blocktype = "icerock"; }
-		else if (r>0.96) { blocktype = "pinetree"; }
-		else { blocktype = "ice"; }
-		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
-	}
-	$('.the-fucking-winter-map').html(mapdata);
-	/* CREATE MAP TERRAIN FEATURES */
-	var terrainblocks = ["sandstone","pinetree","ice"];
-	$.each(terrainblocks, function(index, value){
-		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
-		var terrainarray = [
-		0, -1, -2, -3, -4,
-		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
-		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
-		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
-		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
-		];
-		$.each(terrainarray, function(index, offset){
-			changeBlockType((randomblockid+offset), value, "winter");
-		});
-	});
 
-};
-drawNewBeachMap = function() {
-
-	/* LOAD BEACH MAP FUNCTION */
-	$('.maps-wrap').append('<div class="the-fucking-beach-map" data-maptype="beach"></div>');
-	$('.the-fucking-beach-map').css("width", mapwidthpx+"px");
-	$('.the-fucking-beach-map').css("height", mapheightpx+"px");
-	var mapdata = "";
-	var maphalf = 0.5 * mapwidth;
-	var shoreedge = maphalf;
-	for (var f = 0; f <= (totalmapblocks - 1); f++){
-		//random block generation
-		var r = Math.random();
-		var blocktype;
-		var rowposition = f % mapwidth;
-		if (rowposition == 0) {
-			shoreedge = parseInt(Math.random() * 3) + 2;
-			trace(shoreedge);
-		}
-		if (rowposition <= (maphalf-shoreedge)) {
-			if (r<0.96) { blocktype = "sand"; }
-			else if (r>0.98) { blocktype = "sandstone"; }
-			else if (r>0.96) { blocktype = "palmtree"; }
-		} else {
-			if (r<=0.98) { blocktype = "water"; }
-			else if (r>0.98) { blocktype = "wave"; }
-		}
-		//trace(blocktype+rowposition+maphalf);
-		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
-	}
-	$('.the-fucking-beach-map').html(mapdata);
-	/* CREATE MAP TERRAIN FEATURES */
-	var terrainblocks = ["sandstone","palmtree","wetsand"];
-	$.each(terrainblocks, function(index, value){
-		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
-		var terrainarray = [
-		0, -1, -2, -3, -4,
-		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
-		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
-		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
-		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
-		];
-		$.each(terrainarray, function(index, offset){
-			changeBlockType((randomblockid+offset), value, "beach");
-		});
-	});
-	startWaves();
-};
-drawNewSpaceMap = function() {
-	// LOAD SPACE MAP FUNCTION
-	$('.maps-wrap').append('<div class="the-fucking-space-map" data-maptype="space"></div>');
-	$('.the-fucking-space-map').css("width", mapwidthpx+"px");
-	$('.the-fucking-space-map').css("height", mapheightpx+"px");
-	var mapdata = "";
-	for (var f = 0; f <= (totalmapblocks - 1); f++){
-		//random block generation
-		var r = Math.random();
-		var blocktype;
-		if (r<0.9) { blocktype = "space"; }
-		else if (r>0.98) { blocktype = "star"; }
-		else if (r>0.976) { blocktype = "bluegalaxy"; }
-		else if (r>0.972) { blocktype = "redgalaxy"; }
-		else if (r>0.968) { blocktype = "earth"; }
-		else if (r>0.966) { blocktype = "sun"; }
-		else { blocktype = "space"; }
-		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
-	}
-	$('.the-fucking-space-map').html(mapdata);
-};
-changeBlockType = function(block, newtype, maptype) {
-	//trace("8-changing block "+block+" to "+newtype);
-	if (maptype) {
-		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').removeClass(allblockclasses);
-		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').addClass("block block-"+newtype);
-		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').attr("data-blocktype", newtype);
-	} else {
-		$('.maps-wrap .block:eq('+block+')').removeClass(allblockclasses);
-		$('.maps-wrap .block:eq('+block+')').addClass("block block-"+newtype);
-		$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
-	}
-};
 
 
 
