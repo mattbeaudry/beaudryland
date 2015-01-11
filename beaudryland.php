@@ -30,8 +30,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     		
     	</div>
 	    <div class="maps-wrap clearfix">
-	    	
-	    	<div class="the-fucking-map" data-maptype="forest"></div>
+	    	<div class="the-fucking-map the-fucking-forest-map" data-maptype="forest"></div>
 	    </div>
 
 	    <div class="the-fucking-dev-panel">
