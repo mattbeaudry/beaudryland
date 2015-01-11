@@ -1489,7 +1489,7 @@ setupKeyboardEvents = function() {
 			case 37: /* LEFT ARROW */
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(880); }
-					else if (selecteditem == "piano") { playSound(880); }
+					else if (selecteditem == "piano") { playPiano(880); }
 					else if (selecteditem == "bike") { rideBike("left"); }
 					else if (selecteditem == "skiis") { rideSkiis("left"); }
 					else { moveObjectLeft(1, "player"); }
@@ -1498,7 +1498,7 @@ setupKeyboardEvents = function() {
 			case 38: /* UP ARROW */
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(1320); } 
-					else if (selecteditem == "piano") { playSound(1320); } 
+					else if (selecteditem == "piano") { playPiano(1320); } 
 					else if (selecteditem == "bike") { rideBike("up"); } 
 					else if (selecteditem == "skiis") { rideSkiis("up"); }
 					else { moveObjectUp(1, "player"); }
@@ -1507,7 +1507,7 @@ setupKeyboardEvents = function() {
 			case 39: /* RIGHT ARROW */
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(1100); }
-					else if (selecteditem == "piano") { playSound(1100); }
+					else if (selecteditem == "piano") { playPiano(1100); }
 					else if (selecteditem == "bike") { rideBike("right"); }
 					else if (selecteditem == "skiis") { rideSkiis("right"); }
 					else { moveObjectRight(1, "player"); }
@@ -1516,7 +1516,7 @@ setupKeyboardEvents = function() {
 			case 40: /* DOWN ARROW */
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(660); } 
-					else if (selecteditem == "piano") { playSound(660); } 
+					else if (selecteditem == "piano") { playPiano(660); } 
 					else if (selecteditem == "bike") { rideBike("down"); } 
 					else if (selecteditem == "skiis") { rideSkiis("down"); }
 					else { moveObjectDown(1, "player"); }
@@ -1614,6 +1614,7 @@ setupControlPadEvents = function() {
 	$('.btn-up').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(1320); } 
+		if (selecteditem == "piano") { playPiano(1320); } 
 		else if (selecteditem == "bike") { rideBike("up"); } 
 		else if (selecteditem == "skiis") { rideSkiis("up"); }
 		else { moveObjectUp(1, "player"); }
@@ -1621,6 +1622,7 @@ setupControlPadEvents = function() {
 	$('.btn-down').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(660); } 
+		if (selecteditem == "piano") { playPiano(660); } 
 		else if (selecteditem == "bike") { rideBike("down"); } 
 		else if (selecteditem == "skiis") { rideSkiis("down"); }
 		else { moveObjectDown(1, "player"); } 
@@ -1628,6 +1630,7 @@ setupControlPadEvents = function() {
 	$('.btn-left').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(880); } 
+		if (selecteditem == "piano") { playPiano(880); } 
 		else if (selecteditem == "bike") { rideBike("left"); } 
 		else if (selecteditem == "skiis") { rideSkiis("left"); }
 		else { moveObjectLeft(1, "player"); }
@@ -1635,6 +1638,7 @@ setupControlPadEvents = function() {
 	$('.btn-right').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(1100); } 
+		if (selecteditem == "piano") { playPiano(1100); } 
 		else if (selecteditem == "bike") { rideBike("right"); } 
 		else if (selecteditem == "skiis") { rideSkiis("right"); }
 		else { moveObjectRight(1, "player"); }
@@ -2562,6 +2566,14 @@ playSound = function(freq) {
 		createWinterSigns();
 		guitarFirstNote = false; 
 	}
+	sin = T("sin", freq);
+	env = T("adsr", 10, 500);
+	syn = T("*", sin, env).play();
+	sin.bang();
+	env.bang();
+};
+playPiano = function(freq) {
+	//unlock beach map
 	if ((keyboardFirstNote == true) && ($('.the-fucking-beach-map').length == 0)){ 
 		drawNewBeachMap(); 
 		createBeachSigns();
