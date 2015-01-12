@@ -232,6 +232,9 @@ hr:before {
   		float:right;
   		margin-right:0;
 	}
+	.nav-extra {
+		display:none;
+	}
 }
 
 .nav-username {
@@ -462,6 +465,9 @@ hr:before {
 .link-logout a:hover {
 	color: #cc0000;
 }
+.on-savemap-mobile a {
+	color: #00cc00;
+}
 .the-fucking-login input {
 	border: solid 1px #ddd;
 	padding: 10px 12px;
@@ -579,7 +585,7 @@ hr:before {
 /* THE MAP */
 
 .maps-wrap {
-	padding-top: 200px;
+	padding-top: 244px;
 }
 .the-fucking-map,
 .the-fucking-winter-map,
@@ -885,7 +891,23 @@ hr:before {
 
 
 /* INVENTORY */
-
+.sticky-inventory {
+	position: fixed;
+	width: 800px;
+	top: 0;
+	background-color: rgba(255,255,255,0.9);
+	padding: 5px 5px 0 5px;
+	/*border-bottom: solid 1px #ddd;*/
+}
+.the-fucking-inventory {
+	color: white;
+	margin: 3px auto;
+	background-color: transparent;
+}
+.the-fucking-inventory-collapsed {
+	max-height:40px;
+	overflow:hidden;
+}
 .the-fucking-inventory > div,
 .the-fucking-crafting-table > div,
 .the-fucking-crafted-item > div {
@@ -905,11 +927,6 @@ hr:before {
 	cursor:default;
 	background-color: transparent;
 	color: transparent;
-}
-.the-fucking-inventory {
-	color: white;
-	margin: 3px auto;
-	background-color: transparent;
 }
 .the-fucking-inventory > div {
 	border: solid 2px transparent;
@@ -932,13 +949,6 @@ hr:before {
 }
 .the-fucking-inventory .selected-item {
 	border:dashed 2px #000;
-}
-.sticky-inventory {
-	position: fixed;
-	width: 800px;
-	top: 0;
-	background-color: rgba(255,255,255,0.9);
-	/*border-bottom: solid 1px #ddd;*/
 }
 
 

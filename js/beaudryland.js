@@ -128,7 +128,7 @@ $.each(objecttypes, function(i, v) {
 });
 
 //var craftableblockclasses = "";
-var inventoryslots = 100;
+var inventoryslots = 74;
 var gridunitpx = 20; //must change this px value in css as well
 var enemyspeed = 200;
 var playerspeed = 50;
@@ -179,6 +179,28 @@ newAnimationFrame();
 /////////////
 //  *GAME LOGIC
 /////////////
+
+
+// NAVIGATION TOGGLE
+$('.nav-toggle-inventory').on("click", function() {
+	if ( $('body').hasClass("version-phonegap") ) {
+		$('.the-fucking-navigation').hide();
+		$('.the-fucking-inventory').toggle();
+	} else {
+		$('.the-fucking-inventory').toggleClass("the-fucking-inventory-collapsed");
+	}
+	
+});
+$('.nav-toggle-menu').on("click", function() {
+	if ( $('body').hasClass("version-phonegap") ) {
+		$('.the-fucking-inventory').hide();
+		$('.the-fucking-navigation').toggle();
+	} else {
+		$('.nav-extra').toggle();
+	}
+	
+});
+
 
 /* PHONEGAP / IPHONE ONLY */
 
@@ -625,7 +647,9 @@ var getAllItems = function() {
 		}
 	});
 	$('.the-fucking-inventory').html(inventoryhtml);
+	$('.the-fucking-inventory').show();
 	setupMouseEvents();
+
 	/*for 
 	'<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>'
 	'<div class="slot-2 empty" data-blocktype="empty">0</div>''*/
@@ -1686,20 +1710,6 @@ setupControlPadEvents = function() {
 setupMouseEvents = function() {
 	trace("Mouse Events");
 	var directions = ["up","down","left","right"];
-
-	// NAVIGATION TOGGLE
-	$('.nav-toggle-inventory').on("click", function() {
-		if ( $('body').hasClass("version-phonegap") ) {
-			$('.the-fucking-navigation').hide();
-		}
-		$('.the-fucking-inventory').toggle();
-	});
-	$('.nav-toggle-menu').on("click", function() {
-		if ( $('body').hasClass("version-phonegap") ) {
-			$('.the-fucking-inventory').hide();
-		}
-		$('.the-fucking-navigation').toggle();
-	});
 
 	// SELECT AN ITEM IN THE INVENTORY
 	$('.the-fucking-inventory > div').on("click", function() {

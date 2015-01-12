@@ -63,6 +63,23 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 
 		    <div class="the-fucking-navigation clearfix">
                 <nav class="beaudryland-nav">
+                  <ul class="nav-extra">
+                    <li class="link-mapeditor">
+                      <div class="button-wrap button-wrap-large button-wrap-outline">
+                        <a target="_blank" href="mapgallery.php">Map Gallery</a>
+                      </div>
+                    </li>
+                    <li class="link-itemeditor">
+                      <div class="button-wrap button-wrap-large button-wrap-outline">
+                        <a target="_blank" href="spritepainter.php">Item Editor</a>
+                      </div>
+                    </li>
+                    <li class="link-mapeditor">
+                      <div class="button-wrap button-wrap-large button-wrap-outline">
+                        <a target="_blank" href="mapeditor.php">Map Editor</a>
+                      </div>
+                    </li>
+                  </ul>
                   <ul>
                     <li class="link-savemap">
                       <div class="button-wrap">
@@ -88,7 +105,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
                     </li>
                     <li class="link-help">
                       <div class="button-wrap button-wrap-large">
-                        <a href="#help">Achievements</a>
+                        <a href="#achievements">Achievements</a>
                       </div>
                     </li>
                     <li class="link-logout">
@@ -96,23 +113,8 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
                         <a href="logout.php">Logout</a>
                       </div>
                     </li>
-                    <li class="link-mapeditor">
-                      <div class="button-wrap button-wrap-large button-wrap-outline">
-                        <a target="_blank" href="mapgallery.php">Map Gallery</a>
-                      </div>
-                    </li>
-                    <li class="link-itemeditor">
-                      <div class="button-wrap button-wrap-large button-wrap-outline">
-                        <a target="_blank" href="spritepainter.php">Item Editor</a>
-                      </div>
-                    </li>
-                    <li class="link-mapeditor">
-                      <div class="button-wrap button-wrap-large button-wrap-outline">
-                        <a target="_blank" href="mapeditor.php">Map Editor</a>
-                      </div>
-                    </li>
-                    
-                  </ul>
+                   </ul>
+
                 </nav>
             </div>
 

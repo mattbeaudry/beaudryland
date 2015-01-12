@@ -4,6 +4,19 @@
   width: 320px;
   max-width: none;
 }
+.beaudryland-nav .button-wrap {
+  width: 135px;
+  margin: 0;
+}
+.beaudryland-nav .button-wrap a {
+  width: 125px;
+}
+.beaudryland-nav .button-wrap-large {
+  width: 292px;
+}
+.beaudryland-nav .button-wrap-large a {
+  width: 282px;
+}
 .maps-wrap {
   padding-top: 54px;
 }
@@ -23,6 +36,7 @@
   transition: none;
 }
 .the-fucking-inventory {
+  display: none;
   max-width: 320px;
   margin: 0 auto;
 }
@@ -32,6 +46,7 @@
   float: none;
 }
 .the-fucking-navigation {
+  display: none;
   float: none;
   margin-top: 15px;
 }
