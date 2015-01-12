@@ -289,7 +289,7 @@ section h2 {
                                     <legend for="properties">Properties:</legend>
                                     <input class="form-property" type="checkbox" name="properties" value="isplaceable" checked> Is Placeable<br>
                                     <input class="form-property" type="checkbox" name="properties" value="isingredient"> Is Ingredient<br>
-                                    <!--<input class="form-property" type="checkbox" name="properties" value="isequipable"> Is Equipable<br>-->
+                                    <input class="form-property" type="checkbox" name="properties" value="isequipable"> Is Equipable<br>
                                     <input class="form-property" type="checkbox" name="properties" value="iscollectable" checked> Is Collectable<br>
                                     <input class="form-property" type="checkbox" name="properties" value="iscollectable" checked> Is Craftable <em>(Recipe Below)</em><br>
                                 

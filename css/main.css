@@ -218,6 +218,7 @@ hr:before {
 .nav-username {
   display: block;
   position: absolute;
+  z-index: -1;
   text-align: center;
   width: 100%;
   color: #999;

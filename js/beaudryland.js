@@ -48,17 +48,18 @@ var blocktypes = new Array (
 	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
 	/*beach map*/  	"sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
 	/*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
-	/*items*/     	"shovel", "wood", "fire", "door", "door-open", "frisbee", "sign",
+	/*items*/     	"shovel", "fire", "door", "door-open", "frisbee", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*weapons*/		"sword", "spear", "axe",
-	/*instruments*/ "guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
+	/*instruments*/ "guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*technology*/	"telescope","computer","2dprinter",
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 
-	"appletree", "heart", "apple"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple","heart"
+	
 );
 var allblockclasses = ""; 
 $.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
@@ -69,38 +70,40 @@ var isplaceable = new Array (
 	/*items*/     	"wood", "fire", "door", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*technology*/	"telescope","computer","2dprinter",
-	/*instrument*/	"guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
+	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 
-	"appletree"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple"
 );
 var isingredient = new Array (
 	/*forest map*/	"tree", "rock",
 	/*winter map*/  "pinetree", "icerock",
 	/*beach map*/  	"palmtree",
-	/*items*/     	"wood", "fire",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay"
+	/*items*/     	"fire",
+	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
+	/* organic */	"wood","pinewood","palmwood","applewood"
 );
 /* isequipable is used for items with player graphics */
 var isequipable = new Array (
 	/*items*/     	"shovel",
 	/*weapons*/		"sword", "axe",
-	/*transport*/	"bike", "skiis", "canoe", "car", "rocket"
+	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
+	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom"
 );
 var iscollectable = new Array (
 	/*forest map*/	"tree", "rock",
 	/*winter map*/  "pinetree", "icerock",
 	/*beach map*/  	"palmtree", "sandstone",
-	/*items*/     	"wood", "fire",
+	/*items*/     	"fire",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*technology*/	"telescope","computer","2dprinter",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*instrument*/	"guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
+	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 
-	"appletree","heart","apple"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple","heart"
 );
 
 var objecttypes = new Array (
@@ -380,10 +383,7 @@ if ( $('body').hasClass("version-phonegap") ){
 		//setupControlPadEvents();
 
 	});
-
-	//alert/ask player to save before they close the page
 	
-
 }
 
 var changeOverlayBlockOpacity = function(block, opacity) {
@@ -492,14 +492,14 @@ var loadNewGame = function() {
     loadNewMap();
     createPlayer();
     if (maptype == 'creative'){
-    	getAllItems();
+    	
     	drawNewWinterMap();
 	    drawNewBeachMap();
 	    drawNewSpaceMap();
 	    createForestSigns();
 	    createWinterSigns();
 	    createBeachSigns();
-	    
+	    getAllItems();
 
 	    //testing
 	    /*
@@ -579,12 +579,12 @@ createForestSigns = function(){
 };
 createWinterSigns = function(){
 	trace("add winter sign clues");
-	 var forestSigns = [
+	 var winterSigns = [
 	 	"Winter Message 1",
 	 	"Winter Message 2",
 	 	"Winter Message 3"
 	 ];
-	 $.each(forestSigns,function(index,value){
+	 $.each(winterSigns,function(index,value){
 	 	var blockid = Math.floor((Math.random() * totalmapblocks) + 1);
 	 	changeBlockType(blockid,"sign","winter");
 	 	$('.the-fucking-winter-map .block:eq('+blockid+')').attr("data-text", value);
@@ -1509,6 +1509,7 @@ setupKeyboardEvents = function() {
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(880); }
 					else if (selecteditem == "piano") { playPiano(880); }
+					else if (selecteditem == "drumsticks") { playDrums(880); }
 					else if (selecteditem == "bike") { rideBike("left"); }
 					else if (selecteditem == "skiis") { rideSkiis("left"); }
 					else { moveObjectLeft(1, "player"); }
@@ -1518,6 +1519,7 @@ setupKeyboardEvents = function() {
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(1320); } 
 					else if (selecteditem == "piano") { playPiano(1320); } 
+					else if (selecteditem == "drumsticks") { playDrums(1320); }
 					else if (selecteditem == "bike") { rideBike("up"); } 
 					else if (selecteditem == "skiis") { rideSkiis("up"); }
 					else { moveObjectUp(1, "player"); }
@@ -1527,6 +1529,7 @@ setupKeyboardEvents = function() {
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(1100); }
 					else if (selecteditem == "piano") { playPiano(1100); }
+					else if (selecteditem == "drumsticks") { playDrums(1100); }
 					else if (selecteditem == "bike") { rideBike("right"); }
 					else if (selecteditem == "skiis") { rideSkiis("right"); }
 					else { moveObjectRight(1, "player"); }
@@ -1536,6 +1539,7 @@ setupKeyboardEvents = function() {
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(660); } 
 					else if (selecteditem == "piano") { playPiano(660); } 
+					else if (selecteditem == "drumsticks") { playDrums(660); }
 					else if (selecteditem == "bike") { rideBike("down"); } 
 					else if (selecteditem == "skiis") { rideSkiis("down"); }
 					else { moveObjectDown(1, "player"); }
@@ -1633,7 +1637,8 @@ setupControlPadEvents = function() {
 	$('.btn-up').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(1320); } 
-		if (selecteditem == "piano") { playPiano(1320); } 
+		else if (selecteditem == "piano") { playPiano(1320); } 
+		else if (selecteditem == "drumsticks") { playDrums(1320); }
 		else if (selecteditem == "bike") { rideBike("up"); } 
 		else if (selecteditem == "skiis") { rideSkiis("up"); }
 		else { moveObjectUp(1, "player"); }
@@ -1641,7 +1646,8 @@ setupControlPadEvents = function() {
 	$('.btn-down').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(660); } 
-		if (selecteditem == "piano") { playPiano(660); } 
+		else if (selecteditem == "piano") { playPiano(660); } 
+		else if (selecteditem == "drumsticks") { playDrums(660); }
 		else if (selecteditem == "bike") { rideBike("down"); } 
 		else if (selecteditem == "skiis") { rideSkiis("down"); }
 		else { moveObjectDown(1, "player"); } 
@@ -1649,7 +1655,8 @@ setupControlPadEvents = function() {
 	$('.btn-left').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(880); } 
-		if (selecteditem == "piano") { playPiano(880); } 
+		else if (selecteditem == "piano") { playPiano(880); } 
+		else if (selecteditem == "drumsticks") { playDrums(880); }
 		else if (selecteditem == "bike") { rideBike("left"); } 
 		else if (selecteditem == "skiis") { rideSkiis("left"); }
 		else { moveObjectLeft(1, "player"); }
@@ -1657,7 +1664,8 @@ setupControlPadEvents = function() {
 	$('.btn-right').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(1100); } 
-		if (selecteditem == "piano") { playPiano(1100); } 
+		else if (selecteditem == "piano") { playPiano(1100); } 
+		else if (selecteditem == "drumsticks") { playDrums(1100); }
 		else if (selecteditem == "bike") { rideBike("right"); } 
 		else if (selecteditem == "skiis") { rideSkiis("right"); }
 		else { moveObjectRight(1, "player"); }
@@ -1681,10 +1689,16 @@ setupMouseEvents = function() {
 
 	// NAVIGATION TOGGLE
 	$('.nav-toggle-inventory').on("click", function() {
-		$('.the-fucking-inventory').fadeToggle();
+		if ( $('body').hasClass("version-phonegap") ) {
+			$('.the-fucking-navigation').hide();
+		}
+		$('.the-fucking-inventory').toggle();
 	});
 	$('.nav-toggle-menu').on("click", function() {
-		$('.the-fucking-navigation').fadeToggle();
+		if ( $('body').hasClass("version-phonegap") ) {
+			$('.the-fucking-inventory').hide();
+		}
+		$('.the-fucking-navigation').toggle();
 	});
 
 	// SELECT AN ITEM IN THE INVENTORY
@@ -2555,10 +2569,22 @@ checkCraftingTableForItem = function() {
 
 		case "treepinetreetree": createCraftedItem("table",5); break;
 		case "pinetreewoodwood": createCraftedItem("chair",5); break;
-		case "pinetreepinetreepinetree": createCraftedItem("bed",5); break;
+		case "pinetreepalmpinetree": createCraftedItem("bed",5); break;
 		case "woodpinetreewood": createCraftedItem("chest",5); break;
 		case "diamondsilvergold": createCraftedItem("telescope",1); break;
 		case "diamondsilverdiamond": createCraftedItem("computer",1); break;
+
+		case "palmtreepalmwoodpalmtree": createCraftedItem("drumsticks",3); break;
+
+		case "pinetreeemptyempty": createCraftedItem("pinewood",3); break;
+		case "pinetreepinetreeempty": createCraftedItem("pinewood",6); break;
+		case "pinetreepinetreepinetree": createCraftedItem("pinewood",10); break;
+		case "palmtreeemptyempty": createCraftedItem("palmwood",3); break;
+		case "palmtreepalmtreeempty": createCraftedItem("palmwood",5); break;
+		case "palmtreepalmtreepalmtree": createCraftedItem("palmwood",10); break;
+		case "appletreeemptyempty": createCraftedItem("applewood",3); break;
+		case "appletreeappletreeempty": createCraftedItem("applewood",6); break;
+		case "appletreeappletreeappletree": createCraftedItem("applewood",10); break;
 
 		default:
 			$('.the-fucking-crafted-item > .slot').removeClass(allblockclasses);
@@ -2578,6 +2604,7 @@ checkCraftingTableForItem = function() {
 
 guitarFirstNote = true;
 keyboardFirstNote = true;
+drumsFirstNote = true;
 playSound = function(freq) {
 	//unlock winter map
 	if ((guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
@@ -2596,6 +2623,19 @@ playPiano = function(freq) {
 	if ((keyboardFirstNote == true) && ($('.the-fucking-beach-map').length == 0)){ 
 		drawNewBeachMap(); 
 		createBeachSigns();
+		keyboardFirstNote = false; 
+	}
+	sin = T("sin", freq);
+	env = T("adsr", 10, 500);
+	syn = T("*", sin, env).play();
+	sin.bang();
+	env.bang();
+};
+playDrums = function(freq) {
+	//unlock beach map
+	if ((drumsFirstNote == true) && ($('.the-fucking-space-map').length == 0)){ 
+		drawNewSpaceMap(); 
+		//createBeachSigns();
 		keyboardFirstNote = false; 
 	}
 	sin = T("sin", freq);
