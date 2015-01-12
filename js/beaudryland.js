@@ -125,7 +125,7 @@ $.each(objecttypes, function(i, v) {
 });
 
 //var craftableblockclasses = "";
-var inventoryslots = 44;
+var inventoryslots = 100;
 var gridunitpx = 20; //must change this px value in css as well
 var enemyspeed = 200;
 var playerspeed = 50;
@@ -479,22 +479,20 @@ var lightUpBlock = function() {
 	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)-1, 0.8);
 
 };
-
-
 var loadNewGame = function() {
 	trace("new user & brand new map");
 	trace("map type is "+maptype);
     loadNewMap();
     createPlayer();
     if (maptype == 'creative'){
-    	
+    	getAllItems();
     	drawNewWinterMap();
 	    drawNewBeachMap();
 	    drawNewSpaceMap();
 	    createForestSigns();
 	    createWinterSigns();
 	    createBeachSigns();
-	    getAllItems();
+	    
 
 	    //testing
 	    /*
@@ -539,6 +537,20 @@ loadGame = function(){
 var totalmapblocks = mapwidth * mapheight;
 var mapwidthpx = mapwidth * gridunitpx;
 var mapheightpx = mapheight * gridunitpx;
+
+
+/* CREATE INVENTORY SLOT DIVS */
+var setupInventorySlots = function() {
+	var invslothtml = "";
+	invslothtml += '<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>';
+	for (var i = 1; i <= inventoryslots; i += 1){
+		invslothtml += '<div class="slot-'+i+' empty" data-blocktype="empty">0</div>';
+	}
+	$('.the-fucking-inventory').html(invslothtml);
+};
+setupInventorySlots();
+
+
 
 
 //////////
@@ -1662,7 +1674,7 @@ setupMouseEvents = function() {
 
 	// NAVIGATION TOGGLE
 	$('.nav-toggle-inventory').on("click", function() {
-		$('.the-fucking-inventory').slideToggle();
+		$('.the-fucking-inventory').fadeToggle();
 	});
 	$('.nav-toggle-menu').on("click", function() {
 		$('.beaudryland-nav').fadeToggle();

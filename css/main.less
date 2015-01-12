@@ -212,20 +212,31 @@ hr:before {
 }
 .beaudryland-nav {
 
+	> ul {
+		list-style:none;
+	  	padding:0;
+	  	margin:0;
+	  	text-align:center;
+
+	  	li {
+			display:inline-block;
+		  	margin-right:10px;
+		  	margin-bottom:10px;
+		}
+  	}
+  	.link-savemap {
+  		float:left;
+	}
+  	.link-logout {
+  		float:right;
+	}
 }
-.beaudryland-nav > ul {
-	list-style:none;
-  	padding:0;
-  	margin:0;
-  	text-align:center;
-}
-.beaudryland-nav ul li {
-	display:inline-block;
-  	margin-right:10px;
-  	margin-bottom:10px;
-}
+
 .nav-username {
-	display:inline-block;
+	display: block;
+	position: absolute;
+	text-align: center;
+	width:100%;
 	color: #999;
 	font-family: "Press Start 2P", sans-serif;
 	font-weight: normal;

@@ -202,13 +202,22 @@ hr:before {
   margin: 0;
   text-align: center;
 }
-.beaudryland-nav ul li {
+.beaudryland-nav > ul li {
   display: inline-block;
   margin-right: 10px;
   margin-bottom: 10px;
 }
+.beaudryland-nav .link-savemap {
+  float: left;
+}
+.beaudryland-nav .link-logout {
+  float: right;
+}
 .nav-username {
-  display: inline-block;
+  display: block;
+  position: absolute;
+  text-align: center;
+  width: 100%;
   color: #999;
   font-family: "Press Start 2P", sans-serif;
   font-weight: normal;

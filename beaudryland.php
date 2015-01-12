@@ -37,9 +37,11 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    	<h2>Developer Console</h2>
 	    	<nav>
 	    		<ul class="dev-console clearfix">
-	    			<li><a href="javascript:void(0);" onclick="playMusic();return false">Play Sound</a></li>
+	    			<li><a href="javascript:void(0);" onclick="playMusic();return false">Play Music</a></li>
+	    			<!--
 	    			<li><a href="javascript:void(0);" onclick="enableKeyboardEvents();return false">Enable Keyboard Events</a></li>
 	    			<li><a href="javascript:void(0);" onclick="disableKeyboardEvents();return false">Disable Keyboard Events</a></li>
+	    			-->
 	    			<li><a href="javascript:void(0);" onclick="createEnemy();return false">Create Enemy</a></li>
 	    			<li><a href="javascript:void(0);" onclick="killEnemy();return false">Kill Enemy</a></li>
 	    			<li><a href="javascript:void(0);" onclick="createAnimal();return false">Create Animal</a></li>
@@ -48,9 +50,8 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    			<li><a href="javascript:void(0);" onclick="drawNewBeachMap();return false">Draw New Beach Map</a></li>
 	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
 	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
-	    			<li><a href="javascript:void(0);" onclick="moveObjectToBlock(1,'78');return false">Move Player To Block 78</a></li>
-	    			<li><a href="javascript:void(0);" onclick="displayDialog('You achieved the achievement!');return false">Achievement Notification</a></li>
-	    			<li><a href="javascript:void(0);" onclick="displayDialog();return false">Achievement Notification</a></li>
+	    			<!--<li><a href="javascript:void(0);" onclick="moveObjectToBlock(1,'78');return false">Move Player To Block 78</a></li>-->
+	    			<li><a href="javascript:void(0);" onclick="displayDialog('You achieved the achievement!');return false">Notification</a></li>
 	    			<li><a href="javascript:void(0);" onclick="nightTime();return false">Night Time (lighting tests)</a></li>
 	    			<li><a href="javascript:void(0);" onclick="lightUpBlock();return false">Light up Player</a></li>
 	    			<!--
@@ -86,59 +87,10 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		    </div>
 
         	<div class="the-fucking-inventory clearfix">
-		    	<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>
-		    	<div class="slot-2 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-3 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-4 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-5 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-6 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-7 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-8 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-9 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-10 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-11 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-12 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-13 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-14 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-15 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-16 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-17 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-18 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-19 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-20 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-21 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-22 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-23 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-24 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-25 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-26 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-27 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-28 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-29 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-30 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-31 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-32 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-33 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-34 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-35 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-36 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-37 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-38 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-39 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-40 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-41 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-42 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-43 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-44 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-45 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-46 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-47 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-48 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-49 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-50 empty" data-blocktype="empty">0</div>
+
 		    </div>
 
-		     <div class="the-fucking-navigation clearfix">
+		    <div class="the-fucking-navigation clearfix">
                 <nav class="beaudryland-nav">
                   <ul>
                     <li class="link-savemap">
