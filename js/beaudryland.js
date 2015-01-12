@@ -181,55 +181,16 @@ newAnimationFrame();
 
 if ( $('body').hasClass("version-phonegap") ){
 
-	/* MOBILE */
-	var mapwidth = 16;
-	var mapheight = 75;
-
-	$(document).ready(function() {
-
-		console.log("MOBILE VERSION");
-
-		setMapSize();
-	    loadNewMap();
-	    createPlayer();
-		
-	    //websql_openDatabase();
-	    //websql_createTable();
-	    /*
-	    drawNewWinterMap();
-	    drawNewBeachMap();
-	    drawNewSpaceMap();
-	    */
-	    
-	    //websql_loadMap();
-
-		setupKeyboardEvents();
-		setupMouseEvents();
-		setupControlPadEvents();
-
-	});
-
-	jQuery('.inventory-close').on("click", function(){
-		toggleInventory();
-	});
-	var toggleInventory = function() {
-		$('.sticky-inventory').fadeToggle(0);
-	}; 
-
-	var db;
-	var shortName='beaudryland';
-	var version='0.1';
-	var displayName='beaudryland';
-	var maxSize = 65536;
-
-	var hideControlPad = function() {
-		$('.the-fucking-controller').fadeToggle();
+	/* MOBILE ONLY FUNCTIONS */
+	var saveGameMobile = function() {
+		websql_saveMap();
 	};
-
+	var loadGameMobile = function() {
+		websql_loadMap();
+	};
 	var websql_openDatabase = function() {
 		db = openDatabase(shortName,version,displayName,maxSize);
 	};
-
 	var websql_createTable = function() {
 		 db.transaction(
 			function(transaction) {
@@ -242,7 +203,6 @@ if ( $('body').hasClass("version-phonegap") ){
 			}
 		 );
 	};
-
 	var websql_insertRow = function() {
 		 var username = "matt";
 		 var mapdata = '<div class="block block-grass" data-blocktype="grass"></div>';
@@ -258,7 +218,6 @@ if ( $('body').hasClass("version-phonegap") ){
 			}
 		 );
 	};
-
 	var websql_selectRow = function() {
 		 db.transaction(
 			function(transaction) {
@@ -321,6 +280,54 @@ if ( $('body').hasClass("version-phonegap") ){
 			}
 		 );
 	};
+	jQuery('.inventory-close').on("click", function(){
+		toggleInventory();
+	});
+	var toggleInventory = function() {
+		$('.sticky-inventory').fadeToggle(0);
+	}; 
+	var hideControlPad = function() {
+		$('.the-fucking-controller').fadeToggle();
+	};
+
+
+	/* MOBILE GAME SETUP */
+	var mapwidth = 16;
+	var mapheight = 75;
+
+	$(document).ready(function() {
+
+		console.log("MOBILE VERSION");
+
+		setMapSize();
+	    loadNewMap();
+	    createPlayer();
+		
+	    //websql_openDatabase();
+	    //websql_createTable();
+	    /*
+	    drawNewWinterMap();
+	    drawNewBeachMap();
+	    drawNewSpaceMap();
+	    */
+	    
+	    //websql_loadMap();
+
+		setupKeyboardEvents();
+		setupMouseEvents();
+		setupControlPadEvents();
+
+	});
+
+	/* SETUP MOBILE DATABASE, LOAD MAP IF EXISTS */
+	var db;
+	var shortName='beaudryland';
+	var version='0.1';
+	var displayName='beaudryland';
+	var maxSize = 65536;
+	websql_openDatabase();
+	websql_createTable();
+	loadGameMobile();
 
 
 /* DESKTOP ONLY */
@@ -1677,7 +1684,7 @@ setupMouseEvents = function() {
 		$('.the-fucking-inventory').fadeToggle();
 	});
 	$('.nav-toggle-menu').on("click", function() {
-		$('.beaudryland-nav').fadeToggle();
+		$('.the-fucking-navigation').fadeToggle();
 	});
 
 	// SELECT AN ITEM IN THE INVENTORY

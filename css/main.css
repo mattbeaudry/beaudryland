@@ -204,14 +204,16 @@ hr:before {
 }
 .beaudryland-nav > ul li {
   display: inline-block;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 0 10px 15px 10px;
 }
 .beaudryland-nav .link-savemap {
   float: left;
+  margin-left: 0;
+  padding-left: 0;
 }
 .beaudryland-nav .link-logout {
   float: right;
+  margin-right: 0;
 }
 .nav-username {
   display: block;
@@ -262,6 +264,18 @@ hr:before {
 }
 .button-wrap-large a {
   width: 190px;
+}
+.button-wrap-outline {
+  background-color: #666;
+}
+.button-wrap-outline a {
+  background-color: #666;
+}
+.button-wrap-left {
+  float: left;
+}
+.button-wrap-right {
+  float: right;
 }
 .button-wrap a:hover {
   background-color: #333;

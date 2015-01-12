@@ -33,36 +33,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 	    	<div class="the-fucking-map the-fucking-forest-map" data-maptype="forest"></div>
 	    </div>
 
-	    <div class="the-fucking-dev-panel">
-	    	<h2>Developer Console</h2>
-	    	<nav>
-	    		<ul class="dev-console clearfix">
-	    			<li><a href="javascript:void(0);" onclick="playMusic();return false">Play Music</a></li>
-	    			<!--
-	    			<li><a href="javascript:void(0);" onclick="enableKeyboardEvents();return false">Enable Keyboard Events</a></li>
-	    			<li><a href="javascript:void(0);" onclick="disableKeyboardEvents();return false">Disable Keyboard Events</a></li>
-	    			-->
-	    			<li><a href="javascript:void(0);" onclick="createEnemy();return false">Create Enemy</a></li>
-	    			<li><a href="javascript:void(0);" onclick="killEnemy();return false">Kill Enemy</a></li>
-	    			<li><a href="javascript:void(0);" onclick="createAnimal();return false">Create Animal</a></li>
-	    			<li><a href="javascript:void(0);" onclick="killAnimal();return false">Kill Animal</a></li>
-	    			<li><a href="javascript:void(0);" onclick="drawNewWinterMap();return false">Draw New Winter Map</a></li>
-	    			<li><a href="javascript:void(0);" onclick="drawNewBeachMap();return false">Draw New Beach Map</a></li>
-	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
-	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
-	    			<!--<li><a href="javascript:void(0);" onclick="moveObjectToBlock(1,'78');return false">Move Player To Block 78</a></li>-->
-	    			<li><a href="javascript:void(0);" onclick="displayDialog('You achieved the achievement!');return false">Notification</a></li>
-	    			<li><a href="javascript:void(0);" onclick="nightTime();return false">Night Time (lighting tests)</a></li>
-	    			<li><a href="javascript:void(0);" onclick="lightUpBlock();return false">Light up Player</a></li>
-	    			<!--
-		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
-		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
-		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
-	    			-->
-	    		</ul>
-	    	</nav>
-	    </div>
-		   
+	    
 		<div class="sticky-inventory clearfix">
 		
 			<div class="crafting-table-wrap horizonal-spacing clearfix">
@@ -125,20 +96,28 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
                         <a href="logout.php">Logout</a>
                       </div>
                     </li>
+                    <li class="link-mapeditor">
+                      <div class="button-wrap button-wrap-large button-wrap-outline">
+                        <a target="_blank" href="mapgallery.php">Map Gallery</a>
+                      </div>
+                    </li>
+                    <li class="link-itemeditor">
+                      <div class="button-wrap button-wrap-large button-wrap-outline">
+                        <a target="_blank" href="spritepainter.php">Item Editor</a>
+                      </div>
+                    </li>
+                    <li class="link-mapeditor">
+                      <div class="button-wrap button-wrap-large button-wrap-outline">
+                        <a target="_blank" href="mapeditor.php">Map Editor</a>
+                      </div>
+                    </li>
+                    
                   </ul>
                 </nav>
             </div>
 
 		</div>
 
-	    
-	    <!--
-        <nav class="mapnav">
-	        <a class="link-mapanimate-start" href="javascript:moveMap()">Animate Map</a> | 
-	        <a class="link-mapanimate-stop" href="javascript:stopMap()">Stop Map</a>
-        </nav>
-        -->
-        
         <div class="the-fucking-controller">
         
         	<div class="d-pad">
@@ -150,6 +129,44 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
         	<div href="javascript:void(0)" class="btn-a"></div>
         	
         </div>
+
+
+        <div class="the-fucking-dev-panel">
+	    	<h2>Developer Console</h2>
+	    	<nav>
+	    		<ul class="dev-console clearfix">
+	    			<li><a href="javascript:void(0);" onclick="playMusic();return false">Play Music</a></li>
+	    			<!--
+	    			<li><a href="javascript:void(0);" onclick="enableKeyboardEvents();return false">Enable Keyboard Events</a></li>
+	    			<li><a href="javascript:void(0);" onclick="disableKeyboardEvents();return false">Disable Keyboard Events</a></li>
+	    			-->
+	    			<li><a href="javascript:void(0);" onclick="createEnemy();return false">Create Enemy</a></li>
+	    			<li><a href="javascript:void(0);" onclick="killEnemy();return false">Kill Enemy</a></li>
+	    			<li><a href="javascript:void(0);" onclick="createAnimal();return false">Create Animal</a></li>
+	    			<li><a href="javascript:void(0);" onclick="killAnimal();return false">Kill Animal</a></li>
+	    			<li><a href="javascript:void(0);" onclick="drawNewWinterMap();return false">Draw New Winter Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="drawNewBeachMap();return false">Draw New Beach Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
+	    			<!--<li><a href="javascript:void(0);" onclick="moveObjectToBlock(1,'78');return false">Move Player To Block 78</a></li>-->
+	    			<li><a href="javascript:void(0);" onclick="displayDialog('You achieved the achievement!');return false">Notification</a></li>
+	    			<li><a href="javascript:void(0);" onclick="nightTime();return false">Night Time (lighting tests)</a></li>
+	    			<li><a href="javascript:void(0);" onclick="lightUpBlock();return false">Light up Player</a></li>
+	    			<!--
+		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
+		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
+		    			<li><a href="javascript:void(0);" onclick="playMusic();return false"></a></li>
+	    			-->
+	    			 <!--
+			        <nav class="mapnav">
+				        <a class="link-mapanimate-start" href="javascript:moveMap()">Animate Map</a> | 
+				        <a class="link-mapanimate-stop" href="javascript:stopMap()">Stop Map</a>
+			        </nav>
+			        -->
+	    		</ul>
+	    	</nav>
+	    </div>
+		   
         
                
         <div class="the-fucking-gameinfo">

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Beaudryland</title>
+        <title>Beaudryland Mobile</title>
         
         <meta name="description" content="javascript/CSS game">
         <meta name="viewport" content="user-scalable=no,width=device-width">
@@ -43,40 +43,6 @@
 	    	<div class="the-fucking-map the-fucking-forest-map clearfix" data-maptype="forest"></div>
 	    </div>
 
-	    <div class="ios-console">
-	    	<h2>iOS Developer Console</h2>
-	    	<nav>
-	    		<ul class="dev-console clearfix">
-	    			<li><a href="javascript:void(0);" onclick="hideControlPad();return false">Disable Control Pad</a></li>
-	    			<li><a href="javascript:void(0);" onclick="websql_openDatabase();return false">Open/Create Database</a></li>
-	    			<li><a href="javascript:void(0);" onclick="websql_createTable();return false">Create Table</a></li>
-	    			<li><a href="javascript:void(0);" onclick="websql_insertRow();return false">Insert Row</a></li>
-	    			<li><a href="javascript:void(0);" onclick="websql_selectRow();return false">Select Row</a></li>
-	    			<li><a href="javascript:void(0);" onclick="websql_saveMap();return false">Save Map</a></li>
-	    			<li><a href="javascript:void(0);" onclick="websql_loadMap();return false">Load Map</a></li>
-	    		</ul>
-	    	</nav>
-	    </div>
-	
-	    <div class="the-fucking-dev-panel">
-	    	<h2>Developer Console</h2>
-	    	<nav>
-	    		<ul class="dev-console clearfix">
-	    			<li><a href="javascript:void(0);" onclick="playMusic();return false">Play Sound</a></li>
-	    			<li><a href="javascript:void(0);" onclick="enableKeyboardEvents();return false">Enable Keyboard Events</a></li>
-	    			<li><a href="javascript:void(0);" onclick="disableKeyboardEvents();return false">Disable Keyboard Events</a></li>
-	    			<li><a href="javascript:void(0);" onclick="createEnemy();return false">Create Enemy</a></li>
-	    			<li><a href="javascript:void(0);" onclick="killEnemy();return false">Kill Enemy</a></li>
-	    			<li><a href="javascript:void(0);" onclick="createAnimal();return false">Create Animal</a></li>
-	    			<li><a href="javascript:void(0);" onclick="killAnimal();return false">Kill Animal</a></li>
-	    			<li><a href="javascript:void(0);" onclick="drawNewWinterMap();return false">Draw New Winter Map</a></li>
-	    			<li><a href="javascript:void(0);" onclick="drawNewBeachMap();return false">Draw New Beach Map</a></li>
-	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
-	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
-	    		</ul>
-	    	</nav>
-	    </div>
-		   
 		<div class="sticky-inventory ">
 		    
 			<div class="crafting-table-wrap horizonal-spacing clearfix">
@@ -90,82 +56,44 @@
 			    	<div class="slot empty" data-blocktype="empty"></div>
 			    </div>
 			    <!--<div class="inventory-close">close</div>-->
+			    <div class="nav-buttons">
+              		<ul>
+              			<li><a class="nav-toggle-inventory button-black" href="javascript:void(0);">INV</a></li>
+              			<li><a class="nav-toggle-menu button-black" href="javascript:void(0);">MENU</a></li>
+              		</ul>
+              	</div>
 		    </div>
 
 		    <div class="the-fucking-inventory clearfix">
-		    	<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>
-		    	<div class="slot-2 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-3 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-4 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-5 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-6 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-7 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-8 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-9 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-10 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-11 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-12 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-13 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-14 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-15 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-16 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-17 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-18 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-19 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-20 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-21 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-22 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-23 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-24 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-25 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-26 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-27 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-28 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-29 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-30 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-31 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-32 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-33 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-34 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-35 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-36 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-37 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-38 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-39 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-40 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-41 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-42 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-43 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-44 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-45 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-46 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-47 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-48 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-49 empty" data-blocktype="empty">0</div>
-		    	<div class="slot-50 empty" data-blocktype="empty">0</div>
+
 		    </div>
 
 		    <div class="the-fucking-navigation clearfix">
                 <nav class="beaudryland-nav">
                   <ul>
-                    <li class="on-savemap-mobile">
+                    <li class="on-savemap-mobile button-wrap-left">
                       <div class="button-wrap">
-                        <a>Save</a>
+                        <a href="javascript:void(0);" onclick="saveGameMobile();return false">Save</a>
                       </div>
                     </li>
-                    <li class="link-help">
+                    <li class="on-savemap-mobile button-wrap-right">
+                      <div class="button-wrap">
+                        <a href="javascript:void(0);" onclick="loadGameMobile();return false">Load</a>
+                      </div>
+                    </li>
+                    <li class="link-help button-wrap-left">
                       <div class="button-wrap">
                         <a href="#help">Help</a>
                       </div>
                     </li>
-                    <li class="link-items">
+                    <li class="link-items button-wrap-right">
                       <div class="button-wrap">
                         <a href="#items">Items</a>
                       </div>
                     </li>
                     <li class="link-achievements">
-                      <div class="button-wrap">
-                        <a href="#achievements">Goals</a>
+                      <div class="button-wrap button-wrap-large">
+                        <a href="#achievements">Achievements</a>
                       </div>
                     </li>
                   </ul>
@@ -189,8 +117,47 @@
         		<div class="btn-right"></div>
         	</div>
         	<div class="btn-a"></div>
+        	<!--
         	<div onclick="toggleInventory();return false" class="btn-inv"></div>
+        	-->
         </div>
+
+
+         <div class="ios-console">
+	    	<h2>iOS Developer Console</h2>
+	    	<nav>
+	    		<ul class="dev-console clearfix">
+	    			<li><a href="javascript:void(0);" onclick="hideControlPad();return false">Disable Control Pad</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_openDatabase();return false">Open/Create Database</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_createTable();return false">Create Table</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_insertRow();return false">Insert Row</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_selectRow();return false">Select Row</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_saveMap();return false">Save Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="websql_loadMap();return false">Load Map</a></li>
+	    		</ul>
+	    	</nav>
+	    </div>
+	
+	    <div class="the-fucking-dev-panel">
+	    	<h2>Developer Console</h2>
+	    	<nav>
+	    		<ul class="dev-console clearfix">
+	    			<li><a href="javascript:void(0);" onclick="playMusic();return false">Play Sound</a></li>
+	    			<!--
+	    			<li><a href="javascript:void(0);" onclick="enableKeyboardEvents();return false">Enable Keyboard Events</a></li>
+	    			<li><a href="javascript:void(0);" onclick="disableKeyboardEvents();return false">Disable Keyboard Events</a></li>
+	    			-->
+	    			<li><a href="javascript:void(0);" onclick="createEnemy();return false">Create Enemy</a></li>
+	    			<li><a href="javascript:void(0);" onclick="killEnemy();return false">Kill Enemy</a></li>
+	    			<li><a href="javascript:void(0);" onclick="createAnimal();return false">Create Animal</a></li>
+	    			<li><a href="javascript:void(0);" onclick="killAnimal();return false">Kill Animal</a></li>
+	    			<li><a href="javascript:void(0);" onclick="drawNewWinterMap();return false">Draw New Winter Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="drawNewBeachMap();return false">Draw New Beach Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="drawNewSpaceMap();return false">Draw New Space Map</a></li>
+	    			<li><a href="javascript:void(0);" onclick="getAllItems();return false">Get All Items</a></li>
+	    		</ul>
+	    	</nav>
+	    </div>
         
 
         <div class="the-fucking-gameinfo">
