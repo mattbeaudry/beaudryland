@@ -259,6 +259,50 @@ $(function() {
 
   }
 
+  changePlayerDirection = function(username, direction, name) {
+    trace("changing object:"+id+" direction to "+direction);
+    var selecteditem = getSelectedItem();
+    //animated items
+    var playergraphic;
+    if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "car" || selecteditem == "canoe" || selecteditem == "rocket" && name == "player" ){ 
+      playergraphic = "-"+selecteditem;
+    } else {
+      playergraphic = "";
+    }
+
+    //clear direction and animation classes
+    $('.objectid-'+id).removeClass(name+"-direction-down "+name+"-direction-left "+name+"-direction-right "+name+"-direction-up");
+    $('.objectid-'+id).removeClass(name+"-direction-down"+playergraphic+" "+name+"-direction-left"+playergraphic+" "+name+"-direction-right"+playergraphic+" "+name+"-direction-up"+playergraphic);
+
+    switch (direction) {
+      case "up":
+        $('.objectid-'+id).addClass(name+"-direction-up");
+        if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-up"+playergraphic); }
+        break;
+      case "down":
+        $('.objectid-'+id).addClass(name+"-direction-down");
+        if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-down"+playergraphic); }
+        break;
+      case "left":
+        $('.objectid-'+id).addClass(name+"-direction-left");
+        if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-left"+playergraphic); }
+        break;
+      case "right":
+        $('.objectid-'+id).addClass(name+"-direction-right");
+        if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-right"+playergraphic); }
+        break;
+    }
+
+    /*
+    var mobgraphic;
+    if ( name == 'enemy' || name == 'animal' ){ 
+      mobgraphic = "-"+selecteditem;
+    } else {
+      mobgraphic = "";
+    }
+    */
+  };
+
   /* Move a player */
   socket.on("moveplayer", function(position) {
 
