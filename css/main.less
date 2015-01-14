@@ -365,7 +365,37 @@ hr:before {
 		left:5%;
 	}
 }
+.pixel-corners {
+	position:relative;
+	background-color:#000;
+	text-align:center;
+	color: #fff;
+	padding:0px 5px;
 
+	&:before {
+		display:block;
+		content:"";
+		position:absolute;
+		height:5px;
+		width:90%;
+		background-color:#000;
+		top:-5px;
+		left:5%;
+	}
+	&:after {
+		display:block;
+		content:"";
+		position:absolute;
+		height:5px;
+		width:90%;
+		background-color:#000;
+		bottom:-5px;
+		left:5%;
+	}
+	div {
+		background-color:#ddd;
+	}
+}
 
 
 .the-fucking-gameinfo {
@@ -967,8 +997,8 @@ hr:before {
 }
 .the-fucking-crafted-item {
 	float: left;
-	width: 44px;
-	height: 44px;
+	/*width: 44px;
+	height: 44px;*/
 	color: white;
 	border: solid 2px black;
 }

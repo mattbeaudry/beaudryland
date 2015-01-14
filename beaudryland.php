@@ -37,13 +37,13 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 		<div class="sticky-inventory clearfix">
 		
 			<div class="crafting-table-wrap horizonal-spacing clearfix">
-			    <div class="the-fucking-crafting-table">
+			    <div class="the-fucking-crafting-table pixel-corners">
 			    	<div class="block slot-1 empty" data-blocktype="empty"></div>
 			    	<div class="block slot-2 empty" data-blocktype="empty"></div>
 			    	<div class="block slot-3 empty" data-blocktype="empty"></div>
 			    </div>
-			    <!--<img src="img/arrow-right.png">-->
-			    <div class="the-fucking-crafted-item">
+			    <!--<img class="crafting-arrow-right" src="img/arrow-right.png">-->
+			    <div class="the-fucking-crafted-item pixel-corners">
 			    	<div class="slot empty" data-blocktype="empty"></div>
 			    </div>
 			    <div class="nav-username">
