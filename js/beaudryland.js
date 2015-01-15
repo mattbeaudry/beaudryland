@@ -154,7 +154,7 @@ var globalmapblockcount = 0;
 /////////////
 
 
-
+/*
 var count = 0;
 var seconds = 0;
 
@@ -173,7 +173,7 @@ function newAnimationFrame() {
 }
 // start time!
 newAnimationFrame();
-
+*/
 
 
 /////////////
@@ -816,7 +816,7 @@ drawNewBeachMap = function() {
 		});
 	});
 	*/
-	startWaves();
+	//startWaves();
 };
 drawNewSpaceMap = function() {
 	// LOAD SPACE MAP FUNCTION
@@ -2326,31 +2326,62 @@ initProjectile = function(name, startblock, direction, id) {
 	$('.objectid-'+id).css("top",topstart);
 	$('.objectid-'+id).css("left",leftstart);
 	var t = 0;
-	var maxdistance = 20;
+	var maxdistance = 10;
 
-	var projectilebrain = setTimeout(projectileMotion, projectilespeed);
+	//var projectilebrain = setTimeout(projectileMotion, projectilespeed);
+
+	//window.requestAnimationFrame(projectileMotion);
+
+	window.requestAnimFrame = (function(){
+	  return  window.requestAnimationFrame || 
+	          window.webkitRequestAnimationFrame || 
+	          window.mozRequestAnimationFrame || 
+	          window.oRequestAnimationFrame || 
+	          window.msRequestAnimationFrame || 
+	          function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element){
+	            window.setTimeout(callback, 1000 / 60);
+	          };
+	})();
 
 	function projectileMotion() {
+
 		switch (direction) {
 			case "up": moveObjectUp(id, name); break;
 			case "down": moveObjectDown(id, name); break;
 			case "left": moveObjectLeft(id, name); break;
 			case "right": moveObjectRight(id, name); break;
-		}	
-		//limit
-		if (t > maxdistance) {
-			trace("projectile stopped :(");
-			stopProjectile();
-		} else {
-			t++;
-			projectilebrain = setTimeout(projectileMotion, projectilespeed); // repeat thought
 		}
 		
+		//limit
+		
+			//trace("projectile stopped :(");
+			//stopProjectile();
+		
+			//projectilebrain = setTimeout(projectileMotion, projectilespeed); // repeat thought
+			//window.requestAnimationFrame(projectileMotion);
+		//}//
+		
 	}
+
+	(function animloop(){
+      projectileMotion();
+      
+      if (t > maxdistance) {
+      	
+      } else {
+      	requestAnimFrame(animloop);
+		t++;
+	  }
+	  
+    })();
+
+	//projectileMotion();
+	/*
 	function stopProjectile() {
 		clearTimeout(projectilebrain);
 		$('.objectid-'+id).remove();
 	}
+	*/
 };
 var mapanimate;
 stopMap = function(){ 
