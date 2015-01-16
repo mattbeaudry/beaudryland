@@ -379,10 +379,11 @@ if ( $('body').hasClass("version-phonegap") ){
 
 	//alert/ask player to save before they close the page
 	
-	window.onbeforeunload = confirmExit;
+	
 	function confirmExit() {
 		return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
 	}
+	window.onbeforeunload = confirmExit;
 
 /* MULTIPLAYER ONLY */
 
