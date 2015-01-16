@@ -1065,17 +1065,10 @@ moveObjectToBlock = function(id, destinationblock) {
 	
 	function anObjectMovement() {
 
-		var objectX = getObjectCurrentCol(id); 
-		var objectY = getObjectCurrentRow(id);
+		var objectX = getObjectCurrentCol(id) - 1; 
+		var objectY = getObjectCurrentRow(id) - 1;
 		var n = objectPath.length;
 		objectPath.push(objectX+"-"+objectY);
-
-		//if player stuck abort!
-		if (objectPath[n-1] == objectPath[n]) {
-			trace("OBJECT STUCK, ABORTING");
-			stopObjectMovement();
-			return;
-		}
 
 		var xDifference = destinationblockColumn - objectX;
 		var yDifference = objectY - destinationblockRow;
@@ -1083,6 +1076,15 @@ moveObjectToBlock = function(id, destinationblock) {
 		var POSyDifference = Math.abs(yDifference);
 		//var r = Math.random();
 		//alert(r);
+
+		//if player stuck abort!
+		/*
+		if (objectPath[n-1] == objectPath[n]) {
+			trace("OBJECT STUCK, ABORTING");
+			stopObjectMovement();
+			return;
+		}
+		*/
 		
 		if ( (xDifference == 0) && (yDifference == 0) ){
 			//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
