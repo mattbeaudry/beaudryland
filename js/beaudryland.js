@@ -315,6 +315,12 @@ if ( $('body').hasClass("version-phonegap") ){
 		$('.the-fucking-controller').fadeToggle();
 	};
 
+	/* SETUP MOBILE DATABASE, LOAD MAP IF EXISTS */
+	var db;
+	var shortName='beaudryland';
+	var version='0.1';
+	var displayName='beaudryland';
+	var maxSize = 65536;
 
 	/* MOBILE GAME SETUP */
 	var mapwidth = 16;
@@ -342,17 +348,11 @@ if ( $('body').hasClass("version-phonegap") ){
 		setupMouseEvents();
 		setupControlPadEvents();
 
-	});
+		websql_openDatabase();
+		websql_createTable();
+		loadGameMobile();
 
-	/* SETUP MOBILE DATABASE, LOAD MAP IF EXISTS */
-	var db;
-	var shortName='beaudryland';
-	var version='0.1';
-	var displayName='beaudryland';
-	var maxSize = 65536;
-	websql_openDatabase();
-	websql_createTable();
-	loadGameMobile();
+	});
 
 
 /* DESKTOP ONLY */
