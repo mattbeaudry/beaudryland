@@ -1043,6 +1043,28 @@ moveObjectToBlock = function(id, destinationblock) {
 
 	stopObjectMovement();
 
+	var playerblock = getObjectCurrentBlock('1');
+	trace("destinationblock: "+destinationblock);
+	trace("playerblock: "+playerblock);
+
+	if (playerblock == destinationblock) {
+		trace("dont need to move player so stop object and trigger player action on destination block");
+		playerPrimaryAction(destinationblock); 
+		return;
+	} else if ((playerblock-mapwidth-1) == destinationblock) {
+		trace("dont need to move player so stop object and trigger player action on destination block");
+		playerPrimaryAction(destinationblock); 
+		return;
+	} else if ((playerblock+mapwidth-1) == destinationblock) {
+		trace("dont need to move player so stop object and trigger player action on destination block");
+		playerPrimaryAction(destinationblock); 
+		return;
+	} else if ((playerblock-2) == destinationblock) {
+		trace("dont need to move player so stop object and trigger player action on destination block");
+		playerPrimaryAction(destinationblock); 
+		return;
+	}
+
 	trace("move object ID#"+id+" to block"+destinationblock);
 	var t = 0;
 	var maxthoughts = 100;
@@ -2082,14 +2104,16 @@ getObjectDirection = function(id, name) {
 
 
 
-playerPrimaryAction = function() {
+playerPrimaryAction = function(blockid) {
 
 	var id = 1;
 	//trace("Player primary action");
 	//find block that the player is facing
+
 	var direction = getObjectDirection(id, "player");
 	var playerblock = getObjectCurrentBlock(id);
 	var block = getObjectCurrentBlock(id);
+
 	
 	//trace("1-"+direction);
 	//trace("2-"+playerblock);
@@ -2101,6 +2125,11 @@ playerPrimaryAction = function() {
 		case "down": block = block + (mapwidth-1); break;
 		case "left": block = block - 2; break;
 		case "right": block = block; break;
+	}
+
+	// if there is a blockid supplied run function on that one instead of the block the player is facing
+	if (blockid) {
+		block = blockid;
 	}
 	
 	//trace("4-hitblock "+block);
