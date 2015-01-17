@@ -1029,9 +1029,8 @@ hr:before {
   position: fixed;
   bottom: 40px;
   width: 320px;
-  height: 100%;
+  height: 150px;
   margin: 0 auto;
-  pointer-events: none;
 }
 .btn-up,
 .btn-down,
