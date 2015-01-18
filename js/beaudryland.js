@@ -189,8 +189,8 @@ $('.nav-toggle-inventory').on("click", function() {
 	} else {
 		$('.the-fucking-inventory').toggleClass("the-fucking-inventory-collapsed");
 	}
-	
 });
+
 $('.nav-toggle-menu').on("click", function() {
 	if ( $('body').hasClass("version-phonegap") ) {
 		$('.the-fucking-inventory').hide();
@@ -198,7 +198,6 @@ $('.nav-toggle-menu').on("click", function() {
 	} else {
 		$('.nav-extra').toggle();
 	}
-	
 });
 
 
@@ -223,7 +222,8 @@ if ( $('body').hasClass("version-phonegap") ){
 		            'CREATE TABLE IF NOT EXISTS beaudryland_maps ' +
 					' (mapid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
 					' username TEXT NOT NULL,' +
-					' mapdata TEXT NOT NULL);'
+					' mapdata TEXT NOT NULL,' +
+					' invdata TEXT NOT NULL);'
 				);
 			}
 		 );
@@ -271,13 +271,14 @@ if ( $('body').hasClass("version-phonegap") ){
 	var websql_saveMap = function() {
 		var username = "username";
 		var mapdata = $('.maps-wrap').html();
+		var invdata = $('.the-fucking-inventory').html();
 
 		db.transaction(
 			function(transaction) {
 				console.log('Attempting to insert ' + username + ' and mapdata');
 				transaction.executeSql(
-					'INSERT INTO beaudryland_maps (username,mapdata) VALUES (?,?);',
-					[username,mapdata],
+					'INSERT INTO beaudryland_maps (username,mapdata,invdata) VALUES (?,?,?);',
+					[username,mapdata,invdata],
 					null,
 					errorHandler
 				);
@@ -290,14 +291,16 @@ if ( $('body').hasClass("version-phonegap") ){
 		 db.transaction(
 			function(transaction) {
 					transaction.executeSql(
-						'SELECT mapid, username, mapdata FROM beaudryland_maps;',
+						'SELECT mapid, username, mapdata, invdata FROM beaudryland_maps;',
 						[],
 						function (transaction, result) {
 							for (var i=0; i < result.rows.length; i++) {
 								$('.maps-wrap').html("");
+								$('.the-fucking-inventory').html("");
 								var row = result.rows.item(i);
-								console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+								//console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
 								$('.maps-wrap').html(row.mapdata);
+								$('.the-fucking-inventory').html(row.invdata);
 							}
 						},
 						errorHandler
@@ -305,6 +308,8 @@ if ( $('body').hasClass("version-phonegap") ){
 			}
 		 );
 	};
+
+
 	jQuery('.inventory-close').on("click", function(){
 		toggleInventory();
 	});
