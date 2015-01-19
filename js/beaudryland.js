@@ -208,6 +208,7 @@ if ( $('body').hasClass("version-phonegap") ){
 	/* MOBILE ONLY FUNCTIONS */
 	var saveGameMobile = function() {
 		websql_saveMap();
+		achievementCompleted("saveyourgame");
 	};
 	var loadGameMobile = function() {
 		websql_loadMap();
@@ -538,8 +539,8 @@ var loadNewGame = function() {
     } else if (maptype == 'game') {
 
     	createForestSigns();
-    	createAnimal();
-    	createAnimal();
+    	//createAnimal();
+    	//createAnimal();
     	
     }
 };
@@ -1501,6 +1502,16 @@ readSign = function(block) {
 //  *ACHIEVEMENTS & NOTIFICATIONS
 /////////////
 
+achievementCompleted = function(achievementname) {
+	if (!$('.item-achievements .achievement-'+achievementname).hasClass('status-completed')) {
+		trace('achievement hasnt been completed yet!');
+		$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+		displayDialog("You completed the achivement: "+achievementname);
+	} else {
+		trace('achievement has already been completed!');
+	}
+};
+
 displayDialog = function(text) {
 
 	console.log("displayDialog");
@@ -1565,13 +1576,13 @@ var achievements = [
 // fill in the achivement in page content
 // for loop for above object
 
-
+/*
 completeAchievement = function(achievement) {
 
 
 
 };
-
+*/
 
 
 
@@ -1837,6 +1848,7 @@ setupMouseEvents = function() {
 
 	//SAVE THE MAPS AND PLAYER DATA
 	$('.link-savemap').on("mousedown", function(){
+		achievementCompleted("saveyourgame");
 		$('.link-savemap a').html('Saving');
 		enableSaving = function() {
 			$('.link-savemap div').html('<a>Save</a>');
@@ -2318,6 +2330,14 @@ playerPrimaryAction = function(blockid) {
 				changeBlockType(block, selecteditem);
 			}
 
+			//achievements
+			if (selecteditem == "fire") { 
+				achievementCompleted("keepingwarm"); 
+			}
+			if (selecteditem == "door" || selecteditem == "door-closed") { 
+				achievementCompleted("takingshelter"); 
+			}
+
 		//picking up items & blocks	
 		} else if ($.inArray(blocktype, iscollectable) > -1){
 			var changeblocktotype = "dirt";
@@ -2333,6 +2353,17 @@ playerPrimaryAction = function(blockid) {
 			//appletrees give player apples
 			if (blocktype == "appletree") {
 				addToInventory("apple", "5");
+			}
+
+			//achievement cuttingwood
+			if (blocktype == "tree" || blocktype == "pinetree" || blocktype == "palmtree" || blocktype == "appletree") {
+				achievementCompleted("cuttingwood");
+			}
+
+			//achievement treasurehunter
+			if (blocktype == "diamond" || blocktype == "gold" || blocktype == "silver" || blocktype == "oil" || blocktype == "clay") {
+				//achievement trasure hunter
+				achievementCompleted("treasurehunter");
 			}
 		}
 
@@ -2709,6 +2740,7 @@ guitarFirstNote = true;
 keyboardFirstNote = true;
 drumsFirstNote = true;
 playSound = function(freq) {
+	achievementCompleted("jammingout");
 	//unlock winter map
 	if ((guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
 		drawNewWinterMap(); 
@@ -2722,6 +2754,7 @@ playSound = function(freq) {
 	env.bang();
 };
 playPiano = function(freq) {
+	achievementCompleted("jammingout");
 	//unlock beach map
 	if ((keyboardFirstNote == true) && ($('.the-fucking-beach-map').length == 0)){ 
 		drawNewBeachMap(); 
@@ -2735,6 +2768,7 @@ playPiano = function(freq) {
 	env.bang();
 };
 playDrums = function(freq) {
+	achievementCompleted("jammingout");
 	//unlock beach map
 	if ((drumsFirstNote == true) && ($('.the-fucking-space-map').length == 0)){ 
 		drawNewSpaceMap(); 
