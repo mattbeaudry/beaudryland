@@ -207,8 +207,8 @@ if ( $('body').hasClass("version-phonegap") ){
 
 	/* MOBILE ONLY FUNCTIONS */
 	var saveGameMobile = function() {
-		websql_saveMap();
 		achievementCompleted("saveyourgame");
+		websql_saveMap();
 	};
 	var loadGameMobile = function() {
 		websql_loadMap();
@@ -222,9 +222,10 @@ if ( $('body').hasClass("version-phonegap") ){
 				transaction.executeSql(
 		            'CREATE TABLE IF NOT EXISTS beaudryland_maps ' +
 					' (mapid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
-					' username TEXT NOT NULL,' +
-					' mapdata TEXT NOT NULL,' +
-					' invdata TEXT NOT NULL);'
+					' username TEXT NOT NULL, ' +
+					' mapdata TEXT NOT NULL, ' +
+					' invdata TEXT NOT NULL, ' +
+					' achievements TEXT NOT NULL);'
 				);
 			}
 		 );
@@ -274,12 +275,20 @@ if ( $('body').hasClass("version-phonegap") ){
 		var mapdata = $('.maps-wrap').html();
 		var invdata = $('.the-fucking-inventory').html();
 
+		var achievements = [];
+		$('.item-achievements .status-completed').each(function(index){
+			var achievementname = $(this).attr('data-achievementname');
+			achievements[index] = achievementname;
+			trace(achievementname);
+		});
+		//achievements = JSON.stringify(achievements);
+
 		db.transaction(
 			function(transaction) {
 				console.log('Attempting to insert ' + username + ' and mapdata');
 				transaction.executeSql(
-					'INSERT INTO beaudryland_maps (username,mapdata,invdata) VALUES (?,?,?);',
-					[username,mapdata,invdata],
+					'INSERT INTO beaudryland_maps (username,mapdata,invdata,achievements) VALUES (?,?,?,?);',
+					[username,mapdata,invdata,achievements],
 					null,
 					errorHandler
 				);
@@ -292,7 +301,7 @@ if ( $('body').hasClass("version-phonegap") ){
 		 db.transaction(
 			function(transaction) {
 				transaction.executeSql(
-					'SELECT mapid, username, mapdata, invdata FROM beaudryland_maps;',
+					'SELECT mapid, username, mapdata, invdata, achievements FROM beaudryland_maps;',
 					[],
 					function (transaction, result) {
 						for (var i=0; i < result.rows.length; i++) {
@@ -302,12 +311,22 @@ if ( $('body').hasClass("version-phonegap") ){
 							//console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
 							$('.maps-wrap').html(row.mapdata);
 							$('.the-fucking-inventory').html(row.invdata);
+    						
+    						achievements = row.achievements;
+    						achievements = achievements.split(',');
+					    	for (var k=0;k<achievements.length;k++){
+					    		var achievementname = achievements[k];
+					    		trace(achievementname);
+					    		$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+					    	}
 						}
+						setupMouseEvents();
 					},
 					errorHandler
 				);
 			}
 		 );
+
 	};
 
 
@@ -1504,11 +1523,8 @@ readSign = function(block) {
 
 achievementCompleted = function(achievementname) {
 	if (!$('.item-achievements .achievement-'+achievementname).hasClass('status-completed')) {
-		trace('achievement hasnt been completed yet!');
 		$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
-		displayDialog("You completed the achivement: "+achievementname);
-	} else {
-		trace('achievement has already been completed!');
+		displayDialog("You got the "+achievementname+" achievement!");
 	}
 };
 
@@ -1778,7 +1794,7 @@ setupMouseEvents = function() {
 	var directions = ["up","down","left","right"];
 
 	// SELECT AN ITEM IN THE INVENTORY
-	$('.the-fucking-inventory > div').on("click", function() {
+	$('.the-fucking-inventory div').on("click", function() {
 		var blocktype = $(this).attr('data-blocktype');
 		//items that are crafting ingredients
 		if ( $.inArray(blocktype, isingredient) > -1 ) {
