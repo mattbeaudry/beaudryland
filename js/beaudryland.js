@@ -290,21 +290,21 @@ if ( $('body').hasClass("version-phonegap") ){
 	var websql_loadMap = function() {
 		 db.transaction(
 			function(transaction) {
-					transaction.executeSql(
-						'SELECT mapid, username, mapdata, invdata FROM beaudryland_maps;',
-						[],
-						function (transaction, result) {
-							for (var i=0; i < result.rows.length; i++) {
-								$('.maps-wrap').html("");
-								$('.the-fucking-inventory').html("");
-								var row = result.rows.item(i);
-								//console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
-								$('.maps-wrap').html(row.mapdata);
-								$('.the-fucking-inventory').html(row.invdata);
-							}
-						},
-						errorHandler
-					);
+				transaction.executeSql(
+					'SELECT mapid, username, mapdata, invdata FROM beaudryland_maps;',
+					[],
+					function (transaction, result) {
+						for (var i=0; i < result.rows.length; i++) {
+							$('.maps-wrap').html("");
+							$('.the-fucking-inventory').html("");
+							var row = result.rows.item(i);
+							//console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+							$('.maps-wrap').html(row.mapdata);
+							$('.the-fucking-inventory').html(row.invdata);
+						}
+					},
+					errorHandler
+				);
 			}
 		 );
 	};
@@ -349,13 +349,13 @@ if ( $('body').hasClass("version-phonegap") ){
 	    
 	    //websql_loadMap();
 
-		setupKeyboardEvents();
-		setupMouseEvents();
-		setupControlPadEvents();
-
 		websql_openDatabase();
 		websql_createTable();
 		loadGameMobile();
+
+		setupKeyboardEvents();
+		setupMouseEvents();
+		setupControlPadEvents();
 
 	});
 
@@ -960,15 +960,26 @@ savePlayer = function() {
 	inventoryItems = JSON.stringify(inventoryItems);
 
 	//saving signs
-	var signs = new Array();
+	var signs = [];
 	$('.maps-wrap .block-sign').each(function(index) {
 		var blockid = $(this).attr('data-blockid');
 		var signmessage = $(this).attr('data-text');
 		trace("signid:"+blockid+"---"+signmessage);
 		signs[index] = {id:blockid, text:signmessage};
-	});           
+	});
 	trace("saved signs");
 	signs = JSON.stringify(signs);
+
+	//saving achievements
+	var achievements = [];
+	$('.item-achievements .status-completed').each(function(index){
+		var achievementid = $(this).attr('data-achievementid');
+		var achievementname = $(this).attr('data-achievementname');
+		achievements[index] = {achievementid:achievementid, achievementname:achievementname};
+		trace(achievementname);
+	});
+	achievements = JSON.stringify(achievements);
+
 
 	//trace('signs'+signs);
 
@@ -987,9 +998,10 @@ savePlayer = function() {
 		signmessages = JSON.stringify(signmessages);
 	*/
 
-	$.post('php/saveplayer.php', {inventory: inventoryItems, playerdiv: playerdiv, selecteditem: selecteditem, signs: signs}, function(data) {
+	$.post('php/saveplayer.php', {inventory: inventoryItems, playerdiv: playerdiv, selecteditem: selecteditem, signs: signs, achievements: achievements}, function(data) {
         trace("saved player: "+data);
     });
+
 };
 loadPlayer = function(id) {
 	trace("loadplayer");
@@ -1038,6 +1050,19 @@ loadPlayer = function(id) {
     		//$("ul").find("[data-slide='" + current + "']");
     		
     	}
+
+    	// LOADING ACHIEVEMENTS
+    	var achievements = JSON.parse(data.achievements);
+    	
+    	for (var k=0;k<achievements.length;k++){
+    		var achievementid = achievements[k].achievementid;
+    		var achievementname = achievements[k].achievementname;
+    		trace(achievementname);
+    		if (achievementname!=null) {
+    			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+    		}
+    	}
+    	
 
     }, "json");
 };

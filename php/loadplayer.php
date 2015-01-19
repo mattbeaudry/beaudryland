@@ -21,13 +21,13 @@ if($result->num_rows > 0) {
 		$playerdiv = $row['playerdiv'];
 		$selecteditem = $row['selecteditem'];
 		$signs = $row['signs'];
+		$achievements = $row['achievements'];
 	}
 }
 
 //$playerdata = array("inventory" => $inventory, "playerdiv" => $playerdiv, "selecteditem" => $selecteditem);
-$playerdata = array("inventory" => $inventory, "playerdiv" => $playerdiv, "selecteditem" => $selecteditem);
-
-echo json_encode(array("inventory" => $inventory, "playerdiv" => $playerdiv, "selecteditem" => $selecteditem, "signs" => $signs));
+$playerdata = array("inventory" => $inventory, "playerdiv" => $playerdiv, "selecteditem" => $selecteditem, "signs" => $signs, "achievements" => $achievements);
+echo json_encode(array("inventory" => $inventory, "playerdiv" => $playerdiv, "selecteditem" => $selecteditem, "signs" => $signs, "achievements" => $achievements));
 //echo json_encode($playerdata);
 //echo $inventory;
 //echo $playerdata;
