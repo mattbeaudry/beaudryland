@@ -226,9 +226,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 	        </section>
 
 	        <section class="beaudryland-panel">
-	        	<h3>&copy; <?php echo date('Y'); ?> <a href="http://www.mattbeaudry.com">Matt Beaudry</a><br><br>
-	        		<a href="https://github.com/mattbeaudry/beaudryland">github</a>
-	        	</h3>
+	        	<h3>&copy; <?php echo date('Y'); ?> <a href="http://www.mattbeaudry.com">Matt Beaudry</a></h3>
 	        </section>
         
         </div>

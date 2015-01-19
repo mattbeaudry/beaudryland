@@ -1063,8 +1063,7 @@ loadPlayer = function(id) {
     			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
     		}
     	}
-    	
-
+    
     }, "json");
 };
 
@@ -1075,6 +1074,7 @@ moveObjectToBlock = function(id, destinationblock) {
 	stopObjectMovement();
 
 	var playerblock = getObjectCurrentBlock('1');
+	//var destinationblocktype = getBlockType(destinationblock);
 	trace("destinationblock: "+destinationblock);
 	trace("playerblock: "+playerblock);
 
@@ -2340,12 +2340,12 @@ playerPrimaryAction = function(blockid) {
 
 		//picking up items & blocks	
 		} else if ($.inArray(blocktype, iscollectable) > -1){
-			var changeblocktotype = "dirt";
-			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "dirt"; } 
-			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "frozendirt"; } 
-			else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "frozendirt"; }
-			else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "wetsand"; }
-			else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "wetsand"; }
+			var changeblocktotype = "grass";
+			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "grass"; } 
+			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "snow"; } 
+			else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "snow"; }
+			else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "sand"; }
+			else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "sand"; }
 			addToInventory(blocktype, "5");
 			changeBlockType(block, changeblocktotype);
 			//growGrass(block);

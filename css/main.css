@@ -1010,6 +1010,7 @@ hr:before {
   width: 40px;
   height: 40px;
   float: left;
+  background-size: contain !important;
 }
 .the-fucking-crafting-table > .slot-1 {
   border-right: 0px;
