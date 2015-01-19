@@ -9,7 +9,7 @@
         <title>Beaudryland Game</title>
         
         <meta name="description" content="javascript/CSS game">
-        <meta name="viewport" content="user-scalable=no,width=device-width">
+        <meta name="viewport" content="width=device-width,user-scalable=no">
         
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
         <link rel="apple-touch-icon" href="apple-touch-icon-144x144-precomposed.png" />

@@ -570,7 +570,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
         <script src="js/plugins.js"></script>
         <script src="js/beaudryland.js"></script>
 
-         <!-- BEAUDRYLAND SOURCE CODE 
+        <!-- BEAUDRYLAND SOURCE CODE 
         <script src="js/beaudryland.js"></script>
         <script src="js/beaudryland-settings.js"></script>
         <script src="js/beaudryland-game.js"></script>
