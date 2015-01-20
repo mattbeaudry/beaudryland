@@ -150,33 +150,6 @@ var globalmapblockcount = 0;
 
 
 /////////////
-//  *ANIMATION & TIME
-/////////////
-
-
-/*
-var count = 0;
-var seconds = 0;
-
-function newAnimationFrame() {
-  count++;
-  
-  //run every second
-  if ((count%60) == 0){
-     //world clock
-    seconds++;
-    console.log('time since game started: '+seconds+' seconds');
-  }
-      
-  //call loop again
-  window.requestAnimationFrame(newAnimationFrame);
-}
-// start time!
-newAnimationFrame();
-*/
-
-
-/////////////
 //  *GAME LOGIC
 /////////////
 
@@ -1808,8 +1781,8 @@ setupMouseEvents = function() {
 		$(this).addClass('selected-item');
 		var selecteditem = $(this).attr('data-blocktype');
 
-		if ( selecteditem == "sword" ) { createEnemy(); }
-		if ( selecteditem == "spear" ) { createAnimal(); }
+		//if ( selecteditem == "sword" ) { createEnemy(); }
+		//if ( selecteditem == "spear" ) { createAnimal(); }
 		
 		//clear animation classes
 		$.each(directions, function(i, v) {
@@ -2390,11 +2363,93 @@ playerPrimaryAction = function(blockid) {
 
 
 
+
+/////////////
+//  *ANIMATION & TIME
+/////////////
+
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame || 
+          window.webkitRequestAnimationFrame || 
+          window.mozRequestAnimationFrame || 
+          window.oRequestAnimationFrame || 
+          window.msRequestAnimationFrame || 
+          function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
+var count = 0;
+var seconds = 0;
+
+function newAnimationFrame() {
+  count++;
+  
+  //run every second
+  if ((count%60) == 0){
+     //world clock
+    seconds++;
+    console.log('time since game started: '+seconds+' seconds');
+
+   
+   
+    
+
+
+  }
+
+  //run every half second
+  if ((count%30) == 0){
+
+
+
+  }
+
+  
+
+  	 $('.the-fucking-spear').each(function(index) {
+    	var direction = $(this).attr("data-direction");
+    	var id = $(this).attr("data-id");
+    	switch (direction) {
+			case "up": moveObjectUp(id, "spear"); break;
+			case "down": moveObjectDown(id, "spear"); break;
+			case "left": moveObjectLeft(id, "spear"); break;
+			case "right": moveObjectRight(id, "spear"); break;
+		}
+
+		//stop animation if spear collides with something
+    });
+
+      
+  //call loop again
+  requestAnimFrame(newAnimationFrame);
+}
+// start time!
+newAnimationFrame();
+
+
+
+
+	
+
+/*
+
+(function animloop(){
+projectileMotion();
+
+if (t > maxdistance) {
+
+} else {
+requestAnimFrame(animloop);
+t++;
+}
+
+})();
+*/
+
 /////////////
 // *ANIMATION & PROJECTILES
 /////////////
-
-
 
 growGrass = function(block) {
 	trace("growing grass at block" + block);
@@ -2420,7 +2475,7 @@ throwSpear = function(startblock, direction) {
 	//$('.the-fucking-frisbee').remove();
 	var playerdirection = getObjectDirection(1, "player");
 	var id = uniqueObjectID();
-	$('.the-fucking-map').append('<div data-id='+id+' class=" the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'"></div>');
+	$('.the-fucking-map').append('<div data-id='+id+' class=" the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
 	initProjectile("spear", startblock, direction, id);
 };
 initProjectile = function(name, startblock, direction, id) {
@@ -2441,13 +2496,14 @@ initProjectile = function(name, startblock, direction, id) {
 
 	//window.requestAnimationFrame(projectileMotion);
 
+	/*
 	window.requestAnimFrame = (function(){
 	  return  window.requestAnimationFrame || 
 	          window.webkitRequestAnimationFrame || 
 	          window.mozRequestAnimationFrame || 
 	          window.oRequestAnimationFrame || 
 	          window.msRequestAnimationFrame || 
-	          function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element){
+	          function( callback, element){
 	            window.setTimeout(callback, 1000 / 60);
 	          };
 	})();
@@ -2472,6 +2528,10 @@ initProjectile = function(name, startblock, direction, id) {
 		
 	}
 
+	*/
+
+
+/*
 	(function animloop(){
       projectileMotion();
       
@@ -2483,6 +2543,8 @@ initProjectile = function(name, startblock, direction, id) {
 	  }
 	  
     })();
+
+*/
 
 	//projectileMotion();
 	/*
