@@ -717,6 +717,10 @@ loadNewMap = function(type) {
 		var blocktype;
 		if (r<0.7) { blocktype = "grass"; }
 		else if (r>0.98) { blocktype = "rock"; }
+		else if (r>0.96) { blocktype = "carrot-inground"; }
+		else if (r>0.94) { blocktype = "flowers"; }
+		else if (r>0.92) { blocktype = "mushroom"; }
+		else if (r>0.90) { blocktype = "appletree"; }
 		else if (r>0.8) { blocktype = "tree"; }
 		else { blocktype = "water"; }
 		maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
