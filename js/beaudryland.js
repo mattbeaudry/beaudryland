@@ -917,6 +917,13 @@ saveMap = function(){
 //  *PLAYER
 /////////////
 
+hallucinate = function() {
+	$('body').addClass("mushrooms");
+	setTimeout(
+		function() {
+			$('body').removeClass("mushrooms");
+		}, 10000);
+};
 refillHearts = function() {
 	$('.the-fucking-hearts ul').html('<li></li><li></li><li></li><li></li><li></li>');
 };
@@ -2154,17 +2161,11 @@ getObjectDirection = function(id, name) {
 playerPrimaryAction = function(blockid) {
 
 	var id = 1;
-	//trace("Player primary action");
-	//find block that the player is facing
 
+	//find block that the player is facing
 	var direction = getObjectDirection(id, "player");
 	var playerblock = getObjectCurrentBlock(id);
 	var block = getObjectCurrentBlock(id);
-
-	
-	//trace("1-"+direction);
-	//trace("2-"+playerblock);
-	//trace("3-"+block);
 	
 	var selecteditem = getSelectedItem();
 	switch (direction) {
@@ -2224,11 +2225,20 @@ playerPrimaryAction = function(blockid) {
 			changeBlockType(block, "grass");
 			//growGrass(block);
 
-		//eating for hearts
+		//EATING
 		} else if (selecteditem == "heart") {
 			addHeart();
+			removeFromInventory(selecteditem);
 		} else if (selecteditem == "apple") {
 			addHeart();
+			removeFromInventory(selecteditem);
+		} else if (selecteditem == "carrot") {
+			addHeart();
+			removeFromInventory(selecteditem);
+		} else if (selecteditem == "mushroom") {
+			addHeart();
+			hallucinate();
+			removeFromInventory(selecteditem);
 
 		//open/close doors
 		} else if (blocktype == "door") {
@@ -2351,6 +2361,8 @@ playerPrimaryAction = function(blockid) {
 			else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "snow"; }
 			else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "sand"; }
 			else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "sand"; }
+			else if (blocktype == "carrot-inground") { blocktype = "carrot"; changeblocktotype = "dirt"; }
+
 			addToInventory(blocktype, "5");
 			changeBlockType(block, changeblocktotype);
 			//growGrass(block);
