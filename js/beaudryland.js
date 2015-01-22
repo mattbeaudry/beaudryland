@@ -57,10 +57,8 @@ var blocktypes = new Array (
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple","heart",
-					"mushroom","carrot","carrot-inground","flowers"
-	
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers",
+	/* food */		"apple","mushroom","carrot","carrot-inground"
 );
 var allblockclasses = ""; 
 $.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
@@ -74,9 +72,8 @@ var isplaceable = new Array (
 	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple",
-					"mushroom","carrot","flowers"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","flowers",
+	/* food */		"apple","mushroom","carrot"
 );
 var isingredient = new Array (
 	/*forest map*/	"tree", "rock",
@@ -84,7 +81,7 @@ var isingredient = new Array (
 	/*beach map*/  	"palmtree",
 	/*items*/     	"fire",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/* organic */	"wood","pinewood","palmwood","applewood"
+	/*organic*/		"wood","pinewood","palmwood","applewood"
 );
 /* isequipable is used for items with player graphics + animation */
 var isequipable = new Array (
@@ -104,9 +101,8 @@ var iscollectable = new Array (
 	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple","heart",
-					"mushroom","carrot-inground","flowers"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers",
+	/* food */		"apple","mushroom","carrot-inground"
 );
 
 var objecttypes = new Array (
@@ -638,11 +634,8 @@ createBeachSigns = function(){
 var getAllItems = function() {
 	var inventoryhtml = '';
 	$.each(blocktypes, function(index, value) {
-		if ( value != "diamond-hole" &&
-		 value != "gold-hole" &&
-		 value != "silver-hole" &&
-		 value != "oil-hole" &&
-		 value != "clay-hole" ){
+		if ( 	value != "diamond-hole" && value != "gold-hole" && value != "silver-hole" && value != "oil-hole" &&
+		 		value != "clay-hole" ){
 			inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
 			if(index==0){ inventoryhtml += 'selected-item'; }
 			inventoryhtml += '" data-blocktype="'+value+'">99</div>';
@@ -708,7 +701,8 @@ changeBlockType = function(block, newtype, maptype) {
 	}
 };
 loadNewMap = function(type) {
-	//console.log("about to create new forest map");
+
+	//CREATE RANDOM FOREST TERRAIN
 	var maphtml = "";
 	var overlayhtml = "";
 	for (var f = 0; f <= (totalmapblocks - 1); f++){
@@ -717,19 +711,23 @@ loadNewMap = function(type) {
 		var blocktype;
 		if (r<0.7) { blocktype = "grass"; }
 		else if (r>0.98) { blocktype = "rock"; }
+		else if (r>0.96) { blocktype = "appletree"; }
+		/*
 		else if (r>0.96) { blocktype = "carrot-inground"; }
 		else if (r>0.94) { blocktype = "flowers"; }
 		else if (r>0.92) { blocktype = "mushroom"; }
 		else if (r>0.90) { blocktype = "appletree"; }
+		*/
 		else if (r>0.8) { blocktype = "tree"; }
 		else { blocktype = "water"; }
 		maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-map').append(maphtml);
-	/* CREATE MAP TERRAIN FEATURES */
+
+	/* CREATE LARGER MAP TERRAIN FEATURES - lakes, forests */
 	var terrainblocks = ["water","tree","grass","water","tree","grass","grass","appletree"];
 	$.each(terrainblocks, function(index, value){
-		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+		var randomblockid = randomBlockID();
 		var terrainarray = [
 		0, -1, -2, -3, -4,
 		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
@@ -741,8 +739,17 @@ loadNewMap = function(type) {
 			changeBlockType((randomblockid+offset), value, "forest");
 		});
 	});
+
+	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
+	var terrainblocks = ["mushroom","mushroom","carrot-inground","carrot-inground","flowers","flowers"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		changeBlockType(randomblockid, value, "forest");
+	});
+
 };
 drawNewWinterMap = function() {
+
 	/* LOAD WINTER MAP FUNCTION */
 	$('.maps-wrap').append('<div class="the-fucking-winter-map" data-maptype="winter"></div>');
 	$('.the-fucking-winter-map').css("width", mapwidthpx+"px");
@@ -759,10 +766,11 @@ drawNewWinterMap = function() {
 		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-winter-map').html(mapdata);
+
 	/* CREATE MAP TERRAIN FEATURES */
 	var terrainblocks = ["pinetree","ice", "ice", "pinetree", "snow"];
 	$.each(terrainblocks, function(index, value){
-		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+		var randomblockid = randomBlockID();
 		var terrainarray = [
 		0, -1, -2, -3, -4,
 		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
@@ -805,6 +813,7 @@ drawNewBeachMap = function() {
 		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-beach-map').html(mapdata);
+
 	/* CREATE MAP TERRAIN FEATURES */
 	/*
 	var terrainblocks = ["sandstone","palmtree","wetsand"];
@@ -2901,7 +2910,10 @@ playMusic = function(){
 //  *HELPER FUNCTIONS
 /////////////
 
-
+randomBlockID = function () {
+	var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+	return randomblockid;
+};
 getObjectMap = function(id) {
 	//return which map the object is on
 	return maptype;
