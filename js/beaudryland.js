@@ -50,15 +50,16 @@ var blocktypes = new Array (
 	/*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
 	/*items*/     	"shovel", "fire", "door", "door-open", "frisbee", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*weapons*/		"sword", "spear", "axe",
+	/*weapons*/		"sword", "spear", "axe", "bow", "arrow",
 	/*instruments*/ "guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
-	/*technology*/	"telescope","computer","2dprinter",
+	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple","heart"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple","heart",
+					"mushroom","carrot","carrot-inground","flowers"
 	
 );
 var allblockclasses = ""; 
@@ -69,12 +70,13 @@ var isplaceable = new Array (
 	/*beach map*/  	"sand", "wetsand", "palmtree", "sandstone",
 	/*items*/     	"wood", "fire", "door", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*technology*/	"telescope","computer","2dprinter",
+	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
 	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple",
+					"mushroom","carrot","flowers"
 );
 var isingredient = new Array (
 	/*forest map*/	"tree", "rock",
@@ -84,10 +86,10 @@ var isingredient = new Array (
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/* organic */	"wood","pinewood","palmwood","applewood"
 );
-/* isequipable is used for items with player graphics */
+/* isequipable is used for items with player graphics + animation */
 var isequipable = new Array (
 	/*items*/     	"shovel",
-	/*weapons*/		"sword", "axe",
+	/*weapons*/		"sword", "axe", "bow",
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom"
 );
@@ -103,7 +105,8 @@ var iscollectable = new Array (
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple","heart"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","apple","heart",
+					"mushroom","carrot-inground","flowers"
 );
 
 var objecttypes = new Array (
@@ -2797,6 +2800,11 @@ checkCraftingTableForItem = function() {
 		case "appletreeemptyempty": createCraftedItem("applewood",3); break;
 		case "appletreeappletreeempty": createCraftedItem("applewood",6); break;
 		case "appletreeappletreeappletree": createCraftedItem("applewood",10); break;
+
+		case "palmpalmwood": createCraftedItem("bow",1); break;
+		case "woodpalmpalm": createCraftedItem("arrow",1); break;
+		case "silversilversilver": createCraftedItem("portala",1); break;
+		case "goldgoldgold": createCraftedItem("portalb",1); break;
 
 		default:
 			$('.the-fucking-crafted-item > .slot').removeClass(allblockclasses);
