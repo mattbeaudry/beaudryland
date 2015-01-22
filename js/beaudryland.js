@@ -2206,10 +2206,11 @@ playerPrimaryAction = function(blockid) {
 					killEnemy(enemyid);
 				}
 			});
-		}  
+		}
 	}
 	
 	$('.maps-wrap .block:eq('+block+')').animate({ opacity: 0.9 }, 50, function() {
+		
 		$('.maps-wrap .block:eq('+block+')').css("opacity","1");
 		var selecteditem = getSelectedItem();
 
