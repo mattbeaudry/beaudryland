@@ -136,6 +136,9 @@ var projectilespeed = 50;
 var bikespeed = 100;
 var disablekeyboardevents = false;
 var playerid = 1;
+var totalhearts = 8;
+var globalmapblockcount = 0;
+
 var objectsArray = [0,2,3];
 uniqueObjectID = function() {
 	var id = objectsArray.length + 1;
@@ -144,7 +147,7 @@ uniqueObjectID = function() {
 	return id;
 };
 
-var globalmapblockcount = 0;
+
 
 
 
@@ -925,26 +928,31 @@ hallucinate = function() {
 		}, 10000);
 };
 refillHearts = function() {
-	$('.the-fucking-hearts ul').html('<li></li><li></li><li></li><li></li><li></li>');
+	$('.the-fucking-hearts ul .empty').removeClass();;
 };
 addHeart = function() {
-	$('.the-fucking-hearts ul').append('<li></li>');
+	var emptyhearts = $('.the-fucking-hearts ul .empty').length;
+	//alert(emptyhearts
+	$('.the-fucking-hearts .empty').first().removeClass("empty");
 };
 removeHeart = function() {
 	var hearts = totalHearts();
 	if (hearts > 1) {
-		$('.the-fucking-hearts li').last().remove();
+		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
+	} else if (hearts == totalhearts) {
+		//don't add a heart, max 8
 	} else {
-		$('.the-fucking-hearts li').remove();
+		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
 		gameOver();
 	}
 };
 gameOver = function() {
-	alert("Game Over!");
+	displayDialog("Game Over!");
 	refillHearts();
 };
 totalHearts = function() {
-	var hearts = $('.the-fucking-hearts li').length;
+	var hearts = $('.the-fucking-hearts li.empty').length;
+	hearts = totalhearts - hearts;
 	return hearts;
 };
 createPlayer = function(id) {

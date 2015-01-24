@@ -1133,7 +1133,9 @@ hr:before {
   margin-right: 5px;
 }
 .the-fucking-hearts li.empty {
-  background: url('../svg/item-heartgrey.svg') no-repeat;
+  /*background:url('../svg/item-heartgrey.svg') no-repeat;*/
+
+  opacity: 0.6;
 }
 /* NIGHT TIME */
 .the-fucking-map-overlay {

@@ -24,6 +24,9 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 				<li></li>
 				<li></li>
 				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
 			</ul>
 		</div>
 		<div class="the-fucking-map-overlay">
