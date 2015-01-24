@@ -97,25 +97,27 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 			<section class="the-fucking-gameinfo">
 
 					<h2>Update History</h2>
+
 					<article class="beaudryland-panel">
-						<h3>Beaudryland v0.6<br>Fall 2014 <br>The Space Update</h3>
+						<h3>Beaudryland v0.7<br>Winter 2015</h3>
 						<ul class="multi-column-2">
-							<li>the space map: space, star, earth, sun, planets, galaxies</li>
-							<li>new items: signs, telescope, computer, 2D printer, rocket</li>
-							<li>furniture! table, chair, chest, bed, sink, bathtub, toilet</li>
-							<li>the drum kit! hithat, bass drum, snare, tom and cymbal</ll>
-							<li>write/read messages on signs</li>
 							<li>iOS app in the app store (coming soon)</li>
-							<li>creative and story game modes</li>
 							<li>item builder tool! design your own items and blocks and add them to the game</li>
-							<li>more interesting random terrain generation (lakes, forests etc.)</li>
-							<li>moose</li>
+							<li>map builder</li>
+							<li>character creator</li>
+							<li>level creator</li>
+							<li>more interesting random terrain generation (lakes, forests, plants, objects)</li>
 							<li>achievements!</li>
-							<li>life gauge and hearts! enemies can hurt you now</li>
 							<li>apple trees and apples! eat apples to restore hearts</li>
+							<li>mushrooms, flowers, carrots</li>
+							<li>portals, bow &amp; arrow</li>
+							<li>more interesting digging</li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
 
 							<!--
-							IN THE WORKS:
 							<li>animal &amp; hunting</li>
 							<li>new animation engine</li>
 							<li>clock and game timer</li>
@@ -125,6 +127,20 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 							<li>airplane</li>
 							<li>more weapons</li>
 							-->
+						</ul>
+		        	</article>
+
+					<article class="beaudryland-panel">
+						<h3>Beaudryland v0.6<br>Fall 2014 <br>The Space Update</h3>
+						<ul class="multi-column-2">
+							<li>the space map: space, star, earth, sun, planets, galaxies</li>
+							<li>new items: signs, telescope, computer, 2D printer, rocket</li>
+							<li>furniture! table, chair, chest, bed, sink, bathtub, toilet</li>
+							<li>the drum kit! hithat, bass drum, snare, tom and cymbal</ll>
+							<li>write/read messages on signs</li>
+							<li>creative and story game modes</li>
+							<li>life gauge and hearts! enemies can hurt you now</li>
+							<li>apple trees and apples! eat apples to restore hearts</li>
 						</ul>
 		        	</article>
 		 
