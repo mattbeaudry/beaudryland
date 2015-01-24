@@ -2006,9 +2006,20 @@ objectCollisionDetection = function(id, direction) {
 		case "right": block = block; break;
 	}
 
-
+	//teleporting
+	if (id == 1 && $('.maps-wrap .block:eq('+block+')').hasClass('block-portal-a')) {
+		var destinationblock = $('.maps-wrap .block-portal-b').first().attr("data-blockid");
+		//alert(destinationblock);
+		teleportObjectToBlock(1, destinationblock);
+		return true;
+	//teleporting
+	} else if (id == 1 && $('.maps-wrap .block:eq('+block+')').hasClass('block-portal-b')) {
+		var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
+		//alert(destinationblock);
+		teleportObjectToBlock(1, destinationblock);
+		return true;
 	//space travel
-	if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+block+')').hasClass('block-space')) {
+	} else if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+block+')').hasClass('block-space')) {
 		return false;
 	} else if (selecteditem == "rocket") {
 		return true;
@@ -2157,7 +2168,13 @@ getObjectDirection = function(id, name) {
 
 	return direction;
 };
-
+teleportObjectToBlock = function(id, destinationblock) {
+	//$('.objectid-'+id).
+	var left = getBlockLeftByID(destinationblock);
+	var top = getBlockTopByID(destinationblock);
+	setObjectCurrentPositionX(id,left);
+	setObjectCurrentPositionY(id,top);
+};
 
 
 /////////////
@@ -2344,7 +2361,25 @@ playerPrimaryAction = function(blockid) {
 			//check for selected placable block in inventory
 			//trace('selected item is '+selecteditem);
 			//trace('blocktype is '+blocktype);
-			if ( $.inArray(selecteditem, isplaceable) > -1 ){
+
+			//only allow 1 portal of each type on map
+			if (selecteditem == "portal-a") {
+				$('.maps-wrap .block-portal-a').each(function(index) {
+					var id = $(this).attr("data-blockid");
+					changeBlockType(id, "grass");
+
+				});
+				removeFromInventory(selecteditem);
+				changeBlockType(block, selecteditem);
+			} else if (selecteditem == "portal-b") {
+				$('.maps-wrap .block-portal-b').each(function(index) {
+					var id = $(this).attr("data-blockid");
+					changeBlockType(id, "grass");
+
+				});
+				removeFromInventory(selecteditem);
+				changeBlockType(block, selecteditem);
+			} else if ( $.inArray(selecteditem, isplaceable) > -1 ){
 				//placing/writing on a sign
 				if (selecteditem == "sign"){
 					placeSign(1, block);
@@ -2971,12 +3006,17 @@ getBlockCurrentCol = function(block) {
 */
 getObjectCurrentPositionX = function(id) {
 	var x = $('.objectid-'+id).css("left");
-	//trace("X--"+x);
 	return x;
 };
 getObjectCurrentPositionY = function(id) {
 	var y = $('.objectid-'+id).css("top");
 	return y;
+};
+setObjectCurrentPositionX = function(id,newx) {
+	$('.objectid-'+id).css("left",newx);
+};
+setObjectCurrentPositionY = function(id,newy) {
+	$('.objectid-'+id).css("top",newy);
 };
 getObjectCurrentCol = function(id) {
 	var x = getObjectCurrentPositionX(id);
