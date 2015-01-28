@@ -108,25 +108,15 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 							<li>level creator</li>
 							<li>more interesting random terrain generation (lakes, forests, plants, objects)</li>
 							<li>achievements!</li>
-							<li>apple trees and apples! eat apples to restore hearts</li>
 							<li>mushrooms, flowers, carrots</li>
 							<li>portals, bow &amp; arrow</li>
 							<li>more interesting digging</li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
-
-							<!--
 							<li>animal &amp; hunting</li>
-							<li>new animation engine</li>
-							<li>clock and game timer</li>
-							<li>requestAnimationFrame for all animation</li>
-							<li>night time! lighting effects overlay</li>
-							<li>musical instruments will be playable</li>
+							<li>new animation engine &amp; game global timer</li>
+							<li>night time &amp; lighting effects</li>
+							<li>improved sound and playing of musical instruments</li>
 							<li>airplane</li>
-							<li>more weapons</li>
-							-->
+							<li>weapons &amp; armor</li>
 						</ul>
 		        	</article>
 
@@ -159,9 +149,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		     
 		        	<article class="beaudryland-panel">
 		        		<h3>Beaudryland v0.4<br>March 2013<br>The Winter Update</h3>
-
 		        		<img class="banner-beaudryland" src="img/banner-beaudryland-0.4.png">
-			        	
 			        	<ul class="multi-column-2">
 			        		<li>safer/smarter map and inventory saving</li>
 			        		<li>game now open to new users through register form on homepage</li>
@@ -181,7 +169,6 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 			        </article>
 		
 		        	<article class="beaudryland-panel">
-		        		
 		        		<h3>Beaudryland v0.3<br>January, 2013<br>The Items Update</h3>
 		        		<img class="banner-beaudryland" src="img/banner-beaudryland-0.3.png">
 		        		<ul class="multi-column-2">
@@ -232,7 +219,7 @@ if (isset($_GET['error'])){ $error = $_GET['error']; }else{ $error = ""; }
 		        			<li>keyboard/mouse events</li>
 		        			<li>collect trees</li>
 		        			<li>crafting table</li>
-		        			<li>inventori</li>
+		        			<li>inventory</li>
 		        			<li>crafting wood</li>
 		        			<li>onscreen controller for touch devices</li>
 		        		</ul>
