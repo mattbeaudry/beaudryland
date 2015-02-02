@@ -1150,6 +1150,14 @@ hr:before {
   opacity: 0.9;
   background-color: #000;
 }
+/* MAP GRID */
+.page-mapgallery .gallery-map-wrap {
+  max-width: 400px;
+}
+.page-mapgallery .gallery-map-wrap .block {
+  width: 10px;
+  height: 10px;
+}
 /* Mushroom effects */
 @-webkit-keyframes mushrooms {
   0% {

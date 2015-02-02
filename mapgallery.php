@@ -17,11 +17,6 @@ if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
         <meta name="viewport" content="user-scalable=no,width=device-width">
         
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="apple-touch-icon-144x144-precomposed.png" />
-        <link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png" />
 
 		<link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
@@ -33,7 +28,7 @@ if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
     
     <body class="page-mapgallery">
         
-        <div class="the-fucking-header container">
+        <div class="the-fucking-header">
         
 	        <h1 class="logo-beaudryland"><img src="img/block-tree.png" title="Beaudryland Tree Logo" />Beaudryland</h1>
 	        
@@ -56,7 +51,7 @@ if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
 	    
 	    
 	    
-	    <div class="the-fucking-map-gallery container">
+	    <div class="the-fucking-map-gallery">
 	    
 	    	<!--<p>Each one of these squares belongs to a fellow beaudrylander.</p>-->
 	    	
