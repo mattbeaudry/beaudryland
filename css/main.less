@@ -629,39 +629,6 @@ hr:before {
 	height:600px;
 	margin:40px auto;
 }
-.the-fucking-map-gallery {
-	
-}
-.the-fucking-map-gallery h3 {
-	position: absolute;
-	font-family: "Press Start 2P", helvetica, verdana;
-	font-weight: 400;
-	text-transform: uppercase;
-	background-color: rgba(255,255,255,1);
-	padding: 4px 4px 0;
-	margin-left: 20px;
-	float:left;
-	z-index:10;
-}
-.gallery-map-wrap {
-	float:left;
-	margin-top: -88px;
-	width:800px;
-}
-.gallery-map-wrap.map-forest {
-	background-color:#36ac2a;
-}	
-.gallery-map-wrap.map-winter {
-	background-color:#f5fdff;
-}
-.gallery-map-wrap.map-beach {
-	background-color:#d9cfa2;
-}
-.page-mapgallery h2 {
-	margin-bottom: 50px;
-}
-
-
 
 
 /* THE PLAYER */
@@ -1129,13 +1096,54 @@ hr:before {
 }
 
 
-/* MAP GRID */
+
+/* MAP GALLERY GRID */
+
+.the-fucking-map-gallery {
+	text-align: center;
+}
+.the-fucking-map-gallery h3 {
+	position: absolute;
+	font-family: "Press Start 2P", helvetica, verdana;
+	font-weight: 400;
+	text-transform: uppercase;
+	background-color: rgba(255,255,255,1);
+	padding: 4px 4px 0;
+	margin-left: 20px;
+	float:left;
+	z-index:10;
+}
+.gallery-map-wrap {
+
+}
+.gallery-map-wrap.map-forest {
+	background-color:#36ac2a;
+}	
+.gallery-map-wrap.map-winter {
+	background-color:#f5fdff;
+}
+.gallery-map-wrap.map-beach {
+	background-color:#d9cfa2;
+}
+.page-mapgallery h2 {
+	margin-bottom: 50px;
+}
 
 .page-mapgallery {
+
+	.the-fucking-header {
+		margin-bottom: 30px;
+		text-align: center;
+
+		h1 {
+			text-align: center;
+		}
+	}
 
 	.gallery-map-wrap {
 		//800
 		max-width:400px;
+		display:inline-block;
 
 		.block {
 			//20
@@ -1143,6 +1151,7 @@ hr:before {
 			height:10px;
 		}
 	}
+
 }
 
 
