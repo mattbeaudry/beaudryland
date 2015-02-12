@@ -1176,6 +1176,45 @@ hr:before {
 .mushrooms {
   -webkit-animation: mushrooms 5s infinite;
 }
+/* MAP PERSPECTIVE */
+.the-fucking-map {
+  -webkit-transition: all 5s;
+  transition: all 5s;
+}
+.block-tree,
+.block-appletree,
+.block-muchroom,
+.block-rock,
+.block-flowers,
+.the-fucking-player {
+  /*
+    -webkit-transition:all 5s;
+	transition:all 5s;
+	*/
+
+}
+.map-view-perspective {
+  -webkit-transform: perspective(500px) rotateX(77deg) rotateY(0deg) scale(1);
+  overflow: visible !important;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: all 5s;
+  transition: all 5s;
+}
+.map-view-perspective .block-tree,
+.map-view-perspective .block-appletree,
+.map-view-perspective .block-muchroom,
+.map-view-perspective .block-rock,
+.map-view-perspective .block-flowers {
+  transform-origin: bottom;
+  -webkit-transform: rotateX(-90deg) scale(1);
+}
+/*
+transform-origin: bottom;
+-webkit-transform: rotateX(-90deg) scale(1);
+*/
+/* -webkit-transform: perspective(8) rotateX(-10deg) rotateY(5deg) rotateZ(-16deg) scale(2); */
+/* -webkit-transform: perspective(10) rotateX(-5deg) rotateY(0deg) rotateZ(0deg) scale(2); */
 @media only screen and (min-width: 1000px) {
   
 }
