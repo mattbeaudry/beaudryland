@@ -1917,6 +1917,7 @@ moveObject = function(direction, id, name){
 	}
 };
 moveObjectLeft = function(id, name) {
+	var success = false;
 	changeObjectDirection(id, "left", name);
 	var x = getObjectCurrentPositionX(id);
 	trace(".objectid-"+id);
@@ -1928,13 +1929,17 @@ moveObjectLeft = function(id, name) {
 	if (!collide){ 
 		$('.objectid-'+id).css("left",x);
 		var block = getObjectCurrentBlock(id);
+		success = true;
 	} else {
 		trace("Can't move object:"+id+" left -- x="+x);	
+		success = false;
 	}
-	clearLighting();
-	lightUpBlock();
+	//clearLighting();
+	//lightUpBlock();
+	return success;
 };
 moveObjectRight = function(id, name) {
+	var success = false;
 	changeObjectDirection(id, "right", name);
 	var x = getObjectCurrentPositionX(id);
 	x = stripPX(x);
@@ -1944,13 +1949,17 @@ moveObjectRight = function(id, name) {
 	if (!collide){ 
 		$(".objectid-"+id).css("left",x);
 		var block = getObjectCurrentBlock(id);
+		success = true;
 	} else {
-		trace("Can't move object:"+id+" right -- x="+x);	
+		trace("Can't move object:"+id+" right -- x="+x);
+		success = false;	
 	}
-	clearLighting();
-	lightUpBlock();
+	//clearLighting();
+	//lightUpBlock();
+	return success;
 };
 moveObjectUp = function(id, name) {
+	var success = false;
 	changeObjectDirection(id, "up", name);
 	var y = getObjectCurrentPositionY(id);
 	y = stripPX(y);
@@ -1960,8 +1969,10 @@ moveObjectUp = function(id, name) {
 	if (!collide){ 
 		$('.objectid-'+id).css("top",y);
 		var block = getObjectCurrentBlock(id);
+		success = true;
 	} else {
 		trace("Can't move object:"+id+" up -- y="+y);	
+		success = false;
 	}
 	/*
 	if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 180) ) {
@@ -1969,10 +1980,12 @@ moveObjectUp = function(id, name) {
 		$("html, body").animate({ scrollTop: y - 250 }, 600);
 	}
 	*/
-	clearLighting();
-	lightUpBlock();
+	//clearLighting();
+	//lightUpBlock();
+	return success;
 };
 moveObjectDown = function(id, name) {
+	var success = false;
 	changeObjectDirection(id, "down", name);
 	var y = getObjectCurrentPositionY(id);
 	y = stripPX(y);
@@ -1982,8 +1995,10 @@ moveObjectDown = function(id, name) {
 	if (!collide){ 
 		$('.objectid-'+id).css("top",y);
 		var block = getObjectCurrentBlock(id);
+		success = true;
 	} else {
 		trace("Can't move object:"+id+" down -- y="+y);	
+		success = false;
 	}
 	/*
 	if ( $('.the-fucking-player').offset().top > ($(window).scrollTop() + $(window).height() - 60) ) {
@@ -1991,8 +2006,9 @@ moveObjectDown = function(id, name) {
 		$("html, body").animate({ scrollTop: y + 250 }, 600);
 	}
 	*/
-	clearLighting();
-	lightUpBlock();
+	//clearLighting();
+	//lightUpBlock();
+	return success;
 };
 objectCollisionDetection = function(id, direction) {
 	var block = getObjectCurrentBlock(id);
@@ -2455,6 +2471,7 @@ var count = 0;
 var seconds = 0;
 
 function newAnimationFrame() {
+
   count++;
   
   //run every second
@@ -2463,35 +2480,22 @@ function newAnimationFrame() {
     seconds++;
     console.log('time since game started: '+seconds+' seconds');
 
-   
-   
-    
-
-
   }
 
   //run every half second
   if ((count%30) == 0){
 
-
+  	
 
   }
 
-  
+  //run every 200 miliseconds
+  if ((count%10) == 0){
+  	console.log("160 miliseconds has gone by");
+  	animateSpears();
 
-  	 $('.the-fucking-spear').each(function(index) {
-    	var direction = $(this).attr("data-direction");
-    	var id = $(this).attr("data-id");
-    	switch (direction) {
-			case "up": moveObjectUp(id, "spear"); break;
-			case "down": moveObjectDown(id, "spear"); break;
-			case "left": moveObjectLeft(id, "spear"); break;
-			case "right": moveObjectRight(id, "spear"); break;
-		}
 
-		//stop animation if spear collides with something
-    });
-
+  }  
       
   //call loop again
   requestAnimFrame(newAnimationFrame);
@@ -2501,7 +2505,26 @@ newAnimationFrame();
 
 
 
+animateSpears = function() {
 
+	$('.the-fucking-spear').each(function(index) {
+    	var direction = $(this).attr("data-direction");
+    	var id = $(this).attr("data-id");
+    	var stillmoving;
+    	switch (direction) {
+			case "up": var stillmoving = moveObjectUp(id, "spear"); break;
+			case "down": var stillmoving = moveObjectDown(id, "spear"); break;
+			case "left": var stillmoving = moveObjectLeft(id, "spear"); break;
+			case "right": var stillmoving = moveObjectRight(id, "spear"); break;
+		}
+		//console.log("stillmoving? "+stillmoving);
+
+		//stop animation if spear collides with something
+		if (stillmoving == false) {
+			$('.objectid-'+id).remove();
+		}
+    });
+};
 	
 
 /*
@@ -2561,8 +2584,8 @@ initProjectile = function(name, startblock, direction, id) {
 	leftstart = addPX(leftstart);
 	$('.objectid-'+id).css("top",topstart);
 	$('.objectid-'+id).css("left",leftstart);
-	var t = 0;
-	var maxdistance = 10;
+	//var t = 0;
+	//var maxdistance = 10;
 
 	//var projectilebrain = setTimeout(projectileMotion, projectilespeed);
 
