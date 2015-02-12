@@ -1192,6 +1192,11 @@ hr:before {
 	transition:all 5s;
 	*/
 
+  /*
+	-webkit-transition:all 0.3s;
+    transition:all 0.3s;
+    */
+
 }
 .map-view-perspective {
   -webkit-transform: perspective(500px) rotateX(77deg) rotateY(0deg) scale(1);
@@ -1205,7 +1210,8 @@ hr:before {
 .map-view-perspective .block-appletree,
 .map-view-perspective .block-muchroom,
 .map-view-perspective .block-rock,
-.map-view-perspective .block-flowers {
+.map-view-perspective .block-flowers,
+.map-view-perspective .the-fucking-player {
   transform-origin: bottom;
   -webkit-transform: rotateX(-90deg) scale(1);
 }
