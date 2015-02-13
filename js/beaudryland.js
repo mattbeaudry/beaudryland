@@ -58,7 +58,7 @@ var blocktypes = new Array (
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers",
-	/* food */		"apple","mushroom","bluemushroom","carrot","carrot-inground"
+	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground"
 );
 var allblockclasses = ""; 
 $.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
@@ -73,7 +73,7 @@ var isplaceable = new Array (
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","flowers",
-	/* food */		"apple","mushroom","bluemushroom","carrot"
+	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot"
 );
 var isingredient = new Array (
 	/*forest map*/	"tree", "rock",
@@ -102,7 +102,7 @@ var iscollectable = new Array (
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers",
-	/* food */		"apple","mushroom","bluemushroom","carrot-inground"
+	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
 );
 
 var objecttypes = new Array (
