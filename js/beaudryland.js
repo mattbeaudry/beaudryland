@@ -58,7 +58,7 @@ var blocktypes = new Array (
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers",
-	/* food */		"apple","mushroom","carrot","carrot-inground"
+	/* food */		"apple","mushroom","bluemushroom","carrot","carrot-inground"
 );
 var allblockclasses = ""; 
 $.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
@@ -73,7 +73,7 @@ var isplaceable = new Array (
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","flowers",
-	/* food */		"apple","mushroom","carrot"
+	/* food */		"apple","mushroom","bluemushroom","carrot"
 );
 var isingredient = new Array (
 	/*forest map*/	"tree", "rock",
@@ -102,7 +102,7 @@ var iscollectable = new Array (
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers",
-	/* food */		"apple","mushroom","carrot-inground"
+	/* food */		"apple","mushroom","bluemushroom","carrot-inground"
 );
 
 var objecttypes = new Array (
@@ -637,8 +637,10 @@ createBeachSigns = function(){
 var getAllItems = function() {
 	var inventoryhtml = '';
 	$.each(blocktypes, function(index, value) {
-		if ( 	value != "diamond-hole" && value != "gold-hole" && value != "silver-hole" && value != "oil-hole" &&
-		 		value != "clay-hole" ){
+		if ( 	
+			value != "diamond-hole" && value != "gold-hole" && value != "silver-hole" && value != "oil-hole" &&
+		 	value != "clay-hole" && value != "carrot-inground" 
+		){
 			inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
 			if(index==0){ inventoryhtml += 'selected-item'; }
 			inventoryhtml += '" data-blocktype="'+value+'">99</div>';
@@ -744,7 +746,10 @@ loadNewMap = function(type) {
 	});
 
 	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
-	var terrainblocks = ["mushroom","mushroom","carrot-inground","carrot-inground","flowers","flowers"];
+	var terrainblocks = [
+		"carrot-inground","carrot-inground","flowers","flowers",
+		"bluemushroom","bluemushroom","mushroom","mushroom"
+	];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
 		changeBlockType(randomblockid, value, "forest");
@@ -920,12 +925,21 @@ saveMap = function(){
 //  *PLAYER
 /////////////
 
+mapPerspective = function() {
+	$('.the-fucking-map').addClass("map-view-perspective");
+	setTimeout(
+		function() {
+			$('.the-fucking-map').removeClass("map-view-perspective");
+		}, 
+	10000);
+};
 hallucinate = function() {
 	$('body').addClass("mushrooms");
 	setTimeout(
 		function() {
 			$('body').removeClass("mushrooms");
-		}, 10000);
+		}, 
+	10000);
 };
 refillHearts = function() {
 	$('.the-fucking-hearts ul .empty').removeClass();;
@@ -2281,7 +2295,10 @@ playerPrimaryAction = function(blockid) {
 			addHeart();
 			hallucinate();
 			removeFromInventory(selecteditem);
-
+		} else if (selecteditem == "bluemushroom") {
+			addHeart();
+			mapPerspective();
+			removeFromInventory(selecteditem);
 		//open/close doors
 		} else if (blocktype == "door") {
 			changeBlockType(block, "door-open");

@@ -1176,12 +1176,14 @@ hr:before {
 .the-fucking-map {
     -webkit-transition:all 5s;
     transition:all 5s;
+    overflow: visible !important;
 }
-.block-tree,.block-appletree,.block-muchroom,.block-rock,.block-flowers,.the-fucking-player {
-	/*
-    -webkit-transition:all 5s;
-	transition:all 5s;
-	*/
+.block-tree,.block-appletree,.block-mushroom,.block-rock,.block-flowers,.the-fucking-player,
+.block-sign,.block-bluemushroom {
+
+    -webkit-transition:transform 5s;
+	transition:transform 5s;
+
 	/*
 	-webkit-transition:all 0.3s;
     transition:all 0.3s;
@@ -1198,6 +1200,7 @@ hr:before {
 	.block-tree,.block-appletree,.block-muchroom,.block-rock,.block-flowers,.the-fucking-player {
 		transform-origin: bottom;
         -webkit-transform: rotateX(-90deg) scale(1);
+       
 	}
 }
 
