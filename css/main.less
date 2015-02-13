@@ -1066,7 +1066,7 @@ hr:before {
 	li {
 		width:30px;
 		height:30px;
-		float: left;
+		display:inline-block;
 		background:url('../svg/item-heart.svg') no-repeat;
 		background-size:30px 30px;
 		margin-right:5px;
@@ -1087,7 +1087,7 @@ hr:before {
 	z-index:0;
 	width:800px;
 	height:600px;
-	margin-top:200px;
+	margin-top:244px;
 	display:none;
 }
 .block-dark {
@@ -1179,7 +1179,7 @@ hr:before {
     overflow: visible !important;
 }
 .block-tree,.block-appletree,.block-mushroom,.block-rock,.block-flowers,.the-fucking-player,
-.block-sign,.block-bluemushroom {
+.block-sign,.block-mushroom,.block-bluemushroom {
 
     -webkit-transition:transform 5s;
 	transition:transform 5s;
@@ -1197,7 +1197,8 @@ hr:before {
     -webkit-transition:all 5s;
     transition:all 5s;
 
-	.block-tree,.block-appletree,.block-muchroom,.block-rock,.block-flowers,.the-fucking-player {
+	.block-tree,.block-appletree,.block-muchroom,.block-rock,.block-flowers,.the-fucking-player, 
+	.block-sign,.block-bluemushroom {
 		transform-origin: bottom;
         -webkit-transform: rotateX(-90deg) scale(1);
        

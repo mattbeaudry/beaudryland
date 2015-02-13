@@ -1099,7 +1099,7 @@ hr:before {
 .the-fucking-hearts li {
   width: 30px;
   height: 30px;
-  float: left;
+  display: inline-block;
   background: url('../svg/item-heart.svg') no-repeat;
   background-size: 30px 30px;
   margin-right: 5px;
@@ -1115,7 +1115,7 @@ hr:before {
   z-index: 0;
   width: 800px;
   height: 600px;
-  margin-top: 200px;
+  margin-top: 244px;
   display: none;
 }
 .block-dark {
@@ -1189,6 +1189,7 @@ hr:before {
 .block-flowers,
 .the-fucking-player,
 .block-sign,
+.block-mushroom,
 .block-bluemushroom {
   -webkit-transition: transform 5s;
   transition: transform 5s;
@@ -1211,7 +1212,9 @@ hr:before {
 .map-view-perspective .block-muchroom,
 .map-view-perspective .block-rock,
 .map-view-perspective .block-flowers,
-.map-view-perspective .the-fucking-player {
+.map-view-perspective .the-fucking-player,
+.map-view-perspective .block-sign,
+.map-view-perspective .block-bluemushroom {
   transform-origin: bottom;
   -webkit-transform: rotateX(-90deg) scale(1);
 }

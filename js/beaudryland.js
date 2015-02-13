@@ -138,6 +138,7 @@ var disablekeyboardevents = false;
 var playerid = 1;
 var totalhearts = 8;
 var globalmapblockcount = 0;
+var isnightime = false;
 
 var objectsArray = [0,2,3];
 uniqueObjectID = function() {
@@ -409,14 +410,14 @@ if ( $('body').hasClass("version-phonegap") ){
 	
 }
 
-var changeOverlayBlockOpacity = function(block, opacity) {
+changeOverlayBlockOpacity = function(block, opacity) {
 	//trace("8-changing block "+block+" to "+newtype);
 	$('.the-fucking-map-overlay .block:eq('+block+')').css("opacity",opacity);
 };
 
-var nightTime = function() {
+nightTime = function() {
 
-	console.log ("night time");
+	console.log("night time");
 	// MAP OVERLAY
     var overlayhtml = "";
     for (var f = 0; f <= (totalmapblocks - 1); f++){
@@ -425,21 +426,32 @@ var nightTime = function() {
 	$('.the-fucking-map-overlay').fadeIn();
 	$('.the-fucking-map-overlay').append(overlayhtml);
 
+	isnightime = true;
+
+	setTimeout(
+		function() {
+			morningTime();
+		}, 
+	10000);
+
 };
 
-var clearLighting = function() {
+//end night time e.g. morning
+morningTime = function() {
+	$('.the-fucking-map-overlay').empty();
+	isnightime = false;
+};
 
+clearLighting = function() {
 	$('.the-fucking-map-overlay .block-dark').css("opacity",1);
-
 };
 
-var lightUpBlock = function() {
+lightUpBlock = function() {
 
 	console.log ("the light!");
 
 	//var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
 	var playerblockid = getObjectCurrentBlock("1") - 1;
-
 	var value = 0;
 
 	changeOverlayBlockOpacity(playerblockid, value);
@@ -509,7 +521,7 @@ var lightUpBlock = function() {
 	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)-1, 0.8);
 
 };
-var loadNewGame = function() {
+loadNewGame = function() {
 	trace("new user & brand new map");
 	trace("map type is "+maptype);
     loadNewMap();
@@ -570,7 +582,7 @@ var mapheightpx = mapheight * gridunitpx;
 
 
 /* CREATE INVENTORY SLOT DIVS */
-var setupInventorySlots = function() {
+setupInventorySlots = function() {
 	var invslothtml = "";
 	invslothtml += '<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>';
 	for (var i = 1; i <= inventoryslots; i += 1){
@@ -939,7 +951,7 @@ hallucinate = function() {
 		function() {
 			$('body').removeClass("mushrooms");
 		}, 
-	10000);
+	30000);
 };
 refillHearts = function() {
 	$('.the-fucking-hearts ul .empty').removeClass();;
@@ -1948,8 +1960,10 @@ moveObjectLeft = function(id, name) {
 		trace("Can't move object:"+id+" left -- x="+x);	
 		success = false;
 	}
-	//clearLighting();
-	//lightUpBlock();
+	if (isnightime == true) {
+		clearLighting();
+		lightUpBlock();
+	}
 	return success;
 };
 moveObjectRight = function(id, name) {
@@ -1968,8 +1982,10 @@ moveObjectRight = function(id, name) {
 		trace("Can't move object:"+id+" right -- x="+x);
 		success = false;	
 	}
-	//clearLighting();
-	//lightUpBlock();
+	if (isnightime == true) {
+		clearLighting();
+		lightUpBlock();
+	}
 	return success;
 };
 moveObjectUp = function(id, name) {
@@ -1994,8 +2010,10 @@ moveObjectUp = function(id, name) {
 		$("html, body").animate({ scrollTop: y - 250 }, 600);
 	}
 	*/
-	//clearLighting();
-	//lightUpBlock();
+	if (isnightime == true) {
+		clearLighting();
+		lightUpBlock();
+	}
 	return success;
 };
 moveObjectDown = function(id, name) {
@@ -2020,8 +2038,10 @@ moveObjectDown = function(id, name) {
 		$("html, body").animate({ scrollTop: y + 250 }, 600);
 	}
 	*/
-	//clearLighting();
-	//lightUpBlock();
+	if (isnightime == true) {
+		clearLighting();
+		lightUpBlock();
+	}
 	return success;
 };
 objectCollisionDetection = function(id, direction) {
@@ -2298,6 +2318,11 @@ playerPrimaryAction = function(blockid) {
 		} else if (selecteditem == "bluemushroom") {
 			addHeart();
 			mapPerspective();
+			removeFromInventory(selecteditem);
+		} else if (selecteditem == "blackmushroom") {
+			addHeart();
+			nightTime();
+			lightUpBlock();
 			removeFromInventory(selecteditem);
 		//open/close doors
 		} else if (blocktype == "door") {
