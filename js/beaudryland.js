@@ -943,7 +943,7 @@ mapPerspective = function() {
 		function() {
 			$('.the-fucking-map').removeClass("map-view-perspective");
 		}, 
-	10000);
+	30000);
 };
 hallucinate = function() {
 	$('body').addClass("mushrooms");
@@ -951,7 +951,7 @@ hallucinate = function() {
 		function() {
 			$('body').removeClass("mushrooms");
 		}, 
-	30000);
+	10000);
 };
 refillHearts = function() {
 	$('.the-fucking-hearts ul .empty').removeClass();;
