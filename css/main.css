@@ -1159,6 +1159,7 @@ hr:before {
 .page-mapgallery .gallery-map-wrap {
   max-width: 400px;
   display: inline-block;
+  margin-top: -10px;
 }
 .page-mapgallery .gallery-map-wrap .block {
   width: 10px;
