@@ -1197,7 +1197,12 @@ hr:before {
 .the-fucking-player,
 .block-sign,
 .block-mushroom,
-.block-bluemushroom {
+.block-bluemushroom,
+.block-wood,
+.block-portal-a,
+.block-portal-b,
+.block-door,
+.block-door-closed {
   -webkit-transition: transform 5s;
   transition: transform 5s;
   /*
@@ -1221,7 +1226,13 @@ hr:before {
 .map-view-perspective .block-flowers,
 .map-view-perspective .the-fucking-player,
 .map-view-perspective .block-sign,
-.map-view-perspective .block-bluemushroom {
+.map-view-perspective .block-mushroom,
+.map-view-perspective .block-bluemushroom,
+.map-view-perspective .block-wood,
+.map-view-perspective .block-portal-a,
+.map-view-perspective .block-portal-b,
+.map-view-perspective .block-door,
+.map-view-perspective .block-door-closed {
   transform-origin: bottom;
   -webkit-transform: rotateX(-90deg) scale(1);
 }
