@@ -2528,13 +2528,13 @@ function newAnimationFrame() {
   if ((count%30) == 0){
 
   	
-
+animateSpears();
   }
 
   //run every 200 miliseconds
   if ((count%10) == 0){
   	console.log("160 miliseconds has gone by");
-  	animateSpears();
+  	
 
 
   }  

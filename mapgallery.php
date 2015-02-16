@@ -36,8 +36,9 @@ if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
 	        	<nav class="beaudryland-nav">
 	        		<?php if ($loggedin) { ?>
 		        		<ul>
-		        			<li><a href="beaudryland.php">back to game</a></li>
-	        				<li><?php echo $_SESSION['username']; ?> | <a class="link-logout" href="logout.php">logout</a></li>
+		        			<li><a class="button-black" href="beaudryland.php">back to game</a></li>
+	        				<li><span class="button-black"><?php echo $_SESSION['username']; ?></span></li>
+	        				<li><a class="link-logout button-black" href="logout.php">logout</a></li>
 	        			</ul>	
 	        		<?php } else { ?>
 	        			<ul>
