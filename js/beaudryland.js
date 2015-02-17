@@ -57,7 +57,7 @@ var blocktypes = new Array (
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers",
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
 	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground"
 );
 var allblockclasses = ""; 
@@ -72,7 +72,7 @@ var isplaceable = new Array (
 	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","flowers",
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","flowers","talltree",
 	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot"
 );
 var isingredient = new Array (
@@ -101,7 +101,7 @@ var iscollectable = new Array (
 	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers",
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
 	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
 );
 
@@ -760,7 +760,7 @@ loadNewMap = function(type) {
 	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
 	var terrainblocks = [
 		"carrot-inground","carrot-inground","flowers","flowers",
-		"bluemushroom","bluemushroom","mushroom","mushroom"
+		"bluemushroom","bluemushroom","mushroom","mushroom","talltree","talltree","talltree"
 	];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
@@ -2138,6 +2138,12 @@ objectCollisionDetection = function(id, direction) {
 		return true;
 	// ClayBrick
 	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-claybrick') ) {
+		return true;
+	// AppleTree
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-appletree') ) {
+		return true;
+	// TallTree
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-talltree') ) {
 		return true;
 	// Ice Sliding
 	//} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-ice') ) {

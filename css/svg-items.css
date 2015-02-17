@@ -1,3 +1,17 @@
+/* tall blocks */
+.block-talltree { 
+	position:relative;opacity: 0.8;
+	background-image:url(../svg/item-talltree.svg); 
+}
+/*.block-talltree-top { background-image:url(../svg/item-talltree-top.svg); }*/
+.block-talltree:after {
+	content:"";display:block;position:absolute;
+	width:20px;height:20px;top:-19px;left:0;
+	background-image:url(../svg/item-talltree-top.svg);background-size: cover;
+}
+.the-fucking-inventory .block-talltree { opacity: 1; }
+.the-fucking-inventory .block-talltree:after { display:none; }
+/* svg graphics */
 .block-appletree { background-image:url(../svg/item-appletree.svg); }
 .block-heart { background-image:url(../svg/item-heart.svg); }
 .block-heartgrey { background-image:url(../svg/item-heartgrey.svg); }
@@ -13,83 +27,14 @@
 .block-bow { background-image:url(../svg/item-bow.svg); }
 .block-arrow { background-image:url(../svg/item-arrow.svg); }
 .block-flowers { background-image:url(../svg/item-flowers.svg); }
-.block-portal-a { background-image:url(../svg/item-portal-a.svg); }
 .block-portal-b { background-image:url(../svg/item-portal-b.svg); }
-.block-door-locked { background-image:url(../svg/item-door-locked.svg); }.block-portal-a { background-image:url(../svg/item-portal-a.svg); }
+.block-door-locked { background-image:url(../svg/item-door-locked.svg); }
+.block-portal-a { background-image:url(../svg/item-portal-a.svg); }
 .block-mushroom { background-image:url(../svg/item-mushroom.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
 .block-heartblack { background-image:url(../svg/item-heartblack.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block- { background-image:url(../svg/item-.svg); }
-.block-bluemushroom { background-image:url(../svg/item-bluemushroom.svg); }
-.block-bluemushroom { background-image:url(../svg/item-bluemushroom.svg); }
-.block-bluemushroom { background-image:url(../svg/item-bluemushroom.svg); }
 .block-bluemushroom { background-image:url(../svg/item-bluemushroom.svg); }
 .block-yellowmushroom { background-image:url(../svg/item-yellowmushroom.svg); }
-.block- { background-image:url(../svg/item-.svg); }
 .block-greenmushroom { background-image:url(../svg/item-greenmushroom.svg); }
 .block-blackmushroom { background-image:url(../svg/item-blackmushroom.svg); }
-.block- { background-image:url(../svg/item-.svg); }
+.block-talltree-top { background-image:url(../svg/item-talltree-top.svg); }
+.block-talltree { background-image:url(../svg/item-talltree.svg); }
