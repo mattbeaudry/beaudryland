@@ -719,6 +719,13 @@ changeBlockType = function(block, newtype, maptype) {
 		$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
 	}
 };
+var terrainarray = [
+	-1, -2, -3, -4, -5, -6,
+	-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth), -(6+mapwidth),
+	-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth),
+	-(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+	-(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2)
+];
 loadNewMap = function(type) {
 
 	//CREATE RANDOM FOREST TERRAIN
@@ -747,13 +754,6 @@ loadNewMap = function(type) {
 	var terrainblocks = ["water","tree","grass","water","tree","grass","grass","appletree"];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
-		var terrainarray = [
-		0, -1, -2, -3, -4, -5, -6,
-		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth), -(6+mapwidth),
-		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth),
-		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2), -(6+mapwidth*2),
-		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
-		];
 		$.each(terrainarray, function(index, offset){
 			changeBlockType((randomblockid+offset), value, "forest");
 		});
@@ -793,13 +793,6 @@ drawNewWinterMap = function() {
 	var terrainblocks = ["pinetree","ice", "ice", "pinetree", "snow"];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
-		var terrainarray = [
-		0, -1, -2, -3, -4,
-		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
-		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
-		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
-		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
-		];
 		$.each(terrainarray, function(index, offset){
 			changeBlockType((randomblockid+offset), value, "winter");
 		});
@@ -841,13 +834,6 @@ drawNewBeachMap = function() {
 	var terrainblocks = ["sandstone","palmtree","wetsand"];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
-		var terrainarray = [
-		0, -1, -2, -3, -4,
-		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
-		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
-		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
-		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
-		];
 		$.each(terrainarray, function(index, offset){
 			changeBlockType((randomblockid+offset), value, "beach");
 		});
@@ -902,13 +888,6 @@ drawNewJungleMap = function() {
 	var terrainblocks = ["grass","grass","grass","water","water","appletree","pinetree","palmtree"];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
-		var terrainarray = [
-		0, -1, -2, -3, -4,
-		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
-		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
-		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
-		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
-		];
 		$.each(terrainarray, function(index, offset){
 			changeBlockType((randomblockid+offset), value, "jungle");
 		});
@@ -949,13 +928,6 @@ drawNewDesertMap = function() {
 	var terrainblocks = ["water","wetsand"];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
-		var terrainarray = [
-		0, -1, -2, -3, -4,
-		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
-		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
-		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
-		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
-		];
 		$.each(terrainarray, function(index, offset){
 			changeBlockType((randomblockid+offset), value, "desert");
 		});
@@ -2139,12 +2111,14 @@ moveObjectUp = function(id, name) {
 		trace("Can't move object:"+id+" up -- y="+y);	
 		success = false;
 	}
-	/*
-	if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 180) ) {
-		var y = $(window).scrollTop(); 
-		$("html, body").animate({ scrollTop: y - 250 }, 600);
+
+	if (id == 1){
+		if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 180) ) {
+			var y = $(window).scrollTop(); 
+			$("html, body").animate({ scrollTop: y - 250 }, 600);
+		}
 	}
-	*/
+	
 	if (isnightime == true) {
 		clearLighting();
 		lightUpBlock();
@@ -2167,12 +2141,12 @@ moveObjectDown = function(id, name) {
 		trace("Can't move object:"+id+" down -- y="+y);	
 		success = false;
 	}
-	/*
-	if ( $('.the-fucking-player').offset().top > ($(window).scrollTop() + $(window).height() - 60) ) {
-		var y = $(window).scrollTop(); 
-		$("html, body").animate({ scrollTop: y + 250 }, 600);
+	if (id == 1){
+		if ( $('.the-fucking-player').offset().top > ($(window).scrollTop() + $(window).height()) ) {
+			var y = $(window).scrollTop(); 
+			$("html, body").animate({ scrollTop: y + 250 }, 600);
+		}
 	}
-	*/
 	if (isnightime == true) {
 		clearLighting();
 		lightUpBlock();
