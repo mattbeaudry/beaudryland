@@ -22,6 +22,9 @@
 @grass-green: #36ac2a;
 @snow-white: #f5fdff;
 @sand: #d9cfa2;
+@water-blue: #00a2ff;
+@dirt-brown: #6a4107;
+@woodbrown: #916d33;
 
 /* THE BLOCKS */
 .block { 
@@ -33,17 +36,20 @@
 .block { background-size: contain !important; }
 
 /* map backgrounds */
-.the-fucking-map { background:@grass-green; }
+.the-fucking-forest-map { background:@grass-green; }
 .the-fucking-winter-map { background:@snow-white; }
 .the-fucking-beach-map { background:@sand; }
-.the-fucking-space-map { background:#000; }
+.the-fucking-space-map { background:@black; }
+.the-fucking-jungle-map { background:@grass-green; }
+.the-fucking-desert-map { background:@sand; }
+.the-fucking-island-map { background:@water-blue; }
 
 /* forest map */
-.block-dirt { background:#6a4107 url(../img/block-dirt.png) no-repeat; }
+.block-dirt { background:@dirt-brown url(../img/block-dirt.png) no-repeat; }
 .block-grass { background:@grass-green url(../img/block-grass.png) no-repeat; }
-.block-water { background:#00a2ff url(../img/block-water.png) no-repeat; }
+.block-water { background:@water-blue url(../img/block-water.png) no-repeat; }
 .block-tree { background: url(../img/block-tree.png) no-repeat; }
-.block-wood { background:#916d33 url(../img/block-wood.png) no-repeat; }
+.block-wood { background:@woodbrown url(../img/block-wood.png) no-repeat; }
 .block-rock { background: url(../img/block-rock.png) no-repeat; }
 .block-hole { background:@grass-green url(../img/block-hole.png) no-repeat; }
 

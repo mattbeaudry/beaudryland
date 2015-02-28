@@ -28,7 +28,7 @@
   background-size: contain !important;
 }
 /* map backgrounds */
-.the-fucking-map {
+.the-fucking-forest-map {
   background: #36ac2a;
 }
 .the-fucking-winter-map {
@@ -38,7 +38,16 @@
   background: #d9cfa2;
 }
 .the-fucking-space-map {
-  background: #000;
+  background: #000000;
+}
+.the-fucking-jungle-map {
+  background: #36ac2a;
+}
+.the-fucking-desert-map {
+  background: #d9cfa2;
+}
+.the-fucking-island-map {
+  background: #00a2ff;
 }
 /* forest map */
 .block-dirt {

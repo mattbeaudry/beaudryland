@@ -57,8 +57,8 @@ var blocktypes = new Array (
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
-	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground"
+	/*organic*/		"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
+	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground"
 );
 var allblockclasses = ""; 
 $.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
@@ -104,7 +104,6 @@ var iscollectable = new Array (
 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
 	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
 );
-
 var objecttypes = new Array (
     "player-direction-up","player-direction-down","player-direction-left","player-direction-right",
     "player-direction-up-sword","player-direction-down-sword","player-direction-left-sword ","player-direction-right-sword",
@@ -541,6 +540,9 @@ loadNewGame = function() {
 	    nightTime();
 	    lightUpBlock();
 	    */
+	    drawNewJungleMap();
+	    drawNewDesertMap();
+	    drawNewIslandMap();
 
     } else if (maptype == 'game') {
 
@@ -746,10 +748,10 @@ loadNewMap = function(type) {
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
 		var terrainarray = [
-		0, -1, -2, -3, -4,
-		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
-		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
-		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+		0, -1, -2, -3, -4, -5, -6,
+		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth), -(6+mapwidth),
+		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth),
+		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2), -(6+mapwidth*2),
 		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
 		];
 		$.each(terrainarray, function(index, offset){
@@ -873,6 +875,139 @@ drawNewSpaceMap = function() {
 		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-space-map').html(mapdata);
+};
+drawNewJungleMap = function() {
+	// LOAD SPACE MAP FUNCTION
+	$('.maps-wrap').append('<div class="the-fucking-jungle-map" data-maptype="jungle"></div>');
+	$('.the-fucking-jungle-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-jungle-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "tree"; }
+		else if (r>0.98) { blocktype = "pinetree"; }
+		else if (r>0.976) { blocktype = "appletree"; }
+		else if (r>0.972) { blocktype = "palmtree"; }
+		else if (r>0.968) { blocktype = "oaktree"; }
+		else if (r>0.966) { blocktype = "grass"; }
+		else if (r>0.946) { blocktype = "grass"; }
+		else { blocktype = "grass"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-jungle-map').html(mapdata);
+
+	/* CREATE MAP TERRAIN FEATURES */
+	var terrainblocks = ["grass","grass","grass","water","water","appletree","pinetree","palmtree"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		var terrainarray = [
+		0, -1, -2, -3, -4,
+		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
+		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
+		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
+		];
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "jungle");
+		});
+	});
+
+	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
+	var terrainblocks = [
+		"redmushroom","carrot-inground","flowers","flowers","apple","apple",
+		"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver"
+	];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		changeBlockType(randomblockid, value, "jungle");
+	});
+};
+drawNewDesertMap = function() {
+	// LOAD SPACE MAP FUNCTION
+	$('.maps-wrap').append('<div class="the-fucking-desert-map" data-maptype="desert"></div>');
+	$('.the-fucking-desert-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-desert-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "sand"; }
+		else if (r>0.98) { blocktype = "palmtree"; }
+		else if (r>0.976) { blocktype = "sandstone"; }
+		else if (r>0.972) { blocktype = "bluemushroom"; }
+		else if (r>0.968) { blocktype = "water"; }
+		else if (r>0.966) { blocktype = "wetsand"; }
+		else { blocktype = "sand"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-desert-map').html(mapdata);
+
+	/* CREATE MAP TERRAIN FEATURES */
+	var terrainblocks = ["water","wetsand"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		var terrainarray = [
+		0, -1, -2, -3, -4,
+		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
+		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
+		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
+		];
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "desert");
+		});
+	});
+
+	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
+	var terrainblocks = [
+		"redmushroom","flowers","flowers"
+	];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		changeBlockType(randomblockid, value, "desert");
+	});
+};
+drawNewIslandMap = function() {
+	// LOAD SPACE MAP FUNCTION
+	$('.maps-wrap').append('<div class="the-fucking-island-map" data-maptype="island"></div>');
+	$('.the-fucking-island-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-island-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "water"; }
+		else if (r>0.98) { blocktype = "water"; }
+		else if (r>0.976) { blocktype = "wave"; }
+		/*
+		else if (r>0.972) { blocktype = "palmtree"; }
+		else if (r>0.968) { blocktype = "earth"; }
+		else if (r>0.966) { blocktype = "sun"; }
+		*/
+		else { blocktype = "water"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-island-map').html(mapdata);
+	/* CREATE MAP TERRAIN FEATURES */
+	var terrainblocks = ["grass","grass","grass","grass","grass","grass","grass","grass","sand",
+	"grass","grass","grass","grass","grass","grass","grass","grass","sand"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		var terrainarray = [
+		0, -1, -2, -3, -4,
+		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
+		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
+		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
+		];
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "island");
+		});
+	});
 };
 saveMap = function(){
 	trace("save map");
