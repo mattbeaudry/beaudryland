@@ -187,8 +187,10 @@ section h2 {
                     <nav class="pixelpainter-nav">
                         <ul>
                             <li><a href="#" class="button-reset">Reset</a></li>
+                            <!--
                             <li><a href="#" class="button-preview">Preview</a></li>
-                             <li><a href="#" class="button-saveitem">Save Item</a></li>
+                            <li><a href="#" class="button-saveitem">Save Item</a></li>
+                            -->
                         </ul>
                     </nav>
 
@@ -260,30 +262,35 @@ section h2 {
                         <span class="transparent"></span>
                     </div>
                 </section>
-
                
             </div>
 
             <div class="panel-right">
+
+                <?php /*
                 <section>
                     <h2>Preview</h2>
                     <div id="itemsvg"></div>
                     <div id="itemsvg-large"></div>
                     <div class="iteminfo"></div>
                 </section>
+                */ ?>
 
                  <section>
                     <h2>Item Info</h2>
                     <form class="item-builder" action="php/createnewitem.php" method="post">
                         <ul>
+                            <?php /*
                             <li>
                                 <label for="name"></label>
                                 <input class="form-name" type="text" name="name" placeholder="Item Name">
                             </li>
+                            */ ?>
                             <li>
                                 <label for="slug"></label>
                                 <input class="form-slug" type="text" name="slug" placeholder="item-slug">
                             </li>
+                            <?php /*
                             <li>
                                 <fieldset>
                                     <legend for="properties">Properties:</legend>
@@ -337,6 +344,7 @@ section h2 {
                                     </select>
                                 </fieldset>
                             </li>
+                            */ ?>
                             <li>
                                 <input type="submit" class="create-image" value="Save Item">
                             </li>
@@ -350,35 +358,34 @@ section h2 {
                 <section class="panel-bottom clearfix">
                     <h2>Item Gallery</h2>
 
-<?php
+                    <?php
 
-    $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
-    if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
+                        $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
+                        if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
 
-    if ( $result = $mysqli->query("SELECT * FROM beaudryland_items ORDER BY itemid DESC") ) {
-        if($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $name = $row['name'];
-                $slug = $row['slug'];
-                $recipe = $row['recipe'];
-                $svg = $row['image'];
-                $infohtml = '';
-                //$infohtml += 'Slug: '.$slug.'<br>';
-                //$infohtml += 'Recipe: '.$recipe.'<br>';
-                $infohtml .= '<div class="svg-wrap">';
-                $infohtml .= $svg;
-                $infohtml .= '<br>'.$name;
-                $infohtml .= '</div>';
-                echo $infohtml;
-            }
-        }
-    } else {
-        mysql_error();
-    }
+                        if ( $result = $mysqli->query("SELECT * FROM beaudryland_items ORDER BY itemid DESC") ) {
+                            if($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    $name = $row['name'];
+                                    $slug = $row['slug'];
+                                    $recipe = $row['recipe'];
+                                    $svg = $row['image'];
+                                    $infohtml = '';
+                                    //$infohtml += 'Slug: '.$slug.'<br>';
+                                    //$infohtml += 'Recipe: '.$recipe.'<br>';
+                                    $infohtml .= '<div class="svg-wrap">';
+                                    $infohtml .= $svg;
+                                    $infohtml .= '<br>'.$name;
+                                    $infohtml .= '</div>';
+                                    echo $infohtml;
+                                }
+                            }
+                        } else {
+                            mysql_error();
+                        }
 
-?>
-
-
+                    ?>
+                    
                 </section>
             </div>
 

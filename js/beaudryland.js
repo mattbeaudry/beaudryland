@@ -32,7 +32,6 @@ HELPER FUNCTIONS
 
 
 
-
 /////////////
 //  GAME SETTINGS & GLOBALS
 /////////////
@@ -135,7 +134,7 @@ var projectilespeed = 50;
 var bikespeed = 100;
 var disablekeyboardevents = false;
 var playerid = 1;
-var totalhearts = 8;
+var totalhearts = 5;
 var globalmapblockcount = 0;
 var isnightime = false;
 
@@ -1044,6 +1043,35 @@ saveMap = function(){
 //  *PLAYER
 /////////////
 
+showObjectHealth = function(objectid, number) {
+	var rid = uniqueObjectID();
+	var healthlabelhtml = '<div class="damage-label damage-label-id-'+rid+'">'+number+'</div>';
+	$('.objectid-'+objectid).append(healthlabelhtml);
+	$('.damage-label-id-'+rid).css("top","-80px");
+	//$('.damage-label-fade
+	$('.damage-label-id-'+rid).fadeOut(300, function() {
+		$(this).delete();
+	});
+};
+setObjectHealth = function(objectid, value) {
+	$('.objectid-'+objectid).attr("data-blockhealth",value);
+};
+reduceObjectHealth = function(objectid, amount) {
+	var blockhealth = $('.objectid-'+objectid).attr("data-blockhealth");
+	blockhealth = blockhealth - amount;
+	$('.objectid-'+objectid).attr("data-blockhealth",blockhealth);
+	showObjectHealth(1,blockhealth);
+};
+increaseObjectHealth = function(objectid, amount) {
+	var blockhealth = $('.objectid-'+objectid).attr("data-blockhealth");
+	blockhealth = blockhealth + amount;
+	$('.objectid-'+objectid).attr("data-blockhealth",blockhealth);
+};
+reduceBlockHealth = function(blockid, amount) {
+	var blockhealth = $(".block").find("[data-blockid='" + blockid + "']").attr("data-blockhealth");
+	blockhealth = blockhealth - amount;
+	$(".block").find("[data-blockid='" + blockid + "']").attr("data-blockhealth");
+};
 mapPerspective = function() {
 	$('.the-fucking-map').addClass("map-view-perspective");
 	setTimeout(
@@ -1061,21 +1089,25 @@ hallucinate = function() {
 	10000);
 };
 refillHearts = function() {
-	$('.the-fucking-hearts ul .empty').removeClass();;
+	$('.the-fucking-hearts ul .empty').removeClass();
+	setObjectHealth(1,totalhearts);
 };
 addHeart = function() {
 	var emptyhearts = $('.the-fucking-hearts ul .empty').length;
 	//alert(emptyhearts
 	$('.the-fucking-hearts .empty').first().removeClass("empty");
+	increaseObjectHealth(1,1);
 };
 removeHeart = function() {
 	var hearts = totalHearts();
 	if (hearts > 1) {
 		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
+		reduceObjectHealth(1,1);
 	} else if (hearts == totalhearts) {
 		//don't add a heart, max 8
 	} else {
 		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
+		reduceObjectHealth(1,1);
 		gameOver();
 	}
 };
@@ -1094,7 +1126,7 @@ createPlayer = function(id) {
 	//changeBlockType(playerstartblock, "grass"); //make sure player doesn't start overtop an obstacle
 	//var id = uniqueObjectID();
 	var id = 1;
-	$('.the-fucking-map').append('<div data-id='+id+' class=" objectid-'+id+' the-fucking-player player-direction-down"></div>');
+	$('.the-fucking-map').append('<div data-id='+id+' data-blockhealth="5" class=" objectid-'+id+' the-fucking-player player-direction-down"></div>');
 };
 savePlayer = function() {
 	var playerdiv = $('.the-fucking-player').prop("outerHTML");
