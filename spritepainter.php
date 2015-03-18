@@ -3,7 +3,6 @@ include 'config.php';
 ob_start();
 session_start();
 ?>
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -182,7 +181,7 @@ section h2 {
             <div class="panel-left">
 
                 <section>
-                    <h2>Item Builder</h2>
+                    <h2>Canvas</h2>
 
                     <nav class="pixelpainter-nav">
                         <ul>
@@ -226,7 +225,27 @@ section h2 {
                         <div class="canvas-pixel" data-pixel="25" data-color="transparent"></div>
             		</div>
 
+                </section>
+               
+            </div>
+
+            <div class="panel-right">
+
+                <?php /*
+                <section>
+                    <h2>Preview</h2>
+                    <div id="itemsvg"></div>
+                    <div id="itemsvg-large"></div>
+                    <div class="iteminfo"></div>
+                </section>
+                */ ?>
+
+                 <section>
+                    
+                    <h2>Tools</h2>
+
                     <form class="color-code">
+
                         <input class="form-color" type="text" name="hexcode" placeholder="#000000" value="#000000">
                     </form>
 
@@ -261,95 +280,6 @@ section h2 {
                         <span class="white"></span>
                         <span class="transparent"></span>
                     </div>
-                </section>
-               
-            </div>
-
-            <div class="panel-right">
-
-                <?php /*
-                <section>
-                    <h2>Preview</h2>
-                    <div id="itemsvg"></div>
-                    <div id="itemsvg-large"></div>
-                    <div class="iteminfo"></div>
-                </section>
-                */ ?>
-
-                 <section>
-                    <h2>Item Info</h2>
-                    <form class="item-builder" action="php/createnewitem.php" method="post">
-                        <ul>
-                            <?php /*
-                            <li>
-                                <label for="name"></label>
-                                <input class="form-name" type="text" name="name" placeholder="Item Name">
-                            </li>
-                            */ ?>
-                            <li>
-                                <label for="slug"></label>
-                                <input class="form-slug" type="text" name="slug" placeholder="item-slug">
-                            </li>
-                            <?php /*
-                            <li>
-                                <fieldset>
-                                    <legend for="properties">Properties:</legend>
-                                    <input class="form-property" type="checkbox" name="properties" value="isplaceable" checked> Is Placeable<br>
-                                    <input class="form-property" type="checkbox" name="properties" value="isingredient"> Is Ingredient<br>
-                                    <input class="form-property" type="checkbox" name="properties" value="isequipable"> Is Equipable<br>
-                                    <input class="form-property" type="checkbox" name="properties" value="iscollectable" checked> Is Collectable<br>
-                                    <input class="form-property" type="checkbox" name="properties" value="iscollectable" checked> Is Craftable <em>(Recipe Below)</em><br>
-                                
-                                    <select class="form-recipe-1" name="recipe-1">
-                                        <option value="tree">tree</option>
-                                        <option value="rock">rock</option>
-                                        <option value="pinetree">pinetree</option>
-                                        <option value="icerock">icerock</option>
-                                        <option value="palmtree">palmtree</option>
-                                        <option value="wood">wood</option>
-                                        <option value="fire">fire</option>
-                                        <option value="diamond">diamond</option>
-                                        <option value="gold">gold</option>
-                                        <option value="silver">silver</option>
-                                        <option value="oil">oil</option>
-                                        <option value="clay">clay</option>
-                                    </select>
-                                    <select class="form-recipe-2" name="recipe-2">
-                                        <option value="tree">tree</option>
-                                        <option value="rock">rock</option>
-                                        <option value="pinetree">pinetree</option>
-                                        <option value="icerock">icerock</option>
-                                        <option value="palmtree">palmtree</option>
-                                        <option value="wood">wood</option>
-                                        <option value="fire">fire</option>
-                                        <option value="diamond">diamond</option>
-                                        <option value="gold">gold</option>
-                                        <option value="silver">silver</option>
-                                        <option value="oil">oil</option>
-                                        <option value="clay">clay</option>
-                                    </select>
-                                    <select class="form-recipe-3" name="recipe-3">
-                                        <option value="tree">tree</option>
-                                        <option value="rock">rock</option>
-                                        <option value="pinetree">pinetree</option>
-                                        <option value="icerock">icerock</option>
-                                        <option value="palmtree">palmtree</option>
-                                        <option value="wood">wood</option>
-                                        <option value="fire">fire</option>
-                                        <option value="diamond">diamond</option>
-                                        <option value="gold">gold</option>
-                                        <option value="silver">silver</option>
-                                        <option value="oil">oil</option>
-                                        <option value="clay">clay</option>
-                                    </select>
-                                </fieldset>
-                            </li>
-                            */ ?>
-                            <li>
-                                <input type="submit" class="create-image" value="Save Item">
-                            </li>
-                        </ul>
-                    </form>
                 </section>
 
             </div>
