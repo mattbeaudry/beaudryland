@@ -168,6 +168,9 @@ section h2 {
 .form-color {
     width: 180px;
 }
+h1 {
+    text-align:center;
+}
 
 </style>
 
@@ -241,7 +244,7 @@ section h2 {
                 */ ?>
 
                  <section>
-                    
+
                     <h2>Tools</h2>
 
                     <form class="color-code">
