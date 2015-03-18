@@ -32,7 +32,6 @@ HELPER FUNCTIONS
 
 
 
-
 /////////////
 //  GAME SETTINGS & GLOBALS
 /////////////
@@ -48,17 +47,17 @@ var blocktypes = new Array (
 	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
 	/*beach map*/  	"sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
 	/*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
-	/*items*/     	"shovel", "wood", "fire", "door", "door-open", "frisbee", "sign",
+	/*items*/     	"shovel", "fire", "door", "door-open", "frisbee", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*weapons*/		"sword", "spear", "axe",
-	/*instruments*/ "guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
-	/*technology*/	"telescope","computer","2dprinter",
+	/*weapons*/		"sword", "spear", "axe", "bow", "arrow",
+	/*instruments*/ "guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
+	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-
-	"appletree", "heart", "apple"
+	/*organic*/		"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
+	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground"
 );
 var allblockclasses = ""; 
 $.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
@@ -68,41 +67,42 @@ var isplaceable = new Array (
 	/*beach map*/  	"sand", "wetsand", "palmtree", "sandstone",
 	/*items*/     	"wood", "fire", "door", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*technology*/	"telescope","computer","2dprinter",
-	/*instrument*/	"guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
+	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
+	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-
-	"appletree"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","flowers","talltree",
+	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot"
 );
 var isingredient = new Array (
 	/*forest map*/	"tree", "rock",
 	/*winter map*/  "pinetree", "icerock",
 	/*beach map*/  	"palmtree",
-	/*items*/     	"wood", "fire",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay"
+	/*items*/     	"fire",
+	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
+	/*organic*/		"wood","pinewood","palmwood","applewood"
 );
-/* isequipable is used for items with player graphics */
+/* isequipable is used for items with player graphics + animation */
 var isequipable = new Array (
 	/*items*/     	"shovel",
-	/*weapons*/		"sword", "axe",
-	/*transport*/	"bike", "skiis", "canoe", "car", "rocket"
+	/*weapons*/		"sword", "axe", "bow",
+	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
+	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom"
 );
 var iscollectable = new Array (
 	/*forest map*/	"tree", "rock",
 	/*winter map*/  "pinetree", "icerock",
 	/*beach map*/  	"palmtree", "sandstone",
-	/*items*/     	"wood", "fire",
+	/*items*/     	"fire",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*technology*/	"telescope","computer","2dprinter",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*instrument*/	"guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
+	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-
-	"appletree","heart","apple"
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
+	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
 );
-
 var objecttypes = new Array (
     "player-direction-up","player-direction-down","player-direction-left","player-direction-right",
     "player-direction-up-sword","player-direction-down-sword","player-direction-left-sword ","player-direction-right-sword",
@@ -125,7 +125,7 @@ $.each(objecttypes, function(i, v) {
 });
 
 //var craftableblockclasses = "";
-var inventoryslots = 44;
+var inventoryslots = 74;
 var gridunitpx = 20; //must change this px value in css as well
 var enemyspeed = 200;
 var playerspeed = 50;
@@ -134,6 +134,10 @@ var projectilespeed = 50;
 var bikespeed = 100;
 var disablekeyboardevents = false;
 var playerid = 1;
+var totalhearts = 5;
+var globalmapblockcount = 0;
+var isnightime = false;
+
 var objectsArray = [0,2,3];
 uniqueObjectID = function() {
 	var id = objectsArray.length + 1;
@@ -142,107 +146,64 @@ uniqueObjectID = function() {
 	return id;
 };
 
-var globalmapblockcount = 0;
 
 
-
-/////////////
-//  *ANIMATION & TIME
-/////////////
-
-
-/*
-var count = 0;
-var seconds = 0;
-
-function newAnimationFrame() {
-  count++;
-  
-  //run every second
-  if ((count%60) == 0){
-     //world clock
-    seconds++;
-    console.log('time since game started: '+seconds+' seconds');
-  }
-      
-  //call loop again
-  window.requestAnimationFrame(newAnimationFrame);
-}
-// start time!
-newAnimationFrame();
-*/
 
 
 /////////////
 //  *GAME LOGIC
 /////////////
 
+
+// NAVIGATION TOGGLE
+$('.nav-toggle-inventory').on("click", function() {
+	if ( $('body').hasClass("version-phonegap") ) {
+		$('.the-fucking-navigation').hide();
+		$('.the-fucking-inventory').toggle();
+	} else {
+		$('.the-fucking-inventory').toggleClass("the-fucking-inventory-collapsed");
+	}
+});
+
+$('.nav-toggle-menu').on("click", function() {
+	if ( $('body').hasClass("version-phonegap") ) {
+		$('.the-fucking-inventory').hide();
+		$('.the-fucking-navigation').toggle();
+	} else {
+		$('.nav-extra').toggle();
+	}
+});
+
+
 /* PHONEGAP / IPHONE ONLY */
 
 if ( $('body').hasClass("version-phonegap") ){
 
-	/* MOBILE */
-	var mapwidth = 16;
-	var mapheight = 75;
-
-	$(document).ready(function() {
-
-		console.log("MOBILE VERSION");
-
-		setMapSize();
-	    loadNewMap();
-	    createPlayer();
-		
-	    //websql_openDatabase();
-	    //websql_createTable();
-	    /*
-	    drawNewWinterMap();
-	    drawNewBeachMap();
-	    drawNewSpaceMap();
-	    */
-	    
-	    //websql_loadMap();
-
-		setupKeyboardEvents();
-		setupMouseEvents();
-		setupControlPadEvents();
-
-	});
-
-	jQuery('.inventory-close').on("click", function(){
-		toggleInventory();
-	});
-	var toggleInventory = function() {
-		$('.sticky-inventory').fadeToggle(0);
-	}; 
-
-	var db;
-	var shortName='beaudryland';
-	var version='0.1';
-	var displayName='beaudryland';
-	var maxSize = 65536;
-
-	var hideControlPad = function() {
-		$('.the-fucking-controller').fadeToggle();
+	/* MOBILE ONLY FUNCTIONS */
+	var saveGameMobile = function() {
+		achievementCompleted("saveyourgame");
+		websql_saveMap();
 	};
-
+	var loadGameMobile = function() {
+		websql_loadMap();
+	};
 	var websql_openDatabase = function() {
 		db = openDatabase(shortName,version,displayName,maxSize);
 	};
-
 	var websql_createTable = function() {
 		 db.transaction(
 			function(transaction) {
 				transaction.executeSql(
 		            'CREATE TABLE IF NOT EXISTS beaudryland_maps ' +
 					' (mapid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
-					' username TEXT NOT NULL,' +
-					' mapdata TEXT NOT NULL);'
+					' username TEXT NOT NULL, ' +
+					' mapdata TEXT NOT NULL, ' +
+					' invdata TEXT NOT NULL, ' +
+					' achievements TEXT NOT NULL);'
 				);
 			}
 		 );
 	};
-
 	var websql_insertRow = function() {
 		 var username = "matt";
 		 var mapdata = '<div class="block block-grass" data-blocktype="grass"></div>';
@@ -258,7 +219,6 @@ if ( $('body').hasClass("version-phonegap") ){
 			}
 		 );
 	};
-
 	var websql_selectRow = function() {
 		 db.transaction(
 			function(transaction) {
@@ -287,13 +247,22 @@ if ( $('body').hasClass("version-phonegap") ){
 	var websql_saveMap = function() {
 		var username = "username";
 		var mapdata = $('.maps-wrap').html();
+		var invdata = $('.the-fucking-inventory').html();
+
+		var achievements = [];
+		$('.item-achievements .status-completed').each(function(index){
+			var achievementname = $(this).attr('data-achievementname');
+			achievements[index] = achievementname;
+			trace(achievementname);
+		});
+		//achievements = JSON.stringify(achievements);
 
 		db.transaction(
 			function(transaction) {
 				console.log('Attempting to insert ' + username + ' and mapdata');
 				transaction.executeSql(
-					'INSERT INTO beaudryland_maps (username,mapdata) VALUES (?,?);',
-					[username,mapdata],
+					'INSERT INTO beaudryland_maps (username,mapdata,invdata,achievements) VALUES (?,?,?,?);',
+					[username,mapdata,invdata,achievements],
 					null,
 					errorHandler
 				);
@@ -305,22 +274,84 @@ if ( $('body').hasClass("version-phonegap") ){
 	var websql_loadMap = function() {
 		 db.transaction(
 			function(transaction) {
-					transaction.executeSql(
-						'SELECT mapid, username, mapdata FROM beaudryland_maps;',
-						[],
-						function (transaction, result) {
-							for (var i=0; i < result.rows.length; i++) {
-								$('.maps-wrap').html("");
-								var row = result.rows.item(i);
-								console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
-								$('.maps-wrap').html(row.mapdata);
-							}
-						},
-						errorHandler
-					);
+				transaction.executeSql(
+					'SELECT mapid, username, mapdata, invdata, achievements FROM beaudryland_maps;',
+					[],
+					function (transaction, result) {
+						for (var i=0; i < result.rows.length; i++) {
+							$('.maps-wrap').html("");
+							$('.the-fucking-inventory').html("");
+							var row = result.rows.item(i);
+							//console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+							$('.maps-wrap').html(row.mapdata);
+							$('.the-fucking-inventory').html(row.invdata);
+    						
+    						achievements = row.achievements;
+    						achievements = achievements.split(',');
+					    	for (var k=0;k<achievements.length;k++){
+					    		var achievementname = achievements[k];
+					    		trace(achievementname);
+					    		$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+					    	}
+						}
+						setupMouseEvents();
+					},
+					errorHandler
+				);
 			}
 		 );
+
 	};
+
+
+	jQuery('.inventory-close').on("click", function(){
+		toggleInventory();
+	});
+	var toggleInventory = function() {
+		$('.sticky-inventory').fadeToggle(0);
+	}; 
+	var hideControlPad = function() {
+		$('.the-fucking-controller').fadeToggle();
+	};
+
+	/* SETUP MOBILE DATABASE, LOAD MAP IF EXISTS */
+	var db;
+	var shortName='beaudryland';
+	var version='0.1';
+	var displayName='beaudryland';
+	var maxSize = 65536;
+
+	/* MOBILE GAME SETUP */
+	var mapwidth = 16;
+	var mapheight = 75;
+
+	$(document).ready(function() {
+
+		console.log("MOBILE VERSION");
+
+		setMapSize();
+	    loadNewMap();
+	    createPlayer();
+		
+	    //websql_openDatabase();
+	    //websql_createTable();
+	    /*
+	    drawNewWinterMap();
+	    drawNewBeachMap();
+	    drawNewSpaceMap();
+	    */
+	    
+	    //websql_loadMap();
+
+		websql_openDatabase();
+		websql_createTable();
+		loadGameMobile();
+
+		setupKeyboardEvents();
+		setupMouseEvents();
+		setupControlPadEvents();
+
+	});
 
 
 /* DESKTOP ONLY */
@@ -347,10 +378,11 @@ if ( $('body').hasClass("version-phonegap") ){
 
 	//alert/ask player to save before they close the page
 	
-	window.onbeforeunload = confirmExit;
+	
 	function confirmExit() {
 		return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
 	}
+	window.onbeforeunload = confirmExit;
 
 /* MULTIPLAYER ONLY */
 
@@ -373,20 +405,17 @@ if ( $('body').hasClass("version-phonegap") ){
 		//setupControlPadEvents();
 
 	});
-
-	//alert/ask player to save before they close the page
 	
-
 }
 
-var changeOverlayBlockOpacity = function(block, opacity) {
+changeOverlayBlockOpacity = function(block, opacity) {
 	//trace("8-changing block "+block+" to "+newtype);
 	$('.the-fucking-map-overlay .block:eq('+block+')').css("opacity",opacity);
 };
 
-var nightTime = function() {
+nightTime = function() {
 
-	console.log ("night time");
+	console.log("night time");
 	// MAP OVERLAY
     var overlayhtml = "";
     for (var f = 0; f <= (totalmapblocks - 1); f++){
@@ -395,21 +424,32 @@ var nightTime = function() {
 	$('.the-fucking-map-overlay').fadeIn();
 	$('.the-fucking-map-overlay').append(overlayhtml);
 
+	isnightime = true;
+
+	setTimeout(
+		function() {
+			morningTime();
+		}, 
+	10000);
+
 };
 
-var clearLighting = function() {
+//end night time e.g. morning
+morningTime = function() {
+	$('.the-fucking-map-overlay').empty();
+	isnightime = false;
+};
 
+clearLighting = function() {
 	$('.the-fucking-map-overlay .block-dark').css("opacity",1);
-
 };
 
-var lightUpBlock = function() {
+lightUpBlock = function() {
 
 	console.log ("the light!");
 
 	//var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
 	var playerblockid = getObjectCurrentBlock("1") - 1;
-
 	var value = 0;
 
 	changeOverlayBlockOpacity(playerblockid, value);
@@ -479,9 +519,7 @@ var lightUpBlock = function() {
 	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)-1, 0.8);
 
 };
-
-
-var loadNewGame = function() {
+loadNewGame = function() {
 	trace("new user & brand new map");
 	trace("map type is "+maptype);
     loadNewMap();
@@ -491,20 +529,25 @@ var loadNewGame = function() {
     	drawNewWinterMap();
 	    drawNewBeachMap();
 	    drawNewSpaceMap();
-	    getAllItems();
 	    createForestSigns();
+	    createWinterSigns();
+	    createBeachSigns();
+	    getAllItems();
 
 	    //testing
 	    /*
 	    nightTime();
 	    lightUpBlock();
 	    */
+	    drawNewJungleMap();
+	    drawNewDesertMap();
+	    drawNewIslandMap();
 
     } else if (maptype == 'game') {
 
     	createForestSigns();
-    	createAnimal();
-    	createAnimal();
+    	//createAnimal();
+    	//createAnimal();
     	
     }
 };
@@ -533,11 +576,24 @@ loadGame = function(){
 };
 
 
-/* VARIABLES THAT NEED TO BE CREATED AFTER GAME LOGIC RUNS */
-
+/* VARIABLES THAT NEED TO BE CREATED AFTER GAME LOGIC RUNS */                
 var totalmapblocks = mapwidth * mapheight;
 var mapwidthpx = mapwidth * gridunitpx;
 var mapheightpx = mapheight * gridunitpx;
+
+
+/* CREATE INVENTORY SLOT DIVS */
+setupInventorySlots = function() {
+	var invslothtml = "";
+	invslothtml += '<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>';
+	for (var i = 1; i <= inventoryslots; i += 1){
+		invslothtml += '<div class="slot-'+i+' empty" data-blocktype="empty">0</div>';
+	}
+	$('.the-fucking-inventory').html(invslothtml);
+};
+setupInventorySlots();
+
+
 
 
 //////////
@@ -557,34 +613,32 @@ createForestSigns = function(){
 	 	$('.the-fucking-map .block:eq('+blockid+')').attr("data-text", value);
 	 });
 };
-/*
 createWinterSigns = function(){
 	trace("add winter sign clues");
-	 var forestSigns = [
-	 	"Message 1",
-	 	"Message 2",
-	 	"Message 3"
+	 var winterSigns = [
+	 	"Winter Message 1",
+	 	"Winter Message 2",
+	 	"Winter Message 3"
 	 ];
-	 $.each(forestSigns,function(index,value){
+	 $.each(winterSigns,function(index,value){
 	 	var blockid = Math.floor((Math.random() * totalmapblocks) + 1);
-	 	changeBlockType(blockid,"sign");
+	 	changeBlockType(blockid,"sign","winter");
 	 	$('.the-fucking-winter-map .block:eq('+blockid+')').attr("data-text", value);
 	 });
 };
 createBeachSigns = function(){
 	trace("add beach sign clues");
 	var forestSigns = [
-		"Message 1",
-		"Message 2",
-		"Message 3"
+		"Beach Message 1",
+		"Beach Message 2",
+		"Beach Message 3"
 	];
 	$.each(forestSigns,function(index,value){
 		var blockid = Math.floor((Math.random() * totalmapblocks) + 1);
-		changeBlockType(blockid,"sign");
+		changeBlockType(blockid,"sign","beach");
 		$('.the-fucking-beach-map .block:eq('+blockid+')').attr("data-text", value);
 	});
 };
-*/
 
 
 
@@ -596,25 +650,23 @@ createBeachSigns = function(){
 var getAllItems = function() {
 	var inventoryhtml = '';
 	$.each(blocktypes, function(index, value) {
-		if ( value != "diamond-hole" &&
-		 value != "gold-hole" &&
-		 value != "silver-hole" &&
-		 value != "oil-hole" &&
-		 value != "clay-hole" ){
-
+		if ( 	
+			value != "diamond-hole" && value != "gold-hole" && value != "silver-hole" && value != "oil-hole" &&
+		 	value != "clay-hole" && value != "carrot-inground" 
+		){
 			inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
 			if(index==0){ inventoryhtml += 'selected-item'; }
 			inventoryhtml += '" data-blocktype="'+value+'">99</div>';
 		}
 	});
 	$('.the-fucking-inventory').html(inventoryhtml);
+	$('.the-fucking-inventory').show();
 	setupMouseEvents();
-	/*for 
 
+	/*for 
 	'<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>'
 	'<div class="slot-2 empty" data-blocktype="empty">0</div>''*/
 };
-
 
 
 
@@ -654,73 +706,279 @@ setMapSize = function() {
 	$('.the-fucking-map').css("width", mapwidthpx+"px");
 	$('.the-fucking-map').css("height", mapheightpx+"px");
 };
+changeBlockType = function(block, newtype, maptype) {
+	//trace("8-changing block "+block+" to "+newtype);
+	if (maptype) {
+		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').removeClass(allblockclasses);
+		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').addClass("block block-"+newtype);
+		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').attr("data-blocktype", newtype);
+	} else {
+		$('.maps-wrap .block:eq('+block+')').removeClass(allblockclasses);
+		$('.maps-wrap .block:eq('+block+')').addClass("block block-"+newtype);
+		$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
+	}
+};
+var terrainarray = [
+	-1, -2, -3, -4, -5, -6,
+	-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth), -(6+mapwidth),
+	-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth),
+	-(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+	-(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2)
+];
 loadNewMap = function(type) {
 
-	//console.log("about to create new forest map");
-
+	//CREATE RANDOM FOREST TERRAIN
 	var maphtml = "";
 	var overlayhtml = "";
-
 	for (var f = 0; f <= (totalmapblocks - 1); f++){
 		//random block generation
 		var r = Math.random();
 		var blocktype;
 		if (r<0.7) { blocktype = "grass"; }
 		else if (r>0.98) { blocktype = "rock"; }
+		else if (r>0.96) { blocktype = "appletree"; }
+		/*
+		else if (r>0.96) { blocktype = "carrot-inground"; }
+		else if (r>0.94) { blocktype = "flowers"; }
+		else if (r>0.92) { blocktype = "mushroom"; }
+		else if (r>0.90) { blocktype = "appletree"; }
+		*/
 		else if (r>0.8) { blocktype = "tree"; }
 		else { blocktype = "water"; }
 		maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
-
 	$('.the-fucking-map').append(maphtml);
 
-	//console.log("why didnt it work?");
-
-	/* FOREST BIOME */
-	/*
-	var terrainblocks = ["water","tree","grass","water","tree","grass","appletree"];
+	/* CREATE LARGER MAP TERRAIN FEATURES - lakes, forests */
+	var terrainblocks = ["water","tree","grass","water","tree","grass","grass","appletree"];
 	$.each(terrainblocks, function(index, value){
-
-		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
-
-		changeBlockType(randomblockid, value);
-
-		changeBlockType( (randomblockid-1), value);
-		changeBlockType( (randomblockid-2), value);
-		changeBlockType( (randomblockid-3), value);
-		changeBlockType( (randomblockid-4), value);
-
-		changeBlockType( (randomblockid-1+mapwidth), value);
-		changeBlockType( (randomblockid-2+mapwidth), value);
-		changeBlockType( (randomblockid-3+mapwidth), value);
-		changeBlockType( (randomblockid-4+mapwidth), value);
-		changeBlockType( (randomblockid-5+mapwidth), value);
-
-		changeBlockType( (randomblockid-1-mapwidth), value);
-		changeBlockType( (randomblockid-2-mapwidth), value);
-		changeBlockType( (randomblockid-3-mapwidth), value);
-		changeBlockType( (randomblockid-4-mapwidth), value);
-		changeBlockType( (randomblockid-5-mapwidth), value);
-		changeBlockType( (randomblockid-6-mapwidth), value);
-		changeBlockType( (randomblockid-7-mapwidth), value);
-
-		changeBlockType( (randomblockid-1+mapwidth*2), value);
-		changeBlockType( (randomblockid-2+mapwidth*2), value);
-		changeBlockType( (randomblockid-3+mapwidth*2), value);
-		changeBlockType( (randomblockid-4+mapwidth*2), value);
-		changeBlockType( (randomblockid-5+mapwidth*2), value);
-		
-		changeBlockType( (randomblockid-1-mapwidth*2), value);
-		changeBlockType( (randomblockid-2-mapwidth*2), value);
-		changeBlockType( (randomblockid-3-mapwidth*2), value);
-		changeBlockType( (randomblockid-4-mapwidth*2), value);
-		changeBlockType( (randomblockid-5-mapwidth*2), value);
-		changeBlockType( (randomblockid-6-mapwidth*2), value);
-
+		var randomblockid = randomBlockID();
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "forest");
+		});
 	});
-*/
 
+	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
+	var terrainblocks = [
+		"carrot-inground","carrot-inground","flowers","flowers",
+		"bluemushroom","bluemushroom","mushroom","mushroom","talltree","talltree","talltree"
+	];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		changeBlockType(randomblockid, value, "forest");
+	});
 
+};
+drawNewWinterMap = function() {
+
+	/* LOAD WINTER MAP FUNCTION */
+	$('.maps-wrap').append('<div class="the-fucking-winter-map" data-maptype="winter"></div>');
+	$('.the-fucking-winter-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-winter-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "snow"; }
+		else if (r>0.98) { blocktype = "icerock"; }
+		else if (r>0.96) { blocktype = "pinetree"; }
+		else { blocktype = "ice"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-winter-map').html(mapdata);
+
+	/* CREATE MAP TERRAIN FEATURES */
+	var terrainblocks = ["pinetree","ice", "ice", "pinetree", "snow"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "winter");
+		});
+	});
+};
+drawNewBeachMap = function() {
+
+	/* LOAD BEACH MAP FUNCTION */
+	$('.maps-wrap').append('<div class="the-fucking-beach-map" data-maptype="beach"></div>');
+	$('.the-fucking-beach-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-beach-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	var maphalf = 0.5 * mapwidth;
+	var shoreedge = maphalf;
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		var rowposition = f % mapwidth;
+		if (rowposition == 0) {
+			shoreedge = parseInt(Math.random() * 3) + 2;
+			trace(shoreedge);
+		}
+		if (rowposition <= (maphalf-shoreedge)) {
+			if (r<0.96) { blocktype = "sand"; }
+			else if (r>0.98) { blocktype = "sandstone"; }
+			else if (r>0.96) { blocktype = "palmtree"; }
+		} else {
+			if (r<=0.98) { blocktype = "water"; }
+			else if (r>0.98) { blocktype = "wave"; }
+		}
+		//trace(blocktype+rowposition+maphalf);
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-beach-map').html(mapdata);
+
+	/* CREATE MAP TERRAIN FEATURES */
+	/*
+	var terrainblocks = ["sandstone","palmtree","wetsand"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "beach");
+		});
+	});
+	*/
+	//startWaves();
+};
+drawNewSpaceMap = function() {
+	// LOAD SPACE MAP FUNCTION
+	$('.maps-wrap').append('<div class="the-fucking-space-map" data-maptype="space"></div>');
+	$('.the-fucking-space-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-space-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "space"; }
+		else if (r>0.98) { blocktype = "star"; }
+		else if (r>0.976) { blocktype = "bluegalaxy"; }
+		else if (r>0.972) { blocktype = "redgalaxy"; }
+		else if (r>0.968) { blocktype = "earth"; }
+		else if (r>0.966) { blocktype = "sun"; }
+		else { blocktype = "space"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-space-map').html(mapdata);
+};
+drawNewJungleMap = function() {
+	// LOAD SPACE MAP FUNCTION
+	$('.maps-wrap').append('<div class="the-fucking-jungle-map" data-maptype="jungle"></div>');
+	$('.the-fucking-jungle-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-jungle-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "tree"; }
+		else if (r>0.98) { blocktype = "pinetree"; }
+		else if (r>0.976) { blocktype = "appletree"; }
+		else if (r>0.972) { blocktype = "palmtree"; }
+		else if (r>0.968) { blocktype = "oaktree"; }
+		else if (r>0.966) { blocktype = "grass"; }
+		else if (r>0.946) { blocktype = "grass"; }
+		else { blocktype = "grass"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-jungle-map').html(mapdata);
+
+	/* CREATE MAP TERRAIN FEATURES */
+	var terrainblocks = ["grass","grass","grass","water","water","appletree","pinetree","palmtree"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "jungle");
+		});
+	});
+
+	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
+	var terrainblocks = [
+		"redmushroom","carrot-inground","flowers","flowers","apple","apple",
+		"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver"
+	];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		changeBlockType(randomblockid, value, "jungle");
+	});
+};
+drawNewDesertMap = function() {
+	// LOAD SPACE MAP FUNCTION
+	$('.maps-wrap').append('<div class="the-fucking-desert-map" data-maptype="desert"></div>');
+	$('.the-fucking-desert-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-desert-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "sand"; }
+		else if (r>0.98) { blocktype = "palmtree"; }
+		else if (r>0.976) { blocktype = "sandstone"; }
+		else if (r>0.972) { blocktype = "bluemushroom"; }
+		else if (r>0.968) { blocktype = "water"; }
+		else if (r>0.966) { blocktype = "wetsand"; }
+		else { blocktype = "sand"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-desert-map').html(mapdata);
+
+	/* CREATE MAP TERRAIN FEATURES */
+	var terrainblocks = ["water","wetsand"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "desert");
+		});
+	});
+
+	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
+	var terrainblocks = [
+		"redmushroom","flowers","flowers"
+	];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		changeBlockType(randomblockid, value, "desert");
+	});
+};
+drawNewIslandMap = function() {
+	// LOAD SPACE MAP FUNCTION
+	$('.maps-wrap').append('<div class="the-fucking-island-map" data-maptype="island"></div>');
+	$('.the-fucking-island-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-island-map').css("height", mapheightpx+"px");
+	var mapdata = "";
+	for (var f = 0; f <= (totalmapblocks - 1); f++){
+		//random block generation
+		var r = Math.random();
+		var blocktype;
+		if (r<0.9) { blocktype = "water"; }
+		else if (r>0.98) { blocktype = "water"; }
+		else if (r>0.976) { blocktype = "wave"; }
+		/*
+		else if (r>0.972) { blocktype = "palmtree"; }
+		else if (r>0.968) { blocktype = "earth"; }
+		else if (r>0.966) { blocktype = "sun"; }
+		*/
+		else { blocktype = "water"; }
+		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+	}
+	$('.the-fucking-island-map').html(mapdata);
+	/* CREATE MAP TERRAIN FEATURES */
+	var terrainblocks = ["grass","grass","grass","grass","grass","grass","grass","grass","sand",
+	"grass","grass","grass","grass","grass","grass","grass","grass","sand"];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		var terrainarray = [
+		0, -1, -2, -3, -4,
+		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
+		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
+		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
+		];
+		$.each(terrainarray, function(index, offset){
+			changeBlockType((randomblockid+offset), value, "island");
+		});
+	});
 };
 saveMap = function(){
 	trace("save map");
@@ -777,168 +1035,7 @@ saveMap = function(){
 	}
     $('.the-fucking-map').append(playerdiv);
 };
-drawNewBeachMap = function() {
 
-	/* LOAD BEACH MAP FUNCTION */
-	$('.maps-wrap').append('<div class="the-fucking-beach-map" data-maptype="beach"></div>');
-	$('.the-fucking-beach-map').css("width", mapwidthpx+"px");
-	$('.the-fucking-beach-map').css("height", mapheightpx+"px");
-	var mapdata = "";
-	var maphalf = 0.5 * mapwidth;
-	var shoreedge = maphalf;
-	for (var f = 0; f <= (totalmapblocks - 1); f++){
-		//random block generation
-		var r = Math.random();
-		var blocktype;
-		var rowposition = f % mapwidth;
-		if (rowposition == 0) {
-			shoreedge = parseInt(Math.random() * 3) + 2;
-			trace(shoreedge);
-		}
-		if (rowposition <= (maphalf-shoreedge)) {
-			if (r<0.96) { blocktype = "sand"; }
-			else if (r>0.98) { blocktype = "sandstone"; }
-			else if (r>0.96) { blocktype = "palmtree"; }
-		} else {
-			if (r<=0.98) { blocktype = "water"; }
-			else if (r>0.98) { blocktype = "wave"; }
-		}
-		//trace(blocktype+rowposition+maphalf);
-		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
-	}
-	$('.the-fucking-beach-map').html(mapdata);
-
-	var terrainblocks = ["sandstone","palmtree","wetsand"];
-	
-	$.each(terrainblocks, function(index, value){
-
-		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
-
-		changeBlockType(randomblockid, value);
-
-		changeBlockType( (randomblockid-1), value);
-		changeBlockType( (randomblockid-2), value);
-		changeBlockType( (randomblockid-3), value);
-		changeBlockType( (randomblockid-4), value);
-
-		changeBlockType( (randomblockid-1+mapwidth), value);
-		changeBlockType( (randomblockid-2+mapwidth), value);
-		changeBlockType( (randomblockid-3+mapwidth), value);
-		changeBlockType( (randomblockid-4+mapwidth), value);
-		changeBlockType( (randomblockid-5+mapwidth), value);
-
-		changeBlockType( (randomblockid-1-mapwidth), value);
-		changeBlockType( (randomblockid-2-mapwidth), value);
-		changeBlockType( (randomblockid-3-mapwidth), value);
-		changeBlockType( (randomblockid-4-mapwidth), value);
-		changeBlockType( (randomblockid-5-mapwidth), value);
-		changeBlockType( (randomblockid-6-mapwidth), value);
-		changeBlockType( (randomblockid-7-mapwidth), value);
-
-		changeBlockType( (randomblockid-1+mapwidth*2), value);
-		changeBlockType( (randomblockid-2+mapwidth*2), value);
-		changeBlockType( (randomblockid-3+mapwidth*2), value);
-		changeBlockType( (randomblockid-4+mapwidth*2), value);
-		changeBlockType( (randomblockid-5+mapwidth*2), value);
-		
-		changeBlockType( (randomblockid-1-mapwidth*2), value);
-		changeBlockType( (randomblockid-2-mapwidth*2), value);
-		changeBlockType( (randomblockid-3-mapwidth*2), value);
-		changeBlockType( (randomblockid-4-mapwidth*2), value);
-		changeBlockType( (randomblockid-5-mapwidth*2), value);
-		changeBlockType( (randomblockid-6-mapwidth*2), value);
-
-	});
-
-	startWaves();
-};
-drawNewWinterMap = function() {
-	/* LOAD WINTER MAP FUNCTION */
-	$('.maps-wrap').append('<div class="the-fucking-winter-map" data-maptype="winter"></div>');
-	$('.the-fucking-winter-map').css("width", mapwidthpx+"px");
-	$('.the-fucking-winter-map').css("height", mapheightpx+"px");
-	var mapdata = "";
-	for (var f = 0; f <= (totalmapblocks - 1); f++){
-		//random block generation
-		var r = Math.random();
-		var blocktype;
-		if (r<0.9) { blocktype = "snow"; }
-		else if (r>0.98) { blocktype = "icerock"; }
-		else if (r>0.96) { blocktype = "pinetree"; }
-		else { blocktype = "ice"; }
-		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
-	}
-	$('.the-fucking-winter-map').html(mapdata);
-
-	var terrainblocks = ["sandstone","pinetree","ice"];
-	$.each(terrainblocks, function(index, value){
-
-		var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
-
-		changeBlockType(randomblockid, value);
-
-		changeBlockType( (randomblockid-1), value);
-		changeBlockType( (randomblockid-2), value);
-		changeBlockType( (randomblockid-3), value);
-		changeBlockType( (randomblockid-4), value);
-
-		changeBlockType( (randomblockid-1+mapwidth), value);
-		changeBlockType( (randomblockid-2+mapwidth), value);
-		changeBlockType( (randomblockid-3+mapwidth), value);
-		changeBlockType( (randomblockid-4+mapwidth), value);
-		changeBlockType( (randomblockid-5+mapwidth), value);
-
-		changeBlockType( (randomblockid-1-mapwidth), value);
-		changeBlockType( (randomblockid-2-mapwidth), value);
-		changeBlockType( (randomblockid-3-mapwidth), value);
-		changeBlockType( (randomblockid-4-mapwidth), value);
-		changeBlockType( (randomblockid-5-mapwidth), value);
-		changeBlockType( (randomblockid-6-mapwidth), value);
-		changeBlockType( (randomblockid-7-mapwidth), value);
-
-		changeBlockType( (randomblockid-1+mapwidth*2), value);
-		changeBlockType( (randomblockid-2+mapwidth*2), value);
-		changeBlockType( (randomblockid-3+mapwidth*2), value);
-		changeBlockType( (randomblockid-4+mapwidth*2), value);
-		changeBlockType( (randomblockid-5+mapwidth*2), value);
-		
-		changeBlockType( (randomblockid-1-mapwidth*2), value);
-		changeBlockType( (randomblockid-2-mapwidth*2), value);
-		changeBlockType( (randomblockid-3-mapwidth*2), value);
-		changeBlockType( (randomblockid-4-mapwidth*2), value);
-		changeBlockType( (randomblockid-5-mapwidth*2), value);
-		changeBlockType( (randomblockid-6-mapwidth*2), value);
-
-	});
-
-};
-drawNewSpaceMap = function() {
-	// LOAD SPACE MAP FUNCTION
-	$('.maps-wrap').append('<div class="the-fucking-space-map" data-maptype="space"></div>');
-	$('.the-fucking-space-map').css("width", mapwidthpx+"px");
-	$('.the-fucking-space-map').css("height", mapheightpx+"px");
-	var mapdata = "";
-	for (var f = 0; f <= (totalmapblocks - 1); f++){
-		//random block generation
-		var r = Math.random();
-		var blocktype;
-		if (r<0.9) { blocktype = "space"; }
-		else if (r>0.98) { blocktype = "star"; }
-		else if (r>0.976) { blocktype = "bluegalaxy"; }
-		else if (r>0.972) { blocktype = "redgalaxy"; }
-		else if (r>0.968) { blocktype = "earth"; }
-		else if (r>0.966) { blocktype = "sun"; }
-		else { blocktype = "space"; }
-		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
-	}
-	$('.the-fucking-space-map').html(mapdata);
-};
-changeBlockType = function(block, newtype) {
-	//trace("8-changing block "+block+" to "+newtype);
-	$('.maps-wrap .block:eq('+block+')').removeClass(allblockclasses);
-	$('.maps-wrap .block:eq('+block+')').addClass("block block-"+newtype);
-	$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
-};
 
 
 
@@ -946,38 +1043,90 @@ changeBlockType = function(block, newtype) {
 //  *PLAYER
 /////////////
 
+showObjectHealth = function(objectid, number) {
+	var rid = uniqueObjectID();
+	var healthlabelhtml = '<div class="damage-label damage-label-id-'+rid+'">'+number+'</div>';
+	$('.objectid-'+objectid).append(healthlabelhtml);
+	$('.damage-label-id-'+rid).css("top","-80px");
+	//$('.damage-label-fade
+	$('.damage-label-id-'+rid).fadeOut(300, function() {
+		$(this).delete();
+	});
+};
+setObjectHealth = function(objectid, value) {
+	$('.objectid-'+objectid).attr("data-blockhealth",value);
+};
+reduceObjectHealth = function(objectid, amount) {
+	var blockhealth = $('.objectid-'+objectid).attr("data-blockhealth");
+	blockhealth = blockhealth - amount;
+	$('.objectid-'+objectid).attr("data-blockhealth",blockhealth);
+	showObjectHealth(1,blockhealth);
+};
+increaseObjectHealth = function(objectid, amount) {
+	var blockhealth = $('.objectid-'+objectid).attr("data-blockhealth");
+	blockhealth = blockhealth + amount;
+	$('.objectid-'+objectid).attr("data-blockhealth",blockhealth);
+};
+reduceBlockHealth = function(blockid, amount) {
+	var blockhealth = $(".block").find("[data-blockid='" + blockid + "']").attr("data-blockhealth");
+	blockhealth = blockhealth - amount;
+	$(".block").find("[data-blockid='" + blockid + "']").attr("data-blockhealth");
+};
+mapPerspective = function() {
+	$('.the-fucking-map').addClass("map-view-perspective");
+	setTimeout(
+		function() {
+			$('.the-fucking-map').removeClass("map-view-perspective");
+		}, 
+	30000);
+};
+hallucinate = function() {
+	$('body').addClass("mushrooms");
+	setTimeout(
+		function() {
+			$('body').removeClass("mushrooms");
+		}, 
+	10000);
+};
 refillHearts = function() {
-	$('.the-fucking-hearts ul').html('<li></li><li></li><li></li><li></li><li></li>');
+	$('.the-fucking-hearts ul .empty').removeClass();
+	setObjectHealth(1,totalhearts);
 };
 addHeart = function() {
-	$('.the-fucking-hearts ul').append('<li></li>');
+	var emptyhearts = $('.the-fucking-hearts ul .empty').length;
+	//alert(emptyhearts
+	$('.the-fucking-hearts .empty').first().removeClass("empty");
+	increaseObjectHealth(1,1);
 };
 removeHeart = function() {
 	var hearts = totalHearts();
 	if (hearts > 1) {
-		$('.the-fucking-hearts li').last().remove();
+		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
+		reduceObjectHealth(1,1);
+	} else if (hearts == totalhearts) {
+		//don't add a heart, max 8
 	} else {
-		$('.the-fucking-hearts li').remove();
+		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
+		reduceObjectHealth(1,1);
 		gameOver();
 	}
 };
 gameOver = function() {
-	alert("Game Over!");
+	displayDialog("Game Over!");
 	refillHearts();
 };
 totalHearts = function() {
-	var hearts = $('.the-fucking-hearts li').length;
+	var hearts = $('.the-fucking-hearts li.empty').length;
+	hearts = totalhearts - hearts;
 	return hearts;
 };
-
-
 createPlayer = function(id) {
 	trace("Create Player");
 	//var playerstartblock = 466;
 	//changeBlockType(playerstartblock, "grass"); //make sure player doesn't start overtop an obstacle
 	//var id = uniqueObjectID();
 	var id = 1;
-	$('.the-fucking-map').append('<div data-id='+id+' class=" objectid-'+id+' the-fucking-player player-direction-down"></div>');
+	$('.the-fucking-map').append('<div data-id='+id+' data-blockhealth="5" class=" objectid-'+id+' the-fucking-player player-direction-down"></div>');
 };
 savePlayer = function() {
 	var playerdiv = $('.the-fucking-player').prop("outerHTML");
@@ -1000,7 +1149,7 @@ savePlayer = function() {
 	inventoryItems = JSON.stringify(inventoryItems);
 
 	//saving signs
-	var signs = new Array();
+	var signs = [];
 	$('.maps-wrap .block-sign').each(function(index) {
 		var blockid = $(this).attr('data-blockid');
 		var signmessage = $(this).attr('data-text');
@@ -1009,6 +1158,17 @@ savePlayer = function() {
 	});
 	trace("saved signs");
 	signs = JSON.stringify(signs);
+
+	//saving achievements
+	var achievements = [];
+	$('.item-achievements .status-completed').each(function(index){
+		var achievementid = $(this).attr('data-achievementid');
+		var achievementname = $(this).attr('data-achievementname');
+		achievements[index] = {achievementid:achievementid, achievementname:achievementname};
+		trace(achievementname);
+	});
+	achievements = JSON.stringify(achievements);
+
 
 	//trace('signs'+signs);
 
@@ -1027,9 +1187,10 @@ savePlayer = function() {
 		signmessages = JSON.stringify(signmessages);
 	*/
 
-	$.post('php/saveplayer.php', {inventory: inventoryItems, playerdiv: playerdiv, selecteditem: selecteditem, signs: signs}, function(data) {
+	$.post('php/saveplayer.php', {inventory: inventoryItems, playerdiv: playerdiv, selecteditem: selecteditem, signs: signs, achievements: achievements}, function(data) {
         trace("saved player: "+data);
     });
+
 };
 loadPlayer = function(id) {
 	trace("loadplayer");
@@ -1079,6 +1240,18 @@ loadPlayer = function(id) {
     		
     	}
 
+    	// LOADING ACHIEVEMENTS
+    	var achievements = JSON.parse(data.achievements);
+    	
+    	for (var k=0;k<achievements.length;k++){
+    		var achievementid = achievements[k].achievementid;
+    		var achievementname = achievements[k].achievementname;
+    		trace(achievementname);
+    		if (achievementname!=null) {
+    			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+    		}
+    	}
+    
     }, "json");
 };
 
@@ -1087,6 +1260,29 @@ var objectbrain;
 moveObjectToBlock = function(id, destinationblock) {
 
 	stopObjectMovement();
+
+	var playerblock = getObjectCurrentBlock('1');
+	//var destinationblocktype = getBlockType(destinationblock);
+	trace("destinationblock: "+destinationblock);
+	trace("playerblock: "+playerblock);
+
+	if (playerblock == destinationblock) {
+		trace("dont need to move player so stop object and trigger player action on destination block");
+		playerPrimaryAction(destinationblock); 
+		return;
+	} else if ((playerblock-mapwidth-1) == destinationblock) {
+		trace("dont need to move player so stop object and trigger player action on destination block");
+		playerPrimaryAction(destinationblock); 
+		return;
+	} else if ((playerblock+mapwidth-1) == destinationblock) {
+		trace("dont need to move player so stop object and trigger player action on destination block");
+		playerPrimaryAction(destinationblock); 
+		return;
+	} else if ((playerblock-2) == destinationblock) {
+		trace("dont need to move player so stop object and trigger player action on destination block");
+		playerPrimaryAction(destinationblock); 
+		return;
+	}
 
 	trace("move object ID#"+id+" to block"+destinationblock);
 	var t = 0;
@@ -1101,7 +1297,7 @@ moveObjectToBlock = function(id, destinationblock) {
 	trace("destinationblockRow:"+destinationblockRow);
 	
 	//collection of thoughts
-	var objectPath = Array();
+	var objectPath = [];
 
 	function stopObjectMovement() {
 		//alert("stop tha shit!");
@@ -1110,68 +1306,61 @@ moveObjectToBlock = function(id, destinationblock) {
 	
 	function anObjectMovement() {
 
-		//check if enemy isnt dead
-		if ($('.objectid-'+id).length != 0) {
-	
-			var objectX = getObjectCurrentCol(id); 
-			var objectY = getObjectCurrentRow(id);
+		var objectX = getObjectCurrentCol(id) - 1; 
+		var objectY = getObjectCurrentRow(id) - 1;
+		var n = objectPath.length;
+		objectPath.push(objectX+"-"+objectY);
 
-			var n = objectPath.length;
-			objectPath.push(objectX+"-"+objectY);
+		var xDifference = destinationblockColumn - objectX;
+		var yDifference = objectY - destinationblockRow;
+		var POSxDifference = Math.abs(xDifference);
+		var POSyDifference = Math.abs(yDifference);
+		//var r = Math.random();
+		//alert(r);
 
-			//if player stuck abort!
-			if (objectPath[n-1]==objectPath[n]) {
-
-				trace("OBJECT STUCK, ABORTING");
-				
-				stopObjectMovement();
-
+		//if player stuck abort!
+		/*
+		if (objectPath[n-1] == objectPath[n]) {
+			trace("OBJECT STUCK, ABORTING");
+			stopObjectMovement();
+			return;
+		}
+		*/
+		
+		if ( (xDifference == 0) && (yDifference == 0) ){
+			//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
+			trace("reached destination block, stop moving");
+			//alert("i made it to the spot you clicked!");
+			stopObjectMovement();
+		} else if (POSxDifference >= POSyDifference) {
+			if (xDifference >= 0) { 
+				//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
+				moveObjectRight(id, "player");
+			} else { 
+				//trace("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
+				moveObjectLeft(id, "player");
 			}
-
-			var xDifference = destinationblockColumn - objectX; 
-			var yDifference = objectY - destinationblockRow;
-			var POSxDifference = Math.abs(xDifference); 
-			var POSyDifference = Math.abs(yDifference);
-			var r = Math.random();
-			alert(r);
-			
-			if ( (xDifference == 0) && (yDifference == 0) ){
-				//trace("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
-				//trace("reached destination block, stop moving");
-				//alert("i made it to the spot you clicked!");
-				stopObjectMovement();
-			} else if (POSxDifference >= POSyDifference) {
-				if (xDifference >= 0) { 
-					//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
-					moveObjectRight(id, "player");
-				} else { 
-					//trace("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
-					moveObjectLeft(id, "player");
-				}
-			} else {
-				if (yDifference >= 0) { 
-					//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
-					moveObjectUp(id, "player");
-				} else { 
-					//trace("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
-					moveObjectDown(id, "player");
-				}
+		} else {
+			if (yDifference >= 0) { 
+				//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
+				moveObjectUp(id, "player");
+			} else { 
+				//trace("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
+				moveObjectDown(id, "player");
 			}
-			
-			
-			//limit
-
-			if (t > 10) {
-				//trace("Enemy terminated");
-				stopObjectMovement();
-				//killEnemy(id);
-			} else {
-				t++;
-				objectbrain = setTimeout(anObjectMovement, playerspeed); // repeat thought
-			}
-
 		}
 		
+		//limit
+
+		if (t > 10) {
+			//trace("Enemy terminated");
+			stopObjectMovement();
+			//killEnemy(id);
+		} else {
+			t++;
+			objectbrain = setTimeout(anObjectMovement, playerspeed); // repeat thought
+		}
+	
 	}
 
 	
@@ -1501,6 +1690,13 @@ readSign = function(block) {
 //  *ACHIEVEMENTS & NOTIFICATIONS
 /////////////
 
+achievementCompleted = function(achievementname) {
+	if (!$('.item-achievements .achievement-'+achievementname).hasClass('status-completed')) {
+		$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+		displayDialog("You got the "+achievementname+" achievement!");
+	}
+};
+
 displayDialog = function(text) {
 
 	console.log("displayDialog");
@@ -1565,13 +1761,13 @@ var achievements = [
 // fill in the achivement in page content
 // for loop for above object
 
-
+/*
 completeAchievement = function(achievement) {
 
 
 
 };
-
+*/
 
 
 
@@ -1587,7 +1783,8 @@ setupKeyboardEvents = function() {
 			case 37: /* LEFT ARROW */
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(880); }
-					else if (selecteditem == "piano") { playSound(880); }
+					else if (selecteditem == "piano") { playPiano(880); }
+					else if (selecteditem == "drumsticks") { playDrums(880); }
 					else if (selecteditem == "bike") { rideBike("left"); }
 					else if (selecteditem == "skiis") { rideSkiis("left"); }
 					else { moveObjectLeft(1, "player"); }
@@ -1596,7 +1793,8 @@ setupKeyboardEvents = function() {
 			case 38: /* UP ARROW */
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(1320); } 
-					else if (selecteditem == "piano") { playSound(1320); } 
+					else if (selecteditem == "piano") { playPiano(1320); } 
+					else if (selecteditem == "drumsticks") { playDrums(1320); }
 					else if (selecteditem == "bike") { rideBike("up"); } 
 					else if (selecteditem == "skiis") { rideSkiis("up"); }
 					else { moveObjectUp(1, "player"); }
@@ -1605,7 +1803,8 @@ setupKeyboardEvents = function() {
 			case 39: /* RIGHT ARROW */
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(1100); }
-					else if (selecteditem == "piano") { playSound(1100); }
+					else if (selecteditem == "piano") { playPiano(1100); }
+					else if (selecteditem == "drumsticks") { playDrums(1100); }
 					else if (selecteditem == "bike") { rideBike("right"); }
 					else if (selecteditem == "skiis") { rideSkiis("right"); }
 					else { moveObjectRight(1, "player"); }
@@ -1614,7 +1813,8 @@ setupKeyboardEvents = function() {
 			case 40: /* DOWN ARROW */
 				if (disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(660); } 
-					else if (selecteditem == "piano") { playSound(660); } 
+					else if (selecteditem == "piano") { playPiano(660); } 
+					else if (selecteditem == "drumsticks") { playDrums(660); }
 					else if (selecteditem == "bike") { rideBike("down"); } 
 					else if (selecteditem == "skiis") { rideSkiis("down"); }
 					else { moveObjectDown(1, "player"); }
@@ -1712,6 +1912,8 @@ setupControlPadEvents = function() {
 	$('.btn-up').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(1320); } 
+		else if (selecteditem == "piano") { playPiano(1320); } 
+		else if (selecteditem == "drumsticks") { playDrums(1320); }
 		else if (selecteditem == "bike") { rideBike("up"); } 
 		else if (selecteditem == "skiis") { rideSkiis("up"); }
 		else { moveObjectUp(1, "player"); }
@@ -1719,6 +1921,8 @@ setupControlPadEvents = function() {
 	$('.btn-down').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(660); } 
+		else if (selecteditem == "piano") { playPiano(660); } 
+		else if (selecteditem == "drumsticks") { playDrums(660); }
 		else if (selecteditem == "bike") { rideBike("down"); } 
 		else if (selecteditem == "skiis") { rideSkiis("down"); }
 		else { moveObjectDown(1, "player"); } 
@@ -1726,6 +1930,8 @@ setupControlPadEvents = function() {
 	$('.btn-left').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(880); } 
+		else if (selecteditem == "piano") { playPiano(880); } 
+		else if (selecteditem == "drumsticks") { playDrums(880); }
 		else if (selecteditem == "bike") { rideBike("left"); } 
 		else if (selecteditem == "skiis") { rideSkiis("left"); }
 		else { moveObjectLeft(1, "player"); }
@@ -1733,6 +1939,8 @@ setupControlPadEvents = function() {
 	$('.btn-right').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
 		if (selecteditem == "guitar") { playSound(1100); } 
+		else if (selecteditem == "piano") { playPiano(1100); } 
+		else if (selecteditem == "drumsticks") { playDrums(1100); }
 		else if (selecteditem == "bike") { rideBike("right"); } 
 		else if (selecteditem == "skiis") { rideSkiis("right"); }
 		else { moveObjectRight(1, "player"); }
@@ -1755,7 +1963,7 @@ setupMouseEvents = function() {
 	var directions = ["up","down","left","right"];
 
 	// SELECT AN ITEM IN THE INVENTORY
-	$('.the-fucking-inventory > div').on("click", function() {
+	$('.the-fucking-inventory div').on("click", function() {
 		var blocktype = $(this).attr('data-blocktype');
 		//items that are crafting ingredients
 		if ( $.inArray(blocktype, isingredient) > -1 ) {
@@ -1769,8 +1977,8 @@ setupMouseEvents = function() {
 		$(this).addClass('selected-item');
 		var selecteditem = $(this).attr('data-blocktype');
 
-		if ( selecteditem == "sword" ) { createEnemy(); }
-		if ( selecteditem == "spear" ) { createAnimal(); }
+		//if ( selecteditem == "sword" ) { createEnemy(); }
+		//if ( selecteditem == "spear" ) { createAnimal(); }
 		
 		//clear animation classes
 		$.each(directions, function(i, v) {
@@ -1825,6 +2033,7 @@ setupMouseEvents = function() {
 
 	//SAVE THE MAPS AND PLAYER DATA
 	$('.link-savemap').on("mousedown", function(){
+		achievementCompleted("saveyourgame");
 		$('.link-savemap a').html('Saving');
 		enableSaving = function() {
 			$('.link-savemap div').html('<a>Save</a>');
@@ -1873,6 +2082,7 @@ moveObject = function(direction, id, name){
 	}
 };
 moveObjectLeft = function(id, name) {
+	var success = false;
 	changeObjectDirection(id, "left", name);
 	var x = getObjectCurrentPositionX(id);
 	trace(".objectid-"+id);
@@ -1884,13 +2094,19 @@ moveObjectLeft = function(id, name) {
 	if (!collide){ 
 		$('.objectid-'+id).css("left",x);
 		var block = getObjectCurrentBlock(id);
+		success = true;
 	} else {
 		trace("Can't move object:"+id+" left -- x="+x);	
+		success = false;
 	}
-	clearLighting();
-	lightUpBlock();
+	if (isnightime == true) {
+		clearLighting();
+		lightUpBlock();
+	}
+	return success;
 };
 moveObjectRight = function(id, name) {
+	var success = false;
 	changeObjectDirection(id, "right", name);
 	var x = getObjectCurrentPositionX(id);
 	x = stripPX(x);
@@ -1900,13 +2116,19 @@ moveObjectRight = function(id, name) {
 	if (!collide){ 
 		$(".objectid-"+id).css("left",x);
 		var block = getObjectCurrentBlock(id);
+		success = true;
 	} else {
-		trace("Can't move object:"+id+" right -- x="+x);	
+		trace("Can't move object:"+id+" right -- x="+x);
+		success = false;	
 	}
-	clearLighting();
-	lightUpBlock();
+	if (isnightime == true) {
+		clearLighting();
+		lightUpBlock();
+	}
+	return success;
 };
 moveObjectUp = function(id, name) {
+	var success = false;
 	changeObjectDirection(id, "up", name);
 	var y = getObjectCurrentPositionY(id);
 	y = stripPX(y);
@@ -1916,19 +2138,27 @@ moveObjectUp = function(id, name) {
 	if (!collide){ 
 		$('.objectid-'+id).css("top",y);
 		var block = getObjectCurrentBlock(id);
+		success = true;
 	} else {
 		trace("Can't move object:"+id+" up -- y="+y);	
+		success = false;
 	}
-	/*
-	if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 180) ) {
-		var y = $(window).scrollTop(); 
-		$("html, body").animate({ scrollTop: y - 250 }, 600);
+
+	if (id == 1){
+		if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 180) ) {
+			var y = $(window).scrollTop(); 
+			$("html, body").animate({ scrollTop: y - 250 }, 600);
+		}
 	}
-	*/
-	clearLighting();
-	lightUpBlock();
+	
+	if (isnightime == true) {
+		clearLighting();
+		lightUpBlock();
+	}
+	return success;
 };
 moveObjectDown = function(id, name) {
+	var success = false;
 	changeObjectDirection(id, "down", name);
 	var y = getObjectCurrentPositionY(id);
 	y = stripPX(y);
@@ -1938,17 +2168,22 @@ moveObjectDown = function(id, name) {
 	if (!collide){ 
 		$('.objectid-'+id).css("top",y);
 		var block = getObjectCurrentBlock(id);
+		success = true;
 	} else {
 		trace("Can't move object:"+id+" down -- y="+y);	
+		success = false;
 	}
-	/*
-	if ( $('.the-fucking-player').offset().top > ($(window).scrollTop() + $(window).height() - 60) ) {
-		var y = $(window).scrollTop(); 
-		$("html, body").animate({ scrollTop: y + 250 }, 600);
+	if (id == 1){
+		if ( $('.the-fucking-player').offset().top > ($(window).scrollTop() + $(window).height()) ) {
+			var y = $(window).scrollTop(); 
+			$("html, body").animate({ scrollTop: y + 250 }, 600);
+		}
 	}
-	*/
-	clearLighting();
-	lightUpBlock();
+	if (isnightime == true) {
+		clearLighting();
+		lightUpBlock();
+	}
+	return success;
 };
 objectCollisionDetection = function(id, direction) {
 	var block = getObjectCurrentBlock(id);
@@ -1962,9 +2197,20 @@ objectCollisionDetection = function(id, direction) {
 		case "right": block = block; break;
 	}
 
-
+	//teleporting
+	if (id == 1 && $('.maps-wrap .block:eq('+block+')').hasClass('block-portal-a')) {
+		var destinationblock = $('.maps-wrap .block-portal-b').first().attr("data-blockid");
+		//alert(destinationblock);
+		teleportObjectToBlock(1, destinationblock);
+		return true;
+	//teleporting
+	} else if (id == 1 && $('.maps-wrap .block:eq('+block+')').hasClass('block-portal-b')) {
+		var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
+		//alert(destinationblock);
+		teleportObjectToBlock(1, destinationblock);
+		return true;
 	//space travel
-	if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+block+')').hasClass('block-space')) {
+	} else if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+block+')').hasClass('block-space')) {
 		return false;
 	} else if (selecteditem == "rocket") {
 		return true;
@@ -2033,6 +2279,12 @@ objectCollisionDetection = function(id, direction) {
 		return true;
 	// ClayBrick
 	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-claybrick') ) {
+		return true;
+	// AppleTree
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-appletree') ) {
+		return true;
+	// TallTree
+	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-talltree') ) {
 		return true;
 	// Ice Sliding
 	//} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-ice') ) {
@@ -2113,7 +2365,13 @@ getObjectDirection = function(id, name) {
 
 	return direction;
 };
-
+teleportObjectToBlock = function(id, destinationblock) {
+	//$('.objectid-'+id).
+	var left = getBlockLeftByID(destinationblock);
+	var top = getBlockTopByID(destinationblock);
+	setObjectCurrentPositionX(id,left);
+	setObjectCurrentPositionY(id,top);
+};
 
 
 /////////////
@@ -2122,18 +2380,14 @@ getObjectDirection = function(id, name) {
 
 
 
-playerPrimaryAction = function() {
+playerPrimaryAction = function(blockid) {
 
 	var id = 1;
-	//trace("Player primary action");
+
 	//find block that the player is facing
 	var direction = getObjectDirection(id, "player");
 	var playerblock = getObjectCurrentBlock(id);
 	var block = getObjectCurrentBlock(id);
-	
-	//trace("1-"+direction);
-	//trace("2-"+playerblock);
-	//trace("3-"+block);
 	
 	var selecteditem = getSelectedItem();
 	switch (direction) {
@@ -2141,6 +2395,11 @@ playerPrimaryAction = function() {
 		case "down": block = block + (mapwidth-1); break;
 		case "left": block = block - 2; break;
 		case "right": block = block; break;
+	}
+
+	// if there is a blockid supplied run function on that one instead of the block the player is facing
+	if (blockid) {
+		block = blockid;
 	}
 	
 	//trace("4-hitblock "+block);
@@ -2169,10 +2428,11 @@ playerPrimaryAction = function() {
 					killEnemy(enemyid);
 				}
 			});
-		}  
+		}
 	}
 	
 	$('.maps-wrap .block:eq('+block+')').animate({ opacity: 0.9 }, 50, function() {
+		
 		$('.maps-wrap .block:eq('+block+')').css("opacity","1");
 		var selecteditem = getSelectedItem();
 
@@ -2188,12 +2448,29 @@ playerPrimaryAction = function() {
 			changeBlockType(block, "grass");
 			//growGrass(block);
 
-		//eating for hearts
+		//EATING
 		} else if (selecteditem == "heart") {
 			addHeart();
+			removeFromInventory(selecteditem);
 		} else if (selecteditem == "apple") {
 			addHeart();
-
+			removeFromInventory(selecteditem);
+		} else if (selecteditem == "carrot") {
+			addHeart();
+			removeFromInventory(selecteditem);
+		} else if (selecteditem == "mushroom") {
+			addHeart();
+			hallucinate();
+			removeFromInventory(selecteditem);
+		} else if (selecteditem == "bluemushroom") {
+			addHeart();
+			mapPerspective();
+			removeFromInventory(selecteditem);
+		} else if (selecteditem == "blackmushroom") {
+			addHeart();
+			nightTime();
+			lightUpBlock();
+			removeFromInventory(selecteditem);
 		//open/close doors
 		} else if (blocktype == "door") {
 			changeBlockType(block, "door-open");
@@ -2289,7 +2566,25 @@ playerPrimaryAction = function() {
 			//check for selected placable block in inventory
 			//trace('selected item is '+selecteditem);
 			//trace('blocktype is '+blocktype);
-			if ( $.inArray(selecteditem, isplaceable) > -1 ){
+
+			//only allow 1 portal of each type on map
+			if (selecteditem == "portal-a") {
+				$('.maps-wrap .block-portal-a').each(function(index) {
+					var id = $(this).attr("data-blockid");
+					changeBlockType(id, "grass");
+
+				});
+				removeFromInventory(selecteditem);
+				changeBlockType(block, selecteditem);
+			} else if (selecteditem == "portal-b") {
+				$('.maps-wrap .block-portal-b').each(function(index) {
+					var id = $(this).attr("data-blockid");
+					changeBlockType(id, "grass");
+
+				});
+				removeFromInventory(selecteditem);
+				changeBlockType(block, selecteditem);
+			} else if ( $.inArray(selecteditem, isplaceable) > -1 ){
 				//placing/writing on a sign
 				if (selecteditem == "sign"){
 					placeSign(1, block);
@@ -2299,14 +2594,24 @@ playerPrimaryAction = function() {
 				changeBlockType(block, selecteditem);
 			}
 
+			//achievements
+			if (selecteditem == "fire") { 
+				achievementCompleted("keepingwarm"); 
+			}
+			if (selecteditem == "door" || selecteditem == "door-closed") { 
+				achievementCompleted("takingshelter"); 
+			}
+
 		//picking up items & blocks	
 		} else if ($.inArray(blocktype, iscollectable) > -1){
-			var changeblocktotype = "dirt";
-			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "dirt"; } 
-			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "frozendirt"; } 
-			else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "frozendirt"; }
-			else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "wetsand"; }
-			else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "wetsand"; }
+			var changeblocktotype = "grass";
+			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "grass"; } 
+			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "snow"; } 
+			else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "snow"; }
+			else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "sand"; }
+			else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "sand"; }
+			else if (blocktype == "carrot-inground") { blocktype = "carrot"; changeblocktotype = "dirt"; }
+
 			addToInventory(blocktype, "5");
 			changeBlockType(block, changeblocktotype);
 			//growGrass(block);
@@ -2314,6 +2619,17 @@ playerPrimaryAction = function() {
 			//appletrees give player apples
 			if (blocktype == "appletree") {
 				addToInventory("apple", "5");
+			}
+
+			//achievement cuttingwood
+			if (blocktype == "tree" || blocktype == "pinetree" || blocktype == "palmtree" || blocktype == "appletree") {
+				achievementCompleted("cuttingwood");
+			}
+
+			//achievement treasurehunter
+			if (blocktype == "diamond" || blocktype == "gold" || blocktype == "silver" || blocktype == "oil" || blocktype == "clay") {
+				//achievement trasure hunter
+				achievementCompleted("treasurehunter");
 			}
 		}
 
@@ -2324,11 +2640,102 @@ playerPrimaryAction = function() {
 
 
 
+
+/////////////
+//  *ANIMATION & TIME
+/////////////
+
+
+
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame || 
+          window.webkitRequestAnimationFrame || 
+          window.mozRequestAnimationFrame || 
+          window.oRequestAnimationFrame || 
+          window.msRequestAnimationFrame || 
+          function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
+var count = 0;
+var seconds = 0;
+
+function newAnimationFrame() {
+
+  count++;
+  
+  //run every second
+  if ((count%60) == 0){
+     //world clock
+    seconds++;
+    console.log('time since game started: '+seconds+' seconds');
+
+  }
+
+  //run every half second
+  if ((count%30) == 0){
+
+  	
+animateSpears();
+  }
+
+  //run every 200 miliseconds
+  if ((count%10) == 0){
+  	console.log("160 miliseconds has gone by");
+  	
+
+
+  }  
+      
+  //call loop again
+  requestAnimFrame(newAnimationFrame);
+}
+// start time!
+//newAnimationFrame();
+
+
+
+animateSpears = function() {
+
+	$('.the-fucking-spear').each(function(index) {
+    	var direction = $(this).attr("data-direction");
+    	var id = $(this).attr("data-id");
+    	var stillmoving;
+    	switch (direction) {
+			case "up": var stillmoving = moveObjectUp(id, "spear"); break;
+			case "down": var stillmoving = moveObjectDown(id, "spear"); break;
+			case "left": var stillmoving = moveObjectLeft(id, "spear"); break;
+			case "right": var stillmoving = moveObjectRight(id, "spear"); break;
+		}
+		//console.log("stillmoving? "+stillmoving);
+
+		//stop animation if spear collides with something
+		if (stillmoving == false) {
+			$('.objectid-'+id).remove();
+		}
+    });
+};
+	
+
+/*
+
+(function animloop(){
+projectileMotion();
+
+if (t > maxdistance) {
+
+} else {
+requestAnimFrame(animloop);
+t++;
+}
+
+})();
+*/
+
 /////////////
 // *ANIMATION & PROJECTILES
 /////////////
-
-
 
 growGrass = function(block) {
 	trace("growing grass at block" + block);
@@ -2354,7 +2761,7 @@ throwSpear = function(startblock, direction) {
 	//$('.the-fucking-frisbee').remove();
 	var playerdirection = getObjectDirection(1, "player");
 	var id = uniqueObjectID();
-	$('.the-fucking-map').append('<div data-id='+id+' class=" the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'"></div>');
+	$('.the-fucking-map').append('<div data-id='+id+' class=" the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
 	initProjectile("spear", startblock, direction, id);
 };
 initProjectile = function(name, startblock, direction, id) {
@@ -2368,32 +2775,70 @@ initProjectile = function(name, startblock, direction, id) {
 	leftstart = addPX(leftstart);
 	$('.objectid-'+id).css("top",topstart);
 	$('.objectid-'+id).css("left",leftstart);
-	var t = 0;
-	var maxdistance = 20;
+	//var t = 0;
+	//var maxdistance = 10;
 
-	var projectilebrain = setTimeout(projectileMotion, projectilespeed);
+	//var projectilebrain = setTimeout(projectileMotion, projectilespeed);
+
+	//window.requestAnimationFrame(projectileMotion);
+
+	/*
+	window.requestAnimFrame = (function(){
+	  return  window.requestAnimationFrame || 
+	          window.webkitRequestAnimationFrame || 
+	          window.mozRequestAnimationFrame || 
+	          window.oRequestAnimationFrame || 
+	          window.msRequestAnimationFrame || 
+	          function( callback, element){
+	            window.setTimeout(callback, 1000 / 60);
+	          };
+	})();
 
 	function projectileMotion() {
+
 		switch (direction) {
 			case "up": moveObjectUp(id, name); break;
 			case "down": moveObjectDown(id, name); break;
 			case "left": moveObjectLeft(id, name); break;
 			case "right": moveObjectRight(id, name); break;
-		}	
-		//limit
-		if (t > maxdistance) {
-			trace("projectile stopped :(");
-			stopProjectile();
-		} else {
-			t++;
-			projectilebrain = setTimeout(projectileMotion, projectilespeed); // repeat thought
 		}
 		
+		//limit
+		
+			//trace("projectile stopped :(");
+			//stopProjectile();
+		
+			//projectilebrain = setTimeout(projectileMotion, projectilespeed); // repeat thought
+			//window.requestAnimationFrame(projectileMotion);
+		//}//
+		
 	}
+
+	*/
+
+
+/*
+	(function animloop(){
+      projectileMotion();
+      
+      if (t > maxdistance) {
+      	
+      } else {
+      	requestAnimFrame(animloop);
+		t++;
+	  }
+	  
+    })();
+
+*/
+
+	//projectileMotion();
+	/*
 	function stopProjectile() {
 		clearTimeout(projectilebrain);
 		$('.objectid-'+id).remove();
 	}
+	*/
 };
 var mapanimate;
 stopMap = function(){ 
@@ -2622,10 +3067,27 @@ checkCraftingTableForItem = function() {
 
 		case "treepinetreetree": createCraftedItem("table",5); break;
 		case "pinetreewoodwood": createCraftedItem("chair",5); break;
-		case "pinetreepinetreepinetree": createCraftedItem("bed",5); break;
+		case "pinetreepalmpinetree": createCraftedItem("bed",5); break;
 		case "woodpinetreewood": createCraftedItem("chest",5); break;
 		case "diamondsilvergold": createCraftedItem("telescope",1); break;
 		case "diamondsilverdiamond": createCraftedItem("computer",1); break;
+
+		case "palmtreepalmwoodpalmtree": createCraftedItem("drumsticks",3); break;
+
+		case "pinetreeemptyempty": createCraftedItem("pinewood",3); break;
+		case "pinetreepinetreeempty": createCraftedItem("pinewood",6); break;
+		case "pinetreepinetreepinetree": createCraftedItem("pinewood",10); break;
+		case "palmtreeemptyempty": createCraftedItem("palmwood",3); break;
+		case "palmtreepalmtreeempty": createCraftedItem("palmwood",5); break;
+		case "palmtreepalmtreepalmtree": createCraftedItem("palmwood",10); break;
+		case "appletreeemptyempty": createCraftedItem("applewood",3); break;
+		case "appletreeappletreeempty": createCraftedItem("applewood",6); break;
+		case "appletreeappletreeappletree": createCraftedItem("applewood",10); break;
+
+		case "palmpalmwood": createCraftedItem("bow",1); break;
+		case "woodpalmpalm": createCraftedItem("arrow",1); break;
+		case "silversilversilver": createCraftedItem("portala",1); break;
+		case "goldgoldgold": createCraftedItem("portalb",1); break;
 
 		default:
 			$('.the-fucking-crafted-item > .slot').removeClass(allblockclasses);
@@ -2645,14 +3107,41 @@ checkCraftingTableForItem = function() {
 
 guitarFirstNote = true;
 keyboardFirstNote = true;
+drumsFirstNote = true;
 playSound = function(freq) {
+	achievementCompleted("jammingout");
 	//unlock winter map
 	if ((guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
 		drawNewWinterMap(); 
+		createWinterSigns();
 		guitarFirstNote = false; 
 	}
+	sin = T("sin", freq);
+	env = T("adsr", 10, 500);
+	syn = T("*", sin, env).play();
+	sin.bang();
+	env.bang();
+};
+playPiano = function(freq) {
+	achievementCompleted("jammingout");
+	//unlock beach map
 	if ((keyboardFirstNote == true) && ($('.the-fucking-beach-map').length == 0)){ 
 		drawNewBeachMap(); 
+		createBeachSigns();
+		keyboardFirstNote = false; 
+	}
+	sin = T("sin", freq);
+	env = T("adsr", 10, 500);
+	syn = T("*", sin, env).play();
+	sin.bang();
+	env.bang();
+};
+playDrums = function(freq) {
+	achievementCompleted("jammingout");
+	//unlock beach map
+	if ((drumsFirstNote == true) && ($('.the-fucking-space-map').length == 0)){ 
+		drawNewSpaceMap(); 
+		//createBeachSigns();
 		keyboardFirstNote = false; 
 	}
 	sin = T("sin", freq);
@@ -2691,7 +3180,10 @@ playMusic = function(){
 //  *HELPER FUNCTIONS
 /////////////
 
-
+randomBlockID = function () {
+	var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
+	return randomblockid;
+};
 getObjectMap = function(id) {
 	//return which map the object is on
 	return maptype;
@@ -2728,12 +3220,17 @@ getBlockCurrentCol = function(block) {
 */
 getObjectCurrentPositionX = function(id) {
 	var x = $('.objectid-'+id).css("left");
-	//trace("X--"+x);
 	return x;
 };
 getObjectCurrentPositionY = function(id) {
 	var y = $('.objectid-'+id).css("top");
 	return y;
+};
+setObjectCurrentPositionX = function(id,newx) {
+	$('.objectid-'+id).css("left",newx);
+};
+setObjectCurrentPositionY = function(id,newy) {
+	$('.objectid-'+id).css("top",newy);
 };
 getObjectCurrentCol = function(id) {
 	var x = getObjectCurrentPositionX(id);

@@ -1,4 +1,5 @@
 $(function() {
+
   var FADE_TIME = 150; // ms
   var TYPING_TIMER_LENGTH = 400; // ms
   var COLORS = [
@@ -28,9 +29,9 @@ $(function() {
   function addParticipantsMessage (data) {
     var message = '';
     if (data.numUsers === 1) {
-      message += "there's 1 participant";
+      message += "There's 1 participant";
     } else {
-      message += "there are " + data.numUsers + " participants";
+      message += "There are " + data.numUsers + " participants";
     }
     log(message);
   }
@@ -225,6 +226,7 @@ $(function() {
     var currentPosX = $('.player-'+username).css('left');
     var currentPosY = $('.player-'+username).css('top');
 
+    
     if (direction == "right" || direction == "left") {
 
       currentPosX = stripPX(currentPosX);
@@ -234,7 +236,7 @@ $(function() {
         currentPosX = currentPosX - 20; 
       }
       currentPosX = addPX(currentPosX);
-      $('.player-'+username).css('left',currentPosX);
+      //$('.player-'+username).css('left',currentPosX);
       
     } else if (direction == "up" || direction == "down") {
 
@@ -245,80 +247,168 @@ $(function() {
         currentPosY = currentPosY - 20; 
       }
       currentPosY = addPX(currentPosY);
-      $('.player-'+username).css('top',currentPosY);
+      //$('.player-'+username).css('top',currentPosY);
       
     }
+    
 
     var position = new Array();
     position[0] = currentPosX;
     position[1] = currentPosY;
     position[2] = username;
+    position[3] = direction;
 
     //var jsonposition = JSON.stringify(position);
     socket.emit("moveplayer", position);
 
   }
 
-  changePlayerDirection = function(username, direction, name) {
-    trace("changing object:"+id+" direction to "+direction);
-    var selecteditem = getSelectedItem();
+  function changePlayerDirection(username, direction) {
+
+    trace("changing player-"+username+" direction to "+direction);
+
     //animated items
     var playergraphic;
-    if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "car" || selecteditem == "canoe" || selecteditem == "rocket" && name == "player" ){ 
+    /*
+    if ( selecteditem == "sword" ){ 
       playergraphic = "-"+selecteditem;
     } else {
       playergraphic = "";
     }
+    */
+
+    playergraphic = "";
 
     //clear direction and animation classes
-    $('.objectid-'+id).removeClass(name+"-direction-down "+name+"-direction-left "+name+"-direction-right "+name+"-direction-up");
-    $('.objectid-'+id).removeClass(name+"-direction-down"+playergraphic+" "+name+"-direction-left"+playergraphic+" "+name+"-direction-right"+playergraphic+" "+name+"-direction-up"+playergraphic);
+    $('.player-'+username).removeClass("player-direction-down player-direction-left player-direction-right player-direction-up");
+    //$('.player-'+username).removeClass("player-direction-down"+playergraphic+" "+"player-direction-left"+playergraphic+ " "+player-direction-right"+playergraphic+" "+username+"-direction-up"+playergraphic);
 
     switch (direction) {
       case "up":
-        $('.objectid-'+id).addClass(name+"-direction-up");
-        if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-up"+playergraphic); }
+        $('.player-'+username).addClass("player-direction-up");
+        //if (playergraphic!="") { $('.player-'+username).addClass("player-direction-up"+playergraphic); }
         break;
       case "down":
-        $('.objectid-'+id).addClass(name+"-direction-down");
-        if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-down"+playergraphic); }
+        $('.player-'+username).addClass("player-direction-down");
+        //if (playergraphic!="") { $('.player-'+username).addClass("player-direction-down"+playergraphic); }
         break;
       case "left":
-        $('.objectid-'+id).addClass(name+"-direction-left");
-        if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-left"+playergraphic); }
+        $('.player-'+username).addClass("player-direction-left");
+       // if (playergraphic!="") { $('.player-'+username).addClass("player-direction-left"+playergraphic); }
         break;
       case "right":
-        $('.objectid-'+id).addClass(name+"-direction-right");
-        if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-right"+playergraphic); }
+        $('.player-'+username).addClass("player-direction-right");
+        //if (playergraphic!="") { $('.player-'+username).addClass("player-direction-right"+playergraphic); }
         break;
     }
 
-    /*
-    var mobgraphic;
-    if ( name == 'enemy' || name == 'animal' ){ 
-      mobgraphic = "-"+selecteditem;
-    } else {
-      mobgraphic = "";
-    }
-    */
-  };
+  }
 
-  /* Move a player */
+  // Whenever the server emits moveplayer, move that player */
   socket.on("moveplayer", function(position) {
 
     var playername = position.position[2];
     var playerclass = ".player-"+playername;
     var playerleft = position.position[0];
     var playertop = position.position[1];
+    var direction = position.position[3];
 
     console.log("Move "+playername+": "+playerleft+playertop);
 
+    changePlayerDirection(playername,direction);
     $(playerclass).css('left',playerleft);
     $(playerclass).css('top',playertop);
     
   });
 
 
+  // Socket events
+
+  // Whenever the server emits 'login', log the login message
+  socket.on('login', function (data) {
+    connected = true;
+    // Display the welcome message
+    var message = "Welcome to Beaudryland Multiplayer. <strong>WARNING:</strong> This is a rough demo in the works. ";
+    log(message, {
+      prepend: true
+    });
+    addParticipantsMessage(data);
+
+    if (data.numUsers === 1) {
+      console.log('I am the first user so I create the map, and dont need to receive map');
+    } else {
+      console.log('I am NOT the first user so the map already exists, and I only need to receive map');
+      //alert("test is mapdata exists:"+socket.mapdata);
+      socket.emit('load mapdata');
+    }
+
+    listUsers(data.usernames);
+    listPlayers(data.usernames);
+
+  });
+
+  // Whenever the server emits 'new message', update the chat body
+  socket.on('new message', function (data) {
+    addChatMessage(data);
+  });
+
+  // Whenever the server emits 'user joined', log it in the chat body
+  socket.on('user joined', function (data) {
+    log(data.username + ' joined');
+    listUsers(data.usernames);
+    listPlayers(data.usernames);
+  });
+
+  // Whenever the server emits 'user left', log it in the chat body
+  socket.on('user left', function (data) {
+    log(data.username + ' left');
+    removeChatTyping(data);
+    listUsers(data.usernames);
+    listPlayers(data.usernames);
+  });
+
+  // Whenever the server emits 'typing', show the typing message
+  socket.on('typing', function (data) {
+    addChatTyping(data);
+  });
+
+  // Whenever the server emits 'stop typing', kill the typing message
+  socket.on('stop typing', function (data) {
+    removeChatTyping(data);
+  });
+
+  //setup game: load new map, save map data to server
+  socket.on('setup game', function (){
+
+    console.log("SETUP DA GAME EMIT");
+    loadNewMap();
+
+    var mapdata = $('.the-fucking-map').html();
+    socket.emit('save mapdata', mapdata);
+
+    /*
+    socket.on('update map', function (data) {
+      mapdata: mapdata
+    });
+    */
+
+  });
+
+  socket.on('load mapdata', function (data) {
+    //addChatMessage(data);
+    console.log("Load DA MAP");
+    //alert('LOAD MAP==='+data.mapdata);
+    $('.the-fucking-map').append(data.mapdata);
+  });
+
+  //update map
+  socket.on('update map', function (data){
+    console.log("UPDATE DA MAP");
+    console.log('socketdata:'+socket.mapdata);
+    console.log('mapdata:'+data.mapdata);
+    //drawMap(data.mapdata);
+  });
+                                
   // Keyboard events
 
   $window.keydown(function (event) {
@@ -371,98 +461,6 @@ $(function() {
     $inputMessage.focus();
   });
 
-
-
-  // Socket events
-
-  // Whenever the server emits 'login', log the login message
-  socket.on('login', function (data) {
-    connected = true;
-    // Display the welcome message
-    var message = "Welcome to Socket.IO Chat – ";
-    log(message, {
-      prepend: true
-    });
-    addParticipantsMessage(data);
-
-    if (data.numUsers === 1) {
-      console.log('I am the first user so I create the map, and dont need to receive map');
-    } else {
-      console.log('I am NOT the first user so the map already exists, and I only need to receive map');
-      //alert("test is mapdata exists:"+socket.mapdata);
-      socket.emit('load mapdata');
-    }
-
-    listUsers(data.usernames);
-    listPlayers(data.usernames);
-
-  });
-
-  // Whenever the server emits 'new message', update the chat body
-  socket.on('new message', function (data) {
-    addChatMessage(data);
-  });
-
-  // Whenever the server emits 'user joined', log it in the chat body
-  socket.on('user joined', function (data) {
-    log(data.username + ' joined');
-    addParticipantsMessage(data);
-    listUsers(data.usernames);
-    listPlayers(data.usernames);
-  });
-
-  // Whenever the server emits 'user left', log it in the chat body
-  socket.on('user left', function (data) {
-    log(data.username + ' left');
-    addParticipantsMessage(data);
-    removeChatTyping(data);
-    listUsers(data.usernames);
-    listPlayers(data.usernames);
-  });
-
-  // Whenever the server emits 'typing', show the typing message
-  socket.on('typing', function (data) {
-    addChatTyping(data);
-  });
-
-  // Whenever the server emits 'stop typing', kill the typing message
-  socket.on('stop typing', function (data) {
-    removeChatTyping(data);
-  });
-
-  //setup game: load new map, save map data to server
-  socket.on('setup game', function (){
-
-    console.log("SETUP DA GAME EMIT");
-    loadNewMap();
-
-    var mapdata = $('.the-fucking-map').html();
-    socket.emit('save mapdata', mapdata);
-
-    /*
-    socket.on('update map', function (data) {
-      mapdata: mapdata
-    });
-    */
-
-  });
-
-  socket.on('load mapdata', function (data) {
-    //addChatMessage(data);
-    console.log("Load DA MAP");
-    //alert('LOAD MAP==='+data.mapdata);
-    $('.the-fucking-map').append(data.mapdata);
-  });
-
-  //update map
-  socket.on('update map', function (data){
-    console.log("UPDATE DA MAP");
-    console.log('socketdata:'+socket.mapdata);
-    console.log('mapdata:'+data.mapdata);
-    //drawMap(data.mapdata);
-  });
-                                
-  
 
 });
 

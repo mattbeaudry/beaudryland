@@ -12,14 +12,13 @@ server.listen(port, function () {
 // Routing
 app.use(express.static(__dirname + '/public'));
 
-// Chatroom
-
 // usernames which are currently connected to the chat
 var usernames = {};
 var numUsers = 0;
 var mapdata = '';
 
 io.on('connection', function (socket) {
+
   var addedUser = false;
 
   // when the client emits 'new message', this listens and executes
@@ -102,14 +101,21 @@ io.on('connection', function (socket) {
     });
   });
 
+  /*
   socket.on("moveplayer", function(position) {
       io.sockets.emit("moveplayer", {sender: socket.nick, position: position});
   });
+  */
 
 
-
-
-
+  // when the client emits 'typing', we broadcast it to others
+  socket.on('moveplayer', function (position) {
+    console.log('broadcast move player');
+    io.sockets.emit('moveplayer', {
+      sender: socket.username, 
+      position: position
+    });
+  });
 
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
