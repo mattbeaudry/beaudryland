@@ -965,16 +965,10 @@ drawNewIslandMap = function() {
 	$('.the-fucking-island-map').html(mapdata);
 	/* CREATE MAP TERRAIN FEATURES */
 	var terrainblocks = ["grass","grass","grass","grass","grass","grass","grass","grass","sand",
+	"grass","grass","grass","grass","grass","grass","grass","grass","sand",
 	"grass","grass","grass","grass","grass","grass","grass","grass","sand"];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
-		var terrainarray = [
-		0, -1, -2, -3, -4,
-		-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth),
-		-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth), -(7-mapwidth),
-		-(1+mapwidth*2), -(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
-		-(1-mapwidth*2), -(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2), -(6-mapwidth*2)
-		];
 		$.each(terrainarray, function(index, offset){
 			changeBlockType((randomblockid+offset), value, "island");
 		});
