@@ -328,7 +328,7 @@ $(function() {
   socket.on('login', function (data) {
     connected = true;
     // Display the welcome message
-    var message = "Welcome to Beaudryland Multiplayer. <strong>WARNING:</strong> This is a rough demo in the works. ";
+    var message = "Welcome to Beaudryland Multiplayer. WARNING: This is a rough demo in the works. ";
     log(message, {
       prepend: true
     });
