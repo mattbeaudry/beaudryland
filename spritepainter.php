@@ -189,10 +189,8 @@ h1 {
                     <nav class="pixelpainter-nav">
                         <ul>
                             <li><a href="#" class="button-reset">Reset</a></li>
-                            <!--
                             <li><a href="#" class="button-preview">Preview</a></li>
                             <li><a href="#" class="button-saveitem">Save Item</a></li>
-                            -->
                         </ul>
                     </nav>
 
@@ -234,14 +232,12 @@ h1 {
 
             <div class="panel-right">
 
-                <?php /*
                 <section>
                     <h2>Preview</h2>
                     <div id="itemsvg"></div>
                     <div id="itemsvg-large"></div>
                     <div class="iteminfo"></div>
                 </section>
-                */ ?>
 
                  <section>
 

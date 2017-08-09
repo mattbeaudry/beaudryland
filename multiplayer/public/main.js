@@ -226,7 +226,6 @@ $(function() {
     var currentPosX = $('.player-'+username).css('left');
     var currentPosY = $('.player-'+username).css('top');
 
-    
     if (direction == "right" || direction == "left") {
 
       currentPosX = stripPX(currentPosX);
@@ -251,7 +250,6 @@ $(function() {
       
     }
     
-
     var position = new Array();
     position[0] = currentPosX;
     position[1] = currentPosY;

@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
@@ -107,8 +107,7 @@ io.on('connection', function (socket) {
   });
   */
 
-
-  // when the client emits 'typing', we broadcast it to others
+  // when a player moves tell all clients to move that player
   socket.on('moveplayer', function (position) {
     console.log('broadcast move player');
     io.sockets.emit('moveplayer', {

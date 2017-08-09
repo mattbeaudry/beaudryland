@@ -129,7 +129,7 @@ var inventoryslots = 74;
 var gridunitpx = 20; //must change this px value in css as well
 var enemyspeed = 200;
 var playerspeed = 50;
-var animalspeed = 1000;
+var animalspeed = 2000;
 var projectilespeed = 50;
 var bikespeed = 100;
 var disablekeyboardevents = false;
@@ -533,21 +533,23 @@ loadNewGame = function() {
 	    createWinterSigns();
 	    createBeachSigns();
 	    getAllItems();
+	    createAnimal();
+	    //createAnimal();
 
 	    //testing
 	    /*
 	    nightTime();
 	    lightUpBlock();
 	    */
-	    drawNewJungleMap();
-	    drawNewDesertMap();
-	    drawNewIslandMap();
+	    // drawNewJungleMap();
+	    // drawNewDesertMap();
+	    // drawNewIslandMap();
 
     } else if (maptype == 'game') {
 
     	createForestSigns();
-    	//createAnimal();
-    	//createAnimal();
+    	// createAnimal();
+    	// createAnimal();
     	
     }
 };
@@ -745,7 +747,7 @@ loadNewMap = function(type) {
 		*/
 		else if (r>0.8) { blocktype = "tree"; }
 		else { blocktype = "water"; }
-		maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+		maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'">'+f+'</div>';
 	}
 	$('.the-fucking-map').append(maphtml);
 
@@ -871,20 +873,20 @@ drawNewJungleMap = function() {
 		//random block generation
 		var r = Math.random();
 		var blocktype;
-		if (r<0.9) { blocktype = "tree"; }
-		else if (r>0.98) { blocktype = "pinetree"; }
-		else if (r>0.976) { blocktype = "appletree"; }
-		else if (r>0.972) { blocktype = "palmtree"; }
-		else if (r>0.968) { blocktype = "oaktree"; }
-		else if (r>0.966) { blocktype = "grass"; }
-		else if (r>0.946) { blocktype = "grass"; }
+		if (r>0.97) { blocktype = "flowers"; }
+		else if (r>0.8) { blocktype = "pinetree"; }
+		else if (r>0.7) { blocktype = "appletree"; }
+		else if (r>0.6) { blocktype = "palmtree"; }
+		else if (r>0.5) { blocktype = "oaktree"; }
+		else if (r>0.4) { blocktype = "talltree"; }
+		else if (r>0.3) { blocktype = "tree"; } 
 		else { blocktype = "grass"; }
 		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-jungle-map').html(mapdata);
 
 	/* CREATE MAP TERRAIN FEATURES */
-	var terrainblocks = ["grass","grass","grass","water","water","appletree","pinetree","palmtree"];
+	var terrainblocks = ["grass","grass","grass","water","water","water","appletree","pinetree","palmtree"];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
 		$.each(terrainarray, function(index, offset){
@@ -895,7 +897,8 @@ drawNewJungleMap = function() {
 	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
 	var terrainblocks = [
 		"redmushroom","carrot-inground","flowers","flowers","apple","apple",
-		"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver"
+		"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver",
+		"portal-a","portal-b"
 	];
 	$.each(terrainblocks, function(index, value){
 		var randomblockid = randomBlockID();
@@ -1257,28 +1260,28 @@ moveObjectToBlock = function(id, destinationblock) {
 
 	var playerblock = getObjectCurrentBlock('1');
 	//var destinationblocktype = getBlockType(destinationblock);
-	trace("destinationblock: "+destinationblock);
-	trace("playerblock: "+playerblock);
+	//trace("destinationblock: "+destinationblock);
+	//trace("playerblock: "+playerblock);
 
 	if (playerblock == destinationblock) {
-		trace("dont need to move player so stop object and trigger player action on destination block");
+		//trace("dont need to move player so stop object and trigger player action on destination block");
 		playerPrimaryAction(destinationblock); 
 		return;
 	} else if ((playerblock-mapwidth-1) == destinationblock) {
-		trace("dont need to move player so stop object and trigger player action on destination block");
+		//trace("dont need to move player so stop object and trigger player action on destination block");
 		playerPrimaryAction(destinationblock); 
 		return;
 	} else if ((playerblock+mapwidth-1) == destinationblock) {
-		trace("dont need to move player so stop object and trigger player action on destination block");
+		//trace("dont need to move player so stop object and trigger player action on destination block");
 		playerPrimaryAction(destinationblock); 
 		return;
 	} else if ((playerblock-2) == destinationblock) {
-		trace("dont need to move player so stop object and trigger player action on destination block");
+		//trace("dont need to move player so stop object and trigger player action on destination block");
 		playerPrimaryAction(destinationblock); 
 		return;
 	}
 
-	trace("move object ID#"+id+" to block"+destinationblock);
+	//trace("move object ID#"+id+" to block"+destinationblock);
 	var t = 0;
 	var maxthoughts = 100;
 	objectbrain = setTimeout(anObjectMovement, enemyspeed);
@@ -1286,9 +1289,9 @@ moveObjectToBlock = function(id, destinationblock) {
 	var destinationblockColumn = destinationblock % mapwidth;
 	var destinationblockRow = parseInt(destinationblock / mapwidth);
 
-	trace("destinationblock:"+destinationblock);
-	trace("destinationblockCol:"+destinationblockColumn);
-	trace("destinationblockRow:"+destinationblockRow);
+	//trace("destinationblock:"+destinationblock);
+	//trace("destinationblockCol:"+destinationblockColumn);
+	//trace("destinationblockRow:"+destinationblockRow);
 	
 	//collection of thoughts
 	var objectPath = [];
@@ -1402,10 +1405,10 @@ initEnemyBrain = function(id) {
 			var n = enemyPath.length;
 			enemyPath.push(enemyX+"-"+enemyY);
 
-			trace("-----");
-			trace('enemythoughtid-'+n);
-			trace(enemyPath);
-			trace("enemylastpos="+enemyPath[n-1]);
+			//trace("-----");
+			//trace('enemythoughtid-'+n);
+			//trace(enemyPath);
+			//trace("enemylastpos="+enemyPath[n-1]);
 
 			//is player stuck? move random direction
 			if (enemyPath[n-1]==enemyPath[n]) {
@@ -1421,7 +1424,7 @@ initEnemyBrain = function(id) {
 				}
 			}
 
-			trace("-----");
+			//trace("-----");
 			var PEx = playerX - enemyX; var PEy = enemyY - playerY;
 			var posPEx = Math.abs(PEx); var posPEy = Math.abs(PEy);
 			
@@ -1500,10 +1503,10 @@ initAnimalBrain = function(id) {
 			var n = animalPath.length;
 			animalPath.push(animalX+"-"+animalY);
 
-			trace("-----");
-			trace('animalthoughtid-'+n);
-			trace(animalPath);
-			trace("animallastpos="+animalPath[n-1]);
+			//trace("-----");
+			//trace('animalthoughtid-'+n);
+			//trace(animalPath);
+			//trace("animallastpos="+animalPath[n-1]);
 
 
 
@@ -1521,7 +1524,7 @@ initAnimalBrain = function(id) {
 				}
 			//}
 
-			trace("-----");
+			//trace("-----");
 
 			/*
 			var PEx = playerX - animalX; var PEy = animalY - playerY;
@@ -1550,14 +1553,14 @@ initAnimalBrain = function(id) {
 			*/
 			
 			//limit
-			if (t > maxthoughts) {
-				trace("Animal terminated");
-				stopAnimalBrain();
-				killAnimal(id);
-			} else {
+			// if (t > maxthoughts) {
+			// 	trace("Animal terminated");
+			// 	stopAnimalBrain();
+			// 	killAnimal(id);
+			// } else {
 				t++;
 				animalbrain = setTimeout(anAnimalThought, animalspeed); // repeat thought
-			}
+			// }
 
 		}
 		
@@ -2072,15 +2075,15 @@ moveObject = function(direction, id, name){
 		$(".objectid-"+id).css("left",x);
 		var block = getObjectCurrentBlock(id);
 	} else {
-		trace("Can't move object:"+id+" "+direction+" by "+amount);	
+		//trace("Can't move object:"+id+" "+direction+" by "+amount);	
 	}
 };
 moveObjectLeft = function(id, name) {
 	var success = false;
 	changeObjectDirection(id, "left", name);
 	var x = getObjectCurrentPositionX(id);
-	trace(".objectid-"+id);
-	trace("X"+x);
+	//trace(".objectid-"+id);
+	//trace("X"+x);
 	x = stripPX(x);
 	x = x - gridunitpx;
 	x = addPX(x);
@@ -2180,69 +2183,71 @@ moveObjectDown = function(id, name) {
 	return success;
 };
 objectCollisionDetection = function(id, direction) {
-	var block = getObjectCurrentBlock(id);
+	var currentblock = getObjectCurrentBlock(id);
+	var nextblock = '';
 	var row = getObjectCurrentRow(id);
 	var col = getObjectCurrentCol(id);
 	var selecteditem = getSelectedItem();
+
 	switch (direction) {
-		case "up": block = block - (mapwidth + 1); break;
-		case "down": block = block + (mapwidth - 1); break;
-		case "left": block = block - 2; break;
-		case "right": block = block; break;
+		case "up": nextblock = currentblock - (mapwidth + 1); break;
+		case "down": nextblock = currentblock + (mapwidth - 1); break;
+		case "left": nextblock = currentblock - 2; break;
+		case "right": nextblock = currentblock; break;
 	}
 
 	//teleporting
-	if (id == 1 && $('.maps-wrap .block:eq('+block+')').hasClass('block-portal-a')) {
+	if (id == 1 && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-portal-a')) {
 		var destinationblock = $('.maps-wrap .block-portal-b').first().attr("data-blockid");
 		//alert(destinationblock);
 		teleportObjectToBlock(1, destinationblock);
 		return true;
 	//teleporting
-	} else if (id == 1 && $('.maps-wrap .block:eq('+block+')').hasClass('block-portal-b')) {
+	} else if (id == 1 && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-portal-b')) {
 		var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
 		//alert(destinationblock);
 		teleportObjectToBlock(1, destinationblock);
 		return true;
 	//space travel
-	} else if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+block+')').hasClass('block-space')) {
+	} else if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-space')) {
 		return false;
 	} else if (selecteditem == "rocket") {
 		return true;
 	//space
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-space') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-space') ) {
 		return true;
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-star') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-star') ) {
 		return true;
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-redgalaxy') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-redgalaxy') ) {
 		return true;
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-bluegalaxy') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-bluegalaxy') ) {
 		return true;
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-sun') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-sun') ) {
 		return true;
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-earth') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-earth') ) {
 		return true;
 	//canoeing
-	} else if (selecteditem == "canoe" && $('.maps-wrap .block:eq('+block+')').hasClass('block-water')) {
+	} else if (selecteditem == "canoe" && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-water')) {
 		return false;
 	} else if (selecteditem == "canoe") {
 		return true;
 	// Water
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-water') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-water') ) {
 		return true;
 	// Tree	
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-tree') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-tree') ) {
 		return true;
 	// Rock
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-rock') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-rock') ) {
 		return true;
 	// Wood
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-wood') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-wood') ) {
 		return true;
 	// Fire
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-fire') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-fire') ) {
 		return true;
 	// Closed Door
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-door') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-door') ) {
 		return true;
 	// Map right border	
 	} else if ( (direction == "right" ) && (col>=mapwidth) ) {
@@ -2257,31 +2262,32 @@ objectCollisionDetection = function(id, direction) {
 	} else if ( (direction == "down" ) && (row>=(mapheight*3)) ) {
 		return true;	
 	// PineTree	
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-pinetree') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-pinetree') ) {
 		return true;
 	// IceRock
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-icerock') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-icerock') ) {
 		return true;
 	// PalmTree
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-palmtree') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-palmtree') ) {
 		return true;
 	// RockBrick
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-rockbrick') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-rockbrick') ) {
 		return true;
 	// IceRockBrick
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-icerockbrick') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-icerockbrick') ) {
 		return true;
 	// ClayBrick
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-claybrick') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-claybrick') ) {
 		return true;
 	// AppleTree
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-appletree') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-appletree') ) {
 		return true;
 	// TallTree
-	} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-talltree') ) {
+	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-talltree') ) {
 		return true;
+
 	// Ice Sliding
-	//} else if ( $('.maps-wrap .block:eq('+block+')').hasClass('block-ice') ) {
+	//} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-ice') ) {
 		//slidePlayer();
 		//return true;
 	//Bike Riding?
@@ -2289,13 +2295,26 @@ objectCollisionDetection = function(id, direction) {
 	//Canoeing
 	//Driving
 
+	//Hit animal
+	} else if ($('.the-fucking-deer').length != 0) {
+
+		$('.the-fucking-deer').each(function(index) {
+			var objectid = $(this).attr('data-id');
+			var objectblock = getObjectCurrentBlock(objectid);
+			trace('deerblock:'+objectblock+', next player block:'+nextblock+', objectid:'+objectid);
+			if (nextblock == objectblock){
+				alert("touched an animal");
+				return true;
+			}
+		});
+
 	// Walkable land
 	} else {
 		return false;
 	}
 };
 changeObjectDirection = function(id, direction, name) {
-	trace("changing object:"+id+" direction to "+direction);
+	//trace("changing object:"+id+" direction to "+direction);
 	var selecteditem = getSelectedItem();
 	//animated items
 	var playergraphic;
@@ -2654,35 +2673,30 @@ var count = 0;
 var seconds = 0;
 
 function newAnimationFrame() {
-
   count++;
   
   //run every second
   if ((count%60) == 0){
      //world clock
     seconds++;
-    console.log('time since game started: '+seconds+' seconds');
-
+    //console.log('time since game started: '+seconds+' seconds');
   }
 
   //run every half second
   if ((count%30) == 0){
-
-  	
-animateSpears();
+	
   }
 
   //run every 200 miliseconds
   if ((count%10) == 0){
-  	console.log("160 miliseconds has gone by");
-  	
-
-
+  	//console.log("160 miliseconds has gone by");
+  	animateSpears();
   }  
-      
+  
   //call loop again
   requestAnimFrame(newAnimationFrame);
 }
+
 // start time!
 newAnimationFrame();
 
