@@ -519,7 +519,7 @@ lightUpBlock = function() {
 	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)-1, 0.8);
 
 };
-loadNewGame = function() {
+loadNewGame = function(maptype='game') {
 	trace("new user & brand new map");
 	trace("map type is "+maptype);
     loadNewMap();
@@ -1332,18 +1332,18 @@ moveObjectToBlock = function(id, destinationblock) {
 		} else if (POSxDifference >= POSyDifference) {
 			if (xDifference >= 0) { 
 				//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
-				moveObjectRight(id, "player");
+				moveObject("right", id, "player");
 			} else { 
 				//trace("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
-				moveObjectLeft(id, "player");
+				moveObject("left", id, "player");
 			}
 		} else {
 			if (yDifference >= 0) { 
 				//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
-				moveObjectUp(id, "player");
+				moveObject("up", id, "player");
 			} else { 
 				//trace("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
-				moveObjectDown(id, "player");
+				moveObject("down", id, "player");
 			}
 		}
 		
@@ -1417,10 +1417,10 @@ initEnemyBrain = function(id) {
 
 				var randomDirection = Math.floor(Math.random() * 4) + 1;
 				switch(randomDirection){
-					case 1: moveObjectUp(id, "enemy"); break;
-					case 2: moveObjectDown(id, "enemy"); break;
-					case 3: moveObjectLeft(id, "enemy"); break;
-					case 4: moveObjectRight(id, "enemy"); break;
+					case 1: moveObject("up",id, "enemy"); break;
+					case 2: moveObject("down", id, "enemy"); break;
+					case 3: moveObject("left", id, "enemy"); break;
+					case 4: moveObject("right", id, "enemy"); break;
 				}
 			}
 
@@ -1435,18 +1435,18 @@ initEnemyBrain = function(id) {
 			} else if (posPEx >= posPEy) {
 				if (PEx >= 0) { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
-					moveObjectRight(id, "enemy");
+					moveObject("right", id, "enemy");
 				} else { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
-					moveObjectLeft(id, "enemy");
+					moveObject("left", id, "enemy");
 				}
 			} else {
 				if (PEy >= 0) { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
-					moveObjectUp(id, "enemy");
+					moveObject("up", id, "enemy");
 				} else { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
-					moveObjectDown(id, "enemy");
+					moveObject("down", id, "enemy");
 				}
 			}
 			
@@ -1517,10 +1517,10 @@ initAnimalBrain = function(id) {
 
 				var randomDirection = Math.floor(Math.random() * 4) + 1;
 				switch(randomDirection){
-					case 1: moveObjectUp(id, "deer"); break;
-					case 2: moveObjectDown(id, "deer"); break;
-					case 3: moveObjectLeft(id, "deer"); break;
-					case 4: moveObjectRight(id, "deer"); break;
+					case 1: moveObject("up", id, "deer"); break;
+					case 2: moveObject("down", id, "deer"); break;
+					case 3: moveObject("left", id, "deer"); break;
+					case 4: moveObject("right", id, "deer"); break;
 				}
 			//}
 
@@ -1536,18 +1536,18 @@ initAnimalBrain = function(id) {
 			} else if (posPEx >= posPEy) {
 				if (PEx >= 0) { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
-					moveObjectRight(id, "animal");
+					moveObject("right", id, "animal");
 				} else { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
-					moveObjectLeft(id, "animal");
+					moveObject("left", id, "animal");
 				}
 			} else {
 				if (PEy >= 0) { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
-					moveObjectUp(id, "animal");
+					moveObject("up", id, "animal");
 				} else { 
 					//trace("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
-					moveObjectDown(id, "animal");
+					moveObject("down", id, "animal");
 				}
 			}
 			*/
@@ -1784,7 +1784,7 @@ setupKeyboardEvents = function() {
 					else if (selecteditem == "drumsticks") { playDrums(880); }
 					else if (selecteditem == "bike") { rideBike("left"); }
 					else if (selecteditem == "skiis") { rideSkiis("left"); }
-					else { moveObjectLeft(1, "player"); }
+					else { moveObject("left", 1, "player"); }
 				}
 				break;
 			case 38: /* UP ARROW */
@@ -1794,7 +1794,7 @@ setupKeyboardEvents = function() {
 					else if (selecteditem == "drumsticks") { playDrums(1320); }
 					else if (selecteditem == "bike") { rideBike("up"); } 
 					else if (selecteditem == "skiis") { rideSkiis("up"); }
-					else { moveObjectUp(1, "player"); }
+					else { moveObject("up", 1, "player"); }
 				}
 				break;
 			case 39: /* RIGHT ARROW */
@@ -1804,7 +1804,7 @@ setupKeyboardEvents = function() {
 					else if (selecteditem == "drumsticks") { playDrums(1100); }
 					else if (selecteditem == "bike") { rideBike("right"); }
 					else if (selecteditem == "skiis") { rideSkiis("right"); }
-					else { moveObjectRight(1, "player"); }
+					else { moveObject("right", 1, "player"); }
 				}
 				break;
 			case 40: /* DOWN ARROW */
@@ -1814,7 +1814,7 @@ setupKeyboardEvents = function() {
 					else if (selecteditem == "drumsticks") { playDrums(660); }
 					else if (selecteditem == "bike") { rideBike("down"); } 
 					else if (selecteditem == "skiis") { rideSkiis("down"); }
-					else { moveObjectDown(1, "player"); }
+					else { moveObject("down", 1, "player"); }
 				}
 				break;
 			case 32: /* SPACE */
@@ -1913,7 +1913,7 @@ setupControlPadEvents = function() {
 		else if (selecteditem == "drumsticks") { playDrums(1320); }
 		else if (selecteditem == "bike") { rideBike("up"); } 
 		else if (selecteditem == "skiis") { rideSkiis("up"); }
-		else { moveObjectUp(1, "player"); }
+		else { moveObject("up", 1, "player"); }
 	});
 	$('.btn-down').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
@@ -1922,7 +1922,7 @@ setupControlPadEvents = function() {
 		else if (selecteditem == "drumsticks") { playDrums(660); }
 		else if (selecteditem == "bike") { rideBike("down"); } 
 		else if (selecteditem == "skiis") { rideSkiis("down"); }
-		else { moveObjectDown(1, "player"); } 
+		else { moveObject("down", 1, "player"); } 
 	});
 	$('.btn-left').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
@@ -1931,7 +1931,7 @@ setupControlPadEvents = function() {
 		else if (selecteditem == "drumsticks") { playDrums(880); }
 		else if (selecteditem == "bike") { rideBike("left"); } 
 		else if (selecteditem == "skiis") { rideSkiis("left"); }
-		else { moveObjectLeft(1, "player"); }
+		else { moveObject("left", 1, "player"); }
 	});
 	$('.btn-right').on("touchstart", function() { 
 		selecteditem = getSelectedItem();
@@ -1940,7 +1940,7 @@ setupControlPadEvents = function() {
 		else if (selecteditem == "drumsticks") { playDrums(1100); }
 		else if (selecteditem == "bike") { rideBike("right"); } 
 		else if (selecteditem == "skiis") { rideSkiis("right"); }
-		else { moveObjectRight(1, "player"); }
+		else { moveObject("right", 1, "player"); }
 	});
 	$('.btn-a').on("touchstart", function() { 
 		playerPrimaryAction(); 
@@ -2063,125 +2063,54 @@ setupMouseEvents = function() {
 
 
 moveObject = function(direction, id, name){
-	changeObjectDirection(id, direction, name);
+	var success = false;
 	var x = getObjectCurrentPositionX(id);
-	x = stripPX(x); x = x - gridunitpx; x = addPX(x);
 	var y = getObjectCurrentPositionY(id);
-	y = stripPX(y); y = y - gridunitpx; y = addPX(y);
-	if (direction == "left" || direction == "right"){ var amount = x; } 
-	else { var amount = y; }
-	var collide = objectCollisionDetection(id, direction);
-	if (!collide){
-		$(".objectid-"+id).css("left",x);
-		var block = getObjectCurrentBlock(id);
-	} else {
-		//trace("Can't move object:"+id+" "+direction+" by "+amount);	
-	}
-};
-moveObjectLeft = function(id, name) {
-	var success = false;
-	changeObjectDirection(id, "left", name);
-	var x = getObjectCurrentPositionX(id);
-	//trace(".objectid-"+id);
-	//trace("X"+x);
 	x = stripPX(x);
-	x = x - gridunitpx;
-	x = addPX(x);
-	var collide = objectCollisionDetection(id, "left");
-	if (!collide){ 
-		$('.objectid-'+id).css("left",x);
-		var block = getObjectCurrentBlock(id);
-		success = true;
-	} else {
-		trace("Can't move object:"+id+" left -- x="+x);	
-		success = false;
-	}
-	if (isnightime == true) {
-		clearLighting();
-		lightUpBlock();
-	}
-	return success;
-};
-moveObjectRight = function(id, name) {
-	var success = false;
-	changeObjectDirection(id, "right", name);
-	var x = getObjectCurrentPositionX(id);
-	x = stripPX(x);
-	x = x + gridunitpx;
-	x = addPX(x);
-	var collide = objectCollisionDetection(id, "right");
-	if (!collide){ 
-		$(".objectid-"+id).css("left",x);
-		var block = getObjectCurrentBlock(id);
-		success = true;
-	} else {
-		trace("Can't move object:"+id+" right -- x="+x);
-		success = false;	
-	}
-	if (isnightime == true) {
-		clearLighting();
-		lightUpBlock();
-	}
-	return success;
-};
-moveObjectUp = function(id, name) {
-	var success = false;
-	changeObjectDirection(id, "up", name);
-	var y = getObjectCurrentPositionY(id);
 	y = stripPX(y);
-	y = y - gridunitpx;
-	y = addPX(y);
-	var collide = objectCollisionDetection(id, "up");
-	if (!collide){ 
-		$('.objectid-'+id).css("top",y);
-		var block = getObjectCurrentBlock(id);
+
+	changeObjectDirection(id, direction, name);
+
+	if (!objectCollisionDetection(id, direction)){
+		switch (direction) {
+			case "up": 
+				y = y - gridunitpx; 
+				y = addPX(y);
+				$(".objectid-"+id).css("top",y); 
+				break;
+
+			case "down": 
+				y = y + gridunitpx; 
+				y = addPX(y);
+				$(".objectid-"+id).css("top",y); 
+				break;
+
+			case "left": 
+				x = x - gridunitpx; 
+				x = addPX(x);
+				$(".objectid-"+id).css("left",x); 
+				break;
+
+			case "right": 
+				x = x + gridunitpx; 
+				x = addPX(x);
+				$(".objectid-"+id).css("left",x); 
+				break;
+		}
 		success = true;
 	} else {
-		trace("Can't move object:"+id+" up -- y="+y);	
+		//trace("Can't move object id:"+id+" "+direction);	
 		success = false;
 	}
 
-	if (id == 1){
-		if ( $('.the-fucking-player').offset().top < ($(window).scrollTop() + 180) ) {
-			var y = $(window).scrollTop(); 
-			$("html, body").animate({ scrollTop: y - 250 }, 600);
-		}
-	}
-	
 	if (isnightime == true) {
 		clearLighting();
 		lightUpBlock();
 	}
+
 	return success;
 };
-moveObjectDown = function(id, name) {
-	var success = false;
-	changeObjectDirection(id, "down", name);
-	var y = getObjectCurrentPositionY(id);
-	y = stripPX(y);
-	y = y + gridunitpx;
-	y = addPX(y);
-	var collide = objectCollisionDetection(id, "down");
-	if (!collide){ 
-		$('.objectid-'+id).css("top",y);
-		var block = getObjectCurrentBlock(id);
-		success = true;
-	} else {
-		trace("Can't move object:"+id+" down -- y="+y);	
-		success = false;
-	}
-	if (id == 1){
-		if ( $('.the-fucking-player').offset().top > ($(window).scrollTop() + $(window).height()) ) {
-			var y = $(window).scrollTop(); 
-			$("html, body").animate({ scrollTop: y + 250 }, 600);
-		}
-	}
-	if (isnightime == true) {
-		clearLighting();
-		lightUpBlock();
-	}
-	return success;
-};
+
 objectCollisionDetection = function(id, direction) {
 	var currentblock = getObjectCurrentBlock(id);
 	var nextblock = '';
@@ -2301,9 +2230,9 @@ objectCollisionDetection = function(id, direction) {
 		$('.the-fucking-deer').each(function(index) {
 			var objectid = $(this).attr('data-id');
 			var objectblock = getObjectCurrentBlock(objectid);
-			trace('deerblock:'+objectblock+', next player block:'+nextblock+', objectid:'+objectid);
+			trace('deer block:'+objectblock+', next block:'+nextblock+', objectid:'+objectid);
 			if (nextblock == objectblock){
-				alert("touched an animal");
+				trace("touched an animal");
 				return true;
 			}
 		});
@@ -2709,10 +2638,10 @@ animateSpears = function() {
     	var id = $(this).attr("data-id");
     	var stillmoving;
     	switch (direction) {
-			case "up": var stillmoving = moveObjectUp(id, "spear"); break;
-			case "down": var stillmoving = moveObjectDown(id, "spear"); break;
-			case "left": var stillmoving = moveObjectLeft(id, "spear"); break;
-			case "right": var stillmoving = moveObjectRight(id, "spear"); break;
+			case "up": var stillmoving = moveObject("up", id, "spear"); break;
+			case "down": var stillmoving = moveObject("down", id, "spear"); break;
+			case "left": var stillmoving = moveObject("left", id, "spear"); break;
+			case "right": var stillmoving = moveObject("right", id, "spear"); break;
 		}
 		//console.log("stillmoving? "+stillmoving);
 
@@ -2803,10 +2732,10 @@ initProjectile = function(name, startblock, direction, id) {
 	function projectileMotion() {
 
 		switch (direction) {
-			case "up": moveObjectUp(id, name); break;
-			case "down": moveObjectDown(id, name); break;
-			case "left": moveObjectLeft(id, name); break;
-			case "right": moveObjectRight(id, name); break;
+			case "up": moveObject("up", id, name); break;
+			case "down": moveObject("down", id, name); break;
+			case "left": moveObject("left", id, name); break;
+			case "right": moveObject("right", id, name); break;
 		}
 		
 		//limit
@@ -2932,10 +2861,10 @@ startBiking = function (direction) {
 	var playerdirection = getObjectDirection(1, "player");
 	trace("player current direction: "+playerdirection);
 	switch (direction) {
-		case "up": moveObjectUp(1, "player"); break;
-		case "down": moveObjectDown(1, "player"); break;
-		case "left": moveObjectLeft(1, "player"); break;
-		case "right": moveObjectRight(1, "player"); break;
+		case "up": moveObject("up", 1, "player"); break;
+		case "down": moveObject("down", 1, "player"); break;
+		case "left": moveObject("left", 1, "player"); break;
+		case "right": moveObject("right", 1, "player"); break;
 	}
 	ridingbike = setTimeout(function() {
     	startBiking(direction);
@@ -2946,15 +2875,15 @@ stopBiking = function () {
 };
 rideSkiis = function(direction) {
 	if (direction == "up"){
-		moveObjectUp(1, "player");
+		moveObject("up", 1, "player");
 		changeObjectDirection(1,"up", "player");
 		stopMap();
 	} else {
 		switch (direction) {
-			case "up": moveObjectUp(1, "player"); break;
-			case "down": moveObjectDown(1, "player"); break;
-			case "left": moveObjectLeft(1, "player"); break;
-			case "right": moveObjectRight(1, "player"); break;
+			case "up": moveObject("up",1, "player"); break;
+			case "down": moveObject("down", 1, "player"); break;
+			case "left": moveObject("left", 1, "player"); break;
+			case "right": moveObject("right", 1, "player"); break;
 		}
 		if (mapanimate == null) {
 			moveMap();
