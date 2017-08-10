@@ -583,11 +583,11 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.js"><\/script>')</script>
         <script src="js/vendor/jquery.color.js"></script>
-        <script src="js/vendor/timbre.js"></script>
+        <script src="js/vendor/timbre.dev.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/beaudryland.js"></script>
 
-        <!-- BEAUDRYLAND SOURCE CODE 
+        <!-- BEAUDRYLAND SOURCE CODE
         <script src="js/beaudryland.js"></script>
         <script src="js/beaudryland-settings.js"></script>
         <script src="js/beaudryland-game.js"></script>
