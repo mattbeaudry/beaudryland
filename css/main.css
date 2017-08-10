@@ -1,4 +1,3 @@
-@import url('http://fonts.googleapis.com/css?family=Press+Start+2P');
 /*
  * HTML5 Boilerplate
  *
@@ -9,6 +8,7 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
+@import url('http://fonts.googleapis.com/css?family=Press+Start+2P');
 html,
 button,
 input,
@@ -52,7 +52,6 @@ fieldset {
  */
 textarea {
   /* resize: vertical; */
-
 }
 *,
 *:after,
@@ -85,7 +84,6 @@ body {
 	font-size:0.8em;
 	text-transform: uppercase;
 	*/
-
 }
 h1,
 h2,
@@ -138,10 +136,8 @@ hr:before {
 .multi-column-2 {
   -moz-column-count: 2;
   /* Firefox */
-
   -webkit-column-count: 2;
   /* Safari and Chrome */
-
   column-count: 2;
 }
 .horizonal-spacing {
@@ -235,7 +231,6 @@ hr:before {
   /*max-width: 120px;
 	overflow: hidden;
 	text-overflow: ellipsis;*/
-
 }
 .button-wrap,
 .button-wrap a {
@@ -505,9 +500,7 @@ hr:before {
   margin-right: 2%;
   margin-bottom: 6%;
   /* float: left; */
-
   /* min-height: 280px; */
-
   display: inline-block;
   vertical-align: top;
 }
@@ -555,7 +548,6 @@ hr:before {
   margin: 0 2% 3.33333333% 0;
   width: 30%;
   /* float: left; */
-
   display: inline-block;
   vertical-align: top;
   border: solid 5px #ccc;
@@ -802,7 +794,6 @@ hr:before {
 	width: 240px;
 	height: 100px;
 	*/
-
 }
 /*
 :hover.bubble-link { background-color:#333; }
@@ -857,7 +848,6 @@ hr:before {
   height: 20px;
   margin-top: -20px;
   /* enemy stacking bug fix */
-
   position: relative;
   left: 300px;
   top: 20px;
@@ -882,7 +872,6 @@ hr:before {
   height: 20px;
   margin-top: -20px;
   /* deer stacking bug fix */
-
   position: relative;
   left: 300px;
   top: 20px;
@@ -909,7 +898,6 @@ hr:before {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 5px 5px 0 5px;
   /*border-bottom: solid 1px #ddd;*/
-
 }
 .the-fucking-inventory {
   color: white;
@@ -973,7 +961,6 @@ hr:before {
   float: left;
   /*width: 44px;
 	height: 44px;*/
-
   color: white;
   border: solid 2px black;
 }
@@ -1106,7 +1093,6 @@ hr:before {
 }
 .the-fucking-hearts li.empty {
   /*background:url('../svg/item-heartgrey.svg') no-repeat;*/
-
   opacity: 0.6;
 }
 /* NIGHT TIME */
@@ -1132,7 +1118,6 @@ hr:before {
   font-weight: 400;
   text-transform: uppercase;
   /*background-color: rgba(255,255,255,0.6);*/
-
   color: #fff;
   padding: 4px 4px 0;
   margin-left: 20px;
@@ -1216,7 +1201,6 @@ hr:before {
 	-webkit-transition:all 0.3s;
     transition:all 0.3s;
     */
-
 }
 .map-view-perspective {
   -webkit-transform: perspective(500px) rotateX(77deg) rotateY(0deg) scale(1);
@@ -1261,12 +1245,6 @@ transform-origin: bottom;
 .damage-label-fade {
   opacity: 0;
 }
-@media only screen and (min-width: 1000px) {
-  
-}
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
-  
-}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -1278,7 +1256,6 @@ transform-origin: bottom;
   border: 0;
   overflow: hidden;
   /* IE 6/7 fallback */
-
   *text-indent: -9999px;
 }
 .ir:before {
@@ -1341,10 +1318,8 @@ transform-origin: bottom;
 .clearfix:after {
   content: " ";
   /* 1 */
-
   display: table;
   /* 2 */
-
 }
 .clearfix:after {
   clear: both;
@@ -1376,7 +1351,6 @@ transform-origin: bottom;
     background: transparent !important;
     color: #000 !important;
     /* Black prints faster: h5bp.com/s */
-  
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -1391,8 +1365,8 @@ transform-origin: bottom;
     content: " (" attr(title) ")";
   }
   /*
-       * Don't show links for images, or javascript/internal links
-       */
+     * Don't show links for images, or javascript/internal links
+     */
   .ir a:after,
   a[href^="javascript:"]:after,
   a[href^="#"]:after {
@@ -1406,7 +1380,6 @@ transform-origin: bottom;
   thead {
     display: table-header-group;
     /* h5bp.com/t */
-  
   }
   tr,
   img {
@@ -1415,7 +1388,7 @@ transform-origin: bottom;
   img {
     max-width: 100% !important;
   }
-  @page  {
+  @page {
     margin: 0.5cm;
   }
   p,

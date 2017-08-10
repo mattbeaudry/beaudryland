@@ -519,7 +519,7 @@ lightUpBlock = function() {
 	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)-1, 0.8);
 
 };
-loadNewGame = function(maptype='game') {
+loadNewGame = function() {
 	trace("new user & brand new map");
 	trace("map type is "+maptype);
     loadNewMap();
@@ -2099,7 +2099,7 @@ moveObject = function(direction, id, name){
 		}
 		success = true;
 	} else {
-		//trace("Can't move object id:"+id+" "+direction);	
+		trace("Can't move object id:"+id+" "+direction);	
 		success = false;
 	}
 
@@ -2112,17 +2112,25 @@ moveObject = function(direction, id, name){
 };
 
 objectCollisionDetection = function(id, direction) {
+	var collide = false;
 	var currentblock = getObjectCurrentBlock(id);
 	var nextblock = '';
 	var row = getObjectCurrentRow(id);
 	var col = getObjectCurrentCol(id);
 	var selecteditem = getSelectedItem();
+	var movingObject_id = id;
 
 	switch (direction) {
-		case "up": nextblock = currentblock - (mapwidth + 1); break;
-		case "down": nextblock = currentblock + (mapwidth - 1); break;
-		case "left": nextblock = currentblock - 2; break;
-		case "right": nextblock = currentblock; break;
+		case "up": nextblock = currentblock - (mapwidth); break;
+		case "down": nextblock = currentblock + (mapwidth); break;
+		case "left": nextblock = currentblock - 1; break;
+		case "right": nextblock = currentblock + 1; break;
+	}
+
+	var movingObject_nextblock = nextblock;
+
+	if (movingObject_id == 1){
+		trace('moving id:'+movingObject_id+' to block:'+movingObject_nextblock);
 	}
 
 	//teleporting
@@ -2130,118 +2138,138 @@ objectCollisionDetection = function(id, direction) {
 		var destinationblock = $('.maps-wrap .block-portal-b').first().attr("data-blockid");
 		//alert(destinationblock);
 		teleportObjectToBlock(1, destinationblock);
-		return true;
+		collide = true;
 	//teleporting
 	} else if (id == 1 && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-portal-b')) {
 		var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
 		//alert(destinationblock);
 		teleportObjectToBlock(1, destinationblock);
-		return true;
+		collide = true;
 	//space travel
 	} else if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-space')) {
-		return false;
+		collide = false;
 	} else if (selecteditem == "rocket") {
-		return true;
+		collide = true;
 	//space
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-space') ) {
-		return true;
+		collide = true;
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-star') ) {
-		return true;
+		collide = true;
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-redgalaxy') ) {
-		return true;
+		collide = true;
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-bluegalaxy') ) {
-		return true;
+		collide = true;
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-sun') ) {
-		return true;
+		collide = true;
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-earth') ) {
-		return true;
+		collide = true;
 	//canoeing
 	} else if (selecteditem == "canoe" && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-water')) {
-		return false;
+		collide = false;
 	} else if (selecteditem == "canoe") {
-		return true;
+		collide = true;
 	// Water
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-water') ) {
-		return true;
+		collide = true;
 	// Tree	
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-tree') ) {
-		return true;
+		collide = true;
 	// Rock
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-rock') ) {
-		return true;
+		collide = true;
 	// Wood
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-wood') ) {
-		return true;
+		collide = true;
 	// Fire
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-fire') ) {
-		return true;
+		collide = true;
 	// Closed Door
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-door') ) {
-		return true;
+		collide = true;
 	// Map right border	
 	} else if ( (direction == "right" ) && (col>=mapwidth) ) {
-		return true;
+		collide = true;
 	// Map left border	
-	} else if ( (direction == "left" ) && (col<=1) ) {
-		return true;
+	} else if ( (direction == "left" ) && (col==0) ) {
+		collide = true;
 	// Map top border
 	} else if ( (direction == "up" ) && (row<=1) ) {
-		return true;
-	// Map bottom border	  //NEED TO ADJUST this to find out how many map blocks they have for the height limit
+		collide = true;
+	// Map bottom border	  
+		//NEED TO ADJUST this to find out how many map blocks they have for the height limit
 	} else if ( (direction == "down" ) && (row>=(mapheight*3)) ) {
-		return true;	
+		collide = true;	
 	// PineTree	
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-pinetree') ) {
-		return true;
+		collide = true;
 	// IceRock
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-icerock') ) {
-		return true;
+		collide = true;
 	// PalmTree
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-palmtree') ) {
-		return true;
+		collide = true;
 	// RockBrick
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-rockbrick') ) {
-		return true;
+		collide = true;
 	// IceRockBrick
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-icerockbrick') ) {
-		return true;
+		collide = true;
 	// ClayBrick
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-claybrick') ) {
-		return true;
+		collide = true;
 	// AppleTree
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-appletree') ) {
-		return true;
+		collide = true;
 	// TallTree
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-talltree') ) {
-		return true;
-
+		collide = true;
 	// Ice Sliding
 	//} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-ice') ) {
 		//slidePlayer();
 		//return true;
-	//Bike Riding?
-	//Skiiing?
-	//Canoeing
-	//Driving
 
-	//Hit animal
-	} else if ($('.the-fucking-deer').length != 0) {
-
-		$('.the-fucking-deer').each(function(index) {
-			var objectid = $(this).attr('data-id');
-			var objectblock = getObjectCurrentBlock(objectid);
-			trace('deer block:'+objectblock+', next block:'+nextblock+', objectid:'+objectid);
-			if (nextblock == objectblock){
-				trace("touched an animal");
-				return true;
-			}
-		});
-
-	// Walkable land
 	} else {
-		return false;
-	}
+
+		// Hit player
+		if (id != 1) {
+			var playerElement = $('.the-fucking-player');
+			var player_id = $('.the-fucking-player').attr('data-id');
+			var player_block = getObjectCurrentBlock(player_id);
+			//trace('moving id:'+movingObject_id+' to block:'+movingObject_nextblock+' |||| player is on block:'+player_block);
+
+			if (movingObject_nextblock == player_block){
+				trace('BLOCKED BY PLAYER');
+				collide = true;
+			}
+
+		// Hit animal
+		} else if ($('.the-fucking-deer').length != 0) {
+			$('.the-fucking-deer').each(function(index) {
+				var blockingObject_id = $(this).attr('data-id');
+				var blockingObject_block = getObjectCurrentBlock(blockingObject_id);
+			
+				if (movingObject_nextblock == blockingObject_block && movingObject_id != blockingObject_id){
+					//alert('BLOCKED BY ANIMAL: moving id:'+movingObject_id+' to block:'+movingObject_nextblock+' |||| animal id:'+blockingObject_id+' is on block:'+blockingObject_block);
+					collide = true;
+				}
+			});
+
+		// Walkable land
+		} else {
+			collide = false;
+		}
+
+	}	
+
+	// Bike Riding?
+	// Skiiing?
+	// Canoeing
+	// Driving
+
+	return collide;
+	
 };
+
 changeObjectDirection = function(id, direction, name) {
 	//trace("changing object:"+id+" direction to "+direction);
 	var selecteditem = getSelectedItem();
@@ -2316,6 +2344,7 @@ teleportObjectToBlock = function(id, destinationblock) {
 };
 
 
+
 /////////////
 //  *PLAYER PRIMARY ACTION
 /////////////
@@ -2333,10 +2362,10 @@ playerPrimaryAction = function(blockid) {
 	
 	var selecteditem = getSelectedItem();
 	switch (direction) {
-		case "up": block = block - (mapwidth+1); break;
-		case "down": block = block + (mapwidth-1); break;
-		case "left": block = block - 2; break;
-		case "right": block = block; break;
+		case "up": block = block - (mapwidth); break;
+		case "down": block = block + (mapwidth); break;
+		case "left": block = block - 1; break;
+		case "right": block = block + 1; break;
 	}
 
 	// if there is a blockid supplied run function on that one instead of the block the player is facing
@@ -3174,7 +3203,6 @@ getObjectCurrentCol = function(id) {
 	y = stripPX(y);
 	var col = x / gridunitpx;
 	col = parseInt(col);
-	col = col + 1;
 	return col;
 };
 getObjectCurrentRow = function(id) {
@@ -3190,8 +3218,7 @@ getObjectCurrentBlock = function(id) {
 	var col = getObjectCurrentCol(id);
 	var block = (row * mapwidth) - mapwidth;
 	block = block + col;
-	//trace(object+" is at block# "+block);
-	//trace("block"+block);
+	if (id == 1){trace('row:'+row+'  |  col:'+col+'  |  object id:'+id+' is at block:'+block);}
 	return block;
 };
 stripPX = function(css) {
