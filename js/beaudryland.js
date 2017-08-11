@@ -28,6 +28,8 @@ ANIMATION & PROJECTILES
 INVENTORY / CRAFTING
 SOUND
 HELPER FUNCTIONS
+CHEATS
+EXPERIEMENTS
 */
 
 
@@ -123,13 +125,6 @@ var objectshtml = "";
 $.each(objecttypes, function(i, v) { 
     objectshtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>'; 
 });
-var terrain_circle = [
-	-1, -2, -3, -4, -5, -6,
-	-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth), -(6+mapwidth),
-	-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth),
-	-(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
-	-(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2)
-];
 
 //var craftableblockclasses = "";
 var inventoryslots = 74;
@@ -366,7 +361,7 @@ if ( $('body').hasClass("version-phonegap") ){
 } else if ( $('body').hasClass("version-desktop") ) {
 
 	var mapwidth = 40;
-	var mapheight = 30;
+	var mapheight = 40;
 
 	$(document).ready(function() {
 
@@ -396,7 +391,7 @@ if ( $('body').hasClass("version-phonegap") ){
 } else if ( $('body').hasClass("version-multiplayer") ) {
 	
 	var mapwidth = 40;
-	var mapheight = 30;
+	var mapheight = 40;
 
 	$(document).ready(function() {
 
@@ -422,13 +417,13 @@ loadNewGame = function() {
     createPlayer();
 
     if (maptype == 'creative'){
-    	
+    
     	drawNewWinterMap();
 	    drawNewBeachMap();
-	    drawNewSpaceMap();
 	   	drawNewJungleMap();
 	    drawNewDesertMap();
 	    drawNewIslandMap();
+	    //drawNewSpaceMap();
 
 	    createForestSigns();
 	    createWinterSigns();
@@ -474,6 +469,13 @@ loadGame = function(){
 var totalmapblocks = mapwidth * mapheight;
 var mapwidthpx = mapwidth * gridunitpx;
 var mapheightpx = mapheight * gridunitpx;
+var terrain_circle = [
+	-1, -2, -3, -4, -5, -6,
+	-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth), -(6+mapwidth),
+	-(1-mapwidth), -(2-mapwidth), -(3-mapwidth), -(4-mapwidth), -(5-mapwidth), -(6-mapwidth),
+	-(2+mapwidth*2), -(3+mapwidth*2), -(4+mapwidth*2), -(5+mapwidth*2),
+	-(2-mapwidth*2), -(3-mapwidth*2), -(4-mapwidth*2), -(5-mapwidth*2)
+];
 
 
 /* CREATE INVENTORY SLOT DIVS */
@@ -536,35 +538,6 @@ createBeachSigns = function(){
 
 
 
-
-/////////////
-//  *CHEATS 
-/////////////
-
-var getAllItems = function() {
-	var inventoryhtml = '';
-	$.each(blocktypes, function(index, value) {
-		if ( 	
-			value != "diamond-hole" && value != "gold-hole" && value != "silver-hole" && value != "oil-hole" &&
-		 	value != "clay-hole" && value != "carrot-inground" 
-		){
-			inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
-			if(index==0){ inventoryhtml += 'selected-item'; }
-			inventoryhtml += '" data-blocktype="'+value+'">99</div>';
-		}
-	});
-	$('.the-fucking-inventory').html(inventoryhtml);
-	$('.the-fucking-inventory').show();
-	setupMouseEvents();
-
-	/*for 
-	'<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>'
-	'<div class="slot-2 empty" data-blocktype="empty">0</div>''*/
-};
-
-
-
-
 /////////////
 //  *MAPS
 /////////////
@@ -580,18 +553,19 @@ loadMap = function(maptype){
 			globalmapblockcount++;
 		}
 		if (maptype == 'forest'){
-			$('.the-fucking-map').html(mapdata);
+			$('.maps-wrap').append('<div class="the-fucking-map the-fucking-forest-map cube-side cube-front" data-maptype="forest"></div>');
+			$('.the-fucking-forest-map').html(mapdata);
 		} else if (maptype == 'winter'){
-			$('.maps-wrap').append('<div class="the-fucking-winter-map" data-maptype="winter"></div>');
+			$('.maps-wrap').append('<div class="the-fucking-winter-map cube-side cube-right" data-maptype="winter"></div>');
 			$('.the-fucking-winter-map').css("width", mapwidthpx+"px");
 			$('.the-fucking-winter-map').css("height", mapheightpx+"px");
 			$('.the-fucking-winter-map').html(mapdata);
 		} else if (maptype == 'beach'){
-			$('.maps-wrap').append('<div class="the-fucking-beach-map" data-maptype="beach"></div>');
+			$('.maps-wrap').append('<div class="the-fucking-beach-map cube-side cube-back" data-maptype="beach"></div>');
 			$('.the-fucking-beach-map').css("width", mapwidthpx+"px");
 			$('.the-fucking-beach-map').css("height", mapheightpx+"px");
 			$('.the-fucking-beach-map').html(mapdata);
-			startWaves();
+			//startWaves();
 		}
 	});
 };
@@ -615,6 +589,9 @@ changeBlockType = function(block, newtype, maptype) {
 loadNewMap = function(type) {
 
 	//CREATE RANDOM FOREST TERRAIN
+	$('.maps-wrap').append('<div class="the-fucking-map the-fucking-forest-map cube-side cube-front" data-maptype="forest"></div>');
+	$('.the-fucking-forest-map').css("width", mapwidthpx+"px");
+	$('.the-fucking-forest-map').css("height", mapheightpx+"px");
 	var maphtml = "";
 	var overlayhtml = "";
 	for (var f = 0; f <= (totalmapblocks - 1); f++){
@@ -634,7 +611,7 @@ loadNewMap = function(type) {
 		else { blocktype = "water"; }
 		maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'">'+f+'</div>';
 	}
-	$('.the-fucking-map').append(maphtml);
+	$('.the-fucking-forest-map').append(maphtml);
 
 	/* CREATE LARGER MAP TERRAIN FEATURES - lakes, forests */
 	var terrainblocks = ["water","tree","grass","water","tree","grass","grass","appletree"];
@@ -656,10 +633,11 @@ loadNewMap = function(type) {
 	});
 
 };
+
 drawNewWinterMap = function() {
 
 	/* LOAD WINTER MAP FUNCTION */
-	$('.maps-wrap').append('<div class="the-fucking-winter-map" data-maptype="winter"></div>');
+	$('.maps-wrap').append('<div class="the-fucking-winter-map cube-side cube-right" data-maptype="winter"></div>');
 	$('.the-fucking-winter-map').css("width", mapwidthpx+"px");
 	$('.the-fucking-winter-map').css("height", mapheightpx+"px");
 	var mapdata = "";
@@ -683,11 +661,13 @@ drawNewWinterMap = function() {
 			changeBlockType((randomblockid+offset), value, "winter");
 		});
 	});
+
 };
+
 drawNewBeachMap = function() {
 
 	/* LOAD BEACH MAP FUNCTION */
-	$('.maps-wrap').append('<div class="the-fucking-beach-map" data-maptype="beach"></div>');
+	$('.maps-wrap').append('<div class="the-fucking-beach-map cube-side cube-back" data-maptype="beach"></div>');
 	$('.the-fucking-beach-map').css("width", mapwidthpx+"px");
 	$('.the-fucking-beach-map').css("height", mapheightpx+"px");
 	var mapdata = "";
@@ -726,9 +706,10 @@ drawNewBeachMap = function() {
 
 	//startWaves();
 };
+
 drawNewSpaceMap = function() {
 	// LOAD SPACE MAP FUNCTION
-	$('.maps-wrap').append('<div class="the-fucking-space-map" data-maptype="space"></div>');
+	$('.maps-wrap').append('<div class="the-fucking-space-map cube-outside" data-maptype="space"></div>');
 	$('.the-fucking-space-map').css("width", mapwidthpx+"px");
 	$('.the-fucking-space-map').css("height", mapheightpx+"px");
 	var mapdata = "";
@@ -747,9 +728,10 @@ drawNewSpaceMap = function() {
 	}
 	$('.the-fucking-space-map').html(mapdata);
 };
+
 drawNewJungleMap = function() {
 	// LOAD SPACE MAP FUNCTION
-	$('.maps-wrap').append('<div class="the-fucking-jungle-map" data-maptype="jungle"></div>');
+	$('.maps-wrap').append('<div class="the-fucking-jungle-map cube-side cube-left" data-maptype="jungle"></div>');
 	$('.the-fucking-jungle-map').css("width", mapwidthpx+"px");
 	$('.the-fucking-jungle-map').css("height", mapheightpx+"px");
 	var mapdata = "";
@@ -791,7 +773,7 @@ drawNewJungleMap = function() {
 };
 drawNewDesertMap = function() {
 	// LOAD SPACE MAP FUNCTION
-	$('.maps-wrap').append('<div class="the-fucking-desert-map" data-maptype="desert"></div>');
+	$('.maps-wrap').append('<div class="the-fucking-desert-map cube-side cube-top" data-maptype="desert"></div>');
 	$('.the-fucking-desert-map').css("width", mapwidthpx+"px");
 	$('.the-fucking-desert-map').css("height", mapheightpx+"px");
 	var mapdata = "";
@@ -830,7 +812,7 @@ drawNewDesertMap = function() {
 };
 drawNewIslandMap = function() {
 	// LOAD SPACE MAP FUNCTION
-	$('.maps-wrap').append('<div class="the-fucking-island-map" data-maptype="island"></div>');
+	$('.maps-wrap').append('<div class="the-fucking-island-map cube-side cube-bottom" data-maptype="island"></div>');
 	$('.the-fucking-island-map').css("width", mapwidthpx+"px");
 	$('.the-fucking-island-map').css("height", mapheightpx+"px");
 	var mapdata = "";
@@ -850,6 +832,7 @@ drawNewIslandMap = function() {
 		mapdata += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 	}
 	$('.the-fucking-island-map').html(mapdata);
+
 	/* CREATE MAP TERRAIN FEATURES */
 	var terrainblocks = ["grass","grass","grass","grass","grass","grass","grass","grass","sand",
 	"grass","grass","grass","grass","grass","grass","grass","grass","sand",
@@ -859,6 +842,17 @@ drawNewIslandMap = function() {
 		$.each(terrain_circle, function(index, offset){
 			changeBlockType((randomblockid+offset), value, "island");
 		});
+	});
+
+	/* ADD SOME SPECIAL BLOCKS TO THE MAP */
+	var terrainblocks = [
+		"redmushroom","carrot-inground","flowers","flowers","apple","apple",
+		"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver",
+		"portal-a","portal-b"
+	];
+	$.each(terrainblocks, function(index, value){
+		var randomblockid = randomBlockID();
+		changeBlockType(randomblockid, value, "island");
 	});
 };
 saveMap = function(){
@@ -954,10 +948,10 @@ reduceBlockHealth = function(blockid, amount) {
 	$(".block").find("[data-blockid='" + blockid + "']").attr("data-blockhealth");
 };
 mapPerspective = function() {
-	$('.the-fucking-map').addClass("map-view-perspective");
+	$('.cube-container').addClass("map-view-perspective");
 	setTimeout(
 		function() {
-			$('.the-fucking-map').removeClass("map-view-perspective");
+			$('.cube-container').removeClass("map-view-perspective");
 		}, 
 	30000);
 };
@@ -3121,7 +3115,38 @@ trace = function(msg) {
 
 
 
-/* EXPERIEMENTS */
+/////////////
+//  *CHEATS 
+/////////////
+
+var getAllItems = function() {
+	var inventoryhtml = '';
+	$.each(blocktypes, function(index, value) {
+		if ( 	
+			value != "diamond-hole" && value != "gold-hole" && value != "silver-hole" && value != "oil-hole" &&
+		 	value != "clay-hole" && value != "carrot-inground" 
+		){
+			inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
+			if(index==0){ inventoryhtml += 'selected-item'; }
+			inventoryhtml += '" data-blocktype="'+value+'">99</div>';
+		}
+	});
+	$('.the-fucking-inventory').html(inventoryhtml);
+	$('.the-fucking-inventory').show();
+	setupMouseEvents();
+
+	/*for 
+	'<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>'
+	'<div class="slot-2 empty" data-blocktype="empty">0</div>''*/
+};
+
+
+
+/////////////
+//  *EXPERIEMENTS 
+/////////////
+
+
 
 changeOverlayBlockOpacity = function(block, opacity) {
 	//trace("8-changing block "+block+" to "+newtype);
@@ -3234,3 +3259,14 @@ lightUpBlock = function() {
 	changeOverlayBlockOpacity(playerblockid-(mapwidth*3)-1, 0.8);
 
 };
+
+rotateCubeTo = function(side) {
+	$('.cube').removeClass(function (index, className) {
+		return (className.match (/(^|\s)cube-show-\S+/g) || []).join(' ');
+	});
+	$('.cube').addClass('cube-show-'+side);
+};
+
+
+
+

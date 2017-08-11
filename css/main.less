@@ -615,20 +615,118 @@ hr:before {
 /* THE MAP */
 
 .maps-wrap {
-	padding-top: 244px;
+
 }
 .the-fucking-map,
 .the-fucking-winter-map,
 .the-fucking-beach-map {
 	width:800px;
-	height:600px;
+	height:800px;
 	margin:0px auto;
 }
 .user-map {
 	width:800px;
-	height:600px;
+	height:800px;
 	margin:40px auto;
 }
+
+
+/* THE CUBE */
+
+.cube-container {
+	position: relative;
+	width: 800px;
+	height: 800px;
+  	perspective: 8000px;
+  	margin-top: 300px;
+}
+
+.cube {
+	position: absolute;
+	width: 800px;
+	height: 800px;
+	transform-style: preserve-3d;
+	transition: all 2s;
+}
+  
+.cube-side {
+	position: absolute;
+	width: 800px;
+	height: 800px;
+}
+
+.cube-front {
+	transform: rotateY(0deg) translateZ(-400px);
+}
+  
+.cube-back {
+	transform: rotateX(-180deg) rotatez(180deg) translateZ(-400px);
+}
+  
+.cube-right {
+	transform: rotateY(90deg) translateZ(-400px); 
+}
+  
+.cube-left {
+	transform: rotateY(-90deg) translateZ(-400px); 
+}
+  
+.cube-top {
+	transform: rotateX(90deg) rotatez(180deg) translateZ(-400px);
+}
+  
+.cube-bottom {
+	transform: rotateX(-90deg) rotatez(180deg) translateZ(-400px); 
+}
+  
+.cube-show-front {
+	transform: translateZ(-800px) rotateY(180deg);
+}
+  
+.cube-show-back {
+	transform: translateZ(-800px) rotateX(360deg);
+}
+  
+.cube-show-right {
+	transform: translateZ(-800px) rotateY(90deg);
+}
+  
+.cube-show-left {
+	transform: translateZ(-800px) rotateY(-90deg);
+}
+  
+.cube-show-top {
+	transform: translateZ(-800px) rotateX(-90deg);
+}
+  
+.cube-show-bottom {
+	transform: translateZ(-800px) rotateX(90deg);
+}
+
+
+/* MAP PERSPECTIVE */
+
+.the-fucking-map {
+    transition:all 5s;
+    overflow: visible !important;
+}
+.block-tree,.block-appletree,.block-mushroom,.block-rock,.block-flowers,.the-fucking-player,
+.block-sign,.block-mushroom,.block-bluemushroom,.block-wood,.block-portal-a,.block-portal-b,.block-door,.block-door-closed {
+	transition:transform 5s;
+}
+.map-view-perspective {
+	// transform: perspective(500px) rotateX(77deg) rotateY(0deg) scale(1);
+	transform: perspective(500px) rotateX(55deg) rotateY(0deg) scale(1) translateZ(600px);
+	overflow: visible !important;
+    transform-style: preserve-3d;
+    transition:all 5s;
+
+	.block-tree,.block-appletree,.block-muchroom,.block-rock,.block-flowers,.the-fucking-player, 
+	.block-sign,.block-mushroom,.block-bluemushroom,.block-wood,.block-portal-a,.block-portal-b,.block-door,.block-door-closed {
+		transform-origin: bottom;
+	}
+}
+
 
 
 /* THE PLAYER */
@@ -1086,7 +1184,7 @@ hr:before {
 	position:absolute;
 	z-index:0;
 	width:800px;
-	height:600px;
+	height:800px;
 	margin-top:244px;
 	display:none;
 }
@@ -1183,47 +1281,6 @@ hr:before {
   -webkit-animation: mushrooms 5s infinite;
 }
 
-
-
-/* MAP PERSPECTIVE */
-.the-fucking-map {
-    -webkit-transition:all 5s;
-    transition:all 5s;
-    overflow: visible !important;
-}
-.block-tree,.block-appletree,.block-mushroom,.block-rock,.block-flowers,.the-fucking-player,
-.block-sign,.block-mushroom,.block-bluemushroom,.block-wood,.block-portal-a,.block-portal-b,.block-door,.block-door-closed {
-
-    -webkit-transition:transform 5s;
-	transition:transform 5s;
-
-	/*
-	-webkit-transition:all 0.3s;
-    transition:all 0.3s;
-    */
-}
-.map-view-perspective {
-	-webkit-transform: perspective(500px) rotateX(77deg) rotateY(0deg) scale(1);
-	overflow: visible !important;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-    -webkit-transition:all 5s;
-    transition:all 5s;
-
-	.block-tree,.block-appletree,.block-muchroom,.block-rock,.block-flowers,.the-fucking-player, 
-	.block-sign,.block-mushroom,.block-bluemushroom,.block-wood,.block-portal-a,.block-portal-b,.block-door,.block-door-closed {
-		transform-origin: bottom;
-        -webkit-transform: rotateX(-90deg) scale(1);
-       
-	}
-}
-
-/*
-transform-origin: bottom;
--webkit-transform: rotateX(-90deg) scale(1);
-*/
-/* -webkit-transform: perspective(8) rotateX(-10deg) rotateY(5deg) rotateZ(-16deg) scale(2); */
-/* -webkit-transform: perspective(10) rotateX(-5deg) rotateY(0deg) rotateZ(0deg) scale(2); */
 
 
 

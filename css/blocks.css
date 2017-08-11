@@ -22,8 +22,8 @@
   height: 20px;
   background-size: contain;
   background-repeat: no-repeat;
-  border: solid #000; border-width: 0 1px 1px 0;
   font-size: 8px;
+  color: transparent;
 }
 .block {
   background-size: contain !important;
@@ -39,7 +39,7 @@
   background: #d9cfa2;
 }
 .the-fucking-space-map {
-  background: #000000;
+  background: #000;
 }
 .the-fucking-jungle-map {
   background: #36ac2a;
@@ -162,10 +162,10 @@
 }
 /* items */
 .block-shovel {
-  background: #dddddd url(../img/item-shovel.png) no-repeat;
+  background: #ddd url(../img/item-shovel.png) no-repeat;
 }
 .block-sword {
-  background: #dddddd url(../img/item-sword.png) no-repeat;
+  background: #ddd url(../img/item-sword.png) no-repeat;
 }
 .block-fire {
   background: url(../img/item-fire-3.gif) no-repeat;
@@ -255,7 +255,7 @@
 }
 /* projectiles */
 .block-frisbee {
-  background: #dddddd url(../img/item-frisbee.png) no-repeat;
+  background: #ddd url(../img/item-frisbee.png) no-repeat;
   background-size: contain;
 }
 .the-fucking-frisbee {
