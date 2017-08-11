@@ -32,7 +32,8 @@
 
 		<div class="cube-container">
 		    <div class="maps-wrap cube cube-show-front clearfix">
-<!-- 		    	<div class="the-fucking-map the-fucking-forest-map cube-side cube-front" data-maptype="forest"></div>
+				<!-- 		    	
+				<div class="the-fucking-map the-fucking-forest-map cube-side cube-front" data-maptype="forest"></div>
 		    	<div class="the-fucking-unknown-map cube-side cube-right" data-maptype="unknown"></div>
 		    	<div class="the-fucking-unknown-map cube-side cube-back" data-maptype="unknown"></div>
 		    	<div class="the-fucking-unknown-map cube-side cube-left" data-maptype="unknown"></div>
@@ -597,6 +598,8 @@
         <script src="js/vendor/timbre.dev.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/beaudryland.js"></script>
+
+        <script src="js/app-bundle.js"></script>
 
         <!-- BEAUDRYLAND SOURCE CODE
         <script src="js/beaudryland.js"></script>
