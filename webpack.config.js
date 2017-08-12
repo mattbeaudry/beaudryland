@@ -1,11 +1,12 @@
+var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractPlugin = new ExtractTextPlugin('../css/main.bundle.css');
+var extractPlugin = new ExtractTextPlugin('../../build/css/main.bundle.css');
 
 module.exports = {
-    context: __dirname + "/js",
+    context: __dirname + "/source/",
     entry: "./app.js",
     output: {
-        path: __dirname + "/js",
+        path: __dirname + "/build/js",
         filename: "app-bundle.js"
     },
     module: {
@@ -58,6 +59,10 @@ module.exports = {
     	]
     },
     plugins: [
-    	extractPlugin
+    	extractPlugin,
+    	new webpack.ProvidePlugin({
+    		$: 'jquery',
+    		jQuery: 'jquery'
+    	})
     ]
 };
