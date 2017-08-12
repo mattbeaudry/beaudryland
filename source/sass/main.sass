@@ -556,12 +556,11 @@ hr:before
 		width: 800px
 		height: 800px
 		margin: 40px auto
- 
 
 
 /* THE CUBE */
 
-.cube-container 
+.cube-container
 	position: relative
 	width: 800px
 	height: 800px
@@ -579,37 +578,37 @@ hr:before
 	position: absolute
 	width: 800px
 	height: 800px
- 
 
 .cube-front 
-	transform: rotateY(0deg) translateZ(-400px)
-
-.cube-back 
-	transform: rotateX(-180deg) rotatez(180deg) translateZ(-400px)
+	transform: rotateY(0deg) translateZ(400px)
 
 .cube-right 
-	transform: rotateY(90deg) translateZ(-400px) 
+	transform: rotateY(90deg) translateZ(400px) 
+
+.cube-back 
+	transform: rotateY(-180deg) translateZ(400px)
 
 .cube-left 
-	transform: rotateY(-90deg) translateZ(-400px) 
-
-.cube-top 
-	transform: rotateX(90deg) rotatez(180deg) translateZ(-400px)
+	transform: rotateY(-90deg) translateZ(400px) 
 
 .cube-bottom 
-	transform: rotateX(-90deg) rotatez(180deg) translateZ(-400px) 
+	transform: rotateX(90deg) translateZ(400px) 
+
+.cube-top 
+	transform: rotateX(-90deg) translateZ(400px)
+
 
 .cube-show-front 
-	transform: translateZ(-800px) rotateY(180deg)
-
-.cube-show-back 
-	transform: translateZ(-800px) rotateX(360deg)
+	transform: translateZ(-800px) rotateY(0deg)
 
 .cube-show-right 
-	transform: translateZ(-800px) rotateY(90deg)
+	transform: translateZ(-800px) rotateY(-90deg)
+
+.cube-show-back 
+	transform: translateZ(-800px) rotateY(-180deg)
 
 .cube-show-left 
-	transform: translateZ(-800px) rotateY(-90deg)
+	transform: translateZ(-800px) rotateY(-270deg)
 
 .cube-show-top 
 	transform: translateZ(-800px) rotateX(-90deg)

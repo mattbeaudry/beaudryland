@@ -359,6 +359,8 @@ if ( $('body').hasClass("version-phonegap") ){
 		setupMouseEvents();
 		setupControlPadEvents();
 
+		loadDevConsole();
+
 	});
 
 
@@ -381,6 +383,8 @@ if ( $('body').hasClass("version-phonegap") ){
 		setupKeyboardEvents();
 		setupMouseEvents();
 		setupControlPadEvents();
+
+		loadDevConsole();
 
 	});
 
@@ -3260,6 +3264,14 @@ var loadDevConsole = function() {
 			text: 'Rotate Cube to Top',
 			function_name: 'rotateCubeTo',
 			function_val: 'top'
+		},
+		{
+			text: 'Cubify Map',
+			function_name: 'cubifyMap'
+		},
+		{
+			text: 'Decubify Map',
+			function_name: 'decubifyMap'
 		}
 
 	];
@@ -3283,27 +3295,7 @@ var loadDevConsole = function() {
 		devconsole.append(container);
 	});
 
-	
-
-	// $('select').change(function() {
- //     var num = parseInt($(this).val(), 10);
- //     var container = $('<div />');
- //     for(var i = 1; i <= num; i++) {
- //         container.append('<input id="id'+i+'" name="name'+i+'" />');
- //     }
- //     $('somewhere').html(container);
-	// });
-
 };
-
-loadDevConsole();
-
-//    <li><a href="javascript:void(0);" onclick="rotateCubeTo('front'); return false">Rotate Cube to Front</a></li>
-//    <li><a href="javascript:void(0);" onclick="rotateCubeTo('right'); return false">Rotate Cube to Right</a></li>
-//    <li><a href="javascript:void(0);" onclick="rotateCubeTo('back'); return false">Rotate Cube to Back</a></li>
-//    <li><a href="javascript:void(0);" onclick="rotateCubeTo('left'); return false">Rotate Cube to Left</a></li>
-//    <li><a href="javascript:void(0);" onclick="rotateCubeTo('bottom'); return false">Rotate Cube to Bottom</a></li>
-//    <li><a href="javascript:void(0);" onclick="rotateCubeTo('top'); return false">Rotate Cube to Top</a></li>
 
 
 
@@ -3457,4 +3449,39 @@ var rotateCubeTo = function(side) {
 		return (className.match (/(^|\s)cube-show-\S+/g) || []).join(' ');
 	});
 	$('.cube').addClass('cube-show-'+side);
+};
+
+var cubifyMap = function(){
+	$('.maps-container').addClass('cube-container');
+	$('.maps-wrap').addClass('cube cube-show-front');
+	$('.maps-wrap > div').each(function(index){
+		switch (index){
+			case 0: $(this).addClass("cube-side side-front"); break;
+			case 1: $(this).addClass("cube-side side-right"); break;
+			case 2: $(this).addClass("cube-side side-back"); break;
+			case 3: $(this).addClass("cube-side side-left"); break;
+			case 4: $(this).addClass("cube-side side-top"); break;
+			case 5: $(this).addClass("cube-side side-bottom"); break;
+		}
+	});
+};
+
+var decubifyMap = function(){
+	$('.maps-container').removeClass('cube-container');
+	$('.maps-wrap').removeClass('cube');
+	$('.maps-wrap').removeClass(function (index, className) {
+		return (className.match (/(^|\s)cube-show-\S+/g) || []).join(' ');
+	});
+	$('.maps-wrap > div').removeClass(function (index, className) {
+		return (className.match (/(^|\s)cube-\S+/g) || []).join(' ');
+	});
+};
+
+var moveObjectToMap = function(objectid, maptype, block){
+	var object = $('.objectid-'+objectid);
+	var fromMap = $('.the-fucking-'+maptype+'-map');
+	var toMap = $('.the-fucking-'+maptype+'-map');
+
+	// remove object element from any map
+	$('.maps-wrap .objectid-'+objectid).remove();
 };

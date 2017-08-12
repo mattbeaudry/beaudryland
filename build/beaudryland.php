@@ -30,7 +30,7 @@
 
 		<div class="the-fucking-map-overlay"></div>
 
-		<div class="cube-container">
+		<div class="maps-container cube-container">
 		    <div class="maps-wrap cube cube-show-front clearfix">
 				<!-- 		    	
 				<div class="the-fucking-map the-fucking-forest-map cube-side cube-front" data-maptype="forest"></div>

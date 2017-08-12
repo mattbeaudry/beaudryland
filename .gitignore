@@ -8,3 +8,6 @@
 ehthumbs.db
 Thumbs.db
 multiplayer/node_modules/**/*
+node_modules
+build/js/app-bundle.js
+build/css/main.bundle.css
