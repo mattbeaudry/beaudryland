@@ -2108,7 +2108,7 @@ var objectCollisionDetection = function(id, direction) {
 		collide = true;
 	// Map bottom border	  
 		//NEED TO ADJUST this to find out how many map blocks they have for the height limit
-	} else if ( (direction == "down" ) && (row>=(mapheight*3)) ) {
+	} else if ( (direction == "down" ) && (row>=mapheight) ) {
 		collide = true;	
 	// PineTree	
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-pinetree') ) {
@@ -3272,6 +3272,10 @@ var loadDevConsole = function() {
 		{
 			text: 'Decubify Map',
 			function_name: 'decubifyMap'
+		},
+		{
+			text: 'Move Object To Map',
+			function_name: 'moveObjectToMap'
 		}
 
 	];
@@ -3477,11 +3481,12 @@ var decubifyMap = function(){
 	});
 };
 
-var moveObjectToMap = function(objectid, maptype, block){
-	var object = $('.objectid-'+objectid);
-	var fromMap = $('.the-fucking-'+maptype+'-map');
-	var toMap = $('.the-fucking-'+maptype+'-map');
+var moveObjectToMap = function(){
+	//objectid, maptype, block
+	var object = $('.objectid-'+1);
+	var toMap = $('.the-fucking-'+'winter'+'-map');
 
 	// remove object element from any map
-	$('.maps-wrap .objectid-'+objectid).remove();
+	object.detach().appendTo(toMap);
+	rotateCubeTo('right');
 };
