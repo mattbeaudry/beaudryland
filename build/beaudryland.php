@@ -164,8 +164,8 @@
 	    		</ul>
 	    	</nav>
 	    </div>
-		   
-        
+		
+		<div id="react-map-test"></div>
                
         <div class="the-fucking-gameinfo">
 
@@ -557,6 +557,7 @@
         <script>
         	window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.js"><\/script>');
         </script>
+
         <script src="js/vendor/timbre.dev.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/app-bundle.js"></script>

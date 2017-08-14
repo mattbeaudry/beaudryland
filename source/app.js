@@ -1,3 +1,18 @@
+import React from "react";
+import { render } from "react-dom";
+
+class Game extends React.Component {
+	render() {
+		return (
+			<div>
+				<h1>hello</h1>
+			</div>
+		);
+	}
+}
+console.log("*** LOAD REACT MAP ***");
+render(<Game/>, window.document.getElementById('react-map-test'));
+
 import './sass/main.sass';
 
 /*////////////////////////
@@ -35,12 +50,9 @@ EXPERIEMENTS
 */
 
 
-
-/////////////
-//  GAME SETTINGS & GLOBALS
-/////////////
-
 import * as globals from './js/globals';
+import * as navigation from './js/navigation';
+import * as mobile from './js/mobile';
 
 
 
@@ -49,175 +61,36 @@ import * as globals from './js/globals';
 /////////////
 
 
-// NAVIGATION TOGGLE
-$('.nav-toggle-inventory').on("click", function() {
-	if ( $('body').hasClass("version-phonegap") ) {
-		$('.the-fucking-navigation').hide();
-		$('.the-fucking-inventory').toggle();
-	} else {
-		$('.the-fucking-inventory').toggleClass("the-fucking-inventory-collapsed");
-	}
-});
-
-$('.nav-toggle-menu').on("click", function() {
-	if ( $('body').hasClass("version-phonegap") ) {
-		$('.the-fucking-inventory').hide();
-		$('.the-fucking-navigation').toggle();
-	} else {
-		$('.nav-extra').toggle();
-	}
-});
+/* init game */
+navigation.initializeNavigation();
 
 
 /* PHONEGAP / IPHONE ONLY */
 
 if ( $('body').hasClass("version-phonegap") ){
 
-	/* MOBILE ONLY FUNCTIONS */
-	var saveGameMobile = function() {
-		achievementCompleted("saveyourgame");
-		websql_saveMap();
-	};
-	var loadGameMobile = function() {
-		websql_loadMap();
-	};
-	var websql_openDatabase = function() {
-		db = openDatabase(shortName,version,displayName,maxSize);
-	};
-	var websql_createTable = function() {
-		 db.transaction(
-			function(transaction) {
-				transaction.executeSql(
-		            'CREATE TABLE IF NOT EXISTS beaudryland_maps ' +
-					' (mapid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
-					' username TEXT NOT NULL, ' +
-					' mapdata TEXT NOT NULL, ' +
-					' invdata TEXT NOT NULL, ' +
-					' achievements TEXT NOT NULL);'
-				);
-			}
-		 );
-	};
-	var websql_insertRow = function() {
-		 var username = "matt";
-		 var mapdata = '<div class="block block-grass" data-blocktype="grass"></div>';
-		 db.transaction(
-			function(transaction) {
-				console.log('Attempting to insert ' + username + ' and mapdata');
-				transaction.executeSql(
-					'INSERT INTO beaudryland_maps (username,mapdata) VALUES (?,?);',
-					[username,mapdata],
-					null,
-					errorHandler
-				);
-			}
-		 );
-	};
-	var websql_selectRow = function() {
-		 db.transaction(
-			function(transaction) {
-					transaction.executeSql(
-						'SELECT mapid, username, mapdata FROM beaudryland_maps;',
-						[],
-						function (transaction, result) {
-							for (var i=0; i < result.rows.length; i++) {
-								var row = result.rows.item(i);
-								console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
-							}
-						},
-						errorHandler
-					);
-			}
-		 );
-	};
+	mobile.initializeMobile();
+
+	var mapwidth = 16;
+	var mapheight = 75;
 
 	// This function here is used to write out any errors I get to the console.
 	function errorHandler(transaction, error) {
 		console.log('Oops. Error was '+error.message+' (Code '+error.code+')');
 		return true;
 	}
-
-	//save map
-	var websql_saveMap = function() {
-		var username = "username";
-		var mapdata = $('.maps-wrap').html();
-		var invdata = $('.the-fucking-inventory').html();
-
-		var achievements = [];
-		$('.item-achievements .status-completed').each(function(index){
-			var achievementname = $(this).attr('data-achievementname');
-			achievements[index] = achievementname;
-			trace(achievementname);
-		});
-		//achievements = JSON.stringify(achievements);
-
-		db.transaction(
-			function(transaction) {
-				console.log('Attempting to insert ' + username + ' and mapdata');
-				transaction.executeSql(
-					'INSERT INTO beaudryland_maps (username,mapdata,invdata,achievements) VALUES (?,?,?,?);',
-					[username,mapdata,invdata,achievements],
-					null,
-					errorHandler
-				);
-			}
-		);
-	};
-
-	//load map
-	var websql_loadMap = function() {
-		 db.transaction(
-			function(transaction) {
-				transaction.executeSql(
-					'SELECT mapid, username, mapdata, invdata, achievements FROM beaudryland_maps;',
-					[],
-					function (transaction, result) {
-						for (var i=0; i < result.rows.length; i++) {
-							$('.maps-wrap').html("");
-							$('.the-fucking-inventory').html("");
-							var row = result.rows.item(i);
-							//console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
-							$('.maps-wrap').html(row.mapdata);
-							$('.the-fucking-inventory').html(row.invdata);
-    						
-    						achievements = row.achievements;
-    						achievements = achievements.split(',');
-					    	for (var k=0;k<achievements.length;k++){
-					    		var achievementname = achievements[k];
-					    		trace(achievementname);
-					    		$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
-					    	}
-						}
-						setupMouseEvents();
-					},
-					errorHandler
-				);
-			}
-		 );
-
-	};
-
-
-	jQuery('.inventory-close').on("click", function(){
+	
+	$('.inventory-close').on("click", function(){
 		toggleInventory();
 	});
+
 	var toggleInventory = function() {
 		$('.sticky-inventory').fadeToggle(0);
 	}; 
+
 	var hideControlPad = function() {
 		$('.the-fucking-controller').fadeToggle();
 	};
-
-	/* SETUP MOBILE DATABASE, LOAD MAP IF EXISTS */
-	var db;
-	var shortName='beaudryland';
-	var version='0.1';
-	var displayName='beaudryland';
-	var maxSize = 65536;
-
-	/* MOBILE GAME SETUP */
-	var mapwidth = 16;
-	var mapheight = 75;
 
 	$(document).ready(function() {
 
@@ -226,20 +99,16 @@ if ( $('body').hasClass("version-phonegap") ){
 		setMapSize();
 	    loadNewMap();
 	    createPlayer();
-		
-	    //websql_openDatabase();
-	    //websql_createTable();
+
 	    /*
 	    drawNewWinterMap();
 	    drawNewBeachMap();
 	    drawNewSpaceMap();
 	    */
-	    
-	    //websql_loadMap();
 
-		websql_openDatabase();
-		websql_createTable();
-		loadGameMobile();
+		mobile.websql_openDatabase();
+		mobile.websql_createTable();
+		mobile.loadGameMobile();
 
 		setupKeyboardEvents();
 		setupMouseEvents();
@@ -281,28 +150,6 @@ if ( $('body').hasClass("version-phonegap") ){
 		return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
 	}
 	window.onbeforeunload = confirmExit;
-
-/* MULTIPLAYER ONLY */
-
-} else if ( $('body').hasClass("version-multiplayer") ) {
-	
-	var mapwidth = 40;
-	var mapheight = 40;
-
-	$(document).ready(function() {
-
-		console.log("MULTIPLAYER VERSION");
-
-		setMapSize();
-		//loadGame();
-
-		//load NewGame() ???
-
-		setupKeyboardEvents();
-		//setupMouseEvents();
-		//setupControlPadEvents();
-
-	});
 	
 }
 
@@ -342,17 +189,17 @@ var loadGame = function(){
     	if (data == false){
     		loadNewGame();
     	} else {
-    	    loadMap('forest');
+    	    loadExistingMap('forest');
     		$.post('php/loadmap.php', {maptype:'winter'}, function(data) {
     			if (data){
     				trace("loadwintermap");
-    				loadMap('winter');
+    				loadExistingMap('winter');
     			}
 			});
 			$.post('php/loadmap.php', {maptype:'beach'}, function(data) {
 				if (data){
 					trace("loadbeachmap");
-					loadMap('beach');
+					loadExistingMap('beach');
 				}
 			});
 			loadPlayer();
@@ -438,7 +285,7 @@ var createBeachSigns = function(){
 //  *MAPS
 /////////////
 
-var loadMap = function(maptype){
+var loadExistingMap = function(maptype){
 	$.post('php/loadmap.php', {maptype:maptype}, function(data) {
 		trace("existing user");
 		var mapblocks = JSON.parse(data);
@@ -482,6 +329,7 @@ var changeBlockType = function(block, newtype, maptype) {
 		$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
 	}
 };
+
 var loadNewMap = function(type) {
 
 	//CREATE RANDOM FOREST TERRAIN
@@ -1645,7 +1493,7 @@ var setupKeyboardEvents = function() {
 				saveMap();
 				break;
 			case 67: // C
-				loadMap();
+				loadExistingMap();
 				break;
 			case 65: // A
 				moveMap();
