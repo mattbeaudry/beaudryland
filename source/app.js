@@ -1,9 +1,4 @@
 import './sass/main.sass';
-import { MapTest } from './js/mapTest';
-
-console.log('Class from separate file works? ' + MapTest.renderMap());
-
-$('body').append("jquery works");
 
 /*////////////////////////
 //////////////////////////
@@ -45,116 +40,7 @@ EXPERIEMENTS
 //  GAME SETTINGS & GLOBALS
 /////////////
 
-
-var mobtypes = new Array (
-	/*players*/		"player",
-	/*enemies*/		"enemy",
-	/*animals*/		"deer"
-);
-var blocktypes = new Array (
-	/*forest map*/	"grass", "dirt", "water", "tree", "rock", "hole",
-	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
-	/*beach map*/  	"sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
-	/*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
-	/*items*/     	"shovel", "fire", "door", "door-open", "frisbee", "sign",
-	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*weapons*/		"sword", "spear", "axe", "bow", "arrow",
-	/*instruments*/ "guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
-	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
-	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/*organic*/		"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
-	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground"
-);
-var allblockclasses = ""; 
-$.each(blocktypes, function(i, v) { allblockclasses += "block-"+v+" "; });
-var isplaceable = new Array (
-	/*forest map*/	"grass", "dirt", "water", "tree", "rock",
-	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock",
-	/*beach map*/  	"sand", "wetsand", "palmtree", "sandstone",
-	/*items*/     	"wood", "fire", "door", "sign",
-	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
-	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","flowers","talltree",
-	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot"
-);
-var isingredient = new Array (
-	/*forest map*/	"tree", "rock",
-	/*winter map*/  "pinetree", "icerock",
-	/*beach map*/  	"palmtree",
-	/*items*/     	"fire",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*organic*/		"wood","pinewood","palmwood","applewood"
-);
-/* isequipable is used for items with player graphics + animation */
-var isequipable = new Array (
-	/*items*/     	"shovel",
-	/*weapons*/		"sword", "axe", "bow",
-	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
-	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom"
-);
-var iscollectable = new Array (
-	/*forest map*/	"tree", "rock",
-	/*winter map*/  "pinetree", "icerock",
-	/*beach map*/  	"palmtree", "sandstone",
-	/*items*/     	"fire",
-	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*technology*/	"telescope","computer","2dprinter",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
-	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
-	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
-);
-var objecttypes = new Array (
-    "player-direction-up","player-direction-down","player-direction-left","player-direction-right",
-    "player-direction-up-sword","player-direction-down-sword","player-direction-left-sword ","player-direction-right-sword",
-    "player-direction-up-sword-swing","player-direction-down-sword-swing","player-direction-left-sword-swing","player-direction-right-sword-swing",
-    "player-direction-up-shovel","player-direction-down-shovel","player-direction-left-shovel","player-direction-right-shovel",
-    "player-direction-up-shovel-swing","player-direction-down-shovel-swing","player-direction-left-shovel-swing","player-direction-right-shovel-swing",
-    "player-direction-up-axe","player-direction-down-axe","player-direction-left-axe","player-direction-right-axe",
-    "player-direction-up-axe-swing","player-direction-down-axe-swing","player-direction-left-axe-swing","player-direction-right-axe-swing",
-    "player-direction-up-bike","player-direction-down-bike","player-direction-left-bike","player-direction-right-bike",
-    "player-direction-up-skiis","player-direction-down-skiis","player-direction-left-skiis","player-direction-right-skiis",
-    "player-direction-up-canoe","player-direction-down-canoe","player-direction-left-canoe","player-direction-right-canoe",
-    "player-direction-up-car","player-direction-down-car", "player-direction-left-car","player-direction-right-car",
-    "player-direction-up-rocket","player-direction-down-rocket","player-direction-left-rocket","player-direction-right-rocket",
-    "enemy-direction-up","enemy-direction-down","enemy-direction-left","enemy-direction-right",
-    "deer-direction-up","deer-direction-down","deer-direction-left","deer-direction-right"
-);
-var objectshtml = ""; 
-$.each(objecttypes, function(i, v) { 
-    objectshtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>'; 
-});
-
-//var craftableblockclasses = "";
-var inventoryslots = 74;
-var gridunitpx = 20; //must change this px value in css as well
-var enemyspeed = 200;
-var playerspeed = 50;
-var animalspeed = 2000;
-var projectilespeed = 50;
-var bikespeed = 100;
-var disablekeyboardevents = false;
-var playerid = 1;
-var totalhearts = 5;
-var globalmapblockcount = 0;
-var isnightime = false;
-
-var objectsArray = [0,2,3];
-var uniqueObjectID = function() {
-	var id = objectsArray.length + 1;
-	trace("uniqueID:"+id);
-	objectsArray.push(id);
-	return id;
-};
-
+import * as globals from './js/globals';
 
 
 
@@ -477,8 +363,8 @@ var loadGame = function(){
 
 /* VARIABLES THAT NEED TO BE CREATED AFTER GAME LOGIC RUNS */                
 var totalmapblocks = mapwidth * mapheight;
-var mapwidthpx = mapwidth * gridunitpx;
-var mapheightpx = mapheight * gridunitpx;
+var mapwidthpx = mapwidth * globals.gridunitpx;
+var mapheightpx = mapheight * globals.gridunitpx;
 var terrain_circle = [
 	-1, -2, -3, -4, -5, -6,
 	-(1+mapwidth), -(2+mapwidth), -(3+mapwidth), -(4+mapwidth), -(5+mapwidth), -(6+mapwidth),
@@ -492,7 +378,7 @@ var terrain_circle = [
 var setupInventorySlots = function() {
 	var invslothtml = "";
 	invslothtml += '<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>';
-	for (var i = 1; i <= inventoryslots; i += 1){
+	for (var i = 1; i <= globals.inventoryslots; i += 1){
 		invslothtml += '<div class="slot-'+i+' empty" data-blocktype="empty">0</div>';
 	}
 	$('.the-fucking-inventory').html(invslothtml);
@@ -559,8 +445,8 @@ var loadMap = function(maptype){
 		var mapdata = "";
 		var total = totalmapblocks;
 		for (i=0; i<total; i++){
-			mapdata += '<div data-blockid="'+globalmapblockcount+'" data-blocktype="'+mapblocks[i]+'" data-blockhealth="10" class="block block-'+mapblocks[i]+'"></div>';
-			globalmapblockcount++;
+			mapdata += '<div data-blockid="'+globals.globalmapblockcount+'" data-blocktype="'+mapblocks[i]+'" data-blockhealth="10" class="block block-'+mapblocks[i]+'"></div>';
+			globals.globalmapblockcount++;
 		}
 		if (maptype == 'forest'){
 			$('.maps-wrap').append('<div class="the-fucking-map the-fucking-forest-map cube-side cube-front" data-maptype="forest"></div>');
@@ -587,11 +473,11 @@ var setMapSize = function() {
 var changeBlockType = function(block, newtype, maptype) {
 	//trace("8-changing block "+block+" to "+newtype);
 	if (maptype) {
-		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').removeClass(allblockclasses);
+		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').removeClass(globals.allblockclasses);
 		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').addClass("block block-"+newtype);
 		$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').attr("data-blocktype", newtype);
 	} else {
-		$('.maps-wrap .block:eq('+block+')').removeClass(allblockclasses);
+		$('.maps-wrap .block:eq('+block+')').removeClass(globals.allblockclasses);
 		$('.maps-wrap .block:eq('+block+')').addClass("block block-"+newtype);
 		$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
 	}
@@ -932,7 +818,7 @@ var saveMap = function(){
 /////////////
 
 var showObjectHealth = function(objectid, number) {
-	var rid = uniqueObjectID();
+	var rid = globals.uniqueObjectID();
 	var healthlabelhtml = '<div class="damage-label damage-label-id-'+rid+'">'+number+'</div>';
 	$('.objectid-'+objectid).append(healthlabelhtml);
 	$('.damage-label-id-'+rid).css("top","-80px");
@@ -985,7 +871,7 @@ var hallucinate = function() {
 
 var refillHearts = function() {
 	$('.the-fucking-hearts ul .empty').removeClass();
-	setObjectHealth(1,totalhearts);
+	setObjectHealth(1,globals.totalhearts);
 };
 
 var addHeart = function() {
@@ -1000,7 +886,7 @@ var removeHeart = function() {
 	if (hearts > 1) {
 		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
 		reduceObjectHealth(1,1);
-	} else if (hearts == totalhearts) {
+	} else if (hearts == globals.totalhearts) {
 		//don't add a heart, max 8
 	} else {
 		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
@@ -1016,7 +902,7 @@ var gameOver = function() {
 
 var totalHearts = function() {
 	var hearts = $('.the-fucking-hearts li.empty').length;
-	hearts = totalhearts - hearts;
+	hearts = globals.totalhearts - hearts;
 	return hearts;
 };
 
@@ -1024,7 +910,7 @@ var createPlayer = function(id) {
 	trace("Create Player");
 	//var playerstartblock = 466;
 	//changeBlockType(playerstartblock, "grass"); //make sure player doesn't start overtop an obstacle
-	//var id = uniqueObjectID();
+	//var id = globals.uniqueObjectID();
 	var id = 1;
 	$('.the-fucking-map').append('<div data-id='+id+' data-blockhealth="5" class=" objectid-'+id+' the-fucking-player player-direction-down"></div>');
 };
@@ -1037,7 +923,7 @@ var savePlayer = function() {
 	trace("playerdiv"+playerdiv);
 	trace("seleted item"+selecteditem);
     var inventoryItems = new Array();
-	for (i=1; i<=inventoryslots; i++){ 
+	for (i=1; i<=globals.inventoryslots; i++){ 
 		inventoryItems[i]=new Object();
 	}
 	$('.the-fucking-inventory > div').each(function(index){
@@ -1075,7 +961,7 @@ var savePlayer = function() {
 
 	/*
 		var signmessages = new Array();
-		for (i=1; i<=inventoryslots; i++){ 
+		for (i=1; i<=globals.inventoryslots; i++){ 
 			inventoryItems[i]=new Object();
 		}
 	    for (i=0; i<=total; i++){
@@ -1189,7 +1075,7 @@ var moveObjectToBlock = function(id, destinationblock) {
 	//trace("move object ID#"+id+" to block"+destinationblock);
 	var t = 0;
 	var maxthoughts = 100;
-	objectbrain = setTimeout(anObjectMovement, enemyspeed);
+	objectbrain = setTimeout(anObjectMovement, globals.enemyspeed);
 
 	var destinationblockColumn = destinationblock % mapwidth;
 	var destinationblockRow = parseInt(destinationblock / mapwidth);
@@ -1260,7 +1146,7 @@ var moveObjectToBlock = function(id, destinationblock) {
 			//killEnemy(id);
 		} else {
 			t++;
-			objectbrain = setTimeout(anObjectMovement, playerspeed); // repeat thought
+			objectbrain = setTimeout(anObjectMovement, globals.playerspeed); // repeat thought
 		}
 	
 	}
@@ -1277,7 +1163,7 @@ var moveObjectToBlock = function(id, destinationblock) {
 
 
 var createEnemy = function() {
-	var id = uniqueObjectID();
+	var id = globals.uniqueObjectID();
 	trace("Create Enemy "+id);
 	//var enemystartblock = 0;
 	$('.the-fucking-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-enemy enemy-direction-down"></div>');
@@ -1292,7 +1178,7 @@ var initEnemyBrain = function(id) {
 	trace("start brain program for enemy #"+id);
 	var t = 0;
 	var maxthoughts = 100;
-	var enemybrain = setTimeout(anEnemyThought, enemyspeed);
+	var enemybrain = setTimeout(anEnemyThought, globals.enemyspeed);
 	
 	//collection of thoughts
 	var enemyPath = Array();
@@ -1362,7 +1248,7 @@ var initEnemyBrain = function(id) {
 				killEnemy(id);
 			} else {
 				t++;
-				enemybrain = setTimeout(anEnemyThought, enemyspeed); // repeat thought
+				enemybrain = setTimeout(anEnemyThought, globals.enemyspeed); // repeat thought
 			}
 
 		}
@@ -1381,7 +1267,7 @@ var killAnimal = function(id) {
 
 var createAnimal = function() {
 
-	var id = uniqueObjectID();
+	var id = globals.uniqueObjectID();
 	trace("Create Animal "+id);
 	//var enemystartblock = 0;
 	$('.the-fucking-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-deer deer-direction-down"></div>');
@@ -1393,7 +1279,7 @@ var initAnimalBrain = function(id) {
 	trace("start brain program for animal id:"+id);
 	var t = 0;
 	var maxthoughts = 100;
-	var animalbrain = setTimeout(anAnimalThought, animalspeed);
+	var animalbrain = setTimeout(anAnimalThought, globals.animalspeed);
 	
 	//collection of thoughts
 	var animalPath = Array();
@@ -1467,7 +1353,7 @@ var initAnimalBrain = function(id) {
 			// 	killAnimal(id);
 			// } else {
 				t++;
-				animalbrain = setTimeout(anAnimalThought, animalspeed); // repeat thought
+				animalbrain = setTimeout(anAnimalThought, globals.animalspeed); // repeat thought
 			// }
 
 		}
@@ -1531,13 +1417,13 @@ var placeSign = function(objectid, block) {
 		console.log('write message: ' + message);
 
 		$('.bubble-wrap').remove();
-		disablekeyboardevents = false;
+		globals.disablekeyboardevents = false;
 
 		event.preventDefault();
 
 	});
 
-	disablekeyboardevents = true;
+	globals.disablekeyboardevents = true;
 
 	$('.bubble-text').focus();
 };
@@ -1687,7 +1573,7 @@ var setupKeyboardEvents = function() {
 		var selecteditem = getSelectedItem();
 		switch (event.keyCode) {
 			case 37: /* LEFT ARROW */
-				if (disablekeyboardevents == false) {
+				if (globals.disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(880); }
 					else if (selecteditem == "piano") { playPiano(880); }
 					else if (selecteditem == "drumsticks") { playDrums(880); }
@@ -1697,7 +1583,7 @@ var setupKeyboardEvents = function() {
 				}
 				break;
 			case 38: /* UP ARROW */
-				if (disablekeyboardevents == false) {
+				if (globals.disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(1320); } 
 					else if (selecteditem == "piano") { playPiano(1320); } 
 					else if (selecteditem == "drumsticks") { playDrums(1320); }
@@ -1707,7 +1593,7 @@ var setupKeyboardEvents = function() {
 				}
 				break;
 			case 39: /* RIGHT ARROW */
-				if (disablekeyboardevents == false) {
+				if (globals.disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(1100); }
 					else if (selecteditem == "piano") { playPiano(1100); }
 					else if (selecteditem == "drumsticks") { playDrums(1100); }
@@ -1717,7 +1603,7 @@ var setupKeyboardEvents = function() {
 				}
 				break;
 			case 40: /* DOWN ARROW */
-				if (disablekeyboardevents == false) {
+				if (globals.disablekeyboardevents == false) {
 					if (selecteditem == "guitar") { playSound(660); } 
 					else if (selecteditem == "piano") { playPiano(660); } 
 					else if (selecteditem == "drumsticks") { playDrums(660); }
@@ -1727,7 +1613,7 @@ var setupKeyboardEvents = function() {
 				}
 				break;
 			case 32: /* SPACE */
-				if (disablekeyboardevents == false) {
+				if (globals.disablekeyboardevents == false) {
 
 					if ($('.speech-bubble').length == 0){
 						playerPrimaryAction(); 
@@ -1799,11 +1685,11 @@ var setupKeyboardEvents = function() {
 };
 
 var enableKeyboardEvents = function() {
-	disablekeyboardevents = false;
+	globals.disablekeyboardevents = false;
 };
 
 var disableKeyboardEvents = function() {
-	disablekeyboardevents = true;
+	globals.disablekeyboardevents = true;
 };
 
 
@@ -1874,7 +1760,7 @@ var setupMouseEvents = function() {
 	$('.the-fucking-inventory div').on("click", function() {
 		var blocktype = $(this).attr('data-blocktype');
 		//items that are crafting ingredients
-		if ( $.inArray(blocktype, isingredient) > -1 ) {
+		if ( $.inArray(blocktype, globals.isingredient) > -1 ) {
 		    if ( $(this).attr('data-blocktype') != "empty" ){
 		    	var blocktype = $(this).attr('data-blocktype');
 		    	moveItemToCraftingTable(blocktype);
@@ -1904,7 +1790,7 @@ var setupMouseEvents = function() {
 			
 		});
 		
-		if ( $.inArray(selecteditem, isequipable) > -1 ){
+		if ( $.inArray(selecteditem, globals.isequipable) > -1 ){
 			trace("selected item has animation");
 			$('.the-fucking-player').addClass("player-direction-"+playerdirection+"-"+selecteditem);
 		}
@@ -1931,7 +1817,7 @@ var setupMouseEvents = function() {
 			var blocktype = $(this).attr('data-blocktype');
 			var itemquantity = $(this).html();
 			trace("You crafted" + itemquantity + " " + blocktype);
-			$('.the-fucking-crafted-item > div').removeClass(allblockclasses);
+			$('.the-fucking-crafted-item > div').removeClass(globals.allblockclasses);
 			$('.the-fucking-crafted-item > div').html("0");
 			removeAllItemsFromCraftingTable();
 			addToInventory(blocktype, itemquantity);
@@ -1985,25 +1871,25 @@ var moveObject = function(direction, id, name){
 	if (!objectCollisionDetection(id, direction)){
 		switch (direction) {
 			case "up": 
-				y = y - gridunitpx; 
+				y = y - globals.gridunitpx; 
 				y = addPX(y);
 				$(".objectid-"+id).css("top",y); 
 				break;
 
 			case "down": 
-				y = y + gridunitpx; 
+				y = y + globals.gridunitpx; 
 				y = addPX(y);
 				$(".objectid-"+id).css("top",y); 
 				break;
 
 			case "left": 
-				x = x - gridunitpx; 
+				x = x - globals.gridunitpx; 
 				x = addPX(x);
 				$(".objectid-"+id).css("left",x); 
 				break;
 
 			case "right": 
-				x = x + gridunitpx; 
+				x = x + globals.gridunitpx; 
 				x = addPX(x);
 				$(".objectid-"+id).css("left",x); 
 				break;
@@ -2014,7 +1900,7 @@ var moveObject = function(direction, id, name){
 		success = false;
 	}
 
-	if (isnightime == true) {
+	if (globals.isnightime == true) {
 		clearLighting();
 		lightUpBlock();
 	}
@@ -2468,7 +2354,7 @@ var playerPrimaryAction = function(blockid) {
 				});
 				removeFromInventory(selecteditem);
 				changeBlockType(block, selecteditem);
-			} else if ( $.inArray(selecteditem, isplaceable) > -1 ){
+			} else if ( $.inArray(selecteditem, globals.isplaceable) > -1 ){
 				//placing/writing on a sign
 				if (selecteditem == "sign"){
 					placeSign(1, block);
@@ -2487,7 +2373,7 @@ var playerPrimaryAction = function(blockid) {
 			}
 
 		//picking up items & blocks	
-		} else if ($.inArray(blocktype, iscollectable) > -1){
+		} else if ($.inArray(blocktype, globals.iscollectable) > -1){
 			var changeblocktotype = "grass";
 			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "grass"; } 
 			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "snow"; } 
@@ -2629,7 +2515,7 @@ var throwFrisbee = function(startblock, direction) {
 	//var enemystartblock = 0;
 	//$('.the-fucking-frisbee').remove();
 	var playerdirection = getObjectDirection(1, "player");
-	var id = uniqueObjectID();
+	var id = globals.uniqueObjectID();
 	$('.the-fucking-map').append('<div data-id='+id+' class=" the-fucking-frisbee objectid-'+id+' frisbee-direction-'+playerdirection+'"></div>');
 	initProjectile("frisbee", startblock, direction, id);
 };
@@ -2639,7 +2525,7 @@ var throwSpear = function(startblock, direction) {
 	//var enemystartblock = 0;
 	//$('.the-fucking-frisbee').remove();
 	var playerdirection = getObjectDirection(1, "player");
-	var id = uniqueObjectID();
+	var id = globals.uniqueObjectID();
 	$('.the-fucking-map').append('<div data-id='+id+' class=" the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
 	initProjectile("spear", startblock, direction, id);
 };
@@ -2658,7 +2544,7 @@ var initProjectile = function(name, startblock, direction, id) {
 	//var t = 0;
 	//var maxdistance = 10;
 
-	//var projectilebrain = setTimeout(projectileMotion, projectilespeed);
+	//var projectilebrain = setTimeout(projectileMotion, globals.projectilespeed);
 
 	//window.requestAnimationFrame(projectileMotion);
 
@@ -2688,7 +2574,7 @@ var initProjectile = function(name, startblock, direction, id) {
 			//trace("projectile stopped :(");
 			//stopProjectile();
 		
-			//projectilebrain = setTimeout(projectileMotion, projectilespeed); // repeat thought
+			//projectilebrain = setTimeout(projectileMotion, globals.projectilespeed); // repeat thought
 			//window.requestAnimationFrame(projectileMotion);
 		//}//
 		
@@ -2806,7 +2692,7 @@ var rideBike = function(direction) {
 	} else {
 		ridingbike = setTimeout(function() {
 			startBiking(direction);
-		}, bikespeed);
+		}, globals.bikespeed);
 	}
 };
 
@@ -2822,7 +2708,7 @@ var startBiking = function (direction) {
 	}
 	ridingbike = setTimeout(function() {
     	startBiking(direction);
-	}, bikespeed); // repeat movement
+	}, globals.bikespeed); // repeat movement
 };
 
 var stopBiking = function () {
@@ -2916,7 +2802,7 @@ var moveItemToCraftingTable = function(blocktype) {
 };
 
 var removeAllItemsFromCraftingTable = function() {
-	$('.the-fucking-crafting-table > div').removeClass(allblockclasses);
+	$('.the-fucking-crafting-table > div').removeClass(globals.allblockclasses);
 	$('.the-fucking-crafting-table > div').attr("data-blocktype", "empty");
 	$('.the-fucking-crafting-table > div').addClass("empty");
 	$('.the-fucking-crafting-table > div').html("0");
@@ -2987,7 +2873,7 @@ var checkCraftingTableForItem = function() {
 		case "goldgoldgold": createCraftedItem("portalb",1); break;
 
 		default:
-			$('.the-fucking-crafted-item > .slot').removeClass(allblockclasses);
+			$('.the-fucking-crafted-item > .slot').removeClass(globals.allblockclasses);
 			$('.the-fucking-crafted-item > .slot').addClass("empty");
 			$('.the-fucking-crafted-item > .slot').attr('data-blocktype', 'empty');
 			$('.the-fucking-crafted-item > .slot').html("0");
@@ -3106,7 +2992,7 @@ var getBlockType = function(block) {
 var getBlockLeftByID = function(block) {
 	var column = block % mapwidth;
 	column = column;
-	var leftpx = column * gridunitpx;
+	var leftpx = column * globals.gridunitpx;
 	return leftpx;
 	//alert(leftpx);
 };
@@ -3114,7 +3000,7 @@ var getBlockLeftByID = function(block) {
 var getBlockTopByID = function(block) {
 	var row = block / mapwidth;
 	row = parseInt(row);
-	var toppx = row * gridunitpx;
+	var toppx = row * globals.gridunitpx;
 	//trace("block "+block+", row"+row+", toppx"+toppx);
 	return toppx;
 };
@@ -3150,7 +3036,7 @@ var getObjectCurrentCol = function(id) {
 	x = stripPX(x);
 	var y = getObjectCurrentPositionY(id);
 	y = stripPX(y);
-	var col = x / gridunitpx;
+	var col = x / globals.gridunitpx;
 	col = parseInt(col);
 	return col;
 };
@@ -3158,7 +3044,7 @@ var getObjectCurrentCol = function(id) {
 var getObjectCurrentRow = function(id) {
 	var y = getObjectCurrentPositionY(id);
 	y = stripPX(y);
-	var row = y / gridunitpx;
+	var row = y / globals.gridunitpx;
 	row = parseInt(row);
 	row = row + 1;
 	return row;
@@ -3309,7 +3195,7 @@ var loadDevConsole = function() {
 
 var getAllItems = function() {
 	var inventoryhtml = '';
-	$.each(blocktypes, function(index, value) {
+	$.each(globals.blocktypes, function(index, value) {
 		if ( 	
 			value != "diamond-hole" && value != "gold-hole" && value != "silver-hole" && value != "oil-hole" &&
 		 	value != "clay-hole" && value != "carrot-inground" 
@@ -3352,7 +3238,7 @@ var nightTime = function() {
 	$('.the-fucking-map-overlay').fadeIn();
 	$('.the-fucking-map-overlay').append(overlayhtml);
 
-	isnightime = true;
+	globals.isnightime = true;
 
 	setTimeout(
 		function() {
@@ -3365,7 +3251,7 @@ var nightTime = function() {
 //end night time e.g. morning
 var morningTime = function() {
 	$('.the-fucking-map-overlay').empty();
-	isnightime = false;
+	globals.isnightime = false;
 };
 
 var clearLighting = function() {
