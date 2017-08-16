@@ -56,7 +56,7 @@ session_start();
             <h1>Map Editor</h1>
 
             <div class="maps-wrap clearfix">
-                <div class="the-fucking-map" data-maptype="forest"></div>
+                <div class="the-fucking-forest-map" data-maptype="forest"></div>
             </div>
 
             <section class="beaudryland-panel">
@@ -102,7 +102,7 @@ loadNewMap = function(type) {
         maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
     }
 
-    $('.the-fucking-map').append(maphtml);
+    $('.the-fucking-forest-map').append(maphtml);
 
 };
 

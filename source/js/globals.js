@@ -1,16 +1,23 @@
-//export const craftableblockclasses = "";
-export const inventoryslots = 74;
+
 export const gridunitpx = 20; //must change this px value in css as well
+export var totalmapblocks = 0;
+export var mapwidth = 0;
+export var mapheight = 0;
+export var mapwidthpx = 0;
+export var mapheightpx = 0;
+
+export const inventoryslots = 74;
 export const enemyspeed = 200;
 export const playerspeed = 50;
 export const animalspeed = 2000;
 export const projectilespeed = 50;
 export const bikespeed = 100;
-export const disablekeyboardevents = false;
 export const playerid = 1;
 export const totalhearts = 5;
-export const globalmapblockcount = 0;
-export const isnightime = false;
+
+export var disablekeyboardevents = false;
+export var globalmapblockcount = 0;
+export var isnightime = false;
 
 export const mobtypes = new Array (
 	/*players*/		"player",

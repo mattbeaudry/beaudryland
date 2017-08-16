@@ -1,8 +1,7 @@
-export const initializeNavigation = function() {
+export var initializeNavigation = function(testVar, testObject) {
 
 	console.log("** INIT NAVIGATION **");
 
-	// NAVIGATION TOGGLE
 	$('.nav-toggle-inventory').on("click", function() {
 		if ( $('body').hasClass("version-phonegap") ) {
 			$('.the-fucking-navigation').hide();
@@ -20,5 +19,5 @@ export const initializeNavigation = function() {
 			$('.nav-extra').toggle();
 		}
 	});
-	
+
 };
