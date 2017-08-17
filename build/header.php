@@ -15,4 +15,5 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.bundle.css">
         <link rel="stylesheet" href="css/svg-items.css">
+        <link rel="stylesheet" href="css/spritepainter.css">
     </head>

@@ -25,6 +25,60 @@ render(<Game/>, window.document.getElementById('react-map-test'));
 
 
 
+	playSound(freq) {
+		achievementCompleted("jammingout");
+		//unlock winter map
+		if ((this.guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
+			drawNewWinterMap(); 
+			createWinterSigns();
+			this.guitarFirstNote = false; 
+		}
+		sin = T("sin", freq);
+		env = T("adsr", 10, 500);
+		syn = T("*", sin, env).play();
+		sin.bang();
+		env.bang();
+	}
+
+	playPiano(freq) {
+		achievementCompleted("jammingout");
+		//unlock beach map
+		if ((this.keyboardFirstNote == true) && ($('.the-fucking-beach-map').length == 0)){ 
+			drawNewBeachMap(); 
+			createBeachSigns();
+			this.keyboardFirstNote = false; 
+		}
+		sin = T("sin", freq);
+		env = T("adsr", 10, 500);
+		syn = T("*", sin, env).play();
+		sin.bang();
+		env.bang();
+	}
+
+	playDrums(freq) {
+		achievementCompleted("jammingout");
+		//unlock beach map
+		if ((this.drumsFirstNote == true) && ($('.the-fucking-space-map').length == 0)){ 
+			drawNewSpaceMap(); 
+			//createBeachSigns();
+			this.keyboardFirstNote = false; 
+		}
+		sin = T("sin", freq);
+		env = T("adsr", 10, 500);
+		syn = T("*", sin, env).play();
+		sin.bang();
+		env.bang();
+	}
+
+
+
+
+
+
+
+
+
+
 
 } else if ( $('body').hasClass("version-multiplayer") ) {
 	

@@ -1,3 +1,118 @@
+@import url('http://fonts.googleapis.com/css?family=Press+Start+2P')
+
+$gridunitpx: 20px
+$mapWidthBlocks: 40
+$mapHeightBlocks: 40
+$mapWidthPX: $mapWidthBlocks * $gridunitpx
+$mapHeightPX: $mapHeightBlocks * $gridunitpx
+
+$white: #fff
+$black: #000
+$grass-green: #36ac2a
+$snow-white: #f5fdff
+$sand: #d9cfa2
+
+
+/* THE MAP */
+
+.maps-wrap 
+	.the-fucking-forest-map,
+	.the-fucking-winter-map,
+	.the-fucking-beach-map
+		width: $mapWidthPX
+		height: $mapHeightPX
+		margin: 0px auto
+	 
+	.user-map 
+		width: $mapWidthPX
+		height: $mapHeightPX
+		margin: 40px auto
+
+
+/* THE CUBE */
+
+.cube-container
+	position: relative
+	width: $mapWidthPX
+	height: $mapHeightPX
+	perspective: 8000px
+	margin-top: 300px
+	background-color: #000
+
+.cube 
+	position: absolute
+	width: $mapWidthPX
+	height: $mapHeightPX
+	transform-style: preserve-3d
+	transition: all 2s
+ 
+.cube-side 
+	position: absolute
+	width: $mapWidthPX
+	height: $mapHeightPX
+
+.cube-front 
+	transform: rotateY(0deg) translateZ($mapWidthPX/2)
+
+.cube-right 
+	transform: rotateY(90deg) translateZ($mapWidthPX/2) 
+
+.cube-back 
+	transform: rotateY(-180deg) translateZ($mapWidthPX/2)
+
+.cube-left 
+	transform: rotateY(-90deg) translateZ($mapWidthPX/2) 
+
+.cube-bottom 
+	transform: rotateX(-90deg) translateZ($mapWidthPX/2) 
+
+.cube-top 
+	transform: rotateX(90deg) translateZ($mapWidthPX/2)
+
+.cube-show-front 
+	transform: translateZ(-$mapWidthPX) rotateY(0deg)
+
+.cube-show-right 
+	transform: translateZ(-$mapWidthPX) rotateY(-90deg)
+
+.cube-show-back 
+	transform: translateZ(-$mapWidthPX) rotateY(-180deg)
+
+.cube-show-left 
+	transform: translateZ(-$mapWidthPX) rotateY(-270deg)
+
+.cube-show-top 
+	transform: translateZ(-$mapWidthPX) rotateX(-90deg)
+
+.cube-show-bottom 
+	transform: translateZ(-$mapWidthPX) rotateX(90deg)
+
+
+/* MAP PERSPECTIVE */
+
+.the-fucking-forest-map 
+	transition: all 5s
+	overflow: visible !important
+	transform-style: preserve-3d
+ 
+	.block-tree,.block-appletree,.block-mushroom,.block-rock,.block-flowers,.the-fucking-player,
+	.block-sign,.block-mushroom,.block-bluemushroom,.block-wood,.block-portal-a,.block-portal-b,.block-door,.block-door-closed 
+		transition: transform 5s
+		transform-origin: bottom
+		
+ 
+.map-view-perspective 
+	// transform: perspective(500px) rotateX(77deg) rotateY(0deg) scale(1)
+	transform: perspective(500px) rotateX(55deg) rotateY(0deg) scale(1) translateZ(600px)
+	overflow: visible !important
+	transform-style: preserve-3d
+	transition: all 5s
+
+	.block-tree,.block-appletree,.block-muchroom,.block-rock,.block-flowers,.the-fucking-player, 
+	.block-sign,.block-mushroom,.block-bluemushroom,.block-wood,.block-portal-a,.block-portal-b,.block-door,.block-door-closed 
+		transform: rotateX(-90deg) scale(1);
+
+
 /* BASE */
 
 html, button, input, select, textarea
@@ -27,20 +142,6 @@ fieldset
 	-webkit-box-sizing: border-box
 	-moz-box-sizing: border-box
 	box-sizing: border-box
-
-
-/* FONTS */
-
-@import url('http://fonts.googleapis.com/css?family=Press+Start+2P')
-
-
-/* COLORS */
-
-$white: #fff
-$black: #000
-$grass-green: #36ac2a
-$snow-white: #f5fdff
-$sand: #d9cfa2
 
 
 /* BASE STYLES */
@@ -77,6 +178,7 @@ hr:before
 
 
 /* GRID */
+
 .container 
 	width: 800px
 	margin: 0 auto
@@ -542,101 +644,7 @@ hr:before
 .bubble-achievement 
 
 
-/* THE MAP */
 
-.maps-wrap 
-	.the-fucking-forest-map,
-	.the-fucking-winter-map,
-	.the-fucking-beach-map
-		width: 800px
-		height: 800px
-		margin: 0px auto
-	 
-	.user-map 
-		width: 800px
-		height: 800px
-		margin: 40px auto
-
-
-/* THE CUBE */
-
-.cube-container
-	position: relative
-	width: 800px
-	height: 800px
-	perspective: 8000px
-	margin-top: 300px
-	background-color: #000
-
-.cube 
-	position: absolute
-	width: 800px
-	height: 800px
-	transform-style: preserve-3d
-	transition: all 2s
- 
-.cube-side 
-	position: absolute
-	width: 800px
-	height: 800px
-
-.cube-front 
-	transform: rotateY(0deg) translateZ(400px)
-
-.cube-right 
-	transform: rotateY(90deg) translateZ(400px) 
-
-.cube-back 
-	transform: rotateY(-180deg) translateZ(400px)
-
-.cube-left 
-	transform: rotateY(-90deg) translateZ(400px) 
-
-.cube-bottom 
-	transform: rotateX(-90deg) translateZ(400px) 
-
-.cube-top 
-	transform: rotateX(90deg) translateZ(400px)
-
-.cube-show-front 
-	transform: translateZ(-800px) rotateY(0deg)
-
-.cube-show-right 
-	transform: translateZ(-800px) rotateY(-90deg)
-
-.cube-show-back 
-	transform: translateZ(-800px) rotateY(-180deg)
-
-.cube-show-left 
-	transform: translateZ(-800px) rotateY(-270deg)
-
-.cube-show-top 
-	transform: translateZ(-800px) rotateX(-90deg)
-
-.cube-show-bottom 
-	transform: translateZ(-800px) rotateX(90deg)
-
-
-/* MAP PERSPECTIVE */
-
-.the-fucking-forest-map 
-	transition: all 5s
-	overflow: visible !important
- 
-.block-tree,.block-appletree,.block-mushroom,.block-rock,.block-flowers,.the-fucking-player,
-.block-sign,.block-mushroom,.block-bluemushroom,.block-wood,.block-portal-a,.block-portal-b,.block-door,.block-door-closed 
-	transition: transform 5s
- 
-.map-view-perspective 
-	// transform: perspective(500px) rotateX(77deg) rotateY(0deg) scale(1)
-	transform: perspective(500px) rotateX(55deg) rotateY(0deg) scale(1) translateZ(600px)
-	overflow: visible !important
-	transform-style: preserve-3d
-	transition: all 5s
-
-.block-tree,.block-appletree,.block-muchroom,.block-rock,.block-flowers,.the-fucking-player, 
-.block-sign,.block-mushroom,.block-bluemushroom,.block-wood,.block-portal-a,.block-portal-b,.block-door,.block-door-closed 
-	transform-origin: bottom
 
 
 /* THE PLAYER */

@@ -1,0 +1,144 @@
+.panel-left {
+    float:left;
+    width:50%;
+    padding-right:20px;
+}
+.panel-right {
+    float:left;
+    width:50%;
+    padding-left:20px;
+}
+.panel-bottom {
+    float:left;
+    width:100%;
+}
+.pixelpainter-nav ul {
+    list-style:none;
+    padding:0;
+}
+.pixelpainter-nav li {
+    display:inline-block;
+    margin-right:10px;
+}
+.the-fucking-canvas {
+    border:solid 2px #000;
+    padding:10px;
+    display:inline-block;
+    width:180px;
+}
+.canvas-pixel {
+    float:left;
+    width:30px;
+    height:30px;
+    border:solid 2px #000;
+    cursor:pointer;
+    background-color:transparent;
+}
+.color-code {
+
+}
+.item-builder {
+
+}
+.item-builder ul {
+    list-style:none;
+    padding:0;
+}
+.item-builder li {
+    margin-bottom:5px;
+}
+input[type="text"] {
+    box-shadow:none;
+    border:solid 2px #000;
+    padding:5px 10px;
+}
+.create-image {
+    color:#fff;
+    background-color:#000;
+    padding:5px 10px;
+    border:none;
+}
+#itemsvg,
+#itemsvg-large {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    display: inline-block;
+}
+#itemsvg svg,
+#itemsvg-large svg {
+    width:100%;
+    height:100%;
+    shape-rendering: crispEdges;
+}
+#itemsvg-large {
+    width:180px;
+    height:180px;
+}
+.svg-wrap {
+    display:inline;
+    float:left;
+    margin:20px;
+    shape-rendering: crispEdges;
+}
+.color-palette {
+    margin: 5px 0;
+    border: solid 2px #000;
+    padding: 2px;
+    width:180px;
+}
+.color-palette span {
+    display:inline-block;
+    width:20px;
+    height:20px;
+    cursor:pointer;
+    float:left;
+    margin-right:2px;
+}
+.color-palette span:hover {
+    border:dashed 2px #000;
+}
+.pine { background-color:#0b3607; }
+.tree { background-color:#195513; }
+.grass { background-color:#36ac2a; }
+
+.hole { background-color:#1d1101; }
+.trunk { background-color:#362001; }
+.dirt { background-color:#6a4107; }
+.wood { background-color:#916d33; }
+.board { background-color:#c59f42; }
+.sand { background-color:#d8cea0; }
+
+.ocean { background-color:#068bd7; }
+.water { background-color:#00a2ff; }
+.diamond { background-color:#47d0f3; }
+.ice { background-color:#d4f4fc; }
+.snow { background-color:#f5fdff; }
+
+.brick { background-color:#bd401a; }
+.red { background-color:#d93b0a; }
+.fire { background-color:#d94e03; }
+.clay { background-color:#d7710d; }
+.gold { background-color:#e6bb27; }
+
+.black { background-color:#000000; }
+.road { background-color:#313131; }
+.rock { background-color:#606469; }
+.silver { background-color:#cbcbcb; }
+.white { background-color:#fff; }
+.transparent { background-color:transparent;border:dotted 2px #000; }
+
+section {
+    background-color:#efefef;
+    padding:20px 20px 20px;
+    margin-bottom:40px;
+}
+section h2 {
+    margin-top:0px;
+}
+.form-color {
+    width: 180px;
+}
+h1 {
+    text-align:center;
+}

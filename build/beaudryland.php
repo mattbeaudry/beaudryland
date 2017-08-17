@@ -30,7 +30,7 @@
 
 		<div class="the-fucking-map-overlay"></div>
 
-		<div class="maps-container cube-container">
+		<div class="maps-container cube-container map-view-perspective">
 		    <div class="maps-wrap cube cube-show-front clearfix"></div>
 		</div>
 	    

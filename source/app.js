@@ -16,9 +16,6 @@
 //////////////
 
 /*
-GAME SETTINGS & GLOBALS
-GAME LOGIC
-MAPS
 PLAYER
 ENEMY & ANIMALS
 KEYBOARD, MOUSE, TOUCH & CONTROL PAD EVENTS
@@ -27,7 +24,6 @@ PLAYER PRIMARY ACTION
 ANIMATION & PROJECTILES
 INVENTORY
 CRAFTING (extends inventory)
-SOUND
 HELPER FUNCTIONS
 CHEATS
 EXPERIEMENTS
@@ -45,24 +41,22 @@ import * as mobile from './js/mobile';
 import { Utility } from './js/utility';
 import { Inventory } from './js/inventory';
 import { Map } from './js/map';
+import { Sound } from './js/sound';
+import { Story } from './js/story';
 
 var blUtil = new Utility();
+var blSound = new Sound();
+var blStory = new Story();
 var beaudrylandInventory = new Inventory();
 var beaudrylandMap = new Map();
 
 navigation.initializeNavigation();
+beaudrylandInventory.setupInventorySlots();
 
-
-/////////////
-//  *GAME LOGIC
-/////////////
-
-/* PHONEGAP / IPHONE ONLY */
-
+/* PHONEGAP / MOBILE ONLY */
 if ( $('body').hasClass("version-phonegap") ){
 
 	mobile.initializeMobile();
-
 	globals.mapwidth = 16;
 	globals.mapheight = 75;
 
@@ -72,31 +66,16 @@ if ( $('body').hasClass("version-phonegap") ){
 		return true;
 	}
 	
-	$('.inventory-close').on("click", function(){
-		toggleInventory();
-	});
-
-	var toggleInventory = function() {
-		$('.sticky-inventory').fadeToggle(0);
-	}; 
-
-	var hideControlPad = function() {
-		$('.the-fucking-controller').fadeToggle();
-	};
+	$('.inventory-close').on("click", function(){ toggleInventory(); });
+	var toggleInventory = function() { $('.sticky-inventory').fadeToggle(0); }; 
+	var hideControlPad = function() { $('.the-fucking-controller').fadeToggle(); };
 
 	$(document).ready(function() {
-
 		console.log("MOBILE VERSION");
 
 		beaudrylandMap.setupMap();
 	    loadNewMap();
 	    createPlayer();
-
-	    /*
-	    drawNewWinterMap();
-	    drawNewBeachMap();
-	    drawNewSpaceMap();
-	    */
 
 		mobile.websql_openDatabase();
 		mobile.websql_createTable();
@@ -105,20 +84,13 @@ if ( $('body').hasClass("version-phonegap") ){
 		setupKeyboardEvents();
 		setupMouseEvents();
 		setupControlPadEvents();
-
 		loadDevConsole();
-
-		beaudrylandInventory.setupInventorySlots();
-
 	});
 
-
 /* DESKTOP ONLY */
-
 } else if ( $('body').hasClass("version-desktop") ) {
 
 	$(document).ready(function() {
-
 		console.log("DESKTOP VERSION");
 
 		globals.mapwidth = 40;
@@ -127,16 +99,10 @@ if ( $('body').hasClass("version-phonegap") ){
 		beaudrylandMap.setupMap();
 		loadGame();
 
-		//load NewGame() ???
-
 		setupKeyboardEvents();
 		setupMouseEvents();
 		setupControlPadEvents();
-
 		loadDevConsole();
-
-		beaudrylandInventory.setupInventorySlots();
-
 	});
 
 	//alert/ask player to save before they close the page
@@ -144,39 +110,32 @@ if ( $('body').hasClass("version-phonegap") ){
 		return "Sure you don't wanna SAVE first? You should use the SAVE button before you leave!";
 	}
 	window.onbeforeunload = confirmExit;
-	
+
 }
 
 var loadNewGame = function() {
 	blUtil.log("new user & brand new map");
-
     beaudrylandMap.loadNewMap('forest', 'front');
-
     createPlayer();
 
     if (maptype == 'creative'){
-    	
-    	beaudrylandMap.loadNewMap('winter', 'right');
+      	beaudrylandMap.loadNewMap('winter', 'right');
     	beaudrylandMap.loadNewMap('beach', 'back');
     	beaudrylandMap.loadNewMap('jungle', 'left');
     	beaudrylandMap.loadNewMap('desert', 'bottom');
     	beaudrylandMap.loadNewMap('islands', 'top');
-	    createForestSigns();
-	    createWinterSigns();
-	    createBeachSigns();
+	    blStory.createForestSigns();
+	    blStory.createWinterSigns();
+	    blStory.createBeachSigns();
 	    getAllItems();
-	    createAnimal();
-
+	    //createAnimal();
     } else if (maptype == 'game') {
-
-    	createForestSigns();
-    	createAnimal();
-    	
+    	blStory.createForestSigns();
+    	//createAnimal();
     }
 };
 
 var loadGame = function(){
-
 	blUtil.log("load game");
 
     $.post('php/loadmap.php', {maptype:'forest'}, function(data) {
@@ -200,53 +159,6 @@ var loadGame = function(){
     	}	
     });
 };
-
-
-
-//////////
-//  *STORY
-//////////
-
-var createForestSigns = function(){
-	blUtil.log("add forest sign clues");
-	 var forestSigns = [
-	 	"You shall collect trees and rocks to create wood and other items.",
-	 	"You shall build a shovel in order to find treasure.",
-	 	"You shall build a guitar in order to unlock a new area."
-	 ];
-	 $.each(forestSigns,function(index,value){
-	 	var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-	 	beaudrylandMap.changeBlockType(blockid,"sign");
-	 	$('.the-fucking-forest-map .block:eq('+blockid+')').attr("data-text", value);
-	 });
-};
-var createWinterSigns = function(){
-	blUtil.log("add winter sign clues");
-	 var winterSigns = [
-	 	"Winter Message 1",
-	 	"Winter Message 2",
-	 	"Winter Message 3"
-	 ];
-	 $.each(winterSigns,function(index,value){
-	 	var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-	 	beaudrylandMap.changeBlockType(blockid,"sign","winter");
-	 	$('.the-fucking-winter-map .block:eq('+blockid+')').attr("data-text", value);
-	 });
-};
-var createBeachSigns = function(){
-	blUtil.log("add beach sign clues");
-	var forestSigns = [
-		"Beach Message 1",
-		"Beach Message 2",
-		"Beach Message 3"
-	];
-	$.each(forestSigns,function(index,value){
-		var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-		beaudrylandMap.changeBlockType(blockid,"sign","beach");
-		$('.the-fucking-beach-map .block:eq('+blockid+')').attr("data-text", value);
-	});
-};
-
 
 
 /////////////
@@ -599,8 +511,6 @@ var moveObjectToBlock = function(id, destinationblock) {
 //  ENEMY & ANIMALS
 /////////////
 
-
-
 var createEnemy = function() {
 	var id = globals.uniqueObjectID();
 	blUtil.log("Create Enemy "+id);
@@ -608,12 +518,13 @@ var createEnemy = function() {
 	$('.the-fucking-forest-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-enemy enemy-direction-down"></div>');
 	initEnemyBrain(id);
 };
+
 var killEnemy = function(id) {
 	blUtil.log("Kill Enemy id: "+id);
 	$('.objectid-'+id).remove();
 };
-var initEnemyBrain = function(id) {
 
+var initEnemyBrain = function(id) {
 	blUtil.log("start brain program for enemy #"+id);
 	var t = 0;
 	var maxthoughts = 100;
@@ -812,12 +723,14 @@ var initAnimalBrain = function(id) {
 
 var placeSign = function(objectid, block) {
 
-	/*var html = '<div class="speech-bubble">';
+	/*
+	var html = '<div class="speech-bubble">';
 	html    +=   '<form class="bubble-form" action="submit">';
 	html    +=     '<textarea class="bubble-text" rows="2" cols="30"></textarea>';
 	html    +=   '</form>';
 	html    += '</div>';
-	$('.objectid-'+objectid).append(html);*/
+	$('.objectid-'+objectid).append(html);
+	*/
 
 	var html = '<div class="bubble-wrap">';
 				html += '<div class="bubble-link">';
@@ -834,6 +747,7 @@ var placeSign = function(objectid, block) {
 		html += '</div>';
 
 	$('.objectid-'+objectid).append(html);
+
 	$('.bubble-form').submit(function(e) {
 
 		var message = $('.bubble-text').val();
@@ -2318,88 +2232,6 @@ var checkCraftingTableForItem = function() {
 			$('.the-fucking-crafted-item > .slot').html("0");
 	}	
 };
-
-
-
-/////////////
-//  *SOUND
-/////////////
-
-
-
-var guitarFirstNote = true;
-var keyboardFirstNote = true;
-var drumsFirstNote = true;
-
-var playSound = function(freq) {
-	achievementCompleted("jammingout");
-	//unlock winter map
-	if ((guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
-		drawNewWinterMap(); 
-		createWinterSigns();
-		guitarFirstNote = false; 
-	}
-	sin = T("sin", freq);
-	env = T("adsr", 10, 500);
-	syn = T("*", sin, env).play();
-	sin.bang();
-	env.bang();
-};
-
-var playPiano = function(freq) {
-	achievementCompleted("jammingout");
-	//unlock beach map
-	if ((keyboardFirstNote == true) && ($('.the-fucking-beach-map').length == 0)){ 
-		drawNewBeachMap(); 
-		createBeachSigns();
-		keyboardFirstNote = false; 
-	}
-	sin = T("sin", freq);
-	env = T("adsr", 10, 500);
-	syn = T("*", sin, env).play();
-	sin.bang();
-	env.bang();
-};
-
-var playDrums = function(freq) {
-	achievementCompleted("jammingout");
-	//unlock beach map
-	if ((drumsFirstNote == true) && ($('.the-fucking-space-map').length == 0)){ 
-		drawNewSpaceMap(); 
-		//createBeachSigns();
-		keyboardFirstNote = false; 
-	}
-	sin = T("sin", freq);
-	env = T("adsr", 10, 500);
-	syn = T("*", sin, env).play();
-	sin.bang();
-	env.bang();
-};
-
-var playMusic = function(){
-	var mml = T("mml", "t100 o3 $ l2 a l1 <b0<d0g+>> l2 d l1 <a0<c+0f+>> l2 a l1 <b0<d0g+>> l2 f l1 <a0<c+0f+>>");     
-	mml.synth = T("efx.reverb");
-	mml.synthdef = function(freq, opts) {
-	    var synth = T("*", T("+", 
-	                       T("tri", freq - 1, 0.25)),
-	                       T("adsr", "24db", 100, 2500, 0.6, 1500));
-	    synth.keyon = function(opts) {
-	        synth.args[1].bang();
-	    };
-	    synth.keyoff = function(opts) {
-	        synth.args[1].keyoff();
-	    };
-	    return synth;
-	};
-	mml.synth.onplay = function() {
-	    mml.on().bang();
-	};
-	mml.synth.onpause = function() {
-	    mml.off();
-	};
-	mml.synth.play();
-}
-		
 
 
 /////////////
