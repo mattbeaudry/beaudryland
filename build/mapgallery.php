@@ -1,30 +1,9 @@
-<?php
-ob_start();
-session_start();
-if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
+<?php 
+	ob_start(); session_start();
+	if ($_SESSION['username']){ $loggedin = true; } else { $loggedin=false; } 
 ?>
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Beaudryland Map Gallery</title>
-        
-        <meta name="description" content="javascript/CSS game">
-        <meta name="viewport" content="user-scalable=no,width=device-width">
-        
-        <link href="favicon.ico" rel="icon" type="image/x-icon" />
 
-		<link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/blocks.css">
-        
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-    </head>
+<?php include 'header.php'; ?>
     
     <body class="page-mapgallery">
         
@@ -50,8 +29,6 @@ if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
  
 	    </div>
 	    
-	    
-	    
 	    <div class="the-fucking-map-gallery">
 	    
 	    	<!--<p>Each one of these squares belongs to a fellow beaudrylander.</p>-->
@@ -62,10 +39,7 @@ if ($_SESSION['username']){$loggedin = true;}else{$loggedin=false;}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         -->
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.js"><\/script>')</script>
-        <script src="js/vendor/jquery.color.js"></script>
-        <script src="js/vendor/timbre.js"></script>
         <script src="js/plugins.js"></script>
-        <!--<script src="js/beaudryland.js"></script>-->
 
         <script type="text/javascript">
 

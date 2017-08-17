@@ -7,7 +7,7 @@ export class Map {
 	constructor() {
 		this.mapsContainer = $('.maps-wrap');
 		this.overlayhtml = '';
-	};
+	}
 
 	setupMap() {
 		blUtil.log("Map Setup");
@@ -24,7 +24,105 @@ export class Map {
 		];
 		$('.the-fucking-forest-map').css("width", globals.mapwidthpx+"px");
 		$('.the-fucking-forest-map').css("height", globals.mapheightpx+"px");
+	}
+
+	loadExistingMap(maptype) {
+		$.post('php/loadmap.php', {maptype:maptype}, function(data) {
+			blUtil.log("existing user");
+			var mapblocks = JSON.parse(data);
+			var mapdata = "";
+			var total = globals.totalmapblocks;
+			for (var i=0; i<total; i++) {
+				mapdata += '<div data-blockid="'+globals.globalmapblockcount+'" data-blocktype="'+mapblocks[i]+'" data-blockhealth="10" class="block block-'+mapblocks[i]+'"></div>';
+				globals.globalmapblockcount++;
+			}
+			if (maptype == 'forest') {
+				$('.maps-wrap').append('<div class="the-fucking-forest-map cube-side cube-front" data-maptype="forest"></div>');
+				$('.the-fucking-forest-map').html(mapdata);
+			} else if (maptype == 'winter') {
+				$('.maps-wrap').append('<div class="the-fucking-winter-map cube-side cube-right" data-maptype="winter"></div>');
+				$('.the-fucking-winter-map').css("width", globals.mapwidthpx+"px");
+				$('.the-fucking-winter-map').css("height", globals.mapheightpx+"px");
+				$('.the-fucking-winter-map').html(mapdata);
+			} else if (maptype == 'beach') {
+				$('.maps-wrap').append('<div class="the-fucking-beach-map cube-side cube-back" data-maptype="beach"></div>');
+				$('.the-fucking-beach-map').css("width", globals.mapwidthpx+"px");
+				$('.the-fucking-beach-map').css("height", globals.mapheightpx+"px");
+				$('.the-fucking-beach-map').html(mapdata);
+				//startWaves();
+			}
+		});
+	}
+
+	saveMap() {
+		blUtil.log("save map");
+		var playerdiv = $('.the-fucking-player').prop("outerHTML");
+		$('.the-fucking-player').remove();
+		//save forest map
+		var mapblocks = new Array();
+		var total = globals.totalmapblocks;
+	    for (var i=0; i<=total; i++){
+	    	var blocktype = $('.the-fucking-forest-map div:eq('+i+')').attr('data-blocktype');
+			mapblocks[i] = blocktype;
+		}
+		var jsonmapblocks = JSON.stringify(mapblocks);
+	    $.post('php/savemap.php', {mapdata: jsonmapblocks, maptype:'forest'}, function(data) {
+	        //$('body').append(data);
+	        blUtil.log("save mapdata: "+data);
+	    });
+	    //save winter map
+	    if ($('.the-fucking-winter-map').length) {
+			var wintermapblocks = new Array();
+			var total = globals.totalmapblocks;
+			for (var i=0; i<=total; i++){
+				var blocktype = $('.the-fucking-winter-map div:eq('+i+')').attr('data-blocktype');
+				//snowing on blocks and cleaning up map
+				/*if (blocktype == "dirt") { blocktype = "snow"; }
+				if (blocktype == "hole") { blocktype = "snow"; }
+				if (blocktype == "frozendirt") { blocktype = "snow"; }
+				if (blocktype == "icehole") { blocktype = "snow"; }*/
+
+				wintermapblocks[i] = blocktype;
+			}
+	    	//alert("winter map exists");
+			var jsonwintermapblocks = JSON.stringify(wintermapblocks);
+		    $.post('php/savemap.php', {mapdata: jsonwintermapblocks, maptype:'winter'}, function(data) {
+		        //$('body').append(data);
+		        blUtil.log("save mapdata: "+data);
+		    });
+		}
+		//save beach map
+		if ($('.the-fucking-beach-map').length) {
+			//save winter map
+			var beachmapblocks = new Array();
+			var total = globals.totalmapblocks;
+			for (var i=0; i<=total; i++){
+				var blocktype = $('.the-fucking-beach-map div:eq('+i+')').attr('data-blocktype');
+				beachmapblocks[i] = blocktype;
+			}
+			//alert("winter map exists");
+			var jsonbeachmapblocks = JSON.stringify(beachmapblocks);
+		    $.post('php/savemap.php', {mapdata: jsonbeachmapblocks, maptype:'beach'}, function(data) {
+		        //$('body').append(data);
+		        blUtil.log("save mapdata: "+data);
+		    });
+		}
+	    $('.the-fucking-forest-map').append(playerdiv);
 	};
+
+
+	changeBlockType(block, newtype, maptype) {
+		//blUtil.log("8-changing block "+block+" to "+newtype);
+		if (maptype) {
+			$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').removeClass(globals.allblockclasses);
+			$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').addClass("block block-"+newtype);
+			$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').attr("data-blocktype", newtype);
+		} else {
+			$('.maps-wrap .block:eq('+block+')').removeClass(globals.allblockclasses);
+			$('.maps-wrap .block:eq('+block+')').addClass("block block-"+newtype);
+			$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
+		}
+	}
 
 	loadNewMap(maptype, cubeside) {
 
@@ -180,7 +278,7 @@ export class Map {
 		// 	changeBlockType(randomblockid, value, "forest");
 		// });
 
-	};
+	}
 
 };
 
