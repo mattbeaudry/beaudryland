@@ -54,7 +54,7 @@ navigation.initializeNavigation();
 beaudrylandInventory.setupInventorySlots();
 
 /* PHONEGAP / MOBILE ONLY */
-if ( $('body').hasClass("version-phonegap") ){
+if ( $('body').hasClass("version-phonegap") ) {
 
 	mobile.initializeMobile();
 	globals.mapwidth = 16;
@@ -66,7 +66,7 @@ if ( $('body').hasClass("version-phonegap") ){
 		return true;
 	}
 	
-	$('.inventory-close').on("click", function(){ toggleInventory(); });
+	$('.inventory-close').on("click", function() { toggleInventory(); });
 	var toggleInventory = function() { $('.sticky-inventory').fadeToggle(0); }; 
 	var hideControlPad = function() { $('.the-fucking-controller').fadeToggle(); };
 
@@ -93,8 +93,8 @@ if ( $('body').hasClass("version-phonegap") ){
 	$(document).ready(function() {
 		console.log("DESKTOP VERSION");
 
-		globals.mapwidth = 40;
-		globals.mapheight = 40;
+		globals.mapwidth = 20;
+		globals.mapheight = 20;
 
 		beaudrylandMap.setupMap();
 		loadGame();
@@ -118,7 +118,7 @@ var loadNewGame = function() {
     beaudrylandMap.loadNewMap('forest', 'front');
     createPlayer();
 
-    if (maptype == 'creative'){
+    if (maptype == 'creative') {
       	beaudrylandMap.loadNewMap('winter', 'right');
     	beaudrylandMap.loadNewMap('beach', 'back');
     	beaudrylandMap.loadNewMap('jungle', 'left');
@@ -135,22 +135,22 @@ var loadNewGame = function() {
     }
 };
 
-var loadGame = function(){
+var loadGame = function() {
 	blUtil.log("load game");
 
     $.post('php/loadmap.php', {maptype:'forest'}, function(data) {
-    	if (data == false){
+    	if (data == false) {
     		loadNewGame();
     	} else {
     	    beaudrylandMap.loadExistingMap('forest');
     		$.post('php/loadmap.php', {maptype:'winter'}, function(data) {
-    			if (data){
+    			if (data) {
     				blUtil.log("loadwintermap");
     				beaudrylandMap.loadExistingMap('winter');
     			}
 			});
 			$.post('php/loadmap.php', {maptype:'beach'}, function(data) {
-				if (data){
+				if (data) {
 					blUtil.log("loadbeachmap");
 					beaudrylandMap.loadExistingMap('beach');
 				}
@@ -272,10 +272,10 @@ var savePlayer = function() {
 	blUtil.log("playerdiv"+playerdiv);
 	blUtil.log("selected item"+selecteditem);
     var inventoryItems = new Array();
-	for (var i=1; i<=globals.inventoryslots; i++){ 
+	for (var i=1; i<=globals.inventoryslots; i++) { 
 		inventoryItems[i]=new Object();
 	}
-	$('.the-fucking-inventory > div').each(function(index){
+	$('.the-fucking-inventory > div').each(function(index) {
 		var amount = $(this).html();
 		var blocktype = $(this).attr('data-blocktype');
 		blUtil.log("inventory slot "+index+" = "+amount+blocktype);
@@ -297,7 +297,7 @@ var savePlayer = function() {
 
 	//saving achievements
 	var achievements = [];
-	$('.item-achievements .status-completed').each(function(index){
+	$('.item-achievements .status-completed').each(function(index) {
 		var achievementid = $(this).attr('data-achievementid');
 		var achievementname = $(this).attr('data-achievementname');
 		achievements[index] = {achievementid:achievementid, achievementname:achievementname};
@@ -310,10 +310,10 @@ var savePlayer = function() {
 
 	/*
 		var signmessages = new Array();
-		for (var i=1; i<=globals.inventoryslots; i++){ 
+		for (var i=1; i<=globals.inventoryslots; i++) { 
 			inventoryItems[i]=new Object();
 		}
-	    for (var i=0; i<=total; i++){
+	    for (var i=0; i<=total; i++) {
 	    	var blocktype = $('.the-fucking-forest-map div:eq('+i+')').attr('data-blocktype');
 			mapblocks[i] = blocktype;
 			if (blocktype == sign) {
@@ -342,7 +342,7 @@ var loadPlayer = function(id) {
         blUtil.log("loading inv");
     	for (var i = 0; i < (inventoryitems.length-1); i++) {
     		$('.the-fucking-inventory > div:eq('+i+')').html(inventoryitems[i].amount);
-    		if (inventoryitems[i].amount !== "0"){
+    		if (inventoryitems[i].amount !== "0") {
     			$('.the-fucking-inventory > div:eq('+i+')').attr('data-blocktype', inventoryitems[i].type);
     			$('.the-fucking-inventory > div:eq('+i+')').removeClass('empty');
     			$('.the-fucking-inventory > div:eq('+i+')').addClass('block block-'+inventoryitems[i].type);
@@ -356,7 +356,7 @@ var loadPlayer = function(id) {
     	var signs = JSON.parse(data.signs);
     	blUtil.log('loading signs...'+signs);
 
-    	for (var j=0;j<signs.length;j++){
+    	for (var j=0;j<signs.length;j++) {
 
     		var signid = signs[j].id;
     		var signtext = signs[j].text;
@@ -382,7 +382,7 @@ var loadPlayer = function(id) {
     	// LOADING ACHIEVEMENTS
     	var achievements = JSON.parse(data.achievements);
     	
-    	for (var k=0;k<achievements.length;k++){
+    	for (var k=0;k<achievements.length;k++) {
     		var achievementid = achievements[k].achievementid;
     		var achievementname = achievements[k].achievementname;
     		blUtil.log(achievementname);
@@ -466,7 +466,7 @@ var moveObjectToBlock = function(id, destinationblock) {
 		}
 		*/
 		
-		if ( (xDifference == 0) && (yDifference == 0) ){
+		if ( (xDifference == 0) && (yDifference == 0) ) {
 			//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
 			blUtil.log("reached destination block, stop moving");
 			//alert("i made it to the spot you clicked!");
@@ -557,7 +557,7 @@ var initEnemyBrain = function(id) {
 				blUtil.log("ENEMY STUCK");
 
 				var randomDirection = Math.floor(Math.random() * 4) + 1;
-				switch(randomDirection){
+				switch(randomDirection) {
 					case 1: moveObject("up",id, "enemy"); break;
 					case 2: moveObject("down", id, "enemy"); break;
 					case 3: moveObject("left", id, "enemy"); break;
@@ -569,7 +569,7 @@ var initEnemyBrain = function(id) {
 			var PEx = playerX - enemyX; var PEy = enemyY - playerY;
 			var posPEx = Math.abs(PEx); var posPEy = Math.abs(PEy);
 			
-			if ( (PEx == 0) && (PEy == 0)){
+			if ( (PEx == 0) && (PEy == 0)) {
 				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
 				blUtil.log("found the player, kill player!");
 				removeHeart();
@@ -660,7 +660,7 @@ var initAnimalBrain = function(id) {
 				//blUtil.log("animal STUCK");
 
 				var randomDirection = Math.floor(Math.random() * 4) + 1;
-				switch(randomDirection){
+				switch(randomDirection) {
 					case 1: moveObject("up", id, "deer"); break;
 					case 2: moveObject("down", id, "deer"); break;
 					case 3: moveObject("left", id, "deer"); break;
@@ -674,7 +674,7 @@ var initAnimalBrain = function(id) {
 			var PEx = playerX - animalX; var PEy = animalY - playerY;
 			var posPEx = Math.abs(PEx); var posPEy = Math.abs(PEy);
 			
-			if ( (PEx == 0) && (PEy == 0)){
+			if ( (PEx == 0) && (PEy == 0)) {
 				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
 				blUtil.log("found the player, kill player!");
 			} else if (posPEx >= posPEy) {
@@ -968,7 +968,7 @@ var setupKeyboardEvents = function() {
 			case 32: /* SPACE */
 				if (globals.disablekeyboardevents == false) {
 
-					if ($('.speech-bubble').length == 0){
+					if ($('.speech-bubble').length == 0) {
 						playerPrimaryAction(); 
 						event.preventDefault();
 					} else {
@@ -978,7 +978,7 @@ var setupKeyboardEvents = function() {
 				}
 				break;
 			case 13: /* ENTER */
-				if ($('.speech-bubble').length == 0){
+				if ($('.speech-bubble').length == 0) {
 					$('.bubble-form').submit();
 					event.preventDefault();
 				} 
@@ -1114,7 +1114,7 @@ var setupMouseEvents = function() {
 		var blocktype = $(this).attr('data-blocktype');
 		//items that are crafting ingredients
 		if ( $.inArray(blocktype, globals.isingredient) > -1 ) {
-		    if ( $(this).attr('data-blocktype') != "empty" ){
+		    if ( $(this).attr('data-blocktype') != "empty" ) {
 		    	var blocktype = $(this).attr('data-blocktype');
 		    	moveItemToCraftingTable(blocktype);
 		    }
@@ -1143,7 +1143,7 @@ var setupMouseEvents = function() {
 			
 		});
 		
-		if ( $.inArray(selecteditem, globals.isequipable) > -1 ){
+		if ( $.inArray(selecteditem, globals.isequipable) > -1 ) {
 			blUtil.log("selected item has animation");
 			$('.the-fucking-player').addClass("player-direction-"+playerdirection+"-"+selecteditem);
 		}
@@ -1153,7 +1153,7 @@ var setupMouseEvents = function() {
 	// REMOVE ITEMS FROM CRAFTING TABLE
 	$('.the-fucking-crafting-table > div').on("click", function() {
 		var blocktype = $(this).attr('data-blocktype');
-		if (blocktype != "empty"){
+		if (blocktype != "empty") {
 			blUtil.log("crafting slot not empty");
 			$(this).removeClass("block block-"+blocktype);
 			$(this).addClass("empty");
@@ -1166,7 +1166,7 @@ var setupMouseEvents = function() {
 
 	// MOVE THE CRAFTED ITEM TO INVENTORY
 	$('.the-fucking-crafted-item > div').on("click", function() {
-		if (!$('.the-fucking-crafted-item > div').hasClass("empty")){
+		if (!$('.the-fucking-crafted-item > div').hasClass("empty")) {
 			var blocktype = $(this).attr('data-blocktype');
 			var itemquantity = $(this).html();
 			blUtil.log("You crafted" + itemquantity + " " + blocktype);
@@ -1179,7 +1179,7 @@ var setupMouseEvents = function() {
 	});
 
 	//SAVE THE MAPS AND PLAYER DATA
-	$('.link-savemap').on("mousedown", function(){
+	$('.link-savemap').on("mousedown", function() {
 		achievementCompleted("saveyourgame");
 		$('.link-savemap a').html('Saving');
 		var enableSaving = function() {
@@ -1212,7 +1212,7 @@ var setupMouseEvents = function() {
 
 
 
-var moveObject = function(direction, id, name){
+var moveObject = function(direction, id, name) {
 	var success = false;
 	var x = getObjectCurrentPositionX(id);
 	var y = getObjectCurrentPositionY(id);
@@ -1221,7 +1221,7 @@ var moveObject = function(direction, id, name){
 
 	changeObjectDirection(id, direction, name);
 
-	if (!objectCollisionDetection(id, direction)){
+	if (!objectCollisionDetection(id, direction)) {
 		switch (direction) {
 			case "up": 
 				y = y - globals.gridunitpx; 
@@ -1279,7 +1279,7 @@ var objectCollisionDetection = function(id, direction) {
 
 	var movingObject_nextblock = nextblock;
 
-	if (movingObject_id == 1){
+	if (movingObject_id == 1) {
 		blUtil.log('moving id:'+movingObject_id+' to block:'+movingObject_nextblock);
 	}
 
@@ -1337,17 +1337,24 @@ var objectCollisionDetection = function(id, direction) {
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-door') ) {
 		collide = true;
 	// Map right border	
-	} else if ( (direction == "right" ) && (col>=globals.mapwidth) ) {
+	} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
+		console.log('*** RIGHT MAP EDGE ***');
+		moveObjectToMap(1, currentblock, direction);
 		collide = true;
 	// Map left border	
 	} else if ( (direction == "left" ) && (col==0) ) {
+		console.log('*** LEFT MAP EDGE ***');
+		moveObjectToMap(1, currentblock, direction);
 		collide = true;
 	// Map top border
 	} else if ( (direction == "up" ) && (row<=1) ) {
+		console.log('*** TOP MAP EDGE ***');
+		moveObjectToMap(1, currentblock, direction);
 		collide = true;
-	// Map bottom border	  
-		//NEED TO ADJUST this to find out how many map blocks they have for the height limit
+	// Map bottom border
 	} else if ( (direction == "down" ) && (row>=globals.mapheight) ) {
+		console.log('*** BOTTOM MAP EDGE ***');
+		moveObjectToMap(1, currentblock, direction);
 		collide = true;	
 	// PineTree	
 	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-pinetree') ) {
@@ -1387,7 +1394,7 @@ var objectCollisionDetection = function(id, direction) {
 			var player_block = getObjectCurrentBlock(player_id);
 			//blUtil.log('moving id:'+movingObject_id+' to block:'+movingObject_nextblock+' |||| player is on block:'+player_block);
 
-			if (movingObject_nextblock == player_block){
+			if (movingObject_nextblock == player_block) {
 				blUtil.log('BLOCKED BY PLAYER');
 				collide = true;
 			}
@@ -1398,7 +1405,7 @@ var objectCollisionDetection = function(id, direction) {
 				var blockingObject_id = $(this).attr('data-id');
 				var blockingObject_block = getObjectCurrentBlock(blockingObject_id);
 			
-				if (movingObject_nextblock == blockingObject_block && movingObject_id != blockingObject_id){
+				if (movingObject_nextblock == blockingObject_block && movingObject_id != blockingObject_id) {
 					//alert('BLOCKED BY ANIMAL: moving id:'+movingObject_id+' to block:'+movingObject_nextblock+' |||| animal id:'+blockingObject_id+' is on block:'+blockingObject_block);
 					collide = true;
 				}
@@ -1425,7 +1432,7 @@ var changeObjectDirection = function(id, direction, name) {
 	var selecteditem = getSelectedItem();
 	//animated items
 	var playergraphic;
-	if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "car" || selecteditem == "canoe" || selecteditem == "rocket" && name == "player" ){ 
+	if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "car" || selecteditem == "canoe" || selecteditem == "rocket" && name == "player" ) { 
 		playergraphic = "-"+selecteditem;
 	} else {
 		playergraphic = "";
@@ -1456,7 +1463,7 @@ var changeObjectDirection = function(id, direction, name) {
 
 	/*
 	var mobgraphic;
-	if ( name == 'enemy' || name == 'animal' ){ 
+	if ( name == 'enemy' || name == 'animal' ) { 
 		mobgraphic = "-"+selecteditem;
 	} else {
 		mobgraphic = "";
@@ -1468,7 +1475,7 @@ var getObjectDirection = function(id, name) {
 	var direction;
 	var selecteditem = getSelectedItem();
 	var playergraphic;
-	if ( (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "bike" || selecteditem == "skiis") && name == "player" ){ 
+	if ( (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "bike" || selecteditem == "skiis") && name == "player" ) { 
 		playergraphic = "-"+selecteditem;
 	} else {
 		playergraphic = "";
@@ -1485,14 +1492,6 @@ var getObjectDirection = function(id, name) {
 	}
 
 	return direction;
-};
-
-var teleportObjectToBlock = function(id, destinationblock) {
-	//$('.objectid-'+id).
-	var left = getBlockLeftByID(destinationblock);
-	var top = getBlockTopByID(destinationblock);
-	setObjectCurrentPositionX(id,left);
-	setObjectCurrentPositionY(id,top);
 };
 
 
@@ -1531,7 +1530,7 @@ var playerPrimaryAction = function(blockid) {
 	//blUtil.log("5-blocktype "+blocktype);
 
 	//item swing animations
-	if (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe"){
+	if (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe") {
 		var swingclass = "player-direction-"+direction+"-"+selecteditem+"-swing";
 		$(".the-fucking-player").addClass("player-direction-"+direction+"-"+selecteditem+"-swing");
 		var swinganimation = setTimeout(removeSwingClass, 100);
@@ -1546,7 +1545,7 @@ var playerPrimaryAction = function(blockid) {
 			$('.the-fucking-enemy').each(function(index) {
 				var enemyid = $(this).attr('data-id');
 				var enemyblock = getObjectCurrentBlock(enemyid);
-				if (block == enemyblock || enemyblock == playerblock){
+				if (block == enemyblock || enemyblock == playerblock) {
 					blUtil.log("killed an enemy!");
 					killEnemy(enemyid);
 				}
@@ -1601,15 +1600,15 @@ var playerPrimaryAction = function(blockid) {
 			beaudrylandMap.changeBlockType(block, "door");
 
 		//throw frisbee
-		} else if (selecteditem == "frisbee"){
+		} else if (selecteditem == "frisbee") {
 			throwFrisbee(block, direction);
 
 		//throw spear
-		} else if (selecteditem == "spear"){
+		} else if (selecteditem == "spear") {
 			throwSpear(block, direction);
 
 		//digging - forest map
-		} else if ( (getSelectedItem() == "shovel") && ((blocktype == "grass") || (blocktype == "dirt")) ){
+		} else if ( (getSelectedItem() == "shovel") && ((blocktype == "grass") || (blocktype == "dirt")) ) {
 			blUtil.log("dig!");
 			//chance of digging a diamond
 			var r = Math.random();
@@ -1624,7 +1623,7 @@ var playerPrimaryAction = function(blockid) {
 			//growGrass(block);
 
 		//digging - winter map
-		} else if ( getSelectedItem() == "shovel" && ( blocktype == "snow" || blocktype == "frozendirt" || blocktype == "ice" ) ){
+		} else if ( getSelectedItem() == "shovel" && ( blocktype == "snow" || blocktype == "frozendirt" || blocktype == "ice" ) ) {
 			//chance of digging gold
 			var r = Math.random();
 			if (r < 0.2) {
@@ -1641,7 +1640,7 @@ var playerPrimaryAction = function(blockid) {
 			//growGrass(block);
 
 		//digging - beach map
-		} else if ( getSelectedItem() == "shovel" && ( blocktype == "sand" || blocktype == "wetsand" ) ){
+		} else if ( getSelectedItem() == "shovel" && ( blocktype == "sand" || blocktype == "wetsand" ) ) {
 			//chance of digging gold
 			var r = Math.random();
 			if (r < 0.2) {
@@ -1674,7 +1673,7 @@ var playerPrimaryAction = function(blockid) {
 					beaudrylandMap.changeBlockType(block, getSelectedItem());
 					removeFromInventory(getSelectedItem());
 					//growGrass(block);
-					if(blocktype=="water"||blocktype=="wave"){ addToInventory("water", 5); }
+					if(blocktype=="water"||blocktype=="wave") { addToInventory("water", 5); }
 			}
 			
 		//read sign
@@ -1707,9 +1706,9 @@ var playerPrimaryAction = function(blockid) {
 				});
 				removeFromInventory(selecteditem);
 				beaudrylandMap.changeBlockType(block, selecteditem);
-			} else if ( $.inArray(selecteditem, globals.isplaceable) > -1 ){
+			} else if ( $.inArray(selecteditem, globals.isplaceable) > -1 ) {
 				//placing/writing on a sign
-				if (selecteditem == "sign"){
+				if (selecteditem == "sign") {
 					placeSign(1, block);
 				}
 				blUtil.log('a placable item is selected');
@@ -1726,7 +1725,7 @@ var playerPrimaryAction = function(blockid) {
 			}
 
 		//picking up items & blocks	
-		} else if ($.inArray(blocktype, globals.iscollectable) > -1){
+		} else if ($.inArray(blocktype, globals.iscollectable) > -1) {
 			var changeblocktotype = "grass";
 			if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "grass"; } 
 			else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "snow"; } 
@@ -1768,13 +1767,13 @@ var playerPrimaryAction = function(blockid) {
 //  *ANIMATION & TIME
 /////////////
 
-window.requestAnimFrame = (function(){
+window.requestAnimFrame = (function() {
   return  window.requestAnimationFrame || 
           window.webkitRequestAnimationFrame || 
           window.mozRequestAnimationFrame || 
           window.oRequestAnimationFrame || 
           window.msRequestAnimationFrame || 
-          function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element){
+          function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
             window.setTimeout(callback, 1000 / 60);
           };
 })();
@@ -1786,19 +1785,19 @@ function newAnimationFrame() {
   count++;
   
   //run every second
-  if ((count%60) == 0){
+  if ((count%60) == 0) {
      //world clock
     seconds++;
     //console.log('time since game started: '+seconds+' seconds');
   }
 
   //run every half second
-  if ((count%30) == 0){
+  if ((count%30) == 0) {
 	
   }
 
   //run every 200 miliseconds
-  if ((count%10) == 0){
+  if ((count%10) == 0) {
   	//console.log("160 miliseconds has gone by");
   	animateSpears();
   }  
@@ -1836,7 +1835,7 @@ var animateSpears = function() {
 
 /*
 
-(function animloop(){
+(function animloop() {
 projectileMotion();
 
 if (t > maxdistance) {
@@ -1902,13 +1901,13 @@ var initProjectile = function(name, startblock, direction, id) {
 	//window.requestAnimationFrame(projectileMotion);
 
 	/*
-	window.requestAnimFrame = (function(){
+	window.requestAnimFrame = (function() {
 	  return  window.requestAnimationFrame || 
 	          window.webkitRequestAnimationFrame || 
 	          window.mozRequestAnimationFrame || 
 	          window.oRequestAnimationFrame || 
 	          window.msRequestAnimationFrame || 
-	          function( callback, element){
+	          function( callback, element) {
 	            window.setTimeout(callback, 1000 / 60);
 	          };
 	})();
@@ -1937,7 +1936,7 @@ var initProjectile = function(name, startblock, direction, id) {
 
 
 /*
-	(function animloop(){
+	(function animloop() {
       projectileMotion();
       
       if (t > maxdistance) {
@@ -1962,12 +1961,12 @@ var initProjectile = function(name, startblock, direction, id) {
 
 var mapanimate;
 
-var stopMap = function(){ 
+var stopMap = function() { 
 	clearTimeout(mapanimate); 
 	mapanimate = null;
 };
 
-var moveMap = function(){
+var moveMap = function() {
 	blUtil.log("animating the map!");
 	var mapspeed = 200;
 	mapanimate = setTimeout(scrollMap, mapspeed);
@@ -1981,18 +1980,18 @@ var moveMap = function(){
 
 var wavesanimate;
 
-var stopWaves = function(){ 
+var stopWaves = function() { 
 	clearTimeout(wavesanimate); 
 	wavesanimate = null;
 };
 
-var startWaves = function(){
+var startWaves = function() {
 	blUtil.log("animating the waves!");
 	var wavespeed = 1400;
 	wavesanimate = setTimeout(moveWaves, wavespeed);
 	function moveWaves() {
 		$('.the-fucking-beach-map .block').each( function(index, value) {
-				if ($(this).hasClass('block-wave')){
+				if ($(this).hasClass('block-wave')) {
 					if ($('.the-fucking-beach-map .block:eq('+(index-1)+')').hasClass('block-water')) {
 						//wave has not reached the shore yet
 						var newtype = 'wave';
@@ -2034,13 +2033,13 @@ var ridingbike;
 var rideBike = function(direction) {
 	stopBiking();
 	var playerdirection = getObjectDirection(1, "player");
-	if (playerdirection == "left" && direction == "right"){ 
+	if (playerdirection == "left" && direction == "right") { 
 		changeObjectDirection(1, "right", "player");
-	} else if (playerdirection == "right" && direction == "left"){ 
+	} else if (playerdirection == "right" && direction == "left") { 
 		changeObjectDirection(1, "left", "player");
-	} else if (playerdirection == "up" && direction == "down"){ 
+	} else if (playerdirection == "up" && direction == "down") { 
 		changeObjectDirection(1, "down", "player");
-	} else if (playerdirection == "down" && direction == "up"){ 
+	} else if (playerdirection == "down" && direction == "up") { 
 		changeObjectDirection(1, "up", "player");
 	} else {
 		ridingbike = setTimeout(function() {
@@ -2069,7 +2068,7 @@ var stopBiking = function () {
 };
 
 var rideSkiis = function(direction) {
-	if (direction == "up"){
+	if (direction == "up") {
 		moveObject("up", 1, "player");
 		changeObjectDirection(1,"up", "player");
 		stopMap();
@@ -2169,7 +2168,7 @@ var checkCraftingTableForItem = function() {
 	var recipe = slot1type + slot2type + slot3type;
 
 	var createCraftedItem = function(blocktype, amount) {
-		if (amount == null){ amount = 1; }
+		if (amount == null) { amount = 1; }
 		$('.the-fucking-crafted-item > .slot').addClass("block block-"+blocktype);
 		$('.the-fucking-crafted-item > .slot').attr('data-blocktype', blocktype);
 		$('.the-fucking-crafted-item > .slot').removeClass("empty");
@@ -2326,7 +2325,7 @@ var getObjectCurrentBlock = function(id) {
 	var col = getObjectCurrentCol(id);
 	var block = (row * globals.mapwidth) - globals.mapwidth;
 	block = block + col;
-	if (id == 1){blUtil.log('row:'+row+'  |  col:'+col+'  |  object id:'+id+' is at block:'+block);}
+	if (id == 1) {blUtil.log('row:'+row+'  |  col:'+col+'  |  object id:'+id+' is at block:'+block);}
 	return block;
 };
 
@@ -2445,7 +2444,7 @@ var loadDevConsole = function() {
 			function_name = value.function_name + '()';
 		}
 		container.append('<a href="javascript:void(0);">'+value.text+'</a>');
-		container.on("click", function(){
+		container.on("click", function() {
 			eval(function_name);
 		});
 	 	console.log(function_name);
@@ -2466,9 +2465,9 @@ var getAllItems = function() {
 		if ( 	
 			value != "diamond-hole" && value != "gold-hole" && value != "silver-hole" && value != "oil-hole" &&
 		 	value != "clay-hole" && value != "carrot-inground" 
-		){
+		) {
 			inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
-			if(index==0){ inventoryhtml += 'selected-item'; }
+			if(index==0) { inventoryhtml += 'selected-item'; }
 			inventoryhtml += '" data-blocktype="'+value+'">99</div>';
 		}
 	});
@@ -2499,7 +2498,7 @@ var nightTime = function() {
 	console.log("night time");
 	// MAP OVERLAY
     var overlayhtml = "";
-    for (var f = 0; f <= (globals.totalmapblocks - 1); f++){
+    for (var f = 0; f <= (globals.totalmapblocks - 1); f++) {
 		overlayhtml += '<div data-overlayblockid="'+f+'" class="block block-dark"></div>';
 	}
 	$('.the-fucking-map-overlay').fadeIn();
@@ -2601,18 +2600,11 @@ var lightUpBlock = function() {
 
 };
 
-var rotateCubeTo = function(side) {
-	$('.cube').removeClass(function (index, className) {
-		return (className.match (/(^|\s)cube-show-\S+/g) || []).join(' ');
-	});
-	$('.cube').addClass('cube-show-'+side);
-};
-
-var cubifyMap = function(){
+var cubifyMap = function() {
 	$('.maps-container').addClass('cube-container');
 	$('.maps-wrap').addClass('cube cube-show-front');
-	$('.maps-wrap > div').each(function(index){
-		switch (index){
+	$('.maps-wrap > div').each(function(index) {
+		switch (index) {
 			case 0: $(this).addClass("cube-side side-front"); break;
 			case 1: $(this).addClass("cube-side side-right"); break;
 			case 2: $(this).addClass("cube-side side-back"); break;
@@ -2623,7 +2615,7 @@ var cubifyMap = function(){
 	});
 };
 
-var decubifyMap = function(){
+var decubifyMap = function() {
 	$('.maps-container').removeClass('cube-container');
 	$('.maps-wrap').removeClass('cube');
 	$('.maps-wrap').removeClass(function (index, className) {
@@ -2634,12 +2626,70 @@ var decubifyMap = function(){
 	});
 };
 
-var moveObjectToMap = function(){
-	//objectid, maptype, block
-	var object = $('.objectid-'+1);
-	var toMap = $('.the-fucking-'+'winter'+'-map');
-
-	// remove object element from any map
-	object.detach().appendTo(toMap);
-	rotateCubeTo('right');
+var teleportObjectToBlock = function(objectId, destinationMap, destinationBlock) {
+	var left = getBlockLeftByID(destinationBlock);
+	var top = getBlockTopByID(destinationBlock);
+	setObjectCurrentPositionX(objectId,left);
+	setObjectCurrentPositionY(objectId,top);
 };
+
+var rotateCubeTo = function(side) {
+	$('.cube').removeClass(function (index, className) {
+		return (className.match (/(^|\s)cube-show-\S+/g) || []).join(' ');
+	});
+	$('.cube').addClass('cube-show-'+side);
+	globals.currentCubeSide = side;
+};
+
+var moveObjectToMap = function(objectId, objectCurrentBlock, objectDirection) {
+	//init
+	//globals.currentMap = globals.cubeSidesArray[globals.currentCubeSide].map;
+	var objectDirection = objectDirection;
+	var object = $('.objectid-'+objectId);
+	var currentBlock = objectCurrentBlock;
+
+	// find out what map and side of cube is next
+	var nextCubeSide = globals.cubeSidesArray[globals.currentCubeSide][objectDirection];
+	var nextMap = globals.cubeSidesArray[nextCubeSide].map;
+	var toMap = $('.the-fucking-'+nextMap+'-map');
+
+	blUtil.log('nextCubeSide**************'+nextCubeSide);
+	blUtil.log('nextMap**************'+nextMap);
+	blUtil.log('toMap**************'+toMap);
+
+	// find out what block on next map to move to
+	var mapwidth = globals.mapwidth;
+	var mapheight = globals.mapheight;
+	var nextBlock = 0;
+
+	switch (objectDirection) {
+		case 'right':
+			nextBlock = currentBlock - (mapwidth - 1);
+			break;
+		case 'left':
+			nextBlock = currentBlock + mapwidth - 1;
+			break;
+		case 'up':
+			nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
+			break;
+		case 'down':
+			nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
+			break;
+	}
+	
+	blUtil.log('currentBlock**************'+currentBlock);
+	blUtil.log('mapwidth**************'+mapwidth);
+	blUtil.log('mapwidth * mapheight**************'+mapwidth * mapheight);
+	blUtil.log('nextBlock**************'+nextBlock);
+
+	// remove player from current map
+	object.detach();
+
+	// rotate the cube
+	rotateCubeTo(nextCubeSide);
+
+	// add player to new map
+	object.appendTo(toMap);
+	teleportObjectToBlock(1, nextMap, nextBlock);
+};
+//moveObjectToMap(currentMap, currentBlock, objectID, objectDirection);

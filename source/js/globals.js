@@ -19,6 +19,9 @@ export var disablekeyboardevents = false;
 export var globalmapblockcount = 0;
 export var isnightime = false;
 
+export var currentMap = 'forest';
+export var currentCubeSide = 'front';
+
 export const mobtypes = new Array (
 	/*players*/		"player",
 	/*enemies*/		"enemy",
@@ -130,3 +133,48 @@ export const uniqueObjectID = function() {
 	objectsArray.push(id);
 	return id;
 };
+
+export const cubeSidesArray = {
+	front: {
+		up: 'top',
+		right: 'right',
+		down: 'bottom',
+		left: 'left',
+		map: 'forest'
+	},
+	right: {
+		up: 'top',
+		right: 'back',
+		down: 'bottom',
+		left: 'front',
+		map: 'winter'
+	},
+	back: {
+		up: 'top',
+		right: 'left',
+		down: 'bottom',
+		left: 'right',
+		map: 'beach'
+	},
+	left: {
+		up: 'top',
+		right: 'front',
+		down: 'bottom',
+		left: 'back',
+		map: 'jungle'
+	},
+	bottom: {
+		up: 'front',
+		right: 'right',
+		down: 'back',
+		left: 'left',
+		map: 'desert'
+	},
+	top: {
+		up: 'back',
+		right: 'right',
+		down: 'front',
+		left: 'left',
+		map: 'islands'
+	}
+}
