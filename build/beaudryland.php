@@ -31,7 +31,9 @@
 		<div class="the-fucking-map-overlay"></div>
 
 		<div class="maps-container cube-container">
-		    <div class="maps-wrap cube cube-show-front clearfix"></div>
+		    <div class="maps-wrap cube cube-show-front clearfix">
+				<div class="test-satelite"></div>
+		    </div>
 		</div>
 	    
 		<div class="sticky-inventory clearfix">

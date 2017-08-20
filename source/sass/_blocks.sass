@@ -515,3 +515,25 @@ $woodbrown: #916d33
 
 .player-direction-right-rocket   
 	background: url(../img/player-right-rocket.png) no-repeat   
+
+
+/* Experiments */
+
+.test-satelite
+	position: absolute
+	width: 20px
+	height: 20px
+	top: 190px
+	left: 190px
+	transform-style: preserve-3d
+	transition: all 5s
+	transform: rotateY(0deg) translateZ(300px)
+	background-color: red
+	background: url(../img/player-right-rocket.png) no-repeat
+	background-size: contain
+	background-repeat: no-repeat
+	animation: orbit 5s linear infinite
+	
+@keyframes orbit
+	100%
+		transform: rotateY(360deg) translateZ(300px)

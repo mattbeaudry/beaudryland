@@ -1212,7 +1212,7 @@ var setupMouseEvents = function() {
 
 
 
-var moveObject = function(direction, id, name) {
+var moveObject = function(direction, id, map) {
 	var success = false;
 	var x = getObjectCurrentPositionX(id);
 	var y = getObjectCurrentPositionY(id);
@@ -1221,7 +1221,7 @@ var moveObject = function(direction, id, name) {
 
 	changeObjectDirection(id, direction, name);
 
-	if (!objectCollisionDetection(id, direction)) {
+	if (!objectCollisionDetection(id, direction, map)) {
 		switch (direction) {
 			case "up": 
 				y = y - globals.gridunitpx; 
@@ -1261,7 +1261,7 @@ var moveObject = function(direction, id, name) {
 	return success;
 };
 
-var objectCollisionDetection = function(id, direction) {
+var objectCollisionDetection = function(id, direction, map) {
 	var collide = false;
 	var currentblock = getObjectCurrentBlock(id);
 	var nextblock = '';
