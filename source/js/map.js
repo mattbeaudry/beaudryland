@@ -280,6 +280,15 @@ export class Map {
 
 	}
 
+	mapPerspective() {
+		$('.cube-container').addClass("map-view-perspective");
+		setTimeout(
+			function() {
+				$('.cube-container').removeClass("map-view-perspective");
+			}, 
+		30000);
+	}
+
 };
 
 // var drawNewWinterMap = function() {

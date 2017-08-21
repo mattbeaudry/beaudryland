@@ -1,4 +1,3 @@
-
 export const gridunitpx = 20; //must change this px value in css as well
 export var totalmapblocks = 0;
 export var mapwidth = 0;
