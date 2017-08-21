@@ -1,8 +1,10 @@
 import * as globals from './globals';
-import { Utility } from './utility';
+import { Utility } from './utility'; 
+import { Movement } from './movement'; 
 var blUtil = new Utility();
+var blMovement = new Movement();
 
-export class Objects {
+export class Signs {
 
 	constructor() {
 
@@ -39,7 +41,7 @@ export class Objects {
 
 			//find block that the player is facing
 			var id = 1;
-			var direction = getObjectDirection(id, "player");
+			var direction = blMovement.getObjectDirection(id, "player");
 			var block = blUtil.getObjectCurrentBlock(id);
 			switch (direction) {
 				case "up": block = block - (globals.mapwidth+1); break;
@@ -92,7 +94,7 @@ export class Objects {
 
 			//find block that the player is facing
 			var id = 1;
-			var direction = blUtil.getObjectDirection(id, "player");
+			var direction = blMovement.getObjectDirection(id, "player");
 			var block = blUtil.getObjectCurrentBlock(id);
 			switch (direction) {
 				case "up": block = block - (globals.mapwidth+1); break;

@@ -1,16 +1,11 @@
+//////////////
 //	Beaudryland v1.0
 //	Matt Beaudry
 //	2017
-
-
-//////////////
-//  TABLE OF CONTENTS
 //////////////
 
-// GAME
-// HEALTH
-// PLAYER
-// OBJECTS & ENGINE (movement?, action?)
+// GAME  
+// PLAYER (action?)
 // ENEMY
 // ANIMAL
 // HCI - KEYS, PAD, MOUSE, TOUCH 
@@ -29,13 +24,17 @@ import './sass/main.sass';
 import * as globals from './js/globals';
 import * as blNavigation from './js/navigation';
 import * as mobile from './js/mobile';
+
 import { Utility } from './js/utility';
 import { Inventory } from './js/inventory';
 import { Map } from './js/map';
 import { Sound } from './js/sound';
 import { Story } from './js/story';
 import { Player } from './js/player';
-import { Objects } from './js/objects';
+import { Movement } from './js/movement';
+import { Signs } from './js/signs';
+import { Health } from './js/health';
+import { Action } from './js/action';
 
 var blUtil = new Utility();
 var blInventory = new Inventory();
@@ -43,12 +42,15 @@ var blMap = new Map();
 var blSound = new Sound();
 var blStory = new Story();
 var blPlayer = new Player();
-var blObjects = new Objects();
+var blMovement = new Movement();
+var blSigns = new Signs();
+var blHealth = new Health();
+var blAction = new Action();
 
 blNavigation.initializeNavigation();
 blInventory.setupInventorySlots();
 
-/* PHONEGAP / MOBILE ONLY */
+// PHONEGAP / MOBILE ONLY
 if ( $('body').hasClass("version-phonegap") ) {
 
 	mobile.initializeMobile();
@@ -69,7 +71,7 @@ if ( $('body').hasClass("version-phonegap") ) {
 		console.log("MOBILE VERSION");
 
 		blMap.setupMap();
-	    loadNewMap();
+	    blMap.loadNewMap();
 	    blPlayer.createPlayer();
 
 		mobile.websql_openDatabase();
@@ -82,7 +84,7 @@ if ( $('body').hasClass("version-phonegap") ) {
 		loadDevConsole();
 	});
 
-/* DESKTOP ONLY */
+// DESKTOP ONLY
 } else if ( $('body').hasClass("version-desktop") ) {
 
 	$(document).ready(function() {
@@ -92,6 +94,7 @@ if ( $('body').hasClass("version-phonegap") ) {
 		globals.mapheight = 40;
 
 		blMap.setupMap();
+
 		loadGame();
 
 		setupKeyboardEvents();
@@ -157,200 +160,20 @@ var loadGame = function() {
 
 var gameOver = function() {
 	displayDialog("Game Over!");
-	refillHearts();
+	blHealth.refillHearts();
 };
 
 
 /////////////
-//  *Health
+//  *ACTION
 /////////////
-
-var showObjectHealth = function(objectid, number) {
-	var rid = globals.uniqueObjectID();
-	var healthlabelhtml = '<div class="damage-label damage-label-id-'+rid+'">'+number+'</div>';
-	$('.objectid-'+objectid).append(healthlabelhtml);
-	$('.damage-label-id-'+rid).css("top","-80px");
-	//$('.damage-label-fade
-	$('.damage-label-id-'+rid).fadeOut(300, function() {
-		$(this).delete();
-	});
-};
-
-var setObjectHealth = function(objectid, value) {
-	$('.objectid-'+objectid).attr("data-blockhealth",value);
-};
-
-var reduceObjectHealth = function(objectid, amount) {
-	var blockhealth = $('.objectid-'+objectid).attr("data-blockhealth");
-	blockhealth = blockhealth - amount;
-	$('.objectid-'+objectid).attr("data-blockhealth",blockhealth);
-	showObjectHealth(1,blockhealth);
-};
-
-var increaseObjectHealth = function(objectid, amount) {
-	var blockhealth = $('.objectid-'+objectid).attr("data-blockhealth");
-	blockhealth = blockhealth + amount;
-	$('.objectid-'+objectid).attr("data-blockhealth",blockhealth);
-};
-
-var reduceBlockHealth = function(blockid, amount) {
-	var blockhealth = $(".block").find("[data-blockid='" + blockid + "']").attr("data-blockhealth");
-	blockhealth = blockhealth - amount;
-	$(".block").find("[data-blockid='" + blockid + "']").attr("data-blockhealth");
-};
-
-var refillHearts = function() {
-	$('.the-fucking-hearts ul .empty').removeClass();
-	setObjectHealth(1,globals.totalhearts);
-};
-
-var addHeart = function() {
-	var emptyhearts = $('.the-fucking-hearts ul .empty').length;
-	//alert(emptyhearts
-	$('.the-fucking-hearts .empty').first().removeClass("empty");
-	increaseObjectHealth(1,1);
-};
-
-var removeHeart = function() {
-	var hearts = totalHearts();
-	if (hearts > 1) {
-		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
-		reduceObjectHealth(1,1);
-	} else if (hearts == globals.totalhearts) {
-		//don't add a heart, max 8
-	} else {
-		$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
-		reduceObjectHealth(1,1);
-		gameOver();
-	}
-};
-
-var totalHearts = function() {
-	var hearts = $('.the-fucking-hearts li.empty').length;
-	hearts = globals.totalhearts - hearts;
-	return hearts;
-};
-
-
-/////////////
-//  *Player
-/////////////
-
-var objectbrain;
-
-var walkPlayerToBlock = function(id, destinationblock) {
-
-	stopObjectMovement();
-
-	var playerblock = blUtil.getObjectCurrentBlock('1');
-	//var destinationblocktype = blUtil.getBlockType(destinationblock);
-	//blUtil.log("destinationblock: "+destinationblock);
-	//blUtil.log("playerblock: "+playerblock);
-
-	if (playerblock == destinationblock) {
-		//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-		playerPrimaryAction(destinationblock); 
-		return;
-	} else if ((playerblock-globals.mapwidth-1) == destinationblock) {
-		//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-		playerPrimaryAction(destinationblock); 
-		return;
-	} else if ((playerblock+globals.mapwidth-1) == destinationblock) {
-		//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-		playerPrimaryAction(destinationblock); 
-		return;
-	} else if ((playerblock-2) == destinationblock) {
-		//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-		playerPrimaryAction(destinationblock); 
-		return;
-	}
-
-	//blUtil.log("move object ID#"+id+" to block"+destinationblock);
-	var t = 0;
-	var maxthoughts = 100;
-	objectbrain = setTimeout(anObjectMovement, globals.enemyspeed);
-
-	var destinationblockColumn = destinationblock % globals.mapwidth;
-	var destinationblockRow = parseInt(destinationblock / globals.mapwidth);
-
-	//blUtil.log("destinationblock:"+destinationblock);
-	//blUtil.log("destinationblockCol:"+destinationblockColumn);
-	//blUtil.log("destinationblockRow:"+destinationblockRow);
-	
-	//collection of thoughts
-	var objectPath = [];
-
-	function stopObjectMovement() {
-		//alert("stop tha shit!");
-		clearTimeout(objectbrain);
-	}
-	
-	function anObjectMovement() {
-
-		var objectX = blUtil.getObjectCurrentCol(id) - 1; 
-		var objectY = blUtil.getObjectCurrentRow(id) - 1;
-		var n = objectPath.length;
-		objectPath.push(objectX+"-"+objectY);
-
-		var xDifference = destinationblockColumn - objectX;
-		var yDifference = objectY - destinationblockRow;
-		var POSxDifference = Math.abs(xDifference);
-		var POSyDifference = Math.abs(yDifference);
-		//var r = Math.random();
-		//alert(r);
-
-		//if player stuck abort!
-		/*
-		if (objectPath[n-1] == objectPath[n]) {
-			blUtil.log("OBJECT STUCK, ABORTING");
-			stopObjectMovement();
-			return;
-		}
-		*/
-		
-		if ( (xDifference == 0) && (yDifference == 0) ) {
-			//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
-			blUtil.log("reached destination block, stop moving");
-			//alert("i made it to the spot you clicked!");
-			stopObjectMovement();
-		} else if (POSxDifference >= POSyDifference) {
-			if (xDifference >= 0) { 
-				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
-				moveObject("right", id, "player");
-			} else { 
-				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
-				moveObject("left", id, "player");
-			}
-		} else {
-			if (yDifference >= 0) { 
-				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
-				moveObject("up", id, "player");
-			} else { 
-				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
-				moveObject("down", id, "player");
-			}
-		}
-		
-		//limit
-		if (t > 10) {
-			//blUtil.log("Enemy terminated");
-			stopObjectMovement();
-			//killEnemy(id);
-		} else {
-			t++;
-			objectbrain = setTimeout(anObjectMovement, globals.playerspeed); // repeat thought
-		}
-	
-	}
-
-};
 
 var playerPrimaryAction = function(blockid) {
 
 	var id = 1;
 
 	//find block that the player is facing
-	var direction = getObjectDirection(id, "player");
+	var direction = blMovement.getObjectDirection(id, "player");
 	var playerblock = blUtil.getObjectCurrentBlock(id);
 	var block = blUtil.getObjectCurrentBlock(id);
 	
@@ -415,24 +238,24 @@ var playerPrimaryAction = function(blockid) {
 
 		//EATING
 		} else if (selecteditem == "heart") {
-			addHeart();
+			blHealth.addHeart();
 			removeFromInventory(selecteditem);
 		} else if (selecteditem == "apple") {
-			addHeart();
+			blHealth.addHeart();
 			removeFromInventory(selecteditem);
 		} else if (selecteditem == "carrot") {
-			addHeart();
+			blHealth.addHeart();
 			removeFromInventory(selecteditem);
 		} else if (selecteditem == "mushroom") {
-			addHeart();
+			blHealth.addHeart();
 			hallucinate();
 			removeFromInventory(selecteditem);
 		} else if (selecteditem == "bluemushroom") {
-			addHeart();
+			blHealth.addHeart();
 			blMap.mapPerspective();
 			removeFromInventory(selecteditem);
 		} else if (selecteditem == "blackmushroom") {
-			addHeart();
+			blHealth.addHeart();
 			nightTime();
 			lightUpBlock();
 			removeFromInventory(selecteditem);
@@ -522,7 +345,7 @@ var playerPrimaryAction = function(blockid) {
 		//read sign
 		} else if (blocktype == "sign") {
 			blUtil.log("reading sign");
-			readSign(block);
+			blSigns.readSign(block);
 
 		//placing blocks
 		} else if ( (blocktype == "grass") || (blocktype == "dirt") || (blocktype == "hole") ||
@@ -552,7 +375,7 @@ var playerPrimaryAction = function(blockid) {
 			} else if ( $.inArray(selecteditem, globals.isplaceable) > -1 ) {
 				//placing/writing on a sign
 				if (selecteditem == "sign") {
-					placeSign(1, block);
+					blSigns.placeSign(1, block);
 				}
 				blUtil.log('a placable item is selected');
 				removeFromInventory(selecteditem);
@@ -600,300 +423,6 @@ var playerPrimaryAction = function(blockid) {
 
 	});
 };
-
-
-/////////////
-//  *OBJECTS / ENGINE
-/////////////
-
-var moveObject = function(direction, id, name, map) {
-	var success = false;
-	var x = blUtil.getObjectCurrentPositionX(id);
-	var y = blUtil.getObjectCurrentPositionY(id);
-	x = blUtil.stripPX(x);
-	y = blUtil.stripPX(y);
-
-	changeObjectDirection(id, direction, name);
-
-	if (!objectCollisionDetection(id, direction, map)) {
-		switch (direction) {
-			case "up": 
-				y = y - globals.gridunitpx; 
-				y = blUtil.addPX(y);
-				$(".objectid-"+id).css("top",y); 
-				break;
-
-			case "down": 
-				y = y + globals.gridunitpx; 
-				y = blUtil.addPX(y);
-				$(".objectid-"+id).css("top",y); 
-				break;
-
-			case "left": 
-				x = x - globals.gridunitpx; 
-				x = blUtil.addPX(x);
-				$(".objectid-"+id).css("left",x); 
-				break;
-
-			case "right": 
-				x = x + globals.gridunitpx; 
-				x = blUtil.addPX(x);
-				$(".objectid-"+id).css("left",x); 
-				break;
-		}
-		success = true;
-	} else {
-		blUtil.log("Can't move object id:"+id+" "+direction);	
-		success = false;
-	}
-
-	if (globals.isnightime == true) {
-		clearLighting();
-		lightUpBlock();
-	}
-
-	return success;
-};
-
-var objectCollisionDetection = function(id, direction, map) {
-	var collide = false;
-	var currentblock = blUtil.getObjectCurrentBlock(id);
-	var nextblock = '';
-	var row = blUtil.getObjectCurrentRow(id);
-	var col = blUtil.getObjectCurrentCol(id);
-	var selecteditem = blUtil.getSelectedItem();
-	var movingObject_id = id;
-
-	switch (direction) {
-		case "up": nextblock = currentblock - (globals.mapwidth); break;
-		case "down": nextblock = currentblock + (globals.mapwidth); break;
-		case "left": nextblock = currentblock - 1; break;
-		case "right": nextblock = currentblock + 1; break;
-	}
-
-	var movingObject_nextblock = nextblock;
-
-	if (movingObject_id == 1) {
-		blUtil.log('moving id:'+movingObject_id+' to block:'+movingObject_nextblock);
-	}
-
-	//teleporting
-	if (id == 1 && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-portal-a')) {
-		var destinationblock = $('.maps-wrap .block-portal-b').first().attr("data-blockid");
-		//alert(destinationblock);
-		teleportObjectToBlock(1, destinationblock);
-		collide = true;
-	//teleporting
-	} else if (id == 1 && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-portal-b')) {
-		var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
-		//alert(destinationblock);
-		teleportObjectToBlock(1, destinationblock);
-		collide = true;
-	//space travel
-	} else if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-space')) {
-		collide = false;
-	} else if (selecteditem == "rocket") {
-		collide = true;
-	//space
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-space') ) {
-		collide = true;
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-star') ) {
-		collide = true;
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-redgalaxy') ) {
-		collide = true;
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-bluegalaxy') ) {
-		collide = true;
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-sun') ) {
-		collide = true;
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-earth') ) {
-		collide = true;
-	//canoeing
-	} else if (selecteditem == "canoe" && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-water')) {
-		collide = false;
-	} else if (selecteditem == "canoe") {
-		collide = true;
-	// Water
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-water') ) {
-		collide = true;
-	// Tree	
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-tree') ) {
-		collide = true;
-	// Rock
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-rock') ) {
-		collide = true;
-	// Wood
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-wood') ) {
-		collide = true;
-	// Fire
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-fire') ) {
-		collide = true;
-	// Closed Door
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-door') ) {
-		collide = true;
-	// Map right border	
-	} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
-		console.log('*** RIGHT MAP EDGE ***');
-		moveObjectToMap(1, currentblock, direction);
-		collide = true;
-	// Map left border	
-	} else if ( (direction == "left" ) && (col==0) ) {
-		console.log('*** LEFT MAP EDGE ***');
-		moveObjectToMap(1, currentblock, direction);
-		collide = true;
-	// Map top border
-	} else if ( (direction == "up" ) && (row<=1) ) {
-		console.log('*** TOP MAP EDGE ***');
-		moveObjectToMap(1, currentblock, direction);
-		collide = true;
-	// Map bottom border
-	} else if ( (direction == "down" ) && (row>=globals.mapheight) ) {
-		console.log('*** BOTTOM MAP EDGE ***');
-		moveObjectToMap(1, currentblock, direction);
-		collide = true;	
-	// PineTree	
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-pinetree') ) {
-		collide = true;
-	// IceRock
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-icerock') ) {
-		collide = true;
-	// PalmTree
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-palmtree') ) {
-		collide = true;
-	// RockBrick
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-rockbrick') ) {
-		collide = true;
-	// IceRockBrick
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-icerockbrick') ) {
-		collide = true;
-	// ClayBrick
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-claybrick') ) {
-		collide = true;
-	// AppleTree
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-appletree') ) {
-		collide = true;
-	// TallTree
-	} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-talltree') ) {
-		collide = true;
-	// Ice Sliding
-	//} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-ice') ) {
-		//slidePlayer();
-		//return true;
-	} else {
-		// Hit player
-		if (id != 1) {
-			var playerElement = $('.the-fucking-player');
-			var player_id = $('.the-fucking-player').attr('data-id');
-			var player_block = blUtil.getObjectCurrentBlock(player_id);
-			//blUtil.log('moving id:'+movingObject_id+' to block:'+movingObject_nextblock+' |||| player is on block:'+player_block);
-
-			if (movingObject_nextblock == player_block) {
-				blUtil.log('BLOCKED BY PLAYER');
-				collide = true;
-			}
-		// Hit animal
-		} else if ($('.the-fucking-deer').length != 0) {
-			$('.the-fucking-deer').each(function(index) {
-				var blockingObject_id = $(this).attr('data-id');
-				var blockingObject_block = blUtil.getObjectCurrentBlock(blockingObject_id);
-			
-				if (movingObject_nextblock == blockingObject_block && movingObject_id != blockingObject_id) {
-					//alert('BLOCKED BY ANIMAL: moving id:'+movingObject_id+' to block:'+movingObject_nextblock+' |||| animal id:'+blockingObject_id+' is on block:'+blockingObject_block);
-					collide = true;
-				}
-			});
-		// Walkable land
-		} else {
-			collide = false;
-		}
-
-	}	
-
-	// Bike Riding?
-	// Skiiing?
-	// Canoeing
-	// Driving
-
-	return collide;
-	
-};
-
-var changeObjectDirection = function(id, direction, name) {
-	blUtil.log("changing object:"+id+" direction to "+direction);
-	var selecteditem = blUtil.getSelectedItem();
-	//animated items
-	var playergraphic;
-	if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "car" || selecteditem == "canoe" || selecteditem == "rocket" && name == "player" ) { 
-		playergraphic = "-"+selecteditem;
-	} else {
-		playergraphic = "";
-	}
-
-	//clear direction and animation classes
-	$('.objectid-'+id).removeClass(name+"-direction-down "+name+"-direction-left "+name+"-direction-right "+name+"-direction-up");
-	$('.objectid-'+id).removeClass(name+"-direction-down"+playergraphic+" "+name+"-direction-left"+playergraphic+" "+name+"-direction-right"+playergraphic+" "+name+"-direction-up"+playergraphic);
-
-	switch (direction) {
-		case "up":
-			$('.objectid-'+id).addClass(name+"-direction-up");
-			if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-up"+playergraphic); }
-			break;
-		case "down":
-			$('.objectid-'+id).addClass(name+"-direction-down");
-			if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-down"+playergraphic); }
-			break;
-		case "left":
-			$('.objectid-'+id).addClass(name+"-direction-left");
-			if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-left"+playergraphic); }
-			break;
-		case "right":
-			$('.objectid-'+id).addClass(name+"-direction-right");
-			if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-right"+playergraphic); }
-			break;
-	}
-
-	/*
-	var mobgraphic;
-	if ( name == 'enemy' || name == 'animal' ) { 
-		mobgraphic = "-"+selecteditem;
-	} else {
-		mobgraphic = "";
-	}
-	*/
-};
-
-var getObjectDirection = function(id, name) {
-	var direction;
-	var selecteditem = blUtil.getSelectedItem();
-	var playergraphic;
-	if ( (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "bike" || selecteditem == "skiis") && name == "player" ) { 
-		playergraphic = "-"+selecteditem;
-	} else {
-		playergraphic = "";
-	}
-
-	if ($('.objectid-'+id).hasClass(name+"-direction-down")) {
-		direction = "down";
-	} else if ($('.objectid-'+id).hasClass(name+"-direction-up")) {
-		direction = "up";
-	} else if ($('.objectid-'+id).hasClass(name+"-direction-left")) {
-		direction = "left";
-	} else if ($('.objectid-'+id).hasClass(name+"-direction-right")) {
-		direction = "right";
-	}
-
-	return direction;
-};
-
-var teleportObjectToBlock = function(objectId, destinationMap, destinationBlock) {
-	var left = blUtil.getBlockLeftByID(destinationBlock);
-	var top = blUtil.getBlockTopByID(destinationBlock);
-	blUtil.setObjectCurrentPositionX(objectId,left);
-	blUtil.setObjectCurrentPositionY(objectId,top);
-};
-
-
-
-
 
 
 /////////////
@@ -947,10 +476,10 @@ var initEnemyBrain = function(id) {
 
 				var randomDirection = Math.floor(Math.random() * 4) + 1;
 				switch(randomDirection) {
-					case 1: moveObject("up", id, "enemy"); break;
-					case 2: moveObject("down", id, "enemy"); break;
-					case 3: moveObject("left", id, "enemy"); break;
-					case 4: moveObject("right", id, "enemy"); break;
+					case 1: blMovement.moveObject("up", id, "enemy"); break;
+					case 2: blMovement.moveObject("down", id, "enemy"); break;
+					case 3: blMovement.moveObject("left", id, "enemy"); break;
+					case 4: blMovement.moveObject("right", id, "enemy"); break;
 				}
 			}
 
@@ -961,22 +490,22 @@ var initEnemyBrain = function(id) {
 			if ( (PEx == 0) && (PEy == 0)) {
 				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
 				blUtil.log("found the player, kill player!");
-				removeHeart();
+				blHealth.removeHeart();
 			} else if (posPEx >= posPEy) {
 				if (PEx >= 0) { 
 					//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
-					moveObject("right", id, "enemy");
+					blMovement.moveObject("right", id, "enemy");
 				} else { 
 					//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
-					moveObject("left", id, "enemy");
+					blMovement.moveObject("left", id, "enemy");
 				}
 			} else {
 				if (PEy >= 0) { 
 					//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
-					moveObject("up", id, "enemy");
+					blMovement.moveObject("up", id, "enemy");
 				} else { 
 					//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
-					moveObject("down", id, "enemy");
+					blMovement.moveObject("down", id, "enemy");
 				}
 			}
 			
@@ -1055,10 +584,10 @@ var initAnimalBrain = function(id) {
 
 				var randomDirection = Math.floor(Math.random() * 4) + 1;
 				switch(randomDirection) {
-					case 1: moveObject("up", id, "deer"); break;
-					case 2: moveObject("down", id, "deer"); break;
-					case 3: moveObject("left", id, "deer"); break;
-					case 4: moveObject("right", id, "deer"); break;
+					case 1: blMovement.moveObject("up", id, "deer"); break;
+					case 2: blMovement.moveObject("down", id, "deer"); break;
+					case 3: blMovement.moveObject("left", id, "deer"); break;
+					case 4: blMovement.moveObject("right", id, "deer"); break;
 				}
 			//}
 
@@ -1074,18 +603,18 @@ var initAnimalBrain = function(id) {
 			} else if (posPEx >= posPEy) {
 				if (PEx >= 0) { 
 					//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
-					moveObject("right", id, "animal");
+					blMovement.moveObject("right", id, "animal");
 				} else { 
 					//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
-					moveObject("left", id, "animal");
+					blMovement.moveObject("left", id, "animal");
 				}
 			} else {
 				if (PEy >= 0) { 
 					//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
-					moveObject("up", id, "animal");
+					blMovement.moveObject("up", id, "animal");
 				} else { 
 					//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
-					moveObject("down", id, "animal");
+					blMovement.moveObject("down", id, "animal");
 				}
 			}
 			*/
@@ -1206,7 +735,7 @@ var setupKeyboardEvents = function() {
 					else if (selecteditem == "drumsticks") { playDrums(880); }
 					else if (selecteditem == "bike") { rideBike("left"); }
 					else if (selecteditem == "skiis") { rideSkiis("left"); }
-					else { moveObject("left", 1, "player"); }
+					else { blMovement.moveObject("left", 1, "player"); }
 				}
 				break;
 			case 38: /* UP ARROW */
@@ -1216,7 +745,7 @@ var setupKeyboardEvents = function() {
 					else if (selecteditem == "drumsticks") { playDrums(1320); }
 					else if (selecteditem == "bike") { rideBike("up"); } 
 					else if (selecteditem == "skiis") { rideSkiis("up"); }
-					else { moveObject("up", 1, "player"); }
+					else { blMovement.moveObject("up", 1, "player"); }
 				}
 				break;
 			case 39: /* RIGHT ARROW */
@@ -1226,7 +755,7 @@ var setupKeyboardEvents = function() {
 					else if (selecteditem == "drumsticks") { playDrums(1100); }
 					else if (selecteditem == "bike") { rideBike("right"); }
 					else if (selecteditem == "skiis") { rideSkiis("right"); }
-					else { moveObject("right", 1, "player"); }
+					else { blMovement.moveObject("right", 1, "player"); }
 				}
 				break;
 			case 40: /* DOWN ARROW */
@@ -1236,7 +765,7 @@ var setupKeyboardEvents = function() {
 					else if (selecteditem == "drumsticks") { playDrums(660); }
 					else if (selecteditem == "bike") { rideBike("down"); } 
 					else if (selecteditem == "skiis") { rideSkiis("down"); }
-					else { moveObject("down", 1, "player"); }
+					else { blMovement.moveObject("down", 1, "player"); }
 				}
 				break;
 			case 32: /* SPACE */
@@ -1334,7 +863,7 @@ var setupControlPadEvents = function() {
 		else if (selecteditem == "drumsticks") { playDrums(1320); }
 		else if (selecteditem == "bike") { rideBike("up"); } 
 		else if (selecteditem == "skiis") { rideSkiis("up"); }
-		else { moveObject("up", 1, "player"); }
+		else { blMovement.moveObject("up", 1, "player"); }
 	});
 	$('.btn-down').on("touchstart", function() { 
 		selecteditem = blUtil.getSelectedItem();
@@ -1343,7 +872,7 @@ var setupControlPadEvents = function() {
 		else if (selecteditem == "drumsticks") { playDrums(660); }
 		else if (selecteditem == "bike") { rideBike("down"); } 
 		else if (selecteditem == "skiis") { rideSkiis("down"); }
-		else { moveObject("down", 1, "player"); } 
+		else { blMovement.moveObject("down", 1, "player"); } 
 	});
 	$('.btn-left').on("touchstart", function() { 
 		selecteditem = blUtil.getSelectedItem();
@@ -1352,7 +881,7 @@ var setupControlPadEvents = function() {
 		else if (selecteditem == "drumsticks") { playDrums(880); }
 		else if (selecteditem == "bike") { rideBike("left"); } 
 		else if (selecteditem == "skiis") { rideSkiis("left"); }
-		else { moveObject("left", 1, "player"); }
+		else { blMovement.moveObject("left", 1, "player"); }
 	});
 	$('.btn-right').on("touchstart", function() { 
 		selecteditem = blUtil.getSelectedItem();
@@ -1361,7 +890,7 @@ var setupControlPadEvents = function() {
 		else if (selecteditem == "drumsticks") { playDrums(1100); }
 		else if (selecteditem == "bike") { rideBike("right"); } 
 		else if (selecteditem == "skiis") { rideSkiis("right"); }
-		else { moveObject("right", 1, "player"); }
+		else { blMovement.moveObject("right", 1, "player"); }
 	});
 	$('.btn-a').on("touchstart", function() { 
 		playerPrimaryAction(); 
@@ -1387,7 +916,7 @@ var setupMouseEvents = function() {
 		    	moveItemToCraftingTable(blocktype);
 		    }
 		}
-		var playerdirection = getObjectDirection(1, "player");
+		var playerdirection = blMovement.getObjectDirection(1, "player");
 		$('.the-fucking-inventory > div').removeClass("selected-item");
 		$(this).addClass('selected-item');
 		var selecteditem = $(this).attr('data-blocktype');
@@ -1467,7 +996,7 @@ var setupMouseEvents = function() {
 		}
 		var blockid = $(this).attr("data-blockid");
 		blUtil.log("goto block id:"+blockid);
-		walkPlayerToBlock(1, blockid);
+		blMovement.walkPlayerToBlock(1, blockid);
 	});
 
 };
@@ -1526,10 +1055,10 @@ var animateSpears = function() {
     	var id = $(this).attr("data-id");
     	var stillmoving;
     	switch (direction) {
-			case "up": var stillmoving = moveObject("up", id, "spear"); break;
-			case "down": var stillmoving = moveObject("down", id, "spear"); break;
-			case "left": var stillmoving = moveObject("left", id, "spear"); break;
-			case "right": var stillmoving = moveObject("right", id, "spear"); break;
+			case "up": var stillmoving = blMovement.moveObject("up", id, "spear"); break;
+			case "down": var stillmoving = blMovement.moveObject("down", id, "spear"); break;
+			case "left": var stillmoving = blMovement.moveObject("left", id, "spear"); break;
+			case "right": var stillmoving = blMovement.moveObject("right", id, "spear"); break;
 		}
 		//console.log("stillmoving? "+stillmoving);
 
@@ -1559,7 +1088,7 @@ var throwFrisbee = function(startblock, direction) {
 	blUtil.log("Create Frisbee");
 	//var enemystartblock = 0;
 	//$('.the-fucking-frisbee').remove();
-	var playerdirection = getObjectDirection(1, "player");
+	var playerdirection = blMovement.getObjectDirection(1, "player");
 	var id = globals.uniqueObjectID();
 	$('.the-fucking-forest-map').append('<div data-id='+id+' class=" the-fucking-frisbee objectid-'+id+' frisbee-direction-'+playerdirection+'"></div>');
 	initProjectile("frisbee", startblock, direction, id);
@@ -1569,7 +1098,7 @@ var throwSpear = function(startblock, direction) {
 	blUtil.log("Create Spear");
 	//var enemystartblock = 0;
 	//$('.the-fucking-frisbee').remove();
-	var playerdirection = getObjectDirection(1, "player");
+	var playerdirection = blMovement.getObjectDirection(1, "player");
 	var id = globals.uniqueObjectID();
 	$('.the-fucking-forest-map').append('<div data-id='+id+' class=" the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
 	initProjectile("spear", startblock, direction, id);
@@ -1608,10 +1137,10 @@ var initProjectile = function(name, startblock, direction, id) {
 	function projectileMotion() {
 
 		switch (direction) {
-			case "up": moveObject("up", id, name); break;
-			case "down": moveObject("down", id, name); break;
-			case "left": moveObject("left", id, name); break;
-			case "right": moveObject("right", id, name); break;
+			case "up": blMovement.moveObject("up", id, name); break;
+			case "down": blMovement.moveObject("down", id, name); break;
+			case "left": blMovement.moveObject("left", id, name); break;
+			case "right": blMovement.moveObject("right", id, name); break;
 		}
 		
 		//limit
@@ -1725,15 +1254,15 @@ var ridingbike;
 
 var rideBike = function(direction) {
 	stopBiking();
-	var playerdirection = getObjectDirection(1, "player");
+	var playerdirection = blMovement.getObjectDirection(1, "player");
 	if (playerdirection == "left" && direction == "right") { 
-		changeObjectDirection(1, "right", "player");
+		blMovement.changeObjectDirection(1, "right", "player");
 	} else if (playerdirection == "right" && direction == "left") { 
-		changeObjectDirection(1, "left", "player");
+		blMovement.changeObjectDirection(1, "left", "player");
 	} else if (playerdirection == "up" && direction == "down") { 
-		changeObjectDirection(1, "down", "player");
+		blMovement.changeObjectDirection(1, "down", "player");
 	} else if (playerdirection == "down" && direction == "up") { 
-		changeObjectDirection(1, "up", "player");
+		blMovement.changeObjectDirection(1, "up", "player");
 	} else {
 		ridingbike = setTimeout(function() {
 			startBiking(direction);
@@ -1743,13 +1272,13 @@ var rideBike = function(direction) {
 
 var startBiking = function (direction) {
 	blUtil.log("move bike "+direction);
-	var playerdirection = getObjectDirection(1, "player");
+	var playerdirection = blMovement.getObjectDirection(1, "player");
 	blUtil.log("player current direction: "+playerdirection);
 	switch (direction) {
-		case "up": moveObject("up", 1, "player"); break;
-		case "down": moveObject("down", 1, "player"); break;
-		case "left": moveObject("left", 1, "player"); break;
-		case "right": moveObject("right", 1, "player"); break;
+		case "up": blMovement.moveObject("up", 1, "player"); break;
+		case "down": blMovement.moveObject("down", 1, "player"); break;
+		case "left": blMovement.moveObject("left", 1, "player"); break;
+		case "right": blMovement.moveObject("right", 1, "player"); break;
 	}
 	ridingbike = setTimeout(function() {
     	startBiking(direction);
@@ -1762,15 +1291,15 @@ var stopBiking = function () {
 
 var rideSkiis = function(direction) {
 	if (direction == "up") {
-		moveObject("up", 1, "player");
-		changeObjectDirection(1,"up", "player");
+		blMovement.moveObject("up", 1, "player");
+		blMovement.changeObjectDirection(1,"up", "player");
 		stopMap();
 	} else {
 		switch (direction) {
-			case "up": moveObject("up",1, "player"); break;
-			case "down": moveObject("down", 1, "player"); break;
-			case "left": moveObject("left", 1, "player"); break;
-			case "right": moveObject("right", 1, "player"); break;
+			case "up": blMovement.moveObject("up",1, "player"); break;
+			case "down": blMovement.moveObject("down", 1, "player"); break;
+			case "left": blMovement.moveObject("left", 1, "player"); break;
+			case "right": blMovement.moveObject("right", 1, "player"); break;
 		}
 		if (mapanimate == null) {
 			moveMap();
@@ -2041,7 +1570,6 @@ var loadDevConsole = function() {
 };
 
 
-
 /////////////
 //  *CHEATS 
 /////////////
@@ -2265,5 +1793,5 @@ var moveObjectToMap = function(objectId, objectCurrentBlock, objectDirection) {
 
 	// add player to new map
 	object.appendTo(toMap);
-	teleportObjectToBlock(1, nextMap, nextBlock);
+	blMovement.teleportObjectToBlock(1, nextMap, nextBlock);
 };
