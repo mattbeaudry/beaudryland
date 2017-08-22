@@ -76,7 +76,6 @@
                     <h2>Tools</h2>
 
                     <form class="color-code">
-
                         <input class="form-color" type="text" name="hexcode" placeholder="#000000" value="#000000">
                     </form>
 
@@ -207,6 +206,7 @@ $('.button-saveitem').on("click", function() {
     var svg = $('#itemsvg').html();
     //console.log(svg);
     var name = $('.item-builder .form-name').val();
+    if (!name) { name = 'unnamed' }
     var slug = $('.item-builder .form-slug').val();
     var recipe1 = $('.item-builder .form-recipe-1').val();
     var recipe2 = $('.item-builder .form-recipe-2').val();

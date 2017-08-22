@@ -35,6 +35,7 @@ import { Movement } from './js/movement';
 import { Signs } from './js/signs';
 import { Health } from './js/health';
 import { Action } from './js/action';
+import { Cube } from './js/cube';
 
 var blUtil = new Utility();
 var blInventory = new Inventory();
@@ -46,6 +47,7 @@ var blMovement = new Movement();
 var blSigns = new Signs();
 var blHealth = new Health();
 var blAction = new Action();
+var blCube = new Cube();
 
 blNavigation.initializeNavigation();
 blInventory.setupInventorySlots();
@@ -90,8 +92,8 @@ if ( $('body').hasClass("version-phonegap") ) {
 	$(document).ready(function() {
 		console.log("DESKTOP VERSION");
 
-		globals.mapwidth = 40;
-		globals.mapheight = 40;
+		globals.mapwidth = 20;
+		globals.mapheight = 20;
 
 		blMap.setupMap();
 
@@ -191,7 +193,6 @@ var playerPrimaryAction = function(blockid) {
 	}
 	
 	//blUtil.log("4-hitblock "+block);
-	
 	var blocktype = blUtil.getBlockType(block);
 	//blUtil.log("5-blocktype "+blocktype);
 
@@ -1505,37 +1506,37 @@ var loadDevConsole = function() {
 		},
 		{
 			text: 'Rotate Cube to Front',
-			function_name: 'rotateCubeTo',
+			function_name: 'blCube.rotateCubeTo',
 			function_val: 'front'
 		},
 		{
 			text: 'Rotate Cube to Right',
-			function_name: 'rotateCubeTo',
+			function_name: 'blCube.rotateCubeTo',
 			function_val: 'right'
 		},
 		{
 			text: 'Rotate Cube to Back',
-			function_name: 'rotateCubeTo',
+			function_name: 'blCube.rotateCubeTo',
 			function_val: 'back'
 		},
 		{
 			text: 'Rotate Cube to Left',
-			function_name: 'rotateCubeTo',
+			function_name: 'blCube.rotateCubeTo',
 			function_val: 'left'
 		},
 		{
 			text: 'Rotate Cube to Bottom',
-			function_name: 'rotateCubeTo',
+			function_name: 'blCube.rotateCubeTo',
 			function_val: 'bottom'
 		},
 		{
 			text: 'Rotate Cube to Top',
-			function_name: 'rotateCubeTo',
+			function_name: 'blCube.rotateCubeTo',
 			function_val: 'top'
 		},
 		{
 			text: 'Cubify Map',
-			function_name: 'cubifyMap'
+			function_name: 'blCube.cubifyMap'
 		},
 		{
 			text: 'Decubify Map',
@@ -1710,88 +1711,3 @@ var lightUpBlock = function() {
 
 };
 
-var cubifyMap = function() {
-	$('.maps-container').addClass('cube-container');
-	$('.maps-wrap').addClass('cube cube-show-front');
-	$('.maps-wrap > div').each(function(index) {
-		switch (index) {
-			case 0: $(this).addClass("cube-side side-front"); break;
-			case 1: $(this).addClass("cube-side side-right"); break;
-			case 2: $(this).addClass("cube-side side-back"); break;
-			case 3: $(this).addClass("cube-side side-left"); break;
-			case 4: $(this).addClass("cube-side side-top"); break;
-			case 5: $(this).addClass("cube-side side-bottom"); break;
-		}
-	});
-};
-
-var decubifyMap = function() {
-	$('.maps-container').removeClass('cube-container');
-	$('.maps-wrap').removeClass('cube');
-	$('.maps-wrap').removeClass(function (index, className) {
-		return (className.match (/(^|\s)cube-show-\S+/g) || []).join(' ');
-	});
-	$('.maps-wrap > div').removeClass(function (index, className) {
-		return (className.match (/(^|\s)cube-\S+/g) || []).join(' ');
-	});
-};
-
-var rotateCubeTo = function(side) {
-	$('.cube').removeClass(function (index, className) {
-		return (className.match (/(^|\s)cube-show-\S+/g) || []).join(' ');
-	});
-	$('.cube').addClass('cube-show-'+side);
-	globals.currentCubeSide = side;
-};
-
-var moveObjectToMap = function(objectId, objectCurrentBlock, objectDirection) {
-	//init
-	//globals.currentMap = globals.cubeSidesArray[globals.currentCubeSide].map;
-	var objectDirection = objectDirection;
-	var object = $('.objectid-'+objectId);
-	var currentBlock = objectCurrentBlock;
-
-	// find out what map and side of cube is next
-	var nextCubeSide = globals.cubeSidesArray[globals.currentCubeSide][objectDirection];
-	var nextMap = globals.cubeSidesArray[nextCubeSide].map;
-	var toMap = $('.the-fucking-'+nextMap+'-map');
-
-	blUtil.log('nextCubeSide**************'+nextCubeSide);
-	blUtil.log('nextMap**************'+nextMap);
-	blUtil.log('toMap**************'+toMap);
-
-	// find out what block on next map to move to
-	var mapwidth = globals.mapwidth;
-	var mapheight = globals.mapheight;
-	var nextBlock = 0;
-
-	switch (objectDirection) {
-		case 'right':
-			nextBlock = currentBlock - (mapwidth - 1);
-			break;
-		case 'left':
-			nextBlock = currentBlock + mapwidth - 1;
-			break;
-		case 'up':
-			nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
-			break;
-		case 'down':
-			nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
-			break;
-	}
-	
-	blUtil.log('currentBlock**************'+currentBlock);
-	blUtil.log('mapwidth**************'+mapwidth);
-	blUtil.log('mapwidth * mapheight**************'+mapwidth * mapheight);
-	blUtil.log('nextBlock**************'+nextBlock);
-
-	// remove player from current map
-	object.detach();
-
-	// rotate the cube
-	rotateCubeTo(nextCubeSide);
-
-	// add player to new map
-	object.appendTo(toMap);
-	blMovement.teleportObjectToBlock(1, nextMap, nextBlock);
-};

@@ -2,8 +2,11 @@ import * as globals from './globals';
 
 import { Utility } from './utility';
 import { Action } from './action';
+import { Cube } from './cube';
+
 var blUtil = new Utility();
 var blAction = new Action();
+var blCube = new Cube();
 
 export class Movement {
 
@@ -390,6 +393,58 @@ export class Movement {
 			this.objectbrain = setTimeout(this.anObjectMovement(id), globals.playerspeed); // repeat thought
 		}
 	
+	}
+
+	moveObjectToMap(objectId, objectCurrentBlock, objectDirection) {
+		//init
+		//globals.currentMap = globals.cubeSidesArray[globals.currentCubeSide].map;
+		var objectDirection = objectDirection;
+		var object = $('.objectid-'+objectId);
+		var currentBlock = objectCurrentBlock;
+
+		// find out what map and side of cube is next
+		var nextCubeSide = globals.cubeSidesArray[globals.currentCubeSide][objectDirection];
+		var nextMap = globals.cubeSidesArray[nextCubeSide].map;
+		var toMap = $('.the-fucking-'+nextMap+'-map');
+
+		blUtil.log('nextCubeSide**************'+nextCubeSide);
+		blUtil.log('nextMap**************'+nextMap);
+		blUtil.log('toMap**************'+toMap);
+
+		// find out what block on next map to move to
+		var mapwidth = globals.mapwidth;
+		var mapheight = globals.mapheight;
+		var nextBlock = 0;
+
+		switch (objectDirection) {
+			case 'right':
+				nextBlock = currentBlock - (mapwidth - 1);
+				break;
+			case 'left':
+				nextBlock = currentBlock + mapwidth - 1;
+				break;
+			case 'up':
+				nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
+				break;
+			case 'down':
+				nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
+				break;
+		}
+		
+		blUtil.log('currentBlock**************'+currentBlock);
+		blUtil.log('mapwidth**************'+mapwidth);
+		blUtil.log('mapwidth * mapheight**************'+mapwidth * mapheight);
+		blUtil.log('nextBlock**************'+nextBlock);
+
+		// remove player from current map
+		object.detach();
+
+		// rotate the cube
+		blCube.rotateCubeTo(nextCubeSide);
+
+		// add player to new map
+		object.appendTo(toMap);
+		this.teleportObjectToBlock(1, nextMap, nextBlock);
 	}
 
 }

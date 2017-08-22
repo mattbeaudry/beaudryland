@@ -1,8 +1,8 @@
 @import url('http://fonts.googleapis.com/css?family=Press+Start+2P')
 
 $gridunitpx: 20px
-$mapWidthBlocks: 40
-$mapHeightBlocks: 40
+$mapWidthBlocks: 20
+$mapHeightBlocks: 20
 $mapWidthPX: $mapWidthBlocks * $gridunitpx
 $mapHeightPX: $mapHeightBlocks * $gridunitpx
 
@@ -11,6 +11,41 @@ $black: #000
 $grass-green: #36ac2a
 $snow-white: #f5fdff
 $sand: #d9cfa2
+
+/* DARK THEME */
+
+body.theme-black
+	background-color: #000
+	color: #fff
+
+	.button-wrap,
+	.button-wrap a
+		background-color: #fff
+		color: #000
+
+	.button-black,
+	.the-fucking-crafting-table,
+	.the-fucking-crafted-item
+		background-color: #fff
+		color: #000
+
+		&:before,
+		&:after
+			background-color: #fff
+
+	.sticky-inventory
+		background-color: #333
+
+	section
+		background-color: transparent
+
+	.item-achievements li,
+	.item-formulas > li
+		background-color: transparent
+		color: #fff
+
+		&.status-completed
+			border: solid 5px #36ac2a
 
 
 /* THE MAP */

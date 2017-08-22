@@ -138,7 +138,6 @@
 		</div>
 
         <div class="the-fucking-controller">
-        
         	<div class="d-pad">
         		<div href="javascript:void(0)" class="btn-up"></div>
         		<div href="javascript:void(0)" class="btn-down"></div>
@@ -146,23 +145,18 @@
         		<div href="javascript:void(0)" class="btn-right"></div>
         	</div>
         	<div href="javascript:void(0)" class="btn-a"></div>
-        	
         </div>
-
 
         <div class="the-fucking-dev-panel">
 	    	<h2>Developer Console</h2>
 	    	<nav>
-	    		<ul class="dev-console clearfix">
-	    			
-	    		</ul>
+	    		<ul class="dev-console clearfix"></ul>
 	    	</nav>
 	    </div>
 		
 		<div id="react-map-test"></div>
                
         <div class="the-fucking-gameinfo">
-
         	<section>
         		<a id="help"></a>
 		        <h2>Help</h2>
@@ -179,15 +173,10 @@
 					<li>If you unlock the winter map and you create the skiis, you can go skiing.</li>
 					<li>Thanks for taking part in the Beaudryland experiment.</li>
 		        </ul>
-		        
 		    </section>
-
 		    <section>
-
 		    	<a id="achievements"></a>
-		    
 		        <h2>Achievements</h2>
-		        
 		        <ul class="item-achievements clearfix">
 		        	<li data-achievementid="1" data-achievementname="genesis" class="achievement-genesis status-completed">
 		        		<!--<img src="img/icon-check-grey.png">-->
@@ -221,17 +210,11 @@
 		        		<p>Build a guitar or keyboard.</p>
 		        	</li>
 		        </ul>
-
 		    </section>
-		   
 		    <section>
-
 		    	<a id="items"></a>
-		    
 		        <h2>Item Formulas</h2>
-		        
 		        <p>The item formulas are not very intuitive yet, so for now I will list them here.</p>
-		        
 		        <ul class="item-formulas">
 		        	<li>
 		        		<h3>Wood</h3>
@@ -534,11 +517,8 @@
 		        			<li>can be placed on map</li>
 		        		</ul>
 		        	</li>
-		        	
 		        </ul>
-		        
 		    </section>
-
 		</div>
         
         <!--
