@@ -110,10 +110,9 @@ export class Map {
 	    $('.the-fucking-forest-map').append(playerdiv);
 	};
 
-
-	changeBlockType(block, newtype, maptype) {
+	changeBlockType(block, newtype, map) {
 		//blUtil.log("8-changing block "+block+" to "+newtype);
-		if (maptype) {
+		if (map) {
 			$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').removeClass(globals.allblockclasses);
 			$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').addClass("block block-"+newtype);
 			$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').attr("data-blocktype", newtype);

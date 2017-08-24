@@ -18,7 +18,7 @@ export class Movement {
 		this.maxthoughts = 100;
 	}
 
-	moveObject(direction, id, name, map) {
+	moveObject(direction, id, name) {
 		var success = false;
 		var x = blUtil.getObjectCurrentPositionX(id);
 		var y = blUtil.getObjectCurrentPositionY(id);
@@ -27,7 +27,7 @@ export class Movement {
 
 		this.changeObjectDirection(id, direction, name);
 
-		if (!this.objectCollisionDetection(id, direction, map)) {
+		if (!this.objectCollisionDetection(id, direction, globals.currentMap)) {
 			switch (direction) {
 				case "up": 
 					y = y - globals.gridunitpx; 
@@ -86,58 +86,62 @@ export class Movement {
 			blUtil.log('moving id:'+movingObject_id+' to block:'+movingObject_nextblock);
 		}
 
+		var nextBlockClass = '.the-fucking-'+map+'-map .block:eq('+nextblock+')';
+
+		blUtil.log("nextBlockClass:"+nextBlockClass);
+
 		//teleporting
-		if (id == 1 && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-portal-a')) {
+		if (id == 1 && $(nextBlockClass).hasClass('block-portal-a')) {
 			var destinationblock = $('.maps-wrap .block-portal-b').first().attr("data-blockid");
 			//alert(destinationblock);
 			this.teleportObjectToBlock(1, destinationblock);
 			collide = true;
 		//teleporting
-		} else if (id == 1 && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-portal-b')) {
+		} else if (id == 1 && $(nextBlockClass).hasClass('block-portal-b')) {
 			var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
 			//alert(destinationblock);
 			this.teleportObjectToBlock(1, destinationblock);
 			collide = true;
 		//space travel
-		} else if (selecteditem == "rocket" && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-space')) {
+		} else if (selecteditem == "rocket" && $(nextBlockClass).hasClass('block-space')) {
 			collide = false;
 		} else if (selecteditem == "rocket") {
 			collide = true;
 		//space
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-space') ) {
+		} else if ( $(nextBlockClass).hasClass('block-space') ) {
 			collide = true;
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-star') ) {
+		} else if ( $(nextBlockClass).hasClass('block-star') ) {
 			collide = true;
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-redgalaxy') ) {
+		} else if ( $(nextBlockClass).hasClass('block-redgalaxy') ) {
 			collide = true;
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-bluegalaxy') ) {
+		} else if ( $(nextBlockClass).hasClass('block-bluegalaxy') ) {
 			collide = true;
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-sun') ) {
+		} else if ( $(nextBlockClass).hasClass('block-sun') ) {
 			collide = true;
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-earth') ) {
+		} else if ( $(nextBlockClass).hasClass('block-earth') ) {
 			collide = true;
 		//canoeing
-		} else if (selecteditem == "canoe" && $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-water')) {
+		} else if (selecteditem == "canoe" && $(nextBlockClass).hasClass('block-water')) {
 			collide = false;
 		} else if (selecteditem == "canoe") {
 			collide = true;
 		// Water
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-water') ) {
+		} else if ( $(nextBlockClass).hasClass('block-water') ) {
 			collide = true;
 		// Tree	
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-tree') ) {
+		} else if ( $(nextBlockClass).hasClass('block-tree') ) {
 			collide = true;
 		// Rock
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-rock') ) {
+		} else if ( $(nextBlockClass).hasClass('block-rock') ) {
 			collide = true;
 		// Wood
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-wood') ) {
+		} else if ( $(nextBlockClass).hasClass('block-wood') ) {
 			collide = true;
 		// Fire
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-fire') ) {
+		} else if ( $(nextBlockClass).hasClass('block-fire') ) {
 			collide = true;
 		// Closed Door
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-door') ) {
+		} else if ( $(nextBlockClass).hasClass('block-door') ) {
 			collide = true;
 		// Map right border	
 		} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
@@ -160,31 +164,31 @@ export class Movement {
 			this.moveObjectToMap(1, currentblock, direction);
 			collide = true;	
 		// PineTree	
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-pinetree') ) {
+		} else if ( $(nextBlockClass).hasClass('block-pinetree') ) {
 			collide = true;
 		// IceRock
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-icerock') ) {
+		} else if ( $(nextBlockClass).hasClass('block-icerock') ) {
 			collide = true;
 		// PalmTree
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-palmtree') ) {
+		} else if ( $(nextBlockClass).hasClass('block-palmtree') ) {
 			collide = true;
 		// RockBrick
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-rockbrick') ) {
+		} else if ( $(nextBlockClass).hasClass('block-rockbrick') ) {
 			collide = true;
 		// IceRockBrick
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-icerockbrick') ) {
+		} else if ( $(nextBlockClass).hasClass('block-icerockbrick') ) {
 			collide = true;
 		// ClayBrick
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-claybrick') ) {
+		} else if ( $(nextBlockClass).hasClass('block-claybrick') ) {
 			collide = true;
 		// AppleTree
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-appletree') ) {
+		} else if ( $(nextBlockClass).hasClass('block-appletree') ) {
 			collide = true;
 		// TallTree
-		} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-talltree') ) {
+		} else if ( $(nextBlockClass).hasClass('block-talltree') ) {
 			collide = true;
 		// Ice Sliding
-		//} else if ( $('.maps-wrap .block:eq('+nextblock+')').hasClass('block-ice') ) {
+		//} else if ( $(nextBlockClass).hasClass('block-ice') ) {
 			//slidePlayer();
 			//return true;
 		} else {
@@ -441,6 +445,8 @@ export class Movement {
 
 		// rotate the cube
 		blCube.rotateCubeTo(nextCubeSide);
+
+		globals.currentMap = nextMap;
 
 		// add player to new map
 		object.appendTo(toMap);

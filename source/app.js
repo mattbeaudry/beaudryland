@@ -756,7 +756,10 @@ var setupKeyboardEvents = function() {
 					else if (selecteditem == "drumsticks") { playDrums(1100); }
 					else if (selecteditem == "bike") { rideBike("right"); }
 					else if (selecteditem == "skiis") { rideSkiis("right"); }
-					else { blMovement.moveObject("right", 1, "player"); }
+					else { 
+						blUtil.log("Call move player"); 
+						blMovement.moveObject("right", 1, "player"); 
+					}
 				}
 				break;
 			case 40: /* DOWN ARROW */
