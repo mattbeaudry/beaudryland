@@ -108,19 +108,14 @@ export class Map {
 		    });
 		}
 	    $('.the-fucking-forest-map').append(playerdiv);
-	};
+	}
 
 	changeBlockType(block, newtype, map) {
-		//blUtil.log("8-changing block "+block+" to "+newtype);
-		if (map) {
-			$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').removeClass(globals.allblockclasses);
-			$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').addClass("block block-"+newtype);
-			$('.maps-wrap .the-fucking-'+maptype+'-map .block:eq('+block+')').attr("data-blocktype", newtype);
-		} else {
-			$('.maps-wrap .block:eq('+block+')').removeClass(globals.allblockclasses);
-			$('.maps-wrap .block:eq('+block+')').addClass("block block-"+newtype);
-			$('.maps-wrap .block:eq('+block+')').attr("data-blocktype", newtype);
-		}
+		blUtil.log("changing block "+block+" to "+newtype);
+		var blockClass = '.the-fucking-'+map+'-map .block:eq('+block+')';
+		$(blockClass).removeClass(globals.allblockclasses);
+		$(blockClass).addClass("block block-"+newtype);
+		$(blockClass).attr("data-blocktype", newtype);
 	}
 
 	loadNewMap(maptype, cubeside) {

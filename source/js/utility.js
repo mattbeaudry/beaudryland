@@ -98,6 +98,29 @@ export class Utility {
 		return block;
 	}
 
+	getObjectDirection(id, name) {
+		var direction;
+		var selecteditem = this.getSelectedItem();
+		var playergraphic;
+		if ( (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "bike" || selecteditem == "skiis") && name == "player" ) { 
+			playergraphic = "-"+selecteditem;
+		} else {
+			playergraphic = "";
+		}
+
+		if ($('.objectid-'+id).hasClass(name+"-direction-down")) {
+			direction = "down";
+		} else if ($('.objectid-'+id).hasClass(name+"-direction-up")) {
+			direction = "up";
+		} else if ($('.objectid-'+id).hasClass(name+"-direction-left")) {
+			direction = "left";
+		} else if ($('.objectid-'+id).hasClass(name+"-direction-right")) {
+			direction = "right";
+		}
+
+		return direction;
+	}
+
 	stripPX(css) {
 		var px = css.replace( /px/g , "" );
 		px = parseInt(px);
@@ -109,4 +132,4 @@ export class Utility {
 		return px;
 	}
 
-};
+}
