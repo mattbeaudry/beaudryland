@@ -187,6 +187,9 @@ export class Movement {
 		// TallTree
 		} else if ( $(nextBlockClass).hasClass('block-talltree') ) {
 			collide = true;
+		// Fence
+		} else if ( $(nextBlockClass).hasClass('block-fence-metal') ) {
+			collide = true;
 		// Ice Sliding
 		//} else if ( $(nextBlockClass).hasClass('block-ice') ) {
 			//slidePlayer();

@@ -42,7 +42,8 @@ export const blocktypes = new Array (
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 	/*organic*/		"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
-	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground"
+	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground",
+	/*new*/			"fence-metal"
 );
 
 export const isplaceable = new Array (
@@ -55,8 +56,9 @@ export const isplaceable = new Array (
 	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","flowers","talltree",
-	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot"
+	/*organic*/		"wood","pinewood","palmwood","applewood","appletree","flowers","talltree",
+	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot",
+	/*new*/			"fence-metal"
 );
 
 export const isingredient = new Array (

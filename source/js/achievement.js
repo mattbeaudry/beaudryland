@@ -1,19 +1,37 @@
 import * as globals from './globals';
 
 import { Utility } from './utility';
+import { Story } from './story';
+import { Map } from './map';
 
 var blUtil = new Utility();
+var blStory = new Story();
+var blMap = new Map();
 
 export class Achievement {
 
 	constructor() {
-
+		this.guitarFirstNote = true;
 	}
 
 	achievementCompleted(achievementname) {
 		if (!$('.item-achievements .achievement-'+achievementname).hasClass('status-completed')) {
 			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
 			this.displayDialog("You got the "+achievementname+" achievement!");
+			switch (achievementname) {
+				case 'jammingout':
+					blUtil.log('Jam out!');
+					blStory.demolishMapBorder('forest', 'left');
+					if ((this.guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
+						this.guitarFirstNote = false; 
+						blMap.loadNewMap('winter', 'right'); 
+						blStory.createWinterSigns();
+						blStory.setupMapBorders('winter');
+						blStory.demolishMapBorder('winter', 'left');
+					}
+					break;
+			}
+
 		}
 	}
 

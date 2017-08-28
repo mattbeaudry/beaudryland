@@ -1,7 +1,9 @@
 import * as globals from './globals';
 
 import { Utility } from './utility'; 
+import { Movement } from './movement'; 
 var blUtil = new Utility();
+var blMovement = new Movement();
 
 export class Animal {
 
@@ -14,7 +16,7 @@ export class Animal {
 		blUtil.log("Create Animal "+id);
 		//var enemystartblock = 0;
 		$('.the-fucking-forest-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-deer deer-direction-down"></div>');
-		initAnimalBrain(id);
+		this.initAnimalBrain(id);
 	}
 
 	killAnimal(id) {

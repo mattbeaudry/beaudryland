@@ -6,22 +6,54 @@ export class Sound {
 		this.guitarFirstNote = true;
 		this.keyboardFirstNote = true;
 		this.drumsFirstNote = true;
+		this.sound = new AudioContext;
 	}
 
-	playSound(freq) {
-		achievementCompleted("jammingout");
-		//unlock winter map
-		if ((this.guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
-			drawNewWinterMap(); 
-			createWinterSigns();
-			this.guitarFirstNote = false; 
-		}
-		sin = T("sin", freq);
-		env = T("adsr", 10, 500);
-		syn = T("*", sin, env).play();
-		sin.bang();
-		env.bang();
+	playGuitar(freq) {
+		var time = this.sound.currentTime;
+		var maxDelayTime = 5;
+		this.sound.osc = this.sound.createOscillator();
+		this.sound.gain = this.sound.createGain();
+		//this.sound.delay = this.sound.createDelay(maxDelayTime);
+
+		this.sound.osc.connect(this.sound.gain);
+		this.sound.gain.connect(this.sound.destination);
+
+		this.sound.osc.frequency.setValueAtTime(freq, time);
+		this.sound.gain.gain.setValueAtTime(0.02, time);
+
+		this.sound.osc.start(time);
+		//this.sound.delay.connect(this.sound.destination);
+		this.sound.osc.stop(time + 0.2);
 	}
+
+	// switch(note){
+	//   case "c": freq = 150; break;
+	//   case "d": freq = 175; break;
+	//   case "e": freq = 200; break;
+	//   case "f": freq = 225; break;
+	//   case "g": freq = 250; break;
+	//   case "a": freq = 300; break;
+	//   case "b": freq = 350; break;
+	//   case "c": freq = 400; break;
+	//   case "d": freq = 450; break;
+	//   case "e": freq = 500; break;
+	// }
+
+	// playSound(freq) {
+	// 	achievementCompleted("jammingout");
+	// 	//unlock winter map
+	// 	if ((this.guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
+	// 		drawNewWinterMap(); 
+	// 		createWinterSigns();
+	// 		this.guitarFirstNote = false; 
+	// 	}
+	// 	sin = T("sin", freq);
+	// 	env = T("adsr", 10, 500);
+	// 	syn = T("*", sin, env).play();
+	// 	sin.bang();
+	// 	env.bang();
+	// }
 
 	playPiano(freq) {
 		achievementCompleted("jammingout");

@@ -1,7 +1,11 @@
 import * as globals from './globals';
 
 import { Utility } from './utility'; 
+import { Movement } from './movement'; 
+import { Health } from './health'; 
 var blUtil = new Utility();
+var blMovement = new Movement();
+var blHealth = new Health();
 
 export class Enemy {
 
@@ -14,7 +18,7 @@ export class Enemy {
 		blUtil.log("Create Enemy "+id);
 		//var enemystartblock = 0;
 		$('.the-fucking-forest-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-enemy enemy-direction-down"></div>');
-		initEnemyBrain(id);
+		this.initEnemyBrain(id);
 	}
 
 	killEnemy(id) {
@@ -92,8 +96,8 @@ export class Enemy {
 				//limit
 				if (t > maxthoughts) {
 					blUtil.log("Enemy terminated");
-					stopEnemyBrain();
-					killEnemy(id);
+					this.stopEnemyBrain();
+					this.killEnemy(id);
 				} else {
 					t++;
 					enemybrain = setTimeout(anEnemyThought, globals.enemyspeed); // repeat thought

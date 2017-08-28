@@ -1,8 +1,10 @@
 import * as globals from './globals';
+
 import { Utility } from './utility';
-var blUtil = new Utility();
 import { Map } from './map';
-var beaudrylandMap = new Map();
+
+var blUtil = new Utility();
+var blMap = new Map();
 
 export class Story {
 
@@ -19,7 +21,7 @@ export class Story {
 		];
 		$.each(forestSigns,function(index,value){
 			var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-			beaudrylandMap.changeBlockType(blockid,"sign");
+			blMap.changeBlockType(blockid,"sign");
 			$('.the-fucking-forest-map .block:eq('+blockid+')').attr("data-text", value);
 		});
 	}
@@ -33,7 +35,7 @@ export class Story {
 		 ];
 		 $.each(winterSigns,function(index,value){
 		 	var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-		 	beaudrylandMap.changeBlockType(blockid,"sign","winter");
+		 	blMap.changeBlockType(blockid,"sign","winter");
 		 	$('.the-fucking-winter-map .block:eq('+blockid+')').attr("data-text", value);
 		 });
 	}
@@ -47,9 +49,63 @@ export class Story {
 		];
 		$.each(forestSigns,function(index,value){
 			var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-			beaudrylandMap.changeBlockType(blockid,"sign","beach");
+			blMap.changeBlockType(blockid,"sign","beach");
 			$('.the-fucking-beach-map .block:eq('+blockid+')').attr("data-text", value);
 		});
+	}
+
+	setupMapBorders(map) {
+		blUtil.log('FENCES!!');
+		//var mapClass = '.the-fucking-'+map+'-map';
+		//$(mapClass+' .block:eq('+1+')').
+		// top
+		for (var i=0; i<globals.mapwidth; i++) {
+			blMap.changeBlockType(i, 'fence-metal', map);
+		}
+		// bottom
+		for (var i=(globals.totalmapblocks-globals.mapwidth); i<globals.totalmapblocks; i++) {
+			blMap.changeBlockType(i, 'fence-metal', map);
+		}
+		// right+left
+		for (var i=0; i<globals.totalmapblocks; i++) {
+			if (i%globals.mapwidth == 0 || i%globals.mapwidth == (globals.mapwidth-1)) {
+				blMap.changeBlockType(i, 'fence-metal', map);
+			}
+		}
+	}
+
+	demolishMapBorder(map, side) {
+		blUtil.log('DEMOILISH FENCE: '+map+' + '+side);
+		switch(side) {
+			case 'right':
+				for (var i=0; i<globals.totalmapblocks; i++) {
+					if (i%globals.mapwidth == (globals.mapwidth-1)) {
+						blMap.changeBlockType(i, 'grass', map);
+					}
+				}
+				break;
+			case 'left':
+				for (var i=0; i<globals.totalmapblocks; i++) {
+					if (i%globals.mapwidth == 0) {
+						blMap.changeBlockType(i, 'tree', map);
+					}
+				}
+				break;
+			case 'up':
+				for (var i=0; i<globals.totalmapblocks; i++) {
+					if (i%globals.mapwidth == (globals.mapwidth-1)) {
+						blMap.changeBlockType(i, 'grass', map);
+					}
+				}
+				break;
+			case 'down':
+				for (var i=0; i<globals.totalmapblocks; i++) {
+					if (i%globals.mapwidth == (globals.mapwidth-1)) {
+						blMap.changeBlockType(i, 'grass', map);
+					}
+				}
+				break;
+		}
 	}
 
 }

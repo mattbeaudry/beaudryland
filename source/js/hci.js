@@ -6,6 +6,8 @@ import { Movement } from './movement';
 import { Map } from './map';
 import { Action } from './action'; 
 import { Inventory } from './inventory'; 
+import { Sound } from './sound'; 
+import { Achievement } from './achievement'; 
 
 var blUtil = new Utility();
 var blPlayer = new Player();
@@ -13,6 +15,8 @@ var blMovement = new Movement();
 var blMap = new Map();
 var blAction = new Action();
 var blInventory = new Inventory();
+var blSound = new Sound();
+var blAchievement = new Achievement();
 
 export class HCI {
 
@@ -24,60 +28,28 @@ export class HCI {
 		blUtil.log("Keyboard Events");
 		window.addEventListener('keydown', function(event) {
 			var selecteditem = blUtil.getSelectedItem();
+			var direction = '';
 			switch (event.keyCode) {
 				case 37: /* LEFT ARROW */
-					if (globals.disablekeyboardevents == false) {
-						if (selecteditem == "guitar") { playSound(880); }
-						else if (selecteditem == "piano") { playPiano(880); }
-						else if (selecteditem == "drumsticks") { playDrums(880); }
-						else if (selecteditem == "bike") { rideBike("left"); }
-						else if (selecteditem == "skiis") { rideSkiis("left"); }
-						else { blMovement.moveObject("left", 1, "player"); }
-					}
+					direction = 'left';
 					break;
 				case 38: /* UP ARROW */
-					if (globals.disablekeyboardevents == false) {
-						if (selecteditem == "guitar") { playSound(1320); } 
-						else if (selecteditem == "piano") { playPiano(1320); } 
-						else if (selecteditem == "drumsticks") { playDrums(1320); }
-						else if (selecteditem == "bike") { rideBike("up"); } 
-						else if (selecteditem == "skiis") { rideSkiis("up"); }
-						else { blMovement.moveObject("up", 1, "player"); }
-					}
+					direction = 'up';
 					break;
 				case 39: /* RIGHT ARROW */
-					if (globals.disablekeyboardevents == false) {
-						if (selecteditem == "guitar") { playSound(1100); }
-						else if (selecteditem == "piano") { playPiano(1100); }
-						else if (selecteditem == "drumsticks") { playDrums(1100); }
-						else if (selecteditem == "bike") { rideBike("right"); }
-						else if (selecteditem == "skiis") { rideSkiis("right"); }
-						else { 
-							blUtil.log("Call move player"); 
-							blMovement.moveObject("right", 1, "player"); 
-						}
-					}
+					direction = 'right';
 					break;
 				case 40: /* DOWN ARROW */
-					if (globals.disablekeyboardevents == false) {
-						if (selecteditem == "guitar") { playSound(660); } 
-						else if (selecteditem == "piano") { playPiano(660); } 
-						else if (selecteditem == "drumsticks") { playDrums(660); }
-						else if (selecteditem == "bike") { rideBike("down"); } 
-						else if (selecteditem == "skiis") { rideSkiis("down"); }
-						else { blMovement.moveObject("down", 1, "player"); }
-					}
+					direction = 'down';
 					break;
 				case 32: /* SPACE */
 					if (globals.disablekeyboardevents == false) {
-
 						if ($('.speech-bubble').length == 0) {
 							blAction.playerPrimaryAction(); 
 							event.preventDefault();
 						} else {
 							event.preventDefault();
 						}
-
 					}
 					break;
 				case 13: /* ENTER */
@@ -86,55 +58,63 @@ export class HCI {
 						event.preventDefault();
 					} 
 					break;
-				case 69: // E 
-					//playMusic();
-					break;
 
-				/*
-				case 77: // M
-					createEnemy();
-					break;
-				case 75: // K
-					killEnemy(1);
-					break;
-				case 66: // B
-					blMap.saveMap();
-					break;
-				case 67: // C
-					blMap.loadExistingMap();
-					break;
-				case 65: // A
-					moveMap();
-					break;
-				case 68: // D
-					stopMap();
-					break;
-				case 69: // E
-					playMusic();
-					break;
-				case 70: // F
-					startWaves();
-					break;
-				case 71: // G
-					drawNewWinterMap();
-					drawNewBeachMap();
-					break;
-					/*
-					g 71
-					h 72
-					i 73
-					*/
+				// case 69: // E 
+				// break;
+				// case 77: // M
+				// break;
+				// case 75: // K
+				// break;
+				// case 66: // B
+				// break;
+				// case 67: // C
+				// break;
+				// case 65: // A
+				// break;
+				// case 68: // D
+				// break;
+				// case 69: // E
+				// break;
+				// case 70: // F
+				// break;
+				// case 71: // G
+				// break;
 				
 			}
+
+			if (globals.disablekeyboardevents == false && direction != '') {
+				switch (selecteditem) {
+					case "guitar":
+						blSound.playGuitar(880);
+						blAchievement.achievementCompleted("jammingout");
+						//unlock winter map
+						break;
+					case "piano":
+						blSound.playSound(880);
+						//unlock beach map
+						break;
+					case "drumsticks":
+						blSound.playSound(880);
+						break;
+					case "bike":
+						//rideBike(direction);
+						break;
+					case "skiis":
+						//rideSkiis(direction);
+						break;
+					default:
+						blMovement.moveObject(direction, 1, "player");
+						break;
+				}
+			}
+
 		}, false);
 
 		//prevent keys from scrolling page
 		$(document).keydown(function (e) {
-
 		    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
 		    if ( ((key == 37) || (key == 38) || (key == 39) || (key == 40) /*|| (key == 32)*/) && (e.target.className != null))
 		       e.preventDefault();
-
 		});
 		
 	}

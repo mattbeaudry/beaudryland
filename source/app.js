@@ -1,11 +1,3 @@
-// Beaudryland v1.0
-// Matt Beaudry
-// 2017
-
-// GAME
-// TIME 
-// ANIMATION & PROJECTILES
-
 import './sass/main.sass';
 import * as globals from './js/globals';
 import * as blNavigation from './js/navigation';
@@ -14,16 +6,12 @@ import * as mobile from './js/mobile';
 import { Utility } from './js/utility';
 import { Inventory } from './js/inventory';
 import { Map } from './js/map';
-import { Sound } from './js/sound';
 import { Story } from './js/story';
 import { Player } from './js/player';
-import { Enemy } from './js/enemy';
 import { Animal } from './js/animal';
 import { Movement } from './js/movement';
 import { Signs } from './js/signs';
 import { Health } from './js/health';
-import { Action } from './js/action';
-import { Cube } from './js/cube';
 import { Dev } from './js/dev';
 import { HCI } from './js/hci';
 import { Achievement } from './js/achievement';
@@ -31,16 +19,12 @@ import { Achievement } from './js/achievement';
 var blUtil = new Utility();
 var blInventory = new Inventory();
 var blMap = new Map();
-var blSound = new Sound();
 var blStory = new Story();
 var blPlayer = new Player();
-var blEnemy = new Enemy();
 var blAnimal = new Animal();
 var blMovement = new Movement();
 var blSigns = new Signs();
 var blHealth = new Health();
-var blAction = new Action();
-var blCube = new Cube();
 var blDev = new Dev();
 var blHCI = new HCI();
 var blAchievement = new Achievement();
@@ -126,7 +110,9 @@ var loadNewGame = function() {
 	    //blAnimal.createAnimal();
     } else if (maptype == 'game') {
     	blStory.createForestSigns();
-    	//blAnimal.createAnimal();
+    	blAnimal.createAnimal();
+    	blStory.setupMapBorders('forest');
+    	//blStory.demolishMapBorder('forest', 'right');
     }
 };
 
