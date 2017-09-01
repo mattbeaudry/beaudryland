@@ -20,8 +20,8 @@ export class Utility {
 		return blocktype;
 	}
 
-	getBlockType(block) {
-		var blocktype = $('.maps-wrap .block:eq('+block+')').attr("data-blocktype");
+	getBlockType(block, map) {
+		var blocktype = $('.the-fucking-'+map+'-map .block:eq('+block+')').attr("data-blocktype");
 		//blUtil.log("getblocktype() blocknumber:"+block+", blocktype:"+blocktype);
 		return blocktype;
 	}
@@ -119,6 +119,13 @@ export class Utility {
 		}
 
 		return direction;
+	}
+
+	teleportObjectToBlock(objectId, destinationMap, destinationBlock) {
+		var left = this.getBlockLeftByID(destinationBlock);
+		var top = this.getBlockTopByID(destinationBlock);
+		this.setObjectCurrentPositionX(objectId,left);
+		this.setObjectCurrentPositionY(objectId,top);
 	}
 
 	stripPX(css) {

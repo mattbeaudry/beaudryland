@@ -43,7 +43,7 @@ export class Dev {
 			},
 			{
 				text: 'Get All Items',
-				function_name: 'blDev.getAllItems'
+				function_name: 'this.getAllItems'
 			},
 			{
 				text: 'Night Time',

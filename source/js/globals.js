@@ -21,6 +21,13 @@ export var isnightime = false;
 export var currentMap = 'forest';
 export var currentCubeSide = 'front';
 
+export var guitarFirstNote = true;
+export var keyboardFirstNote = true;
+export var trumpetFirstNote = true;
+export var bassFirstNote = true;
+export var drumsFirstNote = true;
+export var rocketFirstFlight = true;
+
 export const mobtypes = new Array (
 	/*players*/		"player",
 	/*enemies*/		"enemy",
@@ -35,7 +42,7 @@ export const blocktypes = new Array (
 	/*items*/     	"shovel", "fire", "door", "door-open", "frisbee", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*weapons*/		"sword", "spear", "axe", "bow", "arrow",
-	/*instruments*/ "guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
+	/*instruments*/ "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks","bassdrum","snare","hihat","cymbal","tom",
 	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
@@ -53,7 +60,7 @@ export const isplaceable = new Array (
 	/*items*/     	"wood", "fire", "door", "sign",
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
-	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
+	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 	/*organic*/		"wood","pinewood","palmwood","applewood","appletree","flowers","talltree",
@@ -75,7 +82,7 @@ export const isequipable = new Array (
 	/*items*/     	"shovel",
 	/*weapons*/		"sword", "axe", "bow",
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
-	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom"
+	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
 );
 
 export const iscollectable = new Array (
@@ -86,7 +93,7 @@ export const iscollectable = new Array (
 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
 	/*technology*/	"telescope","computer","2dprinter",
 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*instrument*/	"guitar", "piano","drumsticks","bassdrum","snare","hihat","cymbal","tom",
+	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",

@@ -9,7 +9,7 @@ export class Sound {
 		this.sound = new AudioContext;
 	}
 
-	playGuitar(freq) {
+	playSound(freq) {
 		var time = this.sound.currentTime;
 		var maxDelayTime = 5;
 		this.sound.osc = this.sound.createOscillator();

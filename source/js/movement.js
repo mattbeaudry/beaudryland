@@ -94,13 +94,13 @@ export class Movement {
 		if (id == 1 && $(nextBlockClass).hasClass('block-portal-a')) {
 			var destinationblock = $('.maps-wrap .block-portal-b').first().attr("data-blockid");
 			//alert(destinationblock);
-			this.teleportObjectToBlock(1, destinationblock);
+			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
 		//teleporting
 		} else if (id == 1 && $(nextBlockClass).hasClass('block-portal-b')) {
 			var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
 			//alert(destinationblock);
-			this.teleportObjectToBlock(1, destinationblock);
+			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
 		//space travel
 		} else if (selecteditem == "rocket" && $(nextBlockClass).hasClass('block-space')) {
@@ -277,13 +277,6 @@ export class Movement {
 		*/
 	}
 
-	teleportObjectToBlock(objectId, destinationMap, destinationBlock) {
-		var left = blUtil.getBlockLeftByID(destinationBlock);
-		var top = blUtil.getBlockTopByID(destinationBlock);
-		blUtil.setObjectCurrentPositionX(objectId,left);
-		blUtil.setObjectCurrentPositionY(objectId,top);
-	}
-
 	walkPlayerToBlock(id, destinationblock) {
 		this.stopObjectMovement();
 		var playerblock = blUtil.getObjectCurrentBlock('1');
@@ -430,7 +423,7 @@ export class Movement {
 
 		// add player to new map
 		object.appendTo(toMap);
-		this.teleportObjectToBlock(1, nextMap, nextBlock);
+		blUtil.teleportObjectToBlock(1, nextMap, nextBlock);
 	}
 
 }

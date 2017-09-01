@@ -112,7 +112,6 @@ var loadNewGame = function() {
     	blStory.createForestSigns();
     	blAnimal.createAnimal();
     	blStory.setupMapBorders('forest');
-    	//blStory.demolishMapBorder('forest', 'right');
     }
 };
 
@@ -134,6 +133,24 @@ var loadGame = function() {
 				if (data) {
 					blUtil.log("loadbeachmap");
 					blMap.loadExistingMap('beach');
+				}
+			});
+			$.post('php/loadmap.php', {maptype:'jungle'}, function(data) {
+				if (data) {
+					blUtil.log("loadjunglemap");
+					blMap.loadExistingMap('jungle');
+				}
+			});
+			$.post('php/loadmap.php', {maptype:'desert'}, function(data) {
+				if (data) {
+					blUtil.log("loaddesertmap");
+					blMap.loadExistingMap('desert');
+				}
+			});
+			$.post('php/loadmap.php', {maptype:'islands'}, function(data) {
+				if (data) {
+					blUtil.log("loadislandsmap");
+					blMap.loadExistingMap('islands');
 				}
 			});
 			blPlayer.loadPlayer();

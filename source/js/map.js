@@ -41,15 +41,19 @@ export class Map {
 				$('.the-fucking-forest-map').html(mapdata);
 			} else if (maptype == 'winter') {
 				$('.maps-wrap').append('<div class="the-fucking-winter-map cube-side cube-right" data-maptype="winter"></div>');
-				$('.the-fucking-winter-map').css("width", globals.mapwidthpx+"px");
-				$('.the-fucking-winter-map').css("height", globals.mapheightpx+"px");
 				$('.the-fucking-winter-map').html(mapdata);
 			} else if (maptype == 'beach') {
 				$('.maps-wrap').append('<div class="the-fucking-beach-map cube-side cube-back" data-maptype="beach"></div>');
-				$('.the-fucking-beach-map').css("width", globals.mapwidthpx+"px");
-				$('.the-fucking-beach-map').css("height", globals.mapheightpx+"px");
 				$('.the-fucking-beach-map').html(mapdata);
-				//startWaves();
+			} else if (maptype == 'jungle') { 
+				$('.maps-wrap').append('<div class="the-fucking-jungle-map cube-side cube-left" data-maptype="jungle"></div>');
+				$('.the-fucking-jungle-map').html(mapdata);
+			} else if (maptype == 'desert') {
+				$('.maps-wrap').append('<div class="the-fucking-desert-map cube-side cube-bottom" data-maptype="desert"></div>');
+				$('.the-fucking-desert-map').html(mapdata);
+			} else if (maptype == 'islands') {
+				$('.maps-wrap').append('<div class="the-fucking-islands-map cube-side cube-top" data-maptype="islands"></div>');
+				$('.the-fucking-islands-map').html(mapdata);
 			}
 		});
 	}
@@ -100,9 +104,51 @@ export class Map {
 				var blocktype = $('.the-fucking-beach-map div:eq('+i+')').attr('data-blocktype');
 				beachmapblocks[i] = blocktype;
 			}
-			//alert("winter map exists");
 			var jsonbeachmapblocks = JSON.stringify(beachmapblocks);
 		    $.post('php/savemap.php', {mapdata: jsonbeachmapblocks, maptype:'beach'}, function(data) {
+		        //$('body').append(data);
+		        blUtil.log("save mapdata: "+data);
+		    });
+		}
+		//save jungle map
+		if ($('.the-fucking-jungle-map').length) {
+			var junglemapblocks = new Array();
+			var total = globals.totalmapblocks;
+			for (var i=0; i<=total; i++){
+				var blocktype = $('.the-fucking-jungle-map div:eq('+i+')').attr('data-blocktype');
+				junglemapblocks[i] = blocktype;
+			}
+			var jsonjunglemapblocks = JSON.stringify(junglemapblocks);
+		    $.post('php/savemap.php', {mapdata: jsonjunglemapblocks, maptype:'jungle'}, function(data) {
+		        //$('body').append(data);
+		        blUtil.log("save mapdata: "+data);
+		    });
+		}
+		//save desert map
+		if ($('.the-fucking-desert-map').length) {
+			var desertmapblocks = new Array();
+			var total = globals.totalmapblocks;
+			for (var i=0; i<=total; i++){
+				var blocktype = $('.the-fucking-desert-map div:eq('+i+')').attr('data-blocktype');
+				desertmapblocks[i] = blocktype;
+			}
+			var jsondesertmapblocks = JSON.stringify(desertmapblocks);
+		    $.post('php/savemap.php', {mapdata: jsondesertmapblocks, maptype:'desert'}, function(data) {
+		        //$('body').append(data);
+		        blUtil.log("save mapdata: "+data);
+		    });
+		}
+		//save islands map
+		if ($('.the-fucking-islands-map').length) {
+			var islandsmapblocks = new Array();
+			var total = globals.totalmapblocks;
+			for (var i=0; i<=total; i++){
+				var blocktype = $('.the-fucking-islands-map div:eq('+i+')').attr('data-blocktype');
+				islandsmapblocks[i] = blocktype;
+			}
+			//alert("winter map exists");
+			var jsonislandsmapblocks = JSON.stringify(islandsmapblocks);
+		    $.post('php/savemap.php', {mapdata: jsonislandsmapblocks, maptype:'islands'}, function(data) {
 		        //$('body').append(data);
 		        blUtil.log("save mapdata: "+data);
 		    });
@@ -121,11 +167,14 @@ export class Map {
 	loadNewMap(maptype, cubeside) {
 
 		//CREATE RANDOM FOREST TERRAIN
-		this.mapsContainer.append('<div class="the-fucking-'+maptype+'-map cube-side cube-'+cubeside+'" data-maptype="'+maptype+'"></div>');
+		if (cubeside == 'background'){
+			$('.maps-container').append('<div class="the-fucking-'+maptype+'-map" data-maptype="'+maptype+'"></div>');
+		} else {
+			this.mapsContainer.append('<div class="the-fucking-'+maptype+'-map cube-side cube-'+cubeside+'" data-maptype="'+maptype+'"></div>');
+		}
+		
 		var map = $('.the-fucking-'+maptype+'-map');
 		var maphtml = '';
-		map.css("width", globals.mapwidthpx+"px");
-		map.css("height", globals.mapheightpx+"px");
 		
 		switch (maptype) {
 			case 'forest':

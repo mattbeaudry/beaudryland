@@ -15,14 +15,12 @@
             <div class="panel-left">
 
                 <section>
-                
                     <h2>Canvas</h2>
 
                     <nav class="pixelpainter-nav">
                         <ul>
                             <li><a href="#" class="button-reset">Reset</a></li>
                             <li><a href="#" class="button-preview">Preview</a></li>
-                            <li><a href="#" class="button-saveitem">Save Item</a></li>
                         </ul>
                     </nav>
 

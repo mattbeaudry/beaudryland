@@ -101,8 +101,6 @@ export class Inventory {
 		var slot3type = $('.the-fucking-crafting-table > .slot-3').attr("data-blocktype");
 		var recipe = slot1type + slot2type + slot3type;
 
-		
-
 		switch (recipe) {
 			case "treeemptyempty": this.createCraftedItem("wood",3); break;
 			case "treetreeempty": this.createCraftedItem("wood",6); break;
@@ -111,7 +109,14 @@ export class Inventory {
 			case "rockrockwood": this.createCraftedItem("sword",1); break;
 			case "woodwoodrock": this.createCraftedItem("fire",10); break;
 			case "woodwoodwood": this.createCraftedItem("door",10); break;
+
 			case "treewoodwood": this.createCraftedItem("guitar",1); break;
+			case "treewoodsilver": this.createCraftedItem("piano",1); break;
+			case "treegoldgold": this.createCraftedItem("trumpet",1); break;
+			case "treediamonddiamond": this.createCraftedItem("bass",1); break;
+			case "treesilvergold": this.createCraftedItem("microphone",1); break;
+			case "palmtreepalmwoodpalmtree": this.createCraftedItem("drumsticks",1); break;
+
 			case "woodwooddiamond": this.createCraftedItem("frisbee",1); break;
 			case "treewooddiamond": this.createCraftedItem("bike",1); break;
 			case "treetreediamond": this.createCraftedItem("skiis",1); break;
@@ -122,21 +127,16 @@ export class Inventory {
 			case "icerockicerockicerock": this.createCraftedItem("icerockbrick",10); break;
 			case "sandstonesandstonesandstone": this.createCraftedItem("sandstonebrick",10); break;
 			case "clayclayclay": this.createCraftedItem("claybrick",10); break;
-			case "treewoodsilver": this.createCraftedItem("piano",1); break;
 			case "treetreesilver": this.createCraftedItem("spear",1); break;
 			case "woodwoodtree": this.createCraftedItem("sign",5); break;
 			case "rockrocktree": this.createCraftedItem("axe",1); break;
 			case "silveroilfire": this.createCraftedItem("rocket",1); break;
-
 			case "treepinetreetree": this.createCraftedItem("table",5); break;
 			case "pinetreewoodwood": this.createCraftedItem("chair",5); break;
 			case "pinetreepalmpinetree": this.createCraftedItem("bed",5); break;
 			case "woodpinetreewood": this.createCraftedItem("chest",5); break;
 			case "diamondsilvergold": this.createCraftedItem("telescope",1); break;
 			case "diamondsilverdiamond": this.createCraftedItem("computer",1); break;
-
-			case "palmtreepalmwoodpalmtree": this.createCraftedItem("drumsticks",3); break;
-
 			case "pinetreeemptyempty": this.createCraftedItem("pinewood",3); break;
 			case "pinetreepinetreeempty": this.createCraftedItem("pinewood",6); break;
 			case "pinetreepinetreepinetree": this.createCraftedItem("pinewood",10); break;
@@ -146,7 +146,6 @@ export class Inventory {
 			case "appletreeemptyempty": this.createCraftedItem("applewood",3); break;
 			case "appletreeappletreeempty": this.createCraftedItem("applewood",6); break;
 			case "appletreeappletreeappletree": this.createCraftedItem("applewood",10); break;
-
 			case "palmpalmwood": this.createCraftedItem("bow",1); break;
 			case "woodpalmpalm": this.createCraftedItem("arrow",1); break;
 			case "silversilversilver": this.createCraftedItem("portala",1); break;

@@ -64,6 +64,7 @@ input[type="text"] {
     height: 30px;
     background-color: #fff;
     display: inline-block;
+    border: solid 2px #000;
 }
 #itemsvg svg,
 #itemsvg-large svg {
@@ -132,5 +133,8 @@ input[type="text"] {
     width: 180px;
 }
 h1 {
-    text-align:center;
+    text-align: center;
+}
+section > h2 {
+    border-bottom: solid 4px #000;
 }

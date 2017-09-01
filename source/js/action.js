@@ -41,7 +41,7 @@ export class Action {
 		}
 		
 		//blUtil.log("4-hitblock "+block);
-		var blocktype = blUtil.getBlockType(block);
+		var blocktype = blUtil.getBlockType(block, currentMap);
 		//blUtil.log("5-blocktype "+blocktype);
 
 		//item swing animations
@@ -123,7 +123,7 @@ export class Action {
 				//throwSpear(block, direction);
 
 			//digging - forest map
-			} else if ( (blUtil.getSelectedItem() == "shovel") && ((blocktype == "grass") || (blocktype == "dirt")) ) {
+			} else if (blUtil.getSelectedItem() == "shovel" && blocktype == "grass" || blocktype == "dirt") {
 				blUtil.log("dig!");
 				//chance of digging a diamond
 				var r = Math.random();
@@ -138,7 +138,7 @@ export class Action {
 				//growGrass(block);
 
 			//digging - winter map
-			} else if ( blUtil.getSelectedItem() == "shovel" && ( blocktype == "snow" || blocktype == "frozendirt" || blocktype == "ice" ) ) {
+			} else if (blUtil.getSelectedItem() == "shovel" &&  blocktype == "snow" || blocktype == "frozendirt" || blocktype == "ice") {
 				var r = Math.random();
 				if (r < 0.2) {
 					blUtil.log("gold!");
@@ -154,7 +154,7 @@ export class Action {
 				//growGrass(block);
 
 			//digging - beach map
-			} else if ( blUtil.getSelectedItem() == "shovel" && ( blocktype == "sand" || blocktype == "wetsand" ) ) {
+			} else if (blUtil.getSelectedItem() == "shovel" && blocktype == "sand" || blocktype == "wetsand") {
 				//chance of digging gold
 				var r = Math.random();
 				if (r < 0.2) {
@@ -171,7 +171,7 @@ export class Action {
 				//growGrass(block);
 
 			//filling water/holes
-			} else if ( (blocktype == "hole") || (blocktype == "water") || (blocktype == "snowhole") || (blocktype == "wave") || (blocktype == "sandhole") ) {
+			} else if (blocktype == "hole" || blocktype == "water" || blocktype == "snowhole" || blocktype == "wave" || blocktype == "sandhole") {
 				if (selecteditem == "grass" ||
 					selecteditem == "dirt" ||
 					selecteditem == "frozendirt" ||
@@ -241,11 +241,11 @@ export class Action {
 			//picking up items & blocks	
 			} else if ($.inArray(blocktype, globals.iscollectable) > -1) {
 				var changeblocktotype = "grass";
-				if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "grass"; } 
-				else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "snow"; } 
-				else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "snow"; }
-				else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "sand"; }
-				else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "sand"; }
+				if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "dirt"; } 
+				else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "frozendirt"; } 
+				else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "frozendirt"; }
+				else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "wetsand"; }
+				else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "wetsand"; }
 				else if (blocktype == "carrot-inground") { blocktype = "carrot"; changeblocktotype = "dirt"; }
 
 				blInventory.addToInventory(blocktype, "5");

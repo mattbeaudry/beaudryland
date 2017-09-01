@@ -76,32 +76,61 @@ export class Story {
 
 	demolishMapBorder(map, side) {
 		blUtil.log('DEMOILISH FENCE: '+map+' + '+side);
+		var bgBlock;
+		var totalBlocks = globals.totalmapblocks;
+		var mapWidthBlocks = globals.mapwidth;
+
+		switch(map) {
+			case 'forest':
+				bgBlock = 'grass';
+				break;
+			case 'winter':
+				bgBlock = 'snow';
+				break;
+			case 'beach':
+				bgBlock = 'sand';
+				break;
+			case 'jungle':
+				bgBlock = 'pinetree';
+				break;
+			case 'desert':
+				bgBlock = 'sand';
+				break;
+			case 'islands':
+				bgBlock = 'water';
+				break;
+		}
+
 		switch(side) {
 			case 'right':
-				for (var i=0; i<globals.totalmapblocks; i++) {
-					if (i%globals.mapwidth == (globals.mapwidth-1)) {
-						blMap.changeBlockType(i, 'grass', map);
+				for (var i=0; i<totalBlocks; i++) {
+					if (i%mapWidthBlocks == mapWidthBlocks-1 
+						&& i != mapWidthBlocks-1 
+						&& i != totalBlocks-1) {
+						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;
 			case 'left':
-				for (var i=0; i<globals.totalmapblocks; i++) {
-					if (i%globals.mapwidth == 0) {
-						blMap.changeBlockType(i, 'tree', map);
+				for (var i=0; i<totalBlocks; i++) {
+					if (i%mapWidthBlocks == 0
+						&& i != 0
+						&& i != totalBlocks-mapWidthBlocks) {
+						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;
-			case 'up':
-				for (var i=0; i<globals.totalmapblocks; i++) {
-					if (i%globals.mapwidth == (globals.mapwidth-1)) {
-						blMap.changeBlockType(i, 'grass', map);
+			case 'top':
+				for (var i=0; i<totalBlocks; i++) {
+					if (i < mapWidthBlocks) {
+						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;
-			case 'down':
-				for (var i=0; i<globals.totalmapblocks; i++) {
-					if (i%globals.mapwidth == (globals.mapwidth-1)) {
-						blMap.changeBlockType(i, 'grass', map);
+			case 'bottom':
+				for (var i=0; i<totalBlocks; i++) {
+					if (i > totalBlocks-mapWidthBlocks-1) {
+						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;

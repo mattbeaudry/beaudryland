@@ -85,16 +85,28 @@ export class HCI {
 			if (globals.disablekeyboardevents == false && direction != '') {
 				switch (selecteditem) {
 					case "guitar":
-						blSound.playGuitar(880);
-						blAchievement.achievementCompleted("jammingout");
-						//unlock winter map
+						blSound.playSound(880);
+						blAchievement.achievementCompleted("playtheguitar");
 						break;
 					case "piano":
 						blSound.playSound(880);
-						//unlock beach map
+						blAchievement.achievementCompleted("playthekeys");
+						break;
+					case "trumpet":
+						blSound.playSound(880);
+						blAchievement.achievementCompleted("playthetrumpet");
+						break;
+					case "bass":
+						blSound.playSound(880);
+						blAchievement.achievementCompleted("playthebass");
 						break;
 					case "drumsticks":
 						blSound.playSound(880);
+						blAchievement.achievementCompleted("bringinthebeat");
+						break;
+					case "rocket":
+						blSound.playSound(880);
+						blAchievement.achievementCompleted("gotospace");
 						break;
 					case "bike":
 						//rideBike(direction);
@@ -246,7 +258,7 @@ export class HCI {
 
 		//SAVE THE MAPS AND PLAYER DATA
 		$('.link-savemap').on("mousedown", function() {
-			achievementCompleted("saveyourgame");
+			blAchievement.achievementCompleted("saveyourgame");
 			$('.link-savemap a').html('Saving');
 			var enableSaving = function() {
 				$('.link-savemap div').html('<a>Save</a>');

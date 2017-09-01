@@ -11,24 +11,98 @@ var blMap = new Map();
 export class Achievement {
 
 	constructor() {
-		this.guitarFirstNote = true;
+
 	}
 
 	achievementCompleted(achievementname) {
 		if (!$('.item-achievements .achievement-'+achievementname).hasClass('status-completed')) {
+
 			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
 			this.displayDialog("You got the "+achievementname+" achievement!");
+
 			switch (achievementname) {
-				case 'jammingout':
-					blUtil.log('Jam out!');
-					blStory.demolishMapBorder('forest', 'left');
-					if ((this.guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
-						this.guitarFirstNote = false; 
+				case 'playtheguitar':
+					if (globals.guitarFirstNote == true && $('.the-fucking-winter-map').length == 0) {
+						blUtil.log('Jam out!'); 
+						globals.guitarFirstNote = false;
+						blStory.demolishMapBorder('forest', 'right');
 						blMap.loadNewMap('winter', 'right'); 
 						blStory.createWinterSigns();
 						blStory.setupMapBorders('winter');
 						blStory.demolishMapBorder('winter', 'left');
 					}
+					break;
+				case 'playthekeys':
+					if (globals.keyboardFirstNote == true && $('.the-fucking-beach-map').length == 0) {
+						blUtil.log('Play keys!'); 
+						globals.keyboardFirstNote = false; 
+						blStory.demolishMapBorder('winter', 'right');
+						blMap.loadNewMap('beach', 'back'); 
+						blStory.createBeachSigns();
+						blStory.setupMapBorders('beach');
+						blStory.demolishMapBorder('beach', 'left');
+					}
+					break;
+				case 'playthetrumpet':
+					if (globals.trumpetFirstNote == true && $('.the-fucking-jungle-map').length == 0) {
+						blUtil.log('Play keys!'); 
+						globals.trumpetFirstNote = false; 
+						blStory.demolishMapBorder('beach', 'right');
+						blMap.loadNewMap('jungle', 'left'); 
+						//blStory.createJungleSigns();
+						blStory.setupMapBorders('jungle');
+						blStory.demolishMapBorder('jungle', 'left');
+						blStory.demolishMapBorder('jungle', 'right');
+						blStory.demolishMapBorder('forest', 'left');
+					}
+					break;
+				case 'playthebass':
+					if (globals.bassFirstNote == true && $('.the-fucking-desert-map').length == 0) {
+						blUtil.log('Play bass!'); 
+						globals.bassFirstNote = false; 
+						blStory.demolishMapBorder('forest', 'bottom');
+						blStory.demolishMapBorder('winter', 'bottom');
+						blStory.demolishMapBorder('beach', 'bottom');
+						blStory.demolishMapBorder('jungle', 'bottom');
+						blMap.loadNewMap('desert', 'bottom');
+						//blStory.createDesertSigns();
+					}
+					break;
+				case 'bringinthebeat':
+					if (globals.drumsFirstNote == true && $('.the-fucking-islands-map').length == 0) {
+						blUtil.log('Play drums!'); 
+						globals.drumsFirstNote = false; 
+						blStory.demolishMapBorder('forest', 'top');
+						blStory.demolishMapBorder('winter', 'top');
+						blStory.demolishMapBorder('beach', 'top');
+						blStory.demolishMapBorder('jungle', 'top');
+						blMap.loadNewMap('islands', 'top');
+						//blStory.createIslandsSigns();
+					}
+					break;
+				case 'gotospace':
+					if (globals.rocketFirstFlight == true && $('.the-fucking-space-map').length == 0) {
+						globals.rocketFirstFlight = false;
+						var object = $('.objectid-1');
+						var toMap = $('.the-fucking-space-map');
+
+						// create space map
+						blMap.loadNewMap('space', 'background');
+
+						// zoom out from cube
+						$('.maps-wrap').addClass('maps-zoomout');
+
+						// hide cube, show earth blocks
+						setTimeout(function(){ 
+							$('.maps-wrap').hide();
+							blMap.changeBlockType(209, 'earth', 'space');
+							// move player to space
+							object.detach();
+							$('.the-fucking-space-map').append(object);
+							blUtil.teleportObjectToBlock(1, 'space', 210);
+						}, 2000);
+					}
+
 					break;
 			}
 
@@ -36,9 +110,7 @@ export class Achievement {
 	}
 
 	displayDialog(text) {
-
-		console.log("displayDialog");
-
+		blUtil.log("displayDialog");
 		var html = '<div class="bubble-wrap bubble-dialog">';
 					html += '<div class="bubble-link">';
 			  			html += '<form class="bubble-form" action="#">';
