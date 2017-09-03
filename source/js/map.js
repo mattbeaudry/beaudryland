@@ -329,7 +329,16 @@ export class Map {
 			function() {
 				$('.cube-container').removeClass("map-view-perspective");
 			}, 
-		30000);
+		10000);
+	}
+
+	hallucinate() {
+		$('body').addClass("mushrooms");
+		setTimeout(
+			function() {
+				$('body').removeClass("mushrooms");
+			}, 
+		10000);
 	}
 
 };

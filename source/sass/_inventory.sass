@@ -1,0 +1,92 @@
+/* INVENTORY */
+
+.sticky-inventory 
+	position: fixed
+	width: 800px
+	top: 0
+	background-color: rgba(255,255,255,0.9)
+	padding: 5px 5px 0 5px
+	/*border-bottom: solid 1px #ddd*/
+ 
+.the-fucking-inventory 
+	color: white
+	margin: 3px auto
+	background-color: transparent
+ 
+.the-fucking-inventory-collapsed 
+	max-height: 0px
+	overflow: hidden
+ 
+.the-fucking-inventory > div,
+.the-fucking-crafting-table > div,
+.the-fucking-crafted-item > div 
+	padding-top: 10px
+	text-align: center
+	user-select: none
+	cursor: pointer
+ 
+.the-fucking-inventory > .empty,
+.the-fucking-crafting-table > .empty,
+.the-fucking-crafted-item > .empty 
+	cursor: default
+	background-color: transparent
+	color: transparent
+ 
+.the-fucking-inventory > div 
+	border: solid 2px transparent
+	float: left
+	width: 28px !important
+	padding-top: 24px
+	color: #999
+	background-color: transparent
+	margin-bottom: 15px
+	margin-right: 3px
+	font-family: "Press Start 2P", helvetica, verdana
+	font-size: 8px
+	line-height: 1.8
+ 
+.the-fucking-inventory > div:hover 
+	border: dashed 2px #000
+ 
+.the-fucking-inventory .empty 
+	display: none
+ 
+.the-fucking-inventory .selected-item 
+	border: dashed 2px #000
+ 
+
+/* THE CRAFTING TABLE */
+
+.crafting-table-wrap 
+	text-align: center
+ 
+	.the-fucking-crafting-table 
+		display: inline-block
+		color: white
+		margin-right: 5px
+		border: solid 2px black
+	 
+	.the-fucking-crafted-item 
+		display: inline-block
+		// width: 44px
+		// height: 44px
+		color: white
+		border: solid 2px black
+	 
+	.the-fucking-crafting-table > div,
+	.the-fucking-crafted-item > div 
+		width: 40px
+		height: 40px
+		background-size: contain !important
+	 
+	.the-fucking-crafting-table > .slot-1  
+		border-right: 0px 
+		margin-bottom: 0px  
+
+	.the-fucking-crafting-table > .slot-2  
+		border-left: 0px 
+		border-right: 0px
+		margin-bottom: 0px  
+
+	.the-fucking-crafting-table > .slot-3  
+		border-left: 0px  

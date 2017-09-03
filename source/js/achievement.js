@@ -175,4 +175,19 @@ export class Achievement {
 	completeAchievement = function(achievement) {};
 	*/
 
+	// hunt 10 animals
+	// kill 10 enemies
+	// create all items
+	// unlock all maps
+	// build a house
+	// build a road
+	// ride a bike
+	// canoe
+	// skiing
+	// drive a car
+	// astronaut
+	// groceries - get all types of food
+	// fisherman
+	// scientist - build all tech items
+
 }

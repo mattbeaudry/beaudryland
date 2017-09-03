@@ -1080,14 +1080,6 @@ mapPerspective = function() {
 		}, 
 	30000);
 };
-hallucinate = function() {
-	$('body').addClass("mushrooms");
-	setTimeout(
-		function() {
-			$('body').removeClass("mushrooms");
-		}, 
-	10000);
-};
 refillHearts = function() {
 	$('.the-fucking-hearts ul .empty').removeClass();
 	setObjectHealth(1,totalhearts);

@@ -73,7 +73,7 @@ export class HCI {
 				// break;
 				// case 68: // D
 				// break;
-				// case 69: // E
+				// case 69: // El
 				// break;
 				// case 70: // F
 				// break;
@@ -87,26 +87,32 @@ export class HCI {
 					case "guitar":
 						blSound.playSound(880);
 						blAchievement.achievementCompleted("playtheguitar");
+						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "piano":
 						blSound.playSound(880);
 						blAchievement.achievementCompleted("playthekeys");
+						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "trumpet":
 						blSound.playSound(880);
 						blAchievement.achievementCompleted("playthetrumpet");
+						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "bass":
 						blSound.playSound(880);
 						blAchievement.achievementCompleted("playthebass");
+						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "drumsticks":
 						blSound.playSound(880);
 						blAchievement.achievementCompleted("bringinthebeat");
+						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "rocket":
 						blSound.playSound(880);
 						blAchievement.achievementCompleted("gotospace");
+						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "bike":
 						//rideBike(direction);

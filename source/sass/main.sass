@@ -73,8 +73,8 @@ body.theme-black
 	position: relative
 	width: $mapWidthPX
 	height: $mapHeightPX
+	margin: 0px auto
 	perspective: 8000px
-	margin-top: 300px
 	background-color: #000
 
 .cube 
@@ -241,7 +241,16 @@ hr:before
  
 .horizonal-spacing 
 	margin-bottom: 10px
- 
+
+.d-flex
+	display: flex
+
+.align-items-center
+	align-items: center
+
+.justify-content-between
+	justify-content: space-between
+
 
 /* THE WEBSITE */
 
@@ -296,50 +305,6 @@ hr:before
 .page-game .the-fucking-header 
 	padding-top: 160px
  
-.the-fucking-navigation 
-	margin-top: 5px
- 
-.beaudryland-nav 
-	> ul 
-		list-style: none
-		padding: 0
-		margin: 0
-		text-align: center
-
-	li 
-		display: inline-block
-		margin: 0 10px 15px 10px
- 
-.link-savemap 
-	float: left
-	margin-left: 0
-	padding-left: 0
- 
-.link-logout 
-	float: right
-	margin-right: 0
- 
-.nav-extra 
-	display: none
-
-.nav-username 
-	display: block
-	position: absolute
-	z-index: -1
-	text-align: center
-	width: 100%
-	color: #999
-	font-family: "Press Start 2P", sans-serif
-	font-weight: normal
-	font-size: 1.4em
-	line-height: 1.3
-	text-transform: uppercase
-	text-decoration: none
-	margin: 10px 0 0 15px
-	// max-width: 120px
-	// overflow: hidden
-	// text-overflow: ellipsis
-
 .button-wrap, 
 .button-wrap a 
 	background-color: #000
@@ -366,7 +331,6 @@ hr:before
 		margin-top: -5px
 		padding-top: 12px
  
- 
 .button-wrap-large 
 	width: 200px
 
@@ -378,7 +342,6 @@ hr:before
 
 	a 
 		background-color: #666
- 
  
 .button-wrap-left 
 	float: left
@@ -392,22 +355,6 @@ hr:before
 
 .button-wrap a:active
 	background-color: #777  
-
-.nav-buttons 
-	float: right
-	margin-top: 5px
-
-	ul 
-		list-style: none
-		margin: 0
-		padding: 0
-
-		li 
-			display: inline-block
- 
-.nav-toggle-inventory 
- 
-.nav-toggle-menu 
  
 .button-black 
 	position: relative
@@ -451,13 +398,14 @@ hr:before
 		bottom: -5px
 		left: 5%
  
- 
 .pixel-corners 
 	position: relative
 	background-color: #000
 	text-align: center
 	color: #fff
 	padding: 0px 5px
+	margin-top: 8px
+	margin-bottom: 8px
 
 	&:before 
 		display: block
@@ -483,34 +431,7 @@ hr:before
 		background-color: #ddd
  
 
-.the-fucking-gameinfo 
-	width: 100%
-	margin: 0 auto
- 
-.the-fucking-gameinfo section 
-	margin: 40px 0
- 
-.the-fucking-gameinfo article 
-	margin: 60px 0
- 
-.the-fucking-gameinfo 
-	h2 
-		text-align: center
-		margin-top: 60px
-		font-size: 2em
-	 
-	h3 
 
-.the-fucking-gameinfo h3 a 
-	color: #000
- 
-.the-fucking-gameinfo ul 
-	list-style-position: inside
-	list-style-type: square
-	padding: 0
- 
-.the-fucking-gameinfo .recent-updates 
-	margin-bottom: 80px
  
 .banner-beaudryland 
 	background-color: #eee
@@ -559,22 +480,6 @@ hr:before
 .maptype label 
 	cursor: pointer
  
-.link-savemap 
-	padding: 0 5px
-	text-decoration: underline
- 
-.link-savemap a, 
-.link-savemap a:hover 
-	color: #00cc00
-	cursor: pointer
- 
-.link-logout a, 
-.link-logout a:hover 
-	color: #cc0000
- 
-.on-savemap-mobile a 
-	color: #00cc00
- 
 .the-fucking-login input 
 	border: solid 1px #ddd
 	padding: 10px 12px
@@ -608,232 +513,6 @@ hr:before
 .mapnav 
 	margin: 10px auto
 	text-align: center
- 
-.item-formulas 
-	list-style: none
-	padding: 0px
- 
-.item-formulas > li 
-	margin-bottom: 15px
-	background-color: #eee
-	border: solid 5px #ddd
-	padding: 20px
-	list-style: none
-	width: 30%
-	margin-right: 2%
-	margin-bottom: 6%
-	/* float: left */
-	/* min-height: 280px */
-	display: inline-block
-	vertical-align: top
- 
-.item-formulas h3 
-	margin-top: 0
- 
-.item-formulas ul 
-	margin-bottom: 0
-	list-style-type: square
- 
-.item-formulas li img 
-	width: 30px
-	height: 30px
- 
-.dev-console 
-	list-style: none
-	padding: 0
-
-	li 
-		display: inline-block
-
-		a 
-			display: inline-block
-			color: #fff
-			background-color: #999
-			text-decoration: none
-			font-family: "Press Start 2P", sans-serif
-			font-weight: normal
-			font-size: 10px
-			line-height: 1em
-			text-transform: uppercase
-			padding: 7px 10px 5px
-			margin: 0 5px 5px 0
-
-			&:hover 
-				background-color: #000
- 
-.item-achievements 
-	list-style: none
-	padding: 0
-
-	li 
-		background-color: #eee
-		padding: 10px 20px
-		margin: 0 2% 3.33333333% 0
-		width: 30%
-		/* float: left */
-		display: inline-block
-		vertical-align: top
-		border: solid 5px #ccc
- 
-		&.status-completed 
-			color: #000
-			border: solid 5px $grass-green
-
-
-/* THE PLAYER */
-
-.the-fucking-player 
-	width: 20px
-	height: 20px
-	position: relative
-	left: 300px
-	top: 300px
-	background: url(../img/player-down.png) no-repeat
-	background-size: contain !important
- 
-.player-direction-up  
-	background: url(../img/player-up.png) no-repeat  
-
-.player-direction-down  
-	background: url(../img/player-down.png) no-repeat 
-
-.player-direction-left  
-	background: url(../img/player-left.png) no-repeat  
-
-.player-direction-right  
-	background: url(../img/player-right.png) no-repeat  
-
-.player-direction-up-sword  
-	background: url(../img/player-up-sword.png) no-repeat  
-
-.player-direction-down-sword  
-	background: url(../img/player-down-sword.png) no-repeat 
-
-.player-direction-left-sword  
-	background: url(../img/player-left-sword.png) no-repeat  
-
-.player-direction-right-sword  
-	background: url(../img/player-right-sword.png) no-repeat  
-
-.player-direction-up-sword-swing  
-	background: url(../img/player-up-sword-swing.png) no-repeat 
-
-.player-direction-down-sword-swing  
-	background: url(../img/player-down-sword-swing.png) no-repeat 
-
-.player-direction-left-sword-swing  
-	background: url(../img/player-left-sword-swing.png) no-repeat 
-
-.player-direction-right-sword-swing  
-	background: url(../img/player-right-sword-swing.png) no-repeat  
-
-.player-direction-up-shovel  
-	background: url(../img/player-up-shovel.png) no-repeat  
-
-.player-direction-down-shovel  
-	background: url(../img/player-down-shovel.png) no-repeat 
-
-.player-direction-left-shovel  
-	background: url(../img/player-left-shovel.png) no-repeat 
-
-.player-direction-right-shovel  
-	background: url(../img/player-right-shovel.png) no-repeat  
-
-.player-direction-up-shovel-swing  
-	background: url(../img/player-up-shovel-swing.png) no-repeat  
-
-.player-direction-down-shovel-swing  
-	background: url(../img/player-down-shovel-swing.png) no-repeat 
-
-.player-direction-left-shovel-swing  
-	background: url(../img/player-left-shovel-swing.png) no-repeat  
-
-.player-direction-right-shovel-swing  
-	background: url(../img/player-right-shovel-swing.png) no-repeat  
-
-.player-direction-up-axe  
-	background: url(../img/player-up-axe.png) no-repeat  
-
-.player-direction-down-axe  
-	background: url(../img/player-down-axe.png) no-repeat 
-
-.player-direction-left-axe  
-	background: url(../img/player-left-axe.png) no-repeat 
-
-.player-direction-right-axe  
-	background: url(../img/player-right-axe.png) no-repeat  
-
-.player-direction-up-axe-swing  
-	background: url(../img/player-up-axe-swing.png) no-repeat  
-
-.player-direction-down-axe-swing  
-	background: url(../img/player-down-axe-swing.png) no-repeat 
-
-.player-direction-left-axe-swing  
-	background: url(../img/player-left-axe-swing.png) no-repeat 
-
-.player-direction-right-axe-swing  
-	background: url(../img/player-right-axe-swing.png) no-repeat  
-
-.player-direction-up-bike  
-	background: url(../img/player-up-bike.png) no-repeat  
-
-.player-direction-down-bike  
-	background: url(../img/player-down-bike.png) no-repeat 
-
-.player-direction-left-bike  
-	background: url(../img/player-left-bike.png) no-repeat  
-
-.player-direction-right-bike  
-	background: url(../img/player-right-bike.png) no-repeat  
-
-.player-direction-up-skiis  
-	background: url(../img/player-up-skiis.png) no-repeat 
-
-.player-direction-down-skiis  
-	background: url(../img/player-down-skiis.png) no-repeat 
-
-.player-direction-left-skiis  
-	background: url(../img/player-left-skiis.png) no-repeat 
-
-.player-direction-right-skiis  
-	background: url(../img/player-right-skiis.png) no-repeat  
-
-.player-direction-up-canoe  
-	background: url(../img/player-up-canoe.png) no-repeat 
-
-.player-direction-down-canoe  
-	background: url(../img/player-down-canoe.png) no-repeat 
-
-.player-direction-left-canoe  
-	background: url(../img/player-left-canoe.png) no-repeat 
-
-.player-direction-right-canoe  
-	background: url(../img/player-right-canoe.png) no-repeat  
-
-.player-direction-up-car  
-	background: url(../img/player-up-car.png) no-repeat  
-
-.player-direction-down-car  
-	background: url(../img/player-down-car.png) no-repeat 
-
-.player-direction-left-car  
-	background: url(../img/player-left-car.png) no-repeat  
-
-.player-direction-right-car  
-	background: url(../img/player-right-car.png) no-repeat  
-
-.player-direction-up-rocket  
-	background: url(../img/player-up-rocket.png) no-repeat  
-
-.player-direction-down-rocket  
-	background: url(../img/player-down-rocket.png) no-repeat  
-
-.player-direction-left-rocket  
-	background: url(../img/player-left-rocket.png) no-repeat  
-
-.player-direction-right-rocket  
-	background: url(../img/player-right-rocket.png) no-repeat  
 
 
 /* TEXT BUBBLES */
@@ -1005,100 +684,6 @@ hr:before
  
 .deer-direction-right 
 	background: url(../img/deer-right.png) no-repeat
-
-
-/* INVENTORY */
-
-.sticky-inventory 
-	position: fixed
-	width: 800px
-	top: 0
-	background-color: rgba(255,255,255,0.9)
-	padding: 5px 5px 0 5px
-	/*border-bottom: solid 1px #ddd*/
- 
-.the-fucking-inventory 
-	color: white
-	margin: 3px auto
-	background-color: transparent
- 
-.the-fucking-inventory-collapsed 
-	max-height: 40px
-	overflow: hidden
- 
-.the-fucking-inventory > div,
-.the-fucking-crafting-table > div,
-.the-fucking-crafted-item > div 
-	padding-top: 10px
-	text-align: center
-	user-select: none
-	cursor: pointer
- 
-.the-fucking-inventory > .empty,
-.the-fucking-crafting-table > .empty,
-.the-fucking-crafted-item > .empty 
-	cursor: default
-	background-color: transparent
-	color: transparent
- 
-.the-fucking-inventory > div 
-	border: solid 2px transparent
-	float: left
-	width: 28px !important
-	padding-top: 24px
-	color: #999
-	background-color: transparent
-	margin-bottom: 15px
-	margin-right: 3px
-	font-family: "Press Start 2P", helvetica, verdana
-	font-size: 8px
-	line-height: 1.8
- 
-.the-fucking-inventory > div:hover 
-	border: dashed 2px #000
- 
-.the-fucking-inventory .empty 
-	display: none
- 
-.the-fucking-inventory .selected-item 
-	border: dashed 2px #000
- 
-
-/* THE CRAFTING TABLE */
-
-.crafting-table-wrap 
- 
-	.the-fucking-crafting-table 
-		float: left
-		color: white
-		margin-right: 5px
-		border: solid 2px black
-	 
-	.the-fucking-crafted-item 
-		float: left
-		// width: 44px
-		// height: 44px
-		color: white
-		border: solid 2px black
-	 
-	.the-fucking-crafting-table > div,
-	.the-fucking-crafted-item > div 
-		width: 40px
-		height: 40px
-		float: left
-		background-size: contain !important
-	 
-	.the-fucking-crafting-table > .slot-1  
-		border-right: 0px 
-		margin-bottom: 0px  
-
-	.the-fucking-crafting-table > .slot-2  
-		border-left: 0px 
-		border-right: 0px
-		margin-bottom: 0px  
-
-	.the-fucking-crafting-table > .slot-3  
-		border-left: 0px  
 
 
 /* CONTROLLER */
@@ -1313,5 +898,7 @@ hr:before
 	padding: 0
 	border: 0
 
-
 @import blocks
+@import navigation
+@import inventory
+@import player
