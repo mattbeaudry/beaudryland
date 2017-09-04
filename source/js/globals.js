@@ -28,6 +28,11 @@ export var bassFirstNote = true;
 export var drumsFirstNote = true;
 export var rocketFirstFlight = true;
 
+export const WEBDB_shortName = 'beaudryland';
+export const WEBDB_version = '0.1';
+export const WEBDB_displayName = 'beaudryland';
+export const WEBDB_maxSize = 65536;
+
 export const mobtypes = new Array (
 	/*players*/		"player",
 	/*enemies*/		"enemy",

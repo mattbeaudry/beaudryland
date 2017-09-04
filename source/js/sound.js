@@ -6,6 +6,9 @@ export class Sound {
 		this.guitarFirstNote = true;
 		this.keyboardFirstNote = true;
 		this.drumsFirstNote = true;
+		var AudioContext = window.AudioContext // Default
+    	|| window.webkitAudioContext // Safari and old versions of Chrome
+    	|| false; 
 		this.sound = new AudioContext;
 	}
 

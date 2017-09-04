@@ -8,7 +8,8 @@ module.exports = {
     entry: "./app.js",
     output: {
         path: __dirname + "/build/js",
-        filename: "app-bundle.js"    },
+        filename: "app-bundle.js"
+    },
     module: {
     	rules: [
     		{

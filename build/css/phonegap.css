@@ -17,15 +17,23 @@
 .beaudryland-nav .button-wrap-large a {
   width: 282px;
 }
-.maps-wrap {
-  padding-top: 54px;
+.tab-game {
+  margin-top: 88px;
 }
-.the-fucking-forest-map,
-.the-fucking-winter-map,
-.the-fucking-beach-map {
+.maps-wrap {
+
+}
+.maps-wrap .the-fucking-forest-map,
+.maps-wrap .maps-wrap .the-fucking-winter-map,
+.maps-wrap .maps-wrap .maps-wrap .the-fucking-beach-map,
+.maps-wrap .the-fucking-jungle-map,
+.maps-wrap .the-fucking-desert-map,
+.maps-wrap .the-fucking-islands-map,
+.cube,
+.cube-side, 
+.maps-container {
   width: 320px;
-  height: auto;
-  margin: 0px auto;
+  height: 320px;
 }
 .sticky-inventory {
   position: fixed;

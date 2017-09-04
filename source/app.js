@@ -1,7 +1,6 @@
 import './sass/main.sass';
 import * as globals from './js/globals';
 import * as blNavigation from './js/navigation';
-import * as mobile from './js/mobile';
 
 import { Utility } from './js/utility';
 import { Inventory } from './js/inventory';
@@ -15,6 +14,7 @@ import { Health } from './js/health';
 import { Dev } from './js/dev';
 import { HCI } from './js/hci';
 import { Achievement } from './js/achievement';
+import { Mobile } from './js/mobile';
 
 var blUtil = new Utility();
 var blInventory = new Inventory();
@@ -28,6 +28,7 @@ var blHealth = new Health();
 var blDev = new Dev();
 var blHCI = new HCI();
 var blAchievement = new Achievement();
+var blMobile = new Mobile();
 
 blNavigation.initializeNavigation();
 blInventory.setupInventorySlots();
@@ -35,15 +36,8 @@ blInventory.setupInventorySlots();
 // PHONEGAP / MOBILE ONLY
 if ( $('body').hasClass("version-phonegap") ) {
 
-	mobile.initializeMobile();
 	globals.mapwidth = 16;
-	globals.mapheight = 75;
-
-	// This function here is used to write out any errors I get to the console.
-	function errorHandler(transaction, error) {
-		console.log('Oops. Error was '+error.message+' (Code '+error.code+')');
-		return true;
-	}
+	globals.mapheight = 16;
 	
 	$('.inventory-close').on("click", function() { toggleInventory(); });
 	var toggleInventory = function() { $('.sticky-inventory').fadeToggle(0); }; 
@@ -53,12 +47,16 @@ if ( $('body').hasClass("version-phonegap") ) {
 		console.log("MOBILE VERSION");
 
 		blMap.setupMap();
-	    blMap.loadNewMap();
+	    blMap.loadNewMap('forest', 'front');
 	    blPlayer.createPlayer();
 
-		mobile.websql_openDatabase();
-		mobile.websql_createTable();
-		mobile.loadGameMobile();
+		blMobile.websql_openDatabase();
+		blMobile.websql_createTable();
+		blMobile.loadGameMobile();
+
+		blStory.createForestSigns();
+    	//blAnimal.createAnimal();
+    	blStory.setupMapBorders('forest');
 
 		blHCI.setupKeyboardEvents();
 		blHCI.setupMouseEvents();
