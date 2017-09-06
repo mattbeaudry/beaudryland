@@ -147,43 +147,62 @@ export class HCI {
 
 	setupControlPadEvents() {
 		blUtil.log("Control Pad Events");
-		var selecteditem;
-		//alert(selecteditem);
+		var controlMove = function (direction) {
+			var selecteditem = blUtil.getSelectedItem();
+			blUtil.log("Control Pad "+direction+" with "+selecteditem);
+			switch (selecteditem) {
+				case "guitar":
+					blSound.playSound(880);
+					blAchievement.achievementCompleted("playtheguitar");
+					blMovement.moveObject(direction, 1, "player");
+					break;
+				case "piano":
+					blSound.playSound(880);
+					blAchievement.achievementCompleted("playthekeys");
+					blMovement.moveObject(direction, 1, "player");
+					break;
+				case "trumpet":
+					blSound.playSound(880);
+					blAchievement.achievementCompleted("playthetrumpet");
+					blMovement.moveObject(direction, 1, "player");
+					break;
+				case "bass":
+					blSound.playSound(880);
+					blAchievement.achievementCompleted("playthebass");
+					blMovement.moveObject(direction, 1, "player");
+					break;
+				case "drumsticks":
+					blSound.playSound(880);
+					blAchievement.achievementCompleted("bringinthebeat");
+					blMovement.moveObject(direction, 1, "player");
+					break;
+				case "rocket":
+					blSound.playSound(880);
+					blAchievement.achievementCompleted("gotospace");
+					blMovement.moveObject(direction, 1, "player");
+					break;
+				case "bike":
+					//rideBike(direction);
+					break;
+				case "skiis":
+					//rideSkiis(direction);
+					break;
+				default:
+					blMovement.moveObject(direction, 1, "player");
+					break;
+			}
+		};
 		$('.btn-up').on("touchstart", function() { 
-			selecteditem = blUtil.getSelectedItem();
-			if (selecteditem == "guitar") { playSound(1320); } 
-			else if (selecteditem == "piano") { playPiano(1320); } 
-			else if (selecteditem == "drumsticks") { playDrums(1320); }
-			else if (selecteditem == "bike") { rideBike("up"); } 
-			else if (selecteditem == "skiis") { rideSkiis("up"); }
-			else { blMovement.moveObject("up", 1, "player"); }
+			controlMove('up');
 		});
 		$('.btn-down').on("touchstart", function() { 
-			selecteditem = blUtil.getSelectedItem();
-			if (selecteditem == "guitar") { playSound(660); } 
-			else if (selecteditem == "piano") { playPiano(660); } 
-			else if (selecteditem == "drumsticks") { playDrums(660); }
-			else if (selecteditem == "bike") { rideBike("down"); } 
-			else if (selecteditem == "skiis") { rideSkiis("down"); }
-			else { blMovement.moveObject("down", 1, "player"); } 
+			controlMove('down');
 		});
 		$('.btn-left').on("touchstart", function() { 
-			selecteditem = blUtil.getSelectedItem();
-			if (selecteditem == "guitar") { playSound(880); } 
-			else if (selecteditem == "piano") { playPiano(880); } 
-			else if (selecteditem == "drumsticks") { playDrums(880); }
-			else if (selecteditem == "bike") { rideBike("left"); } 
-			else if (selecteditem == "skiis") { rideSkiis("left"); }
-			else { blMovement.moveObject("left", 1, "player"); }
+			controlMove('left');
 		});
 		$('.btn-right').on("touchstart", function() { 
-			selecteditem = blUtil.getSelectedItem();
-			if (selecteditem == "guitar") { playSound(1100); } 
-			else if (selecteditem == "piano") { playPiano(1100); } 
-			else if (selecteditem == "drumsticks") { playDrums(1100); }
-			else if (selecteditem == "bike") { rideBike("right"); } 
-			else if (selecteditem == "skiis") { rideSkiis("right"); }
-			else { blMovement.moveObject("right", 1, "player"); }
+			controlMove('right');
 		});
 		$('.btn-a').on("touchstart", function() { 
 			blAction.playerPrimaryAction(); 
