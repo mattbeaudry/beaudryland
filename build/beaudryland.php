@@ -65,6 +65,7 @@
 			<div class="tab tab-navigation" data-tab="tab-navigation">
 				<div class="the-fucking-navigation clearfix">
 					<nav class="beaudryland-nav">
+						<h2>Game info</h2>
 						<ul>
 							<li class="link-help">
 								<div class="button-wrap">
@@ -82,6 +83,7 @@
 								</div>
 							</li>
 						</ul>
+						<h2>Extras</h2>
 						<ul class="nav-extra">
 							<li class="link-mapeditor">
 								<div class="button-wrap button-wrap-large button-wrap-outline">

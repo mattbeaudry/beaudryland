@@ -68,25 +68,68 @@
 	 
 	.the-fucking-crafted-item 
 		display: inline-block
-		// width: 44px
-		// height: 44px
 		color: white
 		border: solid 2px black
+		margin-left: 50px
+
+		.slot
+			&:before
+				content: "="
+				display: inline-block
+				font-family: "Press Start 2P", helvetica, verdana
+				font-size: 24px
+				color: #000
+				position: absolute
+				left: -55px
+				top: 5px
 	 
 	.the-fucking-crafting-table > div,
 	.the-fucking-crafted-item > div 
+		position: relative
 		width: 40px
 		height: 40px
 		background-size: contain !important
+		margin: 8px
+		background-color: #fff
+		color: #fff
+		font-size: 16px
+		padding-top: 8px
+		font-family: "Press Start 2P", helvetica, verdana
+
+		&.empty
+			background-color: #696969
+			color: transparent
 	 
 	.the-fucking-crafting-table > .slot-1  
 		border-right: 0px 
-		margin-bottom: 0px  
+		margin-bottom: 0px
+		margin-right: 40px
+
+		&:after
+			content: "+"
+			display: inline-block
+			font-family: "Press Start 2P", helvetica, verdana
+			font-size: 24px
+			color: #fff
+			position: absolute
+			left: 52px
+			top: 5px
 
 	.the-fucking-crafting-table > .slot-2  
 		border-left: 0px 
 		border-right: 0px
-		margin-bottom: 0px  
+		margin-bottom: 0px
+		margin-right: 40px
+
+		&:after
+			content: "+"
+			display: inline-block
+			font-family: "Press Start 2P", helvetica, verdana
+			font-size: 24px
+			color: #fff
+			position: absolute
+			left: 52px
+			top: 5px
 
 	.the-fucking-crafting-table > .slot-3  
 		border-left: 0px  

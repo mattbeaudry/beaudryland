@@ -219,10 +219,8 @@
 		</div>
         
         <script src="js/vendor/jquery-2.1.1.js"></script>
-        <script src="js/vendor/jquery.color.js"></script>
         <script src="js/vendor/raphael-min.js"></script>
         <script src="js/plugins.js"></script>
-        <!--<script src="js/beaudryland.js"></script>-->
     
 <script>
 
