@@ -98,6 +98,16 @@
 									<a target="_blank" href="mapeditor.php">Map Editor ></a>
 								</div>
 							</li>
+							<li class="link-synth">
+								<div class="button-wrap button-wrap-large button-wrap-outline">
+									<a target="_blank" href="beaudryland-synth.php">Synth ></a>
+								</div>
+							</li>
+							<li class="link-pong">
+								<div class="button-wrap button-wrap-large button-wrap-outline">
+									<a target="_blank" href="beaudryland-pong.php">Pong ></a>
+								</div>
+							</li>
 						</ul>
 					</nav>
 				</div>
