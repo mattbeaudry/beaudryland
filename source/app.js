@@ -56,7 +56,18 @@ if ( $('body').hasClass("version-phonegap") ) {
 
 		blStory.createForestSigns();
     	//blAnimal.createAnimal();
-    	blStory.setupMapBorders('forest');
+    	//blStory.setupMapBorders('forest');
+
+    	blMap.loadNewMap('winter', 'right');
+    	blMap.loadNewMap('beach', 'back');
+    	blMap.loadNewMap('jungle', 'left');
+    	blMap.loadNewMap('desert', 'bottom');
+    	blMap.loadNewMap('islands', 'top');
+	    blStory.createForestSigns();
+	    blStory.createWinterSigns();
+	    blStory.createBeachSigns();
+	    blDev.getAllItems();
+
 
 		blHCI.setupKeyboardEvents();
 		blHCI.setupMouseEvents();

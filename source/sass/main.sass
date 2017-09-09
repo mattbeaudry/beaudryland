@@ -1,18 +1,7 @@
 @import url('http://fonts.googleapis.com/css?family=Press+Start+2P')
 
-$gridunitpx: 20px
-$mapWidthBlocks: 20
-$mapHeightBlocks: 20
-$mapWidthPX: $mapWidthBlocks * $gridunitpx
-$mapHeightPX: $mapHeightBlocks * $gridunitpx
-$mapHalfWidthPX: $mapWidthPX / 2
-$mapPerspectivePX: $mapWidthPX - 100
+@import variables
 
-$white: #fff
-$black: #000
-$grass-green: #36ac2a
-$snow-white: #f5fdff
-$sand: #d9cfa2
 
 /* DARK THEME */
 
@@ -90,22 +79,22 @@ body.theme-black
 	height: $mapHeightPX
 
 .cube-front 
-	transform: rotateY(0deg) translateZ($mapWidthPX/2)
+	transform: rotateY(0deg) translateZ($mapHalfWidthPX)
 
 .cube-right 
-	transform: rotateY(90deg) translateZ($mapWidthPX/2) 
+	transform: rotateY(90deg) translateZ($mapHalfWidthPX) 
 
 .cube-back 
-	transform: rotateY(-180deg) translateZ($mapWidthPX/2)
+	transform: rotateY(-180deg) translateZ($mapHalfWidthPX)
 
 .cube-left 
-	transform: rotateY(-90deg) translateZ($mapWidthPX/2) 
+	transform: rotateY(-90deg) translateZ($mapHalfWidthPX) 
 
 .cube-bottom 
-	transform: rotateX(-90deg) translateZ($mapWidthPX/2) 
+	transform: rotateX(-90deg) translateZ($mapHalfWidthPX) 
 
 .cube-top 
-	transform: rotateX(90deg) translateZ($mapWidthPX/2)
+	transform: rotateX(90deg) translateZ($mapHalfWidthPX)
 
 .cube-show-front 
 	transform: translateZ(-$mapWidthPX) rotateY(0deg)
@@ -902,3 +891,4 @@ hr:before
 @import navigation
 @import inventory
 @import player
+@import phonegap

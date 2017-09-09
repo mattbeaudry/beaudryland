@@ -258,7 +258,7 @@ export class HCI {
 			var blocktype = $(this).attr('data-blocktype');
 			if (blocktype != "empty") {
 				blUtil.log("crafting slot not empty");
-				$(this).removeClass("block block-"+blocktype);
+				$(this).removeClass("block-"+blocktype);
 				$(this).addClass("empty");
 				$(this).attr('data-blocktype', "empty");
 				$(this).html("0");

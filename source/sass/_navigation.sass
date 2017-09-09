@@ -11,17 +11,6 @@
 	li 
 		display: inline-block
 
-.link-savemap 
-	margin-left: 0
-	padding-left: 0
-
-.link-logout 
-	float: right
-	margin-right: 0
-
-.nav-extra 
-	display: none
-
 .nav-username 
 	display: block
 	color: #999
@@ -47,51 +36,38 @@
 
 		li 
 			display: inline-block
- 
-.nav-toggle-inventory 
- 
-.nav-toggle-menu 
 
 .the-fucking-gameinfo 
 	width: 100%
 	margin: 0 auto
  
-.the-fucking-gameinfo section 
-	margin: 40px 0
+	section 
+		margin: 40px 0
  
-.the-fucking-gameinfo article 
-	margin: 60px 0
- 
-.the-fucking-gameinfo 
+	article 
+		margin: 60px 0
+
 	h2 
 		text-align: center
 		margin-top: 60px
 		font-size: 2em
 	 
 	h3 
-
-.the-fucking-gameinfo h3 a 
-	color: #000
+		a 
+			color: #000
  
-.the-fucking-gameinfo ul 
-	list-style-position: inside
-	list-style-type: square
-	padding: 0
+	ul 
+		list-style-position: inside
+		list-style-type: square
+		padding: 0
  
-.the-fucking-gameinfo .recent-updates 
-	margin-bottom: 80px
+	.recent-updates 
+		margin-bottom: 80px
 
 .link-savemap 
-	padding: 0 5px
-	text-decoration: underline
- 
-.link-savemap a, 
-.link-savemap a:hover 
 	color: #00cc00
-	cursor: pointer
  
-.link-logout a, 
-.link-logout a:hover 
+.link-logout 
 	color: #cc0000
  
 .on-savemap-mobile a 
@@ -100,31 +76,31 @@
 .item-formulas 
 	list-style: none
 	padding: 0px
+
+	> li 
+		margin-bottom: 15px
+		background-color: #eee
+		border: solid 5px #ddd
+		padding: 20px
+		list-style: none
+		width: 30%
+		margin-right: 2%
+		margin-bottom: 6%
+		/* float: left */
+		/* min-height: 280px */
+		display: inline-block
+		vertical-align: top
  
-.item-formulas > li 
-	margin-bottom: 15px
-	background-color: #eee
-	border: solid 5px #ddd
-	padding: 20px
-	list-style: none
-	width: 30%
-	margin-right: 2%
-	margin-bottom: 6%
-	/* float: left */
-	/* min-height: 280px */
-	display: inline-block
-	vertical-align: top
+	h3 
+		margin-top: 0
  
-.item-formulas h3 
-	margin-top: 0
+	ul 
+		margin-bottom: 0
+		list-style-type: square
  
-.item-formulas ul 
-	margin-bottom: 0
-	list-style-type: square
- 
-.item-formulas li img 
-	width: 30px
-	height: 30px
+	li img 
+		width: 30px
+		height: 30px
  
 .dev-console 
 	list-style: none
@@ -167,3 +143,7 @@
 			color: #000
 			border: solid 5px $grass-green
 
+.game-header
+	border-bottom: solid 4px #000
+	padding-bottom: 12px
+	margin-bottom: 16px

@@ -22,11 +22,11 @@
 			<div class="header-nav">
 				<div class="the-fucking-navigation clearfix">
 					<nav class="beaudryland-nav">
-						<ul class="d-flex align-items-center justify-content-between">
-							<li class="link-savemap">
-								<div class="button-wrap">
-									<a>Save</a>
-								</div>
+						<div class="d-flex align-items-center justify-content-between">
+							<li>
+								<a class="tabs-close button-black" href="javascript:void(0);">Back to game</a>
+								<a class="tab-menuitem button-black" href="javascript:void(0);" data-tabmenu="tab-navigation">MENU</a>
+								<a class="tab-menuitem button-black" href="javascript:void(0);" data-tabmenu="tab-inventory">INV</a>
 							</li>
 							<li class="nav-username">
 								<div>
@@ -34,17 +34,10 @@
 								</div>
 							</li>
 							<li>
-								<a class="nav-toggle-inventory button-black" href="javascript:void(0);">INV</a>
+								<a class="link-logout button-black" href="logout.php">Logout</a>
+								<a class="link-savemap button-black" href="javascript:void(0);">Save</a>
 							</li>
-							<li>
-								<a class="nav-toggle-menu button-black" href="javascript:void(0);">MENU</a>
-							</li>
-							<li class="link-logout">
-								<div class="button-wrap">
-									<a href="logout.php">Logout</a>
-								</div>
-							</li>
-						</ul>
+						</div>
 					</nav>
 				</div>
 			</div>
@@ -55,7 +48,7 @@
 
 		<div class="tabs">
 
-			<div class="tab tab-inventory">
+			<div class="tab tab-inventory" data-tab="tab-inventory">
 				<div class="crafting-table-wrap horizonal-spacing clearfix">
 					<div class="the-fucking-crafting-table pixel-corners">
 						<div class="block slot-1 empty" data-blocktype="empty"></div>
@@ -69,40 +62,40 @@
 				<div class="the-fucking-inventory clearfix"></div>
 			</div>
 
-			<div class="tab tab-navigation">
+			<div class="tab tab-navigation" data-tab="tab-navigation">
 				<div class="the-fucking-navigation clearfix">
 					<nav class="beaudryland-nav">
-						<ul class="nav-extra">
+						<ul>
 							<li class="link-help">
 								<div class="button-wrap">
-									<a href="#help">Help</a>
+									<a class="tab-menuitem tab-help" data-tabmenu="tab-help" href="javascript:void(0)">Help</a>
 								</div>
 							</li>
 							<li class="link-items">
 								<div class="button-wrap">
-									<a href="#items">Items</a>
+									<a class="tab-menuitem tab-items" data-tabmenu="tab-items" href="javascript:void(0)">Items</a>
 								</div>
 							</li>
-							<li class="link-help">
+							<li class="link-achievements">
 								<div class="button-wrap button-wrap-large">
-									<a href="#achievements">Achievements</a>
+									<a class="tab-menuitem tab-achievements" data-tabmenu="tab-achievements" href="javascript:void(0)">Achievements</a>
 								</div>
 							</li>
 						</ul>
 						<ul class="nav-extra">
 							<li class="link-mapeditor">
 								<div class="button-wrap button-wrap-large button-wrap-outline">
-									<a target="_blank" href="mapgallery.php">Map Gallery</a>
+									<a target="_blank" href="mapgallery.php">Map Gallery ></a>
 								</div>
 							</li>
 							<li class="link-itemeditor">
 								<div class="button-wrap button-wrap-large button-wrap-outline">
-									<a target="_blank" href="spritepainter.php">Item Editor</a>
+									<a target="_blank" href="spritepainter.php">Item Editor ></a>
 								</div>
 							</li>
 							<li class="link-mapeditor">
 								<div class="button-wrap button-wrap-large button-wrap-outline">
-									<a target="_blank" href="mapeditor.php">Map Editor</a>
+									<a target="_blank" href="mapeditor.php">Map Editor ></a>
 								</div>
 							</li>
 						</ul>
@@ -110,7 +103,7 @@
 				</div>
 			</div>
 
-			<div class="tab tab-game">
+			<div class="tab tab-game" data-tab="tab-game">
 				<div class="the-fucking-hearts">
 					<ul>
 						<li></li>
