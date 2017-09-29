@@ -1,7 +1,7 @@
 import * as globals from './globals';
 
 import { Utility } from './utility';
-import { Map } from './map';
+import { Map } from './map/map';
 import { Inventory } from './inventory';
 import { Signs } from './signs';
 import { Achievement } from './achievement';

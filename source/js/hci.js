@@ -3,7 +3,7 @@ import * as globals from './globals';
 import { Utility } from './utility'; 
 import { Player } from './player'; 
 import { Movement } from './movement'; 
-import { Map } from './map';
+import { Map } from './map/map';
 import { Action } from './action'; 
 import { Inventory } from './inventory'; 
 import { Sound } from './sound'; 

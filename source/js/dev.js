@@ -2,7 +2,7 @@ import * as globals from './globals';
 
 import { Utility } from './utility'; 
 import { HCI } from './hci'; 
-import { Cube } from './cube'; 
+import { Cube } from './map/cube'; 
 import { Enemy } from './enemy'; 
 import { Animal } from './animal'; 
 import { Movement } from './movement'; 

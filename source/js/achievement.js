@@ -2,7 +2,7 @@ import * as globals from './globals';
 
 import { Utility } from './utility';
 import { Story } from './story';
-import { Map } from './map';
+import { Map } from './map/map';
 
 var blUtil = new Utility();
 var blStory = new Story();

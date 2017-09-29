@@ -1,7 +1,7 @@
 import * as globals from './globals';
 
 import { Utility } from './utility';
-import { Map } from './map';
+import { Map } from './map/map';
 
 var blUtil = new Utility();
 var blMap = new Map();
@@ -55,7 +55,7 @@ export class Story {
 	}
 
 	setupMapBorders(map) {
-		blUtil.log('FENCES!!');
+		blUtil.log('FENCEShhh!!');
 		//var mapClass = '.the-fucking-'+map+'-map';
 		//$(mapClass+' .block:eq('+1+')').
 		// top
@@ -63,10 +63,12 @@ export class Story {
 			blMap.changeBlockType(i, 'fence-metal', map);
 		}
 		// bottom
-		for (var i=(globals.totalmapblocks-globals.mapwidth); i<globals.totalmapblocks; i++) {
+		for (var i=(globals.totalmapblocks-globals.mapwidth ); i<globals.totalmapblocks; i++) {
 			blMap.changeBlockType(i, 'fence-metal', map);
 		}
 		// right+left
+		blUtil.log("*******MAPWIDTH:"+globals.mapwidth);
+		
 		for (var i=0; i<globals.totalmapblocks; i++) {
 			if (i%globals.mapwidth == 0 || i%globals.mapwidth == (globals.mapwidth-1)) {
 				blMap.changeBlockType(i, 'fence-metal', map);

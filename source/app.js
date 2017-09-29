@@ -4,7 +4,8 @@ import * as blNavigation from './js/navigation';
 
 import { Utility } from './js/utility';
 import { Inventory } from './js/inventory';
-import { Map } from './js/map';
+import { Map } from './js/map/map';
+import { Cube } from './js/map/cube';
 import { Story } from './js/story';
 import { Player } from './js/player';
 import { Animal } from './js/animal';
@@ -19,6 +20,7 @@ import { Mobile } from './js/mobile';
 var blUtil = new Utility();
 var blInventory = new Inventory();
 var blMap = new Map();
+var blCube = new Cube();
 var blStory = new Story();
 var blPlayer = new Player();
 var blAnimal = new Animal();
@@ -35,9 +37,6 @@ blInventory.setupInventorySlots();
 
 // PHONEGAP / MOBILE ONLY
 if ( $('body').hasClass("version-phonegap") ) {
-
-	globals.mapwidth = 16;
-	globals.mapheight = 16;
 	
 	$('.inventory-close').on("click", function() { toggleInventory(); });
 	var toggleInventory = function() { $('.sticky-inventory').fadeToggle(0); }; 
@@ -46,7 +45,9 @@ if ( $('body').hasClass("version-phonegap") ) {
 	$(document).ready(function() {
 		console.log("MOBILE VERSION");
 
-		blMap.setupMap();
+		globals.mapwidth = globals.mapWidthMobile;
+		globals.mapheight = globals.mapHeightMobile;
+		blMap.setupMap('mobile');
 	    blMap.loadNewMap('forest', 'front');
 	    blPlayer.createPlayer();
 
@@ -81,10 +82,9 @@ if ( $('body').hasClass("version-phonegap") ) {
 	$(document).ready(function() {
 		console.log("DESKTOP VERSION");
 
-		globals.mapwidth = 20;
-		globals.mapheight = 20;
-
-		blMap.setupMap();
+		globals.mapwidth = globals.mapWidthDesktop;
+		globals.mapheight = globals.mapHeightDesktop;
+		blMap.setupMap('desktop');
 
 		loadGame();
 

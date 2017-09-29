@@ -1,9 +1,15 @@
 export const gridunitpx = 20; //must change this px value in css as well
 export var totalmapblocks = 0;
+export var mapWidthMobile = 16;
+export var mapHeightMobile = 16;
+export var mapWidthDesktop = 30;
+export var mapHeightDesktop = 30;
 export var mapwidth = 0;
 export var mapheight = 0;
 export var mapwidthpx = 0;
 export var mapheightpx = 0;
+export var currentMap = 'forest';
+export var currentCubeSide = 'front';
 
 export const inventoryslots = 74;
 export const enemyspeed = 200;
@@ -17,9 +23,6 @@ export const totalhearts = 5;
 export var disablekeyboardevents = false;
 export var globalmapblockcount = 0;
 export var isnightime = false;
-
-export var currentMap = 'forest';
-export var currentCubeSide = 'front';
 
 export var guitarFirstNote = true;
 export var keyboardFirstNote = true;

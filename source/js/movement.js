@@ -2,7 +2,7 @@ import * as globals from './globals';
 
 import { Utility } from './utility';
 import { Action } from './action';
-import { Cube } from './cube';
+import { Cube } from './map/cube';
 
 var blUtil = new Utility();
 var blAction = new Action();
@@ -96,6 +96,26 @@ export class Movement {
 			//alert(destinationblock);
 			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
+		// Map right border	
+		} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
+			console.log('*** RIGHT MAP EDGE ***');
+			this.moveObjectToMap(1, currentblock, direction);
+			collide = true;
+		// Map left border	
+		} else if ( (direction == "left" ) && (col==0) ) {
+			console.log('*** LEFT MAP EDGE ***');
+			this.moveObjectToMap(1, currentblock, direction);
+			collide = true;
+		// Map top border
+		} else if ( (direction == "up" ) && (row<=1) ) {
+			console.log('*** TOP MAP EDGE ***');
+			this.moveObjectToMap(1, currentblock, direction);
+			collide = true;
+		// Map bottom border
+		} else if ( (direction == "down" ) && (row>=globals.mapheight) ) {
+			console.log('*** BOTTOM MAP EDGE ***');
+			this.moveObjectToMap(1, currentblock, direction);
+			collide = true;	
 		//teleporting
 		} else if (id == 1 && $(nextBlockClass).hasClass('block-portal-b')) {
 			var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
@@ -143,26 +163,6 @@ export class Movement {
 		// Closed Door
 		} else if ( $(nextBlockClass).hasClass('block-door') ) {
 			collide = true;
-		// Map right border	
-		} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
-			console.log('*** RIGHT MAP EDGE ***');
-			this.moveObjectToMap(1, currentblock, direction);
-			collide = true;
-		// Map left border	
-		} else if ( (direction == "left" ) && (col==0) ) {
-			console.log('*** LEFT MAP EDGE ***');
-			this.moveObjectToMap(1, currentblock, direction);
-			collide = true;
-		// Map top border
-		} else if ( (direction == "up" ) && (row<=1) ) {
-			console.log('*** TOP MAP EDGE ***');
-			this.moveObjectToMap(1, currentblock, direction);
-			collide = true;
-		// Map bottom border
-		} else if ( (direction == "down" ) && (row>=globals.mapheight) ) {
-			console.log('*** BOTTOM MAP EDGE ***');
-			this.moveObjectToMap(1, currentblock, direction);
-			collide = true;	
 		// PineTree	
 		} else if ( $(nextBlockClass).hasClass('block-pinetree') ) {
 			collide = true;

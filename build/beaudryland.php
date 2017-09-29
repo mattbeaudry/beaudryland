@@ -24,7 +24,7 @@
 					<nav class="beaudryland-nav">
 						<div class="d-flex align-items-center justify-content-between">
 							<li>
-								<a class="tabs-close button-black" href="javascript:void(0);">Back to game</a>
+								<a class="tabs-close button-black" href="javascript:void(0);">< Back to game</a>
 								<a class="tab-menuitem button-black" href="javascript:void(0);" data-tabmenu="tab-navigation">MENU</a>
 								<a class="tab-menuitem button-black" href="javascript:void(0);" data-tabmenu="tab-inventory">INV</a>
 							</li>
