@@ -1,9 +1,9 @@
 import * as globals from '../globals';
-import * as blTerrain from './terrain';
-
+import { Terrain } from './terrain';
 import { Utility } from '../utility';
 
 var blUtil = new Utility();
+var blTerrain = new Terrain();
 
 export class Map {
 
@@ -210,7 +210,7 @@ export class Map {
 
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'">'+f+'</div>';
 				}
-				lakeBlocks = ["water","tree","grass","water","tree","grass","grass","appletree"];
+				lakeBlocks = ["water","tree","grass","water","tree","grass","appletree","water"];
 				specialBlocks = [
 					"carrot-inground","carrot-inground","flowers","flowers",
 					"bluemushroom","bluemushroom","mushroom","mushroom","talltree","talltree","talltree"
@@ -219,7 +219,6 @@ export class Map {
 
 			case 'winter':
 				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
-					//random block generation
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "snow"; }
@@ -229,6 +228,7 @@ export class Map {
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
 				lakeBlocks = ["pinetree","ice", "ice", "pinetree", "snow"];
+				specialBlocks = ["apple"];
 				break;
 
 			case 'beach':
@@ -253,6 +253,7 @@ export class Map {
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
 				lakeBlocks = ["sandstone","palmtree","wetsand"];
+				specialBlocks = [];
 				//startWaves();
 				break;
 
@@ -337,7 +338,8 @@ export class Map {
 					else { blocktype = "space"; }
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
-
+				lakeBlocks = [];
+				specialBlocks = [];
 				break;
 
 			default:
@@ -349,25 +351,17 @@ export class Map {
 		for (var i = 0; i<lakeBlocks.length; i++) {
 		    var randomBlockId = blUtil.randomBlockID();
 		    var blockType = lakeBlocks[i];
-		    var terrainBlocks = blTerrain.terrain_lake;
-		    blUtil.log("randomBlockId:"+randomBlockId);
-		    blUtil.log("blockType:"+blockType);
-
+		    var terrainBlocks = blTerrain.terrainLake(this.mapWidth);
 		    for (var j = 0; j<terrainBlocks.length; j++) {
 		    	var offset = terrainBlocks[j];
-		    	// blUtil.log("randomBlockId:"+randomBlockId);
-		    	// blUtil.log("offset:"+offset);
-		    	// blUtil.log("blockType:"+blockType);
-		    	// blUtil.log("maptype:"+maptype);
 		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
 			}
 		}
 
-		// /* Special blocks */
-		// $.each(specialblocks, function(index, value){
-		// 	var randomblockid = blUtil.randomBlockID();
-		// 	this.changeBlockType(randomblockid, value, maptype);
-		// });
+		for (var i = 0; i<specialBlocks.length; i++) {
+			var randomBlockId = blUtil.randomBlockID();
+			this.changeBlockType(randomBlockId, blockType, maptype);
+		}
 
 	}
 

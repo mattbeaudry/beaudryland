@@ -1,7 +1,7 @@
 export const gridunitpx = 20; //must change this px value in css as well
 export var totalmapblocks = 0;
 export var mapWidthMobile = 16;
-export var mapHeightMobile = 16;
+export var mapHeightMobile = 16; 
 export var mapWidthDesktop = 30;
 export var mapHeightDesktop = 30;
 export var mapwidth = 0;
