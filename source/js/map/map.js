@@ -180,6 +180,8 @@ export class Map {
 
 		var lakeBlocks = [];
 		var specialBlocks = [];
+		var riverBlocksX = [];
+		var riverBlocksY = [];
 
 		//CREATE RANDOM FOREST TERRAIN
 		if (cubeside == 'background'){
@@ -215,6 +217,8 @@ export class Map {
 					"carrot-inground","carrot-inground","flowers","flowers",
 					"bluemushroom","bluemushroom","mushroom","mushroom","talltree","talltree","talltree"
 				];
+				riverBlocksX = ["water"];
+				riverBlocksY = ["water"];
 				break;
 
 			case 'winter':
@@ -361,6 +365,68 @@ export class Map {
 		for (var i = 0; i<specialBlocks.length; i++) {
 			var randomBlockId = blUtil.randomBlockID();
 			this.changeBlockType(randomBlockId, blockType, maptype);
+		}
+
+		for (var i = 0; i<riverBlocksX.length; i++) {
+		    var randomBlockId = blUtil.randomBlockID();
+		    var blockType = riverBlocksX[i];
+		    var terrainBlocks = blTerrain.terrainRiverX(this.mapWidth);
+		    for (var j = 0; j<terrainBlocks.length; j++) {
+		    	var offset = terrainBlocks[j];
+		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
+			}
+		}
+
+		for (var i = 0; i<riverBlocksY.length; i++) {
+		    var randomBlockId = blUtil.randomBlockID();
+		    var blockType = riverBlocksY[i];
+		    var terrainBlocks = blTerrain.terrainRiverY(this.mapWidth);
+		    for (var j = 0; j<terrainBlocks.length; j++) {
+		    	var offset = terrainBlocks[j];
+		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
+			}
+		}
+
+		var randomBlockId = blUtil.randomBlockID();
+		var terrainBlocks = blTerrain.terrainCabin();
+		var canvasWidth = 9;
+		var rowOffset = 0;
+		var rowIndex = 0;
+		for (var j = 0; j<terrainBlocks.length; j++) {
+
+			var blockType = terrainBlocks[j];
+			var newRow = j % canvasWidth;
+
+			if (newRow == 0) {
+				rowOffset++;
+				rowIndex = 0;
+			} else { 
+				rowIndex++;
+			}
+
+			var blockId = randomBlockId + rowIndex + (rowOffset * this.mapWidth);
+
+			switch(blockType) {
+				case '-':
+					blockType = 'none';
+					break;
+				case 'W':
+					blockType = 'wood';
+					break;
+				case 'F':
+					blockType = 'fire';
+					break;
+				case 'D':
+					blockType = 'door';
+					break;
+				default:
+					break;
+			}
+
+			if (blockType != 'none') {
+				this.changeBlockType(blockId, blockType, maptype);
+			}
+			
 		}
 
 	}
