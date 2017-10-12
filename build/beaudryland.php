@@ -82,6 +82,11 @@
 									<a class="tab-menuitem tab-achievements" data-tabmenu="tab-achievements" href="javascript:void(0)">Achievements</a>
 								</div>
 							</li>
+							<li class="link-console">
+								<div class="button-wrap button-wrap-large">
+									<a class="tab-menuitem tab-devconsole" data-tabmenu="tab-devconsole" href="javascript:void(0)">Console</a>
+								</div>
+							</li>
 						</ul>
 						<h2>Extras</h2>
 						<ul class="nav-extra">
@@ -175,14 +180,28 @@
 				<section>
 					<a id="achievements"></a>
 					<h2>Achievements</h2>
+
+					<div class="gamestats">
+						<div class="completion">
+							<span class="completion-percentage">0</span>% Game completion
+						</div>
+						<div class="achievements">
+							<span class="achievements-complete">0</span>/12 achivements complete
+						</div>
+						<div class="items">
+							<span class="items-collected">0</span>/89 blocks collected
+						</div>
+						<div class="maps">
+							<span class="maps-unlocked">1</span>/6 maps unlocked
+						</div>
+					</div>
+
 					<ul class="item-achievements clearfix">
 						<li data-achievementid="1" data-achievementname="genesis" class="achievement-genesis status-completed">
-						<!--<img src="img/icon-check-grey.png">-->
 							<h3>Genesis</h3>
 							<p>Created a new game and generated a randomized map.</p>
 						</li>
 						<li data-achievementid="2" data-achievementname="cuttingwood" class="achievement-cuttingwood">
-							<!--<img src="img/icon-check-grey.png">-->
 							<h3>Cutting Wood</h3>
 							<p>Cut down trees and use them to create wood blocks.</p>
 						</li>
@@ -191,7 +210,6 @@
 							<p>Use rocks and wood to build a fire.</p>
 						</li>
 						<li data-achievementid="4" data-achievementname="saveyourgame" class="achievement-saveyourgame">
-							<!--<img src="img/icon-check-grey.png">-->
 							<h3>Save your Game</h3>
 							<p>Save your game for the first time. You should do tbis periodically whikle playing.</p>
 						</li>
@@ -203,9 +221,23 @@
 							<h3>Taking Shelter</h3>
 							<p>Build a door and use some wood or solid blocks to create a cabin.</p>
 						</li>
-						<li data-achievementid="7" data-achievementname="jammingout" class="achievement-jammingout">
-							<h3>Jamming Out</h3>
-							<p>Build a guitar or keyboard.</p>
+						<li data-achievementid="7" data-achievementname="playtheguitar" class="achievement-playtheguitar">
+							<h3>Play the guitar</h3>
+						</li>
+						<li data-achievementid="8" data-achievementname="playthekeys" class="achievement-playthekeys">
+							<h3>Play the keys</h3>
+						</li>
+						<li data-achievementid="9" data-achievementname="playthetrumpet" class="achievement-playthetrumpet">
+							<h3>Play the trumpet</h3>
+						</li>
+						<li data-achievementid="10" data-achievementname="playthebass" class="achievement-playthebass">
+							<h3>Play the bass</h3>
+						</li>
+						<li data-achievementid="11" data-achievementname="bringinthebeat" class="achievement-bringinthebeat">
+							<h3>Bring in the beat</h3>
+						</li>
+						<li data-achievementid="12" data-achievementname="gotospace" class="achievement-gotospace">
+							<h3>Go to space</h3>
 						</li>
 					</ul>
 					</section>

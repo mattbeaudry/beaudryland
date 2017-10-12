@@ -528,6 +528,7 @@ $woodbrown: #916d33
 	transform-style: preserve-3d
 	transition: all 5s
 	transform: rotateY(0deg) translateZ($mapHalfWidthPX+200)
+	transform-origin: center center
 	background: url(../img/player-right-rocket.png) no-repeat
 	background-size: contain
 	background-repeat: no-repeat
@@ -543,4 +544,4 @@ $woodbrown: #916d33
 	
 @keyframes orbit
 	100%
-		transform: rotateY(360deg) translateZ(300px)
+		transform: rotateY(360deg) translateZ($mapHalfWidthPX+200)

@@ -182,6 +182,7 @@ export class Map {
 		var specialBlocks = [];
 		var riverBlocksX = [];
 		var riverBlocksY = [];
+		var cabin = false;
 
 		//CREATE RANDOM FOREST TERRAIN
 		if (cubeside == 'background'){
@@ -208,7 +209,7 @@ export class Map {
 					else if (r>0.90) { blocktype = "appletree"; }
 					*/
 					else if (r>0.8) { blocktype = "tree"; }
-					else { blocktype = "water"; }
+					else { blocktype = "grass"; }
 
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'">'+f+'</div>';
 				}
@@ -219,6 +220,7 @@ export class Map {
 				];
 				riverBlocksX = ["water"];
 				riverBlocksY = ["water"];
+				cabin = true;
 				break;
 
 			case 'winter':
@@ -233,6 +235,8 @@ export class Map {
 				}
 				lakeBlocks = ["pinetree","ice", "ice", "pinetree", "snow"];
 				specialBlocks = ["apple"];
+				riverBlocksX = [];
+				riverBlocksY = [];
 				break;
 
 			case 'beach':
@@ -258,6 +262,8 @@ export class Map {
 				}
 				lakeBlocks = ["sandstone","palmtree","wetsand"];
 				specialBlocks = [];
+				riverBlocksX = [];
+				riverBlocksY = [];
 				//startWaves();
 				break;
 
@@ -281,6 +287,8 @@ export class Map {
 					"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver",
 					"portal-a","portal-b"
 				];
+				riverBlocksX = [];
+				riverBlocksY = [];
 				break;
 
 			case 'desert':
@@ -300,6 +308,8 @@ export class Map {
 				specialBlocks = [
 					"redmushroom","flowers","flowers"
 				];
+				riverBlocksX = [];
+				riverBlocksY = [];
 				break;
 
 			case 'islands':
@@ -327,6 +337,8 @@ export class Map {
 					"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver",
 					"portal-a","portal-b"
 				];
+				riverBlocksX = [];
+				riverBlocksY = [];
 				break;
 
 			case 'space':
@@ -344,6 +356,8 @@ export class Map {
 				}
 				lakeBlocks = [];
 				specialBlocks = [];
+				riverBlocksX = [];
+				riverBlocksY = [];
 				break;
 
 			default:
@@ -387,46 +401,39 @@ export class Map {
 			}
 		}
 
-		var randomBlockId = blUtil.randomBlockID();
-		var terrainBlocks = blTerrain.terrainCabin();
-		var canvasWidth = 9;
-		var rowOffset = 0;
-		var rowIndex = 0;
-		for (var j = 0; j<terrainBlocks.length; j++) {
+		if (cabin == true) {
+			var randomBlockId = blUtil.randomBlockID();
+			var terrainBlocks = blTerrain.terrainCabin();
+			var canvasWidth = 9;
+			var rowOffset = 0;
+			var rowIndex = 0;
+			for (var j = 0; j<terrainBlocks.length; j++) {
 
-			var blockType = terrainBlocks[j];
-			var newRow = j % canvasWidth;
+				var blockType = terrainBlocks[j];
+				var newRow = j % canvasWidth;
 
-			if (newRow == 0) {
-				rowOffset++;
-				rowIndex = 0;
-			} else { 
-				rowIndex++;
+				if (newRow == 0) {
+					rowOffset++;
+					rowIndex = 0;
+				} else { 
+					rowIndex++;
+				}
+
+				var blockId = randomBlockId + rowIndex + (rowOffset * this.mapWidth);
+
+				switch(blockType) {
+					case '-': blockType = 'none'; break;
+					case 'W': blockType = 'wood'; break;
+					case 'F': blockType = 'fire'; break;
+					case 'D': blockType = 'door'; break;
+					default: blockType = 'none'; break;
+				}
+
+				if (blockType != 'none') {
+					this.changeBlockType(blockId, blockType, maptype);
+				}
+				
 			}
-
-			var blockId = randomBlockId + rowIndex + (rowOffset * this.mapWidth);
-
-			switch(blockType) {
-				case '-':
-					blockType = 'none';
-					break;
-				case 'W':
-					blockType = 'wood';
-					break;
-				case 'F':
-					blockType = 'fire';
-					break;
-				case 'D':
-					blockType = 'door';
-					break;
-				default:
-					break;
-			}
-
-			if (blockType != 'none') {
-				this.changeBlockType(blockId, blockType, maptype);
-			}
-			
 		}
 
 	}

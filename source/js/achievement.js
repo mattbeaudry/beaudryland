@@ -14,10 +14,122 @@ export class Achievement {
 
 	}
 
+/*
+
+MAKE THIS JSON
+
+
+Achievements
+-----------
+
+genesis
+Genesis
+Created a new game and generated a randomized map.
+
+cuttingwood
+Cutting Wood
+Cut down trees and use them to create wood blocks.
+
+keepingwarm
+Keeping Warm
+Use rocks and wood to build a fire.
+
+saveyourgame
+Save your Game
+Save your game for the first time. You should do tbis periodically whikle playing.
+
+treasurehunter
+Treasure Hunter
+Build a shovel, learn how to dig, and find some treasure.
+
+takingshelter
+Taking Shelter
+Build a door and use some wood or solid blocks to create a cabin.
+
+jammingout
+Jamming Out
+Build a guitar or keyboard.
+
+
+************
+
+playtheguitar
+
+playthekeys
+
+playthetrumpet
+
+playthebass
+
+bringinthebeat
+
+gotospace
+
+
+
+	/*
+	var achievements = [
+	        {
+	            "title": "Cutting Wood",
+	            "slug", "cuttingwood",
+	            "description": "Cut down trees and use them to create wood blocks.",
+	            "status": "incompleted"
+	        },
+	        {
+	            "title": "Keeping Warm",
+	            "slug", "keepingwarm",
+	            "description": "Use rocks and wood to build a fire.",
+	            "status": "incompleted"
+	        },
+	        {
+	            "title": "Taking Shelter",
+	            "slug", "takingshelter",
+	            "description": "Build a door and use some wood or solid blocks to create a cabin.",
+	            "status": "incompleted"
+	        },
+	        {
+	            "title": "Treasure Hunter",
+	            "slug", "treasurehunter",
+	            "description": "Build a shovel and dig for treasure.",
+	            "status": "incompleted"
+	        },
+	        {
+	            "title": "Jamming Out",
+	            "slug", "jammingout",
+	            "description": "Build a guitar or keyboard.",
+	            "status": "incompleted"
+	        }
+	    ]
+	}
+	*/
+
+	// fill in the achivement in page content
+	// for loop for above object
+
+	/*
+	completeAchievement = function(achievement) {};
+	*/
+
+	// hunt 10 animals
+	// kill 10 enemies
+	// create all items
+	// unlock all maps
+	// build a house
+	// build a road
+	// ride a bike
+	// canoe
+	// skiing
+	// drive a car
+	// astronaut
+	// groceries - get all types of food
+	// fisherman
+	// scientist - build all tech items
+
 	achievementCompleted(achievementname) {
 		if (!$('.item-achievements .achievement-'+achievementname).hasClass('status-completed')) {
 
 			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+
 			this.displayDialog("You got the "+achievementname+" achievement!");
 
 			switch (achievementname) {
@@ -132,62 +244,5 @@ export class Achievement {
 		});
 	}
 
-	/*
-	var achievements = [
-	        {
-	            "title": "Cutting Wood",
-	            "slug", "cuttingwood",
-	            "description": "Cut down trees and use them to create wood blocks.",
-	            "status": "incompleted"
-	        },
-	        {
-	            "title": "Keeping Warm",
-	            "slug", "keepingwarm",
-	            "description": "Use rocks and wood to build a fire.",
-	            "status": "incompleted"
-	        },
-	        {
-	            "title": "Taking Shelter",
-	            "slug", "takingshelter",
-	            "description": "Build a door and use some wood or solid blocks to create a cabin.",
-	            "status": "incompleted"
-	        },
-	        {
-	            "title": "Treasure Hunter",
-	            "slug", "treasurehunter",
-	            "description": "Build a shovel and dig for treasure.",
-	            "status": "incompleted"
-	        },
-	        {
-	            "title": "Jamming Out",
-	            "slug", "jammingout",
-	            "description": "Build a guitar or keyboard.",
-	            "status": "incompleted"
-	        }
-	    ]
-	}
-	*/
-
-	// fill in the achivement in page content
-	// for loop for above object
-
-	/*
-	completeAchievement = function(achievement) {};
-	*/
-
-	// hunt 10 animals
-	// kill 10 enemies
-	// create all items
-	// unlock all maps
-	// build a house
-	// build a road
-	// ride a bike
-	// canoe
-	// skiing
-	// drive a car
-	// astronaut
-	// groceries - get all types of food
-	// fisherman
-	// scientist - build all tech items
 
 }
