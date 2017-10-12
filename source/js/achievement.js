@@ -130,7 +130,7 @@ gotospace
 
 			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
 
-			this.displayDialog("You got the "+achievementname+" achievement!");
+			this.displayAchievementMessage("You got the "+achievementname+" achievement!");
 
 			switch (achievementname) {
 				case 'playtheguitar':
@@ -214,11 +214,43 @@ gotospace
 							blUtil.teleportObjectToBlock(1, 'space', 210);
 						}, 2000);
 					}
-
 					break;
 			}
 
 		}
+	}
+
+	displayAchievementMessage(text) {
+		blUtil.log("displayDialog");
+
+		var completionPercentage = $('.completion-percentage').html();
+		var achievementsComplete = $('.achievements-complete').html();
+		var itemsCollected = $('.items-collected').html();
+		var mapsUnlocked = $('.maps-unlocked').html();
+
+		var html = '<div class="bubble-wrap bubble-dialog">';
+					html += '<div class="bubble-link">';
+			  			html += '<form class="bubble-form" action="#">';
+			  				html += '<h3>'+text+'</h3>';
+			  				html += '<h3>'+completionPercentage+'% game completion</h3>';
+			  				html += '<h3>'+achievementsComplete+'/12 achievements</h3>';
+			  				html += '<h3>'+itemsCollected+'/89 items collected</h3>';
+			  				html += '<h3>'+mapsUnlocked+'/6 maps unlockeed</h3>';
+			    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
+			    			//html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
+			    			html += '<input type="submit" value="Okay!" >';
+			  			html += '</form>';
+			  		html += '</div>';
+			html += '</div>';
+
+		$('.page-game').append(html);
+
+		$('.bubble-dialog .bubble-form').submit(function(e) {
+
+			$('.bubble-wrap').remove();
+			event.preventDefault();
+
+		});
 	}
 
 	displayDialog(text) {

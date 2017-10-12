@@ -65,6 +65,7 @@
 			<div class="tab tab-navigation" data-tab="tab-navigation">
 				<div class="the-fucking-navigation clearfix">
 					<nav class="beaudryland-nav">
+
 						<h2>Game info</h2>
 						<ul>
 							<li class="link-help">
@@ -88,6 +89,7 @@
 								</div>
 							</li>
 						</ul>
+
 						<h2>Extras</h2>
 						<ul class="nav-extra">
 							<li class="link-mapeditor">
@@ -115,7 +117,13 @@
 									<a target="_blank" href="beaudryland-pong.php">Pong ></a>
 								</div>
 							</li>
+							<li class="link-ui">
+								<div class="button-wrap button-wrap-large button-wrap-outline">
+									<a target="_blank" href="beaudryland-ui.php">BL UI ></a>
+								</div>
+							</li>
 						</ul>
+						
 					</nav>
 				</div>
 			</div>
