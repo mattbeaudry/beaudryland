@@ -1,7 +1,9 @@
 import * as globals from './globals';
 
 import { Utility } from './utility'; 
+import { Achievement } from './achievement'; 
 var blUtil = new Utility();
+var blAchievement = new Achievement();
 
 export class Inventory {
 
@@ -92,6 +94,7 @@ export class Inventory {
 		$('.the-fucking-crafted-item > .slot').attr('data-blocktype', blocktype);
 		$('.the-fucking-crafted-item > .slot').removeClass("empty");
 		$('.the-fucking-crafted-item > .slot').html(amount);
+		blAchievement.updateStats();
 	}
 
 	checkCraftingTableForItem() {

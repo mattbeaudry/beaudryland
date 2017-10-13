@@ -119,7 +119,7 @@ var loadNewGame = function() {
 	    //blAnimal.createAnimal();
     } else if (maptype == 'game') {
     	blStory.createForestSigns();
-    	blAnimal.createAnimal();
+    	//blAnimal.createAnimal();
     	blStory.setupMapBorders('forest');
     }
 };

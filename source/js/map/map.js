@@ -183,6 +183,7 @@ export class Map {
 		var riverBlocksX = [];
 		var riverBlocksY = [];
 		var cabin = false;
+		var total = this.mapTotalBlocks;
 
 		//CREATE RANDOM FOREST TERRAIN
 		if (cubeside == 'background'){
@@ -193,10 +194,12 @@ export class Map {
 		
 		var map = $('.the-fucking-'+maptype+'-map');
 		var maphtml = '';
+
+		console.log("*********LOADMAP"+maptype);
 		
 		switch (maptype) {
 			case 'forest':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (total - 1); f++) {
 					var r = Math.random();
 					var blocktype;
 					if (r<0.7) { blocktype = "grass"; }
@@ -210,7 +213,6 @@ export class Map {
 					*/
 					else if (r>0.8) { blocktype = "tree"; }
 					else { blocktype = "grass"; }
-
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'">'+f+'</div>';
 				}
 				lakeBlocks = ["water","tree","grass","water","tree","grass","appletree","water"];
@@ -224,19 +226,25 @@ export class Map {
 				break;
 
 			case 'winter':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				console.log("create winter----------");
+				var W = 0;
+				for (W <= (total - 1); W++) {
+					console.log("step");
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "snow"; }
 					else if (r>0.98) { blocktype = "icerock"; }
 					else if (r>0.96) { blocktype = "pinetree"; }
 					else { blocktype = "ice"; }
-					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+
+					maphtml += '<div data-blockid="'+W+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
+				console.log("-----------maphtml:"+maphtml);
+
 				lakeBlocks = ["pinetree","ice", "ice", "pinetree", "snow"];
 				specialBlocks = ["apple"];
-				riverBlocksX = [];
-				riverBlocksY = [];
+				riverBlocksX = ['water'];
+				riverBlocksY = ['water'];
 				break;
 
 			case 'beach':
@@ -364,7 +372,8 @@ export class Map {
 				break;
 		}
 
-		map.append(maphtml);
+		console.log('maphtml:'+maphtml);
+		$('.the-fucking-'+maptype+'-map').append(maphtml);
 
 		for (var i = 0; i<lakeBlocks.length; i++) {
 		    var randomBlockId = blUtil.randomBlockID();
@@ -435,6 +444,8 @@ export class Map {
 				
 			}
 		}
+
+		//blAchievement.updateStats();
 
 	}
 

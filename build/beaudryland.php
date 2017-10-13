@@ -123,7 +123,7 @@
 								</div>
 							</li>
 						</ul>
-						
+
 					</nav>
 				</div>
 			</div>
@@ -191,16 +191,16 @@
 
 					<div class="gamestats">
 						<div class="completion">
-							<span class="completion-percentage">0</span>% Game completion
+							<span class="completion-percentage">0</span>% game completion
 						</div>
 						<div class="achievements">
-							<span class="achievements-complete">0</span>/12 achivements complete
+							<span class="achievements-complete">0</span>/<span class="achievements-total">12</span> achivements complete
 						</div>
 						<div class="items">
-							<span class="items-collected">0</span>/89 blocks collected
+							<span class="items-collected">0</span>/<span class="items-total">89</span> blocks collected
 						</div>
 						<div class="maps">
-							<span class="maps-unlocked">1</span>/6 maps unlocked
+							<span class="maps-unlocked">1</span>/<span class="maps-total">6</span> maps unlocked
 						</div>
 					</div>
 

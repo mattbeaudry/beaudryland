@@ -130,6 +130,7 @@ gotospace
 
 			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
 
+			this.updateStats();
 			this.displayAchievementMessage("You got the "+achievementname+" achievement!");
 
 			switch (achievementname) {
@@ -157,10 +158,10 @@ gotospace
 					break;
 				case 'playthetrumpet':
 					if (globals.trumpetFirstNote == true && $('.the-fucking-jungle-map').length == 0) {
-						blUtil.log('Play keys!'); 
-						globals.trumpetFirstNote = false; 
+						blUtil.log('Play keys!');
+						globals.trumpetFirstNote = false;
 						blStory.demolishMapBorder('beach', 'right');
-						blMap.loadNewMap('jungle', 'left'); 
+						blMap.loadNewMap('jungle', 'left');
 						//blStory.createJungleSigns();
 						blStory.setupMapBorders('jungle');
 						blStory.demolishMapBorder('jungle', 'left');
@@ -220,22 +221,46 @@ gotospace
 		}
 	}
 
+	updateStats() {
+		var achievementsTotal = $('.item-achievements li').length;
+		var achievementsComplete = $('.item-achievements li.status-completed').length;
+		var mapsTotal = 6;
+		var mapsUnlocked = $('.maps-wrap .cube-side').length;
+		var itemsTotal = 89;
+		var itemsCollected = $('.the-fucking-inventory .block').length;
+
+		var gameTotal = achievementsTotal + mapsTotal + itemsTotal;
+		var completionTotal = achievementsComplete + mapsUnlocked + itemsCollected;
+		var completionPercentage = Math.floor(completionTotal / gameTotal * 100);
+
+		$('.completion-percentage').html(completionPercentage);
+		$('.achievements-complete').html(achievementsComplete);
+		$('.achievements-total').html(achievementsTotal);
+		$('.items-collected').html(itemsCollected);
+		$('.items-total').html(itemsTotal);
+		$('.maps-unlocked').html(mapsUnlocked);
+		$('.maps-total').html(mapsTotal);
+	}
+
 	displayAchievementMessage(text) {
 		blUtil.log("displayDialog");
 
 		var completionPercentage = $('.completion-percentage').html();
 		var achievementsComplete = $('.achievements-complete').html();
+		var achievementsTotal = $('.achievements-total').html();
 		var itemsCollected = $('.items-collected').html();
+		var itemsTotal = $('.items-total').html();
 		var mapsUnlocked = $('.maps-unlocked').html();
+		var mapsTotal = $('.maps-total').html();
 
 		var html = '<div class="bubble-wrap bubble-dialog">';
 					html += '<div class="bubble-link">';
 			  			html += '<form class="bubble-form" action="#">';
 			  				html += '<h3>'+text+'</h3>';
 			  				html += '<h3>'+completionPercentage+'% game completion</h3>';
-			  				html += '<h3>'+achievementsComplete+'/12 achievements</h3>';
-			  				html += '<h3>'+itemsCollected+'/89 items collected</h3>';
-			  				html += '<h3>'+mapsUnlocked+'/6 maps unlockeed</h3>';
+			  				html += '<h3>'+achievementsComplete+'/'+achievementsTotal+' achievements</h3>';
+			  				html += '<h3>'+itemsCollected+'/'+itemsTotal+' items collected</h3>';
+			  				html += '<h3>'+mapsUnlocked+'/'+mapsTotal+' maps unlocked</h3>';
 			    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
 			    			//html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
 			    			html += '<input type="submit" value="Okay!" >';
@@ -246,10 +271,8 @@ gotospace
 		$('.page-game').append(html);
 
 		$('.bubble-dialog .bubble-form').submit(function(e) {
-
 			$('.bubble-wrap').remove();
 			event.preventDefault();
-
 		});
 	}
 
