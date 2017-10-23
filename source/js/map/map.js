@@ -177,13 +177,12 @@ export class Map {
 	}
 
 	loadNewMap(maptype, cubeside) {
-
 		var lakeBlocks = [];
 		var specialBlocks = [];
 		var riverBlocksX = [];
 		var riverBlocksY = [];
 		var cabin = false;
-		var total = this.mapTotalBlocks;
+		var total = globals.totalmapblocks;
 
 		//CREATE RANDOM FOREST TERRAIN
 		if (cubeside == 'background'){
@@ -226,9 +225,7 @@ export class Map {
 				break;
 
 			case 'winter':
-				console.log("create winter----------");
-				var W = 0;
-				for (W <= (total - 1); W++) {
+				for (var f = 0; f <= (total - 1); f++) {
 					console.log("step");
 					var r = Math.random();
 					var blocktype;
@@ -237,9 +234,8 @@ export class Map {
 					else if (r>0.96) { blocktype = "pinetree"; }
 					else { blocktype = "ice"; }
 
-					maphtml += '<div data-blockid="'+W+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
+					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
-				console.log("-----------maphtml:"+maphtml);
 
 				lakeBlocks = ["pinetree","ice", "ice", "pinetree", "snow"];
 				specialBlocks = ["apple"];
@@ -250,7 +246,7 @@ export class Map {
 			case 'beach':
 				var maphalf = 0.5 * this.mapWidth;
 				var shoreedge = maphalf;
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (total - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					var rowposition = f % this.mapWidth;
@@ -270,13 +266,13 @@ export class Map {
 				}
 				lakeBlocks = ["sandstone","palmtree","wetsand"];
 				specialBlocks = [];
-				riverBlocksX = [];
-				riverBlocksY = [];
+				riverBlocksX = ['water'];
+				riverBlocksY = ['water'];
 				//startWaves();
 				break;
 
 			case 'jungle':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (total - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r>0.97) { blocktype = "flowers"; }
@@ -295,12 +291,12 @@ export class Map {
 					"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver",
 					"portal-a","portal-b"
 				];
-				riverBlocksX = [];
-				riverBlocksY = [];
+				riverBlocksX = ['water'];
+				riverBlocksY = ['water'];
 				break;
 
 			case 'desert':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (total - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "sand"; }
@@ -316,12 +312,12 @@ export class Map {
 				specialBlocks = [
 					"redmushroom","flowers","flowers"
 				];
-				riverBlocksX = [];
-				riverBlocksY = [];
+				riverBlocksX = ['water'];
+				riverBlocksY = ['water'];
 				break;
 
 			case 'islands':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (total - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "water"; }
@@ -345,12 +341,12 @@ export class Map {
 					"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver",
 					"portal-a","portal-b"
 				];
-				riverBlocksX = [];
-				riverBlocksY = [];
+				riverBlocksX = ['water'];
+				riverBlocksY = ['water'];
 				break;
 
 			case 'space':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (total - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "space"; }

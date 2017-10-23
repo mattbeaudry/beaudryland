@@ -103,10 +103,9 @@ if ( $('body').hasClass("version-phonegap") ) {
 
 var loadNewGame = function() {
 	blUtil.log("new user & brand new map");
-    blMap.loadNewMap('forest', 'front');
-    blPlayer.createPlayer();
-
+    
     if (maptype == 'creative') {
+    	blMap.loadNewMap('forest', 'front');
       	blMap.loadNewMap('winter', 'right');
     	blMap.loadNewMap('beach', 'back');
     	blMap.loadNewMap('jungle', 'left');
@@ -118,10 +117,13 @@ var loadNewGame = function() {
 	    blDev.getAllItems();
 	    //blAnimal.createAnimal();
     } else if (maptype == 'game') {
+    	blMap.loadNewMap('forest', 'front');
     	blStory.createForestSigns();
     	//blAnimal.createAnimal();
     	blStory.setupMapBorders('forest');
     }
+
+    blPlayer.createPlayer();
 };
 
 var loadGame = function() {

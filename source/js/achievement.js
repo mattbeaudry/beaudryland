@@ -133,6 +133,8 @@ gotospace
 			this.updateStats();
 			this.displayAchievementMessage("You got the "+achievementname+" achievement!");
 
+			blUtil.log('ACHIEVEMENT COMPLETED'); 
+
 			switch (achievementname) {
 				case 'playtheguitar':
 					if (globals.guitarFirstNote == true && $('.the-fucking-winter-map').length == 0) {
