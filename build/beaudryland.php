@@ -41,8 +41,11 @@
 					</nav>
 				</div>
 			</div>
-			<div class="header-inventory">
-
+			<div class="header-inventory the-fucking-useful-inventory">
+				<div class="block slot-fav-1 block-sword" data-blocktype="sword"></div>
+				<div class="block slot-fav-2 block-shovel" data-blocktype="shovel"></div>
+				<div class="block slot-fav-3 block-axe" data-blocktype="axe"></div>
+				<div class="block slot-fav-4 block-spear" data-blocktype="spear"></div>
 			</div>
 		</header>
 
