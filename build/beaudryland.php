@@ -29,14 +29,14 @@
 									<a class="tabs-close button-black" href="javascript:void(0);">
 										<span>< Back to game</span>
 									</a>
-									<a class="tab-menuitem button-black" href="javascript:void(0);" data-tabmenu="tab-navigation">
-										<span>?</span>
-									</a>
-									<a class="tab-menuitem button-black" href="javascript:void(0);" data-tabmenu="tab-inventory">
-										<span>INV</span>
+									<a class="tab-menuitem nav-selected-item block" href="javascript:void(0);" data-tabmenu="tab-inventory">
+										<span></span>
 									</a>
 									<a class="tab-menuitem button-black button-icon" href="javascript:void(0);" data-tabmenu="tab-achievements">
 										<i class="block i-check-white"></i>
+									</a>
+									<a class="tab-menuitem button-black" href="javascript:void(0);" data-tabmenu="tab-navigation">
+										<span>?</span>
 									</a>
 								</li>
 								<li class="nav-username">

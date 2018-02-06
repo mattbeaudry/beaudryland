@@ -251,6 +251,9 @@ export class HCI {
 				blUtil.log("selected item has animation");
 				$('.the-fucking-player').addClass("player-direction-"+playerdirection+"-"+selecteditem);
 			}
+
+			$('.nav-selected-item').removeClass(globals.allblockclasses);
+			$('.nav-selected-item').addClass('block-'+blocktype);
 		});
 
 		// REMOVE ITEMS FROM CRAFTING TABLE
