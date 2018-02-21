@@ -27,7 +27,7 @@
 							<div class="d-flex align-items-center justify-content-between">
 								<li>
 									<a class="tabs-close button-black" href="javascript:void(0);">
-										<span>< Back to game</span>
+										<span>< BACK</span>
 									</a>
 									<a class="tab-menuitem nav-selected-item block" href="javascript:void(0);" data-tabmenu="tab-inventory">
 										<span></span>
@@ -85,22 +85,28 @@
 		        	</div>
 		        	<div href="javascript:void(0)" class="btn-a"></div>
 		        </div>
+		        <div class="test-itemsJSON">
+		        	
+		        </div>
 			</div>
 
 			<div class="tabs">
 
 				<div class="tab tab-inventory" data-tab="tab-inventory">
-					<div class="the-fucking-inventory clearfix"></div>
-					<div class="crafting-table-wrap horizonal-spacing clearfix">
-						<div class="the-fucking-crafting-table pixel-corners">
-							<div class="block slot-1 empty" data-blocktype="empty"></div>
-							<div class="block slot-2 empty" data-blocktype="empty"></div>
-							<div class="block slot-3 empty" data-blocktype="empty"></div>
+					<section>
+						<h2>Inventory</h2>
+						<div class="the-fucking-inventory clearfix"></div>
+						<div class="crafting-table-wrap horizonal-spacing clearfix">
+							<div class="the-fucking-crafting-table pixel-corners">
+								<div class="block slot-1 empty" data-blocktype="empty"></div>
+								<div class="block slot-2 empty" data-blocktype="empty"></div>
+								<div class="block slot-3 empty" data-blocktype="empty"></div>
+							</div>
+							<div class="the-fucking-crafted-item pixel-corners">
+								<div class="slot empty" data-blocktype="empty"></div>
+							</div>
 						</div>
-						<div class="the-fucking-crafted-item pixel-corners">
-							<div class="slot empty" data-blocktype="empty"></div>
-						</div>
-					</div>
+					</section>
 					<?php include 'php/part-items.php'; ?>
 				</div>
 

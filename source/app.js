@@ -69,7 +69,6 @@ if ( $('body').hasClass("version-phonegap") ) {
 	    blStory.createBeachSigns();
 	    blDev.getAllItems();
 
-
 		blHCI.setupKeyboardEvents();
 		blHCI.setupMouseEvents();
 		blHCI.setupControlPadEvents();
@@ -240,6 +239,7 @@ var animateSpears = function() {
 			$('.objectid-'+id).remove();
 		}
     });
+    
 };
 
 

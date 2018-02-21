@@ -10,7 +10,7 @@
         
         <div class="container clearfix">
 
-            <h1>Item Builder</h1>
+            <h1>Sprite Painter</h1>
 
             <div class="panel-left">
 
@@ -59,65 +59,12 @@
                     <form class="item-builder" action="php/createnewitem.php" method="post">
                         <ul>
                             <li>
-                                <label for="name"></label>
-                                <input class="form-name" type="text" name="name" placeholder="Item Name">
+                                <label for="name">Name</label>
+                                <input class="form-name" type="text" name="name" placeholder="My Item">
                             </li>
                             <li>
-                                <label for="slug"></label>
-                                <input class="form-slug" type="text" name="slug" placeholder="item-slug">
-                            </li>
-                            <li>
-                                <fieldset>
-                                    <legend for="properties">Properties:</legend>
-                                    <input class="form-property" type="checkbox" name="properties" value="isplaceable" checked> Is Placeable<br>
-                                    <input class="form-property" type="checkbox" name="properties" value="isingredient"> Is Ingredient<br>
-                                    <!--<input class="form-property" type="checkbox" name="properties" value="isequipable"> Is Equipable<br>-->
-                                    <input class="form-property" type="checkbox" name="properties" value="iscollectable" checked> Is Collectable<br>
-                                    <input class="form-property" type="checkbox" name="properties" value="iscollectable" checked> Is Craftable <em>(Recipe Below)</em><br>
-                                
-                                    <select class="form-recipe-1" name="recipe-1">
-                                        <option value="tree">tree</option>
-                                        <option value="rock">rock</option>
-                                        <option value="pinetree">pinetree</option>
-                                        <option value="icerock">icerock</option>
-                                        <option value="palmtree">palmtree</option>
-                                        <option value="wood">wood</option>
-                                        <option value="fire">fire</option>
-                                        <option value="diamond">diamond</option>
-                                        <option value="gold">gold</option>
-                                        <option value="silver">silver</option>
-                                        <option value="oil">oil</option>
-                                        <option value="clay">clay</option>
-                                    </select>
-                                    <select class="form-recipe-2" name="recipe-2">
-                                        <option value="tree">tree</option>
-                                        <option value="rock">rock</option>
-                                        <option value="pinetree">pinetree</option>
-                                        <option value="icerock">icerock</option>
-                                        <option value="palmtree">palmtree</option>
-                                        <option value="wood">wood</option>
-                                        <option value="fire">fire</option>
-                                        <option value="diamond">diamond</option>
-                                        <option value="gold">gold</option>
-                                        <option value="silver">silver</option>
-                                        <option value="oil">oil</option>
-                                        <option value="clay">clay</option>
-                                    </select>
-                                    <select class="form-recipe-3" name="recipe-3">
-                                        <option value="tree">tree</option>
-                                        <option value="rock">rock</option>
-                                        <option value="pinetree">pinetree</option>
-                                        <option value="icerock">icerock</option>
-                                        <option value="palmtree">palmtree</option>
-                                        <option value="wood">wood</option>
-                                        <option value="fire">fire</option>
-                                        <option value="diamond">diamond</option>
-                                        <option value="gold">gold</option>
-                                        <option value="silver">silver</option>
-                                        <option value="oil">oil</option>
-                                        <option value="clay">clay</option>
-                                    </select>
-                                </fieldset>
+                                <label for="slug">Slug</label>
+                                <input class="form-slug" type="text" name="slug" placeholder="my-item">
                             </li>
                             <li>
                                 <input type="submit" class="create-image" value="Save Item">

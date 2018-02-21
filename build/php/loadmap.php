@@ -1,4 +1,5 @@
 <?php
+
 include '../config.php';
 ob_start();
 session_start();
@@ -25,4 +26,5 @@ if($result->num_rows > 0) {
 
 $mysqli->close();
 ob_end_flush();
+
 ?>

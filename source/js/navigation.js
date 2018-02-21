@@ -28,14 +28,12 @@ export var initializeNavigation = function(testVar, testObject) {
 		console.log("tabName:"+tabName);
 		$('.tabs .tab').hide();
 		$('.'+tabName).show();
-		$('.header-nav .tab-menuitem').hide();
 		$('.tabs-close').show();
 	});
 
 	$('.tabs-close').on("click", function() {
 		$('.tabs .tab').hide();
 		$('.tab-game').show();
-		$('.header-nav .tab-menuitem').show();
 		$('.tabs-close').hide();
 	});
 
