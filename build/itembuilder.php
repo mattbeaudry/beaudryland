@@ -17,13 +17,6 @@
                 <section>
                     <h2>Canvas</h2>
 
-                    <nav class="pixelpainter-nav">
-                        <ul>
-                            <li><a href="#" class="button-reset">Reset</a></li>
-                            <li><a href="#" class="button-preview">Preview</a></li>
-                        </ul>
-                    </nav>
-
                     <fieldset>
                         <label for="name">Image</label>
                 		<div class="the-fucking-canvas clearfix">
@@ -58,6 +51,76 @@
                             <div class="canvas-pixel" data-pixel="25" data-color="transparent"></div>
                 		</div>
                     <fieldset>
+
+                    <div id="itemsvg"></div>
+                    <div class="iteminfo"></div>
+
+                    <nav class="pixelpainter-nav">
+                        <ul>
+                            <li><a href="#" class="button-reset">Reset</a></li>
+                            <!-- <li><a href="#" class="button-preview">Preview</a></li> -->
+                        </ul>
+                    </nav>
+
+                    <section>
+
+                    <h2>Tools</h2>
+
+                    <form class="color-code">
+                        <input class="form-color" type="text" name="hexcode" placeholder="#000000" value="#000000">
+                    </form>
+
+                    <div class="color-palette clearfix">
+                        <span class="pine"></span>
+                        <span class="tree"></span>
+                        <span class="grass"></span>
+                        <br>
+                        <span class="hole"></span>
+                        <span class="trunk"></span>
+                        <span class="dirt"></span>
+                        <span class="wood"></span>
+                        <span class="board"></span>
+                        <span class="sand"></span>
+                        <br>
+                        <span class="ocean"></span>
+                        <span class="water"></span>
+                        <span class="diamond"></span>
+                        <span class="ice"></span>
+                        <span class="snow"></span>
+                        <br>
+                        <span class="brick"></span>
+                        <span class="red"></span>
+                        <span class="fire"></span>
+                        <span class="clay"></span>
+                        <span class="gold"></span>
+                        <br>
+                        <span class="black"></span>
+                        <span class="road"></span>
+                        <span class="rock"></span>
+                        <span class="silver"></span>
+                        <span clas s="white"></span>
+                        <span class="transparent"></span>
+                    </div>
+
+                    <div class="color-palette clearfix">
+                        <span class="c-ground-grass"></span>
+                        <span class="c-ground-space"></span>
+                        <span class="c-ground-snow"></span>
+                        <span class="c-ground-water"></span>
+                        <span class="c-ground-sand"></span>
+                        <span class="c-ground-dirt"></span>
+                        <span class="c-ground-ice"></span>
+                    </div>
+
+                </section>
+               
+            </div> 
+
+            <div class="panel-right">
+
+                <section>
+
+                    <h2>Propeties</h2>
 
                     <form class="item-builder" action="php/createnewitem.php" method="post">
                         <ul>
@@ -229,64 +292,12 @@
                     </form>
 
                 </section>
-               
-            </div>
-
-            <div class="panel-right">
-
-                <section>
-                    <h2>Preview</h2>
-                    <div id="itemsvg"></div>
-                    <div id="itemsvg-large"></div>
-                    <div class="iteminfo"></div>
-                </section>
-
-                 <section>
-
-                    <h2>Save item</h2>
-
-                    <form class="color-code">
-                        <input class="form-color" type="text" name="hexcode" placeholder="#000000" value="#000000">
-                    </form>
-
-                    <div class="color-palette clearfix">
-                        <span class="pine"></span>
-                        <span class="tree"></span>
-                        <span class="grass"></span>
-                        <br>
-                        <span class="hole"></span>
-                        <span class="trunk"></span>
-                        <span class="dirt"></span>
-                        <span class="wood"></span>
-                        <span class="board"></span>
-                        <span class="sand"></span>
-                        <br>
-                        <span class="ocean"></span>
-                        <span class="water"></span>
-                        <span class="diamond"></span>
-                        <span class="ice"></span>
-                        <span class="snow"></span>
-                        <br>
-                        <span class="brick"></span>
-                        <span class="red"></span>
-                        <span class="fire"></span>
-                        <span class="clay"></span>
-                        <span class="gold"></span>
-                        <br>
-                        <span class="black"></span>
-                        <span class="road"></span>
-                        <span class="rock"></span>
-                        <span class="silver"></span>
-                        <span class="white"></span>
-                        <span class="transparent"></span>
-                    </div>
-                </section>
 
             </div>
 
             <div >
                 <section class="panel-bottom clearfix">
-                    <h2>Item Gallery</h2>
+                    <h2>Items</h2>
 
                     <?php
 
@@ -333,11 +344,13 @@ $('.canvas-pixel').on("click", function() {
     // validate hex code
     $(this).css("background-color",colorcode);
     $(this).attr("data-color",colorcode);
+    itemPreview();
 });
 
 $('.button-reset').on("click", function(){
     $('.canvas-pixel').css("background-color","transparent");
     $('.canvas-pixel').attr("data-color","transparent");
+    itemPreview();
 });
 
 $('.button-preview').on("click", function(){
@@ -437,6 +450,11 @@ var createSVG = function() {
         pixels[i].attr("stroke", "transparent");
     });
 };
+
+var loadItemSelects = function() {
+
+};
+
 
 
 

@@ -56,15 +56,13 @@
                         <div class="canvas-pixel" data-pixel="25" data-color="transparent"></div>
             		</div>
 
+                    <div id="itemsvg"></div>
+
                     <form class="item-builder" action="php/createnewitem.php" method="post">
                         <ul>
                             <li>
                                 <label for="name">Name</label>
                                 <input class="form-name" type="text" name="name" placeholder="My Item">
-                            </li>
-                            <li>
-                                <label for="slug">Slug</label>
-                                <input class="form-slug" type="text" name="slug" placeholder="my-item">
                             </li>
                             <li>
                                 <input type="submit" class="create-image" value="Save Item">
@@ -77,17 +75,11 @@
             </div>
 
             <div class="panel-right">
-
-                <section>
-                    <h2>Preview</h2>
-                    <div id="itemsvg"></div>
-                    <div id="itemsvg-large"></div>
-                    <div class="iteminfo"></div>
                 </section>
 
                  <section>
 
-                    <h2>Save item</h2>
+                    <h2>Tools</h2>
 
                     <form class="color-code">
                         <input class="form-color" type="text" name="hexcode" placeholder="#000000" value="#000000">
@@ -130,19 +122,19 @@
 
             <div >
                 <section class="panel-bottom clearfix">
-                    <h2>Item Gallery</h2>
+                    <h2>Sprite Gallery</h2>
 
                     <?php
 
                         $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
                         if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
 
-                        if ( $result = $mysqli->query("SELECT * FROM beaudryland_items ORDER BY itemid DESC") ) {
+                        if ( $result = $mysqli->query("SELECT * FROM beaudryland_sprites ORDER BY spriteid DESC") ) {
                             if($result->num_rows > 0) {
                                 while($row = $result->fetch_assoc()) {
                                     $name = $row['name'];
-                                    $slug = $row['slug'];
-                                    $recipe = $row['recipe'];
+                                    //$slug = $row['slug'];
+                                    //$recipe = $row['recipe'];
                                     $svg = $row['image'];
                                     $infohtml = '';
                                     //$infohtml += 'Slug: '.$slug.'<br>';
@@ -177,11 +169,13 @@ $('.canvas-pixel').on("click", function() {
     // validate hex code
     $(this).css("background-color",colorcode);
     $(this).attr("data-color",colorcode);
+    itemPreview();
 });
 
 $('.button-reset').on("click", function(){
     $('.canvas-pixel').css("background-color","transparent");
     $('.canvas-pixel').attr("data-color","transparent");
+    itemPreview();
 });
 
 $('.button-preview').on("click", function(){
@@ -197,40 +191,14 @@ $('.color-palette span').on("click", function() {
 $('.item-builder').submit(function(e) {
     itemPreview();
     var svg = $('#itemsvg').html();
-    //console.log(svg);
     var name = $('.item-builder .form-name').val();
-    var slug = $('.item-builder .form-slug').val();
-    var recipe1 = $('.item-builder .form-recipe-1').val();
-    var recipe2 = $('.item-builder .form-recipe-2').val();
-    var recipe3 = $('.item-builder .form-recipe-3').val();
-    var recipe = recipe1+recipe2+recipe3;
-    $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe, image:svg}, function(data) {
+    $.post('php/createnewsprite.php', {name: name, image:svg}, function(data) {
         //console.log(svg);
     });
     location.reload();
-    //header("location:spritepainter.php");
     event.preventDefault();
     location.reload();
-});
-
-$('.button-saveitem').on("click", function() {
     itemPreview();
-    var svg = $('#itemsvg').html();
-    //console.log(svg);
-    var name = $('.item-builder .form-name').val();
-    if (!name) { name = 'unnamed' }
-    var slug = $('.item-builder .form-slug').val();
-    var recipe1 = $('.item-builder .form-recipe-1').val();
-    var recipe2 = $('.item-builder .form-recipe-2').val();
-    var recipe3 = $('.item-builder .form-recipe-3').val();
-    var recipe = recipe1+recipe2+recipe3;
-    $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe, image:svg}, function(data) {
-        //console.log(svg);
-    });
-    location.reload();
-    //header("location:spritepainter.php");
-    event.preventDefault();
-    location.reload();
 });
 
 var itemPreview = function() {
@@ -276,35 +244,6 @@ var createSVG = function() {
         pixels[i].attr("stroke", "transparent");
     });
 };
-
-
-
-/*
-var w = 600;
-var h = 400;
-var paper = Raphael("wrap");
-paper.setViewBox(0,0,w,h,true);
-
-// ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
-var svg = document.querySelector("svg");
-svg.removeAttribute("width");
-svg.removeAttribute("height");
-
-
-// draw some random vectors:
-var path = "M " + w / 2 + " " + h / 2;
-for (var i = 0; i < 100; i++){
-    var x = Math.random() * w;
-    var y = Math.random() * h;
-    paper.circle(x,y,
-                 Math.random() * 60 + 2).
-                 attr("fill", "rgb("+Math.random() * 255+",0,0)").
-                 attr("opacity", 0.5);
-    path += "L " + x + " " + y + " ";
-}
-paper.path(path).attr("stroke","#ffffff").attr("stroke-opacity", 0.2);
-paper.text(200,100,"Resize the window").attr("font","30px Arial").attr("fill","#ffffff");
-*/
 
 </script>
 

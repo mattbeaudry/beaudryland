@@ -16,9 +16,6 @@ export class Item {
 		// create global item variables + JSON object
 		// (item creator) = build select menus for craftable items
 		// create item list under inventory (incl. recipies)
-		
-
-
 	}
 
 }
@@ -57,5 +54,16 @@ is_useable
  image_item_swing_back
  image_item_swing_left
  image_item_swing_right
+
+
+
+NEEDED
+
+is_ground
+is_diggable
+has_map_mechanism
+is_throwable
+background_color
+type? (floor, item, plant, object, organism, etc.)
 
 */

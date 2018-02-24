@@ -16,7 +16,7 @@
 
 <?php include 'header.php'; ?>
 
-	<body class="page-game version-desktop">
+	<body class="page-game version-desktop theme-day">
 
 		<div class="container">
 
@@ -52,12 +52,6 @@
 						</nav>
 					</div>
 				</div>
-				<!-- <div class="header-inventory the-fucking-useful-inventory">
-					<div class="block slot-fav-1 block-sword" data-blocktype="sword"></div>
-					<div class="block slot-fav-2 block-shovel" data-blocktype="shovel"></div>
-					<div class="block slot-fav-3 block-axe" data-blocktype="axe"></div>
-					<div class="block slot-fav-4 block-spear" data-blocktype="spear"></div>
-				</div> -->
 			</header>
 
 			<div class="tab-game" data-tab="tab-game">
@@ -85,9 +79,6 @@
 		        	</div>
 		        	<div href="javascript:void(0)" class="btn-a"></div>
 		        </div>
-		        <div class="test-itemsJSON">
-		        	
-		        </div>
 			</div>
 
 			<div class="tabs">
@@ -107,7 +98,20 @@
 							</div>
 						</div>
 					</section>
-					<?php include 'php/part-items.php'; ?>
+
+					<table class="bl-table items-table">
+						<thead>
+							<tr>
+								<td>Item</td>
+								<td>Image</td>
+								<td>Recipe</td>
+								<td>Notes</td>
+							</tr>
+						</thead>
+						<tbody>
+							<?php include 'php/loaditems.php'; ?>
+						</tbody>
+					</table>
 				</div>
 
 				<div class="tab tab-navigation" data-tab="tab-navigation">
@@ -165,7 +169,12 @@
 								</li>
 								<li class="link-itemeditor">
 									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="spritepainter.php">Item Editor ></a>
+										<a target="_blank" href="itembuilder.php">Item Builder ></a>
+									</div>
+								</li>
+								<li class="link-itemeditor">
+									<div class="button-wrap button-wrap-large button-wrap-outline">
+										<a target="_blank" href="spritepainter.php">Sprite Painter ></a>
 									</div>
 								</li>
 								<li class="link-mapeditor">
