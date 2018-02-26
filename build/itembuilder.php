@@ -112,6 +112,58 @@
                         <span class="c-ground-ice"></span>
                     </div>
 
+                    <div class="color-palette clearfix">
+                        <span class="c-green-1"></span>
+                        <span class="c-green-2"></span>
+                        <span class="c-green-3"></span>
+                        <span class="c-green-4"></span>
+                        <span class="c-green-5"></span>
+                        <span class="c-green-6"></span>
+                        <br>
+                        <span class="c-brown-1"></span>
+                        <span class="c-brown-2"></span>
+                        <span class="c-brown-3"></span>
+                        <span class="c-brown-4"></span>
+                        <span class="c-brown-5"></span>
+                        <span class="c-brown-6"></span>
+                        <br>
+                        <span class="c-blue-1"></span>
+                        <span class="c-blue-2"></span>
+                        <span class="c-blue-3"></span>
+                        <span class="c-blue-4"></span>
+                        <span class="c-blue-5"></span>
+                        <span class="c-blue-6"></span>
+                        <br>
+                        <span class="c-red-1"></span>
+                        <span class="c-red-2"></span>
+                        <span class="c-red-3"></span>
+                        <span class="c-orange-1"></span>
+                        <span class="c-orange-2"></span>
+                        <span class="c-orange-3"></span>
+                        <br>
+                        <span class="c-yellow-1"></span>
+                        <span class="c-yellow-2"></span>
+                        <span class="c-yellow-3"></span>
+                        <span class="c-yellow-4"></span>
+                        <span class="c-yellow-5"></span>
+                        <span class="c-yellow-6"></span>
+                        <br>
+                        <span class="c-purple-1"></span>
+                        <span class="c-purple-2"></span>
+                        <span class="c-purple-3"></span>
+                        <span class="c-pink-1"></span>
+                        <span class="c-peach-1"></span>
+                        <span class="c-peach-2"></span>
+                        <br>
+                        <span class="c-black-1"></span>
+                        <span class="c-grey-1"></span>
+                        <span class="c-grey-2"></span>
+                        <span class="c-grey-3"></span>
+                        <span class="c-grey-4"></span>
+                        <span class="c-white-1"></span>
+                        <br>
+                    </div>
+
                 </section>
                
             </div> 
@@ -126,11 +178,11 @@
                         <ul>
                             <li>
                                 <label for="name">name</label>
-                                <input class="form-name" type="text" name="name" placeholder="My Item">
+                                <input class="form-name" type="text" name="name" placeholder="My Item" required>
                             </li>
                             <li>
                                 <label for="slug">slug</label>
-                                <input class="form-slug" type="text" name="slug" placeholder="my-item">
+                                <input class="form-slug" type="text" name="slug" placeholder="my-item" required>
                             </li>
                             <li>
                                 <label for="description">description</label>
@@ -159,36 +211,24 @@
                                     <label>
                                         <select class="form-recipe-1a" name="recipe-1a">
                                             <option value="null">Choose...</option>
-                                            <option value="tree">tree</option>
-                                            <option value="rock">rock</option>
                                         </select>
                                         <select class="form-recipe-1b" name="recipe-1b">
                                             <option value="null">Choose...</option>
-                                            <option value="tree">tree</option>
-                                            <option value="rock">rock</option>
                                         </select>
                                         <select class="form-recipe-1c" name="recipe-1c">
                                             <option value="null">Choose...</option>
-                                            <option value="tree">tree</option>
-                                            <option value="rock">rock</option>
                                         </select>
                                     </label>
                                     <legend for="recipe-2">recipe #2:</legend>
                                     <label>
                                         <select class="form-recipe-2a" name="recipe-2a">
                                             <option value="null">Choose...</option>
-                                            <option value="tree">tree</option>
-                                            <option value="rock">rock</option>
                                         </select>
                                         <select class="form-recipe-2b" name="recipe-2b">
                                             <option value="null">Choose...</option>
-                                            <option value="tree">tree</option>
-                                            <option value="rock">rock</option>
                                         </select>
                                         <select class="form-recipe-2c" name="recipe-2c">
                                             <option value="null">Choose...</option>
-                                            <option value="tree">tree</option>
-                                            <option value="rock">rock</option>
                                         </select>
                                     </label>
                                     <legend for="recipe-3">recipe #3:</legend>
@@ -309,7 +349,7 @@
                                 while($row = $result->fetch_assoc()) {
                                     $name = $row['name'];
                                     $slug = $row['slug'];
-                                    $recipe = $row['recipes'];
+                                    //$recipe = $row['recipes'];
                                     $svg = $row['image'];
                                     $infohtml = '';
                                     //$infohtml += 'Slug: '.$slug.'<br>';
@@ -452,38 +492,19 @@ var createSVG = function() {
 };
 
 var loadItemSelects = function() {
+    $.post('php/loaditemsJSON.php', {}, function(data) {
+        if (data == false) {
+            console.log("failed gettins items json");
+        } else {
+            for (var i=0; i < data.length; i++) {
+                $('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c, .form-recipe-2a, .form-recipe-2b, .form-recipe-2c, .form-recipe-3a, .form-recipe-3b, .form-recipe-3c').append('<option value="'+data[i].slug+'">'+data[i].name+'</option>');
+            }
+        }   
+    }, "json");
 
 };
 
-
-
-
-/*
-var w = 600;
-var h = 400;
-var paper = Raphael("wrap");
-paper.setViewBox(0,0,w,h,true);
-
-// ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
-var svg = document.querySelector("svg");
-svg.removeAttribute("width");
-svg.removeAttribute("height");
-
-
-// draw some random vectors:
-var path = "M " + w / 2 + " " + h / 2;
-for (var i = 0; i < 100; i++){
-    var x = Math.random() * w;
-    var y = Math.random() * h;
-    paper.circle(x,y,
-                 Math.random() * 60 + 2).
-                 attr("fill", "rgb("+Math.random() * 255+",0,0)").
-                 attr("opacity", 0.5);
-    path += "L " + x + " " + y + " ";
-}
-paper.path(path).attr("stroke","#ffffff").attr("stroke-opacity", 0.2);
-paper.text(200,100,"Resize the window").attr("font","30px Arial").attr("fill","#ffffff");
-*/
+loadItemSelects();
 
 </script>
 

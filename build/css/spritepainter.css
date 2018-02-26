@@ -128,12 +128,61 @@ input[type="text"] {
 .white { background-color:#fff; }
 
 .c-ground-grass { background-color: #6DB366; }
-.c-ground-space {  background-color: #000000; }
+.c-ground-space { background-color: #000000; }
 .c-ground-snow {  background-color: #EEFCFF; }
 .c-ground-water {  background-color: #8DC4E3; }
 .c-ground-sand {  background-color: #F1E9C5; }
 .c-ground-dirt {  background-color: #BBA17A; }
 .c-ground-ice {  background-color: #D0ECFC; }
+
+.c-green-1 { background-color: #083704; }
+.c-green-2 { background-color: #15560E; }
+.c-green-3 { background-color: #398D39; }
+.c-green-4 { background-color: #40C94C; }
+.c-green-5 { background-color: #7DE58A; }
+.c-green-6 { background-color: #CAECC6; }
+
+.c-brown-1 { background-color: #1D1200; }
+.c-brown-2 { background-color: #4E3205; }
+.c-brown-3 { background-color: #87580B; }
+.c-brown-4 { background-color: #A8823E; }
+.c-brown-5 { background-color: #D9BA63; }
+.c-brown-6 { background-color: #D8CF9E; }
+
+.c-blue-1 { background-color: #0A4971; }
+.c-blue-2 { background-color: #0F7CC1; }
+.c-blue-3 { background-color: #43B0F3; }
+.c-blue-4 { background-color: #43CFF4; }
+.c-blue-5 { background-color: #D4F4FC; }
+.c-blue-6 { background-color: #F5FDFF; }
+
+.c-red-1 { background-color: #992F08; }
+.c-red-2 { background-color: #DA3D00; }
+.c-red-3 { background-color: #DA5000; }
+.c-orange-1 { background-color: #D87300; }
+.c-orange-2 { background-color: #EAA85D; }
+.c-orange-3 { background-color: #FFDEB9; }
+
+.c-yellow-1 { background-color: #614C00; }
+.c-yellow-2 { background-color: #9A8002; }
+.c-yellow-3 { background-color: #CBB317; }
+.c-yellow-4 { background-color: #E7D94B; }
+.c-yellow-5 { background-color: #FCF290; }
+.c-yellow-6 { background-color: #FDF3C8; }
+
+.c-purple-1 { background-color: #42004C; }
+.c-purple-2 { background-color: #922097; }
+.c-purple-3 { background-color: #BC75D0; }
+.c-pink-1 { background-color: #FCB8F3; }
+.c-peach-1 { background-color: #FA9E9E; }
+.c-peach-2 { background-color: #FFC8D1; }
+
+.c-black-1 { background-color: #000000; }
+.c-grey-1 { background-color: #3B3B3B; }
+.c-grey-2 { background-color: #939597; }
+.c-grey-3 { background-color: #C6CACE; }
+.c-grey-4 { background-color: #E8ECEF; }
+.c-white-1 { background-color: #FFFFFF; }
 
 .transparent { background-color: transparent; border: dotted 2px #000; }
 

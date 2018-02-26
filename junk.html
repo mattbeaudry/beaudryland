@@ -39,6 +39,34 @@ t++;
 
 
 
+/*
+var w = 600;
+var h = 400;
+var paper = Raphael("wrap");
+paper.setViewBox(0,0,w,h,true);
+
+// ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
+var svg = document.querySelector("svg");
+svg.removeAttribute("width");
+svg.removeAttribute("height");
+
+
+// draw some random vectors:
+var path = "M " + w / 2 + " " + h / 2;
+for (var i = 0; i < 100; i++){
+    var x = Math.random() * w;
+    var y = Math.random() * h;
+    paper.circle(x,y,
+                 Math.random() * 60 + 2).
+                 attr("fill", "rgb("+Math.random() * 255+",0,0)").
+                 attr("opacity", 0.5);
+    path += "L " + x + " " + y + " ";
+}
+paper.path(path).attr("stroke","#ffffff").attr("stroke-opacity", 0.2);
+paper.text(200,100,"Resize the window").attr("font","30px Arial").attr("fill","#ffffff");
+*/
+
+
 
 	playSound(freq) {
 		achievementCompleted("jammingout");
