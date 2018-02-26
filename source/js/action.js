@@ -2,12 +2,14 @@ import * as globals from './globals';
 
 import { Utility } from './utility';
 import { Map } from './map/map';
+import { Health } from './health';
 import { Inventory } from './inventory';
 import { Signs } from './signs';
 import { Achievement } from './achievement';
 
 var blUtil = new Utility();
 var blMap = new Map();
+var blHealth = new Health();
 var blInventory = new Inventory();
 var blSigns = new Signs();
 var blAchievement = new Achievement();
@@ -99,7 +101,7 @@ export class Action {
 				blInventory.removeFromInventory(selecteditem);
 			} else if (selecteditem == "mushroom") {
 				blHealth.addHeart();
-				//hallucinate();
+				blMap.hallucinate();
 				blInventory.removeFromInventory(selecteditem);
 			} else if (selecteditem == "bluemushroom") {
 				blHealth.addHeart();
@@ -271,6 +273,15 @@ export class Action {
 			}
 
 		});
+	}
+
+	hallucinate() {
+		$('body').addClass("mushrooms");
+		setTimeout(
+			function() {
+				$('body').removeClass("mushrooms");
+			}, 
+		10000);
 	}
 
 }

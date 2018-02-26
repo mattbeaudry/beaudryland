@@ -446,21 +446,11 @@ export class Map {
 	}
 
 	mapPerspective() {
-		$('.cube-container').addClass("map-view-perspective");
-		setTimeout(
-			function() {
-				$('.cube-container').removeClass("map-view-perspective");
-			}, 
-		10000);
+		$('.cube-container').toggleClass("map-view-perspective");
 	}
 
 	hallucinate() {
-		$('body').addClass("mushrooms");
-		setTimeout(
-			function() {
-				$('body').removeClass("mushrooms");
-			}, 
-		10000);
+		$('body').toggleClass("mushrooms");
 	}
 
 };
