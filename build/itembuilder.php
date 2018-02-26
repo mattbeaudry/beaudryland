@@ -17,7 +17,7 @@
                 <section>
                     <h2>Canvas</h2>
 
-                    <fieldset>
+                    <fieldset class="canvas-frame-1">
                         <label for="name">Image</label>
                 		<div class="the-fucking-canvas clearfix">
                             <div class="canvas-pixel" data-pixel="1" data-color="transparent"></div>
@@ -30,7 +30,7 @@
                             <div class="canvas-pixel" data-pixel="7" data-color="transparent"></div>
                             <div class="canvas-pixel" data-pixel="8" data-color="transparent"></div>
                             <div class="canvas-pixel" data-pixel="9" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="0" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="10" data-color="transparent"></div>
 
                             <div class="canvas-pixel" data-pixel="11" data-color="transparent"></div>
                             <div class="canvas-pixel" data-pixel="12" data-color="transparent"></div>
@@ -50,7 +50,42 @@
                             <div class="canvas-pixel" data-pixel="24" data-color="transparent"></div>
                             <div class="canvas-pixel" data-pixel="25" data-color="transparent"></div>
                 		</div>
-                    <fieldset>
+                    </fieldset>
+
+                    <fieldset class="canvas-frame-2">
+                        <label for="name">Animation frame</label>
+                        <div class="the-fucking-canvas clearfix">
+                            <div class="canvas-pixel" data-pixel="1" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="2" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="3" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="4" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="5" data-color="transparent"></div>
+
+                            <div class="canvas-pixel" data-pixel="6" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="7" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="8" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="9" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="10" data-color="transparent"></div>
+
+                            <div class="canvas-pixel" data-pixel="11" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="12" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="13" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="14" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="15" data-color="transparent"></div>
+
+                            <div class="canvas-pixel" data-pixel="16" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="17" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="18" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="19" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="20" data-color="transparent"></div>
+
+                            <div class="canvas-pixel" data-pixel="21" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="22" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="23" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="24" data-color="transparent"></div>
+                            <div class="canvas-pixel" data-pixel="25" data-color="transparent"></div>
+                        </div>
+                    </fieldset>
 
                     <div id="itemsvg"></div>
                     <div class="iteminfo"></div>
@@ -456,7 +491,7 @@ $('.item-builder').submit(function(e) {
 var itemPreview = function() {
     createSVG();
 };
-
+ 
 var paper;
 var createSVG = function() {
     $('#itemsvg svg').remove();
@@ -470,7 +505,8 @@ var createSVG = function() {
     var pixels = [];
     var x = 0;
     var y = 0;
-    $('.canvas-pixel').each(function(i) {
+
+    $('.canvas-frame-1 .canvas-pixel').each(function(i) {
         var color = $(this).attr("data-color");
         //color = hexc(color);
         if (i == 0) {
@@ -489,6 +525,38 @@ var createSVG = function() {
         pixels[i].attr("fill", color);
         pixels[i].attr("stroke", "transparent");
     });
+
+    if (has_animation == true) {
+        $('.canvas-frame-2 .canvas-pixel').each(function(i) {
+            var color = $(this).attr("data-color");
+            //color = hexc(color);
+            var offset = w;
+            if (i == 0) {
+                x = 0;
+                y = 0;
+            } else {
+                if (i%5 == 0) {
+                    //multiple of 5 or 0]
+                    y = y + pixelwidth;
+                    x = 0;
+                } else {
+                    x = (i%5) * pixelwidth;
+                }
+            }
+            pixels[i] = paper.rect(x + 30, y, pixelwidth, pixelwidth);
+            pixels[i].attr("fill", color);
+            pixels[i].attr("stroke", "transparent");
+        });
+
+        // animated svg
+        var style = '<style>';
+        style += 'rect {';
+        style += 'animation: svgAnimate 2s steps(1) infinite;';
+        style += '}';
+        style += '</style>';
+
+        $('#itemsvg svg').append(style);
+    }
 };
 
 var loadItemSelects = function() {
@@ -501,10 +569,22 @@ var loadItemSelects = function() {
             }
         }   
     }, "json");
-
 };
 
 loadItemSelects();
+
+var has_animation = '';
+
+$('.form-has_animation').change(function() {
+    if(this.checked) {
+        has_animation = true;
+        $('.canvas-frame-2').show();
+    } else {
+        has_animation = false;
+        $('.canvas-frame-2').hide();
+    }
+    itemPreview();
+});
 
 </script>
 
