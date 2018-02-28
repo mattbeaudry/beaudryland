@@ -29,8 +29,17 @@
     }
 }
 
-.canvas-frame-2 {
+.canvas-frame-2,
+.is_craftable-recipe,
+.is_lifeform-images,
+.is_equipable-images,
+.is_useable-images {
     display: none;
+}
+
+.canvas-frame {
+    float: left;
+    margin: 16px 16px 0 0;
 }
 
 .panel-left {

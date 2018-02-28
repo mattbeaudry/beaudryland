@@ -15,91 +15,93 @@
             <div class="panel-left">
 
                 <section>
-                    <h2>Canvas</h2>
+                    <h2>Art</h2>
 
-                    <fieldset class="canvas-frame-1">
-                        <label for="name">Image</label>
-                		<div class="the-fucking-canvas clearfix">
-                            <div class="canvas-pixel" data-pixel="1" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="2" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="3" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="4" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="5" data-color="transparent"></div>
+                    <div class="clearfix">
+                        <fieldset class="canvas-frame canvas-frame-1">
+                            <label for="name">Image</label>
+                    		<?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
 
-                            <div class="canvas-pixel" data-pixel="6" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="7" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="8" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="9" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="10" data-color="transparent"></div>
+                        <fieldset class="canvas-frame canvas-frame-2">
+                            <label for="name">Animation frame</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <div id="itemsvg"></div>
+                        <div class="iteminfo"></div>
 
-                            <div class="canvas-pixel" data-pixel="11" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="12" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="13" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="14" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="15" data-color="transparent"></div>
+                        <nav class="pixelpainter-nav">
+                            <ul>
+                                <li><a href="#" class="button-reset">Reset</a></li>
+                                <!-- <li><a href="#" class="button-preview">Preview</a></li> -->
+                            </ul>
+                        </nav>
+                    </div>
 
-                            <div class="canvas-pixel" data-pixel="16" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="17" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="18" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="19" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="20" data-color="transparent"></div>
+                    <div class="clearfix is_lifeform-images">
+                        <fieldset class="canvas-frame canvas-is_lifeform-front">
+                            <label for="name">Lifeform front</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_lifeform-back">
+                            <label for="name">Lifeform back</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_lifeform-left">
+                            <label for="name">Lifeform left</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_lifeform-right">
+                            <label for="name">Lifeform right</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                    </div>
 
-                            <div class="canvas-pixel" data-pixel="21" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="22" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="23" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="24" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="25" data-color="transparent"></div>
-                		</div>
-                    </fieldset>
+                    <div class="clearfix is_equipable-images">
+                        <fieldset class="canvas-frame canvas-is_equipable-front">
+                            <label for="name">Equipped item front</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_equipable-back">
+                            <label for="name">Equipped item back</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_equipable-left">
+                            <label for="name">Equipped item left</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_equipable-right">
+                            <label for="name">Equipped item right</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                    </div>
 
-                    <fieldset class="canvas-frame-2">
-                        <label for="name">Animation frame</label>
-                        <div class="the-fucking-canvas clearfix">
-                            <div class="canvas-pixel" data-pixel="1" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="2" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="3" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="4" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="5" data-color="transparent"></div>
+                    <div class="clearfix is_useable-images">
+                        <fieldset class="canvas-frame canvas-is_useable-front">
+                            <label for="name">Item swing front</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_useable-back">
+                            <label for="name">Item swing back</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_useable-left">
+                            <label for="name">Item swing left</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_useable-right">
+                            <label for="name">Item swing right</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                    </div>
 
-                            <div class="canvas-pixel" data-pixel="6" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="7" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="8" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="9" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="10" data-color="transparent"></div>
+                </section>
 
-                            <div class="canvas-pixel" data-pixel="11" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="12" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="13" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="14" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="15" data-color="transparent"></div>
+                <section>
 
-                            <div class="canvas-pixel" data-pixel="16" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="17" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="18" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="19" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="20" data-color="transparent"></div>
-
-                            <div class="canvas-pixel" data-pixel="21" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="22" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="23" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="24" data-color="transparent"></div>
-                            <div class="canvas-pixel" data-pixel="25" data-color="transparent"></div>
-                        </div>
-                    </fieldset>
-
-                    <div id="itemsvg"></div>
-                    <div class="iteminfo"></div>
-
-                    <nav class="pixelpainter-nav">
-                        <ul>
-                            <li><a href="#" class="button-reset">Reset</a></li>
-                            <!-- <li><a href="#" class="button-preview">Preview</a></li> -->
-                        </ul>
-                    </nav>
-
-                    <section>
-
-                    <h2>Tools</h2>
+                    <h2>Colors</h2>
 
                     <form class="color-code">
                         <input class="form-color" type="text" name="hexcode" placeholder="#000000" value="#000000">
@@ -240,7 +242,7 @@
                                     <span>is craftable</span>
                                 </label>
                             </li>
-                            <li>
+                            <li class="is_craftable-recipe">
                                 <fieldset>
                                     <legend for="recipe-1">recipe #1:</legend>
                                     <label>
@@ -584,6 +586,54 @@ $('.form-has_animation').change(function() {
         $('.canvas-frame-2').hide();
     }
     itemPreview();
+});
+
+var is_craftable = '';
+
+$('.form-is_craftable').change(function() {
+    if(this.checked) {
+        is_craftable = true;
+        $('.is_craftable-recipe').show();
+    } else {
+        is_craftable = false;
+        $('.is_craftable-recipe').hide();
+    }
+});
+
+var is_lifeform = '';
+
+$('.form-is_lifeform').change(function() {
+    if(this.checked) {
+        is_craftable = true;
+        $('.is_lifeform-images').show();
+    } else {
+        is_craftable = false;
+        $('.is_lifeform-images').hide();
+    }
+});
+
+var is_equipable = '';
+
+$('.form-is_equipable').change(function() {
+    if(this.checked) {
+        is_equipable = true;
+        $('.is_equipable-images').show();
+    } else {
+        is_equipable = false;
+        $('.is_equipable-images').hide();
+    }
+});
+
+var is_useable = '';
+
+$('.form-is_useable').change(function() {
+    if(this.checked) {
+        is_useable = true;
+        $('.is_useable-images').show();
+    } else {
+        is_craftable = false;
+        $('.is_useable-images').hide();
+    }
 });
 
 </script>
