@@ -15,91 +15,6 @@
             <div class="panel-left">
 
                 <section>
-                    <h2>Art</h2>
-
-                    <div class="clearfix">
-                        <fieldset class="canvas-frame canvas-frame-1">
-                            <label for="name">Image</label>
-                    		<?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-
-                        <fieldset class="canvas-frame canvas-frame-2">
-                            <label for="name">Animation frame</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                    </div>
-                    <div>
-                        <div id="itemsvg"></div>
-                        <div class="iteminfo"></div>
-
-                        <nav class="pixelpainter-nav">
-                            <ul>
-                                <li><a href="#" class="button-reset">Reset</a></li>
-                                <!-- <li><a href="#" class="button-preview">Preview</a></li> -->
-                            </ul>
-                        </nav>
-                    </div>
-
-                    <div class="clearfix is_lifeform-images">
-                        <fieldset class="canvas-frame canvas-is_lifeform-front">
-                            <label for="name">Lifeform front</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                        <fieldset class="canvas-frame canvas-is_lifeform-back">
-                            <label for="name">Lifeform back</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                        <fieldset class="canvas-frame canvas-is_lifeform-left">
-                            <label for="name">Lifeform left</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                        <fieldset class="canvas-frame canvas-is_lifeform-right">
-                            <label for="name">Lifeform right</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                    </div>
-
-                    <div class="clearfix is_equipable-images">
-                        <fieldset class="canvas-frame canvas-is_equipable-front">
-                            <label for="name">Equipped item front</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                        <fieldset class="canvas-frame canvas-is_equipable-back">
-                            <label for="name">Equipped item back</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                        <fieldset class="canvas-frame canvas-is_equipable-left">
-                            <label for="name">Equipped item left</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                        <fieldset class="canvas-frame canvas-is_equipable-right">
-                            <label for="name">Equipped item right</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                    </div>
-
-                    <div class="clearfix is_useable-images">
-                        <fieldset class="canvas-frame canvas-is_useable-front">
-                            <label for="name">Item swing front</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                        <fieldset class="canvas-frame canvas-is_useable-back">
-                            <label for="name">Item swing back</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                        <fieldset class="canvas-frame canvas-is_useable-left">
-                            <label for="name">Item swing left</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                        <fieldset class="canvas-frame canvas-is_useable-right">
-                            <label for="name">Item swing right</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                        </fieldset>
-                    </div>
-
-                </section>
-
-                <section>
 
                     <h2>Colors</h2>
 
@@ -202,6 +117,116 @@
                     </div>
 
                 </section>
+
+                <section>
+                    <h2>Art</h2>
+
+                    <div class="clearfix">
+                        <fieldset class="canvas-frame canvas-frame-1">
+                            <label for="name">Image</label>
+                    		<?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+
+                        <fieldset class="canvas-frame canvas-frame-2">
+                            <label for="name">Animation frame</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                        </fieldset>
+                    </div>
+
+                    <div>
+                        <div class="svg-preview" id="itemsvg"></div>
+                        <div class="svg-preview" id="itemsvg_animated"></div>
+
+                        <nav class="pixelpainter-nav">
+                            <ul>
+                                <li><a href="#" class="button-reset">Reset</a></li>
+                                <!-- <li><a href="#" class="button-preview">Preview</a></li> -->
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="clearfix is_lifeform-images">
+                        <fieldset class="canvas-frame canvas-is_lifeform-front">
+                            <label for="name">Lifeform front</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_front"></div>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_lifeform-back">
+                            <label for="name">Lifeform back</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_back"></div>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_lifeform-left">
+                            <label for="name">Lifeform left</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_left"></div>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_lifeform-right">
+                            <label for="name">Lifeform right</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_right"></div>
+                        </fieldset>
+                    </div>
+
+                    <div class="clearfix is_equipable-images">
+                        <fieldset class="canvas-frame canvas-is_equipable-front">
+                            <label for="name">Equipped item front</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_front"></div>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_equipable-back">
+                            <label for="name">Equipped item back</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_back"></div>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_equipable-left">
+                            <label for="name">Equipped item left</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_left"></div>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_equipable-right">
+                            <label for="name">Equipped item right</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_right"></div>
+                        </fieldset>
+                    </div>
+
+                    <div class="clearfix is_useable-images">
+                        <fieldset class="canvas-frame canvas-is_useable-front">
+                            <label for="name">Item swing front</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_front"></div>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_useable-back">
+                            <label for="name">Item swing back</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_back"></div>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_useable-left">
+                            <label for="name">Item swing left</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_left"></div>
+                        </fieldset>
+                        <fieldset class="canvas-frame canvas-is_useable-right">
+                            <label for="name">Item swing right</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="itemsvg_lifeform_right"></div>
+                        </fieldset>
+                    </div>
+
+                </section>
                
             </div> 
 
@@ -230,14 +255,13 @@
                                 <input class="form-user" type="text" name="user" placeholder="beaudryland" value="beaudryland">
                             </li>
                             <li>
-                                <label for="has_animation">
+                                <label>
                                     <input class="form-has_animation" type="checkbox" name="has_animation">
                                     <span>has animation</span>
                                 </label>
                             </li>
-                            <!-- insert animation image upload - ask for animated gif upload? animnated svg? -->
                             <li>
-                                <label for="is_craftable">
+                                <label>
                                     <input class="form-is_craftable" type="checkbox" name="is_craftable">
                                     <span>is craftable</span>
                                 </label>
@@ -312,7 +336,6 @@
                                     <span>is placeable</span>
                                 </label>
                             </li>
-                            
                             <li>
                                 <label>
                                     <input class="form-is_blocking" type="checkbox" name="is_blocking" value="is_blocking" checked> 
@@ -327,38 +350,20 @@
                             </li>
                             <li>
                                 <label>
-                                    <input class="form-is_lifeform" type="checkbox" name="is_lifeform" value="is_lifeform"> 
+                                    <input class="form-is_lifeform" type="checkbox" name="is_lifeform" value="is_lifeform">
                                     <span>is lifeform</span>
-                                    <!--
-                                        lifeform front
-                                        lifeform back
-                                        lifeform left
-                                        lifeform right
-                                    -->
                                 </label>
                             </li>
                             <li>
                                 <label>
                                     <input class="form-is_equipable" type="checkbox" name="is_equipable" value="is_equipable">
                                     <span>is equipable</span>
-                                    <!--
-                                        player + item image front
-                                        player + item image back
-                                        player + item image left
-                                        player + item image right
-                                    -->
                                 </label>
                             </li>
                             <li>
                                 <label>
                                     <input class="form-is_useable" type="checkbox" name="is_useable" value="is_useable">
                                     <span>is useable</span>
-                                    <!--
-                                        player + item image front
-                                        player + item image back
-                                        player + item image left
-                                        player + item image right
-                                    -->
                                 </label>
                             </li>
         
@@ -377,7 +382,6 @@
                     <h2>Items</h2>
 
                     <?php
-
                         $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
                         if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
 
@@ -386,11 +390,8 @@
                                 while($row = $result->fetch_assoc()) {
                                     $name = $row['name'];
                                     $slug = $row['slug'];
-                                    //$recipe = $row['recipes'];
                                     $svg = $row['image'];
                                     $infohtml = '';
-                                    //$infohtml += 'Slug: '.$slug.'<br>';
-                                    //$infohtml += 'Recipe: '.$recipe.'<br>';
                                     $infohtml .= '<div class="svg-wrap">';
                                     $infohtml .= $svg;
                                     $infohtml .= '<br>'.$name;
@@ -401,7 +402,6 @@
                         } else {
                             mysql_error();
                         }
-
                     ?>
                     
                 </section>
@@ -448,6 +448,7 @@ $('.item-builder').submit(function(e) {
     var description = $('.item-builder .form-description').val();
     var user = $('.item-builder .form-user').val();
     var has_animation = Number($('.item-builder .form-has_animation').is(":checked"));
+    var image_animated = $('#itemsvg_animated').html();
     var is_craftable = Number($('.item-builder .form-is_craftable').is(":checked"));
     //var recipe1a = $('.item-builder .form-recipe-1a').val();
     //var recipe1b = $('.item-builder .form-recipe-1b').val();
@@ -470,6 +471,7 @@ $('.item-builder').submit(function(e) {
         description: description,
         user: user,
         has_animation: has_animation,
+        image_animated: image_animated,
         is_craftable: is_craftable,
         // recipes: recipes,
         is_collectable: is_collectable,
@@ -484,6 +486,7 @@ $('.item-builder').submit(function(e) {
     }, function(data) {
         //console.log(svg);
     });
+
     location.reload();
     //header("location:itemcreator.php");
     event.preventDefault();
@@ -493,17 +496,31 @@ $('.item-builder').submit(function(e) {
 var itemPreview = function() {
     createSVG();
 };
- 
-var paper;
+
+////////////////////////////////
+// create a function for make svg
+// inputs: name, animated
+////////////////////////////////
+
+var renderPreviewSVG = function() {
+    
+}
+
+var itemSVG;
 var createSVG = function() {
     $('#itemsvg svg').remove();
+    $('#itemsvg_animated svg').remove();
+
     var w = 30;
     var h = 30;
     var pixelwidth = w / 5;
-    //paper = Raphael(document.getElementById('itemsvg'), 30, 30);
-    paper = Raphael(document.getElementById('itemsvg'));
-    paper.setViewBox(0, 0, w, h, true);
-    paper.canvas.setAttribute('preserveAspectRatio', 'none');
+
+    // create regular image
+
+    itemSVG = Raphael(document.getElementById('itemsvg'));
+    itemSVG.setViewBox(0, 0, w, h, true);
+    itemSVG.canvas.setAttribute('preserveAspectRatio', 'none');
+
     var pixels = [];
     var x = 0;
     var y = 0;
@@ -523,12 +540,43 @@ var createSVG = function() {
                 x = (i%5) * pixelwidth;
             }
         }
-        pixels[i] = paper.rect(x, y, pixelwidth, pixelwidth);
+        pixels[i] = itemSVG.rect(x, y, pixelwidth, pixelwidth);
         pixels[i].attr("fill", color);
         pixels[i].attr("stroke", "transparent");
     });
 
+    // create animated svg image
+
     if (has_animation == true) {
+
+        itemSVG_animated = Raphael(document.getElementById('itemsvg_animated'));
+        itemSVG_animated.setViewBox(0, 0, w, h, true);
+        itemSVG_animated.canvas.setAttribute('preserveAspectRatio', 'none');
+
+        var pixels = [];
+        var x = 0;
+        var y = 0;
+
+        $('.canvas-frame-1 .canvas-pixel').each(function(i) {
+            var color = $(this).attr("data-color");
+            //color = hexc(color);
+            if (i == 0) {
+                x = 0;
+                y = 0;
+            } else {
+                if (i%5 == 0){
+                    //multiple of 5 or 0]
+                    y = y + pixelwidth;
+                    x = 0;
+                } else {
+                    x = (i%5) * pixelwidth;
+                }
+            }
+            pixels[i] = itemSVG_animated.rect(x, y, pixelwidth, pixelwidth);
+            pixels[i].attr("fill", color);
+            pixels[i].attr("stroke", "transparent");
+        });
+
         $('.canvas-frame-2 .canvas-pixel').each(function(i) {
             var color = $(this).attr("data-color");
             //color = hexc(color);
@@ -545,19 +593,18 @@ var createSVG = function() {
                     x = (i%5) * pixelwidth;
                 }
             }
-            pixels[i] = paper.rect(x + 30, y, pixelwidth, pixelwidth);
+            pixels[i] = itemSVG_animated.rect(x + 30, y, pixelwidth, pixelwidth);
             pixels[i].attr("fill", color);
             pixels[i].attr("stroke", "transparent");
         });
 
-        // animated svg
         var style = '<style>';
-        style += 'rect {';
+        style += '#itemsvg_animated svg rect {';
         style += 'animation: svgAnimate 2s steps(1) infinite;';
         style += '}';
         style += '</style>';
 
-        $('#itemsvg svg').append(style);
+        $('#itemsvg_animated svg').append(style);
     }
 };
 

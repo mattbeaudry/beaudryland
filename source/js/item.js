@@ -39,6 +39,8 @@ is_edible
 is_placeable
 is_blocking
 is_ingredient
+is_ground
+is_diggable
 is_lifeform
  image_lifeform_front
  image_lifeform_back
@@ -56,11 +58,8 @@ is_useable
  image_item_swing_right
 
 
-
-NEEDED
-
-is_ground
-is_diggable
+NEW PROP IDEAS
+--------------
 has_map_mechanism
 is_throwable
 background_color

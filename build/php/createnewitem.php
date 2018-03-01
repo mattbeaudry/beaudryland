@@ -10,6 +10,7 @@ $slug = stripslashes($_POST['slug']);
 $description = stripslashes($_POST['description']);
 $user = stripslashes($_POST['user']);
 $has_animation = stripslashes($_POST['has_animation']);
+$image_animated = stripslashes($_POST['image_animated']);
 $is_craftable = stripslashes($_POST['is_craftable']);
 $is_collectable = stripslashes($_POST['is_collectable']);
 $is_cutable = stripslashes($_POST['is_cutable']);
@@ -34,6 +35,7 @@ $result = $mysqli->query(
 		description,
 		user,
 		has_animation,
+		image_animated,
 		is_craftable,
 		is_collectable,
 		is_cutable,
@@ -51,6 +53,7 @@ $result = $mysqli->query(
 		'".$description."',
 		'".$user."',
 		'".$has_animation."',
+		'".$image_animated."',
 		'".$is_craftable."',
 		'".$is_collectable."',
 		'".$is_cutable."',

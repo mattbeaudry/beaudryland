@@ -49,4 +49,6 @@
 .block-check { background-image:url(../svg/item-check.svg); }
 .block-close { background-image:url(../svg/item-close.svg); }
 .block-check-white { background-image:url(../svg/item-check-white.svg); }
-.block-close-white { background-image:url(../svg/item-close-white.svg); }
+.block-close-white { background-image:url(../svg/item-close-white.svg); }.block-test { background-image:url(../svg/item-test.svg); }
+.block-name { background-image:url(../svg/item-name.svg); }
+.block-test { background-image:url(../svg/item-test.svg); }
