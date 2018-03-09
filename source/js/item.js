@@ -40,7 +40,6 @@ is_placeable
 is_blocking
 is_ingredient
 is_ground
-is_diggable
 is_lifeform
  image_lifeform_front
  image_lifeform_back
@@ -60,6 +59,7 @@ is_useable
 
 NEW PROP IDEAS
 --------------
+is_diggable - not needed cuz of is_ground
 has_map_mechanism
 is_throwable
 background_color

@@ -122,18 +122,18 @@
                     <h2>Art</h2>
 
                     <div class="clearfix">
-                        <fieldset class="canvas-frame canvas-image">
+                        <fieldset class="canvas-frame canvas-itemsvg">
                             <label for="name">Image</label>
                     		<?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image"></div>
+                            <div class="svg-preview" id="itemsvg"></div>
                         </fieldset>
 
-                        <fieldset class="canvas-frame canvas-image_animated">
+                        <fieldset class="canvas-frame canvas-itemsvg_animated">
                             <label for="name">Animation frame</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_animated"></div>
+                            <div class="svg-preview" id="itemsvg_animated"></div>
                         </fieldset>
                     </div>
 
@@ -147,83 +147,83 @@
                     </div>
 
                     <div class="clearfix is_lifeform-images">
-                        <fieldset class="canvas-frame canvas-image_lifeform_front">
+                        <fieldset class="canvas-frame canvas-is_lifeform-front">
                             <label for="name">Lifeform front</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_lifeform_front"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_front"></div>
                         </fieldset>
-                        <fieldset class="canvas-frame canvas-image_lifeform_back">
+                        <fieldset class="canvas-frame canvas-is_lifeform-back">
                             <label for="name">Lifeform back</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_lifeform_back"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_back"></div>
                         </fieldset>
-                        <fieldset class="canvas-frame canvas-image_lifeform_left">
+                        <fieldset class="canvas-frame canvas-is_lifeform-left">
                             <label for="name">Lifeform left</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_lifeform_left"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_left"></div>
                         </fieldset>
-                        <fieldset class="canvas-frame canvas-image_lifeform_right">
+                        <fieldset class="canvas-frame canvas-is_lifeform-right">
                             <label for="name">Lifeform right</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_lifeform_right"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_right"></div>
                         </fieldset>
                     </div>
 
                     <div class="clearfix is_equipable-images">
-                        <fieldset class="canvas-frame canvas-image_item_front">
+                        <fieldset class="canvas-frame canvas-is_equipable-front">
                             <label for="name">Equipped item front</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_item_front"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_front"></div>
                         </fieldset>
-                        <fieldset class="canvas-frame canvas-image_item_back">
+                        <fieldset class="canvas-frame canvas-is_equipable-back">
                             <label for="name">Equipped item back</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_item_back"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_back"></div>
                         </fieldset>
-                        <fieldset class="canvas-frame canvas-image_item_left">
+                        <fieldset class="canvas-frame canvas-is_equipable-left">
                             <label for="name">Equipped item left</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_item_left"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_left"></div>
                         </fieldset>
-                        <fieldset class="canvas-frame canvas-image_item_right">
+                        <fieldset class="canvas-frame canvas-is_equipable-right">
                             <label for="name">Equipped item right</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_item_right"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_right"></div>
                         </fieldset>
                     </div>
 
                     <div class="clearfix is_useable-images">
-                        <fieldset class="canvas-frame canvas-image_item_swing_front">
+                        <fieldset class="canvas-frame canvas-is_useable-front">
                             <label for="name">Item swing front</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_item_swing_front"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_front"></div>
                         </fieldset>
-                        <fieldset class="canvas-frame canvas-image_item_swing_back">
+                        <fieldset class="canvas-frame canvas-is_useable-back">
                             <label for="name">Item swing back</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_item_swing_back"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_back"></div>
                         </fieldset>
-                        <fieldset class="canvas-frame canvas-image_item_swing_left">
+                        <fieldset class="canvas-frame canvas-is_useable-left">
                             <label for="name">Item swing left</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_item_swing_left"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_left"></div>
                         </fieldset>
-                        <fieldset class="canvas-frame canvas-image_item_swing_right">
+                        <fieldset class="canvas-frame canvas-is_useable-right">
                             <label for="name">Item swing right</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
-                            <div class="svg-preview" id="image_item_swing_right"></div>
+                            <div class="svg-preview" id="itemsvg_lifeform_right"></div>
                         </fieldset>
                     </div>
 
@@ -297,12 +297,18 @@
                                     <label>
                                         <select class="form-recipe-3a" name="recipe-3a">
                                             <option value="null">Choose...</option>
+                                            <option value="tree">tree</option>
+                                            <option value="rock">rock</option>
                                         </select>
                                         <select class="form-recipe-3b" name="recipe-3b">
                                             <option value="null">Choose...</option>
+                                            <option value="tree">tree</option>
+                                            <option value="rock">rock</option>
                                         </select>
                                         <select class="form-recipe-3c" name="recipe-3c">
                                             <option value="null">Choose...</option>
+                                            <option value="tree">tree</option>
+                                            <option value="rock">rock</option>
                                         </select>
                                     </label>
                                 </fieldset>
@@ -345,12 +351,6 @@
                             </li>
                             <li>
                                 <label>
-                                    <input class="form-is_ground" type="checkbox" name="is_ground" value="is_ground">
-                                    <span>is ground</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
                                     <input class="form-is_lifeform" type="checkbox" name="is_lifeform" value="is_lifeform">
                                     <span>is lifeform</span>
                                 </label>
@@ -367,6 +367,7 @@
                                     <span>is useable</span>
                                 </label>
                             </li>
+        
                             <li>
                                 <input type="submit" class="create-image" value="Save Item">
                             </li>
@@ -380,25 +381,30 @@
             <div >
                 <section class="panel-bottom clearfix">
                     <h2>Items</h2>
+
+                    <?php
+                        $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
+                        if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
+
+                        if ( $result = $mysqli->query("SELECT * FROM beaudryland_items ORDER BY itemid DESC") ) {
+                            if($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    $name = $row['name'];
+                                    $slug = $row['slug'];
+                                    $svg = $row['image'];
+                                    $infohtml = '';
+                                    $infohtml .= '<div class="svg-wrap">';
+                                    $infohtml .= $svg;
+                                    $infohtml .= '<br>'.$name;
+                                    $infohtml .= '</div>';
+                                    echo $infohtml;
+                                }
+                            }
+                        } else {
+                            mysql_error();
+                        }
+                    ?>
                     
-                    <table class="bl-table items-table">
-                        <thead>
-                            <tr>
-                                <td>Item</td>
-                                <td>Image</td>
-                                <td>Animated Image</td>
-                                <td>Recipe</td>
-                                <td>Description</td>
-                                <td>Lifeform Images</td>
-                                <td>Equipped Images</td>
-                                <td>Swing Images</td>
-                                <td>Properties</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php include 'php/loaditems.php'; ?>
-                        </tbody>
-                    </table>
                 </section>
             </div>
 
@@ -425,6 +431,10 @@ $('.button-reset').on("click", function(){
     itemPreview();
 });
 
+$('.button-preview').on("click", function(){
+    itemPreview();
+});
+
 $('.color-palette span').on("click", function() {
     var color = $(this).css("background-color");
     $('.color-code .form-color').css("background-color", color);
@@ -432,14 +442,14 @@ $('.color-palette span').on("click", function() {
 });
 
 $('.item-builder').submit(function(e) {
-    //itemPreview();
-    var image = $('#image').html();
+    itemPreview();
+    var image = $('#itemsvg').html();
     var name = $('.item-builder .form-name').val();
     var slug = $('.item-builder .form-slug').val();
     var description = $('.item-builder .form-description').val();
     var user = $('.item-builder .form-user').val();
     var has_animation = Number($('.item-builder .form-has_animation').is(":checked"));
-    var image_animated = $('#image_animated').html();
+    var image_animated = $('#itemsvg_animated').html();
     var is_craftable = Number($('.item-builder .form-is_craftable').is(":checked"));
     //var recipe1a = $('.item-builder .form-recipe-1a').val();
     //var recipe1b = $('.item-builder .form-recipe-1b').val();
@@ -451,28 +461,9 @@ $('.item-builder').submit(function(e) {
     var is_placeable = Number($('.item-builder .form-is_placeable').is(":checked"));
     var is_blocking = Number($('.item-builder .form-is_blocking').is(":checked"));
     var is_ingredient = Number($('.item-builder .form-is_ingredient').is(":checked"));
-    var is_ground = Number($('.item-builder .form-is_ground').is(":checked"));
     var is_lifeform = Number($('.item-builder .form-is_lifeform').is(":checked"));
     var is_equipable = Number($('.item-builder .form-is_equipable').is(":checked"));
     var is_useable = Number($('.item-builder .form-is_useable').is(":checked"));
-
-    var image_lifeform_front = $('#image_lifeform_front').html();
-    var image_lifeform_back = $('#image_lifeform_back').html();
-    var image_lifeform_left = $('#image_lifeform_left').html();
-    var image_lifeform_right = $('#image_lifeform_right').html();
-
-    var image_item_front = $('#image_item_front').html();
-    var image_item_back = $('#image_item_back').html();
-    var image_item_left = $('#image_item_left').html();
-    var image_item_right = $('#image_item_right').html();
-
-    var image_item_swing_front = $('#image_item_swing_front').html();
-    var image_item_swing_back = $('#image_item_swing_back').html();
-    var image_item_swing_left = $('#image_item_swing_left').html();
-    var image_item_swing_right = $('#image_item_swing_right').html();
-
-    console.log('before post');
-    console.log(has_animation+' '+is_craftable+' '+is_lifeform+' '+is_equipable+' '+is_useable);
 
     $.post('php/createnewitem.php', {
         image: image,
@@ -483,39 +474,24 @@ $('.item-builder').submit(function(e) {
         has_animation: has_animation,
         image_animated: image_animated,
         is_craftable: is_craftable,
+        // recipes: recipes,
         is_collectable: is_collectable,
         is_cutable: is_cutable,
         is_edible: is_edible,
         is_placeable: is_placeable,
         is_blocking: is_blocking,
         is_ingredient: is_ingredient,
-        is_ground: is_ground,
         is_lifeform: is_lifeform,
         is_equipable: is_equipable,
-        is_useable: is_useable,
-        image_lifeform_front: image_lifeform_front,
-        image_lifeform_back: image_lifeform_back,
-        image_lifeform_left: image_lifeform_left,
-        image_lifeform_right: image_lifeform_right,
-        image_item_front: image_item_front,
-        image_item_back: image_item_back,
-        image_item_left: image_item_left,
-        image_item_right: image_item_right,
-        image_item_swing_front: image_item_swing_front,
-        image_item_swing_back: image_item_swing_back,
-        image_item_swing_left: image_item_swing_left,
-        image_item_swing_right: image_item_swing_right
+        is_useable: is_useable
     }, function(data) {
-        console.log(data);
+        //console.log(svg);
     });
 
-    console.log('after post');
-
-    //location.reload();
+    location.reload();
     //header("location:itemcreator.php");
     event.preventDefault();
-    //location.reload();
-
+    location.reload();
 });
 
 var itemPreview = function() {
@@ -526,7 +502,7 @@ var w = 30;
 var h = 30;
 var pixelwidth = w / 5;
 
-var renderPreviewSVG = function(name, is_animated) {
+var renderPreviewSVG = function(name) {
     $('#'+name+' svg').remove();
     
     var previewSVG;
@@ -545,6 +521,7 @@ var renderPreviewSVG = function(name, is_animated) {
             y = 0;
         } else {
             if (i%5 == 0){
+                //multiple of 5 or 0
                 y = y + pixelwidth;
                 x = 0;
             } else {
@@ -555,66 +532,77 @@ var renderPreviewSVG = function(name, is_animated) {
         pixels[i].attr("fill", color);
         pixels[i].attr("stroke", "transparent");
     });
+}
 
-    if (is_animated) {
-        $('.canvas-image .canvas-pixel').each(function(i) {
+var itemSVG;
+var createSVG = function() {
+
+    // call function to render svg rpeview
+    renderPreviewSVG("itemsvg");
+
+    // create animated svg image
+
+    if (has_animation == true) {
+
+        $('#itemsvg_animated svg').remove();
+
+        itemSVG_animated = Raphael(document.getElementById('itemsvg_animated'));
+        itemSVG_animated.setViewBox(0, 0, w, h, true);
+        itemSVG_animated.canvas.setAttribute('preserveAspectRatio', 'none');
+
+        var pixels = [];
+        var x = 0;
+        var y = 0;
+
+        $('.canvas-itemsvg .canvas-pixel').each(function(i) {
             var color = $(this).attr("data-color");
-            var offset = w;
+            //color = hexc(color);
             if (i == 0) {
                 x = 0;
                 y = 0;
             } else {
-                if (i%5 == 0) {
+                if (i%5 == 0){
+                    //multiple of 5 or 0]
                     y = y + pixelwidth;
                     x = 0;
                 } else {
                     x = (i%5) * pixelwidth;
                 }
             }
-            pixels[i] = previewSVG.rect(x + 30, y, pixelwidth, pixelwidth);
+            pixels[i] = itemSVG_animated.rect(x, y, pixelwidth, pixelwidth);
+            pixels[i].attr("fill", color);
+            pixels[i].attr("stroke", "transparent");
+        });
+
+        $('.canvas-itemsvg_animated .canvas-pixel').each(function(i) {
+            var color = $(this).attr("data-color");
+            //color = hexc(color);
+            var offset = w;
+            if (i == 0) {
+                x = 0;
+                y = 0;
+            } else {
+                if (i%5 == 0) {
+                    //multiple of 5 or 0]
+                    y = y + pixelwidth;
+                    x = 0;
+                } else {
+                    x = (i%5) * pixelwidth;
+                }
+            }
+            pixels[i] = itemSVG_animated.rect(x + 30, y, pixelwidth, pixelwidth);
             pixels[i].attr("fill", color);
             pixels[i].attr("stroke", "transparent");
         });
 
         var style = '<style>';
-        style += '#image_animated svg rect {';
+        style += '#itemsvg_animated svg rect {';
         style += 'animation: svgAnimate 2s steps(1) infinite;';
         style += '}';
         style += '</style>';
-        $('#image_animated svg').append(style);
+
+        $('#itemsvg_animated svg').append(style);
     }
-}
-
-var itemSVG;
-var createSVG = function() {
-
-    renderPreviewSVG("image", false);
-
-    if (has_animation == true) { 
-        renderPreviewSVG("image_animated", true); 
-    }
-
-    if (is_lifeform == true) {
-        renderPreviewSVG("image_lifeform_front", false);
-        renderPreviewSVG("image_lifeform_back", false);
-        renderPreviewSVG("image_lifeform_left", false);
-        renderPreviewSVG("image_lifeform_right", false);
-    }
-
-    if (is_equipable == true) {
-        renderPreviewSVG("image_item_front", false);
-        renderPreviewSVG("image_item_back", false);
-        renderPreviewSVG("image_item_left", false);
-        renderPreviewSVG("image_item_right", false);
-    }
-
-    if (is_useable == true) {
-        renderPreviewSVG("image_item_swing_front", false);
-        renderPreviewSVG("image_item_swing_back", false);
-        renderPreviewSVG("image_item_swing_left", false);
-        renderPreviewSVG("image_item_swing_right", false);
-    }
-
 };
 
 var loadItemSelects = function() {
@@ -632,22 +620,19 @@ var loadItemSelects = function() {
 loadItemSelects();
 
 var has_animation = '';
-var is_craftable = '';
-var is_lifeform = '';
-var is_equipable = '';
-var is_useable = '';
 
 $('.form-has_animation').change(function() {
     if(this.checked) {
         has_animation = true;
-        $('.canvas-image_animated').show();
+        $('.canvas-itemsvg_animated').show();
     } else {
         has_animation = false;
-        $('.canvas-image_animated').hide();
-        $('.canvas-image_animated .svg-preview svg').remove();
+        $('.canvas-itemsvg_animated').hide();
     }
     itemPreview();
 });
+
+var is_craftable = '';
 
 $('.form-is_craftable').change(function() {
     if(this.checked) {
@@ -657,20 +642,21 @@ $('.form-is_craftable').change(function() {
         is_craftable = false;
         $('.is_craftable-recipe').hide();
     }
-    itemPreview();
 });
+
+var is_lifeform = '';
 
 $('.form-is_lifeform').change(function() {
     if(this.checked) {
-        is_lifeform = true;
+        is_craftable = true;
         $('.is_lifeform-images').show();
     } else {
-        is_lifeform = false;
+        is_craftable = false;
         $('.is_lifeform-images').hide();
-        $('.is_lifeform-images .svg-preview svg').remove();
     }
-    itemPreview();
 });
+
+var is_equipable = '';
 
 $('.form-is_equipable').change(function() {
     if(this.checked) {
@@ -679,10 +665,10 @@ $('.form-is_equipable').change(function() {
     } else {
         is_equipable = false;
         $('.is_equipable-images').hide();
-        $('.is_equipable-images .svg-preview svg').remove();
     }
-    itemPreview();
 });
+
+var is_useable = '';
 
 $('.form-is_useable').change(function() {
     if(this.checked) {
@@ -691,14 +677,8 @@ $('.form-is_useable').change(function() {
     } else {
         is_craftable = false;
         $('.is_useable-images').hide();
-        $('.is_useable-images .svg-preview svg').remove();
     }
-    itemPreview();
 });
-
-var displaySlug = function() {
-
-};
 
 </script>
 
