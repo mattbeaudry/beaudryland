@@ -281,30 +281,6 @@
                                             <option value="null">Choose...</option>
                                         </select>
                                     </label>
-                                    <legend for="recipe-2">recipe #2:</legend>
-                                    <label>
-                                        <select class="form-recipe-2a" name="recipe-2a">
-                                            <option value="null">Choose...</option>
-                                        </select>
-                                        <select class="form-recipe-2b" name="recipe-2b">
-                                            <option value="null">Choose...</option>
-                                        </select>
-                                        <select class="form-recipe-2c" name="recipe-2c">
-                                            <option value="null">Choose...</option>
-                                        </select>
-                                    </label>
-                                    <legend for="recipe-3">recipe #3:</legend>
-                                    <label>
-                                        <select class="form-recipe-3a" name="recipe-3a">
-                                            <option value="null">Choose...</option>
-                                        </select>
-                                        <select class="form-recipe-3b" name="recipe-3b">
-                                            <option value="null">Choose...</option>
-                                        </select>
-                                        <select class="form-recipe-3c" name="recipe-3c">
-                                            <option value="null">Choose...</option>
-                                        </select>
-                                    </label>
                                 </fieldset>
                             </li>
                             <li>
@@ -351,6 +327,12 @@
                             </li>
                             <li>
                                 <label>
+                                    <input class="form-is_diggable" type="checkbox" name="is_diggable" value="is_diggable">
+                                    <span>is diggable</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
                                     <input class="form-is_lifeform" type="checkbox" name="is_lifeform" value="is_lifeform">
                                     <span>is lifeform</span>
                                 </label>
@@ -384,15 +366,14 @@
                     <table class="bl-table items-table">
                         <thead>
                             <tr>
-                                <td>Item</td>
                                 <td>Image</td>
-                                <td>Animated Image</td>
-                                <td>Recipe</td>
+                                <td>Name</td>
                                 <td>Description</td>
-                                <td>Lifeform Images</td>
-                                <td>Equipped Images</td>
-                                <td>Swing Images</td>
-                                <td>Properties</td>
+                                <td>Recipe</td>
+                                <td>Animated</td>
+                                <td>Lifeform</td>
+                                <td>Equipable</td>
+                                <td>Useable</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -441,10 +422,10 @@ $('.item-builder').submit(function(e) {
     var has_animation = Number($('.item-builder .form-has_animation').is(":checked"));
     var image_animated = $('#image_animated').html();
     var is_craftable = Number($('.item-builder .form-is_craftable').is(":checked"));
-    //var recipe1a = $('.item-builder .form-recipe-1a').val();
-    //var recipe1b = $('.item-builder .form-recipe-1b').val();
-    //var recipe1c = $('.item-builder .form-recipe-1c').val();
-    //var recipes = recipe1a+recipe1b+recipe1c;
+    var recipe1a = $('.item-builder .form-recipe-1a').val();
+    var recipe1b = $('.item-builder .form-recipe-1b').val();
+    var recipe1c = $('.item-builder .form-recipe-1c').val();
+    var recipe = recipe1a+recipe1b+recipe1c;
     var is_collectable = Number($('.item-builder .form-is_collectable').is(":checked"));
     var is_cutable = Number($('.item-builder .form-is_cutable').is(":checked"));
     var is_edible = Number($('.item-builder .form-is_edible').is(":checked"));
@@ -452,27 +433,22 @@ $('.item-builder').submit(function(e) {
     var is_blocking = Number($('.item-builder .form-is_blocking').is(":checked"));
     var is_ingredient = Number($('.item-builder .form-is_ingredient').is(":checked"));
     var is_ground = Number($('.item-builder .form-is_ground').is(":checked"));
+    var is_diggable = Number($('.item-builder .form-is_diggable').is(":checked"));
     var is_lifeform = Number($('.item-builder .form-is_lifeform').is(":checked"));
     var is_equipable = Number($('.item-builder .form-is_equipable').is(":checked"));
     var is_useable = Number($('.item-builder .form-is_useable').is(":checked"));
-
     var image_lifeform_front = $('#image_lifeform_front').html();
     var image_lifeform_back = $('#image_lifeform_back').html();
     var image_lifeform_left = $('#image_lifeform_left').html();
     var image_lifeform_right = $('#image_lifeform_right').html();
-
     var image_item_front = $('#image_item_front').html();
     var image_item_back = $('#image_item_back').html();
     var image_item_left = $('#image_item_left').html();
     var image_item_right = $('#image_item_right').html();
-
     var image_item_swing_front = $('#image_item_swing_front').html();
     var image_item_swing_back = $('#image_item_swing_back').html();
     var image_item_swing_left = $('#image_item_swing_left').html();
     var image_item_swing_right = $('#image_item_swing_right').html();
-
-    console.log('before post');
-    console.log(has_animation+' '+is_craftable+' '+is_lifeform+' '+is_equipable+' '+is_useable);
 
     $.post('php/createnewitem.php', {
         image: image,
@@ -483,6 +459,7 @@ $('.item-builder').submit(function(e) {
         has_animation: has_animation,
         image_animated: image_animated,
         is_craftable: is_craftable,
+        recipe: recipe,
         is_collectable: is_collectable,
         is_cutable: is_cutable,
         is_edible: is_edible,
@@ -490,6 +467,7 @@ $('.item-builder').submit(function(e) {
         is_blocking: is_blocking,
         is_ingredient: is_ingredient,
         is_ground: is_ground,
+        is_diggable: is_diggable,
         is_lifeform: is_lifeform,
         is_equipable: is_equipable,
         is_useable: is_useable,
@@ -509,12 +487,10 @@ $('.item-builder').submit(function(e) {
         console.log(data);
     });
 
-    console.log('after post');
-
     //location.reload();
     //header("location:itemcreator.php");
     event.preventDefault();
-    //location.reload();
+    location.reload();
 
 });
 
@@ -623,7 +599,7 @@ var loadItemSelects = function() {
             console.log("failed gettins items json");
         } else {
             for (var i=0; i < data.length; i++) {
-                $('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c, .form-recipe-2a, .form-recipe-2b, .form-recipe-2c, .form-recipe-3a, .form-recipe-3b, .form-recipe-3c').append('<option value="'+data[i].slug+'">'+data[i].name+'</option>');
+                $('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c').append('<option value="'+data[i].slug+'">'+data[i].name+'</option>');
             }
         }   
     }, "json");

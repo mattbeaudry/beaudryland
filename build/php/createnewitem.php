@@ -9,6 +9,7 @@ $slug = stripslashes($_POST['slug']);
 $description = stripslashes($_POST['description']);
 $user = stripslashes($_POST['user']);
 $is_craftable = stripslashes($_POST['is_craftable']);
+$recipe = stripslashes($_POST['recipe']);
 $is_collectable = stripslashes($_POST['is_collectable']);
 $is_cutable = stripslashes($_POST['is_cutable']);
 $is_edible = stripslashes($_POST['is_edible']);
@@ -16,6 +17,8 @@ $is_placeable = stripslashes($_POST['is_placeable']);
 $is_blocking = stripslashes($_POST['is_blocking']);
 $is_ingredient = stripslashes($_POST['is_ingredient']);
 $has_animation = stripslashes($_POST['has_animation']);
+$is_ground = stripslashes($_POST['is_ground']);
+$is_diggable = stripslashes($_POST['is_diggable']);
 $is_lifeform = stripslashes($_POST['is_lifeform']);
 $is_equipable = stripslashes($_POST['is_equipable']);
 $is_useable = stripslashes($_POST['is_useable']);
@@ -97,7 +100,6 @@ if ($is_useable) {
 	$image_item_swing_right_filename = saveSVG($slug.'_item_swing_right', $image_item_swing_right);
 }
 
-
 // send data to db
 $result = $mysqli->query(
 	"INSERT INTO beaudryland_items (
@@ -109,12 +111,15 @@ $result = $mysqli->query(
 		has_animation,
 		image_animated,
 		is_craftable,
+		recipe,
 		is_collectable,
 		is_cutable,
 		is_edible,
 		is_placeable,
 		is_blocking,
 		is_ingredient,
+		is_ground,
+		is_diggable,
 		is_lifeform,
 		is_equipable,
 		is_useable,
@@ -139,12 +144,15 @@ $result = $mysqli->query(
 		'".$has_animation."',
 		'".$image_animated_filename."',
 		'".$is_craftable."',
+		'".$recipe."',
 		'".$is_collectable."',
 		'".$is_cutable."',
 		'".$is_edible."',
 		'".$is_placeable."',
 		'".$is_blocking."',
 		'".$is_ingredient."',
+		'".$is_ground."',
+		'".$is_diggable."',
 		'".$is_lifeform."',
 		'".$is_equipable."',
 		'".$is_useable."',
@@ -176,7 +184,6 @@ if($result){
 
 // save svg to file here 
 //$file = 'item-'.$newitemslug.'.txt';
-
 
 /*
 echo $result;

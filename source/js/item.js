@@ -39,7 +39,8 @@ is_edible
 is_placeable
 is_blocking
 is_ingredient
-is_ground
+is_ground *NEW
+is_diggable *NEW
 is_lifeform
  image_lifeform_front
  image_lifeform_back
@@ -59,10 +60,19 @@ is_useable
 
 NEW PROP IDEAS
 --------------
-is_diggable - not needed cuz of is_ground
 has_map_mechanism
 is_throwable
 background_color
-type? (floor, item, plant, object, organism, etc.)
-
+type * NEW
+[
+	lifeform: player, animal, enemy
+	item: tool, weapon, technology, transportation
+		map items, vs lifeform items
+	ground:
+	object: rock, wood, bricks, 
+	plant: trees, flowers, 
+	food: mushroom, vegetables, fruit, meat
+]
+is_item - instead of is_equipable
+has_swing_animation - instead of is useable
 */

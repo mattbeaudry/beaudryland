@@ -230,9 +230,3 @@ input[type="text"] {
 .form-color {
     width: 180px;
 }
-h1 {
-    text-align: center;
-}
-section > h2 {
-    border-bottom: solid 4px #000;
-}
