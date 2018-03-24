@@ -16,6 +16,12 @@
             -->
 
             <div class="bui-components">
+                <section class="bui-section">
+                    <h2 class="bui-sectiontitle">Colors</h2>
+                    <div class="bui-colorpalette">
+                        <span class="bui-swatch c-green-1"></span>
+                    </div>
+                </section>
                 <section class="bui-section typography">
                     <h2 class="bui-sectiontitle">Typography</h2>
                     <h1>First Heading</h1>
@@ -30,11 +36,11 @@
                         <li>List item #3</li>
                     </ul>
                     <p>An ordered list:</p>
-                    <ul>
+                    <ol>
                         <li>List item #1</li>
                         <li>List item #2</li>
                         <li>List item #3</li>
-                    </ul>
+                    </ol>
                 </section>
                 <section class="bui-section button">
                     <h2 class="bui-sectiontitle">Buttons</h2>

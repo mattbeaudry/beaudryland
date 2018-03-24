@@ -25,6 +25,7 @@ export class Item {
 /*
 
 image
+background
 name
 slug
 description
@@ -62,7 +63,6 @@ NEW PROP IDEAS
 --------------
 has_map_mechanism
 is_throwable
-background_color
 type * NEW
 [
 	lifeform: player, animal, enemy

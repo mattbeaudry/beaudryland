@@ -28,24 +28,22 @@ session_start();
 
         <link rel="stylesheet" href="css/blocks.css">
         <link rel="stylesheet" href="css/svg-items.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/main.bundle.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 
         <style>
-
-        .maps-wrap { 
-            padding-top:0px;
-        }
-        .block-palette .block {
-            border:dotted 3px transparent;
-            width:30px;
-            height:30px;
-            margin:2px;
-        }
-        .block-palette .active {
-            border:dotted 3px #000;
-        }
-
+            .maps-wrap { 
+                padding-top:0px;
+            }
+            .block-palette .block {
+                border:dotted 3px transparent;
+                width:30px;
+                height:30px;
+                margin:2px;
+            }
+            .block-palette .active {
+                border:dotted 3px #000;
+            }
         </style>
 
     </head>
