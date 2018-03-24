@@ -1,0 +1,183 @@
+@import "variables";
+
+.version-phonegap {
+  &.container {
+    width: 320px;
+    max-width: none;
+  }
+
+  .beaudryland-nav .button-wrap {
+    width: 135px;
+  }
+
+  .beaudryland-nav .button-wrap a {
+    width: 125px;
+  }
+
+  .beaudryland-nav .button-wrap-large {
+    width: 292px;
+  }
+
+  .beaudryland-nav .button-wrap-large a {
+    width: 282px;
+  }
+
+  .the-fucking-navigation {
+    .button-wrap {
+      margin-bottom: 16px;
+    }
+  }
+
+  .maps-wrap .the-fucking-forest-map,
+  .maps-wrap .the-fucking-winter-map,
+  .maps-wrap .the-fucking-beach-map,
+  .maps-wrap .the-fucking-jungle-map,
+  .maps-wrap .the-fucking-desert-map,
+  .maps-wrap .the-fucking-islands-map,
+  .cube,
+  .cube-side,
+  .maps-container {
+    width: $mapMobileWidthPX;
+    height: $mapMobileWidthPX;
+  }
+
+  .cube-front {
+    transform: rotateY(0deg) translateZ($mapMobileHalfWidthPX);
+  }
+
+  .cube-right {
+    transform: rotateY(90deg) translateZ($mapMobileHalfWidthPX);
+  }
+
+  .cube-back {
+    transform: rotateY(-180deg) translateZ($mapMobileHalfWidthPX);
+  }
+
+  .cube-left {
+    transform: rotateY(-90deg) translateZ($mapMobileHalfWidthPX);
+  }
+
+  .cube-bottom {
+    transform: rotateX(-90deg) translateZ($mapMobileHalfWidthPX);
+  }
+
+  .cube-top {
+    transform: rotateX(90deg) translateZ($mapMobileHalfWidthPX);
+  }
+
+  .cube-show-front {
+    transform: translateZ(-$mapMobileWidthPX) rotateY(0deg);
+  }
+
+  .cube-show-right {
+    transform: translateZ(-$mapMobileWidthPX) rotateY(-90deg);
+  }
+
+  .cube-show-back {
+    transform: translateZ(-$mapMobileWidthPX) rotateY(-180deg);
+  }
+
+  .cube-show-left {
+    transform: translateZ(-$mapMobileWidthPX) rotateY(-270deg);
+  }
+
+  .cube-show-top {
+    transform: translateZ(-$mapMobileWidthPX) rotateX(-90deg);
+  }
+
+  .cube-show-bottom {
+    transform: translateZ(-$mapMobileWidthPX) rotateX(90deg);
+  }
+
+  .sticky-inventory {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0 auto;
+    transition: none;
+    padding-top: 20px;
+  }
+
+  .the-fucking-inventory {
+    margin: 0 auto;
+  }
+
+  .crafting-table-wrap {
+    width: 310px;
+    margin: 5px auto;
+    float: none;
+  }
+
+  .the-fucking-navigation {
+    float: none;
+    margin-top: 15px;
+  }
+
+  .the-fucking-controller {
+    display: block;
+    width: $mapMobileWidthPX;
+  }
+
+  .btn-inv {
+    display: block;
+  }
+
+  .item-formulas > li {
+    width: 100%;
+    margin-right: 0%;
+    min-height: 0;
+  }
+
+  .item-achievements li {
+    margin: 0 0 3.33333333% 0;
+    width: 100%;
+    float: left;
+    color: #bbb;
+    border: solid 5px #ccc;
+  }
+
+  h2,
+  .the-fucking-gameinfo h2 {
+    text-align: center;
+    font-size: 1.6em;
+  }
+}
+
+@media (max-height: 400px) {
+  .version-phonegap {
+    &.container {
+      width: 100%;
+    }
+
+    .game-header {
+      position: absolute;
+      width: 100%;
+      border-bottom: none;
+      top: 0;
+      padding: 0 16px;
+    }
+
+    .maps-container {
+      margin-top: 24px;
+    }
+
+    .the-fucking-controller {
+      width: 100%;
+      bottom: 80px;
+
+      .btn-a {
+        right: 32px;
+      }
+    }
+
+    .tab {
+      margin-top: 64px;
+      padding: 0 16px;
+
+      &.tab-game,
+      &.tab-inventory {
+        margin-top: 0;
+      }
+    }
+  }
+}

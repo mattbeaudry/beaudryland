@@ -19,7 +19,7 @@
                 <section class="bui-section">
                     <h2 class="bui-sectiontitle">Colors</h2>
                     <div class="bui-colorpalette">
-                        <span class="bui-swatch c-green-1"></span>
+                        <?php include 'php/part-colors.php'; ?>
                     </div>
                 </section>
                 <section class="bui-section typography">
