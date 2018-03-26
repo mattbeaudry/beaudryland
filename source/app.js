@@ -14,6 +14,7 @@ import { Signs } from './js/signs';
 import { Health } from './js/health';
 import { Dev } from './js/dev';
 import { HCI } from './js/hci';
+import { UI } from './js/ui';
 import { Achievement } from './js/achievement';
 import { Mobile } from './js/mobile';
 
@@ -29,9 +30,11 @@ var blSigns = new Signs();
 var blHealth = new Health();
 var blDev = new Dev();
 var blHCI = new HCI();
+var blUI = new UI();
 var blAchievement = new Achievement();
 var blMobile = new Mobile();
 
+blUI.setupUI();
 blNavigation.initializeNavigation();
 blInventory.setupInventorySlots();
 

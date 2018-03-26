@@ -16,121 +16,20 @@
 
                 <section>
 
-                    <h2>Colors</h2>
+                    <h2>Item Images</h2>
 
-                    <form class="color-code">
-                        <input class="form-color" type="text" name="hexcode" placeholder="#000000" value="#000000">
-                    </form>
-
-                    <div class="color-palette clearfix">
-                        <span class="pine"></span>
-                        <span class="tree"></span>
-                        <span class="grass"></span>
-                        <br>
-                        <span class="hole"></span>
-                        <span class="trunk"></span>
-                        <span class="dirt"></span>
-                        <span class="wood"></span>
-                        <span class="board"></span>
-                        <span class="sand"></span>
-                        <br>
-                        <span class="ocean"></span>
-                        <span class="water"></span>
-                        <span class="diamond"></span>
-                        <span class="ice"></span>
-                        <span class="snow"></span>
-                        <br>
-                        <span class="brick"></span>
-                        <span class="red"></span>
-                        <span class="fire"></span>
-                        <span class="clay"></span>
-                        <span class="gold"></span>
-                        <br>
-                        <span class="black"></span>
-                        <span class="road"></span>
-                        <span class="rock"></span>
-                        <span class="silver"></span>
-                        <span clas s="white"></span>
-                        <span class="transparent"></span>
-                    </div>
-
-                    <div class="color-palette clearfix">
-                        <span class="c-ground-grass"></span>
-                        <span class="c-ground-space"></span>
-                        <span class="c-ground-snow"></span>
-                        <span class="c-ground-water"></span>
-                        <span class="c-ground-sand"></span>
-                        <span class="c-ground-dirt"></span>
-                        <span class="c-ground-ice"></span>
-                    </div>
-
-                    <div class="color-palette clearfix">
-                        <span class="c-green-1"></span>
-                        <span class="c-green-2"></span>
-                        <span class="c-green-3"></span>
-                        <span class="c-green-4"></span>
-                        <span class="c-green-5"></span>
-                        <span class="c-green-6"></span>
-                        <br>
-                        <span class="c-brown-1"></span>
-                        <span class="c-brown-2"></span>
-                        <span class="c-brown-3"></span>
-                        <span class="c-brown-4"></span>
-                        <span class="c-brown-5"></span>
-                        <span class="c-brown-6"></span>
-                        <br>
-                        <span class="c-blue-1"></span>
-                        <span class="c-blue-2"></span>
-                        <span class="c-blue-3"></span>
-                        <span class="c-blue-4"></span>
-                        <span class="c-blue-5"></span>
-                        <span class="c-blue-6"></span>
-                        <br>
-                        <span class="c-red-1"></span>
-                        <span class="c-red-2"></span>
-                        <span class="c-red-3"></span>
-                        <span class="c-orange-1"></span>
-                        <span class="c-orange-2"></span>
-                        <span class="c-orange-3"></span>
-                        <br>
-                        <span class="c-yellow-1"></span>
-                        <span class="c-yellow-2"></span>
-                        <span class="c-yellow-3"></span>
-                        <span class="c-yellow-4"></span>
-                        <span class="c-yellow-5"></span>
-                        <span class="c-yellow-6"></span>
-                        <br>
-                        <span class="c-purple-1"></span>
-                        <span class="c-purple-2"></span>
-                        <span class="c-purple-3"></span>
-                        <span class="c-pink-1"></span>
-                        <span class="c-peach-1"></span>
-                        <span class="c-peach-2"></span>
-                        <br>
-                        <span class="c-black-1"></span>
-                        <span class="c-grey-1"></span>
-                        <span class="c-grey-2"></span>
-                        <span class="c-grey-3"></span>
-                        <span class="c-grey-4"></span>
-                        <span class="c-white-1"></span>
-                        <br>
-                    </div>
-
-                </section>
-
-                <section>
-                    <h2>Art</h2>
+                    <?php include 'php/ui-colorpicker.php'; ?>
 
                     <div class="clearfix">
                         <fieldset class="canvas-frame canvas-image">
-                            <label for="name">Image</label>
+                            <label for="name">Main image</label>
                     		<?php include 'php/part-canvas.php'; ?>
                             <br>
                             <div class="svg-preview" id="image"></div>
                         </fieldset>
 
                         <fieldset class="canvas-frame canvas-image_animated">
-                            <label for="name">Animation frame</label>
+                            <label for="name">Animated (Frame 2)</label>
                             <?php include 'php/part-canvas.php'; ?>
                             <br>
                             <div class="svg-preview" id="image_animated"></div>
@@ -359,7 +258,7 @@
 
             </div>
 
-            <div >
+            <div>
                 <section class="panel-bottom clearfix">
                     <h2>Items</h2>
                     
@@ -380,6 +279,10 @@
                             <?php include 'php/loaditems.php'; ?>
                         </tbody>
                     </table>
+
+                    <div class="block-palette clearfix">
+
+                    </div>
                 </section>
             </div>
 
@@ -388,15 +291,16 @@
         <script src="js/vendor/jquery-2.1.1.js"></script>
         <script src="js/vendor/raphael-min.js"></script>
         <script src="js/plugins.js"></script>
+        <script src="js/app-bundle.js"></script>
     
-<script>
+        <script>
 
 $('.canvas-pixel').on("click", function() { 
-    var pixelid = $(this).attr("data-pixel");
-    var colorcode = $('.color-code input').val();
+    var pixelID = $(this).attr("data-pixel");
+    var colorCode = $('.bui-colorpicker .bui-colorpicker-input').val();
     // validate hex code
-    $(this).css("background-color",colorcode);
-    $(this).attr("data-color",colorcode);
+    $(this).css("background-color", colorCode);
+    $(this).attr("data-color", colorCode);
     itemPreview();
 });
 
@@ -404,12 +308,6 @@ $('.button-reset').on("click", function(){
     $('.canvas-pixel').css("background-color","transparent");
     $('.canvas-pixel').attr("data-color","transparent");
     itemPreview();
-});
-
-$('.color-palette span').on("click", function() {
-    var color = $(this).css("background-color");
-    $('.color-code .form-color').css("background-color", color);
-    $('.color-code .form-color').val(color);
 });
 
 $('.item-builder').submit(function(e) {
@@ -676,9 +574,59 @@ var displaySlug = function() {
 
 };
 
-</script>
+// display game blocks
+var blocktypes = new Array (
 
+    /*forest map*/  "grass", "dirt", "water", "tree", "rock", "hole",
+    /*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
+    /*beach map*/   "sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
+    /*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
 
+    /*items*/       "shovel", "wood", "fire", "door", "door-open", "frisbee", "sign",
+    /*furniture*/   "table","chair","chest","bed","toilet","sink","bathtub",
+    /*weapons*/     "sword", "spear", "axe",
+    /*instruments*/ "guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
+    /*technology*/  "telescope","computer","2dprinter",
+    /*transport*/   "bike", "skiis", "canoe", "car", "rocket",
+
+    /*treasure*/    "diamond", "gold", "silver", "oil", "clay",
+    /*holes*/       "diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
+    /*blocks*/      "rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
+
+    "appletree", "heart", "apple"
+);
+var blockhtml = ""; 
+$.each(blocktypes, function(i, v) { 
+    blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'; 
+});
+
+var objecttypes = new Array (
+    "player-direction-up","player-direction-down","player-direction-left","player-direction-right",
+    "player-direction-up-sword","player-direction-down-sword","player-direction-left-sword ","player-direction-right-sword",
+    "player-direction-up-sword-swing","player-direction-down-sword-swing","player-direction-left-sword-swing","player-direction-right-sword-swing",
+    "player-direction-up-shovel","player-direction-down-shovel","player-direction-left-shovel","player-direction-right-shovel",
+    "player-direction-up-shovel-swing","player-direction-down-shovel-swing","player-direction-left-shovel-swing","player-direction-right-shovel-swing",
+    "player-direction-up-axe","player-direction-down-axe","player-direction-left-axe","player-direction-right-axe",
+    "player-direction-up-axe-swing","player-direction-down-axe-swing","player-direction-left-axe-swing","player-direction-right-axe-swing",
+    "player-direction-up-bike","player-direction-down-bike","player-direction-left-bike","player-direction-right-bike",
+    "player-direction-up-skiis","player-direction-down-skiis","player-direction-left-skiis","player-direction-right-skiis",
+    "player-direction-up-canoe","player-direction-down-canoe","player-direction-left-canoe","player-direction-right-canoe",
+    "player-direction-up-car","player-direction-down-car", "player-direction-left-car","player-direction-right-car",
+    "player-direction-up-rocket","player-direction-down-rocket","player-direction-left-rocket","player-direction-right-rocket",
+    "enemy-direction-up","enemy-direction-down","enemy-direction-left","enemy-direction-right",
+    "deer-direction-up","deer-direction-down","deer-direction-left","deer-direction-right"
+);
+var blockhtml = "";
+$.each(blocktypes, function(i, v) { 
+    blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'; 
+});
+$.each(objecttypes, function(i, v) { 
+    blockhtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>'; 
+});
+
+$('.block-palette').append(blockhtml);
+
+        </script>
 
     </body>
 </html>

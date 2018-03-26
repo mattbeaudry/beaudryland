@@ -131,16 +131,29 @@
   margin-bottom: 24px;
 }
 
-.bui-colorpicker {
-  position: relative;
-  width: 150px;
-  height: 44px;
+.bui-colorpalette {
+  width: 204px;
+  height: 224px;
 }
 
-.bui-colorpalette {
+.bui-colorpicker {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 204px;
+  height: 44px;
+
+  .bui-colorpalette {
+    display: none;
+    position: absolute;
+    top: 47px;
+    border: solid 2px #000;
+    box-shadow: 4px 4px 0 #000;
+
+    .bui-swatch {
+      &:hover {
+        border: solid 1px #fff;
+      }
+    }
+  }
 }
 
 .bui-swatch {
@@ -149,10 +162,10 @@
   width: 20px;
   height: 20px;
 }
-
+    
 .bui-colorpicker-input {
   float: left;
-  width: 90px;
+  width: 154px;
   margin-right: 8px;
   cursor: pointer;
 }

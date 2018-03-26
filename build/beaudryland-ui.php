@@ -10,6 +10,18 @@
         <div class="container clearfix">
             <h1>Beaudryland UI</h1>
 
+            <p>To do:</p>
+
+            <ul>
+                <li>Grid</li>
+                <li>Flex</li>
+                <li>Table</li>
+                <li>Card</li>
+                <li>Stat</li>
+                <li>Menu</li>
+                <li>Shadow</li>
+            </ul>
+
             <!-- 
                 <p data-height="265" data-theme-id="dark" data-slug-hash="veaOLr" data-default-tab="result" data-user="mattbeaudry" data-embed-version="2" data-pen-title="Beaudryland UI" class="codepen">See the Pen <a href="https://codepen.io/mattbeaudry/pen/veaOLr/">Beaudryland UI</a> by Matt Beaudry (<a href="https://codepen.io/mattbeaudry">@mattbeaudry</a>) on <a href="https://codepen.io">CodePen</a>.</p>
                 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script> 
@@ -78,33 +90,7 @@
                 </section>
                 <section class="bui-section">
                     <h2 class="bui-sectiontitle">Color picker</h2>
-                    <div class="bui-colorpicker">
-                        <input class="bui-textinput bui-colorpicker-input" type="text" name="hexcode" value="#000000">
-                        <div class="bui-colorpicker-eraser"></div>
-                        <div class="bui-colorpicker-palette clearfix"> 
-                            <span class="bui-colorpicker-swatch c-green-1"></span>
-                            <span class="bui-colorpicker-swatch c-green-2"></span>
-                            <span class="bui-colorpicker-swatch c-green-3"></span>
-                            <span class="bui-colorpicker-swatch c-green-4"></span>
-                            <span class="bui-colorpicker-swatch c-green-5"></span>
-                            <span class="bui-colorpicker-swatch c-green-6"></span>
-                            <span class="bui-colorpicker-swatch c-green-1"></span>
-                            <span class="bui-colorpicker-swatch c-green-2"></span>
-                            <span class="bui-colorpicker-swatch c-green-3"></span>
-                            <span class="bui-colorpicker-swatch c-green-4"></span>
-
-                            <span class="bui-colorpicker-swatch c-green-1"></span>
-                            <span class="bui-colorpicker-swatch c-green-2"></span>
-                            <span class="bui-colorpicker-swatch c-green-3"></span>
-                            <span class="bui-colorpicker-swatch c-green-4"></span>
-                            <span class="bui-colorpicker-swatch c-green-5"></span>
-                            <span class="bui-colorpicker-swatch c-green-6"></span>
-                            <span class="bui-colorpicker-swatch c-green-1"></span>
-                            <span class="bui-colorpicker-swatch c-green-2"></span>
-                            <span class="bui-colorpicker-swatch c-green-3"></span>
-                            <span class="bui-colorpicker-swatch c-green-4"></span>
-                        </div>
-                    </div>
+                    <?php include 'php/ui-colorpicker.php'; ?>
                 </section>
             </div>
 
@@ -113,6 +99,7 @@
         <script src="js/vendor/jquery-2.1.1.js"></script>
         <script src="js/vendor/raphael-min.js"></script>
         <script src="js/plugins.js"></script>
+        <script src="js/app-bundle.js"></script>
     </body>
 </html>
 

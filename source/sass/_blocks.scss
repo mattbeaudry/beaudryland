@@ -49,7 +49,7 @@ $woodbrown: #916d33;
 /* map backgrounds */
 
 .the-fucking-forest-map {
-  background: $grass-green;
+  background: bui-c(forest40);
 }
 
 .the-fucking-winter-map {
@@ -79,15 +79,15 @@ $woodbrown: #916d33;
 /* forest map */
 
 .block-dirt {
-  background: $dirt-brown url(../img/block-dirt.png) no-repeat;
+  background: url(../img/block-dirt.png) no-repeat;
 }
 
 .block-grass {
-  background: $grass-green url(../img/block-grass.png) no-repeat;
+  background: url(../img/block-grass.png) no-repeat;
 }
 
 .block-water {
-  background: $water-blue url(../img/block-water.png) no-repeat;
+  background: url(../img/block-water.png) no-repeat;
 }
 
 .block-tree {
@@ -95,7 +95,7 @@ $woodbrown: #916d33;
 }
 
 .block-wood {
-  background: $woodbrown url(../img/block-wood.png) no-repeat;
+  background: url(../img/block-wood.png) no-repeat;
 }
 
 .block-rock {
@@ -103,17 +103,17 @@ $woodbrown: #916d33;
 }
 
 .block-hole {
-  background: $grass-green url(../img/block-hole.png) no-repeat;
+  background: url(../img/block-hole.png) no-repeat;
 }
 
 /* winter map */
 
 .block-snow {
-  background: $snow-white url(../img/block-snow.png) no-repeat;
+  background: url(../img/block-snow.png) no-repeat;
 }
 
 .block-ice {
-  background: $snow-white url(../img/block-ice.png) no-repeat;
+  background: url(../img/block-ice.png) no-repeat;
 }
 
 .block-pinetree {
@@ -125,17 +125,17 @@ $woodbrown: #916d33;
 }
 
 .block-frozendirt {
-  background: $snow-white url(../img/block-frozendirt.png) no-repeat;
+  background: url(../img/block-frozendirt.png) no-repeat;
 }
 
 .block-snowhole {
-  background: $snow-white url(../img/block-snowhole.png) no-repeat;
+  background: url(../img/block-snowhole.png) no-repeat;
 }
 
 /* beach map */
 
 .block-sand {
-  background: $sand url(../img/block-sand.png) no-repeat;
+  background: url(../img/block-sand.png) no-repeat;
 }
 
 .block-sandstone {
@@ -143,15 +143,15 @@ $woodbrown: #916d33;
 }
 
 .block-sandhole {
-  background: $sand url(../img/block-sandhole.png) no-repeat;
+  background: url(../img/block-sandhole.png) no-repeat;
 }
 
 .block-wetsand {
-  background: $sand url(../img/block-wetsand.png) no-repeat;
+  background: url(../img/block-wetsand.png) no-repeat;
 }
 
 .block-wave {
-  background: #00a2ff url(../img/block-wave.png) no-repeat;
+  background: url(../img/block-wave.png) no-repeat;
 }
 
 .block-palmtree {
@@ -229,11 +229,11 @@ $woodbrown: #916d33;
 /* items */
 
 .block-shovel {
-  background: #ddd url(../img/item-shovel.png) no-repeat;
+  background: url(../img/item-shovel.png) no-repeat;
 }
 
 .block-sword {
-  background: #ddd url(../img/item-sword.png) no-repeat;
+  background: url(../img/item-sword.png) no-repeat;
 }
 
 .block-fire {
@@ -246,7 +246,7 @@ $woodbrown: #916d33;
 }
 
 .block-door-open {
-  background: $grass-green url(../img/item-door-open.png) no-repeat;
+  background: url(../img/item-door-open.png) no-repeat;
 }
 
 .block-sign {
@@ -334,11 +334,11 @@ $woodbrown: #916d33;
 /* transportation */
 
 .block-skiis {
-  background: $snow-white url(../img/item-skiis.png) no-repeat;
+  background: url(../img/item-skiis.png) no-repeat;
 }
 
 .block-bike {
-  background: $snow-white url(../img/item-bike.png) no-repeat;
+  background: url(../img/item-bike.png) no-repeat;
 }
 
 .block-car {
@@ -356,7 +356,7 @@ $woodbrown: #916d33;
 /* projectiles */
 
 .block-frisbee {
-  background: #ddd url(../img/item-frisbee.png) no-repeat;
+  background: url(../img/item-frisbee.png) no-repeat;
   background-size: contain;
 }
 
