@@ -92,6 +92,14 @@
                     <h2 class="bui-sectiontitle">Color picker</h2>
                     <?php include 'php/ui-colorpicker.php'; ?>
                 </section>
+                <section class="bui-section">
+                    <h2 class="bui-sectiontitle">Slider</h2>
+                    <div class="bui-slider">
+                        <input type="range" min="1" max="100" value="50" class="bui-slider-input">
+                    </div>
+                </section>
+
+                
             </div>
 
         </div>
