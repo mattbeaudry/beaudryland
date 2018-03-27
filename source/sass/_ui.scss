@@ -296,3 +296,14 @@ knob-face {
   left: 0;
   z-index: 1;
 }
+
+
+/* FLEX */
+
+.bui-iflex {
+  display: inline-flex !important;
+}
+
+.bui-flex {
+  display: flex !important;
+}

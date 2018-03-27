@@ -1,13 +1,13 @@
 .bui-synth {
-	background-color: #333;
+	background-color: bui-c(gray80);
 	padding: 32px;
 }
 
 .bui-synth-panel {
-	display: inline-flex;
+	display: inline-block;
 	height: 160px;
 	border-radius: 6px;
-	padding: 20px 20px 0 20px;
+	padding: 20px 30px 0 30px;
 	margin: 0 20px 20px 0;
 	border: solid 3px #000; 
 	text-align: center;
@@ -56,12 +56,32 @@
 	margin: 0 8px;
 
 	.knobInput-label {
-		color: bui-c(white);
+		color: bui-c(white); 
 	}
 }
 
 .bui-knob-title {
 	font-size: 16px;
 	color: bui-c(white);
+}
 
+.bui-drumpads {
+	.bui-drumpad {
+		height: 50px;
+		min-width: 50px;
+		background-color: #fff;
+		color: #000;
+		font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
+		font-weight: 400;
+		text-transform: uppercase;
+		border-radius: 3px;
+		font-size: 8px;
+		text-align: center;
+		padding: 0 8px;
+		line-height: 1;
+
+		&:active {
+			border: solid 2px #000;
+		}
+	}
 }

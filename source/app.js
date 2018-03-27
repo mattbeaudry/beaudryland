@@ -40,6 +40,7 @@ blUI.setupUI();
 blNavigation.initializeNavigation();
 blInventory.setupInventorySlots();
 blSound.setupSynth();
+blSound.setupDrums();
 
 // PHONEGAP / MOBILE ONLY
 if ( $('body').hasClass("version-phonegap") ) {
