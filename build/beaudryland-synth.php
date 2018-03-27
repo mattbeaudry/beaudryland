@@ -33,12 +33,14 @@
                 </div>
                 <div class="bui-synth-knob">
                     <h3 class="bui-knob-title">Wave</h3>
-                    <select class="bui-select" id="bui-synth-wave">
-                        <option value="sine">Sine</option>
-                        <option value="square">Square</option>
-                        <option value="sawtooth">Sawtooth</option>
-                        <option value="triangle">Triangle</option>
-                    </select>
+                    <div class="bui-select">
+                        <select id="bui-synth-wave">
+                            <option value="sine">Sine</option>
+                            <option value="square">Square</option>
+                            <option value="sawtooth">Sawtooth</option>
+                            <option value="triangle">Triangle</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>

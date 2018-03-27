@@ -83,10 +83,12 @@
                 </div>
                 <div class="bui-field">
                     <label class="bui-label">Select</label>
-                    <select class="bui-select">
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                    </select>
+                    <div class="bui-select">
+                        <select>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
                 </div>
             </section>
             <section class="bui-section">
