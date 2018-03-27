@@ -216,3 +216,55 @@
     background: bui-c(black);
     cursor: pointer;
 }
+
+
+/* KNOB */
+
+$knobSize: 4em;
+$handW : .2em;
+
+knob-input {
+  width: auto;
+  height: auto;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  margin: 0 1em;
+  font-size: .4em;
+}
+
+knob-hand {
+  width: $handW;
+  background-color: transparent;
+  box-sizing: border-box;
+  border-bottom: $knobSize / 2 solid bui-c(white);
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -$handW / 2;
+}
+
+knob-face {
+ display: inline-block;
+  width: $knobSize;
+  height: $knobSize;
+  box-sizing: border-box;
+  border-radius: $knobSize;
+  cursor: pointer;
+  position: absolute;
+  background-color: bui-c(gray80);
+  z-index: 2;
+}
+
+.knobInput-label {
+  display: block;
+  text-align: center;
+  font-size: 1em;
+}
+
+.knob-progress {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}

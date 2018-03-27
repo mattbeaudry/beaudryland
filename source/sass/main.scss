@@ -1123,8 +1123,28 @@ a.nav-selected-item {
   margin-right: 4px;
 }
 
+.hidden {
+  display: none;
+}
+
+.noSelection ::selection {
+  /*background: transparent;*/
+}
+
+.noSelection {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  min-height: 100%;
+  height: 100%;
+}
+
 @import "blocks";
 @import "navigation";
 @import "inventory";
 @import "player";
 @import "phonegap";
+@import "synth";

@@ -1,3 +1,16 @@
+export const buiColor = {
+	white: "#FFFFFF",
+	black: "#000000",
+	red50: "#FA694A",
+	orange50: "#E08F33",
+	yellow50: "#E7DB57",
+	green50: "#37DB2F",
+	forest50: "#61A461",
+	blue50: "#329ADB",
+	cyan50: "#06C7D9",
+	purple50: "#A247A6"
+};
+
 export const gridunitpx = 20; //must change this px value in css as well
 export var totalmapblocks = 0;
 export var mapWidthMobile = 16;

@@ -17,6 +17,7 @@ import { HCI } from './js/hci';
 import { UI } from './js/ui';
 import { Achievement } from './js/achievement';
 import { Mobile } from './js/mobile';
+import { Sound } from './js/sound';
 
 var blUtil = new Utility();
 var blInventory = new Inventory();
@@ -33,10 +34,12 @@ var blHCI = new HCI();
 var blUI = new UI();
 var blAchievement = new Achievement();
 var blMobile = new Mobile();
+var blSound = new Sound();
 
 blUI.setupUI();
 blNavigation.initializeNavigation();
 blInventory.setupInventorySlots();
+blSound.setupSynth();
 
 // PHONEGAP / MOBILE ONLY
 if ( $('body').hasClass("version-phonegap") ) {
@@ -47,21 +50,17 @@ if ( $('body').hasClass("version-phonegap") ) {
 
 	$(document).ready(function() {
 		console.log("MOBILE VERSION");
-
 		globals.mapwidth = globals.mapWidthMobile;
 		globals.mapheight = globals.mapHeightMobile;
 		blMap.setupMap('mobile');
 	    blMap.loadNewMap('forest', 'front');
 	    blPlayer.createPlayer();
-
 		blMobile.websql_openDatabase();
 		blMobile.websql_createTable();
 		blMobile.loadGameMobile();
-
 		blStory.createForestSigns();
     	//blAnimal.createAnimal();
     	//blStory.setupMapBorders('forest');
-
     	blMap.loadNewMap('winter', 'right');
     	blMap.loadNewMap('beach', 'back');
     	blMap.loadNewMap('jungle', 'left');
@@ -71,7 +70,6 @@ if ( $('body').hasClass("version-phonegap") ) {
 	    blStory.createWinterSigns();
 	    blStory.createBeachSigns();
 	    blDev.getAllItems();
-
 		blHCI.setupKeyboardEvents();
 		blHCI.setupMouseEvents();
 		blHCI.setupControlPadEvents();

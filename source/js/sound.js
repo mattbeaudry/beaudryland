@@ -112,6 +112,65 @@ export class Sound {
 		mml.synth.play();
 	}
 
+	setupSynth() {
+
+		var context = new AudioContext;
+		var oscillator = context.createOscillator();
+
+		function buiSynthKey(context) {
+			this.context = context;
+		};
+
+		buiSynthKey.prototype.setup = function() {
+			this.osc = this.context.createOscillator();
+			this.gain = this.context.createGain();
+			this.osc.connect(this.gain);
+			this.gain.connect(this.context.destination);
+		};
+
+		buiSynthKey.prototype.trigger = function(time, freq, gain, sustain, wave) {
+			this.setup();
+			this.osc.frequency.setValueAtTime(freq, time);
+			this.osc.type = wave;
+			this.osc.start(time);
+			this.gain.gain.setValueAtTime(0, time);
+			this.gain.gain.linearRampToValueAtTime(gain, time + 0.01);
+			this.gain.gain.exponentialRampToValueAtTime(0.001, time + sustain);
+			this.osc.stop(time + sustain);
+		};
+
+		$('.bui-synth-keys .bui-key').on("click", function() {
+			var gain = $('#bui-synth-gain').val();
+			gain = gain / 100;
+			var sustain = $('#bui-synth-sustain').val();
+			sustain = (sustain / 100) * 2;
+			var wave = $('#bui-synth-wave').val();
+			var note = $(this).attr("data-key");
+			var key = new buiSynthKey(context);
+			var now = context.currentTime;
+			var freq;
+
+			switch(note) {
+				case "c": freq = 523.25; break;
+				case "cs": freq = 554.37; break;
+				case "d": freq = 587.33; break;
+				case "ds": freq = 622.25; break;
+				case "e": freq = 659.25; break;
+				case "f": freq = 698.46; break;
+				case "fs": freq = 739.99; break;
+				case "g": freq = 783.99; break;
+				case "gs": freq = 830.61; break;
+				case "a": freq = 880.00; break;
+				case "as": freq = 932.33; break;
+				case "b": freq = 987.77; break;
+				case "c2": freq = 1046.50; break;
+			}
+
+			key.trigger(now, freq, gain, sustain, wave);
+		});
+
+	}
+
 }
 
 // var context = new AudioContext;
@@ -214,43 +273,7 @@ export class Sound {
 //   snare.trigger(now);
 // });
 
-// function Key(context) {
-//   this.context = context;
-// };
 
-// Key.prototype.setup = function() {
-//   this.osc = this.context.createOscillator();
-//   this.gain = this.context.createGain();
-//   this.osc.connect(this.gain);
-//   this.gain.connect(this.context.destination);
-// };
-
-// Key.prototype.trigger = function(time, freq) {
-//   this.setup();
-//   this.osc.frequency.setValueAtTime(freq, time);
-//   this.gain.gain.setValueAtTime(1, time);
-//   this.osc.start(time);
-//   this.osc.stop(time + 0.2);
-// };
-
-// $('.key').on("click", function() {
-//   var note = $(this).attr("data-key");
-//   var key = new Key(context);
-//   var now = context.currentTime;
-//   switch(note){
-//     case "c": freq = 150; break;
-//     case "d": freq = 175; break;
-//     case "e": freq = 200; break;
-//     case "f": freq = 225; break;
-//     case "g": freq = 250; break;
-//     case "a": freq = 300; break;
-//     case "b": freq = 350; break;
-//     case "c": freq = 400; break;
-//     case "d": freq = 450; break;
-//     case "e": freq = 500; break;
-//   }
-//   key.trigger(now, freq);
-// });
 
 // $('.sequence-play').on("click", function() {
 //   $('.step').addClass("");

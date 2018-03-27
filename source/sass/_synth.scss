@@ -1,0 +1,67 @@
+.bui-synth {
+	background-color: #333;
+	padding: 32px;
+}
+
+.bui-synth-panel {
+	display: inline-flex;
+	height: 160px;
+	border-radius: 6px;
+	padding: 20px 20px 0 20px;
+	margin: 0 20px 20px 0;
+	border: solid 3px #000; 
+	text-align: center;
+	vertical-align: top;
+	background-color: #000;
+}
+
+.bui-keys {
+	font-size: 0;
+	text-align: center;
+}
+
+.bui-key {
+	position: relative;
+	display: inline-block;
+	height: 100px;
+	width: 20px;
+	background-color: #fff;
+	margin: 0 1px;
+	border-radius: 2px;
+
+	&:active {
+		border: solid 1px #000;
+	}
+}
+
+.bui-key-black {
+	position: absolute;
+	width: 16px;
+	height: 70px;
+	margin-left: -8px;
+	margin-top: -4px;
+	background-color: #000;
+	z-index: 1;
+	border-radius: 4px;
+
+	&:active {
+		width: 14px;
+		margin-left: -7px;
+		margin-top: -7px;
+	}
+}
+
+.bui-synth-knob {
+	display: inline-block;
+	margin: 0 8px;
+
+	.knobInput-label {
+		color: bui-c(white);
+	}
+}
+
+.bui-knob-title {
+	font-size: 16px;
+	color: bui-c(white);
+
+}
