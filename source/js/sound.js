@@ -30,34 +30,6 @@ export class Sound {
 		this.sound.osc.stop(time + 0.2);
 	}
 
-	// switch(note){
-	//   case "c": freq = 150; break;
-	//   case "d": freq = 175; break;
-	//   case "e": freq = 200; break;
-	//   case "f": freq = 225; break;
-	//   case "g": freq = 250; break;
-	//   case "a": freq = 300; break;
-	//   case "b": freq = 350; break;
-	//   case "c": freq = 400; break;
-	//   case "d": freq = 450; break;
-	//   case "e": freq = 500; break;
-	// }
-
-	// playSound(freq) {
-	// 	achievementCompleted("jammingout");
-	// 	//unlock winter map
-	// 	if ((this.guitarFirstNote == true) && ($('.the-fucking-winter-map').length == 0)){ 
-	// 		drawNewWinterMap(); 
-	// 		createWinterSigns();
-	// 		this.guitarFirstNote = false; 
-	// 	}
-	// 	sin = T("sin", freq);
-	// 	env = T("adsr", 10, 500);
-	// 	syn = T("*", sin, env).play();
-	// 	sin.bang();
-	// 	env.bang();
-	// }
-
 	playPiano(freq) {
 		achievementCompleted("jammingout");
 		//unlock beach map
@@ -124,19 +96,35 @@ export class Sound {
 		buiSynthKey.prototype.setup = function() {
 			this.osc = this.context.createOscillator();
 			this.gain = this.context.createGain();
+			this.delay = this.context.createDelay();
+			this.feedback = this.context.createGain();
+			this.filter = this.context.createBiquadFilter();
+
 			this.osc.connect(this.gain);
+			this.delay.connect(this.feedback);
+			this.feedback.connect(this.filter);
+		    this.filter.connect(this.delay);
+		    this.osc.connect(this.delay);
+		    this.osc.connect(this.context.destination);
+		    this.delay.connect(this.context.destination);
 			this.gain.connect(this.context.destination);
 		};
 
-		buiSynthKey.prototype.trigger = function(time, freq, gain, sustain, wave) {
+		buiSynthKey.prototype.trigger = function(time, freq, gain, sustain, wave, delay, feedback, filter) {
 			this.setup();
 			this.osc.frequency.setValueAtTime(freq, time);
 			this.osc.type = wave;
+
+			this.delay.delayTime.value = delay;
+			this.feedback.gain.value = feedback;
+			this.filter.frequency.value = filter;
+
 			this.osc.start(time);
 			this.gain.gain.setValueAtTime(0, time);
 			this.gain.gain.linearRampToValueAtTime(gain, time + 0.01);
 			this.gain.gain.exponentialRampToValueAtTime(0.001, time + sustain);
 			this.osc.stop(time + sustain);
+
 		};
 
 		$('.bui-synth-keys .bui-key').on("click", function() {
@@ -144,6 +132,12 @@ export class Sound {
 			gain = gain / 100;
 			var sustain = $('#bui-synth-sustain').val();
 			sustain = (sustain / 100) * 2;
+			var delay = $('#bui-synth-delay').val();
+			delay = delay / 100;
+			var feedback = $('#bui-synth-feedback').val();
+			feedback = feedback / 100;
+			var filter = $('#bui-synth-filter').val();
+			filter = filter * 20;
 			var wave = $('#bui-synth-wave').val();
 			var note = $(this).attr("data-key");
 			var key = new buiSynthKey(context);
@@ -166,7 +160,7 @@ export class Sound {
 				case "c2": freq = 1046.50; break;
 			}
 
-			key.trigger(now, freq, gain, sustain, wave);
+			key.trigger(now, freq, gain, sustain, wave, delay, feedback, filter);
 		});
 
 	}
