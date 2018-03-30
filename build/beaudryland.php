@@ -102,11 +102,15 @@
 					<table class="bl-table items-table">
 						<thead>
 							<tr>
-								<td>Item</td>
-								<td>Image</td>
-								<td>Recipe</td>
-								<td>Notes</td>
-							</tr>
+                                <td>Image</td>
+                                <td>Name</td>
+                                <td>Description</td>
+                                <td>Recipe</td>
+                                <td>Animated</td>
+                                <td>Lifeform</td>
+                                <td>Equipable</td>
+                                <td>Useable</td>
+                            </tr>
 						</thead>
 						<tbody>
 							<?php include 'php/loaditems.php'; ?>
@@ -215,65 +219,92 @@
 						<a id="achievements"></a>
 						<h2>Achievements</h2>
 
-						<div class="gamestats">
-							<div class="completion">
-								<span class="completion-percentage">0</span>% game completion
+						<div class="gamestats bui-flex">
+							<div class="gamestat completion">
+								<span class="stat"><span class="completion-percentage">0</span>%</span><br>game completion
 							</div>
-							<div class="achievements">
-								<span class="achievements-complete">0</span>/<span class="achievements-total">12</span> achivements complete
+							<div class="gamestat achievements">
+								<span class="stat"><span class="achievements-complete">0</span>/<span class="achievements-total">12</span></span><br>achivements
 							</div>
-							<div class="items">
-								<span class="items-collected">0</span>/<span class="items-total">89</span> blocks collected
+							<div class="gamestat items">
+								<span class="stat"><span class="items-collected">0</span>/<span class="items-total">89</span></span><br>blocks
 							</div>
-							<div class="maps">
-								<span class="maps-unlocked">1</span>/<span class="maps-total">6</span> maps unlocked
+							<div class="gamestat maps">
+								<span class="stat"><span class="maps-unlocked">1</span>/<span class="maps-total">6</span></span><br>maps
 							</div>
 						</div>
 
-						<ul class="item-achievements clearfix">
-							<li data-achievementid="1" data-achievementname="genesis" class="achievement-genesis status-completed">
-								<h3>Genesis</h3>
-								<p>Created a new game and generated a randomized map.</p>
-							</li>
-							<li data-achievementid="2" data-achievementname="cuttingwood" class="achievement-cuttingwood">
-								<h3>Cutting Wood</h3>
-								<p>Cut down trees and use them to create wood blocks.</p>
-							</li>
-							<li data-achievementid="3" data-achievementname="keepingwarm" class="achievement-keepingwarm">
-								<h3>Keeping Warm</h3>
-								<p>Use rocks and wood to build a fire.</p>
-							</li>
-							<li data-achievementid="4" data-achievementname="saveyourgame" class="achievement-saveyourgame">
-								<h3>Save your Game</h3>
-								<p>Save your game for the first time. You should do tbis periodically whikle playing.</p>
-							</li>
-							<li data-achievementid="5" data-achievementname="treasurehunter" class="achievement-treasurehunter">
-								<h3>Treasure Hunter</h3>
-								<p>Build a shovel, learn how to dig, and find some treasure.</p>
-							</li>
-							<li data-achievementid="6" data-achievementname="takingshelter" class="achievement-takingshelter">
-								<h3>Taking Shelter</h3>
-								<p>Build a door and use some wood or solid blocks to create a cabin.</p>
-							</li>
-							<li data-achievementid="7" data-achievementname="playtheguitar" class="achievement-playtheguitar">
-								<h3>Play the guitar</h3>
-							</li>
-							<li data-achievementid="8" data-achievementname="playthekeys" class="achievement-playthekeys">
-								<h3>Play the keys</h3>
-							</li>
-							<li data-achievementid="9" data-achievementname="playthetrumpet" class="achievement-playthetrumpet">
-								<h3>Play the trumpet</h3>
-							</li>
-							<li data-achievementid="10" data-achievementname="playthebass" class="achievement-playthebass">
-								<h3>Play the bass</h3>
-							</li>
-							<li data-achievementid="11" data-achievementname="bringinthebeat" class="achievement-bringinthebeat">
-								<h3>Bring in the beat</h3>
-							</li>
-							<li data-achievementid="12" data-achievementname="gotospace" class="achievement-gotospace">
-								<h3>Go to space</h3>
-							</li>
-						</ul>
+						<table class="bl-table item-achievements clearfix">
+							<thead>
+								<tr>
+									<td>Completed</td>
+									<td>Achievement</td>
+									<td>Description</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr data-achievementid="1" data-achievementname="genesis" class="achievement-genesis status-completed">
+									<td class="achievement-completion"></td>
+									<td>Genesis</td>
+									<td>Created a new game and generated a randomized map.</td>
+								</tr>
+								<tr data-achievementid="2" data-achievementname="cuttingwood" class="achievement-cuttingwood">
+									<td class="achievement-completion"></td>
+									<td>Cutting Wood</td>
+									<td>Cut down trees and use them to create wood blocks.</td>
+								</tr>
+								<tr data-achievementid="3" data-achievementname="keepingwarm" class="achievement-keepingwarm">
+									<td class="achievement-completion"></td>
+									<td>Keeping Warm</td>
+									<td>Use rocks and wood to build a fire.</td>
+								</tr>
+								<tr data-achievementid="4" data-achievementname="saveyourgame" class="achievement-saveyourgame">
+									<td class="achievement-completion"></td>
+									<td>Save your Game</td>
+									<td>Save your game for the first time. You should do tbis periodically whikle playing.</td>
+								</tr>
+								<tr data-achievementid="5" data-achievementname="treasurehunter" class="achievement-treasurehunter">
+									<td class="achievement-completion"></td>
+									<td>Treasure Hunter</td>
+									<td>Build a shovel, learn how to dig, and find some treasure.</td>
+								</tr>
+								<tr data-achievementid="6" data-achievementname="takingshelter" class="achievement-takingshelter">
+									<td class="achievement-completion"></td>
+									<td>Taking Shelter</td>
+									<td>Build a door and use some wood or solid blocks to create a cabin.</td>
+								</tr>
+								<tr data-achievementid="7" data-achievementname="playtheguitar" class="achievement-playtheguitar">
+									<td class="achievement-completion"></td>
+									<td>Play the guitar</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="8" data-achievementname="playthekeys" class="achievement-playthekeys">
+									<td class="achievement-completion"></td>
+									<td>Play the keys</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="9" data-achievementname="playthetrumpet" class="achievement-playthetrumpet">
+									<td class="achievement-completion"></td>
+									<td>Play the trumpet</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="10" data-achievementname="playthebass" class="achievement-playthebass">
+									<td class="achievement-completion"></td>
+									<td>Play the bass</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="11" data-achievementname="bringinthebeat" class="achievement-bringinthebeat">
+									<td class="achievement-completion"></td>
+									<td>Bring in the beat</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="12" data-achievementname="gotospace" class="achievement-gotospace">
+									<td class="achievement-completion"></td>
+									<td>Go to space</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
 						</section>
 				</div>
 

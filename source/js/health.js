@@ -11,10 +11,10 @@ export class Health {
 		var rid = globals.uniqueObjectID();
 		var healthlabelhtml = '<div class="damage-label damage-label-id-'+rid+'">'+number+'</div>';
 		$('.objectid-'+objectid).append(healthlabelhtml);
-		$('.damage-label-id-'+rid).css("top","-80px");
-		//$('.damage-label-fade
+		$('.damage-label-id-'+rid).css("top","-50px");
+		$('.damage-label-id-'+rid).animate("top","-120px");
 		$('.damage-label-id-'+rid).fadeOut(300, function() {
-			$(this).delete();
+			$(this).remove();
 		});
 	}
 
@@ -48,7 +48,6 @@ export class Health {
 
 	addHeart() {
 		var emptyhearts = $('.the-fucking-hearts ul .empty').length;
-		//alert(emptyhearts
 		$('.the-fucking-hearts .empty').first().removeClass("empty");
 		this.increaseObjectHealth(1,1);
 	}

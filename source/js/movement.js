@@ -1,11 +1,11 @@
 import * as globals from './globals';
 
 import { Utility } from './utility';
-import { Action } from './action';
+//import { Action } from './action';
 import { Cube } from './map/cube';
 
 var blUtil = new Utility();
-var blAction = new Action();
+//var blAction = new Action();
 var blCube = new Cube();
 
 export class Movement {
@@ -286,19 +286,19 @@ export class Movement {
 
 		if (playerblock == destinationblock) {
 			//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-			blAction.playerPrimaryAction(destinationblock); 
+			//blAction.playerPrimaryAction(destinationblock); 
 			return;
 		} else if ((playerblock-globals.mapwidth-1) == destinationblock) {
 			//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-			blAction.playerPrimaryAction(destinationblock); 
+			//blAction.playerPrimaryAction(destinationblock); 
 			return;
 		} else if ((playerblock+globals.mapwidth-1) == destinationblock) {
 			//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-			blAction.playerPrimaryAction(destinationblock); 
+			//blAction.playerPrimaryAction(destinationblock); 
 			return;
 		} else if ((playerblock-2) == destinationblock) {
 			//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-			blAction.playerPrimaryAction(destinationblock); 
+			//blAction.playerPrimaryAction(destinationblock); 
 			return;
 		}
 

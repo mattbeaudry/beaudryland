@@ -11,17 +11,22 @@
         
         <h1>Beaudryland UI</h1>
 
-        <p>To do:</p>
+        <section class="bui-section">
+            <h2 class="bui-sectiontitle">To do</h2>
 
-        <ul>
-            <li>Grid</li>
-            <li>Flex</li>
-            <li>Table</li>
-            <li>Card</li>
-            <li>Stat</li>
-            <li>Menu</li>
-            <li>Shadow</li>
-        </ul>
+            <ul>
+                <li>Grid</li>
+                <li>Flex</li>
+                <li>Table</li>
+                <li>Card</li>
+                <li>Stat</li>
+                <li>Menu</li>
+                <li>Shadow</li>
+                <li>Toasts</li>
+                <li>Validation</li>
+                <li>Motion</li>
+            </ul>
+        </section>
 
         <!-- 
             <p data-height="265" data-theme-id="dark" data-slug-hash="veaOLr" data-default-tab="result" data-user="mattbeaudry" data-embed-version="2" data-pen-title="Beaudryland UI" class="codepen">See the Pen <a href="https://codepen.io/mattbeaudry/pen/veaOLr/">Beaudryland UI</a> by Matt Beaudry (<a href="https://codepen.io/mattbeaudry">@mattbeaudry</a>) on <a href="https://codepen.io">CodePen</a>.</p>
@@ -30,7 +35,7 @@
 
         <div class="bui-components">
             <section class="bui-section">
-                <h2 class="bui-sectiontitle">Colors</h2>
+                <h2 class="bui-sectiontitle">Color</h2>
                 <div class="bui-colorpalette">
                     <?php include 'php/part-colors.php'; ?>
                 </div>

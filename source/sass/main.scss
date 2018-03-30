@@ -38,7 +38,7 @@ body.theme-black {
     color: #fff;
 
     &.status-completed {
-      border: solid 5px #36ac2a;
+      border: solid 5px #36ac2a !important;
     }
   }
 
@@ -1081,6 +1081,32 @@ label {
   text-transform: uppercase;
 }
 
+.gamestat {
+  font-size: 10px;
+  height: 80px;
+  margin-right: 32px;
+  margin-bottom: 32px;
+  text-align: center;
+  background-color: #fff;
+  padding: 16px 32px;
+  border: solid 2px #000;
+
+  .stat {
+    font-size: 20px;
+  }
+}
+
+.achievement-completion {
+  background-color: bui-c(gray30);
+}
+
+.status-completed {
+
+  .achievement-completion {
+    background-color: bui-c(green50);
+  }
+}
+
 /* ICONS */
 
 .i-check {
@@ -1111,7 +1137,7 @@ label {
   width: 100%;
 
   .tab {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px 30px;
   }
 }
@@ -1121,6 +1147,7 @@ a.nav-selected-item {
   height: 34px;
   border: dashed 3px #000;
   margin-right: 4px;
+  background-color: #fff;
 }
 
 .hidden {

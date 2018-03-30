@@ -41,23 +41,15 @@ export class Enemy {
 			if ($('.objectid-'+id).length != 0) {
 		
 				var enemyrandom = Math.random();
-				//var enemydirection;
 				var enemyX = blUtil.getObjectCurrentCol(id); var enemyY = blUtil.getObjectCurrentRow(id);
 				var playerX = blUtil.getObjectCurrentCol(1); var playerY = blUtil.getObjectCurrentRow(1);
 				
 				var n = enemyPath.length;
 				enemyPath.push(enemyX+"-"+enemyY);
 
-				//blUtil.log("-----");
-				//blUtil.log('enemythoughtid-'+n);
-				//blUtil.log(enemyPath);
-				//blUtil.log("enemylastpos="+enemyPath[n-1]);
-
 				//is player stuck? move random direction
 				if (enemyPath[n-1]==enemyPath[n]) {
-
 					blUtil.log("ENEMY STUCK");
-
 					var randomDirection = Math.floor(Math.random() * 4) + 1;
 					switch(randomDirection) {
 						case 1: blMovement.moveObject("up", id, "enemy"); break;
@@ -96,8 +88,8 @@ export class Enemy {
 				//limit
 				if (t > maxthoughts) {
 					blUtil.log("Enemy terminated");
-					this.stopEnemyBrain();
-					this.killEnemy(id);
+					stopEnemyBrain();
+					killEnemyCall(id);
 				} else {
 					t++;
 					enemybrain = setTimeout(anEnemyThought, globals.enemyspeed); // repeat thought
@@ -107,9 +99,15 @@ export class Enemy {
 			
 		}
 
+		function killEnemyCall(id) {
+			this.killEnemy(id);
+		}
+
 		function stopEnemyBrain() {
 			clearTimeout(enemybrain);
 		}
+
+		
 	}
 
 }

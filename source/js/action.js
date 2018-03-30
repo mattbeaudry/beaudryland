@@ -6,6 +6,7 @@ import { Health } from './health';
 import { Inventory } from './inventory';
 import { Signs } from './signs';
 import { Achievement } from './achievement';
+import { Enemy } from './enemy';
 
 var blUtil = new Utility();
 var blMap = new Map();
@@ -13,6 +14,7 @@ var blHealth = new Health();
 var blInventory = new Inventory();
 var blSigns = new Signs();
 var blAchievement = new Achievement();
+var blEnemy = new Enemy();
 
 export class Action {
 
@@ -28,8 +30,8 @@ export class Action {
 		var block = blUtil.getObjectCurrentBlock(this.id);
 		var currentMap = globals.currentMap;
 		var blockClass = '.the-fucking-'+currentMap+'-map .block:eq('+block+')';
-		
 		var selecteditem = blUtil.getSelectedItem();
+
 		switch (direction) {
 			case "up": block = block - (globals.mapwidth); break;
 			case "down": block = block + (globals.mapwidth); break;
@@ -64,7 +66,7 @@ export class Action {
 					var enemyblock = blUtil.getObjectCurrentBlock(enemyid);
 					if (block == enemyblock || enemyblock == playerblock) {
 						blUtil.log("killed an enemy!");
-						//killEnemy(enemyid);
+						blEnemy.killEnemy(enemyid);
 					}
 				});
 			}
