@@ -33,17 +33,16 @@ $woodbrown: #916d33;
   float: left;
   width: 20px;
   height: 20px;
-  background-size: contain;
+  background-size: contain !important;
   background-repeat: no-repeat;
-
-  // border: solid #000
-  // border-width: 0 1px 1px 0
   font-size: 8px;
   color: transparent;
 }
 
-.block {
-  background-size: contain !important;
+.maps-container {
+  .block {
+    background-size: 18px 19px !important;
+  }
 }
 
 /* map backgrounds */
@@ -53,7 +52,7 @@ $woodbrown: #916d33;
 }
 
 .the-fucking-winter-map {
-  background: $snow-white;
+  background: bui-c(cyan10);
 }
 
 .the-fucking-beach-map {
@@ -83,11 +82,11 @@ $woodbrown: #916d33;
 }
 
 .block-grass {
-  background: url(../img/block-grass.png) no-repeat;
+  background: bui-c(forest40) url(../img/block-grass.png) no-repeat;
 }
 
 .block-water {
-  background: url(../img/block-water.png) no-repeat;
+  background: bui-c(blue30) url(../img/block-water.png) no-repeat;
 }
 
 .block-tree {

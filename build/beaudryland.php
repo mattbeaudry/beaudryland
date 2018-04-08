@@ -330,11 +330,10 @@
         	<?php foreach(glob('img/*.*') as $filename){ echo '<img src="'.$filename.'" />'; } ?>
         </div>
 
-        <script>
-        	window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.js"><\/script>');
-        </script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.js"><\/script>');</script>
 
         <script src="js/plugins.js"></script>
+
         <script src="js/app-bundle.js"></script>
 
         <script type="text/javascript">

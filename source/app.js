@@ -1,3 +1,6 @@
+require('jquery');
+require('jquery-ui-bundle');
+
 import './sass/main.scss';
 import * as globals from './js/globals';
 import * as blNavigation from './js/navigation';

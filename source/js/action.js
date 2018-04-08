@@ -144,7 +144,7 @@ export class Action {
 				//growGrass(block);
 
 			//digging - winter map
-			} else if (blUtil.getSelectedItem() == "shovel" &&  blocktype == "snow" || blocktype == "frozendirt" || blocktype == "ice") {
+			} else if (blUtil.getSelectedItem() == "shovel" &&  blocktype == "snow" || blocktype == "ice") {
 				var r = Math.random();
 				if (r < 0.2) {
 					blUtil.log("gold!");
@@ -153,14 +153,14 @@ export class Action {
 					blUtil.log("silver!");
 					blMap.changeBlockType(block, "silver-hole", currentMap);
 				} else {
-					blMap.changeBlockType(block, "frozendirt", currentMap);
+					blMap.changeBlockType(block, "dirt", currentMap);
 				}
 				blInventory.addToInventory(blocktype, 5);
-				blInventory.addToInventory('frozendirt', 5);
+				blInventory.addToInventory('dirt', 5);
 				//growGrass(block);
 
 			//digging - beach map
-			} else if (blUtil.getSelectedItem() == "shovel" && blocktype == "sand" || blocktype == "wetsand") {
+			} else if (blUtil.getSelectedItem() == "shovel" && blocktype == "sand" || blocktype == "dirt") {
 				//chance of digging gold
 				var r = Math.random();
 				if (r < 0.2) {
@@ -170,20 +170,18 @@ export class Action {
 					blUtil.log("clay!");
 					blMap.changeBlockType(block, "clay-hole", currentMap);
 				} else {
-					blMap.changeBlockType(block, "wetsand", currentMap);
+					blMap.changeBlockType(block, "dirt", currentMap);
 				}
 				blInventory.addToInventory(blocktype, 5);
-				blInventory.addToInventory('wetsand', 5);
+				blInventory.addToInventory('dirt', 5);
 				//growGrass(block);
 
 			//filling water/holes
 			} else if (blocktype == "hole" || blocktype == "water" || blocktype == "snowhole" || blocktype == "wave" || blocktype == "sandhole") {
 				if (selecteditem == "grass" ||
 					selecteditem == "dirt" ||
-					selecteditem == "frozendirt" ||
 					selecteditem == "snow" ||
 					selecteditem == "sand" ||
-					selecteditem == "wetsand" ||
 					selecteditem == "rockbrick" ||
 					selecteditem == "icerockbrick" ||
 					selecteditem == "sandstonebrick" ||
@@ -205,8 +203,8 @@ export class Action {
 
 			//placing blocks
 			} else if ( (blocktype == "grass") || (blocktype == "dirt") || (blocktype == "hole") ||
-			     (blocktype == "snow") || (blocktype == "frozendirt") || (blocktype == "ice") ||
-			     (blocktype == "sand") || (blocktype == "wetsand") || (blocktype == "water") ) {
+			     (blocktype == "snow") || (blocktype == "ice") ||
+			     (blocktype == "sand") || (blocktype == "water") ) {
 				blUtil.log('selected item is '+selecteditem);
 				blUtil.log('blocktype is '+blocktype);
 
@@ -248,10 +246,10 @@ export class Action {
 			} else if ($.inArray(blocktype, globals.iscollectable) > -1) {
 				var changeblocktotype = "grass";
 				if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "dirt"; } 
-				else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "frozendirt"; } 
-				else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "frozendirt"; }
-				else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "wetsand"; }
-				else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "wetsand"; }
+				else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "dirt"; } 
+				else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "dirt"; }
+				else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "dirt"; }
+				else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "dirt"; }
 				else if (blocktype == "carrot-inground") { blocktype = "carrot"; changeblocktotype = "dirt"; }
 
 				blInventory.addToInventory(blocktype, "5");

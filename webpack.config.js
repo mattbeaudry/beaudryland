@@ -61,7 +61,9 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'globals': path.resolve(__dirname, './globals')
+            'globals': path.resolve(__dirname, './globals'),
+            "jquery-ui": "jquery-ui/jquery-ui.js",      
+            modules: path.join(__dirname, "node_modules"),
         }
     },
     plugins: [

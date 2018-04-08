@@ -10,6 +10,7 @@ export class Inventory {
 	constructor() {
 		this.invslothtml = "";
 		this.inventorySlots = globals.inventoryslots;
+		this.inventoryDiv = '.the-fucking-inventory';
 	}
 
 	setupInventorySlots() {
@@ -19,6 +20,7 @@ export class Inventory {
 			this.invslothtml += '<div class="slot-'+i+' empty" data-blocktype="empty">0</div>';
 		}
 		$('.the-fucking-inventory').html(this.invslothtml);
+		$('.the-fucking-inventory').sortable();
 	}
 
 	addToInventory(blocktype, quantitytoadd) {

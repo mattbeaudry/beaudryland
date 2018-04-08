@@ -62,14 +62,14 @@
             </section>
             <section class="bui-section button">
                 <h2 class="bui-sectiontitle">Buttons</h2>
-                <a class="bui-button" href="#">Button</a>
+                    <a class="bui-button" href="#">Button</a>
                 <button class="bui-button bui-color--green">Button</button>
                 <div class="bui-button bui-color--red"">
                     <span>Button</span>
                 </div>
             </section>
             <section class="bui-section input">
-                <h2 class="bui-sectiontitle">Form inputs</h2>
+                <h2 class="bui-sectiontitle">Inputs</h2>
                 <div class="bui-field">
                     <label class="bui-label">Text</label>
                     <input class="bui-textinput" type="text" placeholder="Placeholder...">
@@ -107,7 +107,7 @@
                 </div>
             </section>
             <section class="bui-section">
-                <h2 class="bui- title">Knob</h2>
+                <h2 class="bui-sectiontitle">Knob</h2>
                 <input type="range" min="5" max="50" data-degree-range="270" data-degree-offset="45" step="0.5" value="12.5" class="bui-knob bui-knob-white">
             </section>
         </div>
