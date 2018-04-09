@@ -7,7 +7,7 @@
 <?php include 'header.php'; ?>
 
 <body>
-    <div class="container clearfix">
+    <div class="container-fullwidth clearfix">
 
         <h1>Beaudryland Synth</h1>
 
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="bui-synth-panel">
-                <h3 class="bui-knob-title">Drums</h3>
+                <h3 class="bui-knob-title">Drum Pad</h3>
                 <div class="bui-drumpads">
                     <button class="bui-drumpad" id="bui-synth-kick">Kick</button>
                     <button class="bui-drumpad" id="bui-synth-snare">Snare</button>
@@ -63,7 +63,24 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="bui-synth-panel">
+                <h3 class="bui-knob-title">Oscilloscope</h3>
+                <div class="bui-oscilloscope">
+
+                </div>
+            </div>
+            <div class="bui-synth-panel">
+                <h3 class="bui-knob-title">Drum Machine</h3>
+                <div class="bui-drummachine">
+
+                </div>
+            </div>
+            <div class="bui-synth-panel">
+                <h3 class="bui-knob-title">Sequencer</h3>
+                <div class="bui-sequencer">
+
+                </div>
+            </div>
         </div>
 
     </div>

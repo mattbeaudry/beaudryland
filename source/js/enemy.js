@@ -88,8 +88,8 @@ export class Enemy {
 				//limit
 				if (t > maxthoughts) {
 					blUtil.log("Enemy terminated");
-					stopEnemyBrain();
-					killEnemyCall(id);
+					this.stopEnemyBrain();
+					this.killEnemyCall(id);
 				} else {
 					t++;
 					enemybrain = setTimeout(anEnemyThought, globals.enemyspeed); // repeat thought

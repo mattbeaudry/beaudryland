@@ -7,6 +7,7 @@ import { Inventory } from './inventory';
 import { Signs } from './signs';
 import { Achievement } from './achievement';
 import { Enemy } from './enemy';
+import { Spear } from './item/spear';
 
 var blUtil = new Utility();
 var blMap = new Map();
@@ -15,6 +16,7 @@ var blInventory = new Inventory();
 var blSigns = new Signs();
 var blAchievement = new Achievement();
 var blEnemy = new Enemy();
+var blSpear = new Spear();
 
 export class Action {
 
@@ -23,7 +25,6 @@ export class Action {
 	}
 
 	playerPrimaryAction(blockid) {
-
 		//find block that the player is facing
 		var direction = blUtil.getObjectDirection(this.id, "player");
 		var playerblock = blUtil.getObjectCurrentBlock(this.id);
@@ -126,7 +127,7 @@ export class Action {
 
 			//throw spear
 			} else if (selecteditem == "spear") {
-				//throwSpear(block, direction);
+				blSpear.throwSpear(block, direction);
 
 			//digging - forest map
 			} else if (blUtil.getSelectedItem() == "shovel" && blocktype == "grass" || blocktype == "dirt") {

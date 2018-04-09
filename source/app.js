@@ -21,6 +21,7 @@ import { UI } from './js/ui';
 import { Achievement } from './js/achievement';
 import { Mobile } from './js/mobile';
 import { Sound } from './js/sound';
+import { Time } from './js/time';
 
 var blUtil = new Utility();
 var blInventory = new Inventory();
@@ -38,6 +39,7 @@ var blUI = new UI();
 var blAchievement = new Achievement();
 var blMobile = new Mobile();
 var blSound = new Sound();
+var blTime = new Time();
 
 blUI.setupUI();
 blNavigation.initializeNavigation();
@@ -78,6 +80,7 @@ if ( $('body').hasClass("version-phonegap") ) {
 		blHCI.setupMouseEvents();
 		blHCI.setupControlPadEvents();
 		blDev.loadDevConsole();
+		blTime.startTime();
 	});
 
 // DESKTOP ONLY
@@ -96,6 +99,7 @@ if ( $('body').hasClass("version-phonegap") ) {
 		blHCI.setupMouseEvents();
 		blHCI.setupControlPadEvents();
 		blDev.loadDevConsole();
+		blTime.startTime();
 	});
 
 	//alert/ask player to save before they close the page
@@ -120,11 +124,13 @@ var loadNewGame = function() {
 	    blStory.createBeachSigns();
 	    blDev.getAllItems();
 	    //blAnimal.createAnimal();
+	    blTime.startTime();
     } else if (maptype == 'game') {
     	blMap.loadNewMap('forest', 'front');
     	blStory.createForestSigns();
     	//blAnimal.createAnimal();
     	blStory.setupMapBorders('forest');
+    	blTime.startTime();
     }
 
     blPlayer.createPlayer();
@@ -180,75 +186,6 @@ var gameOver = function() {
 
 
 /////////////
-//  *ANIMATION & TIME
-/////////////
-
-window.requestAnimFrame = (function() {
-  return  window.requestAnimationFrame || 
-          window.webkitRequestAnimationFrame || 
-          window.mozRequestAnimationFrame || 
-          window.oRequestAnimationFrame || 
-          window.msRequestAnimationFrame || 
-          function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
-            window.setTimeout(callback, 1000 / 60);
-          };
-})();
-
-var count = 0;
-var seconds = 0;
-
-function newAnimationFrame() {
-  count++;
-  
-  //run every second
-  if ((count%60) == 0) {
-     //world clock
-    seconds++;
-    //console.log('time since game started: '+seconds+' seconds');
-  }
-
-  //run every half second
-  if ((count%30) == 0) {
-	
-  }
-
-  //run every 200 miliseconds
-  if ((count%10) == 0) {
-  	//console.log("160 miliseconds has gone by");
-  	animateSpears();
-  }  
-  
-  //call loop again
-  requestAnimFrame(newAnimationFrame);
-}
-
-// start time!
-newAnimationFrame();
-
-var animateSpears = function() {
-
-	$('.the-fucking-spear').each(function(index) {
-    	var direction = $(this).attr("data-direction");
-    	var id = $(this).attr("data-id");
-    	var stillmoving;
-    	switch (direction) {
-			case "up": var stillmoving = blMovement.moveObject("up", id, "spear"); break;
-			case "down": var stillmoving = blMovement.moveObject("down", id, "spear"); break;
-			case "left": var stillmoving = blMovement.moveObject("left", id, "spear"); break;
-			case "right": var stillmoving = blMovement.moveObject("right", id, "spear"); break;
-		}
-		//console.log("stillmoving? "+stillmoving);
-
-		//stop animation if spear collides with something
-		if (stillmoving == false) {
-			$('.objectid-'+id).remove();
-		}
-    });
-    
-};
-
-
-/////////////
 // *ANIMATION & PROJECTILES
 /////////////
 
@@ -270,88 +207,6 @@ var throwFrisbee = function(startblock, direction) {
 	var id = globals.uniqueObjectID();
 	$('.the-fucking-forest-map').append('<div data-id='+id+' class=" the-fucking-frisbee objectid-'+id+' frisbee-direction-'+playerdirection+'"></div>');
 	initProjectile("frisbee", startblock, direction, id);
-};
-
-var throwSpear = function(startblock, direction) {
-	blUtil.log("Create Spear");
-	//var enemystartblock = 0;
-	//$('.the-fucking-frisbee').remove();
-	var playerdirection = blUtil.getObjectDirection(1, "player");
-	var id = globals.uniqueObjectID();
-	$('.the-fucking-forest-map').append('<div data-id='+id+' class=" the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
-	initProjectile("spear", startblock, direction, id);
-};
-
-var initProjectile = function(name, startblock, direction, id) {
-	//stopProjectile();
-	blUtil.log("Start velocity for " + name + " id:" + id + " travelling " + direction + " from block #" + startblock);
-	var topstart = blUtil.getBlockTopByID(startblock);
-	blUtil.log(topstart);
-	var leftstart = blUtil.getBlockLeftByID(startblock);
-	blUtil.log(leftstart);
-	topstart = blUtil.addPX(topstart);
-	leftstart = blUtil.addPX(leftstart);
-	$('.objectid-'+id).css("top",topstart);
-	$('.objectid-'+id).css("left",leftstart);
-	//var t = 0;
-	//var maxdistance = 10;
-
-	//var projectilebrain = setTimeout(projectileMotion, globals.projectilespeed);
-
-	//window.requestAnimationFrame(projectileMotion);
-
-	/*
-	window.requestAnimFrame = (function() {
-	  return  window.requestAnimationFrame || 
-	          window.webkitRequestAnimationFrame || 
-	          window.mozRequestAnimationFrame || 
-	          window.oRequestAnimationFrame || 
-	          window.msRequestAnimationFrame || 
-	          function( callback, element) {
-	            window.setTimeout(callback, 1000 / 60);
-	          };
-	})();
-
-	function projectileMotion() {
-		switch (direction) {
-			case "up": blMovement.moveObject("up", id, name); break;
-			case "down": blMovement.moveObject("down", id, name); break;
-			case "left": blMovement.moveObject("left", id, name); break;
-			case "right": blMovement.moveObject("right", id, name); break;
-		}
-		//limit
-		
-			//blUtil.log("projectile stopped :(");
-			//stopProjectile();
-		
-			//projectilebrain = setTimeout(projectileMotion, globals.projectilespeed); // repeat thought
-			//window.requestAnimationFrame(projectileMotion);
-		//}//
-		
-	}
-	*/
-/*
-	(function animloop() {
-      projectileMotion();
-      
-      if (t > maxdistance) {
-      	
-      } else {
-      	requestAnimFrame(animloop);
-		t++;
-	  }
-	  
-    })();
-
-*/
-
-	//projectileMotion();
-	/*
-	function stopProjectile() {
-		clearTimeout(projectilebrain);
-		$('.objectid-'+id).remove();
-	}
-	*/
 };
 
 var mapanimate;

@@ -275,9 +275,14 @@ label {
 /* GRID */
 
 .container {
+  position: relative;
   width: 800px;
   margin: 0 auto;
+}
+
+.container-fullwidth {
   position: relative;
+  margin: 0 20px;
 }
 
 .row {
