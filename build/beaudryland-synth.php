@@ -40,12 +40,13 @@
                 </div>
                 <div class="bui-synth-knob">
                     <h3 class="bui-knob-title">Delay</h3>
-                    <input type="range" min="0" max="100" data-degree-range="270" data-degree-offset="45" step="0.5" value="50" class="bui-knob bui-knob-white" id="bui-synth-delay">
-                </div>
-                <div class="bui-synth-knob">
-                    <h3 class="bui-knob-title">Feedback</h3>
                     <input type="range" min="0" max="100" data-degree-range="270" data-degree-offset="45" step="0.5" value="50" class="bui-knob bui-knob-white" id="bui-synth-feedback">
                 </div>
+                <div class="bui-synth-knob">
+                    <h3 class="bui-knob-title">D. Time</h3>
+                    <input type="range" min="0" max="100" data-degree-range="270" data-degree-offset="45" step="0.5" value="50" class="bui-knob bui-knob-white" id="bui-synth-delay">
+                </div>
+                
                 <div class="bui-synth-knob">
                     <h3 class="bui-knob-title">Filter</h3>
                     <input type="range" min="0" max="100" data-degree-range="270" data-degree-offset="45" step="0.5" value="50" class="bui-knob bui-knob-white" id="bui-synth-filter">

@@ -100,13 +100,15 @@ export class Sound {
 			this.feedback = this.context.createGain();
 			this.filter = this.context.createBiquadFilter();
 
-			this.osc.connect(this.gain);
+			this.osc.connect(this.filter);
+			this.filter.connect(this.gain);
+
+			this.gain.connect(this.delay);
 			this.delay.connect(this.feedback);
 			this.feedback.connect(this.filter);
-		    this.filter.connect(this.delay);
-		    this.osc.connect(this.delay);
-		    this.osc.connect(this.context.destination);
-		    this.delay.connect(this.context.destination);
+		    this.feedback.connect(this.delay);
+
+		    this.feedback.connect(this.context.destination);
 			this.gain.connect(this.context.destination);
 		};
 
@@ -124,7 +126,6 @@ export class Sound {
 			this.gain.gain.linearRampToValueAtTime(gain, time + 0.01);
 			this.gain.gain.exponentialRampToValueAtTime(0.001, time + sustain);
 			this.osc.stop(time + sustain);
-
 		};
 
 		$('.bui-synth-keys .bui-key').on("click", function() {
@@ -137,7 +138,8 @@ export class Sound {
 			var feedback = $('#bui-synth-feedback').val();
 			feedback = feedback / 100;
 			var filter = $('#bui-synth-filter').val();
-			filter = filter * 20;
+			filter = filter / 100;
+			filter = filter * 5000;
 			var wave = $('#bui-synth-wave').val();
 			var note = $(this).attr("data-key");
 			var key = new buiSynthKey(context);
