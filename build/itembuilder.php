@@ -412,6 +412,7 @@ var renderPreviewSVG = function(name, is_animated) {
     previewSVG.setViewBox(0, 0, w, h, true);
     previewSVG.canvas.setAttribute('preserveAspectRatio', 'none');
 
+
     $('.canvas-'+name+' .canvas-pixel').each(function(i) {
         var color = $(this).attr("data-color");
         if (i == 0) {
@@ -427,10 +428,12 @@ var renderPreviewSVG = function(name, is_animated) {
         }
         pixels[i] = previewSVG.rect(x, y, pixelwidth, pixelwidth);
         pixels[i].attr("fill", color);
-        pixels[i].attr("stroke", "transparent");
+        pixels[i].attr("stroke", color);
     });
 
     if (is_animated) {
+        previewSVG.canvas.setAttribute("class","svg_animated");
+
         $('.canvas-image .canvas-pixel').each(function(i) {
             var color = $(this).attr("data-color");
             var offset = w;
@@ -447,11 +450,16 @@ var renderPreviewSVG = function(name, is_animated) {
             }
             pixels[i] = previewSVG.rect(x + 30, y, pixelwidth, pixelwidth);
             pixels[i].attr("fill", color);
-            pixels[i].attr("stroke", "transparent");
+            pixels[i].attr("stroke", color);
         });
 
         var style = '<style>';
-        style += '#image_animated svg rect {';
+        style += '@keyframes svgAnimate {';
+        style += '0% { transform: translateX(0px); }';
+        style += '50% { transform: translateX(-30px); }';
+        style += '100% { transform: translateX(0px); }';
+        style += '}';
+        style += '.svg_animated rect {';
         style += 'animation: svgAnimate 2s steps(1) infinite;';
         style += '}';
         style += '</style>';

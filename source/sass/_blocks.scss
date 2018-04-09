@@ -16,17 +16,6 @@
 // holes		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 // blocks     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road"
 
-/* COLORS */
-
-$white: #fff;
-$black: #000;
-$grass-green: #36ac2a;
-$snow-white: #f5fdff;
-$sand: #d9cfa2;
-$water-blue: #00a2ff;
-$dirt-brown: #6a4107;
-$woodbrown: #916d33;
-
 /* THE BLOCKS */
 
 .block {
@@ -41,52 +30,52 @@ $woodbrown: #916d33;
 
 .maps-container {
   .block {
-    background-size: 18px 19px !important;
+    background-size: 19px 19px !important;
   }
 }
 
 /* map backgrounds */
 
 .the-fucking-forest-map {
-  background: bui-c(forest40);
+  background: $c-ground-grass;
 }
 
 .the-fucking-winter-map {
-  background: bui-c(cyan10);
+  background: $c-ground-snow;
 }
 
 .the-fucking-beach-map {
-  background: $sand;
+  background: $c-ground-sand;
 }
 
 .the-fucking-space-map {
-  background: $black;
+  background: $c-ground-space;
 }
 
 .the-fucking-jungle-map {
-  background: $grass-green;
+  background: $c-ground-grass;
 }
 
 .the-fucking-desert-map {
-  background: $sand;
+  background: $c-ground-sand;
 }
 
 .the-fucking-island-map {
-  background: $water-blue;
+  background: $c-ground-grass;
 }
 
 /* forest map */
 
 .block-dirt {
-  background: url(../img/block-dirt.png) no-repeat;
+  background: $c-ground-dirt url(../img/block-dirt.png) no-repeat;
 }
 
 .block-grass {
-  background: bui-c(forest40) url(../img/block-grass.png) no-repeat;
+  background: $c-ground-grass url(../img/block-grass.png) no-repeat;
 }
 
 .block-water {
-  background: bui-c(blue30) url(../img/block-water.png) no-repeat;
+  background: $c-ground-water url(../img/block-water.png) no-repeat;
 }
 
 .block-tree {
@@ -108,11 +97,11 @@ $woodbrown: #916d33;
 /* winter map */
 
 .block-snow {
-  background: url(../img/block-snow.png) no-repeat;
+  background: $c-ground-snow url(../img/block-snow.png) no-repeat;
 }
 
 .block-ice {
-  background: url(../img/block-ice.png) no-repeat;
+  background: $c-ground-ice url(../img/block-ice.png) no-repeat;
 }
 
 .block-pinetree {
@@ -134,7 +123,7 @@ $woodbrown: #916d33;
 /* beach map */
 
 .block-sand {
-  background: url(../img/block-sand.png) no-repeat;
+  background: $c-ground-sand url(../img/block-sand.png) no-repeat;
 }
 
 .block-sandstone {
@@ -186,7 +175,7 @@ $woodbrown: #916d33;
 /* treasure */
 
 .block-clay-hole {
-  background: url(../img/block-clay-hole.png) no-repeat;
+  background: $c-ground-dirt url(../img/block-clay-hole.png) no-repeat;
 }
 
 .block-clay {
@@ -194,7 +183,7 @@ $woodbrown: #916d33;
 }
 
 .block-oil-hole {
-  background: url(../img/block-oil-hole.png) no-repeat;
+  background: $c-ground-dirt url(../img/block-oil-hole.png) no-repeat;
 }
 
 .block-oil {
@@ -202,7 +191,7 @@ $woodbrown: #916d33;
 }
 
 .block-diamond-hole {
-  background: url(../img/block-diamond-hole.png) no-repeat;
+  background: $c-ground-dirt url(../img/block-diamond-hole.png) no-repeat;
 }
 
 .block-diamond {
@@ -210,7 +199,7 @@ $woodbrown: #916d33;
 }
 
 .block-gold-hole {
-  background: url(../img/block-gold-hole.png) no-repeat;
+  background: $c-ground-dirt url(../img/block-gold-hole.png) no-repeat;
 }
 
 .block-gold {
@@ -218,7 +207,7 @@ $woodbrown: #916d33;
 }
 
 .block-silver-hole {
-  background: url(../img/block-silver-hole.png) no-repeat;
+  background: $c-ground-dirt url(../img/block-silver-hole.png) no-repeat;
 }
 
 .block-silver {

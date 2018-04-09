@@ -164,7 +164,7 @@ var createSVG = function() {
         }
         pixels[i] = paper.rect(x, y, pixelwidth, pixelwidth);
         pixels[i].attr("fill", color);
-        pixels[i].attr("stroke", "transparent");
+        pixels[i].attr("stroke", color);
     });
 };
 
