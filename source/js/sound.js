@@ -1,4 +1,5 @@
 import * as globals from './globals';
+import { WavyJones } from './vendor/wavy-jones.js';
 
 export class Sound {
 
@@ -85,9 +86,11 @@ export class Sound {
 	}
 
 	setupSynth() {
-
 		var context = new AudioContext;
 		var oscillator = context.createOscillator();
+		var oscilloscope = new WavyJones(context, 'oscilloscope');
+		oscilloscope.lineColor = '#FFFFFF';
+		oscilloscope.lineThickness = 2;
 
 		function buiSynthKey(context) {
 			this.context = context;
@@ -108,11 +111,15 @@ export class Sound {
 			this.feedback.connect(this.filter);
 		    this.feedback.connect(this.delay);
 
-		    this.feedback.connect(this.context.destination);
-			this.gain.connect(this.context.destination);
+		    // this.feedback.connect(this.context.destination);
+			// this.gain.connect(this.context.destination);
+
+		 	this.feedback.connect(this.context.destination);
+			this.gain.connect(oscilloscope);
+			oscilloscope.connect(this.context.destination);
 		};
 
-		buiSynthKey.prototype.trigger = function(time, freq, gain, sustain, wave, delay, feedback, filter) {
+		buiSynthKey.prototype.trigger = function(time, freq, gain, sustain, wave, delay, feedback, filter, filtertype) {
 			this.setup();
 			this.osc.frequency.setValueAtTime(freq, time);
 			this.osc.type = wave;
@@ -120,6 +127,7 @@ export class Sound {
 			this.delay.delayTime.value = delay;
 			this.feedback.gain.value = feedback;
 			this.filter.frequency.value = filter;
+			this.filter.type = filtertype;
 
 			this.osc.start(time);
 			this.gain.gain.setValueAtTime(0, time);
@@ -141,6 +149,7 @@ export class Sound {
 			filter = filter / 100;
 			filter = filter * 5000;
 			var wave = $('#bui-synth-wave').val();
+			var filtertype = $('#bui-synth-filtertype').val();
 			var note = $(this).attr("data-key");
 			var key = new buiSynthKey(context);
 			var now = context.currentTime;
@@ -162,7 +171,53 @@ export class Sound {
 				case "c2": freq = 1046.50; break;
 			}
 
-			key.trigger(now, freq, gain, sustain, wave, delay, feedback, filter);
+			key.trigger(now, freq, gain, sustain, wave, delay, feedback, filter, filtertype);
+		});
+
+		window.addEventListener('keydown', function(event) {
+			switch (event.keyCode) {
+				case 65: /* A */
+					$('.key-c').click();
+					break;
+				case 87: /* W */
+					$('.key-cs').click();
+					break;
+				case 83: /* S */
+					$('.key-d').click();
+					break;
+				case 69: /* E */
+					$('.key-ds').click();
+					break;
+				case 68: /* D */
+					$('.key-d').click();
+					break;
+				case 70: /* F */
+					$('.key-f').click();
+					break;
+				case 84: /* T */
+					$('.key-fs').click();
+					break;
+				case 71: /* G */
+					$('.key-g').click();
+					break;
+				case 89: /* Y */
+					$('.key-gs').click();
+					break;
+				case 72: /* H */
+					$('.key-a').click();
+					break;
+				case 85: /* U */
+					$('.key-as').click();
+					break;
+				case 74: /* J */
+					$('.key-b').click();
+					break;
+				case 75: /* K */
+					$('.key-c2').click();
+					break;
+				default:
+					break;
+			}
 		});
 
 	}

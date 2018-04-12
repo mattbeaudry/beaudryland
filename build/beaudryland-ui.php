@@ -12,9 +12,15 @@
         <h1>Beaudryland UI</h1>
 
         <section class="bui-section">
-            <h2 class="bui-sectiontitle">To do</h2>
-
+            <h2 class="bui-sectiontitle">Contents</h2>
             <ul>
+                <li><a href="#color">Color</a></li>
+                <li><a href="#typography">Typography</a></li>
+                <li><a href="#buttons">Buttons</a></li>
+                <li><a href="#inputs">Inputs</a></li>
+                <li><a href="#colorpicker">Color picker</a></li>
+                <li><a href="#slider">Slider</a></li>
+                <li><a href="#knob">Knob</a></li>
                 <li>Grid</li>
                 <li>Flex</li>
                 <li>Table</li>
@@ -35,12 +41,14 @@
 
         <div class="bui-components">
             <section class="bui-section">
+                <a id="color"></a>
                 <h2 class="bui-sectiontitle">Color</h2>
                 <div class="bui-colorpalette">
                     <?php include 'php/part-colors.php'; ?>
                 </div>
             </section>
             <section class="bui-section typography">
+                <a id="typography"></a>
                 <h2 class="bui-sectiontitle">Typography</h2>
                 <h1>First Heading</h1>
                 <h2>Second Heading</h2>
@@ -61,6 +69,7 @@
                 </ol>
             </section>
             <section class="bui-section button">
+                <a id="buttons"></a>
                 <h2 class="bui-sectiontitle">Buttons</h2>
                     <a class="bui-button" href="#">Button</a>
                 <button class="bui-button bui-color--green">Button</button>
@@ -69,6 +78,7 @@
                 </div>
             </section>
             <section class="bui-section input">
+                <a id="inputs"></a>
                 <h2 class="bui-sectiontitle">Inputs</h2>
                 <div class="bui-field">
                     <label class="bui-label">Text</label>
@@ -97,16 +107,19 @@
                 </div>
             </section>
             <section class="bui-section">
+                <a id="colorpicker"></a>
                 <h2 class="bui-sectiontitle">Color picker</h2>
                 <?php include 'php/ui-colorpicker.php'; ?>
             </section>
             <section class="bui-section">
+                <a id="slider"></a>
                 <h2 class="bui-sectiontitle">Slider</h2>
                 <div class="bui-slider">
                     <input type="range" min="1" max="100" value="50" class="bui-slider-input">
                 </div>
             </section>
             <section class="bui-section">
+                <a id="knob"></a>
                 <h2 class="bui-sectiontitle">Knob</h2>
                 <input type="range" min="5" max="50" data-degree-range="270" data-degree-offset="45" step="0.5" value="12.5" class="bui-knob bui-knob-white">
             </section>

@@ -16,25 +16,9 @@
 
                 <section>
 
-                    <h2>Item Images</h2>
+                    <h2>Tools</h2>
 
                     <?php include 'php/ui-colorpicker.php'; ?>
-
-                    <div class="clearfix">
-                        <fieldset class="canvas-frame canvas-image">
-                            <label for="name">Main image</label>
-                    		<?php include 'php/part-canvas.php'; ?>
-                            <br>
-                            <div class="svg-preview" id="image"></div>
-                        </fieldset>
-
-                        <fieldset class="canvas-frame canvas-image_animated">
-                            <label for="name">Animated (Frame 2)</label>
-                            <?php include 'php/part-canvas.php'; ?>
-                            <br>
-                            <div class="svg-preview" id="image_animated"></div>
-                        </fieldset>
-                    </div>
 
                     <div>
                         <nav class="pixelpainter-nav">
@@ -44,6 +28,36 @@
                             </ul>
                         </nav>
                     </div>
+
+                    <h2>Graphics</h2>
+
+                    <div class="clearfix">
+                        <fieldset class="canvas-frame canvas-image">
+                            <label for="name">Main image</label>
+                    		<?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="image"></div>
+                        </fieldset>
+
+                        <div>
+                            <label>
+                                <input class="form-has_animation" type="checkbox" name="has_animation">
+                                <span>has animation</span>
+                            </label>
+                        </div>
+
+                        <fieldset class="canvas-frame canvas-image_animated">
+                            <label for="name">Animated (Frame 2)</label>
+                            <?php include 'php/part-canvas.php'; ?>
+                            <br>
+                            <div class="svg-preview" id="image_animated"></div>
+                        </fieldset>
+                    </div>
+
+                    <label>
+                        <input class="form-is_lifeform" type="checkbox" name="is_lifeform" value="is_lifeform">
+                        <span>is lifeform</span>
+                    </label>
 
                     <div class="clearfix is_lifeform-images">
                         <fieldset class="canvas-frame canvas-image_lifeform_front">
@@ -72,6 +86,11 @@
                         </fieldset>
                     </div>
 
+                    <label>
+                        <input class="form-is_equipable" type="checkbox" name="is_equipable" value="is_equipable">
+                        <span>is equipable</span>
+                    </label>
+                    
                     <div class="clearfix is_equipable-images">
                         <fieldset class="canvas-frame canvas-image_item_front">
                             <label for="name">Equipped item front</label>
@@ -98,6 +117,11 @@
                             <div class="svg-preview" id="image_item_right"></div>
                         </fieldset>
                     </div>
+
+                    <label>
+                        <input class="form-is_useable" type="checkbox" name="is_useable" value="is_useable">
+                        <span>is useable</span>
+                    </label>
 
                     <div class="clearfix is_useable-images">
                         <fieldset class="canvas-frame canvas-image_item_swing_front">
@@ -153,12 +177,6 @@
                             <li>
                                 <label for="user">user</label>
                                 <input class="form-user" type="text" name="user" placeholder="beaudryland" value="beaudryland">
-                            </li>
-                            <li>
-                                <label>
-                                    <input class="form-has_animation" type="checkbox" name="has_animation">
-                                    <span>has animation</span>
-                                </label>
                             </li>
                             <li>
                                 <label>
@@ -231,25 +249,7 @@
                                 </label>
                             </li>
                             <li>
-                                <label>
-                                    <input class="form-is_lifeform" type="checkbox" name="is_lifeform" value="is_lifeform">
-                                    <span>is lifeform</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input class="form-is_equipable" type="checkbox" name="is_equipable" value="is_equipable">
-                                    <span>is equipable</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input class="form-is_useable" type="checkbox" name="is_useable" value="is_useable">
-                                    <span>is useable</span>
-                                </label>
-                            </li>
-                            <li>
-                                <input type="submit" class="create-image" value="Save Item">
+                                <input type="submit" class="bui-button create-image" value="Save Item">
                             </li>
                         </ul>
                     </form>

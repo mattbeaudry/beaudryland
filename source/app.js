@@ -44,8 +44,11 @@ var blTime = new Time();
 blUI.setupUI();
 blNavigation.initializeNavigation();
 blInventory.setupInventorySlots();
-blSound.setupSynth();
 blSound.setupDrums();
+
+if ($('.bui-synth').length) {
+	blSound.setupSynth();
+}
 
 // PHONEGAP / MOBILE ONLY
 if ( $('body').hasClass("version-phonegap") ) {
