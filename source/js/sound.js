@@ -1,5 +1,9 @@
-import * as globals from './globals';
 import { WavyJones } from './vendor/wavy-jones.js';
+var Reverb = require('soundbank-reverb');
+import * as globals from './globals';
+import { Utility } from './utility'; 
+import { Achievement } from './achievement'; 
+var blUtil = new Utility();
 
 export class Sound {
 
@@ -102,6 +106,7 @@ export class Sound {
 			this.delay = this.context.createDelay();
 			this.feedback = this.context.createGain();
 			this.filter = this.context.createBiquadFilter();
+			this.reverb = Reverb(this.context);
 
 			this.osc.connect(this.filter);
 			this.filter.connect(this.gain);
@@ -110,16 +115,14 @@ export class Sound {
 			this.delay.connect(this.feedback);
 			this.feedback.connect(this.filter);
 		    this.feedback.connect(this.delay);
+		    this.feedback.connect(this.context.destination);
 
-		    // this.feedback.connect(this.context.destination);
-			// this.gain.connect(this.context.destination);
-
-		 	this.feedback.connect(this.context.destination);
-			this.gain.connect(oscilloscope);
+		 	this.gain.connect(this.reverb); 
+			this.reverb.connect(oscilloscope);
 			oscilloscope.connect(this.context.destination);
 		};
 
-		buiSynthKey.prototype.trigger = function(time, freq, gain, sustain, wave, delay, feedback, filter, filtertype) {
+		buiSynthKey.prototype.trigger = function(time, freq, gain, sustain, wave, delay, feedback, filter, filtertype, filterq, reverbtime) {
 			this.setup();
 			this.osc.frequency.setValueAtTime(freq, time);
 			this.osc.type = wave;
@@ -128,6 +131,14 @@ export class Sound {
 			this.feedback.gain.value = feedback;
 			this.filter.frequency.value = filter;
 			this.filter.type = filtertype;
+			this.filter.Q.value = filterq;
+
+			this.reverb.time = reverbtime; //seconds
+			this.reverb.wet.value = 0.8;
+			this.reverb.dry.value = 1;
+
+			this.reverb.filterType = 'lowpass';
+			this.reverb.cutoff.value = 8000; //Hz
 
 			this.osc.start(time);
 			this.gain.gain.setValueAtTime(0, time);
@@ -139,6 +150,7 @@ export class Sound {
 		$('.bui-synth-keys .bui-key').on("click", function() {
 			var gain = $('#bui-synth-gain').val();
 			gain = gain / 100;
+			gain = gain * 0.10;
 			var sustain = $('#bui-synth-sustain').val();
 			sustain = (sustain / 100) * 2;
 			var delay = $('#bui-synth-delay').val();
@@ -150,6 +162,10 @@ export class Sound {
 			filter = filter * 5000;
 			var wave = $('#bui-synth-wave').val();
 			var filtertype = $('#bui-synth-filtertype').val();
+			var filterq = $('#bui-synth-q').val();
+			var reverbtime = $('#bui-synth-reverb').val();
+			reverbtime = (reverbtime / 100) * 10;
+
 			var note = $(this).attr("data-key");
 			var key = new buiSynthKey(context);
 			var now = context.currentTime;
@@ -171,51 +187,82 @@ export class Sound {
 				case "c2": freq = 1046.50; break;
 			}
 
-			key.trigger(now, freq, gain, sustain, wave, delay, feedback, filter, filtertype);
+			key.trigger(now, freq, gain, sustain, wave, delay, feedback, filter, filtertype, filterq, reverbtime);
+		});
+
+		$('.bui-drummachine .drummachine-step').on("click", function() {
+			$(this).toggleClass('step-on');
+		});
+
+		var is_playing = false;
+		var beatTime;
+		var count = 1;
+
+		function beatStep() {
+			if (count % 4 == 0) {
+				$('.drummachine-position').css("left", "7px");
+			} else {
+				var newPosX = $('.drummachine-position').css("left");
+				newPosX = blUtil.stripPX(newPosX);
+				newPosX += 20;
+				newPosX = blUtil.addPX(newPosX);
+				//alert(newPosX);
+				$('.drummachine-position').css("left", newPosX);
+			}
+			beatTime = setTimeout(beatStep, 500); // repeat thought
+			count++;
+		}
+
+		function beatPlay() {
+			$('.drummachine-playstop span').html("stop");
+			beatTime = setTimeout(beatStep, 500);
+			is_playing = true;
+		}
+
+		function beatStop() {
+			$('.drummachine-playstop span').html("play");
+			is_playing = false;
+			count = 1;
+			clearTimeout(beatTime);
+			$('.drummachine-position').css("left", "7px");
+		}
+
+		$('.drummachine-playstop').on("click", function() {
+			if (is_playing) {
+				// press stop
+				beatStop();
+			} else {
+				// press play
+				beatPlay();
+			}
 		});
 
 		window.addEventListener('keydown', function(event) {
 			switch (event.keyCode) {
-				case 65: /* A */
-					$('.key-c').click();
-					break;
-				case 87: /* W */
-					$('.key-cs').click();
-					break;
-				case 83: /* S */
-					$('.key-d').click();
-					break;
-				case 69: /* E */
-					$('.key-ds').click();
-					break;
-				case 68: /* D */
-					$('.key-d').click();
-					break;
-				case 70: /* F */
-					$('.key-f').click();
-					break;
-				case 84: /* T */
-					$('.key-fs').click();
-					break;
-				case 71: /* G */
-					$('.key-g').click();
-					break;
-				case 89: /* Y */
-					$('.key-gs').click();
-					break;
-				case 72: /* H */
-					$('.key-a').click();
-					break;
-				case 85: /* U */
-					$('.key-as').click();
-					break;
-				case 74: /* J */
-					$('.key-b').click();
-					break;
-				case 75: /* K */
-					$('.key-c2').click();
-					break;
-				default:
+				case 65: /* A */ $('.key-c').click(); break;
+				case 87: /* W */ $('.key-cs').click(); break;
+				case 83: /* S */ $('.key-d').click(); break;
+				case 69: /* E */ $('.key-ds').click(); break;
+				case 68: /* D */ $('.key-d').click(); break;
+				case 70: /* F */ $('.key-f').click(); break;
+				case 84: /* T */ $('.key-fs').click(); break;
+				case 71: /* G */ $('.key-g').click(); break;
+				case 89: /* Y */ $('.key-gs').click(); break;
+				case 72: /* H */ $('.key-a').click(); break;
+				case 85: /* U */ $('.key-as').click(); break;
+				case 74: /* J */ $('.key-b').click(); break;
+				case 75: /* K */ $('.key-c2').click(); break;
+
+				case 49: /* 1 */ $('#bui-synth-kick').click(); break;
+				case 50: /* 2 */ $('#bui-synth-snare').click(); break;
+				// case 51: /* 3 */ $('.bui-synth-hh').click(); break;
+				// case 52: /* 4 */ $('.bui-synth-openhh').click(); break;
+				// case 53: /* 5 */ $('.bui-synth-crash').click(); break;
+				// case 54: /* 6 */ $('.bui-synth-tom1').click(); break;
+				// case 55: /* 7 */ $('.bui-synth-tom2').click(); break;
+				// case 56: /* 8 */ $('.bui-synth-cowbell').click(); break;
+
+				default: 
 					break;
 			}
 		});
@@ -336,4 +383,3 @@ export class Sound {
 // $('.sequence-play').on("click", function() {
 //   $('.step').addClass("");
 // });
-	

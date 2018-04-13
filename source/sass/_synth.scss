@@ -1,9 +1,13 @@
+
 .bui-synth {
 	background-color: bui-c(gray80);
 	padding: 32px;
+	font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
+	font-weight: 400;
 }
 
 .bui-synth-panel {
+	position: relative;
 	display: inline-block;
 	height: 160px;
 	border-radius: 6px;
@@ -24,7 +28,7 @@
 	position: relative;
 	display: inline-block;
 	height: 100px;
-	width: 20px;
+	width: 40px;
 	background-color: #fff;
 	margin: 0 1px;
 	border-radius: 2px;
@@ -50,13 +54,13 @@
 
 .bui-key-black {
 	position: absolute;
-	width: 16px;
-	height: 70px;
-	margin-left: -8px;
-	margin-top: -4px;
-	background-color: #000;
-	z-index: 1;
-	border-radius: 4px;
+    width: 30px;
+    height: 70px;
+    margin-left: -15px;
+    margin-top: -4px;
+    background-color: #000;
+    z-index: 1;
+    border-radius: 4px;
 
 	&:active {
 		width: 14px;
@@ -76,7 +80,8 @@
 
 .bui-knob-title {
 	font-size: 16px;
-	color: bui-c(white);
+	color: bui-c(white); 
+	margin-top: 0;
 }
 
 .bui-drumpads {
@@ -85,14 +90,14 @@
 		min-width: 50px;
 		background-color: #fff;
 		color: #000;
-		font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
-		font-weight: 400;
 		text-transform: uppercase;
 		border-radius: 3px;
 		font-size: 8px;
 		text-align: center;
 		padding: 0 8px;
 		line-height: 1;
+		border: none;
+		font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
 
 		&:active {
 			border: solid 2px #000;
@@ -103,4 +108,65 @@
 .bui-oscilloscope {
 	width: 240px;
 	height: 80px;
+}
+
+.bui-drummachine {
+	color: #fff;
+}
+
+.drummachine-row {
+	display: inline-flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.drummachine-drum {
+
+}
+
+.drummachine-steps {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.drummachine-step {
+	width: 16px;
+	height: 16px;
+	border: solid 2px #fff;
+	border-radius: 50%;
+	margin: 0 4px 4px 0;
+	cursor: pointer;
+
+	&.step-on {
+		background-color: #fff;
+	}
+}
+
+.drummachine-playstop {
+	position: absolute;
+	right: 10px;
+	top: 16px;
+	text-decoration: underline;
+	cursor: pointer;
+
+	span {
+
+	}
+}
+
+.drummachine-position {
+	width: 2px;
+    height: 50px;
+    position: absolute;
+    background-color: #fff;
+    left: 7px;
+    top: -5px;
+}
+
+.bui-synth-controls {
+	position: absolute;
+	top: 20px;
+    right: -8px;
 }

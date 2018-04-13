@@ -31,6 +31,7 @@
                 <li>Toasts</li>
                 <li>Validation</li>
                 <li>Motion</li>
+                <li>Dark &amp; Light themes</li>
             </ul>
         </section>
 
