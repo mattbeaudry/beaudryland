@@ -23,15 +23,15 @@
             </div>
             <div id="character-shirt-color">
                 <label>Shirt color</label>
-                <?php include 'php/ui-colorpicker.php'; ?>
+                <?php $defautColor = 'rgb(6, 136, 217)'; include 'php/ui-colorpicker.php'; ?>
             </div>
             <div id="character-shoe-color">
                 <label>Shoes color</label>
-                <?php include 'php/ui-colorpicker.php'; ?>
+                <?php $defautColor = 'rgb(40, 40, 40)'; include 'php/ui-colorpicker.php'; ?>
             </div>
             <div id="character-skin-color">
                 <label>Skin color</label>
-                <?php include 'php/ui-colorpicker.php'; ?>
+                <?php $defautColor = 'rgb(243, 209, 171)'; include 'php/ui-colorpicker.php'; ?>
             </div>
             <div id="character-hair-style">
                 <label>Hair style</label>
@@ -45,7 +45,7 @@
             </div>
             <div id="character-hair-color">
                 <label>Hair color</label>
-                <?php include 'php/ui-colorpicker.php'; ?>
+                <?php $defautColor = 'rgb(106, 66, 0)'; include 'php/ui-colorpicker.php'; ?>
             </div>
             <br>
             <div class="">

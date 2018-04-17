@@ -9,11 +9,10 @@ export class Character {
 	}
 
 	setupCharacterBuilder() {
-		console.log("fffff");
-		$('.character-hair-style').on("change", { yo: this }, function(event) {
-			var data = event.data;
-			event.data.yo.drawCharacter();
-		});
+		// $('.character-hair-style').on("change", { yo: this }, function(event) {
+		// 	var data = event.data;
+		// 	event.data.yo.drawCharacter();
+		// });
 		$('#character-draw').on("click", { yo: this }, function(event) {
 			var data = event.data;
 			event.data.yo.drawCharacter();
@@ -56,10 +55,19 @@ export class Character {
 		bootPixel1.css('backgroundColor', shoeColor);
 		bootPixel2.css('backgroundColor', shoeColor);
 
-		// hairPixel1.css('backgroundColor', "#000");
-		// hairPixel2.css('backgroundColor', "#000");
-		// hairPixel3.css('backgroundColor', "#000");
-		// hairPixel4.css('backgroundColor', "#000");
+		console.log("hair:"+hairStyle);
+
+		if (hairStyle == 'medium') {
+			hairPixel1.css('backgroundColor', hairColor);
+			hairPixel2.css('backgroundColor', hairColor);
+			hairPixel4.css('backgroundColor', hairColor);
+		} else if (hairStyle == 'long') {
+			hairPixel1.css('backgroundColor', hairColor);
+			hairPixel2.css('backgroundColor', hairColor);
+			hairPixel3.css('backgroundColor', hairColor);
+			hairPixel4.css('backgroundColor', hairColor);
+		}
+
 	}
 
 }
