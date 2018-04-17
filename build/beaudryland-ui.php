@@ -15,6 +15,7 @@
             <h2 class="bui-sectiontitle">Contents</h2>
             <ul>
                 <li><a href="#color">Color</a></li>
+                <li>Font</li>
                 <li><a href="#typography">Typography</a></li>
                 <li><a href="#buttons">Buttons</a></li>
                 <li><a href="#inputs">Inputs</a></li>

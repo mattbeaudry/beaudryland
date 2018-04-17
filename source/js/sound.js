@@ -243,7 +243,7 @@ export class Sound {
 				case 87: /* W */ $('.key-cs').click(); break;
 				case 83: /* S */ $('.key-d').click(); break;
 				case 69: /* E */ $('.key-ds').click(); break;
-				case 68: /* D */ $('.key-d').click(); break;
+				case 68: /* D */ $('.key-e').click(); break;
 				case 70: /* F */ $('.key-f').click(); break;
 				case 84: /* T */ $('.key-fs').click(); break;
 				case 71: /* G */ $('.key-g').click(); break;

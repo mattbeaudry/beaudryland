@@ -22,6 +22,7 @@ import { Achievement } from './js/achievement';
 import { Mobile } from './js/mobile';
 import { Sound } from './js/sound';
 import { Time } from './js/time';
+import { Character } from './js/character';
 
 var blUtil = new Utility();
 var blInventory = new Inventory();
@@ -40,6 +41,7 @@ var blAchievement = new Achievement();
 var blMobile = new Mobile();
 var blSound = new Sound();
 var blTime = new Time();
+var blCharacter = new Character();
 
 
 ////////////////////////////
@@ -54,6 +56,12 @@ blSound.setupDrums();
 if ($('.bui-synth').length) {
 	blSound.setupSynth();
 }
+
+if ($('.bl-character-editor').length) {
+	blCharacter.setupCharacterBuilder();
+	blCharacter.drawCharacter();
+}
+
 
 ////////////////////////////
 // MOBILE GAME INIT
