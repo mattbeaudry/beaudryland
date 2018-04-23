@@ -29,11 +29,21 @@ export class UI {
 			colorInput.val(colorCode);
 		});
 
+		$('.bui-menu').on("click", function() {
+			if ($(this).children('.bui-menu-dropdown').is(":visible")) {
+				$('.bui-menu-dropdown').hide();
+				$(this).children('.bui-menu-dropdown').hide();
+			} else {
+				$('.bui-menu-dropdown').hide();
+				$(this).children('.bui-menu-dropdown').show();
+			}
+		});
+
 
 		// KNOB
 
 		var tagBase = "knob";
-		var newElms = ["input","face", "hand"];
+		var newElms = ["input", "face", "hand"];
 		var newPos;
 
 		newElms.forEach(function(newElm) {

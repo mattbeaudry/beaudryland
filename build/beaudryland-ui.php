@@ -15,20 +15,20 @@
             <h2 class="bui-sectiontitle">Contents</h2>
             <ul>
                 <li><a href="#color">Color</a></li>
-                <li>Font</li>
+                <li><a href="#font">Font</a></li>
                 <li><a href="#typography">Typography</a></li>
                 <li><a href="#buttons">Buttons</a></li>
                 <li><a href="#inputs">Inputs</a></li>
                 <li><a href="#colorpicker">Color picker</a></li>
                 <li><a href="#slider">Slider</a></li>
                 <li><a href="#knob">Knob</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#shadow">Shadow</a></li>
                 <li>Grid</li>
                 <li>Flex</li>
                 <li>Table</li>
                 <li>Card</li>
                 <li>Stat</li>
-                <li>Menu</li>
-                <li>Shadow</li>
                 <li>Toasts</li>
                 <li>Validation</li>
                 <li>Motion</li>
@@ -47,6 +47,23 @@
                 <h2 class="bui-sectiontitle">Color</h2>
                 <div class="bui-colorpalette">
                     <?php include 'php/part-colors.php'; ?>
+                </div>
+            </section>
+            <section class="bui-section">
+                <a id="font"></a>
+                <h2 class="bui-sectiontitle">Font</h2>
+                <div class="bui-font">
+                    <p>a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+                    <p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+                    <p>1 2 3 4 5 6 7 8 9 0</p>
+                    <p>, . ! @ # $ % ^ &amp; * ( ) _ + - = [ ] { } ; : ' "  / ?</p>
+                </div>
+            </section>
+            <section class="bui-section">
+                <a id="shadow"></a>
+                <h2 class="bui-sectiontitle">Shadow</h2>
+                <div class="bui-shadow">
+
                 </div>
             </section>
             <section class="bui-section typography">
@@ -124,6 +141,32 @@
                 <a id="knob"></a>
                 <h2 class="bui-sectiontitle">Knob</h2>
                 <input type="range" min="5" max="50" data-degree-range="270" data-degree-offset="45" step="0.5" value="12.5" class="bui-knob bui-knob-white">
+            </section>
+            <section class="bui-section">
+                <a id="menu"></a>
+                <h2 class="bui-sectiontitle">Menu</h2>
+                <div class="bui-menu">
+                    <button class="bui-menu-button bui-button">Right Menu +</button>
+                    <div class="bui-menu-dropdown">
+                        <div class="bui-menu-item">
+                            <a href="#">Account</a>
+                        </div>
+                        <div class="bui-menu-item">
+                            <a href="#">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bui-menu">
+                    <button class="bui-menu-button bui-button">Left Menu +</button>
+                    <div class="bui-menu-dropdown bui-menu-left">
+                        <div class="bui-menu-item">
+                            <a href="#">Account</a>
+                        </div>
+                        <div class="bui-menu-item">
+                            <a href="#">Logout</a>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
 

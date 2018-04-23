@@ -10,11 +10,9 @@
   }
 
   li {
-    display: inline-block;
     margin: 0 2px;
 
     a {
-      float: left;
 
       i {
         width: 16px;
@@ -23,6 +21,15 @@
       }
     }
   }
+}
+
+a.nav-selected-item {
+  width: 40px;
+  height: 40px;
+  border: dashed 3px #000;
+  margin-right: 8px;
+  margin: 0 12px 12px 0px;
+  background-color: #fff;
 }
 
 .tab-navigation {
@@ -195,6 +202,5 @@
 
 .game-header {
   border-bottom: solid 4px #000;
-  padding-bottom: 12px;
   margin-bottom: 16px;
 }

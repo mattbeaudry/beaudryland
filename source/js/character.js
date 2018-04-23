@@ -10,12 +10,12 @@ export class Character {
 
 	setupCharacterBuilder() {
 		// $('.character-hair-style').on("change", { yo: this }, function(event) {
-		// 	var data = event.data;
+		// 	var data = event.data;m,ju 
 		// 	event.data.yo.drawCharacter();
 		// });
-		$('#character-draw').on("click", { yo: this }, function(event) {
+		$('#character-draw').on("click", { that: this }, function(event) {
 			var data = event.data;
-			event.data.yo.drawCharacter();
+			event.data.that.drawCharacter();
 		});
 	}
 

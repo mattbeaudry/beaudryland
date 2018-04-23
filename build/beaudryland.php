@@ -25,29 +25,36 @@
 					<div class="the-fucking-navigation clearfix">
 						<nav class="beaudryland-nav">
 							<div class="d-flex align-items-center justify-content-between">
-								<li>
-									<a class="tabs-close button-black" href="javascript:void(0);">
+								<div class="d-flex align-items-center">
+									<a class="tabs-close bui-button" href="javascript:void(0);">
 										<span>< BACK</span>
-									</a>
-									<a class="tab-menuitem nav-selected-item block" href="javascript:void(0);" data-tabmenu="tab-inventory">
+									</a><!--
+									--><a class="tab-menuitem nav-selected-item block" href="javascript:void(0);" data-tabmenu="tab-inventory">
 										<span></span>
-									</a>
-									<a class="tab-menuitem button-black button-icon" href="javascript:void(0);" data-tabmenu="tab-achievements">
+									</a><!--
+									--><a class="tab-menuitem bui-button button-icon" href="javascript:void(0);" data-tabmenu="tab-achievements">
 										<i class="block i-check-white"></i>
-									</a>
-									<a class="tab-menuitem button-black" href="javascript:void(0);" data-tabmenu="tab-navigation">
+									</a><!--
+									--><a class="tab-menuitem bui-button" href="javascript:void(0);" data-tabmenu="tab-navigation">
 										<span>?</span>
 									</a>
-								</li>
-								<li class="nav-username">
-									<div>
-										<?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} ?>
-									</div>
-								</li>
-								<li>
-									<a class="link-logout button-black" href="logout.php">Logout</a>
-									<a class="link-savemap button-black" href="javascript:void(0);">Save</a>
-								</li>
+								</div>
+								<div>
+									<a class="link-savemap bui-button" href="javascript:void(0);">Save</a>
+									<div class="bui-menu">
+					                    <button class="bui-menu-button bui-button">
+					                    	<?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} ?> +
+					                    </button>
+					                    <div class="bui-menu-dropdown bui-menu-left">
+					                        <div class="bui-menu-item">
+					                            <a href="beaudryland-account.php">Account</a>
+					                        </div>
+					                        <div class="bui-menu-item">
+					                            <a class="link-logout" href="logout.php">Logout</a>
+					                        </div>
+					                    </div>
+					                </div>
+								</div>
 							</div>
 						</nav>
 					</div>
