@@ -5,7 +5,7 @@ var blUtil = new Utility();
 export class Item {
 
 	constructor() {
-
+		
 	}
 
 	initItems() {
@@ -56,7 +56,6 @@ is_useable
  image_item_swing_left
  image_item_swing_right
 
-
 NEW PROP IDEAS
 --------------
 has_map_mechanism
@@ -73,4 +72,5 @@ type * NEW
 ]
 is_item - instead of is_equipable
 has_swing_animation - instead of is useable
+
 */

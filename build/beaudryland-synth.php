@@ -12,20 +12,9 @@
         <h1>Beaudryland Synth</h1>
 
         <div class="bui-synth-controls">
-            <button class="bui-button">Stop all</button>
+            <button class="bui-button">Stop all sounds</button>
             <button class="bui-button">Mute</button>
         </div>
-
-        <!-- 
-        <p data-height="600" data-theme-id="dark" data-slug-hash="jqqMOE" data-default-tab="result" data-user="mattbeaudry" data-embed-version="2" data-pen-title="jqqMOE" class="codepen">See the Pen <a href="https://codepen.io/mattbeaudry/pen/jqqMOE/">jqqMOE</a> by Matt Beaudry (<a href="https://codepen.io/mattbeaudry">@mattbeaudry</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-        <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script> 
-        -->
-        
-        <!-- 
-            - tap tempo 
-            - stop sound
-            - tempo - for delay?
-        -->
         
         <div class="bui-synth">
             <div class="bui-synth-panel">
@@ -100,12 +89,10 @@
                     <h3 class="bui-knob-title">D.Time</h3>
                     <input type="range" min="0" max="100" data-degree-range="270" data-degree-offset="45" step="0.5" value="50" class="bui-knob bui-knob-white" id="bui-synth-delay">
                 </div>
-                <!--
                 <div class="bui-synth-knob">
-                    <h3 class="bui-knob-title">Compress</h3>
+                    <h3 class="bui-knob-title">Compress *</h3>
                     <input type="range" min="0" max="100" data-degree-range="270" data-degree-offset="45" step="0.5" value="50" class="bui-knob bui-knob-white" id="bui-synth-compress">
                 </div>
-                -->
                 <div class="bui-synth-knob">
                     <h3 class="bui-knob-title">Reverb</h3>
                     <input type="range" min="0" max="100" data-degree-range="270" data-degree-offset="45" step="0.5" value="10" class="bui-knob bui-knob-white" id="bui-synth-reverb">
@@ -117,18 +104,18 @@
 
                 </div>
             </div>
-            <!-- <div class="bui-synth-panel">
-                <h3 class="bui-knob-title">Sequencer</h3>
+            <div class="bui-synth-panel">
+                <h3 class="bui-knob-title">Sequencer *</h3>
                 <div class="bui-sequencer">
 
                 </div>
-            </div> -->
+            </div>
             <div class="bui-synth-panel">
-                <h3 class="bui-knob-title">Drum Pad</h3>
+                <h3 class="bui-knob-title">Drum Pad *</h3>
                 <div class="bui-drumpads">
                     <button class="bui-drumpad" id="bui-synth-kick">Kick<br><br>(1)</button>
                     <button class="bui-drumpad" id="bui-synth-snare">Snare<br><br>(2)</button>
-<!--                     <button class="bui-drumpad" id="bui-synth-hh">HH<br><br>(3)</button>
+                    <button class="bui-drumpad" id="bui-synth-hh">HH<br><br>(3)</button>
                     <button class="bui-drumpad" id="bui-synth-openhh">Open HH<br><br>(4)</button>
                     <button class="bui-drumpad" id="bui-synth-crash">Crash<br><br>(5)</button>
                     <button class="bui-drumpad" id="bui-synth-tom1">Tom 1<br><br>(6)</button>
@@ -163,7 +150,7 @@
                     </div>
                 </div>
             </div>
-           <!--  <div class="bui-synth-panel">
+            <div class="bui-synth-panel">
                 <h3 class="bui-knob-title">Tempo</h3>
                 <div class="bui-tempo">
 
@@ -174,7 +161,7 @@
                 <div class="bui-tape">
 
                 </div>
-            </div> -->
+            </div>
         </div>
 
     </div>

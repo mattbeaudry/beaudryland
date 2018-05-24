@@ -15,6 +15,7 @@
             <h2 class="bui-sectiontitle">Contents</h2>
             <ul>
                 <li><a href="#color">Color</a></li>
+                <li><a href="#shadow">Shadow</a></li>
                 <li><a href="#font">Font</a></li>
                 <li><a href="#typography">Typography</a></li>
                 <li><a href="#buttons">Buttons</a></li>
@@ -23,16 +24,15 @@
                 <li><a href="#slider">Slider</a></li>
                 <li><a href="#knob">Knob</a></li>
                 <li><a href="#menu">Menu</a></li>
-                <li><a href="#shadow">Shadow</a></li>
+                <li><a href="#toast">Toast</a></li>
                 <li>Grid</li>
                 <li>Flex</li>
                 <li>Table</li>
                 <li>Card</li>
                 <li>Stat</li>
-                <li>Toasts</li>
                 <li>Validation</li>
                 <li>Motion</li>
-                <li>Dark &amp; Light themes</li>
+                <li>Themes</li>
             </ul>
         </section>
 
@@ -50,6 +50,13 @@
                 </div>
             </section>
             <section class="bui-section">
+                <a id="shadow"></a>
+                <h2 class="bui-sectiontitle">Shadow</h2>
+                <div class="bui-shadow">
+
+                </div>
+            </section>
+            <section class="bui-section">
                 <a id="font"></a>
                 <h2 class="bui-sectiontitle">Font</h2>
                 <div class="bui-font">
@@ -57,13 +64,6 @@
                     <p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
                     <p>1 2 3 4 5 6 7 8 9 0</p>
                     <p>, . ! @ # $ % ^ &amp; * ( ) _ + - = [ ] { } ; : ' "  / ?</p>
-                </div>
-            </section>
-            <section class="bui-section">
-                <a id="shadow"></a>
-                <h2 class="bui-sectiontitle">Shadow</h2>
-                <div class="bui-shadow">
-
                 </div>
             </section>
             <section class="bui-section typography">
@@ -167,6 +167,21 @@
                         </div>
                     </div>
                 </div>
+            </section>
+            <section class="bui-section">
+                <a id="toast"></a>
+                <h2 class="bui-sectiontitle">Toast</h2>
+                <div class="bui-toast">
+                    <div class="bui-toast-close">X</div>
+                    <p>toast style</p>
+                </div>
+                <br>
+                <div class="bui-toast bui-toast-white">
+                    <div class="bui-toast-close">X</div>
+                    <p>toast style</p>
+                </div>
+                <br>
+                <button class="bui-button bui-toast-trigger" data-text="Do did a thing!">Trigger toast</button>
             </section>
         </div>
 

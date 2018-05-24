@@ -3,10 +3,34 @@ import * as globals from './globals';
 export class UI {
 
 	constructor() {
-
+		
 	}
 
 	setupUI() {
+
+		// TOAST
+
+		$('.bui-toast-trigger').on("click", function() {
+			var toastText = $(this).attr("data-text");
+			triggerToast(toastText);
+		});
+
+		var triggerToast = function(text) {
+			var id = 1;
+			var toastHtml = '<div id="toast-'+id+'" class="bui-toast bui-toast-white bui-toast-bottomright">';
+			toastHtml += '<div class="bui-toast-close">X</div>';
+			toastHtml += '<p>'+text+'</p>';
+			toastHtml += '</div>';
+			$('body').append(toastHtml);
+			$('.bui-toast-close').on("click", function() {
+				$(this).parents('.bui-toast').remove();
+			});
+			setTimeout(function() {
+				console.log("timeout trig");
+				$('#toast-'+id+'').remove();
+			}, 1000);
+		};
+
 
 		// COLOR PICKER
 

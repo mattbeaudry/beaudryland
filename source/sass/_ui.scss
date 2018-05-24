@@ -360,3 +360,39 @@ knob-face {
   border: solid 3px #000;
   box-shadow: $buiShadow;
 }
+
+
+/* TOAST */
+
+.bui-toast {
+  background-color: #000;
+  color: #fff;
+  font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
+  width: 320px;
+  height: 80px;
+  padding: 16px;
+  box-shadow: $buiShadow;
+
+  &.bui-toast-bottomright {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  &.bui-toast-white {
+    background-color: #fff;
+    color: #000;
+    border: solid 3px #000;
+  }
+
+  .bui-toast-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+  }
+
+  p {
+    margin: 0;
+  }
+}
