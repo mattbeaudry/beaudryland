@@ -120,7 +120,7 @@
                     <button class="bui-drumpad" id="bui-synth-crash">Crash<br><br>(5)</button>
                     <button class="bui-drumpad" id="bui-synth-tom1">Tom 1<br><br>(6)</button>
                     <button class="bui-drumpad" id="bui-synth-tom2">Tom 2<br><br>(7)</button>
-                    <button class="bui-drumpad" id="bui-synth-cowbell">Cowbell<br><br>(8)</button> -->
+                    <button class="bui-drumpad" id="bui-synth-cowbell">Cowbell<br><br>(8)</button>
                 </div>
             </div>
             <div class="bui-synth-panel">

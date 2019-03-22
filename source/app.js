@@ -78,23 +78,23 @@ if ( $('body').hasClass("version-phonegap") ) {
 		globals.mapwidth = globals.mapWidthMobile;
 		globals.mapheight = globals.mapHeightMobile;
 		blMap.setupMap('mobile');
-	    blMap.loadNewMap('forest', 'front');
-	    blPlayer.createPlayer();
+		blMap.loadNewMap('forest', 'front');
+		blPlayer.createPlayer();
 		blMobile.websql_openDatabase();
 		blMobile.websql_createTable();
 		blMobile.loadGameMobile();
 		blStory.createForestSigns();
-    	//blAnimal.createAnimal();
-    	//blStory.setupMapBorders('forest');
-    	blMap.loadNewMap('winter', 'right');
-    	blMap.loadNewMap('beach', 'back');
-    	blMap.loadNewMap('jungle', 'left');
-    	blMap.loadNewMap('desert', 'bottom');
-    	blMap.loadNewMap('islands', 'top');
-	    blStory.createForestSigns();
-	    blStory.createWinterSigns();
-	    blStory.createBeachSigns();
-	    blDev.getAllItems();
+		//blAnimal.createAnimal();
+		//blStory.setupMapBorders('forest');
+		blMap.loadNewMap('winter', 'right');
+		blMap.loadNewMap('beach', 'back');
+		blMap.loadNewMap('jungle', 'left');
+		blMap.loadNewMap('desert', 'bottom');
+		blMap.loadNewMap('islands', 'top');
+		blStory.createForestSigns();
+		blStory.createWinterSigns();
+		blStory.createBeachSigns();
+		blDev.getAllItems();
 		blHCI.setupKeyboardEvents();
 		blHCI.setupMouseEvents();
 		blHCI.setupControlPadEvents();
@@ -140,16 +140,16 @@ if ( $('body').hasClass("version-phonegap") ) {
 var loadGame = function() {
 	blUtil.log("load game");
 
-    $.post('php/loadmap.php', {maptype:'forest'}, function(data) {
-    	if (data == false) {
-    		loadNewGame();
-    	} else {
-    	    blMap.loadExistingMap('forest');
-    		$.post('php/loadmap.php', {maptype:'winter'}, function(data) {
-    			if (data) {
-    				blUtil.log("loadwintermap");
-    				blMap.loadExistingMap('winter');
-    			}
+	$.post('php/loadmap.php', {maptype:'forest'}, function(data) {
+		if (data == false) {
+			loadNewGame();
+		} else {
+			blMap.loadExistingMap('forest');
+			$.post('php/loadmap.php', {maptype:'winter'}, function(data) {
+				if (data) {
+					blUtil.log("loadwintermap");
+					blMap.loadExistingMap('winter');
+				}
 			});
 			$.post('php/loadmap.php', {maptype:'beach'}, function(data) {
 				if (data) {
@@ -176,8 +176,8 @@ var loadGame = function() {
 				}
 			});
 			blPlayer.loadPlayer();
-    	}	
-    });
+		}	
+	});
 };
 
 
@@ -188,26 +188,25 @@ var loadGame = function() {
 var loadNewGame = function() {
 	blUtil.log("new user & brand new map");
     
-    if (maptype == 'creative') {
-    	blMap.loadNewMap('forest', 'front');
-      	blMap.loadNewMap('winter', 'right');
-    	blMap.loadNewMap('beach', 'back');
-    	blMap.loadNewMap('jungle', 'left');
-    	blMap.loadNewMap('desert', 'bottom');
-    	blMap.loadNewMap('islands', 'top');
-	    blStory.createForestSigns();
-	    blStory.createWinterSigns();
-	    blStory.createBeachSigns();
-	    blDev.getAllItems();
-	    blAnimal.createAnimal();
-	    blTime.startTime();
-    } else if (maptype == 'game') {
-    	blMap.loadNewMap('forest', 'front');
-    	blStory.createForestSigns();
-    	blAnimal.createAnimal();
-    	blStory.setupMapBorders('forest');
-    	blTime.startTime();
-    }
-
-    blPlayer.createPlayer();
+	if (maptype == 'creative') {
+		blMap.loadNewMap('forest', 'front');
+		blMap.loadNewMap('winter', 'right');
+		blMap.loadNewMap('beach', 'back');
+		blMap.loadNewMap('jungle', 'left');
+		blMap.loadNewMap('desert', 'bottom');
+		blMap.loadNewMap('islands', 'top');
+		blStory.createForestSigns();
+		blStory.createWinterSigns();
+		blStory.createBeachSigns();
+		blDev.getAllItems();
+		blAnimal.createAnimal();
+		blTime.startTime();
+	} else if (maptype == 'game') {
+		blMap.loadNewMap('forest', 'front');
+		blStory.createForestSigns();
+		blAnimal.createAnimal();
+		blStory.setupMapBorders('forest');
+		blTime.startTime();
+	}
+	blPlayer.createPlayer();
 };

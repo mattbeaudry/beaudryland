@@ -10,7 +10,7 @@
         
         <div class="container clearfix">
 
-            <h1>Sprite Painter</h1>
+            <h1>Beaudryland Paint</h1>
 
             <div class="panel-left">
 
@@ -39,7 +39,7 @@
                                 <input class="form-name" type="text" name="name" placeholder="My Item">
                             </li>
                             <li>
-                                <input type="submit" class="create-image" value="Save Item">
+                                <input type="submit" class="create-image" value="Save">
                             </li>
                         </ul>
                     </form>

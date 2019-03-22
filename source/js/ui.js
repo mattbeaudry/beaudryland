@@ -28,7 +28,7 @@ export class UI {
 			setTimeout(function() {
 				console.log("timeout trig");
 				$('#toast-'+id+'').remove();
-			}, 1000);
+			}, 5000);
 		};
 
 

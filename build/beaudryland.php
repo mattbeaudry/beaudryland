@@ -147,7 +147,8 @@
 						        </ul>
 						    </section>
  
-							<!-- <h2>Game info</h2>
+							<!-- 
+							<h2>Game info</h2>
 							<ul>
 								<li class="link-help">
 									<div class="button-wrap">
@@ -170,27 +171,28 @@
 									</div>
 								</li>
 							</ul>
- -->
+ 							-->
+
 							<h2>Extras</h2>
 							<ul class="nav-extra">
 								<li class="link-mapeditor">
 									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="mapgallery.php">Map Gallery ></a>
+										<a target="_blank" href="beaudryland-mapgallery.php">Map Gallery ></a>
 									</div>
 								</li>
 								<li class="link-itemeditor">
 									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="itembuilder.php">Item Builder ></a>
+										<a target="_blank" href="beaudryland-itembuilder.php">Item Builder ></a>
 									</div>
 								</li>
 								<li class="link-itemeditor">
 									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="spritepainter.php">Sprite Painter ></a>
+										<a target="_blank" href="beaudryland-paint.php">Sprite Painter ></a>
 									</div>
 								</li>
 								<li class="link-mapeditor">
 									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="mapeditor.php">Map Editor ></a>
+										<a target="_blank" href="beaudryland-mapeditor.php">Map Editor ></a>
 									</div>
 								</li>
 								<li class="link-synth">

@@ -114,8 +114,8 @@ export class Sound {
 			this.gain.connect(this.delay);
 			this.delay.connect(this.feedback);
 			this.feedback.connect(this.filter);
-		    this.feedback.connect(this.delay);
-		    this.feedback.connect(this.context.destination);
+		  this.feedback.connect(this.delay);
+		  this.feedback.connect(this.context.destination);
 
 		 	this.gain.connect(this.reverb); 
 			this.reverb.connect(oscilloscope);

@@ -96,25 +96,25 @@ export class Movement {
 			//alert(destinationblock);
 			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
-		// Map right border	
+		// Map right border
 		} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
 			console.log('*** RIGHT MAP EDGE ***');
-			this.moveObjectToMap(1, currentblock, direction);
+			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;
 		// Map left border	
 		} else if ( (direction == "left" ) && (col==0) ) {
 			console.log('*** LEFT MAP EDGE ***');
-			this.moveObjectToMap(1, currentblock, direction);
+			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;
 		// Map top border
 		} else if ( (direction == "up" ) && (row<=1) ) {
 			console.log('*** TOP MAP EDGE ***');
-			this.moveObjectToMap(1, currentblock, direction);
+			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;
 		// Map bottom border
 		} else if ( (direction == "down" ) && (row>=globals.mapheight) ) {
 			console.log('*** BOTTOM MAP EDGE ***');
-			this.moveObjectToMap(1, currentblock, direction);
+			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;	
 		//teleporting
 		} else if (id == 1 && $(nextBlockClass).hasClass('block-portal-b')) {
@@ -417,7 +417,9 @@ export class Movement {
 		object.detach();
 
 		// rotate the cube
-		blCube.rotateCubeTo(nextCubeSide);
+		if (objectId == 1) {
+			blCube.rotateCubeTo(nextCubeSide);	
+		}
 
 		globals.currentMap = nextMap;
 

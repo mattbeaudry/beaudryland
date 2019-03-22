@@ -3,10 +3,12 @@ import * as globals from './globals';
 import { Utility } from './utility';
 import { Story } from './story';
 import { Map } from './map/map';
+import { UI } from './ui';
 
 var blUtil = new Utility();
 var blStory = new Story();
 var blMap = new Map();
+var blUI = new UI();
 
 export class Achievement {
 
@@ -103,7 +105,7 @@ gotospace
 	}
 	*/
 
-	// fill in the achivement in page content
+	// fill in the achievement in page content
 	// for loop for above object
 
 	/*

@@ -261,6 +261,8 @@
             <div>
                 <section class="panel-bottom clearfix">
                     <h2>Items</h2>
+
+                    <div class="block-palette clearfix"></div>
                     
                     <table class="bl-table items-table">
                         <thead>
@@ -280,9 +282,6 @@
                         </tbody>
                     </table>
 
-                    <div class="block-palette clearfix">
-
-                    </div>
                 </section>
             </div>
 
