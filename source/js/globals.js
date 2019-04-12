@@ -158,7 +158,7 @@ export const objectsArray = [0,2,3];
 
 export const uniqueObjectID = function() {
 	var id = objectsArray.length + 1;
-	console.log("uniqueID:"+id);
+	// console.log("uniqueID:"+id);
 	objectsArray.push(id);
 	return id;
 };

@@ -193,7 +193,7 @@ $('.button-preview').on("click", function(){
 $('.item-builder').submit(function(e) {
     itemPreview();
     var svg = $('#itemsvg').html();
-    //console.log(svg);
+    //// console.log(svg);
     var name = $('.item-builder .form-name').val();
     var slug = $('.item-builder .form-slug').val();
     var recipe1 = $('.item-builder .form-recipe-1').val();
@@ -201,7 +201,7 @@ $('.item-builder').submit(function(e) {
     var recipe3 = $('.item-builder .form-recipe-3').val();
     var recipe = recipe1+recipe2+recipe3;
     $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe, image:svg}, function(data) {
-        //console.log(svg);
+        //// console.log(svg);
     });
     location.reload();
     //header("location:spritepainter.php");
@@ -212,7 +212,7 @@ $('.item-builder').submit(function(e) {
 $('.button-saveitem').on("click", function() {
     itemPreview();
     var svg = $('#itemsvg').html();
-    //console.log(svg);
+    //// console.log(svg);
     var name = $('.item-builder .form-name').val();
     var slug = $('.item-builder .form-slug').val();
     var recipe1 = $('.item-builder .form-recipe-1').val();
@@ -220,7 +220,7 @@ $('.button-saveitem').on("click", function() {
     var recipe3 = $('.item-builder .form-recipe-3').val();
     var recipe = recipe1+recipe2+recipe3;
     $.post('php/createnewitem.php', {name: name, slug: slug, recipe: recipe, image:svg}, function(data) {
-        //console.log(svg);
+        //// console.log(svg);
     });
     location.reload();
     //header("location:spritepainter.php");

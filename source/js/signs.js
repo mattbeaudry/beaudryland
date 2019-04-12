@@ -52,8 +52,8 @@ export class Signs {
 			$('.maps-wrap .block:eq('+block+')').attr("data-text", message);
 			//$('.maps-wrap .block:eq('+block+')').remove();
 
-			console.log('write message to block #: ' + block);
-			console.log('write message: ' + message);
+			// console.log('write message to block #: ' + block);
+			// console.log('write message: ' + message);
 
 			$('.bubble-wrap').remove();
 			globals.disablekeyboardevents = false;
@@ -105,8 +105,8 @@ export class Signs {
 			$('.maps-wrap .block:eq('+block+')').attr("data-text", message);
 			//$('.maps-wrap .block:eq('+block+')').remove();
 
-			//console.log('write message to block #: ' + block);
-			//console.log('write message: ' + message);
+			//// console.log('write message to block #: ' + block);
+			//// console.log('write message: ' + message);
 
 			$('.bubble-wrap').remove();
 

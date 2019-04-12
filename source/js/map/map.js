@@ -194,7 +194,7 @@ export class Map {
 		var map = $('.the-fucking-'+maptype+'-map');
 		var maphtml = '';
 
-		console.log("*********LOADMAP"+maptype);
+		// console.log("*********LOADMAP"+maptype);
 		
 		switch (maptype) {
 			case 'forest':
@@ -226,7 +226,7 @@ export class Map {
 
 			case 'winter':
 				for (var f = 0; f <= (total - 1); f++) {
-					console.log("step");
+					// console.log("step");
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "snow"; }
@@ -368,7 +368,7 @@ export class Map {
 				break;
 		}
 
-		console.log('maphtml:'+maphtml);
+		// console.log('maphtml:'+maphtml);
 		$('.the-fucking-'+maptype+'-map').append(maphtml);
 
 		for (var i = 0; i<lakeBlocks.length; i++) {

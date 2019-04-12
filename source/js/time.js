@@ -32,7 +32,7 @@ export class Time {
 			if ((count%60) == 0) {
 				//world clock
 				seconds++;
-				console.log('time since game started: '+seconds+' seconds');
+				// console.log('time since game started: '+seconds+' seconds');
 			}
 
 			//run every half second
@@ -42,7 +42,7 @@ export class Time {
 
 			//run every 200 miliseconds
 			if ((count%10) == 0) {
-				//console.log("160 miliseconds has gone by");
+				//// console.log("160 miliseconds has gone by");
 				animateSpears();
 			}  
 
@@ -65,7 +65,7 @@ export class Time {
 					case "left": var stillmoving = blMovement.moveObject("left", id, "spear"); break;
 					case "right": var stillmoving = blMovement.moveObject("right", id, "spear"); break;
 				}
-				//console.log("stillmoving? "+stillmoving);
+				//// console.log("stillmoving? "+stillmoving);
 
 				//stop animation if spear collides with something
 				if (stillmoving == false) {

@@ -119,7 +119,7 @@ export class Player {
 
 	    			$('.maps-wrap').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
 
-	    			//console.log(sign);
+	    			//// console.log(sign);
 	    			//sign[0].attr('data-blocktype',signtext);
 	    			//$('.block').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
 	    			//blUtil.log('');

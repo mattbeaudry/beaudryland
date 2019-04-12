@@ -74,7 +74,7 @@ if ( $('body').hasClass("version-phonegap") ) {
 	var hideControlPad = function() { $('.the-fucking-controller').fadeToggle(); };
 
 	$(document).ready(function() {
-		console.log("MOBILE VERSION");
+		// console.log("MOBILE VERSION");
 		globals.mapwidth = globals.mapWidthMobile;
 		globals.mapheight = globals.mapHeightMobile;
 		blMap.setupMap('mobile');
@@ -110,7 +110,7 @@ if ( $('body').hasClass("version-phonegap") ) {
 } else if ( $('body').hasClass("version-desktop") ) {
 
 	$(document).ready(function() {
-		console.log("DESKTOP VERSION");
+		// console.log("DESKTOP VERSION");
 
 		globals.mapwidth = globals.mapWidthDesktop;
 		globals.mapheight = globals.mapHeightDesktop;

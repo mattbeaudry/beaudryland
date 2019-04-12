@@ -1,6 +1,6 @@
 export var initializeNavigation = function(testVar, testObject) {
 
-	console.log("** INIT NAVIGATION **");
+	// console.log("** INIT NAVIGATION **");
 
 	// $('.nav-toggle-inventory').on("click", function() {
 	// 	if ( $('body').hasClass("version-phonegap") ) {
@@ -25,7 +25,7 @@ export var initializeNavigation = function(testVar, testObject) {
 	
 	$('.tab-menuitem').on("click", function() {
 		var tabName = $(this).attr("data-tabmenu");
-		console.log("tabName:"+tabName);
+		// console.log("tabName:"+tabName);
 		$('.tabs .tab').hide();
 		$('.'+tabName).show();
 		$('.tabs-close').show();

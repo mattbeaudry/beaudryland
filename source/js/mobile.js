@@ -47,7 +47,7 @@ export class Mobile {
 		 var mapdata = '<div class="block block-grass" data-blocktype="grass"></div>';
 		 this.db.transaction(
 			function(transaction) {
-				console.log('Attempting to insert ' + username + ' and mapdata');
+				// console.log('Attempting to insert ' + username + ' and mapdata');
 				transaction.executeSql(
 					'INSERT INTO beaudryland_maps (username,mapdata) VALUES (?,?);',
 					[username,mapdata],
@@ -66,7 +66,7 @@ export class Mobile {
 					function (transaction, result) {
 						for (var i=0; i < result.rows.length; i++) {
 							var row = result.rows.item(i);
-							console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+							// console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
 						}
 					}
 				);
@@ -90,7 +90,7 @@ export class Mobile {
 
 		this.db.transaction(
 			function(transaction) {
-				console.log('Attempting to insert ' + username + ' and mapdata');
+				// console.log('Attempting to insert ' + username + ' and mapdata');
 				transaction.executeSql(
 					'INSERT INTO beaudryland_maps (username,mapdata,invdata,achievements) VALUES (?,?,?,?);',
 					[username,mapdata,invdata,achievements],
@@ -112,7 +112,7 @@ export class Mobile {
 							$('.maps-wrap').html("");
 							$('.the-fucking-inventory').html("");
 							var row = result.rows.item(i);
-							//console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+							//// console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
 							$('.maps-wrap').html(row.mapdata);
 							$('.the-fucking-inventory').html(row.invdata);
 							

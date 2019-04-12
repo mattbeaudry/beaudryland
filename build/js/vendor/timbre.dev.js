@@ -2162,7 +2162,7 @@
             }
 
             if (this.status !== FINISHED_STATE) {
-                console.log("status is not none", this.status);
+               // // console.log("status is not none", this.status);
                 return dfd.reject().promise();
             }
 

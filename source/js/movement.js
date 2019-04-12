@@ -98,22 +98,22 @@ export class Movement {
 			collide = true;
 		// Map right border
 		} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
-			console.log('*** RIGHT MAP EDGE ***');
+			// console.log('*** RIGHT MAP EDGE ***');
 			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;
 		// Map left border	
 		} else if ( (direction == "left" ) && (col==0) ) {
-			console.log('*** LEFT MAP EDGE ***');
+			// console.log('*** LEFT MAP EDGE ***');
 			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;
 		// Map top border
 		} else if ( (direction == "up" ) && (row<=1) ) {
-			console.log('*** TOP MAP EDGE ***');
+			// console.log('*** TOP MAP EDGE ***');
 			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;
 		// Map bottom border
 		} else if ( (direction == "down" ) && (row>=globals.mapheight) ) {
-			console.log('*** BOTTOM MAP EDGE ***');
+			// console.log('*** BOTTOM MAP EDGE ***');
 			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;	
 		//teleporting

@@ -162,6 +162,12 @@
 
                 </div>
             </div>
+            <div class="bui-synth-panel">
+                <h3 class="bui-knob-title">Strings</h3>
+                <div class="bui-tape">
+
+                </div>
+            </div>
         </div>
 
     </div>

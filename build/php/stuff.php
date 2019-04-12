@@ -339,16 +339,16 @@ savePlayerInventory = function() {
 	$('.the-fucking-inventory > div').each(function(index){
 		var amount = $(this).html();
 		var blocktype = $(this).attr('data-blocktype');
-		console.log("inventory slot "+index+" = "+amount+blocktype);
+		// console.log("inventory slot "+index+" = "+amount+blocktype);
 		inventoryItems[index] = {type:blocktype, amount:amount};
 	});
 
-	console.log("saved inventory = "+inventoryItems);
+	// console.log("saved inventory = "+inventoryItems);
 	inventoryItems = JSON.stringify(inventoryItems);
 	
 	$.post('php/saveinventory.php', {inventory: inventoryItems}, function(data) {
 
-        console.log("saved inventory: "+data);
+       // // console.log("saved inventory: "+data);
         
     });
 	
@@ -359,7 +359,7 @@ loadPlayerInventory = function() {
 	$.post('php/loadinventory.php', function(data) {
     
         //$('.the-fucking-map').append(data);
-        console.log("loading inv");
+       // // console.log("loading inv");
         
         if (data == false) {
         	//alert("inv query fail");
@@ -377,7 +377,7 @@ loadPlayerInventory = function() {
     			$('.the-fucking-inventory > div:eq('+i+')').addClass('block block-'+inventoryitems[i].type);
     		}
     		
-		    console.log("loadinventory item "+i+inventoryitems[i].type+inventoryitems[i].amount);
+		   // // console.log("loadinventory item "+i+inventoryitems[i].type+inventoryitems[i].amount);
 
 		}
         
@@ -386,7 +386,7 @@ loadPlayerInventory = function() {
 };
 
 saveMap = function(){
-	console.log("save map");
+	// console.log("save map");
 	
 	//loop through blocks and create array, then jason stringify 
 	
@@ -395,7 +395,7 @@ saveMap = function(){
     $.post('php/savemap.php', {mapdata: mapdata}, function(data) {
     
         $('body').append(data);
-        console.log("save mapdata: "+data);
+       // // console.log("save mapdata: "+data);
         
         $('.link-savemap').append(' <span><strong>map saved.</strong></span>');
 		//$('.the-fucking-'+object).css("marginTop","-60px");

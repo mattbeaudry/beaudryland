@@ -209,7 +209,7 @@ if ( $('body').hasClass("version-phonegap") ){
 		 var mapdata = '<div class="block block-grass" data-blocktype="grass"></div>';
 		 db.transaction(
 			function(transaction) {
-				console.log('Attempting to insert ' + username + ' and mapdata');
+				// console.log('Attempting to insert ' + username + ' and mapdata');
 				transaction.executeSql(
 					'INSERT INTO beaudryland_maps (username,mapdata) VALUES (?,?);',
 					[username,mapdata],
@@ -228,7 +228,7 @@ if ( $('body').hasClass("version-phonegap") ){
 						function (transaction, result) {
 							for (var i=0; i < result.rows.length; i++) {
 								var row = result.rows.item(i);
-								console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+								// console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
 							}
 						},
 						errorHandler
@@ -239,7 +239,7 @@ if ( $('body').hasClass("version-phonegap") ){
 
 	// This function here is used to write out any errors I get to the console.
 	function errorHandler(transaction, error) {
-		console.log('Oops. Error was '+error.message+' (Code '+error.code+')');
+		// console.log('Oops. Error was '+error.message+' (Code '+error.code+')');
 		return true;
 	}
 
@@ -259,7 +259,7 @@ if ( $('body').hasClass("version-phonegap") ){
 
 		db.transaction(
 			function(transaction) {
-				console.log('Attempting to insert ' + username + ' and mapdata');
+				// console.log('Attempting to insert ' + username + ' and mapdata');
 				transaction.executeSql(
 					'INSERT INTO beaudryland_maps (username,mapdata,invdata,achievements) VALUES (?,?,?,?);',
 					[username,mapdata,invdata,achievements],
@@ -282,7 +282,7 @@ if ( $('body').hasClass("version-phonegap") ){
 							$('.maps-wrap').html("");
 							$('.the-fucking-inventory').html("");
 							var row = result.rows.item(i);
-							//console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+							//// console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
 							$('.maps-wrap').html(row.mapdata);
 							$('.the-fucking-inventory').html(row.invdata);
     						
@@ -327,7 +327,7 @@ if ( $('body').hasClass("version-phonegap") ){
 
 	$(document).ready(function() {
 
-		console.log("MOBILE VERSION");
+		// console.log("MOBILE VERSION");
 
 		setMapSize();
 	    loadNewMap();
@@ -363,7 +363,7 @@ if ( $('body').hasClass("version-phonegap") ){
 
 	$(document).ready(function() {
 
-		console.log("DESKTOP VERSION");
+		// console.log("DESKTOP VERSION");
 
 		setMapSize();
 		loadGame();
@@ -393,7 +393,7 @@ if ( $('body').hasClass("version-phonegap") ){
 
 	$(document).ready(function() {
 
-		console.log("MULTIPLAYER VERSION");
+		// console.log("MULTIPLAYER VERSION");
 
 		setMapSize();
 		//loadGame();
@@ -415,7 +415,7 @@ changeOverlayBlockOpacity = function(block, opacity) {
 
 nightTime = function() {
 
-	console.log("night time");
+	// console.log("night time");
 	// MAP OVERLAY
     var overlayhtml = "";
     for (var f = 0; f <= (totalmapblocks - 1); f++){
@@ -446,7 +446,7 @@ clearLighting = function() {
 
 lightUpBlock = function() {
 
-	console.log ("the light!");
+	// console.log ("the light!");
 
 	//var randomblockid = Math.floor((Math.random() * totalmapblocks) + 1);
 	var playerblockid = getObjectCurrentBlock("1") - 1;
@@ -1220,7 +1220,7 @@ loadPlayer = function(id) {
 
     			$('.maps-wrap').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
 
-    			//console.log(sign);
+    			//// console.log(sign);
 
 
 
@@ -1614,8 +1614,8 @@ placeSign = function(objectid, block) {
 		$('.maps-wrap .block:eq('+block+')').attr("data-text", message);
 		//$('.maps-wrap .block:eq('+block+')').remove();
 
-		console.log('write message to block #: ' + block);
-		console.log('write message: ' + message);
+		// console.log('write message to block #: ' + block);
+		// console.log('write message: ' + message);
 
 		$('.bubble-wrap').remove();
 		disablekeyboardevents = false;
@@ -1666,8 +1666,8 @@ readSign = function(block) {
 		$('.maps-wrap .block:eq('+block+')').attr("data-text", message);
 		//$('.maps-wrap .block:eq('+block+')').remove();
 
-		//console.log('write message to block #: ' + block);
-		//console.log('write message: ' + message);
+		//// console.log('write message to block #: ' + block);
+		//// console.log('write message: ' + message);
 
 		$('.bubble-wrap').remove();
 
@@ -1691,7 +1691,7 @@ achievementCompleted = function(achievementname) {
 
 displayDialog = function(text) {
 
-	console.log("displayDialog");
+	// console.log("displayDialog");
 
 	var html = '<div class="bubble-wrap bubble-dialog">';
 				html += '<div class="bubble-link">';
@@ -2661,7 +2661,7 @@ function newAnimationFrame() {
   if ((count%60) == 0){
      //world clock
     seconds++;
-    console.log('time since game started: '+seconds+' seconds');
+   // // console.log('time since game started: '+seconds+' seconds');
 
   }
 
@@ -2674,7 +2674,7 @@ animateSpears();
 
   //run every 200 miliseconds
   if ((count%10) == 0){
-  	console.log("160 miliseconds has gone by");
+  	// console.log("160 miliseconds has gone by");
   	
 
 
@@ -2700,7 +2700,7 @@ animateSpears = function() {
 			case "left": var stillmoving = moveObjectLeft(id, "spear"); break;
 			case "right": var stillmoving = moveObjectRight(id, "spear"); break;
 		}
-		//console.log("stillmoving? "+stillmoving);
+		//// console.log("stillmoving? "+stillmoving);
 
 		//stop animation if spear collides with something
 		if (stillmoving == false) {
@@ -3206,7 +3206,7 @@ getBlockTopByID = function(block) {
 /*
 getBlockCurrentCol = function(block) {
 	var left = getBlockLeftByID();
-	console.log("XXX-LEFT:"+left)
+	// console.log("XXX-LEFT:"+left)
 
 }
 */
@@ -3261,5 +3261,5 @@ addPX = function(css) {
 	return px;
 };
 trace = function(msg) {
-	console.log(msg);
+	// console.log(msg);
 };

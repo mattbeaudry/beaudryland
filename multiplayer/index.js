@@ -6,7 +6,7 @@ var io = require('socket.io')(server);
 var port = process.env.PORT || 3001;
 
 server.listen(port, function () {
-  console.log('Server listening at port %d', port);
+ // // console.log('Server listening at port %d', port);
 });
 
 // Routing
@@ -37,14 +37,14 @@ io.on('connection', function (socket) {
     // add the client's username to the global list
     usernames[username] = username;
 
-    console.log('numUsers:'+numUsers);
+   // // console.log('numUsers:'+numUsers);
 
     //first user?
     if(numUsers == 0){
-      console.log("first user, call setupgame");
+     // // console.log("first user, call setupgame");
       socket.emit('setup game');
     } else {
-      console.log("not first user");
+     // // console.log("not first user");
       //socket.emit('update map'); 
     }
 
@@ -79,7 +79,7 @@ io.on('connection', function (socket) {
   // when a user joins they need to receive the current map
   socket.on('update map', function (data) {
 
-    console.log("updating map data on server and in client socket");
+   // // console.log("updating map data on server and in client socket");
     socket.mapdata = data;
     mapdata = data;
 
@@ -90,12 +90,12 @@ io.on('connection', function (socket) {
   });
 
   socket.on('save mapdata', function (data) {
-    console.log('save mapdata on server..');
+   // // console.log('save mapdata on server..');
     mapdata = data;
   });
 
   socket.on('load mapdata', function () {
-    console.log('load mapdata from server');
+   // // console.log('load mapdata from server');
     socket.emit('load mapdata', {
       mapdata: mapdata
     });
@@ -109,7 +109,7 @@ io.on('connection', function (socket) {
 
   // when a player moves tell all clients to move that player
   socket.on('moveplayer', function (position) {
-    console.log('broadcast move player');
+   // // console.log('broadcast move player');
     io.sockets.emit('moveplayer', {
       sender: socket.username, 
       position: position

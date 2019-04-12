@@ -311,7 +311,7 @@ $(function() {
     var playertop = position.position[1];
     var direction = position.position[3];
 
-    console.log("Move "+playername+": "+playerleft+playertop);
+   // // console.log("Move "+playername+": "+playerleft+playertop);
 
     changePlayerDirection(playername,direction);
     $(playerclass).css('left',playerleft);
@@ -333,9 +333,9 @@ $(function() {
     addParticipantsMessage(data);
 
     if (data.numUsers === 1) {
-      console.log('I am the first user so I create the map, and dont need to receive map');
+     // // console.log('I am the first user so I create the map, and dont need to receive map');
     } else {
-      console.log('I am NOT the first user so the map already exists, and I only need to receive map');
+     // // console.log('I am NOT the first user so the map already exists, and I only need to receive map');
       //alert("test is mapdata exists:"+socket.mapdata);
       socket.emit('load mapdata');
     }
@@ -378,7 +378,7 @@ $(function() {
   //setup game: load new map, save map data to server
   socket.on('setup game', function (){
 
-    console.log("SETUP DA GAME EMIT");
+   // // console.log("SETUP DA GAME EMIT");
     loadNewMap();
 
     var mapdata = $('.the-fucking-map').html();
@@ -394,16 +394,16 @@ $(function() {
 
   socket.on('load mapdata', function (data) {
     //addChatMessage(data);
-    console.log("Load DA MAP");
+   // // console.log("Load DA MAP");
     //alert('LOAD MAP==='+data.mapdata);
     $('.the-fucking-map').append(data.mapdata);
   });
 
   //update map
   socket.on('update map', function (data){
-    console.log("UPDATE DA MAP");
-    console.log('socketdata:'+socket.mapdata);
-    console.log('mapdata:'+data.mapdata);
+   // // console.log("UPDATE DA MAP");
+   // // console.log('socketdata:'+socket.mapdata);
+   // // console.log('mapdata:'+data.mapdata);
     //drawMap(data.mapdata);
   });
                                 

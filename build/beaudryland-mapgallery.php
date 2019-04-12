@@ -47,11 +47,11 @@
         
 			loadUserMaps = function(){
 			
-				console.log("load user maps");
+				// console.log("load user maps");
 			
 				$.post('php/getmapgallery.php', {}, function(usermapdata) {
 					
-					//console.log("usermapdata:"+usermapdata);
+					//// console.log("usermapdata:"+usermapdata);
 					
 					$(".the-fucking-map-gallery").append(usermapdata);
 					

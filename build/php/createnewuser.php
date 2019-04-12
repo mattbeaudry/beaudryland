@@ -14,8 +14,8 @@ $newpassword = stripslashes($newpassword);
 
 $result = $mysqli->query(
 	"INSERT INTO beaudryland_users 
-	(username,password) VALUES ('".$newusername."','".$newpassword."')"
-) or die(mysql_error() );
+	(username,password,email) VALUES ('".$newusername."','".$newpassword."', 'email')"
+) or die(mysqli_error() );
 
 if($result){
 	session_start();

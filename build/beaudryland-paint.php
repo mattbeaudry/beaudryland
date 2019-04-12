@@ -122,7 +122,7 @@ $('.item-builder').submit(function(e) {
     var svg = $('#image').html();
     var name = $('.item-builder .form-name').val();
     $.post('php/createnewsprite.php', {name: name, image:svg}, function(data) {
-        //console.log(svg);
+        //// console.log(svg);
     });
     location.reload();
     event.preventDefault();

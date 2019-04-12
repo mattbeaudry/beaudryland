@@ -121,7 +121,7 @@ export class Dev {
 			container.on("click", function() {
 				eval(function_name);
 			});
-		 	console.log(function_name);
+		 	// console.log(function_name);
 			devconsole.append(container);
 		});
 
@@ -154,7 +154,7 @@ export class Dev {
 	}
 
 	nightTime() {
-		console.log("night time");
+		// console.log("night time");
 		// MAP OVERLAY
 	    var overlayhtml = "";
 	    for (var f = 0; f <= (globals.totalmapblocks - 1); f++) {
@@ -184,7 +184,7 @@ export class Dev {
 
 	lightUpBlock() {
 
-		console.log ("the light!");
+		// console.log ("the light!");
 
 		//var randomblockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
 		var playerblockid = blUtil.getObjectCurrentBlock("1") - 1;

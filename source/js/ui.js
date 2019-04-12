@@ -26,7 +26,7 @@ export class UI {
 				$(this).parents('.bui-toast').remove();
 			});
 			setTimeout(function() {
-				console.log("timeout trig");
+				// console.log("timeout trig");
 				$('#toast-'+id+'').remove();
 			}, 5000);
 		};
@@ -220,7 +220,7 @@ export class UI {
 		}
 
 		function drawArc(canvas, radius, deg, min, lw, col){
-			//console.log(canvas, radius, deg, min, lw, col);
+			//// console.log(canvas, radius, deg, min, lw, col);
 			var ctx = canvas.getContext("2d");
 			clearCanvas(canvas);
 			ctx.beginPath();          

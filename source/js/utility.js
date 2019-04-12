@@ -2,7 +2,7 @@ import * as globals from './globals';
 
 export class Utility {
 	log(msg) {
-		console.log(msg);
+		// console.log(msg);
 	}
 
 	randomBlockID() {
@@ -45,7 +45,7 @@ export class Utility {
 	/*
 	getBlockCurrentCol(block) {
 		var left = getBlockLeftByID();
-		console.log("XXX-LEFT:"+left)
+		// console.log("XXX-LEFT:"+left)
 
 	}
 	*/

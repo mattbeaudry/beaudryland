@@ -20,7 +20,7 @@ export class Character {
 	}
 
 	drawCharacter() {
-		console.log("draw character");
+		// console.log("draw character");
 		var characterCanvas = $('#canvas-character .the-fucking-canvas');
 
 		var facePixel = characterCanvas.children('.canvas-pixel-8');
@@ -55,7 +55,7 @@ export class Character {
 		bootPixel1.css('backgroundColor', shoeColor);
 		bootPixel2.css('backgroundColor', shoeColor);
 
-		console.log("hair:"+hairStyle);
+		// console.log("hair:"+hairStyle);
 
 		if (hairStyle == 'medium') {
 			hairPixel1.css('backgroundColor', hairColor);

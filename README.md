@@ -2,9 +2,8 @@ Beaudryland
 ===========
 by Matt Beaudry
 beaudryland.com
-mattbeaudry.com
 
-This one time in 2013, I made a simple game called MiniCraft in a day. Been working on it ever since. Mostly to keep practicing coding but also bvecause it was fun.
+This one time in 2013, I made a simple game called MiniCraft in a day. Been working on it ever since. Mostly to keep practicing coding and have some fun doing it.
 
 FEATURES 2018
 - engine: movement, collisions, projectiles, map mechanisms
@@ -27,5 +26,10 @@ FEATURES 2018
 - pixelated ui design system
 - user accounts: loading / saving of maps, inventory, achievements etc. 
 
-TECH
-- html, css, javascript, node, webpack, jquery, jqueryui, php, mysql, svg, web audio api, sass, phonegap, raphael svg, 
+HOW TO INSTALL ON NEW MACHINE
+- install MAMP and Sequel Pro
+- install xcode
+- install xcode tools
+- upload database
+- config.php
+- hosts file - might be done auto by MAMP

@@ -72,7 +72,7 @@ export class Action {
 				});
 			}
 
-			console.log("TEST DAMAGE INDICATOR");
+			// console.log("TEST DAMAGE INDICATOR");
 		}
 		
 		$(blockClass).animate({ opacity: 0.9 }, 50, function() {

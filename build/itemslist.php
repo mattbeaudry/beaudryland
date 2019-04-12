@@ -485,7 +485,7 @@ $('.item-builder').submit(function(e) {
         is_equipable: is_equipable,
         is_useable: is_useable
     }, function(data) {
-        //console.log(svg);
+        //// console.log(svg);
     });
 
     location.reload();
@@ -608,7 +608,7 @@ var createSVG = function() {
 var loadItemSelects = function() {
     $.post('php/loaditemsJSON.php', {}, function(data) {
         if (data == false) {
-            console.log("failed gettins items json");
+           // // console.log("failed gettins items json");
         } else {
             for (var i=0; i < data.length; i++) {
                 $('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c, .form-recipe-2a, .form-recipe-2b, .form-recipe-2c, .form-recipe-3a, .form-recipe-3b, .form-recipe-3c').append('<option value="'+data[i].slug+'">'+data[i].name+'</option>');

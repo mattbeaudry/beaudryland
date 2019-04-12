@@ -381,7 +381,7 @@ $('.item-builder').submit(function(e) {
         image_item_swing_left: image_item_swing_left,
         image_item_swing_right: image_item_swing_right
     }, function(data) {
-        console.log(data);
+       // // console.log(data);
     });
 
     //location.reload();
@@ -501,7 +501,7 @@ var createSVG = function() {
 var loadItemSelects = function() {
     $.post('php/loaditemsJSON.php', {}, function(data) {
         if (data == false) {
-            console.log("failed gettins items json");
+           // // console.log("failed gettins items json");
         } else {
             for (var i=0; i < data.length; i++) {
                 $('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c').append('<option value="'+data[i].slug+'">'+data[i].name+'</option>');

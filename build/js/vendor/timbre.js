@@ -5807,7 +5807,7 @@ var timbre = (function(context, timbre) {
                         callback.samplerate = result.samplerate;
                         callback.duration   = (result.buffer.length / samplerate) * 1000;
                         callback.buffer     = result.buffer;
-                        console.log("wav.load: done.");
+                       // // console.log("wav.load: done.");
                     }
                 }
                 timbre.fn.doEvent(this, "loadeddata", [result]);
@@ -5815,7 +5815,7 @@ var timbre = (function(context, timbre) {
                 if (typeof callback === "function") {
                     callback.call(this, "error");
                 } else if (typeof callback === "object") {
-                    console.log("wav.load: error.");
+                   // // console.log("wav.load: error.");
                 }
                 timbre.fn.doEvent(this, "error");
             }
@@ -9467,7 +9467,7 @@ var timbre = (function(context, timbre) {
             } else if (timbre.env === "moz") {
                 x.push(" on AudioDataAPI");
             }
-            console.log(x.join(""));
+           // // console.log(x.join(""));
         }());
         
         window.timbre = window.T = timbre;
@@ -9532,7 +9532,7 @@ var timbre = (function(context, timbre) {
                 this.jsnode = new ctimbre.JavaScriptOutputNode(timbre.streamsize);
                 samplerate = this.jsnode.sampleRate;
                 this.streamsize = timbre.streamsize;
-                console.log("streamsize", this.streamsize);
+               // // console.log("streamsize", this.streamsize);
                 
                 if (timbre.samplerate === samplerate) {
                     onaudioprocess = function(e) {
