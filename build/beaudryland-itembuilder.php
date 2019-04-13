@@ -10,7 +10,7 @@
         
         <div class="container clearfix">
 
-            <h1>Item Builder</h1>
+            <h1>Item Workshop</h1>
 
             <div class="panel-left">
 
@@ -158,7 +158,7 @@
 
                 <section>
 
-                    <h2>Propeties</h2>
+                    <h2>Properties</h2>
 
                     <form class="item-builder" action="php/createnewitem.php" method="post">
                         <ul>
@@ -263,25 +263,27 @@
                     <h2>Items</h2>
 
                     <div class="block-palette clearfix"></div>
-                    
-                    <table class="bl-table items-table">
-                        <thead>
-                            <tr>
-                                <td>Image</td>
-                                <td>Name</td>
-                                <td>Description</td>
-                                <td>Recipe</td>
-                                <td>Animated</td>
-                                <td>Lifeform</td>
-                                <td>Equipable</td>
-                                <td>Useable</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php include 'php/loaditems.php'; ?>
-                        </tbody>
-                    </table>
-
+                    <div class="bl-table-contain" style="height: 400px; overflow: scroll;">
+                        <table class="bl-table items-table">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>Image</td>
+                                    <td>Name</td>
+                                    <td>Description</td>
+                                    <td>Recipe</td>
+                                    <!-- <td>Animated</td> -->
+                                    <td>Lifeform</td>
+                                    <td>Equipable</td>
+                                    <td>Useable</td>
+                                    <td>Peoperties</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php include 'php/loaditems.php'; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </div>
 
@@ -581,27 +583,25 @@ var displaySlug = function() {
 
 };
 
-// display game blocks
 var blocktypes = new Array (
-
-    /*forest map*/  "grass", "dirt", "water", "tree", "rock", "hole",
-    /*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
-    /*beach map*/   "sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
-    /*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
-
-    /*items*/       "shovel", "wood", "fire", "door", "door-open", "frisbee", "sign",
-    /*furniture*/   "table","chair","chest","bed","toilet","sink","bathtub",
-    /*weapons*/     "sword", "spear", "axe",
-    /*instruments*/ "guitar", "piano","bassdrum","snare","hihat","cymbal","tom",
-    /*technology*/  "telescope","computer","2dprinter",
-    /*transport*/   "bike", "skiis", "canoe", "car", "rocket",
-
-    /*treasure*/    "diamond", "gold", "silver", "oil", "clay",
-    /*holes*/       "diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-    /*blocks*/      "rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-
-    "appletree", "heart", "apple"
+	/*forest map*/	"grass", "dirt", "water", "rock", "hole",
+	/*winter map*/  "snow", "ice",  "icerock", // "frozendirt", "snowhole",
+	/*beach map*/  	"sand", "wave", "sandstone", // "wetsand", "sandhole",
+	/*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
+    /*items*/     	"shovel", "fire", "door", "door-open", "frisbee", "sign",
+    /*weapons*/		"sword", "spear", "axe", "bow", "arrow",
+	/*instruments*/ "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
+	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
+	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
+	/*furniture*/	"table", "chair", "chest", "bed", "toilet", "sink", "bathtub",
+    /*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
+	/*holes*/		//"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
+	/*organic*/		"tree", "pinetree", "appletree", "palmtree", "flowers", "heart", //"talltree",
+	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground",
+    /*new*/			"fence-metal",
+    /*blocks*/     	"wood", "pinewood", "palmwood", "applewood", "rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 );
+
 var blockhtml = ""; 
 $.each(blocktypes, function(i, v) { 
     blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'; 
@@ -625,6 +625,7 @@ var objecttypes = new Array (
 );
 var blockhtml = "";
 $.each(blocktypes, function(i, v) { 
+    //blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'+(i+1)+' '+v+' | '; 
     blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'; 
 });
 $.each(objecttypes, function(i, v) { 

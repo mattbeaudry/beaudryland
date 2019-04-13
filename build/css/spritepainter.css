@@ -113,9 +113,6 @@ input[type="text"] {
     shape-rendering: crispEdges;
 }
 .svg-wrap {
-    display:inline;
-    float:left;
-    margin:20px;
     shape-rendering: crispEdges;
 }
 .svg-wrap svg {

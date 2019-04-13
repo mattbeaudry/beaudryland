@@ -16,17 +16,11 @@ if($result->num_rows > 0) {
         $image = $row['image'];
         $name = $row['name'];
         $slug = $row['slug'];
+        $itemid = $row['itemid'];
         $description = $row['description'];
-        
-        // $user = $row['user'];
-        // $is_collectable = $row['is_collectable'];
-        // $is_cutable = $row['is_cutable'];
-        // $is_edible = $row['is_edible'];
-        // $is_placeable = $row['is_placeable'];
-        // $is_blocking = $row['is_blocking'];
-        // $is_ingredient = $row['is_ingredient'];
 
         $infohtml .= '<tr>';
+        $infohtml .= '<td>'.$itemid.'</td>';
         $infohtml .= '<td><div class="svg-wrap"><img src="items/'.$image.'"></div></td>';
         $infohtml .= '<td>'.$name.'</td>';
         $infohtml .= '<td>'.$description.'</td>';
@@ -37,11 +31,11 @@ if($result->num_rows > 0) {
             $infohtml .= '<td></td>';
         }
 
-        if ($row['has_animation']) {
-            $infohtml .= '<td><div id="image_animated" class="svg-wrap"><img src="items/'.$row['image_animated'].'"></div></td>';
-        } else {
-            $infohtml .= '<td></td>';
-        }
+        // if ($row['has_animation']) {
+        //     $infohtml .= '<td><div id="image_animated" class="svg-wrap"><img src="items/'.$row['image_animated'].'"></div></td>';
+        // } else {
+        //     $infohtml .= '<td></td>';
+        // }
 
         if ($row['is_lifeform']) {
             $infohtml .= '<td>';
@@ -75,6 +69,22 @@ if($result->num_rows > 0) {
         } else {
             $infohtml .= '<td></td>';
         }
+
+        // Properties
+        $infohtml .= '<td>';
+        if ($row['is_craftable']) { $infohtml .= 'is_craftable<br>'; }
+        if ($row['is_collectable']) { $infohtml .= 'is_collectable<br>'; }
+        if ($row['is_cutable']) { $infohtml .= 'is_cutable<br>'; }
+        if ($row['is_edible']) { $infohtml .= 'is_edible<br>'; }
+        if ($row['is_placeable']) { $infohtml .= 'is_placeable<br>'; }
+        if ($row['is_blocking']) { $infohtml .= 'is_blocking<br>'; }
+        if ($row['is_ingredient']) { $infohtml .= 'is_ingredient<br>'; }
+        if ($row['is_ground']) { $infohtml .= 'is_ground<br>'; }
+        if ($row['is_diggable']) { $infohtml .= 'is_diggable<br>'; }
+        if ($row['is_lifeform']) { $infohtml .= 'is_lifeform<br>'; }
+        if ($row['is_equipable']) { $infohtml .= 'is_equipable<br>'; }
+        if ($row['is_useable']) { $infohtml .= 'is_useable<br>'; }
+        $infohtml .= '</td>';
 
         $infohtml .= '</tr>';
     }
