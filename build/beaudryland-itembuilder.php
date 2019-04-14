@@ -7,19 +7,15 @@
 <?php include 'header.php'; ?>
 
     <body>
-        
         <div class="container clearfix">
-
             <h1>Item Workshop</h1>
 
             <div class="panel-left">
-
                 <section>
 
                     <h2>Tools</h2>
 
                     <?php include 'php/ui-colorpicker.php'; ?>
-
                     <div>
                         <nav class="pixelpainter-nav">
                             <ul>
@@ -38,14 +34,12 @@
                             <br>
                             <div class="svg-preview" id="image"></div>
                         </fieldset>
-
                         <div>
                             <label>
                                 <input class="form-has_animation" type="checkbox" name="has_animation">
                                 <span>has animation</span>
                             </label>
                         </div>
-
                         <fieldset class="canvas-frame canvas-image_animated">
                             <label for="name">Animated (Frame 2)</label>
                             <?php include 'php/part-canvas.php'; ?>
@@ -149,15 +143,11 @@
                             <div class="svg-preview" id="image_item_swing_right"></div>
                         </fieldset>
                     </div>
-
                 </section>
-               
             </div> 
 
             <div class="panel-right">
-
                 <section>
-
                     <h2>Properties</h2>
 
                     <form class="item-builder" action="php/createnewitem.php" method="post">
@@ -253,17 +243,16 @@
                             </li>
                         </ul>
                     </form>
-
                 </section>
-
             </div>
 
             <div>
                 <section class="panel-bottom clearfix">
+
                     <h2>Items</h2>
 
                     <div class="block-palette clearfix"></div>
-                    <div class="bl-table-contain" style="height: 400px; overflow: scroll;">
+                    <div class="bl-table-contain">
                         <table class="bl-table items-table">
                             <thead>
                                 <tr>
@@ -294,8 +283,9 @@
         <script src="js/plugins.js"></script>
         <script src="js/app-bundle.js"></script>
     
-        <script>
+<script>
 
+// COLOR PALETTE
 $('.canvas-pixel').on("click", function() { 
     var pixelID = $(this).attr("data-pixel");
     var colorCode = $('.bui-colorpicker .bui-colorpicker-input').val();
@@ -305,12 +295,14 @@ $('.canvas-pixel').on("click", function() {
     itemPreview();
 });
 
+// RESET BUTTON
 $('.button-reset').on("click", function(){
     $('.canvas-pixel').css("background-color","transparent");
     $('.canvas-pixel').attr("data-color","transparent");
     itemPreview();
 });
 
+// SUBMIT ITEM
 $('.item-builder').submit(function(e) {
     //itemPreview();
     var image = $('#image').html();
@@ -383,14 +375,11 @@ $('.item-builder').submit(function(e) {
         image_item_swing_left: image_item_swing_left,
         image_item_swing_right: image_item_swing_right
     }, function(data) {
-       // // console.log(data);
+       // console.log(data);
     });
-
-    //location.reload();
-    //header("location:itemcreator.php");
+    // location.reload();
+    // header("location:itemcreator.php");
     event.preventDefault();
-    location.reload();
-
 });
 
 var itemPreview = function() {
@@ -408,11 +397,9 @@ var renderPreviewSVG = function(name, is_animated) {
     var pixels = [];
     var x = 0;
     var y = 0;
-
     previewSVG = Raphael(document.getElementById(name));
     previewSVG.setViewBox(0, 0, w, h, true);
     previewSVG.canvas.setAttribute('preserveAspectRatio', 'none');
-
 
     $('.canvas-'+name+' .canvas-pixel').each(function(i) {
         var color = $(this).attr("data-color");
@@ -470,40 +457,34 @@ var renderPreviewSVG = function(name, is_animated) {
 
 var itemSVG;
 var createSVG = function() {
-
     renderPreviewSVG("image", false);
-
     if (has_animation == true) { 
         renderPreviewSVG("image_animated", true); 
     }
-
     if (is_lifeform == true) {
         renderPreviewSVG("image_lifeform_front", false);
         renderPreviewSVG("image_lifeform_back", false);
         renderPreviewSVG("image_lifeform_left", false);
         renderPreviewSVG("image_lifeform_right", false);
     }
-
     if (is_equipable == true) {
         renderPreviewSVG("image_item_front", false);
         renderPreviewSVG("image_item_back", false);
         renderPreviewSVG("image_item_left", false);
         renderPreviewSVG("image_item_right", false);
     }
-
     if (is_useable == true) {
         renderPreviewSVG("image_item_swing_front", false);
         renderPreviewSVG("image_item_swing_back", false);
         renderPreviewSVG("image_item_swing_left", false);
         renderPreviewSVG("image_item_swing_right", false);
     }
-
 };
 
 var loadItemSelects = function() {
     $.post('php/loaditemsJSON.php', {}, function(data) {
         if (data == false) {
-           // // console.log("failed gettins items json");
+           // console.log("failed gettins items json");
         } else {
             for (var i=0; i < data.length; i++) {
                 $('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c').append('<option value="'+data[i].slug+'">'+data[i].name+'</option>');
@@ -595,18 +576,16 @@ var blocktypes = new Array (
 	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
 	/*furniture*/	"table", "chair", "chest", "bed", "toilet", "sink", "bathtub",
     /*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*holes*/		//"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
+	/*holes*/		// "diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
 	/*organic*/		"tree", "pinetree", "appletree", "palmtree", "flowers", "heart", //"talltree",
 	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground",
     /*new*/			"fence-metal",
     /*blocks*/     	"wood", "pinewood", "palmwood", "applewood", "rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 );
-
 var blockhtml = ""; 
 $.each(blocktypes, function(i, v) { 
     blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'; 
 });
-
 var objecttypes = new Array (
     "player-direction-up","player-direction-down","player-direction-left","player-direction-right",
     "player-direction-up-sword","player-direction-down-sword","player-direction-left-sword ","player-direction-right-sword",
@@ -623,16 +602,11 @@ var objecttypes = new Array (
     "enemy-direction-up","enemy-direction-down","enemy-direction-left","enemy-direction-right",
     "deer-direction-up","deer-direction-down","deer-direction-left","deer-direction-right"
 );
-var blockhtml = "";
-$.each(blocktypes, function(i, v) { 
-    //blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'+(i+1)+' '+v+' | '; 
-    blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'; 
-});
 $.each(objecttypes, function(i, v) { 
     blockhtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>'; 
 });
-
 $('.block-palette').append(blockhtml);
+
 
         </script>
 

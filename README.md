@@ -27,9 +27,8 @@ FEATURES 2018
 - user accounts: loading / saving of maps, inventory, achievements etc. 
 
 HOW TO INSTALL ON NEW MACHINE
-- install MAMP and Sequel Pro
-- install xcode
-- install xcode tools
-- upload database
-- config.php
-- hosts file - might be done auto by MAMP
+- clone into you local
+- import beaudryland database found in db folder
+- upload sql database
+- config.php to point to db
+- webpack to compile

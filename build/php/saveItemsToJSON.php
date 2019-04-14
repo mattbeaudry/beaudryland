@@ -6,15 +6,13 @@ $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
 if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
 
 $result = $mysqli->query(
-    "SELECT * FROM beaudryland_items ORDER BY itemid DESC"
+    "SELECT * FROM beaudryland_items ORDER BY itemid ASC"
 ) or die(mysql_error() );
 
 $items = array();
 
 if($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        $name = $row['name'];
-        $slug = $row['slug'];
         $items[] = array(
             'name' => $row['name'],
             'slug' => $row['slug'],
@@ -54,10 +52,15 @@ if($result->num_rows > 0) {
             'image_item_swing_back' => $row['image_item_swing_back'],
             'image_item_swing_left' => $row['image_item_swing_left'],
             'image_item_swing_right' => $row['image_item_swing_right']
+            
         );
     }
 }
 
-echo json_encode($items);
+$items_json = json_encode($items);
+
+$fp = fopen('../json/items.json', 'w');
+fwrite($fp, $items_json);
+fclose($fp);
 
 ?>

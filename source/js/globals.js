@@ -1,3 +1,41 @@
+import { Items } from './item/items';
+var blItems = new Items();
+
+export const blocktypes = blItems.getItemSlugs();
+export const isplaceable = blItems.getItemSlugsByProperty();
+
+export const isingredient = new Array (
+	/*forest map*/	"tree", "rock",
+	/*winter map*/  "pinetree", "icerock",
+	/*beach map*/  	"palmtree",
+	/*items*/     	"fire",
+	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
+	/*organic*/		"wood", "pinewood", "palmwood", "applewood"
+);
+
+/* isequipable is used for items with player graphics + animation */
+export const isequipable = new Array (
+	/*items*/     	"shovel",
+	/*weapons*/		"sword", "axe", "bow",
+	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
+	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
+);
+
+export const iscollectable = new Array (
+	/*forest map*/	"tree", "rock",
+	/*winter map*/  "pinetree", "icerock",
+	/*beach map*/  	"palmtree", "sandstone",
+	/*items*/     	"fire",
+	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
+	/*technology*/	"telescope","computer","2dprinter",
+	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
+	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
+	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
+	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
+	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
+	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
+);
+
 export const buiColor = {
 	white: "#FFFFFF",
 	black: "#000000",
@@ -53,72 +91,6 @@ export const mobtypes = new Array (
 	/*players*/		"player",
 	/*enemies*/		"enemy",
 	/*animals*/		"deer"
-);
-
-export const blocktypes = new Array (
-	/*forest map*/	"grass", "dirt", "water", "tree", "rock", "hole",
-	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock", "snowhole",
-	/*beach map*/  	"sand", "wetsand", "wave", "palmtree", "sandstone", "sandhole",
-	/*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
-	/*items*/     	"shovel", "fire", "door", "door-open", "frisbee", "sign",
-	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*weapons*/		"sword", "spear", "axe", "bow", "arrow",
-	/*instruments*/ "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks","bassdrum","snare","hihat","cymbal","tom",
-	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
-	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/*organic*/		"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
-	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground",
-	/*new*/			"fence-metal"
-);
-
-export const isplaceable = new Array (
-	/*forest map*/	"grass", "dirt", "water", "tree", "rock",
-	/*winter map*/  "snow", "frozendirt", "ice", "pinetree", "icerock",
-	/*beach map*/  	"sand", "wetsand", "palmtree", "sandstone",
-	/*items*/     	"wood", "fire", "door", "sign",
-	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
-	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/*organic*/		"wood","pinewood","palmwood","applewood","appletree","flowers","talltree",
-	/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot",
-	/*new*/			"fence-metal"
-);
-
-export const isingredient = new Array (
-	/*forest map*/	"tree", "rock",
-	/*winter map*/  "pinetree", "icerock",
-	/*beach map*/  	"palmtree",
-	/*items*/     	"fire",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*organic*/		"wood","pinewood","palmwood","applewood"
-);
-
-/* isequipable is used for items with player graphics + animation */
-export const isequipable = new Array (
-	/*items*/     	"shovel",
-	/*weapons*/		"sword", "axe", "bow",
-	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
-	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
-);
-
-export const iscollectable = new Array (
-	/*forest map*/	"tree", "rock",
-	/*winter map*/  "pinetree", "icerock",
-	/*beach map*/  	"palmtree", "sandstone",
-	/*items*/     	"fire",
-	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*technology*/	"telescope","computer","2dprinter",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
-	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
-	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
 );
 
 export const objecttypes = new Array (

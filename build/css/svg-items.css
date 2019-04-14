@@ -1,56 +1,4 @@
-/* tall blocks */
-.block-talltree { 
-	position:relative;opacity: 0.8;
-	background-image:url(../svg/item-talltree.svg); 
-}
-/*.block-talltree-top { background-image:url(../svg/item-talltree-top.svg); }*/
-.block-talltree:after {
-	content:"";display:block;position:absolute;
-	width:20px;height:20px;top:-19px;left:0;
-	background-image:url(../svg/item-talltree-top.svg);background-size: cover;
-}
-.the-fucking-inventory .block-talltree { opacity: 1; }
-.the-fucking-inventory .block-talltree:after { display:none; }
-/* svg graphics */
-.block-appletree { background-image:url(../svg/item-appletree.svg); }
-.block-heart { background-image:url(../svg/item-heart.svg); }
-.block-heartgrey { background-image:url(../svg/item-heartgrey.svg); }
-.block-apple { background-image:url(../svg/item-apple.svg); }
-.block-drumsticks { background-image:url(../svg/item-drumsticks.svg); }
-.block-pinewood { background-image:url(../svg/item-pinewood.svg); }
-.block-palmwood { background-image:url(../svg/item-palmwood.svg); }
-.block-applewood { background-image:url(../svg/item-applewood.svg); }
-.block-heart { background-image:url(../svg/item-heart.svg); }
-.block-carrot { background-image:url(../svg/item-carrot.svg); }
-.block-carrot-inground { background-image:url(../svg/item-carrot-inground.svg); }
-.block-mushroom { background-image:url(../svg/item-mushroom.svg); }
-.block-bow { background-image:url(../svg/item-bow.svg); }
-.block-arrow { background-image:url(../svg/item-arrow.svg); }
-.block-flowers { background-image:url(../svg/item-flowers.svg); }
-.block-portal-b { background-image:url(../svg/item-portal-b.svg); }
-.block-door-locked { background-image:url(../svg/item-door-locked.svg); }
-.block-portal-a { background-image:url(../svg/item-portal-a.svg); }
-.block-mushroom { background-image:url(../svg/item-mushroom.svg); }
-.block-heartblack { background-image:url(../svg/item-heartblack.svg); }
-.block-bluemushroom { background-image:url(../svg/item-bluemushroom.svg); }
-.block-yellowmushroom { background-image:url(../svg/item-yellowmushroom.svg); }
-.block-greenmushroom { background-image:url(../svg/item-greenmushroom.svg); }
-.block-blackmushroom { background-image:url(../svg/item-blackmushroom.svg); }
-.block-talltree-top { background-image:url(../svg/item-talltree-top.svg); }
-.block-talltree { background-image:url(../svg/item-talltree.svg); }
-.block-red-x { background-image:url(../svg/item-red-x.svg); }
-.block-fence-wood { background-image:url(../svg/item-fence-wood.svg); }
-.block-fence-metal { background-image:url(../svg/item-fence-metal.svg); }
-.block-trumpet { background-image:url(../svg/item-trumpet.svg); }
-.block-bass { background-image:url(../svg/item-bass.svg); }
-.block-microphone { background-image:url(../svg/item-microphone.svg); }
-.block-oaktree { background-image:url(../svg/item-oaktree.svg); }
-.block-oaktree { background-image:url(../svg/item-oaktree.svg); }
-.block-check { background-image:url(../svg/item-check.svg); }
-.block-close { background-image:url(../svg/item-close.svg); }
-.block-check-white { background-image:url(../svg/item-check-white.svg); }
-.block-close-white { background-image:url(../svg/item-close-white.svg); }
-/* as of mar 2018 */
+/* April 2019 - 85 Items */
 .block-grass { background-image:url(../items/grass.svg); }
 .block-water { background-image:url(../items/water.svg); }
 .block-dirt { background-image:url(../items/dirt.svg); }
@@ -65,17 +13,8 @@
 .block-palmtree { background-image:url(../items/palmtree.svg); }
 .block-wood { background-image:url(../items/wood.svg); }
 .block-appletree { background-image:url(../items/appletree.svg); }
-.block-appletree { background-image:url(../items/appletree.svg); }
-.block-appletree { background-image:url(../items/appletree.svg); }
 .block-fire { background-image:url(../items/fire.svg); }
 .block-fire_animated { background-image:url(../items/fire_animated.svg); }
-.block-asdfasdf { background-image:url(../items/asdfasdf.svg); }
-.block-asdfasdf_animated { background-image:url(../items/asdfasdf_animated.svg); }
-.block-asdfasdf_lifeform_front { background-image:url(../items/asdfasdf_lifeform_front.svg); }
-.block-asdfasdf_lifeform_back { background-image:url(../items/asdfasdf_lifeform_back.svg); }
-.block-asdfasdf_lifeform_left { background-image:url(../items/asdfasdf_lifeform_left.svg); }
-.block-asdfasdf_lifeform_right { background-image:url(../items/asdfasdf_lifeform_right.svg); }
-.block-diamond-hole { background-image:url(../items/diamond-hole.svg); }
 .block-diamond { background-image:url(../items/diamond.svg); }
 .block-hole { background-image:url(../items/hole.svg); }
 .block-hole { background-image:url(../items/hole.svg); }
@@ -149,3 +88,33 @@
 .block-sandstonebrick { background-image:url(../items/sandstonebrick.svg); }
 .block-claybrick { background-image:url(../items/claybrick.svg); }
 .block-road { background-image:url(../items/road.svg); }
+
+/* tall blocks */
+.block-talltree { 
+	position:relative;opacity: 0.8;
+	background-image:url(../svg/item-talltree.svg); 
+}
+
+/*.block-talltree-top { background-image:url(../svg/item-talltree-top.svg); }*/
+.block-talltree:after {
+	content:"";display:block;position:absolute;
+	width:20px;height:20px;top:-19px;left:0;
+	background-image:url(../svg/item-talltree-top.svg);background-size: cover;
+}
+.the-fucking-inventory .block-talltree { opacity: 1; }
+.the-fucking-inventory .block-talltree:after { display:none; }
+
+/* svg graphics */
+.block-heart { background-image:url(../svg/item-heart.svg); }
+.block-heartgrey { background-image:url(../svg/item-heartgrey.svg); }
+.block-door-locked { background-image:url(../svg/item-door-locked.svg); }
+.block-heartblack { background-image:url(../svg/item-heartblack.svg); }
+.block-talltree-top { background-image:url(../svg/item-talltree-top.svg); }
+.block-talltree { background-image:url(../svg/item-talltree.svg); }
+.block-red-x { background-image:url(../svg/item-red-x.svg); }
+.block-fence-wood { background-image:url(../svg/item-fence-wood.svg); }
+.block-oaktree { background-image:url(../svg/item-oaktree.svg); }
+.block-check { background-image:url(../svg/item-check.svg); }
+.block-close { background-image:url(../svg/item-close.svg); }
+.block-check-white { background-image:url(../svg/item-check-white.svg); }
+.block-close-white { background-image:url(../svg/item-close-white.svg); }
