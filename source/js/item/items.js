@@ -1,10 +1,8 @@
-//import * as globals from './../globals';
-//import { Utility } from '../utility';
-//var blUtil = new Utility();
-// load "built-in" items from db
-// load "user generated" items from db
-// create global item variables + JSON object
-// (item creator) = build select menus for craftable items
+// load items from db
+// create global items json
+
+// move item builder code to here
+// populate select menus for choose crafting recipes
 // create item list under inventory (incl. recipies)
 
 export class Items {
@@ -44,10 +42,10 @@ export class Items {
 		return itemSlugs;
 	}
 
-	getItemSlugsByProperty() {
+	getItemSlugsByProperty(property) {
 		const itemsJSON = this.getItemsJSONFile();
 		var itemSlugs = itemsJSON.reduce(function(filtered, item) {
-			if (item.is_placeable == 1) {
+			if (item[property] == 1) {
 			   var itemSlug = item.slug;
 			   filtered.push(itemSlug);
 			}
@@ -135,6 +133,36 @@ export const blocktypes = new Array (
 /*new/			"fence-metal",
 /*blocks/     	"wood", "pinewood", "palmwood", "applewood", "rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
 );
-
-
 */
+
+// export const isingredient = new Array (
+// 	/*forest map/	"tree", "rock",
+// 	/*winter map/  "pinetree", "icerock",
+// 	/*beach map/  	"palmtree",
+// 	/*items/     	"fire",
+// 	/*treasure/  	"diamond", "gold", "silver", "oil", "clay",
+// 	/*organic/		"wood", "pinewood", "palmwood", "applewood"
+// );
+
+// /* isequipable is used for items with player graphics + animation */
+// export const isequipable = new Array (
+// 	/*items/     	"shovel",
+// 	/*weapons/		"sword", "axe", "bow",
+// 	/*transport/	"bike", "skiis", "canoe", "car", "rocket",
+// 	/*instrument/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
+// );
+
+// export const iscollectable = new Array (
+// 	/*forest map*/	"tree", "rock",
+// 	/*winter map*/  "pinetree", "icerock",
+// 	/*beach map*/  	"palmtree", "sandstone",
+// 	/*items*/     	"fire",
+// 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
+// 	/*technology*/	"telescope","computer","2dprinter",
+// 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
+// 	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
+// 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
+// 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
+// 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
+// 	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
+// );

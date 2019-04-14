@@ -2,38 +2,33 @@ import { Items } from './item/items';
 var blItems = new Items();
 
 export const blocktypes = blItems.getItemSlugs();
-export const isplaceable = blItems.getItemSlugsByProperty();
+export const isplaceable = blItems.getItemSlugsByProperty('is_placeable');
+export const isingredient = blItems.getItemSlugsByProperty('is_ingredient');
+export const isequipable = blItems.getItemSlugsByProperty('is_equipable');
+export const iscollectable = blItems.getItemSlugsByProperty('is_collectable');
+export const isground = blItems.getItemSlugsByProperty('is_ground');
 
-export const isingredient = new Array (
-	/*forest map*/	"tree", "rock",
-	/*winter map*/  "pinetree", "icerock",
-	/*beach map*/  	"palmtree",
-	/*items*/     	"fire",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*organic*/		"wood", "pinewood", "palmwood", "applewood"
+export const mobtypes = new Array (
+	"player",
+	"enemy",
+	"deer"
 );
 
-/* isequipable is used for items with player graphics + animation */
-export const isequipable = new Array (
-	/*items*/     	"shovel",
-	/*weapons*/		"sword", "axe", "bow",
-	/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
-	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
-);
-
-export const iscollectable = new Array (
-	/*forest map*/	"tree", "rock",
-	/*winter map*/  "pinetree", "icerock",
-	/*beach map*/  	"palmtree", "sandstone",
-	/*items*/     	"fire",
-	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-	/*technology*/	"telescope","computer","2dprinter",
-	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
-	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
-	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
+export const objecttypes = new Array (
+    "player-direction-up","player-direction-down","player-direction-left","player-direction-right",
+    "player-direction-up-sword","player-direction-down-sword","player-direction-left-sword ","player-direction-right-sword",
+    "player-direction-up-sword-swing","player-direction-down-sword-swing","player-direction-left-sword-swing","player-direction-right-sword-swing",
+    "player-direction-up-shovel","player-direction-down-shovel","player-direction-left-shovel","player-direction-right-shovel",
+    "player-direction-up-shovel-swing","player-direction-down-shovel-swing","player-direction-left-shovel-swing","player-direction-right-shovel-swing",
+    "player-direction-up-axe","player-direction-down-axe","player-direction-left-axe","player-direction-right-axe",
+    "player-direction-up-axe-swing","player-direction-down-axe-swing","player-direction-left-axe-swing","player-direction-right-axe-swing",
+    "player-direction-up-bike","player-direction-down-bike","player-direction-left-bike","player-direction-right-bike",
+    "player-direction-up-skiis","player-direction-down-skiis","player-direction-left-skiis","player-direction-right-skiis",
+    "player-direction-up-canoe","player-direction-down-canoe","player-direction-left-canoe","player-direction-right-canoe",
+    "player-direction-up-car","player-direction-down-car", "player-direction-left-car","player-direction-right-car",
+    "player-direction-up-rocket","player-direction-down-rocket","player-direction-left-rocket","player-direction-right-rocket",
+    "enemy-direction-up","enemy-direction-down","enemy-direction-left","enemy-direction-right",
+    "deer-direction-up","deer-direction-down","deer-direction-left","deer-direction-right"
 );
 
 export const buiColor = {
@@ -87,29 +82,6 @@ export const WEBDB_version = '0.1';
 export const WEBDB_displayName = 'beaudryland';
 export const WEBDB_maxSize = 65536;
 
-export const mobtypes = new Array (
-	/*players*/		"player",
-	/*enemies*/		"enemy",
-	/*animals*/		"deer"
-);
-
-export const objecttypes = new Array (
-    "player-direction-up","player-direction-down","player-direction-left","player-direction-right",
-    "player-direction-up-sword","player-direction-down-sword","player-direction-left-sword ","player-direction-right-sword",
-    "player-direction-up-sword-swing","player-direction-down-sword-swing","player-direction-left-sword-swing","player-direction-right-sword-swing",
-    "player-direction-up-shovel","player-direction-down-shovel","player-direction-left-shovel","player-direction-right-shovel",
-    "player-direction-up-shovel-swing","player-direction-down-shovel-swing","player-direction-left-shovel-swing","player-direction-right-shovel-swing",
-    "player-direction-up-axe","player-direction-down-axe","player-direction-left-axe","player-direction-right-axe",
-    "player-direction-up-axe-swing","player-direction-down-axe-swing","player-direction-left-axe-swing","player-direction-right-axe-swing",
-    "player-direction-up-bike","player-direction-down-bike","player-direction-left-bike","player-direction-right-bike",
-    "player-direction-up-skiis","player-direction-down-skiis","player-direction-left-skiis","player-direction-right-skiis",
-    "player-direction-up-canoe","player-direction-down-canoe","player-direction-left-canoe","player-direction-right-canoe",
-    "player-direction-up-car","player-direction-down-car", "player-direction-left-car","player-direction-right-car",
-    "player-direction-up-rocket","player-direction-down-rocket","player-direction-left-rocket","player-direction-right-rocket",
-    "enemy-direction-up","enemy-direction-down","enemy-direction-left","enemy-direction-right",
-    "deer-direction-up","deer-direction-down","deer-direction-left","deer-direction-right"
-);
-
 export const allblockclasses = function() {
 	var allblockclasses = ""; 
 	$.each(blocktypes, function(i, v) { 
@@ -130,7 +102,6 @@ export const objectsArray = [0,2,3];
 
 export const uniqueObjectID = function() {
 	var id = objectsArray.length + 1;
-	// console.log("uniqueID:"+id);
 	objectsArray.push(id);
 	return id;
 };

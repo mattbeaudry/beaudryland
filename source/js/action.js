@@ -115,6 +115,7 @@ export class Action {
 				//nightTime();
 				//lightUpBlock();
 				blInventory.removeFromInventory(selecteditem);
+			
 			//open/close doors
 			} else if (blocktype == "door") {
 				blMap.changeBlockType(block, "door-open", currentMap);
@@ -202,14 +203,13 @@ export class Action {
 				blUtil.log("reading sign");
 				blSigns.readSign(block);
 
-			//placing blocks
-			} else if ( (blocktype == "grass") || (blocktype == "dirt") || (blocktype == "hole") ||
-			     (blocktype == "snow") || (blocktype == "ice") ||
-			     (blocktype == "sand") || (blocktype == "water") ) {
+			// placing blocks
+			} else if ( $.inArray(blocktype, globals.isground) > -1 ) {
+
 				blUtil.log('selected item is '+selecteditem);
 				blUtil.log('blocktype is '+blocktype);
 
-				//only allow 1 portal of each type on map
+				// only allow 1 portal of each type on map
 				if (selecteditem == "portal-a") {
 					$('.maps-wrap .block-portal-a').each(function(index) {
 						var id = $(this).attr("data-blockid");
@@ -226,6 +226,8 @@ export class Action {
 					});
 					blInventory.removeFromInventory(selecteditem);
 					blMap.changeBlockType(block, selecteditem, currentMap);
+
+				// place the block
 				} else if ( $.inArray(selecteditem, globals.isplaceable) > -1 ) {
 					if (selecteditem == "sign") {
 						blSigns.placeSign(1, block);
@@ -235,7 +237,7 @@ export class Action {
 					blMap.changeBlockType(block, selecteditem, currentMap);
 				}
 
-				//achievements
+				// achievement?
 				if (selecteditem == "fire") { 
 					blAchievement.achievementCompleted("keepingwarm"); 
 				}
