@@ -23,6 +23,7 @@ import { Mobile } from './js/mobile';
 import { Sound } from './js/sound';
 import { Time } from './js/time';
 import { Character } from './js/character';
+import { Items } from './js/item/items';
 
 var blUtil = new Utility();
 var blInventory = new Inventory();
@@ -42,6 +43,7 @@ var blMobile = new Mobile();
 var blSound = new Sound();
 var blTime = new Time();
 var blCharacter = new Character();
+var blItems = new Items();
 
 
 ////////////////////////////
@@ -60,6 +62,10 @@ if ($('.bui-synth').length) {
 if ($('.bl-character-editor').length) {
 	blCharacter.setupCharacterBuilder();
 	blCharacter.drawCharacter();
+}
+
+if ($('.page-itemworkshop').length) {
+	blItems.initItemBuilder();
 }
 
 
