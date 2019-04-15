@@ -39,14 +39,20 @@ is_useable
 --------------
 NEW ITEM PROP IDEAS
 --------------
-has_map_mechanism
-is_throwable
-type * NEW
+is_projectile/is_throwable?
+- front, back, left, right svgs
+
+is_map_mechanism
+- if played presses actionm while facing this block this event occurs
+
+type
 [
-	lifeform: player, animal, enemy
-	item: tool, weapon, technology, transportation, map items, vs lifeform items
+	lifeform: player, animal, robot, girlfriend
+	  tool: weapon, tool, technology
+	  transport: bike, canoe, car, skiis
+	  mechanism: sign, door, portal, chest
 	ground: diff map blocks
-	object: rock, wood, bricks, 
+	object: rock, wood, bricks,
 	plant: trees, flowers, 
 	food: mushroom, vegetables, fruit, meat
 ]

@@ -49,13 +49,10 @@
             </div>
 
             <div class="panel-right">
-
                  <section>
                     <h2>Color</h2>
-
                     <?php include 'php/ui-colorpicker.php'; ?>
                 </section>
-
             </div>
 
             <div>
@@ -63,11 +60,9 @@
                     <h2>Sprite Gallery</h2>
 
                     <?php
-
                         $mysqli = new mysqli($host, $sqlusername, $sqlpassword, $db_name);
-                        if(mysqli_connect_errno()){ echo mysqli_connect_error(); }
-
-                        if ( $result = $mysqli->query("SELECT * FROM beaudryland_sprites ORDER BY spriteid DESC") ) {
+                        if (mysqli_connect_errno()) { echo mysqli_connect_error(); }
+                        if ($result = $mysqli->query("SELECT * FROM beaudryland_sprites ORDER BY spriteid DESC")) {
                             if($result->num_rows > 0) {
                                 while($row = $result->fetch_assoc()) {
                                     $name = $row['name'];
@@ -77,7 +72,7 @@
                                     $infohtml = '';
                                     //$infohtml += 'Slug: '.$slug.'<br>';
                                     //$infohtml += 'Recipe: '.$recipe.'<br>';
-                                    $infohtml .= '<div class="svg-wrap">';
+                                    $infohtml .= '<div class="svg-wrap" style="display: inline-block; margin: 0 16px 16px 0;">';
                                     $infohtml .= $svg;
                                     $infohtml .= '<br>'.$name;
                                     $infohtml .= '</div>';
@@ -87,19 +82,16 @@
                         } else {
                             mysql_error();
                         }
-
                     ?>
-                    
                 </section>
             </div>
-
 		</div>
         
-        <script src="js/vendor/jquery-2.1.1.js"></script>
-        <script src="js/vendor/raphael-min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/app-bundle.js"></script>
-    
+<script src="js/vendor/jquery-2.1.1.js"></script>
+<script src="js/vendor/raphael-min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/app-bundle.js"></script>
+
 <script>
 
 $('.canvas-pixel').on("click", function() { 
@@ -169,7 +161,6 @@ var createSVG = function() {
 };
 
 </script>
-
 
 
     </body>

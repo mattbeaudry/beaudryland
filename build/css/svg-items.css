@@ -124,3 +124,8 @@
 .the-fucking-inventory .block-talltree:after { display:none; }
 
 /* NEW */
+.block-player { background-image:url(../items/player.svg); }
+.block-player_lifeform_front { background-image:url(../items/player_lifeform_front.svg); }
+.block-player_lifeform_back { background-image:url(../items/player_lifeform_back.svg); }
+.block-player_lifeform_left { background-image:url(../items/player_lifeform_left.svg); }
+.block-player_lifeform_right { background-image:url(../items/player_lifeform_right.svg); }

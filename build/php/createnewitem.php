@@ -76,28 +76,28 @@ $image_filename = saveSVG($slug, $image);
 
 if ($has_animation) {
 	echo 'save animated';
-	$image_animated_filename = saveSVG($slug.'_animated', $image_animated);
+	$image_animated_filename = saveSVG($slug.'-animated', $image_animated);
 }
 if ($is_lifeform) {
 	echo 'save lifeform';
-	$image_lifeform_front_filename = saveSVG($slug.'_lifeform_front', $image_lifeform_front);
-	$image_lifeform_back_filename = saveSVG($slug.'_lifeform_back', $image_lifeform_back);
-	$image_lifeform_left_filename = saveSVG($slug.'_lifeform_left', $image_lifeform_left);
-	$image_lifeform_right_filename = saveSVG($slug.'_lifeform_right', $image_lifeform_right);
+	$image_lifeform_front_filename = saveSVG($slug.'-lifeform-front', $image_lifeform_front);
+	$image_lifeform_back_filename = saveSVG($slug.'-lifeform-back', $image_lifeform_back);
+	$image_lifeform_left_filename = saveSVG($slug.'-lifeform-left', $image_lifeform_left);
+	$image_lifeform_right_filename = saveSVG($slug.'-lifeform-right', $image_lifeform_right);
 }
 if ($is_equipable) {
 	echo 'save item';
-	$image_item_front_filename = saveSVG($slug.'_item_front', $image_item_front);
-	$image_item_back_filename = saveSVG($slug.'_item_back', $image_item_back);
-	$image_item_left_filename = saveSVG($slug.'_item_left', $image_item_left);
-	$image_item_right_filename = saveSVG($slug.'_item_right', $image_item_right);
+	$image_item_front_filename = saveSVG($slug.'-equipable-front', $image_item_front);
+	$image_item_back_filename = saveSVG($slug.'-equipable-back', $image_item_back);
+	$image_item_left_filename = saveSVG($slug.'-equipable-left', $image_item_left);
+	$image_item_right_filename = saveSVG($slug.'-equipable-right', $image_item_right);
 }
 if ($is_useable) {
 	echo 'save swing';
-	$image_item_swing_front_filename = saveSVG($slug.'_item_swing_front', $image_item_swing_front);
-	$image_item_swing_back_filename = saveSVG($slug.'_item_swing_back', $image_item_swing_back);
-	$image_item_swing_left_filename = saveSVG($slug.'_item_swing_left', $image_item_swing_left);
-	$image_item_swing_right_filename = saveSVG($slug.'_item_swing_right', $image_item_swing_right);
+	$image_item_swing_front_filename = saveSVG($slug.'-useable-front', $image_item_swing_front);
+	$image_item_swing_back_filename = saveSVG($slug.'-useable-back', $image_item_swing_back);
+	$image_item_swing_left_filename = saveSVG($slug.'-useable-left', $image_item_swing_left);
+	$image_item_swing_right_filename = saveSVG($slug.'-useable-right', $image_item_swing_right);
 }
 
 // send data to db
