@@ -17,7 +17,6 @@
 .block-fire_animated { background-image:url(../items/fire_animated.svg); }
 .block-diamond { background-image:url(../items/diamond.svg); }
 .block-hole { background-image:url(../items/hole.svg); }
-.block-hole { background-image:url(../items/hole.svg); }
 .block-wave { background-image:url(../items/wave.svg); }
 .block-space { background-image:url(../items/space.svg); }
 .block-star { background-image:url(../items/star.svg); }
@@ -52,7 +51,6 @@
 .block-2dprinter { background-image:url(../items/2dprinter.svg); }
 .block-bike { background-image:url(../items/bike.svg); }
 .block-bike { background-image:url(../items/bike.svg); }
-.block-skiis { background-image:url(../items/skiis.svg); }
 .block-skiis { background-image:url(../items/skiis.svg); }
 .block-canoe { background-image:url(../items/canoe.svg); }
 .block-car { background-image:url(../items/car.svg); }
@@ -89,21 +87,6 @@
 .block-claybrick { background-image:url(../items/claybrick.svg); }
 .block-road { background-image:url(../items/road.svg); }
 
-/* tall blocks */
-.block-talltree { 
-	position:relative;opacity: 0.8;
-	background-image:url(../svg/item-talltree.svg); 
-}
-
-/*.block-talltree-top { background-image:url(../svg/item-talltree-top.svg); }*/
-.block-talltree:after {
-	content:"";display:block;position:absolute;
-	width:20px;height:20px;top:-19px;left:0;
-	background-image:url(../svg/item-talltree-top.svg);background-size: cover;
-}
-.the-fucking-inventory .block-talltree { opacity: 1; }
-.the-fucking-inventory .block-talltree:after { display:none; }
-
 /* svg graphics */
 .block-heart { background-image:url(../svg/item-heart.svg); }
 .block-heartgrey { background-image:url(../svg/item-heartgrey.svg); }
@@ -118,3 +101,26 @@
 .block-close { background-image:url(../svg/item-close.svg); }
 .block-check-white { background-image:url(../svg/item-check-white.svg); }
 .block-close-white { background-image:url(../svg/item-close-white.svg); }
+
+/* tall blocks */
+.block-talltree { 
+	position:relative;opacity: 0.8;
+	background-image:url(../svg/item-talltree.svg); 
+}
+
+/*.block-talltree-top { background-image:url(../svg/item-talltree-top.svg); }*/
+.block-talltree:after {
+	content:"";
+	display:block;
+	position:absolute;
+	width:20px;
+	height:20px;
+	top:-19px;
+	left:0;
+	background-image: url(../svg/item-talltree-top.svg);
+	background-size: cover;
+}
+.the-fucking-inventory .block-talltree { opacity: 1; }
+.the-fucking-inventory .block-talltree:after { display:none; }
+
+/* NEW */

@@ -18,7 +18,7 @@ is_edible
 is_placeable
 is_blocking
 is_ingredient
-is_ground *NEW
+is_ground *NEW                                                                                                                                                            
 is_diggable *NEW
 is_lifeform
  image_lifeform_front
@@ -300,6 +300,7 @@ export class Items {
 	}
 
 	itemSubmitForm() {
+		var _self = this;
 		$('.item-builder').submit(function(e) {
 			//itemPreview();
 			var image = $('#image').html();
@@ -307,7 +308,7 @@ export class Items {
 			var slug = $('.item-builder .form-slug').val();
 			var description = $('.item-builder .form-description').val();
 			var user = $('.item-builder .form-user').val();
-			var has_animation = Number($('.item-builder .form-has_animation').is(":checked"));
+			var has_animation = Number($('.form-has_animation').is(":checked"));
 			var image_animated = $('#image_animated').html();
 			var is_craftable = Number($('.item-builder .form-is_craftable').is(":checked"));
 			var recipe1a = $('.item-builder .form-recipe-1a').val();
@@ -322,9 +323,10 @@ export class Items {
 			var is_ingredient = Number($('.item-builder .form-is_ingredient').is(":checked"));
 			var is_ground = Number($('.item-builder .form-is_ground').is(":checked"));
 			var is_diggable = Number($('.item-builder .form-is_diggable').is(":checked"));
-			var is_lifeform = Number($('.item-builder .form-is_lifeform').is(":checked"));
-			var is_equipable = Number($('.item-builder .form-is_equipable').is(":checked"));
-			var is_useable = Number($('.item-builder .form-is_useable').is(":checked"));
+
+			var is_lifeform = Number($('.form-is_lifeform').is(":checked"));
+			var is_equipable = Number($('.form-is_equipable').is(":checked"));
+			var is_useable = Number($(' .form-is_useable').is(":checked"));
 			var image_lifeform_front = $('#image_lifeform_front').html();
 			var image_lifeform_back = $('#image_lifeform_back').html();
 			var image_lifeform_left = $('#image_lifeform_left').html();
@@ -371,8 +373,8 @@ export class Items {
 				image_item_swing_back: image_item_swing_back,
 				image_item_swing_left: image_item_swing_left,
 				image_item_swing_right: image_item_swing_right
-			}, function(data) {
-			// console.log(data);
+			}, function() {
+				_self.updateItemsJSONFile();
 			});
 			// location.reload();
 			// header("location:itemcreator.php");
