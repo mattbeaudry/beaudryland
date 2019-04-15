@@ -109,14 +109,15 @@
 					<table class="bl-table items-table">
 						<thead>
 							<tr>
+								<td>ID</td>
                                 <td>Image</td>
                                 <td>Name</td>
                                 <td>Description</td>
                                 <td>Recipe</td>
-                                <td>Animated</td>
                                 <td>Lifeform</td>
                                 <td>Equipable</td>
-                                <td>Useable</td>
+								<td>Useable</td>
+								<td>Properties</td>
                             </tr>
 						</thead>
 						<tbody>

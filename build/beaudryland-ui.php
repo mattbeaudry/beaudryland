@@ -33,6 +33,8 @@
                 <li>Validation</li>
                 <li>Motion</li>
                 <li>Themes</li>
+                <li>Checkbox</li>
+                <li>Radio</li>
             </ul>
         </section>
 

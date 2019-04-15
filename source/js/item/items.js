@@ -1,13 +1,69 @@
-// load items from db
-// create global items json
+/*
+--------------
+ITEM PROPERTIES
+--------------
+image
+background
+name
+slug
+description
+user
+has_animation
+ image_animated
+is_craftable
+ recipes
+is_collectable
+is_cutable
+is_edible
+is_placeable
+is_blocking
+is_ingredient
+is_ground *NEW
+is_diggable *NEW
+is_lifeform
+ image_lifeform_front
+ image_lifeform_back
+ image_lifeform_left
+ image_lifeform_right
+is_equipeable
+ image_item_front
+ image_item_back
+ image_item_left
+ image_item_right
+is_useable
+ image_item_swing_front
+ image_item_swing_back
+ image_item_swing_left
+ image_item_swing_right
 
-// move item builder code to here
-// populate select menus for choose crafting recipes
-// create item list under inventory (incl. recipies)
+--------------
+NEW ITEM PROP IDEAS
+--------------
+has_map_mechanism
+is_throwable
+type * NEW
+[
+	lifeform: player, animal, enemy
+	item: tool, weapon, technology, transportation, map items, vs lifeform items
+	ground: diff map blocks
+	object: rock, wood, bricks, 
+	plant: trees, flowers, 
+	food: mushroom, vegetables, fruit, meat
+]
+is_item - instead of is_equipable
+has_swing_animation - instead of is useable
+is_transport
+bgcolor - for ground blocks on diff maps
+*/
 
 export class Items {
 	constructor() {
 		this.itemData;
+		this.has_animation = false;
+		this.is_craftable = false;
+		this.is_lifeform = false;
+		this.is_equipable = false;
+		this.is_useable = false;
 	}
 
 	updateItemsJSONFile() {
@@ -57,26 +113,193 @@ export class Items {
 	initItemBuilder() {
 		console.log('initItemBuilder');
 
-		// COLOR PALETTE
-		$('.canvas-pixel').on("click", function() { 
-			console.log('canvas-pixelclick');
-			//var pixelID = $(this).attr("data-pixel");
-			var colorCode = $('.bui-colorpicker .bui-colorpicker-input').val();
-			console.log(colorCode);
-			// validate hex code
-			$(this).css("background-color", colorCode);
-			$(this).attr("data-color", colorCode);
-			itemPreview();
+		this.itemSubmitForm();
+		this.loadItemSelects();
+		this.initItemBuilderForm();
+		this.getAllItemImages();
+
+		this.setupCanvas();
+
+	}
+
+	loadItemSelects() {
+		$.post('php/loaditemsJSON.php', {}, function(data) {
+			if (data == false) {
+			} else {
+				for (var i=0; i < data.length; i++) {
+					$('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c').append('<option value="'+data[i].slug+'">'+data[i].name+'</option>');
+				}
+			}   
+		}, "json");
+	}
+
+	itemPreview() {
+		console.log('itemPreview');
+		this.createSVG();
+	}
+
+	createSVG() {
+		console.log('createSVG');
+
+		this.renderPreviewSVG("image", false);
+
+		if (this.has_animation == true) { 
+			this.renderPreviewSVG("image_animated", true);
+		}
+		if (this.is_lifeform == true) {
+			this.renderPreviewSVG("image_lifeform_front", false);
+			this.renderPreviewSVG("image_lifeform_back", false);
+			this.renderPreviewSVG("image_lifeform_left", false);
+			this.renderPreviewSVG("image_lifeform_right", false);
+		}
+		if (this.is_equipable == true) {
+			this.renderPreviewSVG("image_item_front", false);
+			this.renderPreviewSVG("image_item_back", false);
+			this.renderPreviewSVG("image_item_left", false);
+			this.renderPreviewSVG("image_item_right", false);
+		}
+		if (this.is_useable == true) {
+			this.renderPreviewSVG("image_item_swing_front", false);
+			this.renderPreviewSVG("image_item_swing_back", false);
+			this.renderPreviewSVG("image_item_swing_left", false);
+			this.renderPreviewSVG("image_item_swing_right", false);
+		}
+	};
+
+	renderPreviewSVG(name, is_animated) {
+		var w = 30;
+		var h = 30;
+		var pixelwidth = w / 5;
+
+		console.log('renderPreviewSVG');
+		$('#'+name+' svg').remove();
+		
+		var previewSVG;
+		var pixels = [];
+		var x = 0;
+		var y = 0;
+		previewSVG = Raphael(document.getElementById(name));
+		previewSVG.setViewBox(0, 0, w, h, true);
+		previewSVG.canvas.setAttribute('preserveAspectRatio', 'none');
+
+		$('.canvas-'+name+' .canvas-pixel').each(function(i) {
+			var color = $(this).attr("data-color");
+			if (i == 0) {
+				x = 0;
+				y = 0;
+			} else {
+				if (i%5 == 0){
+					y = y + pixelwidth;
+					x = 0;
+				} else {
+					x = (i%5) * pixelwidth;
+				}
+			}
+			pixels[i] = previewSVG.rect(x, y, pixelwidth, pixelwidth);
+			pixels[i].attr("fill", color);
+			pixels[i].attr("stroke", color);
 		});
 
-		// RESET BUTTON
-		$('.button-reset').on("click", function(){
-			$('.canvas-pixel').css("background-color","transparent");
-			$('.canvas-pixel').attr("data-color","transparent");
-			itemPreview();
+		if (is_animated) {
+			previewSVG.canvas.setAttribute("class","svg_animated");
+
+			$('.canvas-image .canvas-pixel').each(function(i) {
+				var color = $(this).attr("data-color");
+				var offset = w;
+				if (i == 0) {
+					x = 0;
+					y = 0;
+				} else {
+					if (i%5 == 0) {
+						y = y + pixelwidth;
+						x = 0;
+					} else {
+						x = (i%5) * pixelwidth;
+					}
+				}
+				pixels[i] = previewSVG.rect(x + 30, y, pixelwidth, pixelwidth);
+				pixels[i].attr("fill", color);
+				pixels[i].attr("stroke", color);
+			});
+
+			var style = '<style>';
+			style += '@keyframes svgAnimate {';
+			style += '0% { transform: translateX(0px); }';
+			style += '50% { transform: translateX(-30px); }';
+			style += '100% { transform: translateX(0px); }';
+			style += '}';
+			style += '.svg_animated rect {';
+			style += 'animation: svgAnimate 2s steps(1) infinite;';
+			style += '}';
+			style += '</style>';
+			$('#image_animated svg').append(style);
+		}
+	}
+
+	initItemBuilderForm() {
+		var _self = this;
+
+		$('.form-has_animation').change(function() {
+			if(this.checked) {
+				_self.has_animation = true;
+				$('.canvas-image_animated').show();
+			} else {
+				_self.has_animation = false;
+				$('.canvas-image_animated').hide();
+				$('.canvas-image_animated .svg-preview svg').remove();
+			}
+			_self.itemPreview();
 		});
 
-		// SUBMIT ITEM
+		$('.form-is_craftable').change(function() {
+			if(this.checked) {
+				_self.is_craftable = true;
+				$('.is_craftable-recipe').show();
+			} else {
+				_self.is_craftable = false;
+				$('.is_craftable-recipe').hide();
+			}
+			_self.itemPreview();
+		});
+
+		$('.form-is_lifeform').change(function() {
+			if(this.checked) {
+				_self.is_lifeform = true;
+				$('.is_lifeform-images').show();
+			} else {
+				_self.is_lifeform = false;
+				$('.is_lifeform-images').hide();
+				$('.is_lifeform-images .svg-preview svg').remove();
+			}
+			_self.itemPreview();
+		});
+
+		$('.form-is_equipable').change(function() {
+			if(this.checked) {
+				_self.is_equipable = true;
+				$('.is_equipable-images').show();
+			} else {
+				_self.is_equipable = false;
+				$('.is_equipable-images').hide();
+				$('.is_equipable-images .svg-preview svg').remove();
+			}
+			_self.itemPreview();
+		});
+
+		$('.form-is_useable').change(function() {
+			if(this.checked) {
+				_self.is_useable = true;
+				$('.is_useable-images').show();
+			} else {
+				_self.is_craftable = false;
+				$('.is_useable-images').hide();
+				$('.is_useable-images .svg-preview svg').remove();
+			}
+			_self.itemPreview();
+		});
+	}
+
+	itemSubmitForm() {
 		$('.item-builder').submit(function(e) {
 			//itemPreview();
 			var image = $('#image').html();
@@ -155,207 +378,11 @@ export class Items {
 			// header("location:itemcreator.php");
 			event.preventDefault();
 		});
+	}
 
-		var itemPreview = function() {
-			console.log('itemPreview');
-			createSVG();
-		};
-
-		var w = 30;
-		var h = 30;
-		var pixelwidth = w / 5;
-
-		var renderPreviewSVG = function(name, is_animated) {
-			console.log('renderPreviewSVG');
-			$('#'+name+' svg').remove();
-			
-			var previewSVG;
-			var pixels = [];
-			var x = 0;
-			var y = 0;
-			previewSVG = Raphael(document.getElementById(name));
-			previewSVG.setViewBox(0, 0, w, h, true);
-			previewSVG.canvas.setAttribute('preserveAspectRatio', 'none');
-
-			$('.canvas-'+name+' .canvas-pixel').each(function(i) {
-				var color = $(this).attr("data-color");
-				if (i == 0) {
-					x = 0;
-					y = 0;
-				} else {
-					if (i%5 == 0){
-						y = y + pixelwidth;
-						x = 0;
-					} else {
-						x = (i%5) * pixelwidth;
-					}
-				}
-				pixels[i] = previewSVG.rect(x, y, pixelwidth, pixelwidth);
-				pixels[i].attr("fill", color);
-				pixels[i].attr("stroke", color);
-			});
-
-			if (is_animated) {
-				previewSVG.canvas.setAttribute("class","svg_animated");
-
-				$('.canvas-image .canvas-pixel').each(function(i) {
-					var color = $(this).attr("data-color");
-					var offset = w;
-					if (i == 0) {
-						x = 0;
-						y = 0;
-					} else {
-						if (i%5 == 0) {
-							y = y + pixelwidth;
-							x = 0;
-						} else {
-							x = (i%5) * pixelwidth;
-						}
-					}
-					pixels[i] = previewSVG.rect(x + 30, y, pixelwidth, pixelwidth);
-					pixels[i].attr("fill", color);
-					pixels[i].attr("stroke", color);
-				});
-
-				var style = '<style>';
-				style += '@keyframes svgAnimate {';
-				style += '0% { transform: translateX(0px); }';
-				style += '50% { transform: translateX(-30px); }';
-				style += '100% { transform: translateX(0px); }';
-				style += '}';
-				style += '.svg_animated rect {';
-				style += 'animation: svgAnimate 2s steps(1) infinite;';
-				style += '}';
-				style += '</style>';
-				$('#image_animated svg').append(style);
-			}
-		}
-
-		var itemSVG;
-		var createSVG = function() {
-			console.log('createSVG');
-
-			renderPreviewSVG("image", false);
-			if (has_animation == true) { 
-				renderPreviewSVG("image_animated", true); 
-			}
-			if (is_lifeform == true) {
-				renderPreviewSVG("image_lifeform_front", false);
-				renderPreviewSVG("image_lifeform_back", false);
-				renderPreviewSVG("image_lifeform_left", false);
-				renderPreviewSVG("image_lifeform_right", false);
-			}
-			if (is_equipable == true) {
-				renderPreviewSVG("image_item_front", false);
-				renderPreviewSVG("image_item_back", false);
-				renderPreviewSVG("image_item_left", false);
-				renderPreviewSVG("image_item_right", false);
-			}
-			if (is_useable == true) {
-				renderPreviewSVG("image_item_swing_front", false);
-				renderPreviewSVG("image_item_swing_back", false);
-				renderPreviewSVG("image_item_swing_left", false);
-				renderPreviewSVG("image_item_swing_right", false);
-			}
-		};
-
-		var loadItemSelects = function() {
-			$.post('php/loaditemsJSON.php', {}, function(data) {
-				if (data == false) {
-				// console.log("failed gettins items json");
-				} else {
-					for (var i=0; i < data.length; i++) {
-						$('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c').append('<option value="'+data[i].slug+'">'+data[i].name+'</option>');
-					}
-				}   
-			}, "json");
-		};
-
-		loadItemSelects();
-
-		var has_animation = '';
-		var is_craftable = '';
-		var is_lifeform = '';
-		var is_equipable = '';
-		var is_useable = '';
-
-		$('.form-has_animation').change(function() {
-			if(this.checked) {
-				has_animation = true;
-				$('.canvas-image_animated').show();
-			} else {
-				has_animation = false;
-				$('.canvas-image_animated').hide();
-				$('.canvas-image_animated .svg-preview svg').remove();
-			}
-			itemPreview();
-		});
-
-		$('.form-is_craftable').change(function() {
-			if(this.checked) {
-				is_craftable = true;
-				$('.is_craftable-recipe').show();
-			} else {
-				is_craftable = false;
-				$('.is_craftable-recipe').hide();
-			}
-			itemPreview();
-		});
-
-		$('.form-is_lifeform').change(function() {
-			if(this.checked) {
-				is_lifeform = true;
-				$('.is_lifeform-images').show();
-			} else {
-				is_lifeform = false;
-				$('.is_lifeform-images').hide();
-				$('.is_lifeform-images .svg-preview svg').remove();
-			}
-			itemPreview();
-		});
-
-		$('.form-is_equipable').change(function() {
-			if(this.checked) {
-				is_equipable = true;
-				$('.is_equipable-images').show();
-			} else {
-				is_equipable = false;
-				$('.is_equipable-images').hide();
-				$('.is_equipable-images .svg-preview svg').remove();
-			}
-			itemPreview();
-		});
-
-		$('.form-is_useable').change(function() {
-			if(this.checked) {
-				is_useable = true;
-				$('.is_useable-images').show();
-			} else {
-				is_craftable = false;
-				$('.is_useable-images').hide();
-				$('.is_useable-images .svg-preview svg').remove();
-			}
-			itemPreview();
-		});
-
-		var blocktypes = new Array (
-			/*forest map*/	"grass", "dirt", "water", "rock", "hole",
-			/*winter map*/  "snow", "ice",  "icerock", // "frozendirt", "snowhole",
-			/*beach map*/  	"sand", "wave", "sandstone", // "wetsand", "sandhole",
-			/*space map*/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
-			/*items*/     	"shovel", "fire", "door", "door-open", "frisbee", "sign",
-			/*weapons*/		"sword", "spear", "axe", "bow", "arrow",
-			/*instruments*/ "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
-			/*technology*/	"telescope","computer","2dprinter","portal-a","portal-b",
-			/*transport*/	"bike", "skiis", "canoe", "car", "rocket",
-			/*furniture*/	"table", "chair", "chest", "bed", "toilet", "sink", "bathtub",
-			/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-			/*holes*/		// "diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-			/*organic*/		"tree", "pinetree", "appletree", "palmtree", "flowers", "heart", //"talltree",
-			/*food*/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground",
-			/*new*/			"fence-metal",
-			/*blocks*/     	"wood", "pinewood", "palmwood", "applewood", "rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-		);
+	getAllItemImages() {
+		// draw small preview ofall items above items tables
+		const blocktypes = this.getItemSlugs();
 		var blockhtml = ""; 
 		$.each(blocktypes, function(i, v) { 
 			blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'; 
@@ -382,115 +409,26 @@ export class Items {
 		$('.block-palette').append(blockhtml);
 	}
 
+	// might need to move to paint.js
+	setupCanvas() {
+		var _self = this;
+		// COLOR PALETTE
+		$('.canvas-pixel').on("click", function() { 
+			console.log('canvas-pixelclick');
+			//var pixelID = $(this).attr("data-pixel");
+			var colorCode = $('.bui-colorpicker .bui-colorpicker-input').val();
+			console.log(colorCode);
+			// validate hex code
+			$(this).css("background-color", colorCode);
+			$(this).attr("data-color", colorCode);
+			_self.itemPreview();
+		});
+
+		// RESET BUTTON
+		$('.button-reset').on("click", function(){
+			$('.canvas-pixel').css("background-color","transparent");
+			$('.canvas-pixel').attr("data-color","transparent");
+			_self.itemPreview();
+		});
+	}
 }
-
-/*
---------------
-ITEM PROPERTIES
---------------
-image
-background
-name
-slug
-description
-user
-has_animation
- image_animated
-is_craftable
- recipes
-is_collectable
-is_cutable
-is_edible
-is_placeable
-is_blocking
-is_ingredient
-is_ground *NEW
-is_diggable *NEW
-is_lifeform
- image_lifeform_front
- image_lifeform_back
- image_lifeform_left
- image_lifeform_right
-is_equipeable
- image_item_front
- image_item_back
- image_item_left
- image_item_right
-is_useable
- image_item_swing_front
- image_item_swing_back
- image_item_swing_left
- image_item_swing_right
-
---------------
-NEW PROP IDEAS
---------------
-has_map_mechanism
-is_throwable
-type * NEW
-[
-	lifeform: player, animal, enemy
-	item: tool, weapon, technology, transportation
-		map items, vs lifeform items
-	ground:
-	object: rock, wood, bricks, 
-	plant: trees, flowers, 
-	food: mushroom, vegetables, fruit, meat
-]
-is_item - instead of is_equipable
-has_swing_animation - instead of is useable
-is_transport
-bgcolor - for ground blocks on diff maps
-
-
-export const blocktypes = new Array (
-/*forest map*	"grass", "dirt", "water", "rock", "hole",
-/*winter map/  "snow", "ice",  "icerock", // "frozendirt", "snowhole",
-/*beach map/  	"sand", "wave", "sandstone", // "wetsand", "sandhole",
-/*space map/   "space", "star", "earth", "redgalaxy", "bluegalaxy", "sun",
-/*items/     	"shovel", "fire", "door", "door-open", "frisbee", "sign",
-/*weapons/		"sword", "spear", "axe", "bow", "arrow",
-/*instruments/ "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
-/*technology/	"telescope","computer","2dprinter","portal-a","portal-b",
-/*transport/	"bike", "skiis", "canoe", "car", "rocket",
-/*furniture/	"table", "chair", "chest", "bed", "toilet", "sink", "bathtub",
-/*treasure/  	"diamond", "gold", "silver", "oil", "clay",
-/*holes/		// "diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-/*organic/		"tree", "pinetree", "appletree", "palmtree", "flowers", "heart", //"talltree",
-/*food/		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot","carrot-inground",
-/*new/			"fence-metal",
-/*blocks/     	"wood", "pinewood", "palmwood", "applewood", "rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-);
-*/
-
-// export const isingredient = new Array (
-// 	/*forest map/	"tree", "rock",
-// 	/*winter map/  "pinetree", "icerock",
-// 	/*beach map/  	"palmtree",
-// 	/*items/     	"fire",
-// 	/*treasure/  	"diamond", "gold", "silver", "oil", "clay",
-// 	/*organic/		"wood", "pinewood", "palmwood", "applewood"
-// );
-
-// /* isequipable is used for items with player graphics + animation */
-// export const isequipable = new Array (
-// 	/*items/     	"shovel",
-// 	/*weapons/		"sword", "axe", "bow",
-// 	/*transport/	"bike", "skiis", "canoe", "car", "rocket",
-// 	/*instrument/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
-// );
-
-// export const iscollectable = new Array (
-// 	/*forest map*/	"tree", "rock",
-// 	/*winter map*/  "pinetree", "icerock",
-// 	/*beach map*/  	"palmtree", "sandstone",
-// 	/*items*/     	"fire",
-// 	/*furniture*/	"table","chair","chest","bed","toilet","sink","bathtub",
-// 	/*technology*/	"telescope","computer","2dprinter",
-// 	/*treasure*/  	"diamond", "gold", "silver", "oil", "clay",
-// 	/*instrument*/  "guitar", "piano", "trumpet", "bass", "microphone", "drumsticks", "bassdrum", "snare", "hihat", "cymbal", "tom",
-// 	/*holes*/		"diamond-hole", "gold-hole", "silver-hole", "oil-hole", "clay-hole",
-// 	/*blocks*/     	"rockbrick", "icerockbrick", "sandstonebrick", "claybrick", "road",
-// 	/* organic */	"wood","pinewood","palmwood","applewood","appletree","heart","flowers","talltree",
-// 	/* food */		"apple","mushroom","bluemushroom","blackmushroom","yellowmushroom","greenmushroom","carrot-inground"
-// );
