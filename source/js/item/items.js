@@ -1,6 +1,6 @@
 /*
 --------------
-ITEM PROPERTIES
+ITEM PROPS
 --------------
 image
 background
@@ -39,28 +39,26 @@ is_useable
 --------------
 NEW ITEM PROP IDEAS
 --------------
-is_projectile/is_throwable?
-- front, back, left, right svgs
-
-is_map_mechanism
-- if played presses actionm while facing this block this event occurs
-
-type
-[
+is_projectile/is_throwable? - front, back, left, right svgs
+is_map_mechanism - if played presses actionm while facing this block this event occurs
+soaks_water - if can be placed on water to form a bridge
+is_item - instead of is_equipable
+has_swing_animation - instead of is useable
+is_transport
+bgcolor - for ground blocks on diff maps
+type [
 	lifeform: player, animal, robot, girlfriend
-	  tool: weapon, tool, technology
-	  transport: bike, canoe, car, skiis
-	  mechanism: sign, door, portal, chest
+	  	tool: weapon, tool, technology
+	  	transport: bike, canoe, car, skiis
+	  	mechanism: sign, door, portal, chest
 	ground: diff map blocks
 	object: rock, wood, bricks,
 	plant: trees, flowers, 
 	food: mushroom, vegetables, fruit, meat
 ]
-is_item - instead of is_equipable
-has_swing_animation - instead of is useable
-is_transport
-bgcolor - for ground blocks on diff maps
 */
+
+import * as globals from '../globals';
 
 export class Items {
 	constructor() {
@@ -80,6 +78,20 @@ export class Items {
 		this.getAllItemImages();
 		this.setupCanvas();
 	}
+
+	itemHasAnimation(item) { return $.inArray(item, globals.hasanimation) > -1; }
+	itemIsCraftable(item) { return $.inArray(item, globals.iscraftable) > -1; }
+	itemIsCollectable(item) { return $.inArray(item, globals.iscollectable) > -1; }
+	itemIsCutable(item) { return $.inArray(item, globals.iscutable) > -1; }
+	itemIsEdible(item) { return $.inArray(item, globals.isedible) > -1; }
+	itemIsPlaceable(item) { return $.inArray(item, globals.isplaceable) > -1; }
+	itemIsBlocking(item) { return $.inArray(item, globals.isblocking) > -1; }
+	itemIsIngredient(item) { return $.inArray(item, globals.isingredient) > -1; }
+	itemIsGround(item) { return $.inArray(item, globals.isground) > -1; }
+	itemIsDiggable(item) { return $.inArray(item, globals.isdiggable) > -1; }
+	itemIsLifeform(item) { return $.inArray(item, globals.islifeform) > -1; }
+	itemIsEquipable(item) { return $.inArray(item, globals.isequipable) > -1; }
+	itemIsUseable(item) { return $.inArray(item, globals.isuseable) > -1; }
 
 	updateItemsJSONFile() {
 		$.ajax({

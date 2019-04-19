@@ -7,6 +7,7 @@ import { Inventory } from './inventory';
 import { Signs } from './signs';
 import { Achievement } from './achievement';
 import { Enemy } from './enemy';
+import { Items } from './item/items';
 import { Spear } from './item/spear';
 
 var blUtil = new Utility();
@@ -16,6 +17,7 @@ var blInventory = new Inventory();
 var blSigns = new Signs();
 var blAchievement = new Achievement();
 var blEnemy = new Enemy();
+var blItems = new Items();
 var blSpear = new Spear();
 
 export class Action {
@@ -25,7 +27,6 @@ export class Action {
 	}
 
 	playerPrimaryAction(blockid) {
-		//find block that the player is facing
 		var direction = blUtil.getObjectDirection(this.id, "player");
 		var playerblock = blUtil.getObjectCurrentBlock(this.id);
 		var block = blUtil.getObjectCurrentBlock(this.id);
@@ -49,16 +50,13 @@ export class Action {
 		var blocktype = blUtil.getBlockType(block, currentMap);
 		//blUtil.log("5-blocktype "+blocktype);
 
-		//item swing animations
-		if (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe") {
-			var swingclass = "player-direction-"+direction+"-"+selecteditem+"-swing";
+		if (blItems.itemIsUseable(selecteditem)) {
 			$(".the-fucking-player").addClass("player-direction-"+direction+"-"+selecteditem+"-swing");
-			var swinganimation = setTimeout(removeSwingClass, 100);
-			function removeSwingClass(swingclass) {
+			setTimeout(removeSwingClass, 100);
+			function removeSwingClass() {
 				$(".the-fucking-player").removeClass("player-direction-"+direction+"-"+selecteditem+"-swing");
 			}	
-			var playerblock = blUtil.getObjectCurrentBlock(this.id);	
-			//blUtil.log("5-playerblock "+playerblock);
+			var playerblock = blUtil.getObjectCurrentBlock(this.id);
 
 			//killing the enemy
 			if ($('.the-fucking-enemy').length != 0) {
@@ -71,8 +69,6 @@ export class Action {
 					}
 				});
 			}
-
-			// console.log("TEST DAMAGE INDICATOR");
 		}
 		
 		$(blockClass).animate({ opacity: 0.9 }, 50, function() {
@@ -80,106 +76,84 @@ export class Action {
 			$(blockClass).css("opacity","1");
 			var selecteditem = blUtil.getSelectedItem();
 
-			//use axe to collect doors, signs and other mechnism objects
-			if ( (selecteditem == "axe") &&  ((blocktype == "door") || (blocktype == "door-open") ) ) {
-				blInventory.addToInventory("door", 1);
-				blMap.changeBlockType(block, "grass", currentMap);
-			} else if ( (selecteditem == "axe") && (blocktype == "sign") ) {
-				blInventory.addToInventory("sign", 1);
-				blMap.changeBlockType(block, "grass", currentMap);
-			} else if ( (selecteditem == "axe") && (blocktype == "fire") ) {
-				blInventory.addToInventory("fire", 1);
-				blMap.changeBlockType(block, "grass", currentMap);
-				//growGrass(block);
+			// using axe to collect doors, signs and other mechnism objects 
+			// that have a function instead of being collecable
+			if (selecteditem == "axe" && ( blItems.itemIsCollectable(blocktype) || blItems.itemIsCutable(blocktype) ) ) {
+				blInventory.addToInventory(blocktype, 1);
+				blMap.changeBlockType(block, "dirt", currentMap);
 
-			//EATING
-			} else if (selecteditem == "heart") {
+			// EATING
+			} else if (blItems.itemIsEdible(selecteditem)) {
 				blHealth.addHeart();
-				blInventory.removeFromInventory(selecteditem);
-			} else if (selecteditem == "apple") {
-				blHealth.addHeart();
-				blInventory.removeFromInventory(selecteditem);
-			} else if (selecteditem == "carrot") {
-				blHealth.addHeart();
-				blInventory.removeFromInventory(selecteditem);
-			} else if (selecteditem == "mushroom") {
-				blHealth.addHeart();
-				blMap.hallucinate();
-				blInventory.removeFromInventory(selecteditem);
-			} else if (selecteditem == "bluemushroom") {
-				blHealth.addHeart();
-				blMap.mapPerspective();
-				blInventory.removeFromInventory(selecteditem);
-			} else if (selecteditem == "blackmushroom") {
-				blHealth.addHeart();
-				//nightTime();
-				//lightUpBlock();
+				// mushroom effects
+				switch (selecteditem) {
+					case "mushroom":
+						blMap.hallucinate();
+						break;
+					case "bluemushroom":
+						blMap.mapPerspective();
+						break;
+					case "blackmushroom":
+						//nightTime();
+						//lightUpBlock();
+				}
 				blInventory.removeFromInventory(selecteditem);
 			
-			//open/close doors
+			// DOORS
 			} else if (blocktype == "door") {
 				blMap.changeBlockType(block, "door-open", currentMap);
 			} else if (blocktype == "door-open") {
 				blMap.changeBlockType(block, "door", currentMap);
 
-			//throw frisbee
-			} else if (selecteditem == "frisbee") {
+			// FRISBEE THROW
+			// } else if (selecteditem == "frisbee") {
 				//throwFrisbee(block, direction);
 
-			//throw spear
+			// SPEAR THROW
 			} else if (selecteditem == "spear") {
 				blSpear.throwSpear(block, direction);
 
-			//digging - forest map
-			} else if (blUtil.getSelectedItem() == "shovel" && blocktype == "grass" || blocktype == "dirt") {
+			// DIGGING
+			} else if (selecteditem == "shovel" && blItems.itemIsDiggable(blocktype)) {
 				blUtil.log("dig!");
-				//chance of digging a diamond
 				var r = Math.random();
-				if (r < 0.5) {
-					blUtil.log("diamond!");
-					blMap.changeBlockType(block, "diamond-hole", currentMap);
-				} else {
-					blMap.changeBlockType(block, "dirt", currentMap);
+
+				if (currentMap == 'forest') {
+					if (r < 0.5) {
+						blUtil.log("diamond!");
+						blMap.changeBlockType(block, "diamond", currentMap);
+					} else {
+						blMap.changeBlockType(block, "dirt", currentMap);
+					}
+				} else if (currentMap == 'winter') {
+					if (r < 0.2) {
+						blUtil.log("gold!");
+						blMap.changeBlockType(block, "gold", currentMap);
+					} else if (r < 0.4) {
+						blUtil.log("silver!");
+						blMap.changeBlockType(block, "silver", currentMap);
+					} else {
+						blMap.changeBlockType(block, "dirt", currentMap);
+					}
+				} else if (currentMap == 'beach') {
+					if (r < 0.2) {
+						blUtil.log("oil!");
+						blMap.changeBlockType(block, "oil", currentMap);
+					} else if (r < 0.4) {
+						blUtil.log("clay!");
+						blMap.changeBlockType(block, "clay", currentMap);
+					} else {
+						blMap.changeBlockType(block, "dirt", currentMap);
+					}
 				}
+				// TODO jungle, desert, islands trasure
+				
 				blInventory.addToInventory(blocktype, 5);
 				blInventory.addToInventory('dirt', 5);
-				//growGrass(block);
+				// growGrass(block);
 
-			//digging - winter map
-			} else if (blUtil.getSelectedItem() == "shovel" &&  blocktype == "snow" || blocktype == "ice") {
-				var r = Math.random();
-				if (r < 0.2) {
-					blUtil.log("gold!");
-					blMap.changeBlockType(block, "gold-hole", currentMap);
-				} else if (r < 0.4) {
-					blUtil.log("silver!");
-					blMap.changeBlockType(block, "silver-hole", currentMap);
-				} else {
-					blMap.changeBlockType(block, "dirt", currentMap);
-				}
-				blInventory.addToInventory(blocktype, 5);
-				blInventory.addToInventory('dirt', 5);
-				//growGrass(block);
-
-			//digging - beach map
-			} else if (blUtil.getSelectedItem() == "shovel" && blocktype == "sand" || blocktype == "dirt") {
-				//chance of digging gold
-				var r = Math.random();
-				if (r < 0.2) {
-					blUtil.log("oil!");
-					blMap.changeBlockType(block, "oil-hole", currentMap);
-				} else if (r < 0.4) {
-					blUtil.log("clay!");
-					blMap.changeBlockType(block, "clay-hole", currentMap);
-				} else {
-					blMap.changeBlockType(block, "dirt", currentMap);
-				}
-				blInventory.addToInventory(blocktype, 5);
-				blInventory.addToInventory('dirt', 5);
-				//growGrass(block);
-
-			//filling water/holes
-			} else if (blocktype == "hole" || blocktype == "water" || blocktype == "snowhole" || blocktype == "wave" || blocktype == "sandhole") {
+			// FILLING WATER/HOLES
+			} else if (blocktype == "hole" || blocktype == "water" || blocktype == "wave") {
 				if (selecteditem == "grass" ||
 					selecteditem == "dirt" ||
 					selecteditem == "snow" ||
@@ -189,27 +163,25 @@ export class Action {
 					selecteditem == "sandstonebrick" ||
 					selecteditem == "claybrick" ||
 					selecteditem == "road" ) {
-						blUtil.log("fill hole/water with dirt, sand or snow");
 						blMap.changeBlockType(block, blUtil.getSelectedItem(), currentMap);
 						blInventory.removeFromInventory(blUtil.getSelectedItem());
-						//growGrass(block);
-						if(blocktype=="water"||blocktype=="wave") { 
+						if (blocktype=="water" || blocktype=="wave") { 
 							blInventory.addToInventory("water", 5); 
 						}
 				}
 				
-			//read sign
+			// SIGNS
 			} else if (blocktype == "sign") {
 				blUtil.log("reading sign");
 				blSigns.readSign(block);
 
-			// placing blocks
-			} else if ( $.inArray(blocktype, globals.isground) > -1 ) {
+			// PLACING BLOCKS
+			} else if (blItems.itemIsGround(blocktype)) {
 
 				blUtil.log('selected item is '+selecteditem);
 				blUtil.log('blocktype is '+blocktype);
 
-				// only allow 1 portal of each type on map
+				// PORTALS
 				if (selecteditem == "portal-a") {
 					$('.maps-wrap .block-portal-a').each(function(index) {
 						var id = $(this).attr("data-blockid");
@@ -227,64 +199,53 @@ export class Action {
 					blInventory.removeFromInventory(selecteditem);
 					blMap.changeBlockType(block, selecteditem, currentMap);
 
-				// place the block
-				} else if ( $.inArray(selecteditem, globals.isplaceable) > -1 ) {
+				// PLACE BLOCK
+				} else if (blItems.itemIsPlaceable(selecteditem)) {
 					if (selecteditem == "sign") {
 						blSigns.placeSign(1, block);
 					}
-					blUtil.log('a placable item is selected');
 					blInventory.removeFromInventory(selecteditem);
 					blMap.changeBlockType(block, selecteditem, currentMap);
 				}
 
-				// achievement?
-				if (selecteditem == "fire") { 
-					blAchievement.achievementCompleted("keepingwarm"); 
-				}
-				if (selecteditem == "door" || selecteditem == "door-closed") { 
-					blAchievement.achievementCompleted("takingshelter"); 
-				}
+				// ACHIEVEMENT
+				if (selecteditem == "fire") { blAchievement.achievementCompleted("keepingwarm"); }
+				if (selecteditem == "door" || selecteditem == "door-closed") { blAchievement.achievementCompleted("takingshelter"); }
 
-			//picking up items & blocks	
-			} else if ($.inArray(blocktype, globals.iscollectable) > -1) {
+			// PICKING UP THINGS
+			} else if (blItems.itemIsCollectable(blocktype)) {
 				var changeblocktotype = "grass";
-				if (blocktype == "diamond-hole") { blocktype = "diamond"; changeblocktotype = "dirt"; } 
-				else if (blocktype == "gold-hole") { blocktype = "gold"; changeblocktotype = "dirt"; } 
-				else if (blocktype == "silver-hole") { blocktype = "silver"; changeblocktotype = "dirt"; }
-				else if (blocktype == "oil-hole") { blocktype = "oil"; changeblocktotype = "dirt"; }
-				else if (blocktype == "clay-hole") { blocktype = "clay"; changeblocktotype = "dirt"; }
-				else if (blocktype == "carrot-inground") { blocktype = "carrot"; changeblocktotype = "dirt"; }
+
+				// TREASURE
+				if (
+					blocktype == "diamond-hole" ||
+					blocktype == "gold-hole" ||
+					blocktype == "silver-hole" ||
+					blocktype == "oil-hole" ||
+					blocktype == "clay-hole"
+				) {
+					changeblocktotype = "dirt";
+				} else if (blocktype == "carrot-inground") { 
+					blocktype = "carrot";
+					changeblocktotype = "dirt";
+				}
 
 				blInventory.addToInventory(blocktype, "5");
 				blMap.changeBlockType(block, changeblocktotype, currentMap);
-				//growGrass(block);
 
-				//appletrees give player apples
-				if (blocktype == "appletree") {
-					blInventory.addToInventory("apple", "5");
-				}
+				// APPLE TREES
+				if (blocktype == "appletree") { blInventory.addToInventory("apple", "5");}
 
-				//achievement cuttingwood
+				// ACHIEVEMENT
 				if (blocktype == "tree" || blocktype == "pinetree" || blocktype == "palmtree" || blocktype == "appletree") {
 					blAchievement.achievementCompleted("cuttingwood");
 				}
-
-				//achievement treasurehunter
 				if (blocktype == "diamond" || blocktype == "gold" || blocktype == "silver" || blocktype == "oil" || blocktype == "clay") {
 					blAchievement.achievementCompleted("treasurehunter");
 				}
 			}
 
 		});
-	}
-
-	hallucinate() {
-		$('body').addClass("mushrooms");
-		setTimeout(
-			function() {
-				$('body').removeClass("mushrooms");
-			}, 
-		10000);
 	}
 
 }

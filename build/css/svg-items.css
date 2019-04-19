@@ -105,21 +105,21 @@
 .block-talltree-top { background-image:url(../svg/item-talltree-top.svg); }
 .block-talltree { background-image:url(../svg/item-talltree.svg); }
 .block-talltree { 
-	position:relative;
+	position: relative;
 	opacity: 0.8;
 }
 .block-talltree:after {
-	content:"";
-	display:block;
-	position:absolute;
-	width:20px;
-	height:20px;
-	top:-19px;
-	left:0;
+	content: "";
+	display: block;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: -19px;
+	left: 0;
 	background-image: url(../svg/item-talltree-top.svg);
 	background-size: cover;
 }
 .the-fucking-inventory .block-talltree { opacity: 1; }
-.the-fucking-inventory .block-talltree:after { display:none; }
+.the-fucking-inventory .block-talltree:after { display: none; }
 
 /* NEW */

@@ -2,11 +2,19 @@ import { Items } from './item/items';
 var blItems = new Items();
 
 export const blocktypes = blItems.getItemSlugs();
-export const isplaceable = blItems.getItemSlugsByProperty('is_placeable');
-export const isingredient = blItems.getItemSlugsByProperty('is_ingredient');
-export const isequipable = blItems.getItemSlugsByProperty('is_equipable');
+export const hasanimationn = blItems.getItemSlugsByProperty('has_animation');
+export const iscraftable = blItems.getItemSlugsByProperty('is_craftable');
 export const iscollectable = blItems.getItemSlugsByProperty('is_collectable');
+export const iscutable = blItems.getItemSlugsByProperty('is_cutable');
+export const isedible = blItems.getItemSlugsByProperty('is_edible');
+export const isplaceable = blItems.getItemSlugsByProperty('is_placeable');
+export const isblocking = blItems.getItemSlugsByProperty('is_blocking');
+export const isingredient = blItems.getItemSlugsByProperty('is_ingredient');
 export const isground = blItems.getItemSlugsByProperty('is_ground');
+export const isdiggable = blItems.getItemSlugsByProperty('is_diggable');
+export const islifeform = blItems.getItemSlugsByProperty('is_lifeform');
+export const isequipable = blItems.getItemSlugsByProperty('is_equipable');
+export const isuseable = blItems.getItemSlugsByProperty('is_useable');
 
 export const mobtypes = new Array (
 	"player",
