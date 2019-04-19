@@ -1,12 +1,12 @@
 import * as globals from './globals';
 
 import { Utility } from './utility';
-//import { Action } from './action';
 import { Cube } from './map/cube';
+import { Items } from './item/items';
 
 var blUtil = new Utility();
-//var blAction = new Action();
 var blCube = new Cube();
+var blItems = new Items();
 
 export class Movement {
 
@@ -56,10 +56,10 @@ export class Movement {
 			success = false;
 		}
 
-		if (globals.isnightime == true) {
-			//clearLighting();
-			//lightUpBlock();
-		}
+		// if (globals.isnightime == true) {
+		// 	//clearLighting();
+		// 	//lightUpBlock();
+		// }
 
 		return success;
 	}
@@ -81,148 +81,88 @@ export class Movement {
 		}
 
 		var movingObject_nextblock = nextblock;
-
-		if (movingObject_id == 1) {
-			blUtil.log('moving id:'+movingObject_id+' to block:'+movingObject_nextblock);
-		}
-
 		var nextBlockClass = '.the-fucking-'+map+'-map .block:eq('+nextblock+')';
+		var nextBlockType = blUtil.getBlockType(nextblock, globals.currentMap);
+		console.log(nextblock);
+		console.log(globals.currentMap);
+		console.log(nextBlockType);
 
-		blUtil.log("nextBlockClass:"+nextBlockClass);
 
-		//teleporting
+		// TELEPORTING
 		if (id == 1 && $(nextBlockClass).hasClass('block-portal-a')) {
 			var destinationblock = $('.maps-wrap .block-portal-b').first().attr("data-blockid");
-			//alert(destinationblock);
 			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
-		// Map right border
-		} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
-			// console.log('*** RIGHT MAP EDGE ***');
-			this.moveObjectToMap(movingObject_id, currentblock, direction);
-			collide = true;
-		// Map left border	
-		} else if ( (direction == "left" ) && (col==0) ) {
-			// console.log('*** LEFT MAP EDGE ***');
-			this.moveObjectToMap(movingObject_id, currentblock, direction);
-			collide = true;
-		// Map top border
-		} else if ( (direction == "up" ) && (row<=1) ) {
-			// console.log('*** TOP MAP EDGE ***');
-			this.moveObjectToMap(movingObject_id, currentblock, direction);
-			collide = true;
-		// Map bottom border
-		} else if ( (direction == "down" ) && (row>=globals.mapheight) ) {
-			// console.log('*** BOTTOM MAP EDGE ***');
-			this.moveObjectToMap(movingObject_id, currentblock, direction);
-			collide = true;	
-		//teleporting
+
+		// TELEPORTING
 		} else if (id == 1 && $(nextBlockClass).hasClass('block-portal-b')) {
 			var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
-			//alert(destinationblock);
 			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
-		//space travel
+
+		// MAP EDGES
+		} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
+			this.moveObjectToMap(movingObject_id, currentblock, direction);
+			collide = true;
+		} else if ( (direction == "left" ) && (col==0) ) {
+			this.moveObjectToMap(movingObject_id, currentblock, direction);
+			collide = true;
+		} else if ( (direction == "up" ) && (row<=1) ) {
+			this.moveObjectToMap(movingObject_id, currentblock, direction);
+			collide = true;
+		} else if ( (direction == "down" ) && (row>=globals.mapheight) ) {
+			this.moveObjectToMap(movingObject_id, currentblock, direction);
+			collide = true;	
+
+		// ROCKET
 		} else if (selecteditem == "rocket" && $(nextBlockClass).hasClass('block-space')) {
 			collide = false;
 		} else if (selecteditem == "rocket") {
 			collide = true;
-		//space
-		} else if ( $(nextBlockClass).hasClass('block-space') ) {
-			collide = true;
-		} else if ( $(nextBlockClass).hasClass('block-star') ) {
-			collide = true;
-		} else if ( $(nextBlockClass).hasClass('block-redgalaxy') ) {
-			collide = true;
-		} else if ( $(nextBlockClass).hasClass('block-bluegalaxy') ) {
-			collide = true;
-		} else if ( $(nextBlockClass).hasClass('block-sun') ) {
-			collide = true;
-		} else if ( $(nextBlockClass).hasClass('block-earth') ) {
-			collide = true;
-		//canoeing
+
+		// CANOEING
 		} else if (selecteditem == "canoe" && $(nextBlockClass).hasClass('block-water')) {
 			collide = false;
 		} else if (selecteditem == "canoe") {
 			collide = true;
-		// Water
-		} else if ( $(nextBlockClass).hasClass('block-water') ) {
+
+		} else if (blItems.itemIsBlocking(nextBlockType)) {
 			collide = true;
-		// Tree	
-		} else if ( $(nextBlockClass).hasClass('block-tree') ) {
-			collide = true;
-		// Rock
-		} else if ( $(nextBlockClass).hasClass('block-rock') ) {
-			collide = true;
-		// Wood
-		} else if ( $(nextBlockClass).hasClass('block-wood') ) {
-			collide = true;
-		// Fire
-		} else if ( $(nextBlockClass).hasClass('block-fire') ) {
-			collide = true;
-		// Closed Door
-		} else if ( $(nextBlockClass).hasClass('block-door') ) {
-			collide = true;
-		// PineTree	
-		} else if ( $(nextBlockClass).hasClass('block-pinetree') ) {
-			collide = true;
-		// IceRock
-		} else if ( $(nextBlockClass).hasClass('block-icerock') ) {
-			collide = true;
-		// PalmTree
-		} else if ( $(nextBlockClass).hasClass('block-palmtree') ) {
-			collide = true;
-		// RockBrick
-		} else if ( $(nextBlockClass).hasClass('block-rockbrick') ) {
-			collide = true;
-		// IceRockBrick
-		} else if ( $(nextBlockClass).hasClass('block-icerockbrick') ) {
-			collide = true;
-		// ClayBrick
-		} else if ( $(nextBlockClass).hasClass('block-claybrick') ) {
-			collide = true;
-		// AppleTree
-		} else if ( $(nextBlockClass).hasClass('block-appletree') ) {
-			collide = true;
-		// TallTree
-		} else if ( $(nextBlockClass).hasClass('block-talltree') ) {
-			collide = true;
-		// Fence
-		} else if ( $(nextBlockClass).hasClass('block-fence-metal') ) {
-			collide = true;
-		// Ice Sliding
-		//} else if ( $(nextBlockClass).hasClass('block-ice') ) {
-			//slidePlayer();
-			//return true;
+
 		} else {
-			// Hit player
+			// PLAYER
 			if (id != 1) {
 				var playerElement = $('.the-fucking-player');
 				var player_id = $('.the-fucking-player').attr('data-id');
 				var player_block = blUtil.getObjectCurrentBlock(player_id);
-				//blUtil.log('moving id:'+movingObject_id+' to block:'+movingObject_nextblock+' |||| player is on block:'+player_block);
 
 				if (movingObject_nextblock == player_block) {
 					blUtil.log('BLOCKED BY PLAYER');
 					collide = true;
 				}
-			// Hit animal
+
+			// ANIMAL
 			} else if ($('.the-fucking-deer').length != 0) {
 				$('.the-fucking-deer').each(function(index) {
 					var blockingObject_id = $(this).attr('data-id');
 					var blockingObject_block = blUtil.getObjectCurrentBlock(blockingObject_id);
 				
 					if (movingObject_nextblock == blockingObject_block && movingObject_id != blockingObject_id) {
-						//alert('BLOCKED BY ANIMAL: moving id:'+movingObject_id+' to block:'+movingObject_nextblock+' |||| animal id:'+blockingObject_id+' is on block:'+blockingObject_block);
 						collide = true;
 					}
 				});
-			// Walkable land
+
+			// WALK TO NEXT BLOCK
 			} else {
 				collide = false;
 			}
 
 		}	
+
+		// ICE
+		//} else if ( $(nextBlockClass).hasClass('block-ice') ) {
+			//slidePlayer();
+			//return true;
 
 		// Bike Riding?
 		// Skiiing?
@@ -230,7 +170,6 @@ export class Movement {
 		// Driving
 
 		return collide;
-		
 	}
 
 	changeObjectDirection(id, direction, name) {
@@ -280,41 +219,30 @@ export class Movement {
 	walkPlayerToBlock(id, destinationblock) {
 		this.stopObjectMovement();
 		var playerblock = blUtil.getObjectCurrentBlock('1');
-		//var destinationblocktype = blUtil.getBlockType(destinationblock);
-		//blUtil.log("destinationblock: "+destinationblock);
-		//blUtil.log("playerblock: "+playerblock);
 
-		if (playerblock == destinationblock) {
-			//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-			//blAction.playerPrimaryAction(destinationblock); 
-			return;
-		} else if ((playerblock-globals.mapwidth-1) == destinationblock) {
-			//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-			//blAction.playerPrimaryAction(destinationblock); 
-			return;
-		} else if ((playerblock+globals.mapwidth-1) == destinationblock) {
-			//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-			//blAction.playerPrimaryAction(destinationblock); 
-			return;
-		} else if ((playerblock-2) == destinationblock) {
-			//blUtil.log("dont need to move player so stop object and trigger player action on destination block");
-			//blAction.playerPrimaryAction(destinationblock); 
-			return;
-		}
+		// if clicking a block that the player is touching
+		// run the player action function on that block
 
-		//blUtil.log("move object ID#"+id+" to block"+destinationblock);
+		// if (playerblock == destinationblock) {
+		// 	blAction.playerPrimaryAction(destinationblock); 
+		// 	return;
+		// } else if ((playerblock-globals.mapwidth-1) == destinationblock) {
+		// 	blAction.playerPrimaryAction(destinationblock); 
+		// 	return;
+		// } else if ((playerblock+globals.mapwidth-1) == destinationblock) {
+		// 	blAction.playerPrimaryAction(destinationblock); 
+		// 	return;
+		// } else if ((playerblock-2) == destinationblock) {
+		// 	blAction.playerPrimaryAction(destinationblock); 
+		// 	return;
+		// }
+
 		this.objectbrain = setTimeout(this.anObjectMovement(id), globals.enemyspeed);
 		this.destinationblockColumn = destinationblock % globals.mapwidth;
 		this.destinationblockRow = parseInt(destinationblock / globals.mapwidth);
-
-		//blUtil.log("destinationblock:"+destinationblock);
-		//blUtil.log("destinationblockCol:"+destinationblockColumn);
-		//blUtil.log("destinationblockRow:"+destinationblockRow);
-
 	}
 
 	stopObjectMovement() {
-		//alert("stop tha shit!");
 		clearTimeout(this.objectbrain);
 	}
 	
@@ -328,9 +256,8 @@ export class Movement {
 		var yDifference = objectY - this.destinationblockRow;
 		var POSxDifference = Math.abs(xDifference);
 		var POSyDifference = Math.abs(yDifference);
-		//var r = Math.random();
 
-		//if player stuck abort!
+		// if player stuck abort!
 		// if (this.objectPath[n-1] == this.objectPath[n]) {
 		// 	blUtil.log("OBJECT STUCK, ABORTING");
 		// 	stopObjectMovement();
@@ -338,24 +265,18 @@ export class Movement {
 		// }
 		
 		if ( (xDifference == 0) && (yDifference == 0) ) {
-			//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
 			blUtil.log("reached destination block, stop moving");
-			//alert("i made it to the spot you clicked!");
 			this.stopObjectMovement();
 		} else if (POSxDifference >= POSyDifference) {
 			if (xDifference >= 0) { 
-				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
 				this.moveObject("right", id, "player");
 			} else { 
-				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
 				this.moveObject("left", id, "player");
 			}
 		} else {
 			if (yDifference >= 0) { 
-				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
 				this.moveObject("up", id, "player");
 			} else { 
-				//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
 				this.moveObject("down", id, "player");
 			}
 		}
@@ -384,10 +305,6 @@ export class Movement {
 		var nextMap = globals.cubeSidesArray[nextCubeSide].map;
 		var toMap = $('.the-fucking-'+nextMap+'-map');
 
-		blUtil.log('nextCubeSide**************'+nextCubeSide);
-		blUtil.log('nextMap**************'+nextMap);
-		blUtil.log('toMap**************'+toMap);
-
 		// find out what block on next map to move to
 		var mapwidth = globals.mapwidth;
 		var mapheight = globals.mapheight;
@@ -407,11 +324,6 @@ export class Movement {
 				nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
 				break;
 		}
-		
-		blUtil.log('currentBlock**************'+currentBlock);
-		blUtil.log('mapwidth**************'+mapwidth);
-		blUtil.log('mapwidth * mapheight**************'+mapwidth * mapheight);
-		blUtil.log('nextBlock**************'+nextBlock);
 
 		// remove player from current map
 		object.detach();
