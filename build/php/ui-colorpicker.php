@@ -1,6 +1,6 @@
 <?php 
 	if (!$defautColor) {
-		$defautColor = '#ffffff';
+		$defautColor = '#666';
 	}
 ?>
 <div class="bui-colorpicker">

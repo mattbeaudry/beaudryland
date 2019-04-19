@@ -72,6 +72,15 @@ export class Items {
 		this.is_useable = false;
 	}
 
+	initItemBuilder() {
+		console.log('initItemBuilder');
+		this.itemSubmitForm();
+		this.loadItemSelects();
+		this.initItemBuilderForm();
+		this.getAllItemImages();
+		this.setupCanvas();
+	}
+
 	updateItemsJSONFile() {
 		$.ajax({
 			url: 'php/saveItemsToJSON.php',
@@ -114,18 +123,6 @@ export class Items {
 			return filtered;
 		}, []);
 		return itemSlugs;
-	}
-
-	initItemBuilder() {
-		console.log('initItemBuilder');
-
-		this.itemSubmitForm();
-		this.loadItemSelects();
-		this.initItemBuilderForm();
-		this.getAllItemImages();
-
-		this.setupCanvas();
-
 	}
 
 	loadItemSelects() {
@@ -173,9 +170,9 @@ export class Items {
 	};
 
 	renderPreviewSVG(name, is_animated) {
-		var w = 30;
-		var h = 30;
-		var pixelwidth = w / 5;
+		var w = 20;
+		var h = 20;
+		var pixelwidth = 4;
 
 		console.log('renderPreviewSVG');
 		$('#'+name+' svg').remove();
@@ -186,10 +183,13 @@ export class Items {
 		var y = 0;
 		previewSVG = Raphael(document.getElementById(name));
 		previewSVG.setViewBox(0, 0, w, h, true);
-		previewSVG.canvas.setAttribute('preserveAspectRatio', 'none');
-
+		//previewSVG.canvas.setAttribute('preserveAspectRatio', 'none');
+		console.log('renderPreviewSVG');
+		
 		$('.canvas-'+name+' .canvas-pixel').each(function(i) {
 			var color = $(this).attr("data-color");
+			console.log(color);
+			console.log('renderPreviewSVG');
 			if (i == 0) {
 				x = 0;
 				y = 0;
@@ -203,7 +203,8 @@ export class Items {
 			}
 			pixels[i] = previewSVG.rect(x, y, pixelwidth, pixelwidth);
 			pixels[i].attr("fill", color);
-			pixels[i].attr("stroke", color);
+			pixels[i].attr("stroke", 'transparent');
+			//pixels[i].attr("stroke-width", '0');
 		});
 
 		if (is_animated) {
@@ -223,7 +224,7 @@ export class Items {
 						x = (i%5) * pixelwidth;
 					}
 				}
-				pixels[i] = previewSVG.rect(x + 30, y, pixelwidth, pixelwidth);
+				pixels[i] = previewSVG.rect(x + w, y, pixelwidth, pixelwidth);
 				pixels[i].attr("fill", color);
 				pixels[i].attr("stroke", color);
 			});
@@ -419,6 +420,7 @@ export class Items {
 
 	// might need to move to paint.js
 	setupCanvas() {
+		console.log('setup-canvas');
 		var _self = this;
 		// COLOR PALETTE
 		$('.canvas-pixel').on("click", function() { 

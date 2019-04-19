@@ -26,13 +26,11 @@
 	        <div class="the-fucking-header">
 	        
 		        <h1 class="logo-beaudryland">
-		        	<a href="http://www.beaudryland.com"><img src="img/block-tree.png" title="Beaudryland Tree Logo" />Beaudryland</a>
+		        	<a href="http://www.beaudryland.com"><img src="items/tree.svg" title="Beaudryland Tree Logo" />Beaudryland</a>
 		        </h1>
 					    
 			    <div class="clearfix">
-
 			    	<div class="row beaudryland-panel">
-
 			    		<div class="col-2 col-left">
 			    			<h2>New?</h2>
 							<p><strong>What is Beaudryland?</strong> <br>Beaudryland is a Minecraft inspired javascript game that is in the early stages of development.</p>
@@ -57,23 +55,18 @@
 									<input class="button" type="submit" name="newuser" value="Create Land">
 								</form>
 							</div>
-							
 						</div>
-
 			    	</div>
 
 			    	<div class="row beaudryland-panel">
 					    <div class="col-2 col-left">
-					    						        
 					        <h2>Returning?</h2>
 					    	<p>See what people are building in Beaudryland at the <a href="mapgallery.php">Map Gallery</a>.</p>
 					    	<p>Create your own items for the game with the <a href="spritepainter.php">Item Builder</a>.</p>
 					    	<p>Create your own maps for the game with the <a href="mapeditor.php">Map Editor</a>.</p>
 					    	<p>Play with a very early demo of <a href="https://rocky-escarpment-1406.herokuapp.com/">Beaudryland Multiplayer</a>.</p>
-					        
 					    </div>
 					    <div class="col-2 col-right">
-
 					        <div class="the-fucking-login clearfix">
 						        <form class="beaudrylandlogin" name="beaudrylandlogin" method="post" action="checklogin.php">
 						        	<h3>Revisit Your Land</h3>
@@ -83,17 +76,13 @@
 									<input class="button" type="submit" name="submit" value="Enter Land">
 								</form>
 							</div>
-
 						</div>
 		        	</div>
-
 		        </div>
 			</div>
 			
 			<section class="the-fucking-gameinfo">
-
 					<h2>Update History</h2>
-
 					<article class="beaudryland-panel">
 						<h3>Beaudryland v0.7<br>Winter 2015</h3>
 						<ul class="multi-column-2">
@@ -115,7 +104,6 @@
 							<li>weapons &amp; armor</li>
 						</ul>
 		        	</article>
-
 					<article class="beaudryland-panel">
 						<h3>Beaudryland v0.6<br>Fall 2014 <br>The Space Update</h3>
 						<ul class="multi-column-2">
@@ -129,7 +117,6 @@
 							<li>apple trees and apples! eat apples to restore hearts</li>
 						</ul>
 		        	</article>
-		 
 					<article class="beaudryland-panel">
 						<h3>Beaudryland v0.5<br>December 2013<br>The Beach Update</h3>
 						<img class="banner-beaudryland" src="img/banner-beaudryland-0.5.png" title="Beaudryland Banner" />
@@ -142,7 +129,6 @@
 							<li>projectiles: throwable items (spear and frisbee)</li>
 						</ul>
 		        	</article>
-		     
 		        	<article class="beaudryland-panel">
 		        		<h3>Beaudryland v0.4<br>March 2013<br>The Winter Update</h3>
 		        		<img class="banner-beaudryland" src="img/banner-beaudryland-0.4.png">
@@ -163,7 +149,6 @@
 			        		<li>placing water</li>
 			        	</ul>
 			        </article>
-		
 		        	<article class="beaudryland-panel">
 		        		<h3>Beaudryland v0.3<br>January, 2013<br>The Items Update</h3>
 		        		<img class="banner-beaudryland" src="img/banner-beaudryland-0.3.png">
@@ -189,7 +174,6 @@
 							<li>throwable frisbee</li>
 		        		</ul>
 		        	</article>
-			
 		        	<article class="beaudryland-panel">
 		        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.2/">Beaudryland v0.2</a><br>December 24, 2012<br>The Texture Update</h3>
 		        		<ul class="multi-column-2">
@@ -205,7 +189,6 @@
 		        			<li>craftable fire with animation</li>
 		        		</ul>
 		        	</article>
-		  
 		        	<article class="beaudryland-panel">
 		        		<h3><a href="http://www.mattbeaudry.com/beaudryland-0.1/">Beaudryland v0.1</a><br>Dec 17, 2012<br>The Game Engine Update</h3>
 		        		<ul class="multi-column-2">
@@ -230,29 +213,23 @@
         
         </div>
 
-        <!--
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-        -->
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.js"><\/script>')</script>
         <script src="js/vendor/jquery.validate.js"></script>
         <script src="js/plugins.js"></script>
 
-		
         <script type="text/javascript">
-        
-        $('.beaudrylandregister').validate();
-        $('.beaudrylandlogin').validate();
+			$('.beaudrylandregister').validate();
+			$('.beaudrylandlogin').validate();
 
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-37415514-1']);
-		  _gaq.push(['_trackPageview']);
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-37415514-1']);
+			_gaq.push(['_trackPageview']);
 		
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
 		</script>
         
     </body>

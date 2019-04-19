@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 
 @-webkit-keyframes svgAnimate {
     0% {
@@ -82,11 +85,13 @@
 .item-builder {
 
 }
-.item-builder ul {
+.item-builder ul,
+.sprite-painter ul {
     list-style:none;
     padding:0;
 }
-.item-builder li {
+.item-builder li,
+.sprite-painter li {
     margin-bottom:5px;
 }
 input[type="text"] {
@@ -101,11 +106,12 @@ input[type="text"] {
     border:none;
 }
 .svg-preview {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     background-color: #fff;
     display: inline-block;
     border: solid 2px #000;
+    box-sizing: content-box;
 }
 .svg-preview svg {
     width:100%;

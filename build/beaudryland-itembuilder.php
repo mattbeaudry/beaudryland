@@ -8,24 +8,18 @@
 
     <body class="page-itemworkshop">
         <div class="container clearfix">
-            <h1>Item Workshop</h1>
+            <h1>Thing Workshop</h1>
 
             <div class="panel-left">
                 <section>
-
                     <h2>Tools</h2>
-
                     <?php include 'php/ui-colorpicker.php'; ?>
-                    <div>
-                        <nav class="pixelpainter-nav">
-                            <ul>
-                                <li><a href="#" class="button-reset">Reset</a></li>
-                                <!-- <li><a href="#" class="button-preview">Preview</a></li> -->
-                            </ul>
-                        </nav>
-                    </div>
+                    
+                    <h2>Canvas</h2>
 
-                    <h2>Graphics</h2>
+                    <nav class="pixelpainter-nav">
+                        <a href="#" class="button-reset">Reset</a>
+                    </nav>
 
                     <div class="clearfix">
                         <fieldset class="canvas-frame canvas-image">
@@ -249,7 +243,7 @@
             <div>
                 <section class="panel-bottom clearfix">
 
-                    <h2>Items</h2>
+                    <h2>Things</h2>
 
                     <div class="block-palette clearfix"></div>
                     <div class="bl-table-contain">
