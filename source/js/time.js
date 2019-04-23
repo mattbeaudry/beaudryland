@@ -6,7 +6,8 @@ var blMovement = new Movement();
 
 export class Time {
 
-	startTime () {
+	startTime() {
+		console.log("STTTARTTTTTIMEEEE");
 		window.requestAnimFrame = (function() {
 		  return  window.requestAnimationFrame || 
 				window.webkitRequestAnimationFrame || 
@@ -24,22 +25,24 @@ export class Time {
 		function newAnimationFrame() {
 			count++;
 
+			//run every 10 seconds
+			if ((count % 600) == 0) {
+				
+			}
+
 			//run every second
 			if ((count%60) == 0) {
-				//world clock
 				seconds++;
-				console.log('time since game started: '+seconds+' seconds');
-				animateSpears();
+				//console.log('time: '+seconds+'s');
 			}
 
 			//run every half second
 			if ((count%30) == 0) {
-
+				animateSpears();
 			}
 
 			//run every 200 miliseconds
 			if ((count % 10) == 0) {
-				//console.log("160 miliseconds has gone by");
 				
 			}  
 

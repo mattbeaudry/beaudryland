@@ -111,6 +111,7 @@ export class Action {
 
 			// SPEAR THROW
 			} else if (selecteditem == "spear") {
+				console.log('throw spear');
 				blSpear.throwSpear(block, direction);
 
 			// DIGGING
