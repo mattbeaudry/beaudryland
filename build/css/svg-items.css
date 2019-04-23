@@ -93,11 +93,14 @@
 .block-door-locked { background-image:url(../svg/item-door-locked.svg); }
 .block-heartblack { background-image:url(../svg/item-heartblack.svg); }
 .block-red-x { background-image:url(../svg/item-red-x.svg); }
-
 .block-check { background-image:url(../svg/item-check.svg); }
 .block-close { background-image:url(../svg/item-close.svg); }
 .block-check-white { background-image:url(../svg/item-check-white.svg); }
 .block-close-white { background-image:url(../svg/item-close-white.svg); }
+
+.block-question-mark { background-image:url(../svg/icon-question-mark.svg); }
+.block-question-mark-white { background-image:url(../svg/icon-question-mark-white.svg); }
+
 
 /* experimental  */
 .block-fence-wood { background-image:url(../svg/item-fence-wood.svg); }

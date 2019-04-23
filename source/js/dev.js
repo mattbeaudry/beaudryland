@@ -32,10 +32,6 @@ export class Dev {
 		$('.the-fucking-inventory').html(inventoryhtml);
 		$('.the-fucking-inventory').show();
 		blHCI.setupMouseEvents();
-
-		/*for 
-		'<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>'
-		'<div class="slot-2 empty" data-blocktype="empty">0</div>''*/
 	}
 
 	loadDevConsole() {
@@ -109,22 +105,16 @@ export class Dev {
 				function_name: 'blCube.rotateCubeTo',
 				function_val: 'top'
 			},
-			{
-				text: 'Cubify Map',
-				function_name: 'blCube.cubifyMap'
-			},
-			{
-				text: 'Decubify Map',
-				function_name: 'blCube.decubifyMap'
-			},
 			// {
-			// 	text: 'Move Object To Map',
-			// 	function_name: 'blMovement.moveObjectToMap'
-			// }
-
+			// 	text: 'Cubify Map',
+			// 	function_name: 'blCube.cubifyMap'
+			// },
+			// {
+			// 	text: 'Decubify Map',
+			// 	function_name: 'blCube.decubifyMap'
+			// },
 		];
 
-		var html = '';
 		var devconsole = $('.dev-console');
 		var _self = this;
 
@@ -136,23 +126,20 @@ export class Dev {
 			} else {
 				function_name = value.function_name + '()';
 			}
-			container.append('<a href="javascript:void(0);">'+value.text+'</a>');
+			container.append('<a href="javascript:void(0);">/'+value.text+'</a>');
 			container.on("click", function() {
 				eval(function_name);
 			});
-		 	// console.log(function_name);
-			devconsole.append(container);
+			devconsole.append(container); 
 		});
 
 	}
 
 	changeOverlayBlockOpacity(block, opacity) {
-		//blUtil.log("8-changing block "+block+" to "+newtype);
 		$('.the-fucking-map-overlay .block:eq('+block+')').css("opacity",opacity);
 	}
 
 	nightTime() {
-		// console.log("night time");
 		// MAP OVERLAY
 	    var overlayhtml = "";
 	    for (var f = 0; f <= (globals.totalmapblocks - 1); f++) {

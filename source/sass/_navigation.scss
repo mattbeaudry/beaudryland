@@ -33,6 +33,11 @@ a.nav-selected-item {
 }
 
 .tab-navigation {
+
+  h2 {
+    text-align: center;
+  }
+
   .button-wrap {
     margin-bottom: 16px;
   }
@@ -52,6 +57,12 @@ a.nav-selected-item {
   // max-width: 120px
   // overflow: hidden
   // text-overflow: ellipsis
+}
+
+.nav-extra {
+  li {
+    display: inline-block;
+  }
 }
 
 .nav-buttons {
@@ -152,8 +163,15 @@ a.nav-selected-item {
 }
 
 .dev-console {
+  background-color: #000;
   list-style: none;
-  padding: 0;
+  padding: 8px;
+
+  h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 0;
+  }
 
   li {
     display: inline-block;
@@ -161,7 +179,6 @@ a.nav-selected-item {
     a {
       display: inline-block;
       color: #fff;
-      background-color: #999;
       text-decoration: none;
       font-family: $blockFont;
       font-weight: normal;
@@ -172,7 +189,7 @@ a.nav-selected-item {
       margin: 0 5px 5px 0;
 
       &:hover {
-        background-color: #000;
+        color: #00cc00;
       }
     }
   }

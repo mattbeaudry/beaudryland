@@ -27,17 +27,13 @@
 							<div class="d-flex align-items-center justify-content-between">
 								<div class="d-flex align-items-center">
 									<a class="tabs-close bui-button" href="javascript:void(0);">
-										<span>< BACK</span>
-									</a><!--
+										<span>< BACK</span></a><!--
 									--><a class="tab-menuitem nav-selected-item block" href="javascript:void(0);" data-tabmenu="tab-inventory">
-										<span></span>
-									</a><!--
+										<span></span></a><!--
 									--><a class="tab-menuitem bui-button button-icon" href="javascript:void(0);" data-tabmenu="tab-achievements">
-										<i class="block i-check-white"></i>
-									</a><!--
-									--><a class="tab-menuitem bui-button" href="javascript:void(0);" data-tabmenu="tab-navigation">
-										<span>?</span>
-									</a>
+										<i class="block i-check-white"></i></a><!--
+									--><a class="tab-menuitem bui-button button-icon" href="javascript:void(0);" data-tabmenu="tab-navigation">
+										<i class="block block-question-mark-white"></i></a>
 								</div>
 								<div>
 									<a class="link-savemap bui-button" href="javascript:void(0);">Save</a>
@@ -134,7 +130,7 @@
 				        		<a id="help"></a>
 						        <h2>Help</h2>
 						        
-						        <ul>
+						        <ul class="bui-list-bullets">
 						        	<li>*** Don't forget to save your map before you leave! ***</li>
 						        	<li>Use the arrow keys to move around, use spacebar to collect and place blocks</li>
 						        	<li>Start by collecting some trees and rocks and clearing an area to build your shelter.</li>
@@ -147,76 +143,37 @@
 									<li>Thanks for taking part in the Beaudryland experiment.</li>
 						        </ul>
 						    </section>
- 
-							<!-- 
-							<h2>Game info</h2>
-							<ul>
-								<li class="link-help">
-									<div class="button-wrap">
-										<a class="tab-menuitem tab-help" data-tabmenu="tab-help" href="javascript:void(0)">Help</a>
-									</div>
-								</li>
-								<li class="link-items">
-									<div class="button-wrap">
-										<a class="tab-menuitem tab-items" data-tabmenu="tab-items" href="javascript:void(0)">Items</a>
-									</div>
-								</li> 
-								<li class="link-achievements">
-									<div class="button-wrap button-wrap-large">
-										<a class="tab-menuitem tab-achievements" data-tabmenu="tab-achievements" href="javascript:void(0)">Achievements</a>
-									</div>
-								</li>
-								<li class="link-console">
-									<div class="button-wrap button-wrap-large">
-										<a class="tab-menuitem tab-devconsole" data-tabmenu="tab-devconsole" href="javascript:void(0)">Console</a>
-									</div>
-								</li>
-							</ul>
- 							-->
 
 							<h2>Extras</h2>
 							<ul class="nav-extra">
 								<li class="link-mapeditor">
-									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="beaudryland-mapgallery.php">Map Gallery ></a>
-									</div>
+									<a class="bui-button" target="_blank" href="beaudryland-mapgallery.php">Map Gallery ></a>
 								</li>
 								<li class="link-itemeditor">
-									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="beaudryland-itembuilder.php">Item Builder ></a>
-									</div>
+									<a class="bui-button" target="_blank" href="beaudryland-itembuilder.php">Item Builder ></a>
 								</li>
 								<li class="link-itemeditor">
-									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="beaudryland-paint.php">Sprite Painter ></a>
-									</div>
+									<a class="bui-button" target="_blank" href="beaudryland-paint.php">Sprite Painter ></a>
 								</li>
 								<li class="link-mapeditor">
-									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="beaudryland-mapeditor.php">Map Editor ></a>
-									</div>
+									<a class="bui-button" target="_blank" href="beaudryland-mapeditor.php">Map Editor ></a>
 								</li>
 								<li class="link-synth">
-									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="beaudryland-synth.php">Synth ></a>
-									</div>
+									<a class="bui-button" target="_blank" href="beaudryland-synth.php">Synth ></a>
 								</li>
 								<li class="link-pong">
-									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="beaudryland-pong.php">Pong ></a>
-									</div>
+									<a class="bui-button" target="_blank" href="beaudryland-pong.php">Pong ></a>
 								</li>
 								<li class="link-ui">
-									<div class="button-wrap button-wrap-large button-wrap-outline">
-										<a target="_blank" href="beaudryland-ui.php">BL UI ></a>
-									</div>
+									<a class="bui-button" target="_blank" href="beaudryland-ui.php">BL UI ></a>
 								</li>
 							</ul>
 
 							<div class="the-fucking-dev-panel">
+								
+								<nav class="dev-console">
 								<h2>Developer Console</h2>
-								<nav>
-									<ul class="dev-console clearfix"></ul>
+									<ul class="clearfix"></ul>
 								</nav>
 							</div>
 
