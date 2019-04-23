@@ -20,39 +20,57 @@ export class Dev {
 
 	}
 
+	getAllItems() {
+		var inventoryhtml = '';
+		$.each(globals.blocktypes, function(index, value) {
+			{
+				inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
+				if(index==0) { inventoryhtml += 'selected-item'; }
+				inventoryhtml += '" data-blocktype="'+value+'">99</div>';
+			}
+		});
+		$('.the-fucking-inventory').html(inventoryhtml);
+		$('.the-fucking-inventory').show();
+		blHCI.setupMouseEvents();
+
+		/*for 
+		'<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>'
+		'<div class="slot-2 empty" data-blocktype="empty">0</div>''*/
+	}
+
 	loadDevConsole() {
 
 		blUtil.log("load dev console");
 
 		var consoleItems = [
 			{
+				text: 'Get All Items',
+				function_name: '_self.getAllItems'
+			},
+			{
 				text: 'Create Enemy',
 				function_name: 'blEnemy.createEnemy'
 			},
 			{
-				text: 'Kill Enemy',
-				function_name: 'blEnemy.killEnemy'
+				text: 'Kill Enemies',
+				function_name: 'blEnemy.killEnemies'
 			},
 			{
 				text: 'Create Animal',
 				function_name: 'blAnimal.createAnimal'
 			},
 			{
-				text: 'Kill Animal',
-				function_name: 'blAnimal.killAnimal'
+				text: 'Kill Animals',
+				function_name: 'blAnimal.killAnimals'
 			},
-			{
-				text: 'Get All Items',
-				function_name: 'this.getAllItems'
-			},
-			{
-				text: 'Night Time',
-				function_name: 'this.nightTime'
-			},
-			{
-				text: 'Light up Player',
-				function_name: 'this.lightUpBlock'
-			},
+			// {
+			// 	text: 'Night Time',
+			// 	function_name: 'this.nightTime'
+			// },
+			// {
+			// 	text: 'Light up Player',
+			// 	function_name: 'this.lightUpBlock'
+			// },
 			// {
 			// 	text: 'Start Skiing',
 			// 	function_name: 'moveMap'
@@ -99,15 +117,16 @@ export class Dev {
 				text: 'Decubify Map',
 				function_name: 'blCube.decubifyMap'
 			},
-			{
-				text: 'Move Object To Map',
-				function_name: 'blMovement.moveObjectToMap'
-			}
+			// {
+			// 	text: 'Move Object To Map',
+			// 	function_name: 'blMovement.moveObjectToMap'
+			// }
 
 		];
 
 		var html = '';
 		var devconsole = $('.dev-console');
+		var _self = this;
 
 		$.each(consoleItems, function(index, value) {
 			var container = $('<li />');
@@ -125,27 +144,6 @@ export class Dev {
 			devconsole.append(container);
 		});
 
-	}
-
-	getAllItems() {
-		var inventoryhtml = '';
-		$.each(globals.blocktypes, function(index, value) {
-			if ( 	
-				value != "diamond-hole" && value != "gold-hole" && value != "silver-hole" && value != "oil-hole" &&
-			 	value != "clay-hole" && value != "carrot-inground" 
-			) {
-				inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
-				if(index==0) { inventoryhtml += 'selected-item'; }
-				inventoryhtml += '" data-blocktype="'+value+'">99</div>';
-			}
-		});
-		$('.the-fucking-inventory').html(inventoryhtml);
-		$('.the-fucking-inventory').show();
-		blHCI.setupMouseEvents();
-
-		/*for 
-		'<div class="slot-1 empty selected-item" data-blocktype="empty">0</div>'
-		'<div class="slot-2 empty" data-blocktype="empty">0</div>''*/
 	}
 
 	changeOverlayBlockOpacity(block, opacity) {

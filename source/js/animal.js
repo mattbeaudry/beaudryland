@@ -24,6 +24,11 @@ export class Animal {
 		$('.objectid-'+id).remove();
 	}
 
+	killAnimals() {
+		blUtil.log("Kill Animals");
+		$('.the-fucking-deer').remove();
+	}
+
 	initAnimalBrain(id) {
 		blUtil.log("start brain program for animal id:"+id);
 		var t = 0;

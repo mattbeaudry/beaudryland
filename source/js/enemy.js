@@ -26,6 +26,11 @@ export class Enemy {
 		$('.objectid-'+id).remove();
 	}
 
+	killEnemies() {
+		blUtil.log("Kill Enemies");
+		$('.the-fucking-enemy').remove();
+	}
+
 	initEnemyBrain(id) {
 		blUtil.log("start brain program for enemy #"+id);
 		var t = 0;
