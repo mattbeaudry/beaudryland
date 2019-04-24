@@ -19,7 +19,7 @@
                 <li><a href="#font">Font</a></li>
                 <li><a href="#typography">Typography</a></li>
                 <li><a href="#buttons">Buttons</a></li>
-                <li><a href="#inputs">Inputs</a></li>
+                <li><a href="#forms">Forms</a></li>
                 <li><a href="#colorpicker">Color picker</a></li>
                 <li><a href="#slider">Slider</a></li>
                 <li><a href="#knob">Knob</a></li>
@@ -33,8 +33,8 @@
                 <li>Validation</li>
                 <li>Motion</li>
                 <li>Themes</li>
-                <li>Checkbox</li>
-                <li>Radio</li>
+                <li>Modal</li>
+                <li>Icons</li>
             </ul>
         </section>
 
