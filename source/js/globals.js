@@ -60,8 +60,8 @@ export var mapWidthDesktop = 26;
 export var mapHeightDesktop = 26;
 export var mapwidth = 0;
 export var mapheight = 0;
-export var mapwidthpx = 0;
-export var mapheightpx = 0;
+export var mapWidthPx = 0;
+export var mapHeightPx = 0;
 export var currentMap = 'forest';
 export var currentCubeSide = 'front';
 

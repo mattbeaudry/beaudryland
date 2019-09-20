@@ -13,13 +13,15 @@ export class Map {
 		this.mapHeight;
 		this.mapWidth;
 		this.mapHeightPx;
-		this.mapWidthPX;
+		this.mapWidthPx;
 		this.mapTotalBlocks;
 		this.globalMapBlockCount;
 	}
 
 	setupMap(mapsize) {
 		blUtil.log("Map Setup");
+		blUtil.log("map width"+globals.mapWidthDesktop);
+
 		if (mapsize == 'mobile'){
 			globals.mapwidth = globals.mapWidthMobile;
 			globals.mapheight = globals.mapHeightMobile;
@@ -169,7 +171,7 @@ export class Map {
 	}
 
 	changeBlockType(block, newtype, map) {
-		blUtil.log("changing block "+block+" to "+newtype);
+		//blUtil.log("changing block "+block+" to "+newtype);
 		var blockClass = '.the-fucking-'+map+'-map .block:eq('+block+')';
 		$(blockClass).removeClass(globals.allblockclasses);
 		$(blockClass).addClass("block block-"+newtype);
@@ -184,7 +186,9 @@ export class Map {
 		var cabin = false;
 		var total = globals.totalmapblocks;
 
-		//CREATE RANDOM FOREST TERRAIN
+		console.log('****loadNewMap****');
+		console.log('this.mapWidth'+this.mapWidth);
+
 		if (cubeside == 'background'){
 			$('.maps-container').append('<div class="the-fucking-'+maptype+'-map" data-maptype="'+maptype+'"></div>');
 		} else {
@@ -194,7 +198,9 @@ export class Map {
 		var map = $('.the-fucking-'+maptype+'-map');
 		var maphtml = '';
 
-		// console.log("*********LOADMAP"+maptype);
+		console.log("*********LOADMAP"+maptype);
+
+		console.log('this.mapWidth'+this.mapWidth);
 		
 		switch (maptype) {
 			case 'forest':
@@ -204,20 +210,18 @@ export class Map {
 					if (r<0.7) { blocktype = "grass"; }
 					else if (r>0.98) { blocktype = "rock"; }
 					else if (r>0.96) { blocktype = "appletree"; }
-					/*
-					else if (r>0.96) { blocktype = "carrot-inground"; }
-					else if (r>0.94) { blocktype = "flowers"; }
-					else if (r>0.92) { blocktype = "mushroom"; }
-					else if (r>0.90) { blocktype = "appletree"; }
-					*/
+					else if (r>0.94) { blocktype = "carrot-inground"; }
+					else if (r>0.92) { blocktype = "flower"; }
+					else if (r>0.90) { blocktype = "mushroom"; }
+					else if (r>0.88) { blocktype = "appletree"; }
 					else if (r>0.8) { blocktype = "tree"; }
 					else { blocktype = "grass"; }
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'">'+f+'</div>';
 				}
 				lakeBlocks = ["water","tree","grass","water","tree","grass","appletree","water"];
 				specialBlocks = [
-					"carrot-inground","carrot-inground","flowers","flowers",
-					"bluemushroom","bluemushroom","mushroom","mushroom","talltree","talltree","talltree"
+					"carrot-inground","carrot-inground","flower","flower",
+					"bluemushroom","bluemushroom","mushroom","mushroom"
 				];
 				riverBlocksX = ["water"];
 				riverBlocksY = ["water"];
@@ -244,8 +248,13 @@ export class Map {
 				break;
 
 			case 'beach':
+				console.log('this.mapWidth'+this.mapWidth);
+				console.log('BEACH!');
+				console.log('this.mapWidth: '+this.mapWidth);
 				var maphalf = 0.5 * this.mapWidth;
+				console.log('maphalf: '+maphalf);
 				var shoreedge = maphalf;
+				console.log('shoreedge: '+shoreedge);
 				for (var f = 0; f <= (total - 1); f++){
 					var r = Math.random();
 					var blocktype;
@@ -264,11 +273,10 @@ export class Map {
 					}
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
-				lakeBlocks = ["sandstone","palmtree","wetsand"];
-				specialBlocks = [];
+				lakeBlocks = ["sand", "grass"];
+				specialBlocks = ["canoe"];
 				riverBlocksX = ['water'];
 				riverBlocksY = ['water'];
-				//startWaves();
 				break;
 
 			case 'jungle':
