@@ -22,7 +22,7 @@ export class Story {
 		console.log("globals.totalmapblocks:",globals.totalmapblocks);
 		$.each(forestSigns,function(index,value){
 			var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-			blMap.changeBlockType(blockid,"sign");
+			blMap.changeBlockType(blockid,"sign","forest");
 			$('.the-fucking-forest-map .block:eq('+blockid+')').attr("data-text", value);
 		});
 	}
