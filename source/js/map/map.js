@@ -171,7 +171,6 @@ export class Map {
 	}
 
 	changeBlockType(block, newtype, map) {
-		//blUtil.log("changing block "+block+" to "+newtype);
 		var blockClass = '.the-fucking-'+map+'-map .block:eq('+block+')';
 		$(blockClass).removeClass(globals.allblockclasses);
 		$(blockClass).addClass("block block-"+newtype);
@@ -186,9 +185,6 @@ export class Map {
 		var cabin = false;
 		var total = globals.totalmapblocks;
 
-		console.log('****loadNewMap****');
-		console.log('this.mapWidth'+this.mapWidth);
-
 		if (cubeside == 'background'){
 			$('.maps-container').append('<div class="the-fucking-'+maptype+'-map" data-maptype="'+maptype+'"></div>');
 		} else {
@@ -197,10 +193,6 @@ export class Map {
 		
 		var map = $('.the-fucking-'+maptype+'-map');
 		var maphtml = '';
-
-		console.log("*********LOADMAP"+maptype);
-
-		console.log('this.mapWidth'+this.mapWidth);
 		
 		switch (maptype) {
 			case 'forest':
@@ -220,8 +212,8 @@ export class Map {
 				}
 				lakeBlocks = ["water","tree","grass","water","tree","grass","appletree","water"];
 				specialBlocks = [
-					"carrot-inground","carrot-inground","flower","flower",
-					"bluemushroom","bluemushroom","mushroom","mushroom"
+					"flower",
+					"mushroom",
 				];
 				riverBlocksX = ["water"];
 				riverBlocksY = ["water"];
@@ -230,7 +222,6 @@ export class Map {
 
 			case 'winter':
 				for (var f = 0; f <= (total - 1); f++) {
-					// console.log("step");
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "snow"; }
@@ -248,13 +239,8 @@ export class Map {
 				break;
 
 			case 'beach':
-				console.log('this.mapWidth'+this.mapWidth);
-				console.log('BEACH!');
-				console.log('this.mapWidth: '+this.mapWidth);
 				var maphalf = 0.5 * this.mapWidth;
-				console.log('maphalf: '+maphalf);
 				var shoreedge = maphalf;
-				console.log('shoreedge: '+shoreedge);
 				for (var f = 0; f <= (total - 1); f++){
 					var r = Math.random();
 					var blocktype;
@@ -283,12 +269,10 @@ export class Map {
 				for (var f = 0; f <= (total - 1); f++){
 					var r = Math.random();
 					var blocktype;
-					if (r>0.97) { blocktype = "flowers"; }
+					if (r>0.97) { blocktype = "flower"; }
 					else if (r>0.8) { blocktype = "pinetree"; }
 					else if (r>0.7) { blocktype = "appletree"; }
 					else if (r>0.6) { blocktype = "palmtree"; }
-					//else if (r>0.5) { blocktype = "oaktree"; }
-					//else if (r>0.4) { blocktype = "talltree"; }
 					else if (r>0.5) { blocktype = "tree"; } 
 					else { blocktype = "grass"; }
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
@@ -312,13 +296,13 @@ export class Map {
 					else if (r>0.976) { blocktype = "sandstone"; }
 					else if (r>0.972) { blocktype = "bluemushroom"; }
 					else if (r>0.968) { blocktype = "water"; }
-					else if (r>0.966) { blocktype = "wetsand"; }
+					else if (r>0.966) { blocktype = "dirt"; }
 					else { blocktype = "sand"; }
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
-				lakeBlocks = ["water","wetsand"];
+				lakeBlocks = ["water","dirt"];
 				specialBlocks = [
-					"redmushroom","flowers","flowers"
+					"redmushroom","flower","flower"
 				];
 				riverBlocksX = ['water'];
 				riverBlocksY = ['water'];
@@ -331,11 +315,6 @@ export class Map {
 					if (r<0.9) { blocktype = "water"; }
 					else if (r>0.98) { blocktype = "water"; }
 					else if (r>0.976) { blocktype = "wave"; }
-					/*
-					else if (r>0.972) { blocktype = "palmtree"; }
-					else if (r>0.968) { blocktype = "earth"; }
-					else if (r>0.966) { blocktype = "sun"; }
-					*/
 					else { blocktype = "water"; }
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
@@ -376,7 +355,6 @@ export class Map {
 				break;
 		}
 
-		// console.log('maphtml:'+maphtml);
 		$('.the-fucking-'+maptype+'-map').append(maphtml);
 
 		for (var i = 0; i<lakeBlocks.length; i++) {
@@ -431,8 +409,6 @@ export class Map {
 				} else { 
 					rowIndex++;
 				}
-
-				console.log("********** CABIN ******** this.mapWidth: "+this.mapWidth);
 
 				var blockId = randomBlockId + rowIndex + (rowOffset * this.mapWidth);
 

@@ -2,7 +2,8 @@ import * as globals from './globals';
 
 export class Utility {
 	log(msg) {
-		console.log(msg);
+		// disabled for dev
+		// console.log(msg);
 	}
 
 	randomBlockID() {

@@ -83,10 +83,6 @@ export class Movement {
 		var movingObject_nextblock = nextblock;
 		var nextBlockClass = '.the-fucking-'+map+'-map .block:eq('+nextblock+')';
 		var nextBlockType = blUtil.getBlockType(nextblock, globals.currentMap);
-		console.log(nextblock);
-		console.log(globals.currentMap);
-		console.log(nextBlockType);
-
 
 		// TELEPORTING
 		if (id == 1 && $(nextBlockClass).hasClass('block-portal-a')) {
