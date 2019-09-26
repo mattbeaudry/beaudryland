@@ -10,8 +10,8 @@ export class Map {
 	constructor() {
 		this.mapsContainer = $('.maps-wrap');
 		this.overlayhtml = '';
-		this.mapHeight;
-		this.mapWidth;
+		this.mapHeight = globals.mapheight;
+		this.mapWidth = globals.mapwidth;
 		this.mapHeightPx;
 		this.mapWidthPx;
 		this.mapTotalBlocks;
@@ -268,8 +268,8 @@ export class Map {
 						else if (r>0.98) { blocktype = "sandstone"; }
 						else if (r>0.96) { blocktype = "palmtree"; }
 					} else {
-						if (r<=0.98) { blocktype = "water"; }
-						else if (r>0.98) { blocktype = "wave"; }
+						if (r<=0.995) { blocktype = "water"; }
+						else if (r>0.995) { blocktype = "wave"; }
 					}
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
@@ -417,7 +417,7 @@ export class Map {
 		if (cabin == true) {
 			var randomBlockId = blUtil.randomBlockID();
 			var terrainBlocks = blTerrain.terrainCabin();
-			var canvasWidth = 9;
+			var canvasWidth = 5;
 			var rowOffset = 0;
 			var rowIndex = 0;
 			for (var j = 0; j<terrainBlocks.length; j++) {
@@ -431,6 +431,8 @@ export class Map {
 				} else { 
 					rowIndex++;
 				}
+
+				console.log("********** CABIN ******** this.mapWidth: "+this.mapWidth);
 
 				var blockId = randomBlockId + rowIndex + (rowOffset * this.mapWidth);
 
