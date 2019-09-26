@@ -34,7 +34,7 @@ export class Utility {
 		//alert(leftpx);
 	}
 
-	getBlockTopByID(block) {webpack -webkitCancelAnimationFrame
+	getBlockTopByID(block) {
 		var row = block / globals.mapwidth;
 		row = parseInt(row);
 		var toppx = row * globals.gridunitpx;

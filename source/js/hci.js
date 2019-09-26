@@ -296,17 +296,19 @@ export class HCI {
 			blMap.saveMap();
 		});
 
-		//MOVE PLAYER TO BLOCK
-		$('.the-fucking-forest-map .block').on("click", function() {
-			if (typeof stopObjectMovement === 'undefined') {
-			    // variable is undefined
-			} else {
-				stopObjectMovement();
-			}
-			var blockid = $(this).attr("data-blockid");
-			blUtil.log("goto block id:"+blockid);
-			blMovement.walkPlayerToBlock(1, blockid);
-		});
+		// disabled for dev
+
+		// MOVE PLAYER TO BLOCK
+		// $('.the-fucking-forest-map .block').on("click", function() {
+		// 	if (typeof stopObjectMovement === 'undefined') {
+		// 	    // variable is undefined
+		// 	} else {
+		// 		stopObjectMovement();
+		// 	}
+		// 	var blockid = $(this).attr("data-blockid");
+		// 	blUtil.log("goto block id:"+blockid);
+		// 	blMovement.walkPlayerToBlock(1, blockid);
+		// });
 
 	}
 

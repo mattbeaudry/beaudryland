@@ -1,6 +1,6 @@
 import * as globals from './globals';
 
-import { Utility } from './utility'; 
+import { Utility } from './utility';
 import { HCI } from './hci'; 
 import { Cube } from './map/cube'; 
 import { Enemy } from './enemy'; 

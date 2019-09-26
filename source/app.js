@@ -191,14 +191,20 @@ var loadNewGame = function() {
 		blMap.loadNewMap('jungle', 'left');
 		blMap.loadNewMap('desert', 'bottom');
 		blMap.loadNewMap('islands', 'top');
-		blStory.createForestSigns();
-		blStory.createWinterSigns();
-		blStory.createBeachSigns();
+		setTimeout(function() {
+			blStory.createForestSigns();
+			blStory.createWinterSigns();
+			blStory.createBeachSigns();
+		}, 3000);
 		blDev.getAllItems();
-		blAnimal.createAnimal();
+		// disabled for dev
+		//blAnimal.createAnimal();
 	} else if (maptype == 'game') {
 		blMap.loadNewMap('forest', 'front');
-		//blStory.createForestSigns();
+		setTimeout(function() {
+			blStory.createForestSigns();
+		}, 500);
+		// disabled for dev
 		//blAnimal.createAnimal();
 		blStory.setupMapBorders('forest');
 	}

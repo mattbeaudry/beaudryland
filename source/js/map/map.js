@@ -287,9 +287,9 @@ export class Map {
 					else if (r>0.8) { blocktype = "pinetree"; }
 					else if (r>0.7) { blocktype = "appletree"; }
 					else if (r>0.6) { blocktype = "palmtree"; }
-					else if (r>0.5) { blocktype = "oaktree"; }
-					else if (r>0.4) { blocktype = "talltree"; }
-					else if (r>0.3) { blocktype = "tree"; } 
+					//else if (r>0.5) { blocktype = "oaktree"; }
+					//else if (r>0.4) { blocktype = "talltree"; }
+					else if (r>0.5) { blocktype = "tree"; } 
 					else { blocktype = "grass"; }
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}

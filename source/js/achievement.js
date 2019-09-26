@@ -272,12 +272,13 @@ gotospace
 			  		html += '</div>';
 			html += '</div>';
 
-		$('.page-game').append(html);
-
-		$('.bubble-dialog .bubble-form').submit(function(e) {
-			$('.bubble-wrap').remove();
-			event.preventDefault();
-		});
+		// disabled for dev
+		
+		//$('.page-game').append(html);
+		// $('.bubble-dialog .bubble-form').submit(function(e) {
+		// 	$('.bubble-wrap').remove();
+		// 	event.preventDefault();
+		// });
 	}
 
 	displayDialog(text) {

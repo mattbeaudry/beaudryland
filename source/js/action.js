@@ -217,15 +217,25 @@ export class Action {
 			} else if (blItems.itemIsCollectable(blocktype)) {
 				var changeblocktotype = "grass";
 
-				// TREASURE
+				// "PLANTED" items - leaves dirt behind
 				if (
 					blocktype == "diamond-hole" ||
 					blocktype == "gold-hole" ||
 					blocktype == "silver-hole" ||
 					blocktype == "oil-hole" ||
-					blocktype == "clay-hole"
+					blocktype == "clay-hole" ||
+					blocktype == "tree" ||
+					blocktype == "pinetree" ||
+					blocktype == "palmtree" ||
+					blocktype == "appletree" ||
+					blocktype == "flower" ||
+					blocktype == "rock" ||
+					blocktype == "icerock" ||
+					blocktype == "standstone"
 				) {
 					changeblocktotype = "dirt";
+
+				// PICKING PLANTS
 				} else if (blocktype == "carrot-inground") { 
 					blocktype = "carrot";
 					changeblocktotype = "dirt";

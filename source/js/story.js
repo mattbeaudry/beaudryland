@@ -19,6 +19,7 @@ export class Story {
 			"You shall build a shovel in order to find treasure.",
 			"You shall build a guitar in order to unlock a new area."
 		];
+		console.log("globals.totalmapblocks:",globals.totalmapblocks);
 		$.each(forestSigns,function(index,value){
 			var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
 			blMap.changeBlockType(blockid,"sign");
