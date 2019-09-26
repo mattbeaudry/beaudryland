@@ -111,37 +111,29 @@ export class Action {
 
 			// SPEAR THROW
 			} else if (selecteditem == "spear") {
-				console.log('throw spear');
 				blSpear.throwSpear(block, direction);
 
 			// DIGGING
-			} else if (selecteditem == "shovel" && blItems.itemIsDiggable(blocktype)) {
-				blUtil.log("dig!");
 				var r = Math.random();
 
 				if (currentMap == 'forest') {
 					if (r < 0.5) {
-						blUtil.log("diamond!");
 						blMap.changeBlockType(block, "diamond", currentMap);
 					} else {
 						blMap.changeBlockType(block, "dirt", currentMap);
 					}
 				} else if (currentMap == 'winter') {
 					if (r < 0.2) {
-						blUtil.log("gold!");
 						blMap.changeBlockType(block, "gold", currentMap);
 					} else if (r < 0.4) {
-						blUtil.log("silver!");
 						blMap.changeBlockType(block, "silver", currentMap);
 					} else {
 						blMap.changeBlockType(block, "dirt", currentMap);
 					}
 				} else if (currentMap == 'beach') {
 					if (r < 0.2) {
-						blUtil.log("oil!");
 						blMap.changeBlockType(block, "oil", currentMap);
 					} else if (r < 0.4) {
-						blUtil.log("clay!");
 						blMap.changeBlockType(block, "clay", currentMap);
 					} else {
 						blMap.changeBlockType(block, "dirt", currentMap);
@@ -173,14 +165,10 @@ export class Action {
 				
 			// SIGNS
 			} else if (blocktype == "sign") {
-				blUtil.log("reading sign");
 				blSigns.readSign(block);
 
 			// PLACING BLOCKS
 			} else if (blItems.itemIsGround(blocktype)) {
-
-				blUtil.log('selected item is '+selecteditem);
-				blUtil.log('blocktype is '+blocktype);
 
 				// PORTALS
 				if (selecteditem == "portal-a") {

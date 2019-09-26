@@ -202,10 +202,6 @@ export class Map {
 					if (r<0.7) { blocktype = "grass"; }
 					else if (r>0.98) { blocktype = "rock"; }
 					else if (r>0.96) { blocktype = "appletree"; }
-					else if (r>0.94) { blocktype = "carrot-inground"; }
-					else if (r>0.92) { blocktype = "flower"; }
-					else if (r>0.90) { blocktype = "mushroom"; }
-					else if (r>0.88) { blocktype = "appletree"; }
 					else if (r>0.8) { blocktype = "tree"; }
 					else { blocktype = "grass"; }
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'">'+f+'</div>';
@@ -214,6 +210,8 @@ export class Map {
 				specialBlocks = [
 					"flower",
 					"mushroom",
+					"appletree",
+					"carrot-inground"
 				];
 				riverBlocksX = ["water"];
 				riverBlocksY = ["water"];
@@ -254,8 +252,8 @@ export class Map {
 						else if (r>0.98) { blocktype = "sandstone"; }
 						else if (r>0.96) { blocktype = "palmtree"; }
 					} else {
-						if (r<=0.995) { blocktype = "water"; }
-						else if (r>0.995) { blocktype = "wave"; }
+						if (r<=0.997) { blocktype = "water"; }
+						else if (r>0.997) { blocktype = "wave"; }
 					}
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}

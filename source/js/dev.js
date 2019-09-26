@@ -105,14 +105,6 @@ export class Dev {
 				function_name: 'blCube.rotateCubeTo',
 				function_val: 'top'
 			},
-			// {
-			// 	text: 'Cubify Map',
-			// 	function_name: 'blCube.cubifyMap'
-			// },
-			// {
-			// 	text: 'Decubify Map',
-			// 	function_name: 'blCube.decubifyMap'
-			// },
 		];
 
 		var devconsole = $('.dev-console');
@@ -168,10 +160,6 @@ export class Dev {
 	}
 
 	lightUpBlock() {
-
-		// console.log ("the light!");
-
-		//var randomblockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
 		var playerblockid = blUtil.getObjectCurrentBlock("1") - 1;
 		var value = 0;
 
