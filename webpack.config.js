@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-//var extractPlugin = new MiniCssExtractPlugin('../../build/css/main.bundle.css');
 var path = require('path');
 
 module.exports = {
@@ -44,8 +43,13 @@ module.exports = {
 							hmr: process.env.NODE_ENV === 'development',
 						},
 					},
-          			'css-loader',
-					'sass-loader'
+					{
+						loader: 'css-loader'
+					},
+					{ 
+						loader: 'sass-loader'
+
+					}
 				],
 			},
     		{
@@ -56,7 +60,7 @@ module.exports = {
     					options: {
     						name: '[name].[ext]',
     						outputPath: '../img/',
-    						publicPath: '../img/'
+							publicPath: '../img/'
     					}
     				}
     			]
