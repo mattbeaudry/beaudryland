@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npx webpack --config webpack.config.js --color"
+    "build": "npx webpack --config webpack.config.js --color",
+    "watch": "npx webpack -w --config webpack.config.js --color"
   },
   "repository": {
     "type": "git",
