@@ -13,13 +13,11 @@ export class Story {
 	}
 
 	createForestSigns() {
-		blUtil.log("add forest sign clues");
 		var forestSigns = [
 			"You shall collect trees and rocks to create wood and other items.",
 			"You shall build a shovel in order to find treasure.",
 			"You shall build a guitar in order to unlock a new area."
 		];
-		console.log("globals.totalmapblocks:",globals.totalmapblocks);
 		$.each(forestSigns,function(index,value){
 			var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
 			blMap.changeBlockType(blockid,"sign","forest");
@@ -28,7 +26,6 @@ export class Story {
 	}
 
 	createWinterSigns() {
-		blUtil.log("add winter sign clues");
 		 var winterSigns = [
 		 	"Winter Message 1",
 		 	"Winter Message 2",
@@ -42,7 +39,6 @@ export class Story {
 	}
 
 	createBeachSigns() {
-		blUtil.log("add beach sign clues");
 		var forestSigns = [
 			"Beach Message 1",
 			"Beach Message 2",
@@ -56,9 +52,6 @@ export class Story {
 	}
 
 	setupMapBorders(map) {
-		blUtil.log('FENCEShhh!!');
-		//var mapClass = '.the-fucking-'+map+'-map';
-		//$(mapClass+' .block:eq('+1+')').
 		// top
 		for (var i=0; i<globals.mapwidth; i++) {
 			blMap.changeBlockType(i, 'fence-metal', map);
@@ -68,8 +61,6 @@ export class Story {
 			blMap.changeBlockType(i, 'fence-metal', map);
 		}
 		// right+left
-		blUtil.log("*******MAPWIDTH:"+globals.mapwidth);
-		
 		for (var i=0; i<globals.totalmapblocks; i++) {
 			if (i%globals.mapwidth == 0 || i%globals.mapwidth == (globals.mapwidth-1)) {
 				blMap.changeBlockType(i, 'fence-metal', map);
@@ -78,7 +69,6 @@ export class Story {
 	}
 
 	demolishMapBorder(map, side) {
-		blUtil.log('DEMOILISH FENCE: '+map+' + '+side);
 		var bgBlock;
 		var totalBlocks = globals.totalmapblocks;
 		var mapWidthBlocks = globals.mapwidth;
