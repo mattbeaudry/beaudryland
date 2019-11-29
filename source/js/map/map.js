@@ -93,7 +93,7 @@ export class Map {
 	        //$('body').append(data);
 	        blUtil.log("save mapdata: "+data);
 	    });
-	    //save winter map
+		//save winter map
 	    if ($('.the-fucking-winter-map').length) {
 			var wintermapblocks = new Array();
 			for (var i=0; i<=this.mapTotalBlocks; i++){
@@ -237,12 +237,12 @@ export class Map {
 				break;
 
 			case 'beach':
-				var maphalf = 0.5 * this.mapWidth;
+				var maphalf = 0.5 * globals.mapwidth;
 				var shoreedge = maphalf;
 				for (var f = 0; f <= (total - 1); f++){
 					var r = Math.random();
 					var blocktype;
-					var rowposition = f % this.mapWidth;
+					var rowposition = f % globals.mapwidth;
 					if (rowposition == 0) {
 						shoreedge = parseInt(Math.random() * 3) + 2;
 						blUtil.log(shoreedge);
@@ -358,7 +358,7 @@ export class Map {
 		for (var i = 0; i<lakeBlocks.length; i++) {
 		    var randomBlockId = blUtil.randomBlockID();
 		    var blockType = lakeBlocks[i];
-		    var terrainBlocks = blTerrain.terrainLake(this.mapWidth);
+		    var terrainBlocks = blTerrain.terrainLake(globals.mapwidth);
 		    for (var j = 0; j<terrainBlocks.length; j++) {
 		    	var offset = terrainBlocks[j];
 		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
@@ -373,7 +373,7 @@ export class Map {
 		for (var i = 0; i<riverBlocksX.length; i++) {
 		    var randomBlockId = blUtil.randomBlockID();
 		    var blockType = riverBlocksX[i];
-		    var terrainBlocks = blTerrain.terrainRiverX(this.mapWidth);
+		    var terrainBlocks = blTerrain.terrainRiverX(globals.mapwidth);
 		    for (var j = 0; j<terrainBlocks.length; j++) {
 		    	var offset = terrainBlocks[j];
 		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
@@ -383,7 +383,7 @@ export class Map {
 		for (var i = 0; i<riverBlocksY.length; i++) {
 		    var randomBlockId = blUtil.randomBlockID();
 		    var blockType = riverBlocksY[i];
-		    var terrainBlocks = blTerrain.terrainRiverY(this.mapWidth);
+		    var terrainBlocks = blTerrain.terrainRiverY(globals.mapwidth);
 		    for (var j = 0; j<terrainBlocks.length; j++) {
 		    	var offset = terrainBlocks[j];
 		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
@@ -408,7 +408,7 @@ export class Map {
 					rowIndex++;
 				}
 
-				var blockId = randomBlockId + rowIndex + (rowOffset * this.mapWidth);
+				var blockId = randomBlockId + rowIndex + (rowOffset * globals.mapwidth);
 
 				switch(blockType) {
 					case '-': blockType = 'none'; break;

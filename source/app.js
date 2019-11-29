@@ -182,8 +182,6 @@ var loadGame = function() {
 ////////////////////////////
 
 var loadNewGame = function() {
-	blUtil.log("new user & brand new map");
-    
 	if (maptype == 'creative') {
 		blMap.loadNewMap('forest', 'front');
 		blMap.loadNewMap('winter', 'right');

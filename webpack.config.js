@@ -9,6 +9,10 @@ module.exports = {
         path: __dirname + "/build/js",
         filename: "app-bundle.js"
 	},
+	mode: "development",
+	optimization: {
+		minimize: false
+	},
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: '../css/main.bundle.css'
