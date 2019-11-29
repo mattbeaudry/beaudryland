@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx webpack --config webpack.config.js --color",
+    "watch": "npx webpack -w --config webpack.config.js --color"
   },
   "repository": {
     "type": "git",
@@ -21,19 +23,22 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.28.9",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^0.11.2",
+    "css-loader": "^3.2.0",
+    "file-loader": "^5.0.2",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^2.30.1",
     "jquery": "^3.3.1",
     "jquery-ui-bundle": "^1.12.1-migrate",
     "jqueryui": "^1.11.1",
-    "node-sass": "^4.11.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.13.0",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^8.0.0",
     "soundbank-reverb": "^1.1.2",
-    "webpack": "^3.12.0"
+    "webpack": "^4.41.2"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.10"
   }
 }

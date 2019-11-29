@@ -27,8 +27,8 @@ FEATURES 2018
 - user accounts: loading / saving of maps, inventory, achievements etc. 
 
 HOW TO INSTALL ON NEW MACHINE
-- clone into you local
-- import beaudryland database found in db folder
-- upload sql database
+- clone into your local
+- import db found in database folder
 - config.php to point to db
-- webpack to compile
+- "npm install"
+- "npm run watch" to compile

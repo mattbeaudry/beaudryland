@@ -114,6 +114,7 @@ export class Action {
 				blSpear.throwSpear(block, direction);
 
 			// DIGGING
+			} else if (selecteditem == "shovel" && blItems.itemIsDiggable(blocktype)) {
 				var r = Math.random();
 
 				if (currentMap == 'forest') {

@@ -1,6 +1,5 @@
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractPlugin = new ExtractTextPlugin('../../build/css/main.bundle.css');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var path = require('path');
 
 module.exports = {
@@ -9,7 +8,17 @@ module.exports = {
     output: {
         path: __dirname + "/build/js",
         filename: "app-bundle.js"
-    },
+	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: '../css/main.bundle.css'
+		}),
+		new webpack.ProvidePlugin({
+    		$: 'jquery',
+    		jQuery: 'jquery',
+            'globals': 'globals'
+    	})
+    ],
     module: {
     	rules: [
     		{
@@ -23,13 +32,26 @@ module.exports = {
 					}
 				]
     		},
-    		{
-    			test: /\.scss$/,
-    			use: extractPlugin.extract({
-    				use: ['css-loader', 'sass-loader']
-    			})
-    				
-    		},
+			{
+				test: /\.scss$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							name: '[name].bundle.css',
+							outputPath: 'build/css',
+							hmr: process.env.NODE_ENV === 'development',
+						},
+					},
+					{
+						loader: 'css-loader'
+					},
+					{ 
+						loader: 'sass-loader'
+
+					}
+				],
+			},
     		{
     			test: /\.(jpg|png|gif)$/,
     			use: [
@@ -38,7 +60,7 @@ module.exports = {
     					options: {
     						name: '[name].[ext]',
     						outputPath: '../img/',
-    						publicPath: '../img/'
+							publicPath: '../img/'
     					}
     				}
     			]
@@ -65,13 +87,5 @@ module.exports = {
             "jquery-ui": "jquery-ui/jquery-ui.js",      
             modules: path.join(__dirname, "node_modules"),
         }
-    },
-    plugins: [
-    	extractPlugin,
-    	new webpack.ProvidePlugin({
-    		$: 'jquery',
-    		jQuery: 'jquery',
-            'globals': 'globals'
-    	})
-    ]
+    }
 };
