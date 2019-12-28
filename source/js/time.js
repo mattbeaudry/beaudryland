@@ -52,7 +52,7 @@ export class Time {
 		}
 
 		// start time!
-		newAnimationFrame();
+		//newAnimationFrame();
 
 		// spears
 		var animateSpears = function() {

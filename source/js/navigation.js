@@ -19,6 +19,7 @@ export var initializeNavigation = function(testVar, testObject) {
 	// 		$('.nav-extra').toggle();
 	// 	}
 	// });
+	
 	$('.tabs-close').hide();
 	$('.tabs .tab').hide();
 	$('.tab-game').show();

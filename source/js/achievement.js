@@ -206,6 +206,10 @@ gotospace
 						// create space map
 						blMap.loadNewMap('space', 'background');
 
+						// change ui theme to night mode
+						$('body').removeClass('theme-day');
+						$('body').addClass('theme-night');
+
 						// zoom out from cube
 						$('.maps-wrap').addClass('maps-zoomout');
 
