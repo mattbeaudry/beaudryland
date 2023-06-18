@@ -272,11 +272,16 @@
 								</tr>
 							</tbody>
 						</table>
-						</section>
+						<ul>
+							<li>Invent the bicycle</li>
+							<li>Invent roads</li>
+							<li>Invent the car</li>
+							<li>Find the mushrooms</li>
+							<li>Go skiing</li>
+						</ul>
+					</section>
 				</div>
-
 			</div>
-
 		</div>
 
 		<!-- 

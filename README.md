@@ -5,7 +5,7 @@ beaudryland.com
 
 This one time in 2013, I made a simple game called MiniCraft in a day. Been working on it ever since. Mostly to keep practicing coding and have some fun doing it.
 
-FEATURES 2018
+FEATURES
 - engine: movement, collisions, projectiles, map mechanisms
 - random map terrain generation
 - player movement via keyboard / mouse / touch pad

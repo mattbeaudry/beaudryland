@@ -110,7 +110,6 @@ body.theme-night {
   transition: all 5s;
   transform: perspective(0px) rotateX(0deg) rotateY(0deg) scale(1) translateZ(0px);
   overflow: visible !important;
-  transform-style: preserve-3d;
 }
 
 .cube {
