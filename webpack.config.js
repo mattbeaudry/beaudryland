@@ -31,56 +31,63 @@ module.exports = {
 					{
 						loader: 'babel-loader',
 						options: {
-							presets: ['es2015', 'react']
+							presets: ['@babel/react', '@babel/preset-env']
 						}
 					}
 				]
     		},
 			{
+				// test: /\.scss$/,
+				// use: [
+				// 	{
+				// 		loader: MiniCssExtractPlugin.loader,
+				// 		options: {
+				// 			name: '[name].bundle.css',
+				// 			outputPath: 'build/css',
+				// 			publicPath: "build/css",
+				// 			hmr: process.env.NODE_ENV === 'development',
+				// 		},
+				// 	},
+				// 	{
+				// 		loader: 'css-loader'
+				// 	},
+				// 	{ 
+				// 		loader: 'sass-loader'
+
+				// 	}
+				// ],
 				test: /\.scss$/,
 				use: [
+					MiniCssExtractPlugin.loader,
 					{
-						loader: MiniCssExtractPlugin.loader,
+						loader: "css-loader",
 						options: {
-							name: '[name].bundle.css',
-							outputPath: 'build/css',
-							hmr: process.env.NODE_ENV === 'development',
+							// name: '[name].bundle.css',
+							// outputPath: 'build/css',
+							// publicPath: "build/css",
+							// hmr: process.env.NODE_ENV === 'development',
 						},
 					},
-					{
-						loader: 'css-loader'
-					},
-					{ 
-						loader: 'sass-loader'
-
-					}
-				],
+					"sass-loader"
+				]
 			},
     		{
     			test: /\.(jpg|png|gif)$/,
-    			use: [
-    				{
-    					loader: 'file-loader',
-    					options: {
-    						name: '[name].[ext]',
-    						outputPath: '../img/',
-							publicPath: '../img/'
-    					}
-    				}
-    			]
+    			loader: 'file-loader',
+				options: {
+					name: '[path][name].[ext]',
+					outputPath: '../img/',
+					publicPath: '../img/'
+				}
     		},
     		{
     			test: /\.svg$/,
-    			use: [
-    				{
-    					loader: 'file-loader',
-    					options: {
-    						name: '[name].[ext]',
-    						outputPath: '../svg/',
-    						publicPath: '../svg/'
-    					}
-    				}
-    			]
+    			loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					outputPath: '../svg/',
+					publicPath: '../svg/'
+				}
     		}
 
     	]

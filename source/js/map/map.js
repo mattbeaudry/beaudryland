@@ -23,24 +23,28 @@ export class Map {
 		blUtil.log("map width"+globals.mapWidthDesktop);
 
 		if (mapsize == 'mobile'){
-			globals.mapwidth = globals.mapWidthMobile;
-			globals.mapheight = globals.mapHeightMobile;
-			globals.totalmapblocks = globals.mapWidthMobile * globals.mapHeightMobile;
+			//globals.mapwidth = globals.mapWidthMobile;
+			//globals.mapheight = globals.mapHeightMobile;
+			//globals.totalmapblocks = globals.mapWidthMobile * globals.mapHeightMobile;
 			this.mapWidth = globals.mapWidthMobile;
 			this.mapHeight = globals.mapHeightMobile;
 			this.mapTotalBlocks = globals.mapWidthMobile * globals.mapHeightMobile;
 			this.mapWidthPx = globals.mapWidthMobile * globals.gridunitpx;
 			this.mapHeightPx = globals.mapHeightMobile * globals.gridunitpx;
 		} else {
-			globals.mapwidth = globals.mapWidthDesktop;
-			globals.mapheight = globals.mapHeightDesktop;
-			globals.totalmapblocks = globals.mapWidthDesktop * globals.mapHeightDesktop;
+			// globals.mapwidth = globals.mapWidthDesktop;
+			// globals.mapheight = globals.mapHeightDesktop;
+			// globals.totalmapblocks = globals.mapWidthDesktop * globals.mapHeightDesktop;
 			this.mapWidth = globals.mapWidthDesktop;
 			this.mapHeight = globals.mapHeightDesktop;
 			this.mapTotalBlocks = globals.mapWidthDesktop * globals.mapHeightDesktop;
 			this.mapWidthPx = globals.mapWidthDesktop * globals.gridunitpx;
-			this.mapHeightPx = globals.meapHeightDesktop * globals.gridunitpx;
+			this.mapHeightPx = globals.mapHeightDesktop * globals.gridunitpx;
 		}
+
+		console.log("setupMap");
+		console.log(this.mapTotalBlocks);
+
 		$('.the-fucking-forest-map').css("width", this.mapWidthPx+"px");
 		$('.the-fucking-forest-map').css("height", this.mapHeightPx+"px");
 	}
@@ -183,7 +187,9 @@ export class Map {
 		var riverBlocksX = [];
 		var riverBlocksY = [];
 		var cabin = false;
-		var total = globals.totalmapblocks;
+
+		console.log("loadNewMap");
+		console.log(this.mapTotalBlocks);
 
 		if (cubeside == 'background'){
 			$('.maps-container').append('<div class="the-fucking-'+maptype+'-map" data-maptype="'+maptype+'"></div>');
@@ -191,12 +197,12 @@ export class Map {
 			this.mapsContainer.append('<div class="the-fucking-'+maptype+'-map cube-side cube-'+cubeside+'" data-maptype="'+maptype+'"></div>');
 		}
 		
-		var map = $('.the-fucking-'+maptype+'-map');
+		// var map = $('.the-fucking-'+maptype+'-map');
 		var maphtml = '';
 		
 		switch (maptype) {
 			case 'forest':
-				for (var f = 0; f <= (total - 1); f++) {
+				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++) {
 					var r = Math.random();
 					var blocktype;
 					if (r<0.7) { blocktype = "grass"; }
@@ -219,7 +225,7 @@ export class Map {
 				break;
 
 			case 'winter':
-				for (var f = 0; f <= (total - 1); f++) {
+				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++) {
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "snow"; }
@@ -237,12 +243,12 @@ export class Map {
 				break;
 
 			case 'beach':
-				var maphalf = 0.5 * globals.mapwidth;
+				var maphalf = 0.5 * this.mapWidth;
 				var shoreedge = maphalf;
-				for (var f = 0; f <= (total - 1); f++){
+				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
-					var rowposition = f % globals.mapwidth;
+					var rowposition = f % this.mapWidth;
 					if (rowposition == 0) {
 						shoreedge = parseInt(Math.random() * 3) + 2;
 						blUtil.log(shoreedge);
@@ -264,7 +270,7 @@ export class Map {
 				break;
 
 			case 'jungle':
-				for (var f = 0; f <= (total - 1); f++){
+				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r>0.97) { blocktype = "flower"; }
@@ -286,7 +292,7 @@ export class Map {
 				break;
 
 			case 'desert':
-				for (var f = 0; f <= (total - 1); f++){
+				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "sand"; }
@@ -307,7 +313,7 @@ export class Map {
 				break;
 
 			case 'islands':
-				for (var f = 0; f <= (total - 1); f++){
+				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "water"; }
@@ -331,7 +337,7 @@ export class Map {
 				break;
 
 			case 'space':
-				for (var f = 0; f <= (total - 1); f++){
+				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "space"; }
@@ -358,7 +364,7 @@ export class Map {
 		for (var i = 0; i<lakeBlocks.length; i++) {
 		    var randomBlockId = blUtil.randomBlockID();
 		    var blockType = lakeBlocks[i];
-		    var terrainBlocks = blTerrain.terrainLake(globals.mapwidth);
+		    var terrainBlocks = blTerrain.terrainLake(this.mapWidth);
 		    for (var j = 0; j<terrainBlocks.length; j++) {
 		    	var offset = terrainBlocks[j];
 		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
@@ -373,7 +379,7 @@ export class Map {
 		for (var i = 0; i<riverBlocksX.length; i++) {
 		    var randomBlockId = blUtil.randomBlockID();
 		    var blockType = riverBlocksX[i];
-		    var terrainBlocks = blTerrain.terrainRiverX(globals.mapwidth);
+		    var terrainBlocks = blTerrain.terrainRiverX(this.mapWidth);
 		    for (var j = 0; j<terrainBlocks.length; j++) {
 		    	var offset = terrainBlocks[j];
 		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
@@ -383,7 +389,7 @@ export class Map {
 		for (var i = 0; i<riverBlocksY.length; i++) {
 		    var randomBlockId = blUtil.randomBlockID();
 		    var blockType = riverBlocksY[i];
-		    var terrainBlocks = blTerrain.terrainRiverY(globals.mapwidth);
+		    var terrainBlocks = blTerrain.terrainRiverY(this.mapWidth);
 		    for (var j = 0; j<terrainBlocks.length; j++) {
 		    	var offset = terrainBlocks[j];
 		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
@@ -408,7 +414,7 @@ export class Map {
 					rowIndex++;
 				}
 
-				var blockId = randomBlockId + rowIndex + (rowOffset * globals.mapwidth);
+				var blockId = randomBlockId + rowIndex + (rowOffset * this.mapWidth);
 
 				switch(blockType) {
 					case '-': blockType = 'none'; break;

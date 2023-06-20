@@ -2,7 +2,7 @@ import { Items } from './item/items';
 var blItems = new Items();
 
 export const blocktypes = blItems.getItemSlugs();
-export const hasanimationn = blItems.getItemSlugsByProperty('has_animation');
+export const hasanimation = blItems.getItemSlugsByProperty('has_animation');
 export const iscraftable = blItems.getItemSlugsByProperty('is_craftable');
 export const iscollectable = blItems.getItemSlugsByProperty('is_collectable');
 export const iscutable = blItems.getItemSlugsByProperty('is_cutable');
@@ -53,15 +53,15 @@ export const buiColor = {
 };
 
 export const gridunitpx = 20; //must change this px value in css as well
-export var totalmapblocks = 0;
 export var mapWidthMobile = 16;
-export var mapHeightMobile = 16; 
+export var mapHeightMobile = 16;
 export var mapWidthDesktop = 16;
 export var mapHeightDesktop = 16;
-export var mapwidth = 0;
-export var mapheight = 0;
-export var mapWidthPx = 0;
-export var mapHeightPx = 0;
+export var totalmapblocks = mapWidthDesktop * mapHeightDesktop;
+export var mapwidth = 16;
+export var mapheight = 16;
+export var mapWidthPx = mapwidth * gridunitpx;
+export var mapHeightPx = mapheight * gridunitpx;
 export var currentMap = 'forest';
 export var currentCubeSide = 'front';
 

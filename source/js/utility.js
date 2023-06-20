@@ -2,7 +2,7 @@ import * as globals from './globals';
 
 export class Utility {
 	log(msg) {
-		// disabled for dev
+		// uncomment for dev mode
 		// console.log(msg);
 	}
 

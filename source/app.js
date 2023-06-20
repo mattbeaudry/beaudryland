@@ -71,8 +71,10 @@ if ( $('body').hasClass("version-phonegap") ) {
 
 	$(document).ready(function() {
 		//console.log("MOBILE VERSION");
-		globals.mapwidth = globals.mapWidthMobile;
-		globals.mapheight = globals.mapHeightMobile;
+		
+		// globals.mapwidth = globals.mapWidthMobile;
+		// globals.mapheight = globals.mapHeightMobile;
+		
 		blMap.setupMap('mobile');
 		blMap.loadNewMap('forest', 'front');
 		blPlayer.createPlayer();
@@ -108,8 +110,9 @@ if ( $('body').hasClass("version-phonegap") ) {
 	$(document).ready(function() {
 		//console.log("DESKTOP VERSION");
 
-		globals.mapwidth = globals.mapWidthDesktop;
-		globals.mapheight = globals.mapHeightDesktop;
+		// globals.mapwidth = globals.mapWidthDesktop;
+		// globals.mapheight = globals.mapHeightDesktop;
+		
 		blMap.setupMap('desktop');
 
 		loadGame();
