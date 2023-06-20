@@ -273,11 +273,19 @@
 							</tbody>
 						</table>
 						<ul>
+							<li>Store items in a chest</li>
 							<li>Invent the bicycle</li>
 							<li>Invent roads</li>
+							<li>Sale a boat on water</li>
 							<li>Invent the car</li>
 							<li>Find the mushrooms</li>
 							<li>Go skiing</li>
+							<li>Invent the 2D printer</li>
+							<li>Invent the computer</li>
+							<li>Invent teleportation</li>
+							<li>Invent the telescope</li>
+							<li>Start a band (invent and place all instruments)</li>
+
 						</ul>
 					</section>
 				</div>

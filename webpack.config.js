@@ -59,36 +59,28 @@ module.exports = {
 				test: /\.scss$/,
 				use: [
 					MiniCssExtractPlugin.loader,
-					{
-						loader: "css-loader",
-						options: {
-							// name: '[name].bundle.css',
-							// outputPath: 'build/css',
-							// publicPath: "build/css",
-							// hmr: process.env.NODE_ENV === 'development',
-						},
-					},
-					"sass-loader"
-				]
+					"css-loader",
+					"sass-loader",
+				  ],
 			},
-    		{
-    			test: /\.(jpg|png|gif)$/,
-    			loader: 'file-loader',
-				options: {
-					name: '[path][name].[ext]',
-					outputPath: '../img/',
-					publicPath: '../img/'
-				}
-    		},
-    		{
-    			test: /\.svg$/,
-    			loader: 'file-loader',
-				options: {
-					name: '[name].[ext]',
-					outputPath: '../svg/',
-					publicPath: '../svg/'
-				}
-    		}
+    		// {
+    		// 	test: /\.(jpg|png|gif)$/,
+    		// 	loader: 'file-loader',
+			// 	options: {
+			// 		name: '[name].[ext]',
+			// 		outputPath: '../img/',
+			// 		publicPath: '../img/'
+			// 	}
+    		// },
+    		// {
+    		// 	test: /\.svg$/,
+    		// 	loader: 'file-loader',
+			// 	options: {
+			// 		name: '[name].[ext]',
+			// 		outputPath: '../svg/',
+			// 		publicPath: '../svg/'
+			// 	}
+    		// }
 
     	]
     },
