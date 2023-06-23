@@ -81,7 +81,7 @@
 /* THE CRAFTING TABLE */
 
 .crafting-table-wrap {
-  text-align: center;
+  display: flex;
 
   .the-fucking-crafting-table {
     display: inline-block;

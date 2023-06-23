@@ -42,7 +42,7 @@ export class Cube {
 			return (className.match (/(^|\s)cube-show-\S+/g) || []).join(' ');
 		});
 		$('.cube').addClass('cube-show-'+side);
-		globals.currentCubeSide = side;
+		// globals.currentCubeSide = side;
 	}
 
 }

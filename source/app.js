@@ -81,7 +81,6 @@ if ( $('body').hasClass("version-phonegap") ) {
 		blMobile.websql_openDatabase();
 		blMobile.websql_createTable();
 		blMobile.loadGameMobile();
-		blStory.createForestSigns();
 		//blAnimal.createAnimal();
 		//blStory.setupMapBorders('forest');
 		blMap.loadNewMap('winter', 'right');

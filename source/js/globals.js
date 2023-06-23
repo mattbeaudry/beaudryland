@@ -53,17 +53,27 @@ export const buiColor = {
 };
 
 export const gridunitpx = 20; //must change this px value in css as well
-export var mapWidthMobile = 16;
-export var mapHeightMobile = 16;
-export var mapWidthDesktop = 16;
-export var mapHeightDesktop = 16;
+export var mapWidthMobile = 20;
+export var mapHeightMobile = 20;
+export var mapWidthDesktop = 20;
+export var mapHeightDesktop = 20;
 export var totalmapblocks = mapWidthDesktop * mapHeightDesktop;
-export var mapwidth = 16;
-export var mapheight = 16;
+export var mapwidth = 20;
+export var mapheight = 20;
 export var mapWidthPx = mapwidth * gridunitpx;
 export var mapHeightPx = mapheight * gridunitpx;
-export var currentMap = 'forest';
-export var currentCubeSide = 'front';
+export let currentCubeSide = 'front';
+
+console.log("load globals");
+export function setCurrentMap(map) { $('.maps-container').data('currentMap', map); }
+export function getCurrentMap() { 
+	return $('.maps-container').data('currentMap');
+}
+setCurrentMap('forest');
+
+const currentMap = getCurrentMap();
+
+console.log(currentMap);
 
 export const inventoryslots = 74;
 export const enemyspeed = 200;

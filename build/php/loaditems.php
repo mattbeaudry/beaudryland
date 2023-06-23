@@ -77,18 +77,20 @@ if($result->num_rows > 0) {
 
             // PROPERTIES
             $infohtml .= '<td>';
-                if ($row['is_craftable']) { $infohtml .= 'is_craftable<br>'; }
-                if ($row['is_collectable']) { $infohtml .= 'is_collectable<br>'; }
-                if ($row['is_cutable']) { $infohtml .= 'is_cutable<br>'; }
-                if ($row['is_edible']) { $infohtml .= 'is_edible<br>'; }
-                if ($row['is_placeable']) { $infohtml .= 'is_placeable<br>'; }
-                if ($row['is_blocking']) { $infohtml .= 'is_blocking<br>'; }
-                if ($row['is_ingredient']) { $infohtml .= 'is_ingredient<br>'; }
-                if ($row['is_ground']) { $infohtml .= 'is_ground<br>'; }
-                if ($row['is_diggable']) { $infohtml .= 'is_diggable<br>'; }
-                if ($row['is_lifeform']) { $infohtml .= 'is_lifeform<br>'; }
-                if ($row['is_equipable']) { $infohtml .= 'is_equipable<br>'; }
-                if ($row['is_useable']) { $infohtml .= 'is_useable<br>'; }
+            $infohtml .= '<select>';
+                if ($row['is_craftable']) { $infohtml .= '<option>is_craftable</option>'; }
+                if ($row['is_collectable']) { $infohtml .= '<option>is_collectable</option>'; }
+                if ($row['is_cutable']) { $infohtml .= '<option>is_cutable</option>'; }
+                if ($row['is_edible']) { $infohtml .= '<option>is_edible</option>'; }
+                if ($row['is_placeable']) { $infohtml .= '<option>is_placeable</option>'; }
+                if ($row['is_blocking']) { $infohtml .= '<option>is_blocking</option>'; }
+                if ($row['is_ingredient']) { $infohtml .= '<option>is_ingredient</option>'; }
+                if ($row['is_ground']) { $infohtml .= '<option>is_ground</option>'; }
+                if ($row['is_diggable']) { $infohtml .= '<option>is_diggable</option>'; }
+                if ($row['is_lifeform']) { $infohtml .= '<option>is_lifeform</option>'; }
+                if ($row['is_equipable']) { $infohtml .= '<option>is_equipable</option>'; }
+                if ($row['is_useable']) { $infohtml .= '<option>is_useable</option>'; }
+            $infohtml .= '</select>';
             $infohtml .= '</td>';
 
         $infohtml .= '</tr>';

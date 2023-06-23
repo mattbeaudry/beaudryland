@@ -216,22 +216,26 @@ export class HCI {
 		// SELECT AN ITEM IN THE INVENTORY
 		$('.the-fucking-inventory div').on("click", function() {
 			var blocktype = $(this).attr('data-blocktype');
-			//items that are crafting ingredients
+			// items that are crafting ingredients
 			if ( $.inArray(blocktype, globals.isingredient) > -1 ) {
 			    if ( $(this).attr('data-blocktype') != "empty" ) {
 			    	var blocktype = $(this).attr('data-blocktype');
 			    	blInventory.moveItemToCraftingTable(blocktype);
 			    }
+			} else {
+				$('.tabs .tab').hide();
+				$('.tab-game').show();
+				$('.tabs-close').hide();
 			}
 			var playerdirection = blUtil.getObjectDirection(1, "player");
 			$('.the-fucking-inventory > div').removeClass("selected-item");
 			$(this).addClass('selected-item');
 			var selecteditem = $(this).attr('data-blocktype');
 
-			//if ( selecteditem == "sword" ) { createEnemy(); }
-			//if ( selecteditem == "spear" ) { createAnimal(); }
+			// if ( selecteditem == "sword" ) { createEnemy(); }
+			// if ( selecteditem == "spear" ) { createAnimal(); }
 			
-			//clear animation classes
+			// clear animation classes
 			$.each(directions, function(i, v) {
 				$('.the-fucking-player').removeClass("player-direction-"+v+"-sword");
 				$('.the-fucking-player').removeClass("player-direction-"+v+"-shovel");
@@ -254,6 +258,7 @@ export class HCI {
 
 			$('.nav-selected-item').removeClass(globals.allblockclasses);
 			$('.nav-selected-item').addClass('block-'+blocktype);
+
 		});
 
 		// REMOVE ITEMS FROM CRAFTING TABLE

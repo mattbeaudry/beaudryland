@@ -141,7 +141,7 @@ gotospace
 				case 'playtheguitar':
 					if (globals.guitarFirstNote == true && $('.the-fucking-winter-map').length == 0) {
 						blUtil.log('Jam out!'); 
-						globals.guitarFirstNote = false;
+						// globals.guitarFirstNote = false;
 						blStory.demolishMapBorder('forest', 'right');
 						blMap.loadNewMap('winter', 'right'); 
 						blStory.createWinterSigns();
@@ -152,7 +152,7 @@ gotospace
 				case 'playthekeys':
 					if (globals.keyboardFirstNote == true && $('.the-fucking-beach-map').length == 0) {
 						blUtil.log('Play keys!'); 
-						globals.keyboardFirstNote = false; 
+						// globals.keyboardFirstNote = false; 
 						blStory.demolishMapBorder('winter', 'right');
 						blMap.loadNewMap('beach', 'back'); 
 						blStory.createBeachSigns();
@@ -163,7 +163,7 @@ gotospace
 				case 'playthetrumpet':
 					if (globals.trumpetFirstNote == true && $('.the-fucking-jungle-map').length == 0) {
 						blUtil.log('Play keys!');
-						globals.trumpetFirstNote = false;
+						// globals.trumpetFirstNote = false;
 						blStory.demolishMapBorder('beach', 'right');
 						blMap.loadNewMap('jungle', 'left');
 						//blStory.createJungleSigns();
@@ -176,7 +176,7 @@ gotospace
 				case 'playthebass':
 					if (globals.bassFirstNote == true && $('.the-fucking-desert-map').length == 0) {
 						blUtil.log('Play bass!'); 
-						globals.bassFirstNote = false; 
+						// globals.bassFirstNote = false; 
 						blStory.demolishMapBorder('forest', 'bottom');
 						blStory.demolishMapBorder('winter', 'bottom');
 						blStory.demolishMapBorder('beach', 'bottom');
@@ -188,7 +188,7 @@ gotospace
 				case 'bringinthebeat':
 					if (globals.drumsFirstNote == true && $('.the-fucking-islands-map').length == 0) {
 						blUtil.log('Play drums!'); 
-						globals.drumsFirstNote = false; 
+						// globals.drumsFirstNote = false; 
 						blStory.demolishMapBorder('forest', 'top');
 						blStory.demolishMapBorder('winter', 'top');
 						blStory.demolishMapBorder('beach', 'top');
@@ -199,7 +199,7 @@ gotospace
 					break;
 				case 'gotospace':
 					if (globals.rocketFirstFlight == true && $('.the-fucking-space-map').length == 0) {
-						globals.rocketFirstFlight = false;
+						// globals.rocketFirstFlight = false;
 						var object = $('.objectid-1');
 						var toMap = $('.the-fucking-space-map');
 

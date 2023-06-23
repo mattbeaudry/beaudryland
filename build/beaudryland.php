@@ -82,10 +82,12 @@
 		        	</div>
 		        	<div href="javascript:void(0)" class="btn-a"></div>
 		        </div>
+				<div class="the-fucking-console">
+					<ul></ul>
+				</div>
 			</div>
 
 			<div class="tabs">
-
 				<div class="tab tab-inventory" data-tab="tab-inventory">
 					<section>
 						<h2>Inventory</h2>
@@ -101,25 +103,26 @@
 							</div>
 						</div>
 					</section>
-
-					<table class="bl-table items-table">
-						<thead>
-							<tr>
-								<td>ID</td>
-                                <td>Image</td>
-                                <td>Name</td>
-                                <td>Description</td>
-                                <td>Recipe</td>
-                                <td>Lifeform</td>
-                                <td>Equipable</td>
-								<td>Useable</td>
-								<td>Properties</td>
-                            </tr>
-						</thead>
-						<tbody>
-							<?php include 'php/loaditems.php'; ?>
-						</tbody>
-					</table>
+					<div class="bl-table-container">
+						<table class="bl-table items-table">
+							<thead>
+								<tr>
+									<td>ID</td>
+									<td>Image</td>
+									<td>Name</td>
+									<td>Description</td>
+									<td>Recipe</td>
+									<td>Lifeform</td>
+									<td>Equipable</td>
+									<td>Useable</td>
+									<td>Properties</td>
+								</tr>
+							</thead>
+							<tbody>
+								<?php include 'php/loaditems.php'; ?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 
 				<div class="tab tab-navigation" data-tab="tab-navigation">
@@ -168,15 +171,12 @@
 									<a class="bui-button" target="_blank" href="beaudryland-ui.php">BL UI ></a>
 								</li>
 							</ul>
-
 							<div class="the-fucking-dev-panel">
-								
 								<nav class="dev-console">
 								<h2>Developer Console</h2>
 									<ul class="clearfix"></ul>
 								</nav>
 							</div>
-
 						</nav>
 					</div>
 				</div>
@@ -270,23 +270,68 @@
 									<td>Go to space</td>
 									<td></td>
 								</tr>
+								<tr data-achievementid="13" data-achievementname="chest" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Store items in a chest</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="14" data-achievementname="bicycle" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Invent the bicycle</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="15" data-achievementname="roads" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Invent roads</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="16" data-achievementname="boat" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Sale a boat on water</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="17" data-achievementname="car" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Invent the car</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="18" data-achievementname="mushrooms" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Find the mushrooms</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="19" data-achievementname="skiing" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Go skiing</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="20" data-achievementname="printer" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Invent the 2D printer</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="21" data-achievementname="computer" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Invent the computer</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="22" data-achievementname="teleportation" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Invent teleportation</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="23" data-achievementname="telescope" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Invent the telescope</td>
+									<td></td>
+								</tr>
+								<tr data-achievementid="24" data-achievementname="band" class="achievement-chest">
+									<td class="achievement-completion"></td>
+									<td>Start a band (invent and place all instruments)</td>
+									<td></td>
+								</tr>
 							</tbody>
 						</table>
-						<ul>
-							<li>Store items in a chest</li>
-							<li>Invent the bicycle</li>
-							<li>Invent roads</li>
-							<li>Sale a boat on water</li>
-							<li>Invent the car</li>
-							<li>Find the mushrooms</li>
-							<li>Go skiing</li>
-							<li>Invent the 2D printer</li>
-							<li>Invent the computer</li>
-							<li>Invent teleportation</li>
-							<li>Invent the telescope</li>
-							<li>Start a band (invent and place all instruments)</li>
-
-						</ul>
 					</section>
 				</div>
 			</div>

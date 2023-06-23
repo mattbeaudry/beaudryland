@@ -10,11 +10,8 @@ export class Map {
 	constructor() {
 		this.mapsContainer = $('.maps-wrap');
 		this.overlayhtml = '';
-		this.mapHeight = globals.mapheight;
-		this.mapWidth = globals.mapwidth;
 		this.mapHeightPx;
 		this.mapWidthPx;
-		this.mapTotalBlocks;
 		this.globalMapBlockCount;
 	}
 
@@ -43,7 +40,7 @@ export class Map {
 		}
 
 		console.log("setupMap");
-		console.log(this.mapTotalBlocks);
+		console.log("this.mapTotalBlocks"+globals.totalmapblocks);
 
 		$('.the-fucking-forest-map').css("width", this.mapWidthPx+"px");
 		$('.the-fucking-forest-map').css("height", this.mapHeightPx+"px");
@@ -54,7 +51,7 @@ export class Map {
 			blUtil.log("existing user");
 			var mapblocks = JSON.parse(data);
 			var mapdata = "";
-			var total = this.mapTotalBlocks;
+			var total = globals.totalmapblocks;
 			for (var i=0; i<total; i++) {
 				mapdata += '<div data-blockid="'+this.globalMapBlockCount+'" data-blocktype="'+mapblocks[i]+'" data-blockhealth="10" class="block block-'+mapblocks[i]+'"></div>';
 				this.globalMapBlockCount++;
@@ -87,7 +84,7 @@ export class Map {
 		$('.the-fucking-player').remove();
 		//save forest map
 		var mapblocks = new Array();
-		var total = this.mapTotalBlocks;
+		var total = globals.totalmapblocks;
 	    for (var i=0; i<=total; i++){
 	    	var blocktype = $('.the-fucking-forest-map div:eq('+i+')').attr('data-blocktype');
 			mapblocks[i] = blocktype;
@@ -100,7 +97,7 @@ export class Map {
 		//save winter map
 	    if ($('.the-fucking-winter-map').length) {
 			var wintermapblocks = new Array();
-			for (var i=0; i<=this.mapTotalBlocks; i++){
+			for (var i=0; i<=globals.totalmapblocks; i++){
 				var blocktype = $('.the-fucking-winter-map div:eq('+i+')').attr('data-blocktype');
 				//snowing on blocks and cleaning up map
 				/*if (blocktype == "dirt") { blocktype = "snow"; }
@@ -188,9 +185,6 @@ export class Map {
 		var riverBlocksY = [];
 		var cabin = false;
 
-		console.log("loadNewMap");
-		console.log(this.mapTotalBlocks);
-
 		if (cubeside == 'background'){
 			$('.maps-container').append('<div class="the-fucking-'+maptype+'-map" data-maptype="'+maptype+'"></div>');
 		} else {
@@ -202,7 +196,7 @@ export class Map {
 		
 		switch (maptype) {
 			case 'forest':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++) {
+				for (var f = 0; f <= (globals.totalmapblocks - 1); f++) {
 					var r = Math.random();
 					var blocktype;
 					if (r<0.7) { blocktype = "grass"; }
@@ -225,7 +219,7 @@ export class Map {
 				break;
 
 			case 'winter':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++) {
+				for (var f = 0; f <= (globals.totalmapblocks - 1); f++) {
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "snow"; }
@@ -245,7 +239,7 @@ export class Map {
 			case 'beach':
 				var maphalf = 0.5 * this.mapWidth;
 				var shoreedge = maphalf;
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (globals.totalmapblocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					var rowposition = f % this.mapWidth;
@@ -270,7 +264,7 @@ export class Map {
 				break;
 
 			case 'jungle':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (globals.totalmapblocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r>0.97) { blocktype = "flower"; }
@@ -292,7 +286,7 @@ export class Map {
 				break;
 
 			case 'desert':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (globals.totalmapblocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "sand"; }
@@ -313,7 +307,7 @@ export class Map {
 				break;
 
 			case 'islands':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (globals.totalmapblocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "water"; }
@@ -337,7 +331,7 @@ export class Map {
 				break;
 
 			case 'space':
-				for (var f = 0; f <= (this.mapTotalBlocks - 1); f++){
+				for (var f = 0; f <= (globals.totalmapblocks - 1); f++){
 					var r = Math.random();
 					var blocktype;
 					if (r<0.9) { blocktype = "space"; }

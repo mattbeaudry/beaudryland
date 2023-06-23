@@ -24,10 +24,13 @@ export class Movement {
 		var y = blUtil.getObjectCurrentPositionY(id);
 		x = blUtil.stripPX(x);
 		y = blUtil.stripPX(y);
+		const currentMap = globals.getCurrentMap();
+
+		console.log(currentMap);
 
 		this.changeObjectDirection(id, direction, name);
 
-		if (!this.objectCollisionDetection(id, direction, globals.currentMap)) {
+		if (!this.objectCollisionDetection(id, direction, currentMap)) {
 			switch (direction) {
 				case "up": 
 					y = y - globals.gridunitpx; 
@@ -40,7 +43,7 @@ export class Movement {
 					$(".objectid-"+id).css("top",y); 
 					break;
 				case "left": 
-					x = x - globals.gridunitpx; 
+					x = x - globals.gridunitpx;
 					x = blUtil.addPX(x);
 					$(".objectid-"+id).css("left",x); 
 					break;
@@ -82,7 +85,7 @@ export class Movement {
 
 		var movingObject_nextblock = nextblock;
 		var nextBlockClass = '.the-fucking-'+map+'-map .block:eq('+nextblock+')';
-		var nextBlockType = blUtil.getBlockType(nextblock, globals.currentMap);
+		var nextBlockType = blUtil.getBlockType(nextblock, globals.getCurrentMap());
 
 		// TELEPORTING
 		if (id == 1 && $(nextBlockClass).hasClass('block-portal-a')) {
@@ -291,7 +294,7 @@ export class Movement {
 
 	moveObjectToMap(objectId, objectCurrentBlock, objectDirection) {
 		//init
-		//globals.currentMap = globals.cubeSidesArray[globals.currentCubeSide].map;
+		globals.setCurrentMap(globals.cubeSidesArray[globals.currentCubeSide].map);
 		var objectDirection = objectDirection;
 		var object = $('.objectid-'+objectId);
 		var currentBlock = objectCurrentBlock;
@@ -329,7 +332,7 @@ export class Movement {
 			blCube.rotateCubeTo(nextCubeSide);	
 		}
 
-		globals.currentMap = nextMap;
+		globals.setCurrentMap(nextMap);
 
 		// add player to new map
 		object.appendTo(toMap);

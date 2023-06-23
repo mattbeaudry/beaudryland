@@ -139,4 +139,8 @@ export class Utility {
 		return px;
 	}
 
+	displayConsoleMessage(text) {
+		$('.the-fucking-console > ul').append('<li>'+text+'</li>');
+	}
+
 }

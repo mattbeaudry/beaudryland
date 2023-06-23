@@ -185,11 +185,13 @@ body.theme-night {
   .block-wood, .block-door, .block-door-open, .block-fire, .block-sign, .the-fucking-player {
     transition: transform 5s;
     transform-origin: bottom;
+    transform-style: preserve-3d;
   }
 }
 
 .map-view-perspective {
-  transform: perspective(600px) rotateX(55deg) rotateY(0deg) scale(1) translateZ(400px);
+  // transform: perspective(600px) rotateX(55deg) rotateY(0deg) scale(1) translateZ(400px);
+  transform: perspective(174px) rotateX(45deg) rotateY(0deg) scale(1) translateZ(0px);
 
   .block-tree, .block-pinetree, .block-palmtree, .block-appletree, .block-rock, .block-icerock, .block-sandstone,
   .block-wood, .block-door, .block-door-open, .block-fire, .block-sign, .the-fucking-player {
@@ -576,10 +578,6 @@ label {
 // 		top: -5px
 // 		left: 5px
 
-.beaudrylandlogin input {}
-
-.beaudrylandregister input {}
-
 .beaudrylandlogin input:-webkit-autofill,
 .beaudrylandregister input:-webkit-autofill {
   box-shadow: 0 0 0px 1000px white inset;
@@ -657,8 +655,6 @@ label {
   padding: 20px;
   border: 1px solid #333;
 }
-
-.bubble-form {}
 
 .bubble-text {
   border: none;

@@ -30,7 +30,7 @@ export class Action {
 		var direction = blUtil.getObjectDirection(this.id, "player");
 		var playerblock = blUtil.getObjectCurrentBlock(this.id);
 		var block = blUtil.getObjectCurrentBlock(this.id);
-		var currentMap = globals.currentMap;
+		var currentMap = globals.getCurrentMap();
 		var blockClass = '.the-fucking-'+currentMap+'-map .block:eq('+block+')';
 		var selecteditem = blUtil.getSelectedItem();
 
@@ -79,12 +79,14 @@ export class Action {
 			// using axe to collect doors, signs and other mechnism objects 
 			// that have a function instead of being collecable
 			if (selecteditem == "axe" && ( blItems.itemIsCollectable(blocktype) || blItems.itemIsCutable(blocktype) ) ) {
+				blUtil.displayConsoleMessage("you picked up "+blocktype);
 				blInventory.addToInventory(blocktype, 1);
 				blMap.changeBlockType(block, "dirt", currentMap);
 
 			// EATING
 			} else if (blItems.itemIsEdible(selecteditem)) {
 				blHealth.addHeart();
+				blUtil.displayConsoleMessage("you ate "+selecteditem);
 				// mushroom effects
 				switch (selecteditem) {
 					case "mushroom":
@@ -101,8 +103,10 @@ export class Action {
 			
 			// DOORS
 			} else if (blocktype == "door") {
+				blUtil.displayConsoleMessage("you opened the door");
 				blMap.changeBlockType(block, "door-open", currentMap);
 			} else if (blocktype == "door-open") {
+				blUtil.displayConsoleMessage("you closed the door");
 				blMap.changeBlockType(block, "door", currentMap);
 
 			// FRISBEE THROW
@@ -111,6 +115,7 @@ export class Action {
 
 			// SPEAR THROW
 			} else if (selecteditem == "spear") {
+				blUtil.displayConsoleMessage("you threw spear");
 				blSpear.throwSpear(block, direction);
 
 			// DIGGING
@@ -119,32 +124,41 @@ export class Action {
 
 				if (currentMap == 'forest') {
 					if (r < 0.5) {
+						blUtil.displayConsoleMessage("you found diamond");
 						blMap.changeBlockType(block, "diamond", currentMap);
 					} else {
+						blUtil.displayConsoleMessage("you dug some dirt");
 						blMap.changeBlockType(block, "dirt", currentMap);
 					}
 				} else if (currentMap == 'winter') {
 					if (r < 0.2) {
+						blUtil.displayConsoleMessage("you found gold");
 						blMap.changeBlockType(block, "gold", currentMap);
 					} else if (r < 0.4) {
+						blUtil.displayConsoleMessage("you found silver");
 						blMap.changeBlockType(block, "silver", currentMap);
 					} else {
+						blUtil.displayConsoleMessage("you dug some dirt");
 						blMap.changeBlockType(block, "dirt", currentMap);
 					}
 				} else if (currentMap == 'beach') {
 					if (r < 0.2) {
+						blUtil.displayConsoleMessage("you found oil");
 						blMap.changeBlockType(block, "oil", currentMap);
 					} else if (r < 0.4) {
+						blUtil.displayConsoleMessage("you found clay");
 						blMap.changeBlockType(block, "clay", currentMap);
 					} else {
+						blUtil.displayConsoleMessage("you dug some dirt");
 						blMap.changeBlockType(block, "dirt", currentMap);
 					}
 				}
+
 				// TODO jungle, desert, islands trasure
 				
 				blInventory.addToInventory(blocktype, 5);
 				blInventory.addToInventory('dirt', 5);
-				// growGrass(block);
+				// growGrass(block); // TODO: grow grass back after digging
 
 			// FILLING WATER/HOLES
 			} else if (blocktype == "hole" || blocktype == "water" || blocktype == "wave") {
@@ -157,6 +171,7 @@ export class Action {
 					selecteditem == "sandstonebrick" ||
 					selecteditem == "claybrick" ||
 					selecteditem == "road" ) {
+						blUtil.displayConsoleMessage("you filled water block with"+blocktype);
 						blMap.changeBlockType(block, blUtil.getSelectedItem(), currentMap);
 						blInventory.removeFromInventory(blUtil.getSelectedItem());
 						if (blocktype=="water" || blocktype=="wave") { 
@@ -166,6 +181,7 @@ export class Action {
 				
 			// SIGNS
 			} else if (blocktype == "sign") {
+				blUtil.displayConsoleMessage("you placed a sign");
 				blSigns.readSign(block);
 
 			// PLACING BLOCKS
@@ -204,6 +220,7 @@ export class Action {
 
 			// PICKING UP THINGS
 			} else if (blItems.itemIsCollectable(blocktype)) {
+				blUtil.displayConsoleMessage("you picked up "+blocktype);
 				var changeblocktotype = "grass";
 
 				// "PLANTED" items - leaves dirt behind

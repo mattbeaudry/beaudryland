@@ -6,6 +6,10 @@
   color: #cc0000;
 }
 
+.bl-table-container {
+  overflow-x: scroll;
+}
+
 .bl-table {
   width: 100%;
   background-color: #fff;
@@ -22,7 +26,7 @@
   }
 
   td {
-    padding: 8px;
+    padding: 0 8px;
   }
 
   img {
@@ -401,4 +405,18 @@ knob-face {
 
 .bui-list-bullets {
   list-style: inherit;
+}
+
+.the-fucking-console {
+  position: fixed;
+  bottom: 0;
+  width: 800px;
+  padding: 5px 10px;
+  z-index: 1;
+  text-align: right;
+
+  > ul {
+    list-style: none;
+    padding: 0;
+  }
 }
