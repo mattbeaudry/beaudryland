@@ -293,14 +293,21 @@ export class Movement {
 	}
 
 	moveObjectToMap(objectId, objectCurrentBlock, objectDirection) {
+		console.log("moveObjectToMap")
+
+		const currentMap = globals.getCurrentMap();
+		const currentCubeSide = globals.getCurrentCubeSide();
+
 		//init
-		globals.setCurrentMap(globals.cubeSidesArray[globals.currentCubeSide].map);
+		console.log("globals.currentCubeSide"+globals.getCurrentCubeSide())
+		globals.setCurrentMap(globals.cubeSidesArray[globals.getCurrentCubeSide()].map);
+
 		var objectDirection = objectDirection;
 		var object = $('.objectid-'+objectId);
 		var currentBlock = objectCurrentBlock;
 
 		// find out what map and side of cube is next
-		var nextCubeSide = globals.cubeSidesArray[globals.currentCubeSide][objectDirection];
+		var nextCubeSide = globals.cubeSidesArray[globals.getCurrentCubeSide()][objectDirection];
 		var nextMap = globals.cubeSidesArray[nextCubeSide].map;
 		var toMap = $('.the-fucking-'+nextMap+'-map');
 
@@ -309,20 +316,85 @@ export class Movement {
 		var mapheight = globals.mapheight;
 		var nextBlock = 0;
 
-		switch (objectDirection) {
-			case 'right':
+		const destinationSquareSide = {
+			front: {
+				left: 'right',
+				right: 'left',
+				top: 'bottom',
+				bottom: 'top',
+			},
+			left: { 
+				back: 'right',
+				front: 'left',
+				top: 'left',
+				bottom: 'left',
+			},
+			back: {
+				left: 'right',
+				right: 'left',
+				top: 'top',
+				bottom: 'top',
+			},
+			right: {
+				front: 'right',
+				back: 'left',
+				top: 'right',
+				bottom: 'right',
+			},
+			top: {
+				left: 'top',
+				right: 'top',
+				front: 'top',
+				back: 'top',
+			},
+			bottom: {
+				left: 'bottom',
+				right: 'bottom',
+				front: 'bottom',
+				back: 'bottom',
+			},
+		};
+
+		console.log({currentMap});
+		console.log({nextMap});
+
+		console.log(`moving player from ${currentCubeSide} to ${nextCubeSide}`);
+		
+		const movePlayerToEdge = destinationSquareSide[currentCubeSide][nextCubeSide];
+
+		console.log({movePlayerToEdge});
+
+		console.log({currentBlock});
+
+		switch (movePlayerToEdge) {
+			case 'left':
 				nextBlock = currentBlock - (mapwidth - 1);
 				break;
-			case 'left':
+			case 'right':
 				nextBlock = currentBlock + mapwidth - 1;
 				break;
-			case 'up':
+			case 'bottom':
 				nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
 				break;
-			case 'down':
+			case 'top':
 				nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
 				break;
 		}
+
+		// switch (objectDirection) {
+		// 	case 'right':
+		// 		nextBlock = currentBlock - (mapwidth - 1);
+		// 		break;
+		// 	case 'left':
+		// 		nextBlock = currentBlock + mapwidth - 1;
+		// 		break;
+		// 	case 'up':
+		// 		nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
+		// 		break;
+		// 	case 'down':
+		// 		nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
+		// 		break;
+		// }
 
 		// remove player from current map
 		object.detach();
@@ -336,6 +408,11 @@ export class Movement {
 
 		// add player to new map
 		object.appendTo(toMap);
+
+		console.log({ toMap });
+		console.log({ nextMap });
+		console.log({ nextBlock });
+
 		blUtil.teleportObjectToBlock(1, nextMap, nextBlock);
 	}
 

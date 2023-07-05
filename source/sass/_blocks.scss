@@ -331,7 +331,7 @@
   background: url(../img/player-right-rocket.png) no-repeat;
   background-size: contain;
   background-repeat: no-repeat;
-  animation: orbit 60s linear infinite;
+  animation: orbit 20s linear infinite;
 
   &:before {
     content: "";

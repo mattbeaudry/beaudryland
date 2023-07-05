@@ -31,70 +31,69 @@ if($forestmaps->num_rows > 0) {
 		    $mapdata .= '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
 		}
 		$mapdata .= '</article>';
-		
 	}
 	
 }
 
-$wintermaps = $mysqli->query(
-	"SELECT * 
-	FROM beaudryland_maps
-	WHERE mapid IN (
-    	SELECT MAX(mapid)
-    	FROM beaudryland_maps
-    	WHERE maptype = 'winter'
-    	GROUP BY user
-    ) ORDER BY mapid DESC"
-) or die(mysql_error() );
+// $wintermaps = $mysqli->query(
+// 	"SELECT * 
+// 	FROM beaudryland_maps
+// 	WHERE mapid IN (
+//     	SELECT MAX(mapid)
+//     	FROM beaudryland_maps
+//     	WHERE maptype = 'winter'
+//     	GROUP BY user
+//     ) ORDER BY mapid DESC"
+// ) or die(mysql_error() );
 
-if($wintermaps->num_rows > 0) {
+// if($wintermaps->num_rows > 0) {
 	
-	while($winterrows = $wintermaps->fetch_assoc()) {
+// 	while($winterrows = $wintermaps->fetch_assoc()) {
 		
-		$mapblocks = json_decode($winterrows['mapdata']);
+// 		$mapblocks = json_decode($winterrows['mapdata']);
 		
-		$mapdata .= '<article class="gallery-map-wrap map-winter">';
-		$mapdata .= '<h3>'.$winterrows['user'].'land</h3>';
-		foreach($mapblocks as $blocktype) {
-		    $mapdata .= '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
-		}
-		$mapdata .= '</article>';
+// 		$mapdata .= '<article class="gallery-map-wrap map-winter">';
+// 		$mapdata .= '<h3>'.$winterrows['user'].'land</h3>';
+// 		foreach($mapblocks as $blocktype) {
+// 		    $mapdata .= '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
+// 		}
+// 		$mapdata .= '</article>';
 		
-		//echo $row['mapdata'];
+// 		//echo $row['mapdata'];
 		
-	}
+// 	}
 	
-}
+// }
 
-$beachmaps = $mysqli->query(
-	"SELECT * 
-	FROM beaudryland_maps
-	WHERE mapid IN (
-    	SELECT MAX(mapid)
-    	FROM beaudryland_maps
-    	WHERE maptype = 'beach'
-    	GROUP BY user
-    ) ORDER BY mapid DESC"
-) or die(mysql_error() );
+// $beachmaps = $mysqli->query(
+// 	"SELECT * 
+// 	FROM beaudryland_maps
+// 	WHERE mapid IN (
+//     	SELECT MAX(mapid)
+//     	FROM beaudryland_maps
+//     	WHERE maptype = 'beach'
+//     	GROUP BY user
+//     ) ORDER BY mapid DESC"
+// ) or die(mysql_error() );
 
-if($beachmaps->num_rows > 0) {
+// if($beachmaps->num_rows > 0) {
 	
-	while($beachrows = $beachmaps->fetch_assoc()) {
+// 	while($beachrows = $beachmaps->fetch_assoc()) {
 		
-		$mapblocks = json_decode($beachrows['mapdata']);
+// 		$mapblocks = json_decode($beachrows['mapdata']);
 		
-		$mapdata .= '<article class="gallery-map-wrap map-beach">';
-		$mapdata .= '<h3>'.$beachrows['user'].'land</h3>';
-		foreach($mapblocks as $blocktype) {
-		    $mapdata .= '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
-		}
-		$mapdata .= '</article>';
+// 		$mapdata .= '<article class="gallery-map-wrap map-beach">';
+// 		$mapdata .= '<h3>'.$beachrows['user'].'land</h3>';
+// 		foreach($mapblocks as $blocktype) {
+// 		    $mapdata .= '<div data-blocktype="'.$blocktype.'" data-blockhealth="10" class="block block-'.$blocktype.'"></div>';
+// 		}
+// 		$mapdata .= '</article>';
 		
-		//echo $row['mapdata'];
+// 		//echo $row['mapdata'];
 		
-	}
+// 	}
 	
-}
+// }
 
 echo $mapdata;
 

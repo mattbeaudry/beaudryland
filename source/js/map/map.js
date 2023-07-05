@@ -20,18 +20,12 @@ export class Map {
 		blUtil.log("map width"+globals.mapWidthDesktop);
 
 		if (mapsize == 'mobile'){
-			//globals.mapwidth = globals.mapWidthMobile;
-			//globals.mapheight = globals.mapHeightMobile;
-			//globals.totalmapblocks = globals.mapWidthMobile * globals.mapHeightMobile;
 			this.mapWidth = globals.mapWidthMobile;
 			this.mapHeight = globals.mapHeightMobile;
 			this.mapTotalBlocks = globals.mapWidthMobile * globals.mapHeightMobile;
 			this.mapWidthPx = globals.mapWidthMobile * globals.gridunitpx;
 			this.mapHeightPx = globals.mapHeightMobile * globals.gridunitpx;
 		} else {
-			// globals.mapwidth = globals.mapWidthDesktop;
-			// globals.mapheight = globals.mapHeightDesktop;
-			// globals.totalmapblocks = globals.mapWidthDesktop * globals.mapHeightDesktop;
 			this.mapWidth = globals.mapWidthDesktop;
 			this.mapHeight = globals.mapHeightDesktop;
 			this.mapTotalBlocks = globals.mapWidthDesktop * globals.mapHeightDesktop;
@@ -277,7 +271,7 @@ export class Map {
 				}
 				lakeBlocks = ["grass","grass","grass","water","water","water","appletree","pinetree","palmtree"];
 				specialBlocks = [
-					"redmushroom","carrot-inground","flowers","flowers","apple","apple",
+					"redmushroom","carrot-inground","flower","flower","apple","apple",
 					"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver",
 					"portal-a","portal-b"
 				];
@@ -317,12 +311,10 @@ export class Map {
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
 				lakeBlocks = [
-					"grass","grass","grass","grass","grass","grass","grass","grass","sand",
-					"grass","grass","grass","grass","grass","grass","grass","grass","sand",
-					"grass","grass","grass","grass","grass","grass","grass","grass","sand"
+					"grass","grass","grass","grass","grass","grass","grass","grass","sand","sand",
 				];
 				specialBlocks = [
-					"redmushroom","carrot-inground","flowers","flowers","apple","apple",
+					"redmushroom","carrot-inground","flower","flower","apple","apple",
 					"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver",
 					"portal-a","portal-b"
 				];
@@ -363,11 +355,6 @@ export class Map {
 		    	var offset = terrainBlocks[j];
 		    	this.changeBlockType((randomBlockId+offset), blockType, maptype);
 			}
-		}
-
-		for (var i = 0; i<specialBlocks.length; i++) {
-			var randomBlockId = blUtil.randomBlockID();
-			this.changeBlockType(randomBlockId, blockType, maptype);
 		}
 
 		for (var i = 0; i<riverBlocksX.length; i++) {
@@ -423,6 +410,11 @@ export class Map {
 				}
 				
 			}
+		}
+
+		for (var i = 0; i<specialBlocks.length; i++) {
+			var randomBlockId = blUtil.randomBlockID();
+			this.changeBlockType(randomBlockId, blockType, maptype);
 		}
 
 		//blAchievement.updateStats();

@@ -10,7 +10,7 @@
         <div class="the-fucking-header">
         
 	        <h1 class="logo-beaudryland"><img src="img/block-tree.png" title="Beaudryland Tree Logo" />Beaudryland</h1>
-	        
+	    
 	        <div class="the-fucking-user clearfix">
 	        	<nav class="beaudryland-nav">
 	        		<?php if ($loggedin) { ?>
