@@ -17,13 +17,13 @@ export class Enemy {
 		var id = globals.uniqueObjectID();
 		blUtil.log("Create Enemy "+id);
 		//var enemystartblock = 0;
-		$('.the-fucking-forest-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-enemy enemy-direction-down"></div>');
+		$('.the-fucking-forest-map').append('<div data-id="'+id+'" class="objectId-'+id+' the-fucking-enemy enemy-direction-down"></div>');
 		this.initEnemyBrain(id);
 	}
 
 	killEnemy(id) {
 		blUtil.log("Kill Enemy id: "+id);
-		$('.objectid-'+id).remove();
+		$('.objectId-'+id).remove();
 	}
 
 	killEnemies() {
@@ -43,7 +43,7 @@ export class Enemy {
 		function anEnemyThought() {
 
 			//check if enemy isnt dead
-			if ($('.objectid-'+id).length != 0) {
+			if ($('.objectId-'+id).length != 0) {
 		
 				var enemyrandom = Math.random();
 				var enemyX = blUtil.getObjectCurrentCol(id); var enemyY = blUtil.getObjectCurrentRow(id);

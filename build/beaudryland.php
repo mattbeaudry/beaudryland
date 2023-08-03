@@ -27,20 +27,26 @@
 							<div class="d-flex align-items-center justify-content-between">
 								<div class="d-flex align-items-center">
 									<a class="tabs-close bui-button" href="javascript:void(0);">
-										<span>< BACK</span></a><!--
-									--><a class="tab-menuitem nav-selected-item block" href="javascript:void(0);" data-tabmenu="tab-inventory">
-										<span></span></a><!--
-									--><a class="tab-menuitem bui-button button-icon" href="javascript:void(0);" data-tabmenu="tab-achievements">
-										<i class="block i-check-white"></i></a><!--
-									--><a class="tab-menuitem bui-button button-icon" href="javascript:void(0);" data-tabmenu="tab-navigation">
-										<i class="block block-question-mark-white"></i></a>
+										<span>< BACK</span>
+									</a>
+									<a class="tab-menuitem nav-selected-item block" href="javascript:void(0);" data-tabmenu="tab-inventory">
+										<span></span>
+									</a>
+									<a class="tab-menuitem bui-button button-icon" href="javascript:void(0);" data-tabmenu="tab-achievements">
+										<i class="block i-check-white"></i>
+									</a>
+									<a class="tab-menuitem bui-button button-icon" href="javascript:void(0);" data-tabmenu="tab-navigation">
+										<i class="block block-question-mark-white"></i>
+									</a>
 								</div>
 								<div>
 									<a class="link-savemap bui-button" href="javascript:void(0);">Save</a>
 									<div class="bui-menu">
 					                    <button class="bui-menu-button bui-button">
-					                    	<?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} ?> +
-					                    </button>
+											<span class="bui-truncate">
+					                    		<?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} ?> +
+					                    	</span>
+										</button>
 					                    <div class="bui-menu-dropdown bui-menu-left">
 					                        <div class="bui-menu-item">
 					                            <a href="beaudryland-account.php">Account</a>

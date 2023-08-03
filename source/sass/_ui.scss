@@ -50,6 +50,7 @@
   font-weight: 400;
   text-transform: uppercase;
   text-decoration: none;
+  text-wrap: nowrap;
 
   &:before,
   &:after {
@@ -419,4 +420,10 @@ knob-face {
     list-style: none;
     padding: 0;
   }
+}
+
+.bui-truncate {
+  max-width: 160px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

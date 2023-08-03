@@ -15,13 +15,13 @@ export class Animal {
 		var id = globals.uniqueObjectID();
 		blUtil.log("Create Animal "+id);
 		//var enemystartblock = 0;
-		$('.the-fucking-forest-map').append('<div data-id="'+id+'" class="objectid-'+id+' the-fucking-deer deer-direction-down"></div>');
+		$('.the-fucking-forest-map').append('<div data-id="'+id+'" class="objectId-'+id+' the-fucking-deer deer-direction-down"></div>');
 		this.initAnimalBrain(id);
 	}
 
 	killAnimal(id) {
 		blUtil.log("Kill Animal id: "+id);
-		$('.objectid-'+id).remove();
+		$('.objectId-'+id).remove();
 	}
 
 	killAnimals() {
@@ -40,7 +40,7 @@ export class Animal {
 		function anAnimalThought() {
 
 			//check if enemy isnt dead
-			if ($('.objectid-'+id).length != 0) {
+			if ($('.objectId-'+id).length != 0) {
 		
 				var animalrandom = Math.random();
 				//var enemydirection;

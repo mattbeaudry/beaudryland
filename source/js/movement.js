@@ -35,22 +35,22 @@ export class Movement {
 				case "up": 
 					y = y - globals.gridunitpx; 
 					y = blUtil.addPX(y);
-					$(".objectid-"+id).css("top",y); 
+					$(".objectId-"+id).css("top",y); 
 					break;
 				case "down": 
 					y = y + globals.gridunitpx; 
 					y = blUtil.addPX(y);
-					$(".objectid-"+id).css("top",y); 
+					$(".objectId-"+id).css("top",y); 
 					break;
 				case "left": 
 					x = x - globals.gridunitpx;
 					x = blUtil.addPX(x);
-					$(".objectid-"+id).css("left",x); 
+					$(".objectId-"+id).css("left",x); 
 					break;
 				case "right": 
 					x = x + globals.gridunitpx; 
 					x = blUtil.addPX(x);
-					$(".objectid-"+id).css("left",x); 
+					$(".objectId-"+id).css("left",x); 
 					break;
 			}
 			success = true;
@@ -183,25 +183,25 @@ export class Movement {
 		}
 
 		//clear direction and animation classes
-		$('.objectid-'+id).removeClass(name+"-direction-down "+name+"-direction-left "+name+"-direction-right "+name+"-direction-up");
-		$('.objectid-'+id).removeClass(name+"-direction-down"+playergraphic+" "+name+"-direction-left"+playergraphic+" "+name+"-direction-right"+playergraphic+" "+name+"-direction-up"+playergraphic);
+		$('.objectId-'+id).removeClass(name+"-direction-down "+name+"-direction-left "+name+"-direction-right "+name+"-direction-up");
+		$('.objectId-'+id).removeClass(name+"-direction-down"+playergraphic+" "+name+"-direction-left"+playergraphic+" "+name+"-direction-right"+playergraphic+" "+name+"-direction-up"+playergraphic);
 
 		switch (direction) {
 			case "up":
-				$('.objectid-'+id).addClass(name+"-direction-up");
-				if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-up"+playergraphic); }
+				$('.objectId-'+id).addClass(name+"-direction-up");
+				if (playergraphic!="") { $('.objectId-'+id).addClass(name+"-direction-up"+playergraphic); }
 				break;
 			case "down":
-				$('.objectid-'+id).addClass(name+"-direction-down");
-				if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-down"+playergraphic); }
+				$('.objectId-'+id).addClass(name+"-direction-down");
+				if (playergraphic!="") { $('.objectId-'+id).addClass(name+"-direction-down"+playergraphic); }
 				break;
 			case "left":
-				$('.objectid-'+id).addClass(name+"-direction-left");
-				if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-left"+playergraphic); }
+				$('.objectId-'+id).addClass(name+"-direction-left");
+				if (playergraphic!="") { $('.objectId-'+id).addClass(name+"-direction-left"+playergraphic); }
 				break;
 			case "right":
-				$('.objectid-'+id).addClass(name+"-direction-right");
-				if (playergraphic!="") { $('.objectid-'+id).addClass(name+"-direction-right"+playergraphic); }
+				$('.objectId-'+id).addClass(name+"-direction-right");
+				if (playergraphic!="") { $('.objectId-'+id).addClass(name+"-direction-right"+playergraphic); }
 				break;
 		}
 
@@ -293,17 +293,33 @@ export class Movement {
 	}
 
 	moveObjectToMap(objectId, objectCurrentBlock, objectDirection) {
+		console.log("")
+		console.log("")
 		console.log("moveObjectToMap")
 
 		const currentMap = globals.getCurrentMap();
 		const currentCubeSide = globals.getCurrentCubeSide();
 
-		//init
-		console.log("globals.currentCubeSide"+globals.getCurrentCubeSide())
 		globals.setCurrentMap(globals.cubeSidesArray[globals.getCurrentCubeSide()].map);
 
-		var objectDirection = objectDirection;
-		var object = $('.objectid-'+objectId);
+		let movePlayerFromEdge;
+
+		switch (objectDirection) {
+			case 'left':
+				movePlayerFromEdge = 'left';
+				break;
+			case 'right':
+				movePlayerFromEdge = 'right';
+				break;
+			case 'up':
+				movePlayerFromEdge = 'top';
+				break;
+			case 'down':
+				movePlayerFromEdge = 'bottom';
+				break;
+		}
+
+		var object = $('.objectId-'+objectId);
 		var currentBlock = objectCurrentBlock;
 
 		// find out what map and side of cube is next
@@ -330,8 +346,8 @@ export class Movement {
 				bottom: 'left',
 			},
 			back: {
-				left: 'right',
-				right: 'left',
+				left: 'left',
+				right: 'right',
 				top: 'top',
 				bottom: 'top',
 			},
@@ -355,46 +371,77 @@ export class Movement {
 			},
 		};
 
-		console.log({currentMap});
-		console.log({nextMap});
-
-		console.log(`moving player from ${currentCubeSide} to ${nextCubeSide}`);
-		
 		const movePlayerToEdge = destinationSquareSide[currentCubeSide][nextCubeSide];
-
-		console.log({movePlayerToEdge});
-
-		console.log({currentBlock});
-
-		switch (movePlayerToEdge) {
-			case 'left':
-				nextBlock = currentBlock - (mapwidth - 1);
-				break;
-			case 'right':
-				nextBlock = currentBlock + mapwidth - 1;
-				break;
-			case 'bottom':
-				nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
-				break;
-			case 'top':
-				nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
-				break;
+		if (nextCubeSide === 'top') {
+			switch (currentCubeSide) {
+				case 'front':
+					nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
+					break;
+				case 'left':
+					nextBlock = currentBlock * mapwidth; 
+					break;
+				case 'back':
+					nextBlock = mapwidth - currentBlock - 1;
+					break;
+				case 'right':
+					nextBlock = (mapwidth * 10) - (currentBlock * mapwidth) -1;
+					break;
+			}
+		} else if (currentCubeSide === 'top') {
+			switch (nextCubeSide) {
+				case 'front':
+					nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
+					break;
+				case 'left':
+					nextBlock = (currentBlock / mapwidth);
+					break;
+				case 'back':
+					nextBlock = mapwidth - currentBlock - 1;
+					break;
+				case 'right':
+					nextBlock = mapwidth - (currentBlock / mapwidth);
+					break;
+			}
+		} else if (nextCubeSide === 'bottom') {
+			switch (currentCubeSide) {
+				case 'front':
+					nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;	
+					break;
+				case 'left':
+					nextBlock = (mapwidth - (currentBlock - ((mapwidth * mapwidth) - mapwidth))) * mapwidth - mapwidth;
+					break;
+				case 'back':
+					nextBlock = ((mapwidth * mapwidth) - mapwidth) + (mapwidth - currentBlock % mapwidth) - 1;
+					break;
+				case 'right':
+					nextBlock = ((currentBlock % mapwidth) * mapwidth) + mapwidth + mapwidth - 1;
+					break;
+			}
+		} else if (currentCubeSide === 'bottom') {
+			switch (nextCubeSide) {
+				case 'front':
+					nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
+					break;
+				case 'left':
+					nextBlock = ((mapwidth - (currentBlock / mapwidth)) + ((mapwidth * mapheight) - mapwidth)) - 1;
+					break;
+				case 'back':
+					nextBlock = (mapwidth - (currentBlock % mapwidth)) + ((mapwidth * mapwidth) - mapwidth) - 1;
+					break;
+				case 'right':
+					nextBlock = (currentBlock / mapwidth) + ((mapwidth * mapheight) - mapwidth) - 1;
+					break;
+			}
+		} else if (objectDirection === 'left') {
+			nextBlock = currentBlock + mapwidth - 1;
+		} else if (objectDirection === 'right') {
+			nextBlock = currentBlock - (mapwidth - 1);
 		}
 
-		// switch (objectDirection) {
-		// 	case 'right':
-		// 		nextBlock = currentBlock - (mapwidth - 1);
-		// 		break;
-		// 	case 'left':
-		// 		nextBlock = currentBlock + mapwidth - 1;
-		// 		break;
-		// 	case 'up':
-		// 		nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
-		// 		break;
-		// 	case 'down':
-		// 		nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
-		// 		break;
-		// }
+		console.log(`moving player from ${currentMap} map to ${nextMap} map`);
+		console.log(`moving player from ${currentCubeSide} cube face to ${nextCubeSide} cube face`);
+		console.log(`moving player from ${movePlayerFromEdge} edge to ${movePlayerToEdge} edge`);
+		console.log(`moving player from block ${currentBlock} to block ${nextBlock}`);
 
 		// remove player from current map
 		object.detach();
@@ -408,10 +455,6 @@ export class Movement {
 
 		// add player to new map
 		object.appendTo(toMap);
-
-		console.log({ toMap });
-		console.log({ nextMap });
-		console.log({ nextBlock });
 
 		blUtil.teleportObjectToBlock(1, nextMap, nextBlock);
 	}

@@ -16,7 +16,7 @@ export class Spear {
 		//$('.the-fucking-frisbee').remove();
 		var playerdirection = blUtil.getObjectDirection(1, "player");
 		var id = globals.uniqueObjectID();
-		$('.the-fucking-forest-map').append('<div data-id='+id+' class="the-fucking-spear objectid-'+id+' spear-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
+		$('.the-fucking-forest-map').append('<div data-id='+id+' class="the-fucking-spear objectId-'+id+' spear-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
 		this.initProjectile("spear", startblock, direction, id);
 	}
 
@@ -29,8 +29,8 @@ export class Spear {
 		blUtil.log(leftstart);
 		topstart = blUtil.addPX(topstart);
 		leftstart = blUtil.addPX(leftstart);
-		$('.objectid-'+id).css("top",topstart);
-		$('.objectid-'+id).css("left",leftstart);
+		$('.objectId-'+id).css("top",topstart);
+		$('.objectId-'+id).css("left",leftstart);
 	}
 
 }

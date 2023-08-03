@@ -311,15 +311,15 @@ export class Map {
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
 				lakeBlocks = [
-					"grass","grass","grass","grass","grass","grass","grass","grass","sand","sand",
+					"grass"
 				];
 				specialBlocks = [
-					"redmushroom","carrot-inground","flower","flower","apple","apple",
-					"bluemushroom","bluemushroom","sand","sand","diamond","gold","silver",
+					"redmushroom","carrot-inground","flower","apple",
+					"bluemushroom","diamond","gold","silver",
 					"portal-a","portal-b"
 				];
 				riverBlocksX = ['water'];
-				riverBlocksY = ['water'];
+				//riverBlocksY = ['water'];
 				break;
 
 			case 'space':

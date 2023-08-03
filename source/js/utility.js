@@ -51,21 +51,21 @@ export class Utility {
 	*/
 
 	getObjectCurrentPositionX(id) {
-		var x = $('.objectid-'+id).css("left");
+		var x = $('.objectId-'+id).css("left");
 		return x;
 	}
 
 	getObjectCurrentPositionY(id) {
-		var y = $('.objectid-'+id).css("top");
+		var y = $('.objectId-'+id).css("top");
 		return y;
 	}
 
 	setObjectCurrentPositionX(id,newx) {
-		$('.objectid-'+id).css("left",newx);
+		$('.objectId-'+id).css("left",newx);
 	}
 
 	setObjectCurrentPositionY(id,newy) {
-		$('.objectid-'+id).css("top",newy);
+		$('.objectId-'+id).css("top",newy);
 	}
 
 	getObjectCurrentCol(id) {
@@ -108,13 +108,13 @@ export class Utility {
 			playergraphic = "";
 		}
 
-		if ($('.objectid-'+id).hasClass(name+"-direction-down")) {
+		if ($('.objectId-'+id).hasClass(name+"-direction-down")) {
 			direction = "down";
-		} else if ($('.objectid-'+id).hasClass(name+"-direction-up")) {
+		} else if ($('.objectId-'+id).hasClass(name+"-direction-up")) {
 			direction = "up";
-		} else if ($('.objectid-'+id).hasClass(name+"-direction-left")) {
+		} else if ($('.objectId-'+id).hasClass(name+"-direction-left")) {
 			direction = "left";
-		} else if ($('.objectid-'+id).hasClass(name+"-direction-right")) {
+		} else if ($('.objectId-'+id).hasClass(name+"-direction-right")) {
 			direction = "right";
 		}
 

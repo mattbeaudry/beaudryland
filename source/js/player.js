@@ -14,7 +14,7 @@ export class Player {
 		//blMap.changeBlockType(playerstartblock, "grass"); //make sure player doesn't start overtop an obstacle
 		//var id = globals.uniqueObjectID();
 		var id = 1;
-		$('.the-fucking-forest-map').append('<div data-id='+id+' data-blockhealth="5" class=" objectid-'+id+' the-fucking-player player-direction-down"></div>');
+		$('.the-fucking-forest-map').append('<div data-id='+id+' data-blockhealth="5" class=" objectId-'+id+' the-fucking-player player-direction-down"></div>');
 	}
 
 	savePlayer() {

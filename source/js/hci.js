@@ -29,20 +29,20 @@ export class HCI {
 		window.addEventListener('keydown', function(event) {
 			var selecteditem = blUtil.getSelectedItem();
 			var direction = '';
-			switch (event.keyCode) {
-				case 37: /* LEFT ARROW */
+			switch (event.code) {
+				case "ArrowLeft":
 					direction = 'left';
 					break;
-				case 38: /* UP ARROW */
+				case "ArrowUp":
 					direction = 'up';
 					break;
-				case 39: /* RIGHT ARROW */
+				case "ArrowRight":
 					direction = 'right';
 					break;
-				case 40: /* DOWN ARROW */
+				case "ArrowDown":
 					direction = 'down';
 					break;
-				case 32: /* SPACE */
+				case "Space":
 					if (globals.disablekeyboardevents == false) {
 						if ($('.speech-bubble').length == 0) {
 							blAction.playerPrimaryAction(); 
@@ -52,11 +52,26 @@ export class HCI {
 						}
 					}
 					break;
-				case 13: /* ENTER */
+				case "Enter":
 					if ($('.speech-bubble').length == 0) {
 						$('.bubble-form').submit();
 						event.preventDefault();
 					} 
+					break;
+				case "Digit1":
+					$('.the-fucking-inventory > div:eq(0)').trigger("click");
+					break;
+				case "Digit2":
+					$('.the-fucking-inventory > div:eq(1)').trigger("click");
+					break;
+				case "Digit3":
+					$('.the-fucking-inventory > div:eq(2)').trigger("click");
+					break;
+				case "Digit4":
+					$('.the-fucking-inventory > div:eq(3)').trigger("click");
+					break;
+				case "Digit5":
+					$('.the-fucking-inventory > div:eq(4)').trigger("click");
 					break;
 
 				// case 69: // E 
@@ -115,10 +130,10 @@ export class HCI {
 						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "bike":
-						//rideBike(direction);
+						rideBike(direction);
 						break;
 					case "skiis":
-						//rideSkiis(direction);
+						rideSkiis(direction);
 						break;
 					default:
 						blMovement.moveObject(direction, 1, "player");

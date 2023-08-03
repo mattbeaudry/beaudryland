@@ -200,7 +200,7 @@ gotospace
 				case 'gotospace':
 					if (globals.rocketFirstFlight == true && $('.the-fucking-space-map').length == 0) {
 						// globals.rocketFirstFlight = false;
-						var object = $('.objectid-1');
+						var object = $('.objectId-1');
 						var toMap = $('.the-fucking-space-map');
 
 						// create space map

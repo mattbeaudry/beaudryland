@@ -7,10 +7,10 @@ export class Health {
 
 	}
 
-	showObjectHealth(objectid, number) {
+	showObjectHealth(objectId, number) {
 		var rid = globals.uniqueObjectID();
 		var healthlabelhtml = '<div class="damage-label damage-label-id-'+rid+'">'+number+'</div>';
-		$('.objectid-'+objectid).append(healthlabelhtml);
+		$('.objectId-'+objectId).append(healthlabelhtml);
 		$('.damage-label-id-'+rid).css("top","-50px");
 		$('.damage-label-id-'+rid).animate("top","-120px");
 		$('.damage-label-id-'+rid).fadeOut(300, function() {
@@ -18,21 +18,21 @@ export class Health {
 		});
 	}
 
-	setObjectHealth(objectid, value) {
-		$('.objectid-'+objectid).attr("data-blockhealth",value);
+	setObjectHealth(objectId, value) {
+		$('.objectId-'+objectId).attr("data-blockhealth",value);
 	}
 
-	reduceObjectHealth(objectid, amount) {
-		var blockhealth = $('.objectid-'+objectid).attr("data-blockhealth");
+	reduceObjectHealth(objectId, amount) {
+		var blockhealth = $('.objectId-'+objectId).attr("data-blockhealth");
 		blockhealth = blockhealth - amount;
-		$('.objectid-'+objectid).attr("data-blockhealth",blockhealth);
+		$('.objectId-'+objectId).attr("data-blockhealth",blockhealth);
 		this.showObjectHealth(1,blockhealth);
 	}
 
-	increaseObjectHealth(objectid, amount) {
-		var blockhealth = $('.objectid-'+objectid).attr("data-blockhealth");
+	increaseObjectHealth(objectId, amount) {
+		var blockhealth = $('.objectId-'+objectId).attr("data-blockhealth");
 		blockhealth = blockhealth + amount;
-		$('.objectid-'+objectid).attr("data-blockhealth",blockhealth);
+		$('.objectId-'+objectId).attr("data-blockhealth",blockhealth);
 	}
 
 	reduceBlockHealth(blockid, amount) {

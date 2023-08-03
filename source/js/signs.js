@@ -9,14 +9,14 @@ export class Signs {
 
 	}
 
-	placeSign(objectid, block) {
+	placeSign(objectId, block) {
 
 		// var html = '<div class="speech-bubble">';
 		// html    +=   '<form class="bubble-form" action="submit">';
 		// html    +=     '<textarea class="bubble-text" rows="2" cols="30"></textarea>';
 		// html    +=   '</form>';
 		// html    += '</div>';
-		// $('.objectid-'+objectid).append(html);
+		// $('.objectId-'+objectId).append(html);
 
 		var html = '<div class="bubble-wrap">';
 					html += '<div class="bubble-link">';
@@ -32,7 +32,7 @@ export class Signs {
 			  	html += '<span class="bubble-hangdown-4"></span>';
 			html += '</div>';
 
-		$('.objectid-'+objectid).append(html);
+		$('.objectId-'+objectId).append(html);
 
 		$('.bubble-form').submit(function(e) {
 
@@ -85,7 +85,7 @@ export class Signs {
 			  	html += '<span class="bubble-hangdown-4"></span>';
 			html += '</div>';
 
-		$('.objectid-'+1).append(html);
+		$('.objectId-'+1).append(html);
 
 		$('.bubble-form').submit(function(e) {
 
