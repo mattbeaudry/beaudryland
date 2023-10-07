@@ -116,7 +116,7 @@ body.theme-night {
   width: $mapWidthPX;
   height: $mapHeightPX;
   transform-style: preserve-3d;
-  transition: all 2s;
+  transition: all 1.5s;
 }
 
 .cube-side {
@@ -181,7 +181,8 @@ body.theme-night {
   transform-style: preserve-3d;
 
   .block-tree, .block-pinetree, .block-palmtree, .block-appletree, .block-rock, .block-icerock, .block-sandstone,
-  .block-wood, .block-door, .block-door-open, .block-fire, .block-sign, .the-fucking-player {
+  .block-wood, .block-door, .block-door-open, .block-fire, .block-sign, .the-fucking-player, .block-flower,
+  .block-bluemushroom, .block-blackmushroom, .block-greenmushroom, .block-yellowmushroom {
     transition: transform 5s;
     transform-origin: bottom;
     transform-style: preserve-3d;

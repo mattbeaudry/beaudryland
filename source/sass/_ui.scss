@@ -410,11 +410,16 @@ knob-face {
 
 .the-fucking-console {
   position: fixed;
-  bottom: 0;
-  width: 800px;
+  right: 16px;
+  height: 40%;
+  bottom: 16px;
+  width: 400px;
   padding: 5px 10px;
   z-index: 1;
   text-align: right;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
 
   > ul {
     list-style: none;

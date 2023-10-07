@@ -52,14 +52,15 @@ export const buiColor = {
 	purple50: "#A247A6"
 };
 
-export const gridunitpx = 20; //must change this px value in css as well
-export var mapWidthMobile = 10;
-export var mapHeightMobile = 10;
-export var mapWidthDesktop = 10;
-export var mapHeightDesktop = 10;
+export const mapSize = 16;
+export const gridunitpx = 20; // must change this px value in css as well
+export var mapWidthMobile = mapSize;
+export var mapHeightMobile = mapSize;
+export var mapWidthDesktop = mapSize;
+export var mapHeightDesktop = mapSize;
 export var totalmapblocks = mapWidthDesktop * mapHeightDesktop;
-export var mapwidth = 10;
-export var mapheight = 10;
+export var mapwidth = mapSize;
+export var mapheight = mapSize;
 export var mapWidthPx = mapwidth * gridunitpx;
 export var mapHeightPx = mapheight * gridunitpx;
 

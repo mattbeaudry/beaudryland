@@ -31,6 +31,21 @@
   vertical-align: top;
 }
 
+.the-fucking-inventory > div:first-child,
+.the-fucking-inventory > div:nth-child(2),
+.the-fucking-inventory > div:nth-child(3),
+.the-fucking-inventory > div:nth-child(4),
+.the-fucking-inventory > div:nth-child(5) {
+  box-shadow: 0px 0px 0px 2px #000;
+  background-color: #000;
+}
+
+.the-fucking-inventory > div:first-child::before {
+  content: "a";
+  position: absolute;
+  
+}
+
 .the-fucking-inventory > .empty,
 .the-fucking-crafting-table > .empty,
 .the-fucking-crafted-item > .empty {

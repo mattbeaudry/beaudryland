@@ -1,15 +1,16 @@
+$mapSize: 16;
 $gridunitpx: 20px;
 
-$mapWidthBlocks: 10;
-$mapHeightBlocks: 10;
+$mapWidthBlocks: $mapSize;
+$mapHeightBlocks: $mapSize;
 
 $mapWidthPX: $mapWidthBlocks * $gridunitpx;
 $mapHeightPX: $mapHeightBlocks * $gridunitpx;
 $mapHalfWidthPX: $mapWidthPX / 2;
 $mapPerspectivePX: $mapWidthPX - 100;
 
-$mapMobileWidthBlocks: 10;
-$mapMobileHeightBlocks: 10;
+$mapMobileWidthBlocks: $mapSize;
+$mapMobileHeightBlocks: $mapSize;
 $mapMobileWidthPX: $mapMobileWidthBlocks * $gridunitpx;
 $mapMobileHeightPX: $mapMobileHeightBlocks * $gridunitpx;
 $mapMobileHalfWidthPX: $mapMobileWidthPX / 2;

@@ -201,15 +201,15 @@ export class Map {
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'">'+f+'</div>';
 				}
 				lakeBlocks = ["water","tree","grass","water","tree","grass","appletree","water"];
+				riverBlocksX = ["water"];
+				riverBlocksY = ["water"];
+				cabin = true;
 				specialBlocks = [
 					"flower",
 					"mushroom",
 					"appletree",
 					"carrot-inground"
 				];
-				riverBlocksX = ["water"];
-				riverBlocksY = ["water"];
-				cabin = true;
 				break;
 
 			case 'winter':
@@ -251,10 +251,7 @@ export class Map {
 					}
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
-				lakeBlocks = ["sand", "grass"];
-				specialBlocks = ["canoe"];
-				riverBlocksX = ['water'];
-				riverBlocksY = ['water'];
+				specialBlocks = ["canoe", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "rock", "rock", "rock", "rock", "rock"];
 				break;
 
 			case 'jungle':
@@ -292,12 +289,12 @@ export class Map {
 					else { blocktype = "sand"; }
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
-				lakeBlocks = ["water","dirt"];
+				//lakeBlocks = ["water"];
 				specialBlocks = [
 					"redmushroom","flower","flower"
 				];
-				riverBlocksX = ['water'];
-				riverBlocksY = ['water'];
+				// riverBlocksX = ['water'];
+				// riverBlocksY = ['water'];
 				break;
 
 			case 'islands':
@@ -311,15 +308,13 @@ export class Map {
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
 				lakeBlocks = [
-					"grass"
+					"grass",
 				];
+				riverBlocksY = ['wave', 'wave'];
 				specialBlocks = [
-					"redmushroom","carrot-inground","flower","apple",
-					"bluemushroom","diamond","gold","silver",
-					"portal-a","portal-b"
+					"portal-a","portal-b",
+					"canoe", "wave", "wave"
 				];
-				riverBlocksX = ['water'];
-				//riverBlocksY = ['water'];
 				break;
 
 			case 'space':
@@ -408,16 +403,21 @@ export class Map {
 				if (blockType != 'none') {
 					this.changeBlockType(blockId, blockType, maptype);
 				}
-				
 			}
 		}
 
+		console.log("specialBlocks",specialBlocks);
+
 		for (var i = 0; i<specialBlocks.length; i++) {
 			var randomBlockId = blUtil.randomBlockID();
-			this.changeBlockType(randomBlockId, blockType, maptype);
+			this.changeBlockType(randomBlockId, specialBlocks[i], maptype);
+
+			console.log({randomBlockId});
+			console.log(specialBlocks[i]);
+			console.log({maptype});
 		}
 
-		//blAchievement.updateStats();
+		// blAchievement.updateStats();
 
 	}
 
