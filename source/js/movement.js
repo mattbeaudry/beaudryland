@@ -9,13 +9,14 @@ var blCube = new Cube();
 var blItems = new Items();
 
 export class Movement {
-
 	constructor() {
 		this.objectbrain;
 		this.objectPath = [];
 		this.destinationblockColumn;
 		this.t = 0;
 		this.maxthoughts = 100;
+		this.mapanimate;
+		this.ridingbike;
 	}
 
 	moveObject(direction, id, name) {
@@ -174,7 +175,7 @@ export class Movement {
 	changeObjectDirection(id, direction, name) {
 		blUtil.log("changing object:"+id+" direction to "+direction);
 		var selecteditem = blUtil.getSelectedItem();
-		//animated items
+		// animated items
 		var playergraphic;
 		if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "car" || selecteditem == "canoe" || selecteditem == "rocket" && name == "player" ) { 
 			playergraphic = "-"+selecteditem;
@@ -438,10 +439,10 @@ export class Movement {
 			nextBlock = currentBlock - (mapwidth - 1);
 		}
 
-		console.log(`moving player from ${currentMap} map to ${nextMap} map`);
-		console.log(`moving player from ${currentCubeSide} cube face to ${nextCubeSide} cube face`);
-		console.log(`moving player from ${movePlayerFromEdge} edge to ${movePlayerToEdge} edge`);
-		console.log(`moving player from block ${currentBlock} to block ${nextBlock}`);
+		// console.log(`moving player from ${currentMap} map to ${nextMap} map`);
+		// console.log(`moving player from ${currentCubeSide} cube face to ${nextCubeSide} cube face`);
+		// console.log(`moving player from ${movePlayerFromEdge} edge to ${movePlayerToEdge} edge`);
+		// console.log(`moving player from block ${currentBlock} to block ${nextBlock}`);
 
 		// remove player from current map
 		object.detach();
@@ -457,6 +458,78 @@ export class Movement {
 		object.appendTo(toMap);
 
 		blUtil.teleportObjectToBlock(1, nextMap, nextBlock);
-	}
+	};
+
+	startBiking(direction) {
+		blUtil.log("move bike "+direction);
+		var playerdirection = blUtil.getObjectDirection(1, "player");
+		blUtil.log("player current direction: "+playerdirection);
+		switch (direction) {
+			case "up": this.moveObject("up", 1, "player"); break;
+			case "down": this.moveObject("down", 1, "player"); break;
+			case "left": this.moveObject("left", 1, "player"); break;
+			case "right": this.moveObject("right", 1, "player"); break;
+		}
+		// this.ridingbike = setTimeout(function() {
+		// 	this.startBiking(direction);
+		// }, globals.bikespeed); // repeat movement
+	};
+
+	stopBiking() {
+		clearTimeout(this.ridingbike);
+	};
+
+	rideBike(direction) {
+		this.stopBiking();
+		var playerdirection = blUtil.getObjectDirection(1, "player");
+		if (playerdirection == "left" && direction == "right") { 
+			this.changeObjectDirection(1, "right", "player");
+		} else if (playerdirection == "right" && direction == "left") { 
+			this.changeObjectDirection(1, "left", "player");
+		} else if (playerdirection == "up" && direction == "down") { 
+			this.changeObjectDirection(1, "down", "player");
+		} else if (playerdirection == "down" && direction == "up") { 
+			this.changeObjectDirection(1, "up", "player");
+		} else {
+			this.ridingbike = setTimeout(function() {
+				this.startBiking(direction);
+			}.bind(this), globals.bikespeed);
+		}
+	};
+
+	stopMap() { 
+		clearTimeout(this.mapanimate); 
+		this.mapanimate = null;
+	};
+
+	moveMap() {
+		blUtil.log("animating the map!");
+		var mapspeed = 200;
+		this.mapanimate = setTimeout(scrollMap, mapspeed);
+		
+		function scrollMap() {
+			var toprow = $('.the-fucking-winter-map div').slice(0,40).remove();
+			$('.the-fucking-winter-map').append(toprow);
+			this.mapanimate = setTimeout(scrollMap, mapspeed); // repeat thought
+		}
+	};
+
+	rideSkiis(direction) {
+		if (direction == "up") {
+			this.moveObject("up", 1, "player");
+			this.changeObjectDirection(1,"up", "player");
+			this.stopMap();
+		} else {
+			switch (direction) {
+				case "up": this.moveObject("up",1, "player"); break;
+				case "down": this.moveObject("down", 1, "player"); break;
+				case "left": this.moveObject("left", 1, "player"); break;
+				case "right": this.moveObject("right", 1, "player"); break;
+			}
+			if (this.mapanimate == null) {
+				this.moveMap();
+			}
+		}
+	};
 
 }

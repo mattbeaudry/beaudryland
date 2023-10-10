@@ -1145,8 +1145,9 @@ label {
   z-index: 2;
 
   .tab {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.4);
     padding: 20px 30px;
+    backdrop-filter: blur(11px);
   }
 }
 

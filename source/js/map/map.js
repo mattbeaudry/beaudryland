@@ -251,7 +251,7 @@ export class Map {
 					}
 					maphtml += '<div data-blockid="'+f+'" data-blocktype="'+blocktype+'" data-blockhealth="10" class="block block-'+blocktype+'"></div>';
 				}
-				specialBlocks = ["canoe", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "rock", "rock", "rock", "rock", "rock"];
+				specialBlocks = ["canoe", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "palmtree", "rock", "rock", "rock", "rock", "rock", "wave", "wave"];
 				break;
 
 			case 'jungle':
@@ -406,19 +406,12 @@ export class Map {
 			}
 		}
 
-		console.log("specialBlocks",specialBlocks);
-
 		for (var i = 0; i<specialBlocks.length; i++) {
 			var randomBlockId = blUtil.randomBlockID();
 			this.changeBlockType(randomBlockId, specialBlocks[i], maptype);
-
-			console.log({randomBlockId});
-			console.log(specialBlocks[i]);
-			console.log({maptype});
 		}
 
 		// blAchievement.updateStats();
-
 	}
 
 	mapPerspective() {

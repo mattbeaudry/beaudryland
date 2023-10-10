@@ -130,10 +130,10 @@ export class HCI {
 						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "bike":
-						rideBike(direction);
+						blMovement.rideBike(direction);
 						break;
 					case "skiis":
-						rideSkiis(direction);
+						blMovement.rideSkiis(direction);
 						break;
 					default:
 						blMovement.moveObject(direction, 1, "player");
