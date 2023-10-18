@@ -166,7 +166,7 @@ gotospace
 						// globals.trumpetFirstNote = false;
 						blStory.demolishMapBorder('beach', 'right');
 						blMap.loadNewMap('jungle', 'left');
-						//blStory.createJungleSigns();
+						blStory.createJungleSigns();
 						blStory.setupMapBorders('jungle');
 						blStory.demolishMapBorder('jungle', 'left');
 						blStory.demolishMapBorder('jungle', 'right');
@@ -180,28 +180,27 @@ gotospace
 						blStory.demolishMapBorder('forest', 'bottom');
 						blStory.demolishMapBorder('winter', 'bottom');
 						blStory.demolishMapBorder('beach', 'bottom');
-						blStory.demolishMapBorder('jungle', 'bottom');
+						blStory.demolishMapBorder('jungle', 'bottom'); 
 						blMap.loadNewMap('desert', 'bottom');
-						//blStory.createDesertSigns();
+						blStory.createDesertSigns();
 					}
 					break;
 				case 'bringinthebeat':
 					if (globals.drumsFirstNote == true && $('.the-fucking-islands-map').length == 0) {
-						blUtil.log('Play drums!'); 
-						// globals.drumsFirstNote = false; 
+						blUtil.log('Play drums!');
+						// globals.drumsFirstNote = false;
 						blStory.demolishMapBorder('forest', 'top');
 						blStory.demolishMapBorder('winter', 'top');
 						blStory.demolishMapBorder('beach', 'top');
 						blStory.demolishMapBorder('jungle', 'top');
 						blMap.loadNewMap('islands', 'top');
-						//blStory.createIslandsSigns();
+						blStory.createIslandsSigns();
 					}
 					break;
 				case 'gotospace':
 					if (globals.rocketFirstFlight == true && $('.the-fucking-space-map').length == 0) {
 						// globals.rocketFirstFlight = false;
 						var object = $('.objectId-1');
-						var toMap = $('.the-fucking-space-map');
 
 						// create space map
 						blMap.loadNewMap('space', 'background');
@@ -211,17 +210,17 @@ gotospace
 						$('body').addClass('theme-night');
 
 						// zoom out from cube
-						$('.maps-wrap').addClass('maps-zoomout');
+						$('.maps-container').addClass('maps-zoomout');
 
 						// hide cube, show earth blocks
-						setTimeout(function(){ 
+						setTimeout(function(){
 							$('.maps-wrap').hide();
-							blMap.changeBlockType(209, 'earth', 'space');
+							blMap.changeBlockType(135, 'earth', 'space');
 							// move player to space
 							object.detach();
 							$('.the-fucking-space-map').append(object);
-							blUtil.teleportObjectToBlock(1, 'space', 210);
-						}, 2000);
+							blUtil.teleportObjectToBlock(1, 'space', 136);
+						}, 5000);
 					}
 					break;
 			}

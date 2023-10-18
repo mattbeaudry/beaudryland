@@ -26,23 +26,23 @@
 						<nav class="beaudryland-nav">
 							<div class="d-flex align-items-center justify-content-between">
 								<div class="d-flex align-items-center">
-									<a class="tabs-close bui-button" href="javascript:void(0);">
+									<button class="tabs-close bui-button bui-button-nav">
 										<span>< BACK</span>
-									</a>
-									<a class="tab-menuitem nav-selected-item block" href="javascript:void(0);" data-tabmenu="tab-inventory">
-										<span></span>
-									</a>
-									<a class="tab-menuitem bui-button button-icon" href="javascript:void(0);" data-tabmenu="tab-achievements">
+									</button>
+									<button class="tab-menuitem nav-selected-item bui-button bui-button-nav" data-tabmenu="tab-inventory">
+										<span class="block"></span>
+									</button>
+									<button class="tab-menuitem bui-button bui-button-nav button-icon" data-tabmenu="tab-achievements">
 										<i class="block i-check-white"></i>
-									</a>
-									<a class="tab-menuitem bui-button button-icon" href="javascript:void(0);" data-tabmenu="tab-navigation">
+									</button>
+									<button class="tab-menuitem bui-button bui-button-nav button-icon" data-tabmenu="tab-navigation">
 										<i class="block block-question-mark-white"></i>
-									</a>
+									</button>
 								</div>
 								<div>
-									<a class="link-savemap bui-button" href="javascript:void(0);">Save</a>
+									<button class="link-savemap bui-button bui-button-nav">Save</button>
 									<div class="bui-menu">
-					                    <button class="bui-menu-button bui-button">
+					                    <button class="bui-menu-button bui-button bui-button-nav">
 											<span class="bui-truncate">
 					                    		<?php if(isset($_SESSION['username'])){echo $_SESSION['username'];} ?> +
 					                    	</span>
@@ -73,11 +73,13 @@
 						<li></li>
 					</ul>
 				</div>
-				<div class="the-fucking-map-overlay"></div>
-				<div class="maps-container cube-container">
-				    <div class="maps-wrap cube cube-show-front clearfix">
-						<div class="test-satelite"></div>
-				    </div>
+				<div class="space-container">
+					<div class="the-fucking-map-overlay"></div>
+					<div class="maps-container cube-container">
+						<div class="maps-wrap cube cube-show-front clearfix">
+							<div class="test-satelite"></div>
+						</div>
+					</div>
 				</div>
 				<div class="the-fucking-controller">
 		        	<div class="d-pad">

@@ -31,6 +31,11 @@ export class Utility {
 		var column = block % globals.mapwidth;
 		column = column;
 		var leftpx = column * globals.gridunitpx;
+		console.log("getBlockLeftByID");
+		console.log({column});
+		console.log({leftpx});
+		console.log("globals.gridunitpx", globals.gridunitpx);
+		console.log("globals.mapwidth", globals.mapwidth);
 		return leftpx;
 		//alert(leftpx);
 	}
@@ -39,6 +44,9 @@ export class Utility {
 		var row = block / globals.mapwidth;
 		row = parseInt(row);
 		var toppx = row * globals.gridunitpx;
+		console.log("getBlockTopByID");
+		console.log({row});
+		console.log({toppx});
 		//blUtil.log("block "+block+", row"+row+", toppx"+toppx);
 		return toppx;
 	}
@@ -124,8 +132,13 @@ export class Utility {
 	teleportObjectToBlock(objectId, destinationMap, destinationBlock) {
 		var left = this.getBlockLeftByID(destinationBlock);
 		var top = this.getBlockTopByID(destinationBlock);
-		this.setObjectCurrentPositionX(objectId,left);
-		this.setObjectCurrentPositionY(objectId,top);
+		
+		console.log("teleportObjectToBlock");
+		console.log({left});
+		console.log({top});
+		
+		this.setObjectCurrentPositionX(objectId, left);
+		this.setObjectCurrentPositionY(objectId, top);
 	}
 
 	stripPX(css) {

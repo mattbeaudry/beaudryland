@@ -53,7 +53,7 @@ export const buiColor = {
 };
 
 export const mapSize = 16;
-export const gridunitpx = 20; // must change this px value in css as well
+export const gridunitpx = 32; // must change this px value in css as well
 export var mapWidthMobile = mapSize;
 export var mapHeightMobile = mapSize;
 export var mapWidthDesktop = mapSize;
@@ -64,7 +64,6 @@ export var mapheight = mapSize;
 export var mapWidthPx = mapwidth * gridunitpx;
 export var mapHeightPx = mapheight * gridunitpx;
 
-console.log("load globals");
 export function setCurrentMap(map) { $('.maps-container').data('currentMap', map); }
 export function getCurrentMap() { 
 	return $('.maps-container').data('currentMap');
@@ -82,7 +81,7 @@ export const enemyspeed = 200;
 export const playerspeed = 50;
 export const animalspeed = 2000;
 export const projectilespeed = 50;
-export const bikespeed = 100;
+export const bikespeed = 500;
 export const playerid = 1;
 export const totalhearts = 5;
 

@@ -83,6 +83,23 @@
       background-color: #333;
     }
   }
+
+  &.bui-button-nav {
+    height: 64px;
+    min-width: 64px;
+    justify-content: space-around;
+    padding: 0 16px;
+  
+    &:before,
+    &:after {
+      height: 56px;
+    }
+  }
+
+  &.nav-selected-item > span {
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .bui-label {

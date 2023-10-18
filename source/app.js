@@ -107,7 +107,7 @@ if ( $('body').hasClass("version-phonegap") ) {
 } else if ( $('body').hasClass("version-desktop") ) {
 
 	$(document).ready(function() {
-		//console.log("DESKTOP VERSION");
+		// console.log("DESKTOP VERSION");
 
 		// globals.mapwidth = globals.mapWidthDesktop;
 		// globals.mapheight = globals.mapHeightDesktop;
@@ -194,6 +194,9 @@ var loadNewGame = function() {
 		blStory.createForestSigns();
 		blStory.createWinterSigns();
 		blStory.createBeachSigns();
+		blStory.createJungleSigns();
+		blStory.createDesertSigns();
+		blStory.createIslandsSigns();
 		blDev.getAllItems();
 		// disabled for dev
 		//blAnimal.createAnimal();

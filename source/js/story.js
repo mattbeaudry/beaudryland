@@ -6,49 +6,109 @@ import { Map } from './map/map';
 var blUtil = new Utility();
 var blMap = new Map();
 
-export class Story {
-
-	constructor() {
-
+function isBlockOnEdgeOfCube(blockid) {
+	if ((blockid) % globals.mapwidth === 0) {
+		return true;
 	}
 
+	if ((blockid + 1) % globals.mapwidth === 0) {
+		return true;
+	}
+
+	if (blockid < globals.mapwidth) {
+		return true;
+	}
+
+	if (blockid > (globals.totalmapblocks - globals.mapwidth)) {
+		return true;
+	}
+
+	return false;
+}
+
+function renderSignsOnMap(signText, map) {
+	var previousSignBlockIds = [];
+
+	console.log("renderSignsOnMap");
+	console.log({signText});
+	console.log({map})
+
+	$.each(signText,function(index,value){
+		let blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
+		let signAlreadyThere = previousSignBlockIds.includes(blockid);
+		let invalidBlock = isBlockOnEdgeOfCube(blockid);
+
+		while(invalidBlock || signAlreadyThere) {
+			blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
+			signAlreadyThere = previousSignBlockIds.includes(blockid);
+			invalidBlock = isBlockOnEdgeOfCube(blockid);
+			// console.log({blockid});
+			// console.log({invalidBlock});
+			// console.log({signAlreadyThere});
+		}
+		
+		blMap.changeBlockType(blockid, "sign", map);
+		$('.the-fucking-'+map+'-map .block:eq('+blockid+')').attr("data-text", value);
+
+		previousSignBlockIds.push(blockid);
+	});
+}
+
+export class Story {
 	createForestSigns() {
+		console.log("createForestSigns");
 		var forestSigns = [
 			"You shall collect trees and rocks to create wood and other items.",
 			"You shall build a shovel in order to find treasure.",
 			"You shall build a guitar in order to unlock a new area."
 		];
-		$.each(forestSigns,function(index,value){
-			var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-			blMap.changeBlockType(blockid,"sign","forest");
-			$('.the-fucking-forest-map .block:eq('+blockid+')').attr("data-text", value);
-		});
+		renderSignsOnMap(forestSigns, "forest");
 	}
 
 	createWinterSigns() {
-		 var winterSigns = [
-		 	"Winter Message 1",
-		 	"Winter Message 2",
-		 	"Winter Message 3"
-		 ];
-		 $.each(winterSigns,function(index,value){
-		 	var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-		 	blMap.changeBlockType(blockid,"sign","winter");
-		 	$('.the-fucking-winter-map .block:eq('+blockid+')').attr("data-text", value);
-		 });
+		console.log("createWinterSigns");
+		var winterSigns = [
+			"Dig to find gold and silver.",
+			"Build and play the keyboard to unlock another map.",
+			"Build and ride the bike for speedy transport."
+		];
+		renderSignsOnMap(winterSigns, "winter");
 	}
 
 	createBeachSigns() {
-		var forestSigns = [
-			"Beach Message 1",
+		var beachSigns = [
+			"Build and play the trumpet to unlock another map.",
 			"Beach Message 2",
 			"Beach Message 3"
 		];
-		$.each(forestSigns,function(index,value){
-			var blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
-			blMap.changeBlockType(blockid,"sign","beach");
-			$('.the-fucking-beach-map .block:eq('+blockid+')').attr("data-text", value);
-		});
+		renderSignsOnMap(beachSigns, "beach");
+	}
+
+	createJungleSigns() {
+		var jungleSigns = [
+			"Build and play the instrument to unlock another map.",
+			"Jungle Message 2",
+			"Jungle Message 3"
+		];
+		renderSignsOnMap(jungleSigns, "jungle");
+	}
+
+	createDesertSigns() {
+		var desertSigns = [
+			"Build and play the instrument to unlock another map.",
+			"Desert Message 2",
+			"Desert Message 3"
+		];
+		renderSignsOnMap(desertSigns, "desert");
+	}
+
+	createIslandsSigns() {
+		var islandSigns = [
+			"Build and play the instrument to unlock another map.",
+			"Island Message 2",
+			"Island Message 3"
+		];
+		renderSignsOnMap(islandSigns, "island");
 	}
 
 	setupMapBorders(map) {

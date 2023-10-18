@@ -9,7 +9,7 @@ export class Signs {
 
 	}
 
-	placeSign(objectId, block) {
+	placeSign(objectId, map) {
 
 		// var html = '<div class="speech-bubble">';
 		// html    +=   '<form class="bubble-form" action="submit">';
@@ -49,7 +49,7 @@ export class Signs {
 				case "right": block = block; break;
 			}
 			
-			$('.maps-wrap .block:eq('+block+')').attr("data-text", message);
+			$('.the-fucking-'+map+'-map .block:eq('+block+')').attr("data-text", message);
 			//$('.maps-wrap .block:eq('+block+')').remove();
 
 			// console.log('write message to block #: ' + block);
@@ -58,7 +58,7 @@ export class Signs {
 			$('.bubble-wrap').remove();
 			globals.disablekeyboardevents = false;
 
-			event.preventDefault();
+			e.preventDefault();
 
 		});
 
@@ -67,8 +67,12 @@ export class Signs {
 		$('.bubble-text').focus();
 	}
 
-	readSign(block) {
-		var message = $('.maps-wrap .block:eq('+block+')').attr("data-text");
+	readSign(block, map) {
+		console.log("readSign");
+		console.log({block});
+		console.log({map});
+
+		var message = $('.the-fucking-'+map+'-map .block:eq('+block+')').attr("data-text");
 		//alert(message);
 		var html = '<div class="bubble-wrap">';
 					html += '<div class="bubble-link">';
@@ -102,7 +106,7 @@ export class Signs {
 				case "right": block = block; break;
 			}
 			
-			$('.maps-wrap .block:eq('+block+')').attr("data-text", message);
+			$('.the-fucking-'+map+'-map .block:eq('+block+')').attr("data-text", message);
 			//$('.maps-wrap .block:eq('+block+')').remove();
 
 			//// console.log('write message to block #: ' + block);

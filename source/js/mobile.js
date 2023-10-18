@@ -20,9 +20,9 @@ export class Mobile {
 
 	websql_openDatabase() {
 		this.db = openDatabase(
-			globals.WEBDB_shortName, 
+			globals.WEBDB_shortName,
 			globals.WEBDB_version,
-			globals.WEBDB_displayName, 
+			globals.WEBDB_displayName,
 			globals.WEBDB_maxSize
 		);
 	}

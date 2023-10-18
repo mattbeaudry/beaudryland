@@ -58,7 +58,7 @@ export class Action {
 			}	
 			var playerblock = blUtil.getObjectCurrentBlock(this.id);
 
-			//killing the enemy
+			// killing the enemy
 			if ($('.the-fucking-enemy').length != 0) {
 				$('.the-fucking-enemy').each(function(index) {
 					var enemyid = $(this).attr('data-id');
@@ -110,8 +110,9 @@ export class Action {
 				blMap.changeBlockType(block, "door", currentMap);
 
 			// FRISBEE THROW
-			// } else if (selecteditem == "frisbee") {
-				//throwFrisbee(block, direction);
+			} else if (selecteditem == "frisbee") {
+				blUtil.displayConsoleMessage("you threw frisbee");
+				blSpear.throwFrisbee(block, direction);
 
 			// SPEAR THROW
 			} else if (selecteditem == "spear") {
@@ -182,7 +183,7 @@ export class Action {
 			// SIGNS
 			} else if (blocktype == "sign") {
 				blUtil.displayConsoleMessage("you placed a sign");
-				blSigns.readSign(block);
+				blSigns.readSign(block, currentMap);
 
 			// PLACING BLOCKS
 			} else if (blItems.itemIsGround(blocktype)) {

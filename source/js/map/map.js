@@ -180,7 +180,7 @@ export class Map {
 		var cabin = false;
 
 		if (cubeside == 'background'){
-			$('.maps-container').append('<div class="the-fucking-'+maptype+'-map" data-maptype="'+maptype+'"></div>');
+			$('.space-container').prepend('<div class="the-fucking-'+maptype+'-map" data-maptype="'+maptype+'"></div>');
 		} else {
 			this.mapsContainer.append('<div class="the-fucking-'+maptype+'-map cube-side cube-'+cubeside+'" data-maptype="'+maptype+'"></div>');
 		}

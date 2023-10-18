@@ -271,8 +271,8 @@ export class HCI {
 				$('.the-fucking-player').addClass("player-direction-"+playerdirection+"-"+selecteditem);
 			}
 
-			$('.nav-selected-item').removeClass(globals.allblockclasses);
-			$('.nav-selected-item').addClass('block-'+blocktype);
+			$('.nav-selected-item span').removeClass(globals.allblockclasses);
+			$('.nav-selected-item span').addClass('block-'+blocktype);
 
 		});
 

@@ -1,21 +1,23 @@
+@import "variables";
+
 // Beaudryland Block Graphics
 
 /* THE BLOCKS */
 
 .block {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: $gridunitpx;
+  height: $gridunitpx;
   background-size: contain !important;
   background-repeat: no-repeat;
   font-size: 8px;
   color: transparent;
 }
 
-.maps-container {
+.space-container {
   .block {
     float: left;
-    background-size: 19px 19px !important;
+    background-size: $gridunitpx $gridunitpx !important;
   }
 }
 
@@ -35,6 +37,7 @@
 
 .the-fucking-space-map {
   background: $c-ground-space;
+  position: absolute;
 }
 
 .the-fucking-jungle-map {
@@ -57,8 +60,8 @@
 
 .the-fucking-spear {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: $gridunitpx;
+  height: $gridunitpx;
   background-size: contain !important;
   background-repeat: no-repeat;
 }
@@ -79,19 +82,19 @@
   background-image: url(../img/item-spear-right.png);
 }
 
-// .block-frisbee {
-//   background: url(../img/item-frisbee.png) no-repeat;
-//   background-size: contain;
-// }
+.block-frisbee {
+  background: url(../img/item-frisbee.svg) no-repeat;
+  background-size: contain;
+}
 
-// .the-fucking-frisbee {
-//   width: 20px;
-//   height: 20px;
-//   position: relative;
-//   margin-top: -20px;
-//   background: url(../img/item-frisbee.gif) no-repeat;
-//   background-size: contain;
-// }
+.the-fucking-frisbee {
+  width: $gridunitpx;
+  height: $gridunitpx;
+  position: relative;
+  margin-top: -$gridunitpx;
+  background: url(../img/item-frisbee.svg) no-repeat;
+  background-size: contain;
+}
 
 // /* animations */
 // .block-bluegalaxy {
@@ -115,8 +118,8 @@
 /* player animations */
 
 .the-fucking-player {
-  width: 20px;
-  height: 20px;
+  width: $gridunitpx;
+  height: $gridunitpx;
   position: relative;
   left: 300px;
   top: 300px;
@@ -320,8 +323,8 @@
 
 .test-satelite {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: $gridunitpx;
+  height: $gridunitpx;
   top: $mapHalfWidthPX;
   left: $mapHalfWidthPX;
   transform-style: preserve-3d;
@@ -336,8 +339,8 @@
   &:before {
     content: "";
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: $gridunitpx;
+    height: $gridunitpx;
     background: url(../img/player-right-rocket.png) no-repeat;
     background-size: contain;
     background-repeat: no-repeat;

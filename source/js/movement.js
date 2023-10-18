@@ -117,8 +117,8 @@ export class Movement {
 		// ROCKET
 		} else if (selecteditem == "rocket" && $(nextBlockClass).hasClass('block-space')) {
 			collide = false;
-		} else if (selecteditem == "rocket") {
-			collide = true;
+		// } else if (selecteditem == "rocket") {
+		// 	collide = true;
 
 		// CANOEING
 		} else if (selecteditem == "canoe" && $(nextBlockClass).hasClass('block-water')) {
@@ -460,10 +460,11 @@ export class Movement {
 		blUtil.teleportObjectToBlock(1, nextMap, nextBlock);
 	};
 
-	startBiking(direction) {
+	moveBike(direction) {
 		blUtil.log("move bike "+direction);
 		var playerdirection = blUtil.getObjectDirection(1, "player");
 		blUtil.log("player current direction: "+playerdirection);
+
 		switch (direction) {
 			case "up": this.moveObject("up", 1, "player"); break;
 			case "down": this.moveObject("down", 1, "player"); break;
@@ -475,26 +476,33 @@ export class Movement {
 		// }, globals.bikespeed); // repeat movement
 	};
 
-	stopBiking() {
+	stopBike() {
 		clearTimeout(this.ridingbike);
 	};
 
 	rideBike(direction) {
-		this.stopBiking();
-		var playerdirection = blUtil.getObjectDirection(1, "player");
-		if (playerdirection == "left" && direction == "right") { 
-			this.changeObjectDirection(1, "right", "player");
-		} else if (playerdirection == "right" && direction == "left") { 
-			this.changeObjectDirection(1, "left", "player");
-		} else if (playerdirection == "up" && direction == "down") { 
-			this.changeObjectDirection(1, "down", "player");
-		} else if (playerdirection == "down" && direction == "up") { 
-			this.changeObjectDirection(1, "up", "player");
-		} else {
-			this.ridingbike = setTimeout(function() {
-				this.startBiking(direction);
-			}.bind(this), globals.bikespeed);
-		}
+		blUtil.log("rideBike");
+		this.stopBike();
+
+		this.ridingbike = setInterval(function() {
+			this.moveBike(direction);
+		}.bind(this), globals.bikespeed);
+
+		// var playerdirection = blUtil.getObjectDirection(1, "player");
+
+		// if (playerdirection == "left" && direction == "right") { 
+		// 	this.changeObjectDirection(1, "right", "player");
+		// } else if (playerdirection == "right" && direction == "left") { 
+		// 	this.changeObjectDirection(1, "left", "player");
+		// } else if (playerdirection == "up" && direction == "down") { 
+		// 	this.changeObjectDirection(1, "down", "player");
+		// } else if (playerdirection == "down" && direction == "up") { 
+		// 	this.changeObjectDirection(1, "up", "player");
+		// } else {
+		// 	this.ridingbike = setTimeout(function() {
+		// 		this.moveBike(direction);
+		// 	}.bind(this), globals.bikespeed);
+		// }
 	};
 
 	stopMap() { 
@@ -504,11 +512,11 @@ export class Movement {
 
 	moveMap() {
 		blUtil.log("animating the map!");
-		var mapspeed = 200;
+		var mapspeed = 500;
 		this.mapanimate = setTimeout(scrollMap, mapspeed);
 		
 		function scrollMap() {
-			var toprow = $('.the-fucking-winter-map div').slice(0,40).remove();
+			var toprow = $('.the-fucking-winter-map div').slice(0,globals.mapwidth).remove();
 			$('.the-fucking-winter-map').append(toprow);
 			this.mapanimate = setTimeout(scrollMap, mapspeed); // repeat thought
 		}

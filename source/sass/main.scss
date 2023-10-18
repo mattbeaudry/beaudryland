@@ -77,26 +77,27 @@ body.theme-night {
 
 /* THE MAP */
 
-.maps-wrap {
-  .the-fucking-forest-map,
-  .the-fucking-winter-map,
-  .the-fucking-beach-map {
-    width: $mapWidthPX;
-    height: $mapHeightPX;
-    margin: 0px auto;
+.maps-container {
+  &.maps-zoomout {
+    transform: scale(0.045) rotateX(90deg) rotateY(90deg) rotateZ(90deg);
+    top: 10px;
+    left: -10px;
   }
+}
 
+.maps-wrap {
   .user-map {
     width: $mapWidthPX;
     height: $mapHeightPX;
     margin: 40px auto;
   }
+}
 
-  &.maps-zoomout {
-    transform: scale(0.045);
-    top: 10px;
-    left: -10px;
-  }
+.space-container {
+  width: $mapWidthPX;
+  height: $mapHeightPX;
+  margin: 0px auto;
+  position: relative;
 }
 
 /* THE CUBE */
@@ -180,9 +181,7 @@ body.theme-night {
   overflow: visible !important;
   transform-style: preserve-3d;
 
-  .block-tree, .block-pinetree, .block-palmtree, .block-appletree, .block-rock, .block-icerock, .block-sandstone,
-  .block-wood, .block-door, .block-door-open, .block-fire, .block-sign, .the-fucking-player, .block-flower,
-  .block-bluemushroom, .block-blackmushroom, .block-greenmushroom, .block-yellowmushroom {
+  .block, .the-fucking-player, .the-fucking-enemy, .the-fucking-deer {
     transition: transform 5s;
     transform-origin: bottom;
     transform-style: preserve-3d;
@@ -192,9 +191,11 @@ body.theme-night {
 .map-view-perspective {
   transform: perspective(600px) rotateX(55deg) rotateY(0deg) scale(1);
 
-  .block-tree, .block-pinetree, .block-palmtree, .block-appletree, .block-rock, .block-icerock, .block-sandstone,
-  .block-wood, .block-door, .block-door-open, .block-fire, .block-sign, .the-fucking-player {
-    transform: rotateX(-90deg) scale(1);
+  .block, .the-fucking-player, .the-fucking-enemy, .the-fucking-deer {
+    transform: rotateX(-90deg) scale(1) translateZ(-16px);
+  }
+  .block-grass, .block-water, .block-sand, .block-dirt, .block-snow, .block-ice, .block-road {
+    transform: rotateX(0deg) scale(1);
   }
 }
 
@@ -780,12 +781,12 @@ label {
 /* THE ENEMY */
 
 .the-fucking-enemy {
-  width: 20px;
-  height: 20px;
-  margin-top: -20px;
+  width: $gridunitpx;
+  height: $gridunitpx;
+  margin-top: -$gridunitpx;
   position: relative;
-  left: 300px;
-  top: 20px;
+  left: $gridunitpx * 20;
+  top: $gridunitpx;
   background: #36ac2a url(../img/enemy-down.png) no-repeat;
   background-size: contain !important;
 }
@@ -809,12 +810,12 @@ label {
 /* THE ANIMALS */
 
 .the-fucking-deer {
-  width: 20px;
-  height: 20px;
-  margin-top: -20px;
+  width: $gridunitpx;
+  height: $gridunitpx;
+  margin-top: -$gridunitpx;
   position: relative;
-  left: 300px;
-  top: 20px;
+  left: $gridunitpx * 20;
+  top: $gridunitpx;
   background: #36ac2a url(../img/deer-down.png) no-repeat;
   background-size: contain !important;
 }
@@ -1140,7 +1141,7 @@ label {
 
 .tabs {
   position: absolute;
-  top: 50px;
+  top: 80px;
   width: 100%;
   z-index: 2;
 
