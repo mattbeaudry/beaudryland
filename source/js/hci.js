@@ -8,6 +8,7 @@ import { Action } from './action';
 import { Inventory } from './inventory'; 
 import { Sound } from './sound'; 
 import { Achievement } from './achievement'; 
+import { Instruments } from './item/instruments'; 
 
 var blUtil = new Utility();
 var blPlayer = new Player();
@@ -17,6 +18,7 @@ var blAction = new Action();
 var blInventory = new Inventory();
 var blSound = new Sound();
 var blAchievement = new Achievement();
+var blInstruments = new Instruments();
 
 export class HCI {
 
@@ -29,6 +31,7 @@ export class HCI {
 		window.addEventListener('keydown', function(event) {
 			var selecteditem = blUtil.getSelectedItem();
 			var direction = '';
+
 			switch (event.code) {
 				case "ArrowLeft":
 					direction = 'left';
@@ -75,55 +78,84 @@ export class HCI {
 					break;
 
 				// case 69: // E 
-				// break;
+					// break;
 				// case 77: // M
-				// break;
+					// break;
 				// case 75: // K
-				// break;
+					// break;
 				// case 66: // B
-				// break;
+					// break;
 				// case 67: // C
-				// break;
+					// break;
 				// case 65: // A
-				// break;
+					// break;
 				// case 68: // D
-				// break;
-				// case 69: // El
-				// break;
+					// break;
+				// case 69: // E
+					// break;
 				// case 70: // F
-				// break;
+					// break;
 				// case 71: // G
-				// break;
+					// break;
 				
 			}
 
-			if (globals.disablekeyboardevents == false && direction != '') {
-				switch (selecteditem) {
-					case "guitar":
+			function playInstrument(instrument) {
+				// make noise
+				switch (direction) {
+					case 'up':
 						blSound.playSound(880);
+					case 'down':
+						blSound.playSound(880);
+					case 'right':
+						blSound.playSound(880);
+					case 'left':
+						blSound.playSound(880);
+					break;
+				}
+				
+				// show music note
+				blInstruments.showMusicNote();
+
+				// animate strumming guitar or playing instrument
+				$(".the-fucking-player").addClass("player-direction-down-"+selecteditem+"-swing");
+				setTimeout(removeSwingClass, 100);
+				function removeSwingClass() {
+					$(".the-fucking-player").removeClass("player-direction-down-"+selecteditem+"-swing");
+				}
+			}
+
+			
+
+			if (globals.disablekeyboardevents == false && direction != '') {
+
+				switch (selecteditem) {
+
+					// MUSICAL INSTRUMENTS
+
+					case "guitar":
+						playInstrument(selecteditem);
 						blAchievement.achievementCompleted("playtheguitar");
-						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "piano":
-						blSound.playSound(880);
+						playInstrument(selecteditem);
 						blAchievement.achievementCompleted("playthekeys");
-						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "trumpet":
-						blSound.playSound(880);
+						playInstrument(selecteditem);
 						blAchievement.achievementCompleted("playthetrumpet");
-						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "bass":
-						blSound.playSound(880);
+						playInstrument(selecteditem);
 						blAchievement.achievementCompleted("playthebass");
-						blMovement.moveObject(direction, 1, "player");
 						break;
 					case "drumsticks":
-						blSound.playSound(880);
+						playInstrument(selecteditem);
 						blAchievement.achievementCompleted("bringinthebeat");
-						blMovement.moveObject(direction, 1, "player");
 						break;
+					
+					// TRANSPORTATION
+
 					case "rocket":
 						blSound.playSound(880);
 						blAchievement.achievementCompleted("gotospace");
@@ -135,6 +167,7 @@ export class HCI {
 					case "skiis":
 						blMovement.rideSkiis(direction);
 						break;
+
 					default:
 						blMovement.moveObject(direction, 1, "player");
 						break;
@@ -246,9 +279,6 @@ export class HCI {
 			$('.the-fucking-inventory > div').removeClass("selected-item");
 			$(this).addClass('selected-item');
 			var selecteditem = $(this).attr('data-blocktype');
-
-			// if ( selecteditem == "sword" ) { createEnemy(); }
-			// if ( selecteditem == "spear" ) { createAnimal(); }
 			
 			// clear animation classes
 			$.each(directions, function(i, v) {
@@ -263,12 +293,24 @@ export class HCI {
 				$('.the-fucking-player').removeClass("player-direction-"+v+"-car");
 				$('.the-fucking-player').removeClass("player-direction-"+v+"-canoe");
 				$('.the-fucking-player').removeClass("player-direction-"+v+"-rocket");
-				
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-guitar");
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-guitar-swing");
 			});
 			
 			if ( $.inArray(selecteditem, globals.isequipable) > -1 ) {
 				blUtil.log("selected item has animation");
 				$('.the-fucking-player').addClass("player-direction-"+playerdirection+"-"+selecteditem);
+			}
+
+			console.log("HCI");
+			console.log({selecteditem});
+			console.log(globals.isinstrument);
+
+			if ( $.inArray(selecteditem, globals.isinstrument) > -1 ) {
+				blUtil.log("selected item in an instrument");
+				// $('.the-fucking-player').addClass("player-direction-down-"+selecteditem);
+				blMovement.changeObjectDirection(1, 'down', 'player');
+				$('.the-fucking-player').addClass("player-direction-down-guitar");
 			}
 
 			$('.nav-selected-item span').removeClass(globals.allblockclasses);
@@ -304,7 +346,7 @@ export class HCI {
 			}
 		});
 
-		//SAVE THE MAPS AND PLAYER DATA
+		// SAVE THE MAPS AND PLAYER DATA
 		$('.link-savemap').on("mousedown", function() {
 			blAchievement.achievementCompleted("saveyourgame");
 			$('.link-savemap a').html('Saving');

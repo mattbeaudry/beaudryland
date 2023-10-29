@@ -27,9 +27,15 @@ if($result->num_rows > 0) {
             $infohtml .= '<td>'.$name.'</td>';
             $infohtml .= '<td>'.$description.'</td>';
 
+            $itemRecipe = explode(',', $row['recipe']);
+
             // CRAFTING RECIPE
             if ($row['is_craftable']) {
-                $infohtml .= '<td><div id="recipe" class="svg-wrap">'.$row['recipe'].'</td>';
+                $infohtml .= '<td class="recipe">';
+                $infohtml .= '<div class="svg-wrap"><img src="items/'.$itemRecipe[0].'.svg"></div>';
+                $infohtml .= '<div class="svg-wrap"><img src="items/'.$itemRecipe[1].'.svg"></div>';
+                $infohtml .= '<div class="svg-wrap"><img src="items/'.$itemRecipe[2].'.svg"></div>';
+                $infohtml .= '</td>';
             } else {
                 $infohtml .= '<td></td>';
             }
@@ -66,10 +72,10 @@ if($result->num_rows > 0) {
             // SWING ANIMATION SPRITES
             if ($row['is_useable']) {
                 $infohtml .= '<td>';
-                    $infohtml .= '<div class="svg-wrap"><img src="items/'.$row['image_item_swing_front'].'"></div>';
-                    $infohtml .= '<div class="svg-wrap"><img src="items/'.$row['image_item_swing_back'].'"></div>';
-                    $infohtml .= '<div class="svg-wrap"><img src="items/'.$row['image_item_swing_left'].'"></div>';
-                    $infohtml .= '<div class="svg-wrap"><img src="items/'.$row['image_item_swing_right'].'"></div>';
+                    // $infohtml .= '<div class="svg-wrap"><img src="items/'.$row['image_item_swing_front'].'"></div>';
+                    // $infohtml .= '<div class="svg-wrap"><img src="items/'.$row['image_item_swing_back'].'"></div>';
+                    // $infohtml .= '<div class="svg-wrap"><img src="items/'.$row['image_item_swing_left'].'"></div>';
+                    // $infohtml .= '<div class="svg-wrap"><img src="items/'.$row['image_item_swing_right'].'"></div>';
                 $infohtml .= '</td>';
             } else {
                 $infohtml .= '<td></td>';

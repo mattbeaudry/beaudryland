@@ -58,11 +58,11 @@ export class Health {
 			$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
 			this.reduceObjectHealth(1,1);
 		} else if (hearts == globals.totalhearts) {
-			//don't add a heart, max 8
+			// don't add a heart, max 8
 		} else {
 			$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
 			this.reduceObjectHealth(1,1);
-			//gameOver();
+			// gameOver();
 		}
 	}
 

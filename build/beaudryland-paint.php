@@ -102,10 +102,11 @@ $('.sprite-painter').submit(function(e) {
     var svg = $('#sprite').html();
     var name = $('.sprite-painter .form-name').val();
     $.post('php/createnewsprite.php', { name: name, image:svg });
-    location.reload();
     event.preventDefault();
-    location.reload();
     spritePreview();
+    setTimeout(() => {
+        location.reload();
+    }, 100);
 });
 
 var spritePreview = function() {

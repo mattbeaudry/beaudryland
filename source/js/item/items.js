@@ -92,8 +92,10 @@ export class Items {
 	itemIsLifeform(item) { return $.inArray(item, globals.islifeform) > -1; }
 	itemIsEquipable(item) { return $.inArray(item, globals.isequipable) > -1; }
 	itemIsUseable(item) { return $.inArray(item, globals.isuseable) > -1; }
+	itemIsInstrument(item) { return $.inArray(item, globals.isinstrument) > -1; }
 
 	updateItemsJSONFile() {
+		console.log("updateItemsJSONFile");
 		$.ajax({
 			url: 'php/saveItemsToJSON.php',
 			dataType: 'json'
@@ -244,7 +246,7 @@ export class Items {
 			var style = '<style>';
 			style += '@keyframes svgAnimate {';
 			style += '0% { transform: translateX(0px); }';
-			style += '50% { transform: translateX(-30px); }';
+			style += '50% { transform: translateX(-20px); }';
 			style += '100% { transform: translateX(0px); }';
 			style += '}';
 			style += '.svg_animated rect {';
@@ -342,6 +344,7 @@ export class Items {
 			var is_ingredient = Number($('.item-builder .form-is_ingredient').is(":checked"));
 			var is_ground = Number($('.item-builder .form-is_ground').is(":checked"));
 			var is_diggable = Number($('.item-builder .form-is_diggable').is(":checked"));
+			var is_instrument = Number($('.item-builder .form-is_instrument').is(":checked"));
 
 			var is_lifeform = Number($('.form-is_lifeform').is(":checked"));
 			var is_equipable = Number($('.form-is_equipable').is(":checked"));
@@ -380,6 +383,7 @@ export class Items {
 				is_lifeform: is_lifeform,
 				is_equipable: is_equipable,
 				is_useable: is_useable,
+				is_instrument: is_instrument,
 				image_lifeform_front: image_lifeform_front,
 				image_lifeform_back: image_lifeform_back,
 				image_lifeform_left: image_lifeform_left,

@@ -30,6 +30,7 @@ if($result->num_rows > 0) {
             'is_ingredient' => $row['is_ingredient'],
             'is_ground' => $row['is_ground'],
             'is_diggable' => $row['is_diggable'],
+            'is_instrument' => $row['is_instrument'],
 
             'image' => $row['image'],
             'has_animation' => $row['has_animation'],

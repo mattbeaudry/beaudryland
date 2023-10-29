@@ -233,6 +233,12 @@
                                 </label>
                             </li>
                             <li>
+                                <label>
+                                    <input class="form-is_instrument" type="checkbox" name="is_instrument" value="is_instrument">
+                                    <span>is instrument</span>
+                                </label>
+                            </li>
+                            <li>
                                 <input type="submit" class="bui-button create-image" value="Save Item">
                             </li>
                         </ul>

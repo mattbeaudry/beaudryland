@@ -15,6 +15,10 @@ export const isdiggable = blItems.getItemSlugsByProperty('is_diggable');
 export const islifeform = blItems.getItemSlugsByProperty('is_lifeform');
 export const isequipable = blItems.getItemSlugsByProperty('is_equipable');
 export const isuseable = blItems.getItemSlugsByProperty('is_useable');
+export const isinstrument = blItems.getItemSlugsByProperty('is_instrument');
+export const issymbol = blItems.getItemSlugsByProperty('is_symbol');
+
+console.log({isinstrument});
 
 export const mobtypes = new Array (
 	"player",

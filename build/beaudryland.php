@@ -100,6 +100,7 @@
 					<section>
 						<h2>Inventory</h2>
 						<div class="the-fucking-inventory clearfix"></div>
+						<h2>Crafting</h2>
 						<div class="crafting-table-wrap horizonal-spacing clearfix">
 							<div class="the-fucking-crafting-table pixel-corners">
 								<div class="block slot-1 empty" data-blocktype="empty"></div>
@@ -111,6 +112,7 @@
 							</div>
 						</div>
 					</section>
+					<h2>Items list</h2>
 					<div class="bl-table-container">
 						<table class="bl-table items-table">
 							<thead>

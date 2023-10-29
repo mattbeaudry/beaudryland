@@ -9,6 +9,7 @@ import { Achievement } from './achievement';
 import { Enemy } from './enemy';
 import { Items } from './item/items';
 import { Spear } from './item/spear';
+import { Animal } from './animal';
 
 var blUtil = new Utility();
 var blMap = new Map();
@@ -19,6 +20,7 @@ var blAchievement = new Achievement();
 var blEnemy = new Enemy();
 var blItems = new Items();
 var blSpear = new Spear();
+var blAnimal = new Animal();
 
 export class Action {
 
@@ -46,11 +48,25 @@ export class Action {
 			block = blockid;
 		}
 		
-		//blUtil.log("4-hitblock "+block);
 		var blocktype = blUtil.getBlockType(block, currentMap);
-		//blUtil.log("5-blocktype "+blocktype);
+
+		console.log("ACTION");
+		console.log({ selecteditem });
+		
+		if (blItems.itemIsInstrument(selecteditem)) {
+			console.log("IS INSTRUMENT");
+			
+			$(".the-fucking-player").addClass("player-direction-"+direction+"-"+selecteditem+"-swing");
+			setTimeout(removeSwingClass, 100);
+			function removeSwingClass() {
+				$(".the-fucking-player").removeClass("player-direction-"+direction+"-"+selecteditem+"-swing");
+			}
+		}
 
 		if (blItems.itemIsUseable(selecteditem)) {
+
+			console.log("IS USEBLE");
+			
 			$(".the-fucking-player").addClass("player-direction-"+direction+"-"+selecteditem+"-swing");
 			setTimeout(removeSwingClass, 100);
 			function removeSwingClass() {
@@ -96,8 +112,17 @@ export class Action {
 						blMap.mapPerspective();
 						break;
 					case "blackmushroom":
-						//nightTime();
-						//lightUpBlock();
+						// nightTime();
+						// lightUpBlock();
+						break;
+					case "yellowmushroom":
+						blAnimal.createAnimal();
+						break;
+					case "greenmushroom":
+						blEnemy.createEnemy();
+						break;
+							
+						
 				}
 				blInventory.removeFromInventory(selecteditem);
 			
@@ -153,9 +178,40 @@ export class Action {
 						blUtil.displayConsoleMessage("you dug some dirt");
 						blMap.changeBlockType(block, "dirt", currentMap);
 					}
+				} else if (currentMap == 'jungle') {
+					if (r < 0.2) {
+						blUtil.displayConsoleMessage("you found silver");
+						blMap.changeBlockType(block, "silver", currentMap);
+					} else if (r < 0.4) {
+						blUtil.displayConsoleMessage("you found clay");
+						blMap.changeBlockType(block, "clay", currentMap);
+					} else {
+						blUtil.displayConsoleMessage("you dug some dirt");
+						blMap.changeBlockType(block, "dirt", currentMap);
+					}
+				} else if (currentMap == 'desert') {
+					if (r < 0.2) {
+						blUtil.displayConsoleMessage("you found oil");
+						blMap.changeBlockType(block, "oil", currentMap);
+					} else if (r < 0.4) {
+						blUtil.displayConsoleMessage("you found gold");
+						blMap.changeBlockType(block, "gold", currentMap);
+					} else {
+						blUtil.displayConsoleMessage("you dug some dirt");
+						blMap.changeBlockType(block, "dirt", currentMap);
+					}
+				} else if (currentMap == 'islands') {
+					if (r < 0.2) {
+						blUtil.displayConsoleMessage("you found oil");
+						blMap.changeBlockType(block, "oil", currentMap);
+					} else if (r < 0.4) {
+						blUtil.displayConsoleMessage("you found clay");
+						blMap.changeBlockType(block, "clay", currentMap);
+					} else {
+						blUtil.displayConsoleMessage("you dug some diamond");
+						blMap.changeBlockType(block, "diamond", currentMap);
+					}
 				}
-
-				// TODO jungle, desert, islands trasure
 				
 				blInventory.addToInventory(blocktype, 5);
 				blInventory.addToInventory('dirt', 5);

@@ -8,8 +8,8 @@
         transform: translateX(0px);
     }
     50% {
-        -webkit-transform: translateX(-30px);
-        transform: translateX(-30px);
+        -webkit-transform: translateX(-32px);
+        transform: translateX(-32px);
     }
     100% {
         -webkit-transform: translateX(0px);
@@ -23,8 +23,8 @@
         transform: translateX(0px);
     }
     50% {
-        -webkit-transform: translateX(-30px);
-        transform: translateX(-30px);
+        -webkit-transform: translateX(-32px);
+        transform: translateX(-32px);
     }
     100% {
         -webkit-transform: translateX(0px);
@@ -106,8 +106,8 @@ input[type="text"] {
     border:none;
 }
 .svg-preview {
-    width: 20px;
-    height: 20px;
+    width: 32px;
+    height: 32px;
     background-color: #fff;
     display: inline-block;
     border: solid 2px #000;

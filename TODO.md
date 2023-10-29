@@ -2,29 +2,48 @@
 
 ## FOR v1.0 🎉
 - activity log UI improvements
-- playing instruments animation
-- better instrument sounds
 - get acheievements working
-- sign messages for other maps
-    - make sure signs always get placed dispite outer fences, lakes rivers specialblocks etc.
-- better recipe display in items list view
-- damage indictor
-
+- ✅ sign messages for other maps
+- ✅ make sure signs always get placed dispite outer fences, lakes rivers specialblocks etc.
+- ✅ better recipe display in items list view
+- damage indicator
+    - have it animate and fade out like Metal Warriors
+- better instrument playing
+    - ✅ don't move while holding an instrument
+    - player graphics for holing diff instruments
+        - ✅ guitar
+        - keys
+        - trumpet
+        - bass
+        - drumsticks
+    - ✅ music note animation
+    - better instrument sounds
+    - better animation for when it triggers unlocking a map
+        - gate opens slowly, sound, magic lines or somethin'
 - maps
     - ✅ improve island and desert terrain
-    - can fly ship on space map
-
+    - ✅ can fly ship on space map
 - animation
     - ✅ spear
-    - bike
+    - ✅ bike
     - frisbee
     - ✅ waves
+    - growing grass
+    - ✅ go to space
 
-- organisms
-    - player
+- mobs
     - enemy
     - deer
 
+
+
+## FIXES
+
+- player gets trapped in a lake at beginning of game
+- sometimes currentMap value gets out of date
+- mob movement code conflicting with the players movement
+- ✅ player graphics load slow sometimes after game loads
+- ✅ css webpack mess
 
 
 

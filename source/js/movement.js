@@ -126,6 +126,10 @@ export class Movement {
 		} else if (selecteditem == "canoe") {
 			collide = true;
 
+		// PLAYING INSTRUMENTS
+		} else if (selecteditem === "guitar") {
+			collide = true;
+
 		} else if (blItems.itemIsBlocking(nextBlockType)) {
 			collide = true;
 

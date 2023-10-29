@@ -10,28 +10,20 @@ function isBlockOnEdgeOfCube(blockid) {
 	if ((blockid) % globals.mapwidth === 0) {
 		return true;
 	}
-
 	if ((blockid + 1) % globals.mapwidth === 0) {
 		return true;
 	}
-
 	if (blockid < globals.mapwidth) {
 		return true;
 	}
-
 	if (blockid > (globals.totalmapblocks - globals.mapwidth)) {
 		return true;
 	}
-
 	return false;
 }
 
 function renderSignsOnMap(signText, map) {
 	var previousSignBlockIds = [];
-
-	console.log("renderSignsOnMap");
-	console.log({signText});
-	console.log({map})
 
 	$.each(signText,function(index,value){
 		let blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
@@ -42,9 +34,6 @@ function renderSignsOnMap(signText, map) {
 			blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
 			signAlreadyThere = previousSignBlockIds.includes(blockid);
 			invalidBlock = isBlockOnEdgeOfCube(blockid);
-			// console.log({blockid});
-			// console.log({invalidBlock});
-			// console.log({signAlreadyThere});
 		}
 		
 		blMap.changeBlockType(blockid, "sign", map);
@@ -56,7 +45,6 @@ function renderSignsOnMap(signText, map) {
 
 export class Story {
 	createForestSigns() {
-		console.log("createForestSigns");
 		var forestSigns = [
 			"You shall collect trees and rocks to create wood and other items.",
 			"You shall build a shovel in order to find treasure.",
@@ -66,11 +54,10 @@ export class Story {
 	}
 
 	createWinterSigns() {
-		console.log("createWinterSigns");
 		var winterSigns = [
-			"Dig to find gold and silver.",
+			"Dig to find gold and silver in the snow.",
 			"Build and play the keyboard to unlock another map.",
-			"Build and ride the bike for speedy transport."
+			"Build the skiis to go for rip in the snow!"
 		];
 		renderSignsOnMap(winterSigns, "winter");
 	}
@@ -78,8 +65,8 @@ export class Story {
 	createBeachSigns() {
 		var beachSigns = [
 			"Build and play the trumpet to unlock another map.",
-			"Beach Message 2",
-			"Beach Message 3"
+			"Dig for oil and clay on the beach.",
+			"Build and ride the bike for speedy transport."
 		];
 		renderSignsOnMap(beachSigns, "beach");
 	}
@@ -87,8 +74,8 @@ export class Story {
 	createJungleSigns() {
 		var jungleSigns = [
 			"Build and play the instrument to unlock another map.",
-			"Jungle Message 2",
-			"Jungle Message 3"
+			"Eat a blue mushroom to gain some PERSPECTIVE.",
+			"Eat a red mushroom for a psychedelic experience."
 		];
 		renderSignsOnMap(jungleSigns, "jungle");
 	}
@@ -96,8 +83,8 @@ export class Story {
 	createDesertSigns() {
 		var desertSigns = [
 			"Build and play the instrument to unlock another map.",
-			"Desert Message 2",
-			"Desert Message 3"
+			"Eat a green mushroom to fight an enemy, get your sword out!",
+			"Build the 2D printer to invent something."
 		];
 		renderSignsOnMap(desertSigns, "desert");
 	}
@@ -105,8 +92,8 @@ export class Story {
 	createIslandsSigns() {
 		var islandSigns = [
 			"Build and play the instrument to unlock another map.",
-			"Island Message 2",
-			"Island Message 3"
+			"Build a rocket to go to space and fly to another planet.",
+			"Eat a yellow mushroom to meet an animal."
 		];
 		renderSignsOnMap(islandSigns, "island");
 	}

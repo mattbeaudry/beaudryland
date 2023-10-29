@@ -194,7 +194,7 @@ body.theme-night {
   .block, .the-fucking-player, .the-fucking-enemy, .the-fucking-deer {
     transform: rotateX(-90deg) scale(1) translateZ(-16px);
   }
-  .block-grass, .block-water, .block-sand, .block-dirt, .block-snow, .block-ice, .block-road {
+  .block-grass, .block-water, .block-sand, .block-dirt, .block-snow, .block-ice, .block-road, .block-wave {
     transform: rotateX(0deg) scale(1);
   }
 }
@@ -785,26 +785,9 @@ label {
   height: $gridunitpx;
   margin-top: -$gridunitpx;
   position: relative;
-  left: $gridunitpx * 20;
+  left: $gridunitpx * 10;
   top: $gridunitpx;
-  background: #36ac2a url(../img/enemy-down.png) no-repeat;
   background-size: contain !important;
-}
-
-.enemy-direction-up {
-  background: url(../img/enemy-up.png) no-repeat;
-}
-
-.enemy-direction-down {
-  background: url(../img/enemy-down.png) no-repeat;
-}
-
-.enemy-direction-left {
-  background: url(../img/enemy-left.png) no-repeat;
-}
-
-.enemy-direction-right {
-  background: url(../img/enemy-right.png) no-repeat;
 }
 
 /* THE ANIMALS */
@@ -814,26 +797,9 @@ label {
   height: $gridunitpx;
   margin-top: -$gridunitpx;
   position: relative;
-  left: $gridunitpx * 20;
+  left: $gridunitpx * 10;
   top: $gridunitpx;
-  background: #36ac2a url(../img/deer-down.png) no-repeat;
   background-size: contain !important;
-}
-
-.deer-direction-up {
-  background: url(../img/deer-up.png) no-repeat;
-}
-
-.deer-direction-down {
-  background: url(../img/deer-down.png) no-repeat;
-}
-
-.deer-direction-left {
-  background: url(../img/deer-left.png) no-repeat;
-}
-
-.deer-direction-right {
-  background: url(../img/deer-right.png) no-repeat;
 }
 
 /* CONTROLLER */
@@ -929,12 +895,10 @@ label {
       width: 30px;
       height: 30px;
       display: inline-block;
-      background: url("../svg/item-heart.svg") no-repeat;
       background-size: 30px 30px;
       margin-right: 5px;
 
       &.empty {
-        // background: url('../svg/item-heartgrey.svg') no-repeat
         opacity: 0.6;
       }
     }
@@ -1063,6 +1027,39 @@ label {
   opacity: 0;
 }
 
+@keyframes musicNote {
+  0% {
+    top: -16px;
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  25% {
+    transform: translateX(-16px);
+  }
+  50% {
+    transform: translateX(16px);
+  }
+  75% {
+    transform: translateX(-16px);
+  }
+  100% {
+    opacity: 0;
+    top: -80px;
+    transform: translateX(0px);
+  }
+}
+
+.musical-note {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-size: 16px 16px;
+  opacity: 0;
+  top: -40px;
+  // transition: all 0.3s;
+  animation: musicNote 1s ease 1;
+}
+
 .clearfix:before,
 .clearfix:after {
   content: " ";
@@ -1115,24 +1112,6 @@ label {
   }
 }
 
-/* ICONS */
-
-.i-check {
-  background: url(../svg/item-check.svg) no-repeat;
-}
-
-.i-close {
-  background: url(../svg/item-close.svg) no-repeat;
-}
-
-.i-check-white {
-  background: url(../svg/item-check-white.svg) no-repeat;
-}
-
-.i-close-white {
-  background: url(../svg/item-close-white.svg) no-repeat;
-}
-
 /* Grid & Flex */
 
 .flex {
@@ -1169,6 +1148,12 @@ label {
   user-select: none;
   min-height: 100%;
   height: 100%;
+}
+
+.items-table {
+  .recipe {
+    display: flex;
+  }
 }
 
 @import "blocks";

@@ -53,8 +53,10 @@ session_start();
 
             <h1>Map Editor</h1>
 
-            <div class="maps-wrap clearfix">
-                <div class="the-fucking-forest-map" data-maptype="forest"></div>
+            <div class="cube-container">
+                <div class="maps-wrap clearfix">
+                    <div class="the-fucking-forest-map" data-maptype="forest"></div>
+                </div>
             </div>
 
             <section class="beaudryland-panel">
@@ -80,8 +82,8 @@ session_start();
         <!--<script src="js/beaudryland.js"></script>-->
     
 <script>
-var mapwidth = 40;
-var mapheight = 30;
+var mapwidth = 16;
+var mapheight = 16;
 var totalmapblocks = mapwidth * mapheight;
 
 loadNewMap = function(type) {

@@ -60,6 +60,9 @@ module.exports = {
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: "build/css",
+						},
 					},
 					"css-loader",
 					"sass-loader",
