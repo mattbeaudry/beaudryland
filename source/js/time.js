@@ -34,13 +34,13 @@ export class Time {
 			if ((count%60) == 0) {
 				seconds++;
 				console.log('time: '+seconds+'s');
-				animateWaves(); 
+				//animateWaves(); 
 			}
 
 			// run every half second
 			if ((count%30) == 0) {
 				animateSpears();
-				animateWaves();
+				//animateWaves();
 			}
 
 			// run every 200 miliseconds

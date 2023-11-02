@@ -295,6 +295,14 @@ export class HCI {
 				$('.the-fucking-player').removeClass("player-direction-"+v+"-rocket");
 				$('.the-fucking-player').removeClass("player-direction-"+v+"-guitar");
 				$('.the-fucking-player').removeClass("player-direction-"+v+"-guitar-swing");
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-piano");
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-piano-swing");
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-trumpet");
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-trumpet-swing");
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-bass");
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-bass-swing");
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-drumsticks");
+				$('.the-fucking-player').removeClass("player-direction-"+v+"-drumsticks-swing");
 			});
 			
 			if ( $.inArray(selecteditem, globals.isequipable) > -1 ) {
@@ -310,12 +318,11 @@ export class HCI {
 				blUtil.log("selected item in an instrument");
 				// $('.the-fucking-player').addClass("player-direction-down-"+selecteditem);
 				blMovement.changeObjectDirection(1, 'down', 'player');
-				$('.the-fucking-player').addClass("player-direction-down-guitar");
+				$('.the-fucking-player').addClass("player-direction-down-"+selecteditem);
 			}
 
 			$('.nav-selected-item span').removeClass(globals.allblockclasses);
 			$('.nav-selected-item span').addClass('block-'+blocktype);
-
 		});
 
 		// REMOVE ITEMS FROM CRAFTING TABLE

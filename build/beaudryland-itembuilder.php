@@ -239,7 +239,7 @@
                                 </label>
                             </li>
                             <li>
-                                <input type="submit" class="bui-button create-image" value="Save Item">
+                                <input type="submit" class="bui-button create-image" id="create-item-submit" value="Save Item">
                             </li>
                         </ul>
                     </form>
@@ -282,6 +282,19 @@
         <script src="js/vendor/raphael-min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/app-bundle.js"></script>
+
+<!-- <script>
+    $('#create-item-submit').submit(function(e) {
+        event.preventDefault();
+
+        $.post('php/createnewsprite.php', { name: name, image:svg });
+        
+        spritePreview();
+        setTimeout(() => {
+            location.reload();
+        }, 100);
+    });
+</script> -->
 
     </body>
 </html>
