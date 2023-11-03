@@ -409,13 +409,4 @@ background: url(../img/deer-right.png) no-repeat;
 .player-direction-down-bass-swing { background-image:url(../items/bass-strum.svg); }
 .player-direction-down-drumsticks { background-image:url(../items/drumsticks-holding.svg); }
 .player-direction-down-drumsticks-swing { background-image:url(../items/drumsticks-strum.svg); }
-.block-piano-strum { background-image:url(../items/piano-strum.svg); }
-.block-piano-holding { background-image:url(../items/piano-holding.svg); }
-.block-piano-holding { background-image:url(../items/piano-holding.svg); }
-.block-piano-strum { background-image:url(../items/piano-strum.svg); }
-.block-piano-strum { background-image:url(../items/piano-strum.svg); }
-.block-piano-strum-1 { background-image:url(../items/piano-strum-1.svg); }
-.block-piano-hold-1 { background-image:url(../items/piano-hold-1.svg); }
-.block-piano-strum-2 { background-image:url(../items/piano-strum-2.svg); }
-.block-drumsticks-strum-1 { background-image:url(../items/drumsticks-strum-1.svg); }
-.block-trumpet-holding-1 { background-image:url(../items/trumpet-holding-1.svg); }
+.block-drum-strum { background-image:url(../items/drum-strum.svg); }
