@@ -102,17 +102,7 @@ export class HCI {
 
 			function playInstrument(instrument) {
 				// make noise
-				switch (direction) {
-					case 'up':
-						blSound.playSound(880);
-					case 'down':
-						blSound.playSound(880);
-					case 'right':
-						blSound.playSound(880);
-					case 'left':
-						blSound.playSound(880);
-					break;
-				}
+				blSound.playInstrumentNote(instrument, direction);
 				
 				// show music note
 				blInstruments.showMusicNote();
@@ -124,8 +114,6 @@ export class HCI {
 					$(".the-fucking-player").removeClass("player-direction-down-"+selecteditem+"-swing");
 				}
 			}
-
-			
 
 			if (globals.disablekeyboardevents == false && direction != '') {
 

@@ -37,7 +37,7 @@ export class Enemy {
 		var maxthoughts = 100;
 		var enemybrain = setTimeout(anEnemyThought, globals.enemyspeed);
 		
-		//collection of thoughts
+		// collection of thoughts
 		var enemyPath = Array();
 		
 		function anEnemyThought() {
@@ -90,7 +90,7 @@ export class Enemy {
 					}
 				}
 				
-				//limit
+				// limit
 				if (t > maxthoughts) {
 					blUtil.log("Enemy terminated");
 					this.stopEnemyBrain();

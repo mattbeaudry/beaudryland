@@ -1,26 +1,20 @@
 # TODO
 
 ## FOR v1.0 🎉
-- activity log UI improvements
-- get acheievements working
 - ✅ sign messages for other maps
 - ✅ make sure signs always get placed dispite outer fences, lakes rivers specialblocks etc.
 - ✅ better recipe display in items list view
-- damage indicator
-    - have it animate and fade out like Metal Warriors
-- better instrument playing
+- ✅ better instrument playing
     - ✅ don't move while holding an instrument
-    - player graphics for holing diff instruments
+    - ✅ player graphics for holing diff instruments
         - ✅ guitar
-        - keys
-        - trumpet
-        - bass
-        - drumsticks
+        - ✅ keys
+        - ✅ trumpet
+        - ✅ bass
+        - ✅ drumsticks
     - ✅ music note animation
-    - better instrument sounds
-    - better animation for when it triggers unlocking a map
-        - gate opens slowly, sound, magic lines or somethin'
-- maps
+    - ✅ better instrument sounds
+- ✅ maps
     - ✅ improve island and desert terrain
     - ✅ can fly ship on space map
 - animation
@@ -30,26 +24,31 @@
     - ✅ waves
     - growing grass
     - ✅ go to space
-
+- better animation for when it triggers unlocking a map
+    - gate opens slowly, sound, magic lines or somethin'
+- activity log UI improvements
+- get acheievements working
+- damage indicator
+    - have it animate and fade out like Metal Warriors
 - mobs
     - enemy
     - deer
-
-
-
-## FIXES
-
-- player gets trapped in a lake at beginning of game
-- sometimes currentMap value gets out of date
-- mob movement code conflicting with the players movement
-- ✅ player graphics load slow sometimes after game loads
-- ✅ css webpack mess
+- performance
+    - find any ways to increase performance
+    - make updateMap function that only runs once a second that quese all mapblock changes, test with lots of waves
+    - make sure moving player and enemy and aniamls don't cause performance hit like changeMapBlock does
+- fixes
+    - player gets trapped in a lake at beginning of game
+    - sometimes currentMap value gets out of date
+    - mob movement code conflicting with the players movement
+    - ✅ player graphics load slow sometimes after game loads
+    - ✅ css webpack mess
 
 
 
 ## FEATURES
 - show keys above 5 hot items so users know the shortcut
-- single login form, check user, if no user then create one
+- single login form
 
 - add new items
     - cactus
@@ -63,9 +62,13 @@
 - add new mobs
     - cow
     - chicken
+    - robot
 
+- full animation refactor
+    - map block 
 
 
 ## IDEAS
 - perspective view vertical tiles shadows
-- get in satellite (new thing orbiting the cube) in order to easily rotate the cube and land on a side
+- get in satellite spaceship (new thing orbiting the cube) in order to easily rotate the cube and land on a side
+    - new item LAUNCHPAD if created the satelite lands, and if you get in, you can rotate cube freely
