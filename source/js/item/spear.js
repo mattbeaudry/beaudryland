@@ -16,7 +16,7 @@ export class Spear {
 		//$('.the-fucking-frisbee').remove();
 		var playerdirection = blUtil.getObjectDirection(1, "player");
 		var id = globals.uniqueObjectID();
-		$('.the-fucking-forest-map').append('<div data-id='+id+' class="the-fucking-spear objectId-'+id+' spear-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
+		document.querySelector('.the-fucking-forest-map').insertAdjacentHTML('beforeend', '<div data-id='+id+' class="the-fucking-spear objectId-'+id+' spear-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
 		this.initProjectile("spear", startblock, direction, id);
 	}
 
@@ -28,7 +28,7 @@ export class Spear {
 		//$('.the-fucking-frisbee').remove();
 		var playerdirection = blUtil.getObjectDirection(1, "player");
 		var id = globals.uniqueObjectID();
-		$('.the-fucking-forest-map').append('<div data-id='+id+' class="the-fucking-frisbee objectId-'+id+' frisbee-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
+		document.querySelector('.the-fucking-forest-map').insertAdjacentHTML('beforeend', '<div data-id='+id+' class="the-fucking-frisbee objectId-'+id+' frisbee-direction-'+playerdirection+'" data-direction="'+direction+'"></div>');
 		this.initProjectile("frisbee", startblock, direction, id);
 	}
 
@@ -41,8 +41,9 @@ export class Spear {
 		blUtil.log(leftstart);
 		topstart = blUtil.addPX(topstart);
 		leftstart = blUtil.addPX(leftstart);
-		$('.objectId-'+id).css("top",topstart);
-		$('.objectId-'+id).css("left",leftstart);
+		var projEl = document.querySelector('.objectId-'+id);
+		projEl.style.top = topstart;
+		projEl.style.left = leftstart;
 	}
 
 }

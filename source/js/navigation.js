@@ -20,22 +20,24 @@ export var initializeNavigation = function(testVar, testObject) {
 	// 	}
 	// });
 	
-	$('.tabs-close').hide();
-	$('.tabs .tab').hide();
-	$('.tab-game').show();
-	
-	$('.tab-menuitem').on("click", function() {
-		var tabName = $(this).attr("data-tabmenu");
-		// console.log("tabName:"+tabName);
-		$('.tabs .tab').hide();
-		$('.'+tabName).show();
-		$('.tabs-close').show();
+	document.querySelector('.tabs-close').style.display = 'none';
+	[...document.querySelectorAll('.tabs .tab')].forEach(t => t.style.display = 'none');
+	document.querySelector('.tab-game').style.display = '';
+
+	[...document.querySelectorAll('.tab-menuitem')].forEach(function(el) {
+		el.addEventListener("click", function() {
+			var tabName = el.getAttribute("data-tabmenu");
+			// console.log("tabName:"+tabName);
+			[...document.querySelectorAll('.tabs .tab')].forEach(t => t.style.display = 'none');
+			document.querySelector('.'+tabName).style.display = '';
+			document.querySelector('.tabs-close').style.display = '';
+		});
 	});
 
-	$('.tabs-close').on("click", function() {
-		$('.tabs .tab').hide();
-		$('.tab-game').show();
-		$('.tabs-close').hide();
+	document.querySelector('.tabs-close').addEventListener("click", function() {
+		[...document.querySelectorAll('.tabs .tab')].forEach(t => t.style.display = 'none');
+		document.querySelector('.tab-game').style.display = '';
+		document.querySelector('.tabs-close').style.display = 'none';
 	});
 
 };

@@ -17,12 +17,14 @@ export class Utility {
 	}
 
 	getSelectedItem() {
-		var blocktype = $('.the-fucking-inventory > .selected-item').attr("data-blocktype");
+		var el = document.querySelector('.the-fucking-inventory > .selected-item');
+		var blocktype = el ? el.getAttribute("data-blocktype") : undefined;
 		return blocktype;
 	}
 
 	getBlockType(block, map) {
-		var blocktype = $('.the-fucking-'+map+'-map .block:eq('+block+')').attr("data-blocktype");
+		var el = document.querySelectorAll('.the-fucking-'+map+'-map .block')[block];
+		var blocktype = el ? el.getAttribute("data-blocktype") : undefined;
 		//blUtil.log("getblocktype() blocknumber:"+block+", blocktype:"+blocktype);
 		return blocktype;
 	}
@@ -59,21 +61,25 @@ export class Utility {
 	*/
 
 	getObjectCurrentPositionX(id) {
-		var x = $('.objectId-'+id).css("left");
+		var el = document.querySelector('.objectId-'+id);
+		var x = el ? getComputedStyle(el).left : '0px';
 		return x;
 	}
 
 	getObjectCurrentPositionY(id) {
-		var y = $('.objectId-'+id).css("top");
+		var el = document.querySelector('.objectId-'+id);
+		var y = el ? getComputedStyle(el).top : '0px';
 		return y;
 	}
 
 	setObjectCurrentPositionX(id,newx) {
-		$('.objectId-'+id).css("left",newx);
+		var el = document.querySelector('.objectId-'+id);
+		if (el) el.style.left = newx + (typeof newx === 'number' ? 'px' : '');
 	}
 
 	setObjectCurrentPositionY(id,newy) {
-		$('.objectId-'+id).css("top",newy);
+		var el = document.querySelector('.objectId-'+id);
+		if (el) el.style.top = newy + (typeof newy === 'number' ? 'px' : '');
 	}
 
 	getObjectCurrentCol(id) {
@@ -110,20 +116,23 @@ export class Utility {
 		var direction;
 		var selecteditem = this.getSelectedItem();
 		var playergraphic;
-		if ( (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "bike" || selecteditem == "skiis") && name == "player" ) { 
+		if ( (selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "bike" || selecteditem == "skiis") && name == "player" ) {
 			playergraphic = "-"+selecteditem;
 		} else {
 			playergraphic = "";
 		}
 
-		if ($('.objectId-'+id).hasClass(name+"-direction-down")) {
-			direction = "down";
-		} else if ($('.objectId-'+id).hasClass(name+"-direction-up")) {
-			direction = "up";
-		} else if ($('.objectId-'+id).hasClass(name+"-direction-left")) {
-			direction = "left";
-		} else if ($('.objectId-'+id).hasClass(name+"-direction-right")) {
-			direction = "right";
+		var el = document.querySelector('.objectId-'+id);
+		if (el) {
+			if (el.classList.contains(name+"-direction-down")) {
+				direction = "down";
+			} else if (el.classList.contains(name+"-direction-up")) {
+				direction = "up";
+			} else if (el.classList.contains(name+"-direction-left")) {
+				direction = "left";
+			} else if (el.classList.contains(name+"-direction-right")) {
+				direction = "right";
+			}
 		}
 
 		return direction;
@@ -153,7 +162,8 @@ export class Utility {
 	}
 
 	displayConsoleMessage(text) {
-		$('.the-fucking-console > ul').append('<li>'+text+'</li>');
+		var consoleUl = document.querySelector('.the-fucking-console > ul');
+		if (consoleUl) consoleUl.insertAdjacentHTML('beforeend', '<li>'+text+'</li>');
 	}
 
 }

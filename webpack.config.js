@@ -18,8 +18,6 @@ module.exports = {
 			filename: '../css/main.bundle.css'
 		}),
 		new webpack.ProvidePlugin({
-    		$: 'jquery',
-    		jQuery: 'jquery',
             'globals': 'globals'
     	})
     ],
@@ -92,7 +90,6 @@ module.exports = {
     resolve: {
         alias: {
             'globals': path.resolve(__dirname, './globals'),
-            "jquery-ui": "jquery-ui/jquery-ui.js",      
             modules: path.join(__dirname, "node_modules"),
         }
     }

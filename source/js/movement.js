@@ -33,25 +33,25 @@ export class Movement {
 
 		if (!this.objectCollisionDetection(id, direction, currentMap)) {
 			switch (direction) {
-				case "up": 
-					y = y - globals.gridunitpx; 
+				case "up":
+					y = y - globals.gridunitpx;
 					y = blUtil.addPX(y);
-					$(".objectId-"+id).css("top",y); 
+					document.querySelector(".objectId-"+id).style.top = y;
 					break;
-				case "down": 
-					y = y + globals.gridunitpx; 
+				case "down":
+					y = y + globals.gridunitpx;
 					y = blUtil.addPX(y);
-					$(".objectId-"+id).css("top",y); 
+					document.querySelector(".objectId-"+id).style.top = y;
 					break;
-				case "left": 
+				case "left":
 					x = x - globals.gridunitpx;
 					x = blUtil.addPX(x);
-					$(".objectId-"+id).css("left",x); 
+					document.querySelector(".objectId-"+id).style.left = x;
 					break;
-				case "right": 
-					x = x + globals.gridunitpx; 
+				case "right":
+					x = x + globals.gridunitpx;
 					x = blUtil.addPX(x);
-					$(".objectId-"+id).css("left",x); 
+					document.querySelector(".objectId-"+id).style.left = x;
 					break;
 			}
 			success = true;
@@ -89,14 +89,17 @@ export class Movement {
 		var nextBlockType = blUtil.getBlockType(nextblock, globals.getCurrentMap());
 
 		// TELEPORTING
-		if (id == 1 && $(nextBlockClass).hasClass('block-portal-a')) {
-			var destinationblock = $('.maps-wrap .block-portal-b').first().attr("data-blockid");
+		var nextBlockEl = document.querySelectorAll('.the-fucking-'+map+'-map .block')[nextblock];
+		if (id == 1 && nextBlockEl && nextBlockEl.classList.contains('block-portal-a')) {
+			var portalBEl = document.querySelector('.maps-wrap .block-portal-b');
+			var destinationblock = portalBEl ? portalBEl.getAttribute("data-blockid") : null;
 			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
 
 		// TELEPORTING
-		} else if (id == 1 && $(nextBlockClass).hasClass('block-portal-b')) {
-			var destinationblock = $('.maps-wrap .block-portal-a').first().attr("data-blockid");
+		} else if (id == 1 && nextBlockEl && nextBlockEl.classList.contains('block-portal-b')) {
+			var portalAEl = document.querySelector('.maps-wrap .block-portal-a');
+			var destinationblock = portalAEl ? portalAEl.getAttribute("data-blockid") : null;
 			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
 
@@ -115,13 +118,13 @@ export class Movement {
 			collide = true;	
 
 		// ROCKET
-		} else if (selecteditem == "rocket" && $(nextBlockClass).hasClass('block-space')) {
+		} else if (selecteditem == "rocket" && nextBlockEl && nextBlockEl.classList.contains('block-space')) {
 			collide = false;
 		// } else if (selecteditem == "rocket") {
 		// 	collide = true;
 
 		// CANOEING
-		} else if (selecteditem == "canoe" && $(nextBlockClass).hasClass('block-water')) {
+		} else if (selecteditem == "canoe" && nextBlockEl && nextBlockEl.classList.contains('block-water')) {
 			collide = false;
 		} else if (selecteditem == "canoe") {
 			collide = true;
@@ -136,8 +139,8 @@ export class Movement {
 		} else {
 			// PLAYER
 			if (id != 1) {
-				var playerElement = $('.the-fucking-player');
-				var player_id = $('.the-fucking-player').attr('data-id');
+				var playerElement = document.querySelector('.the-fucking-player');
+				var player_id = playerElement ? playerElement.getAttribute('data-id') : null;
 				var player_block = blUtil.getObjectCurrentBlock(player_id);
 
 				if (movingObject_nextblock == player_block) {
@@ -146,11 +149,11 @@ export class Movement {
 				}
 
 			// ANIMAL
-			} else if ($('.the-fucking-deer').length != 0) {
-				$('.the-fucking-deer').each(function(index) {
-					var blockingObject_id = $(this).attr('data-id');
+			} else if (document.querySelectorAll('.the-fucking-deer').length != 0) {
+				[...document.querySelectorAll('.the-fucking-deer')].forEach(function(el) {
+					var blockingObject_id = el.getAttribute('data-id');
 					var blockingObject_block = blUtil.getObjectCurrentBlock(blockingObject_id);
-				
+
 					if (movingObject_nextblock == blockingObject_block && movingObject_id != blockingObject_id) {
 						collide = true;
 					}
@@ -188,25 +191,27 @@ export class Movement {
 		}
 
 		//clear direction and animation classes
-		$('.objectId-'+id).removeClass(name+"-direction-down "+name+"-direction-left "+name+"-direction-right "+name+"-direction-up");
-		$('.objectId-'+id).removeClass(name+"-direction-down"+playergraphic+" "+name+"-direction-left"+playergraphic+" "+name+"-direction-right"+playergraphic+" "+name+"-direction-up"+playergraphic);
+		var objEl = document.querySelector('.objectId-'+id);
+		if (!objEl) return;
+		objEl.classList.remove(name+"-direction-down", name+"-direction-left", name+"-direction-right", name+"-direction-up");
+		objEl.classList.remove(name+"-direction-down"+playergraphic, name+"-direction-left"+playergraphic, name+"-direction-right"+playergraphic, name+"-direction-up"+playergraphic);
 
 		switch (direction) {
 			case "up":
-				$('.objectId-'+id).addClass(name+"-direction-up");
-				if (playergraphic!="") { $('.objectId-'+id).addClass(name+"-direction-up"+playergraphic); }
+				objEl.classList.add(name+"-direction-up");
+				if (playergraphic!="") { objEl.classList.add(name+"-direction-up"+playergraphic); }
 				break;
 			case "down":
-				$('.objectId-'+id).addClass(name+"-direction-down");
-				if (playergraphic!="") { $('.objectId-'+id).addClass(name+"-direction-down"+playergraphic); }
+				objEl.classList.add(name+"-direction-down");
+				if (playergraphic!="") { objEl.classList.add(name+"-direction-down"+playergraphic); }
 				break;
 			case "left":
-				$('.objectId-'+id).addClass(name+"-direction-left");
-				if (playergraphic!="") { $('.objectId-'+id).addClass(name+"-direction-left"+playergraphic); }
+				objEl.classList.add(name+"-direction-left");
+				if (playergraphic!="") { objEl.classList.add(name+"-direction-left"+playergraphic); }
 				break;
 			case "right":
-				$('.objectId-'+id).addClass(name+"-direction-right");
-				if (playergraphic!="") { $('.objectId-'+id).addClass(name+"-direction-right"+playergraphic); }
+				objEl.classList.add(name+"-direction-right");
+				if (playergraphic!="") { objEl.classList.add(name+"-direction-right"+playergraphic); }
 				break;
 		}
 
@@ -324,13 +329,13 @@ export class Movement {
 				break;
 		}
 
-		var object = $('.objectId-'+objectId);
+		var object = document.querySelector('.objectId-'+objectId);
 		var currentBlock = objectCurrentBlock;
 
 		// find out what map and side of cube is next
 		var nextCubeSide = globals.cubeSidesArray[globals.getCurrentCubeSide()][objectDirection];
 		var nextMap = globals.cubeSidesArray[nextCubeSide].map;
-		var toMap = $('.the-fucking-'+nextMap+'-map');
+		var toMap = document.querySelector('.the-fucking-'+nextMap+'-map');
 
 		// find out what block on next map to move to
 		var mapwidth = globals.mapwidth;
@@ -449,17 +454,17 @@ export class Movement {
 		// console.log(`moving player from block ${currentBlock} to block ${nextBlock}`);
 
 		// remove player from current map
-		object.detach();
+		if (object && object.parentNode) object.parentNode.removeChild(object);
 
 		// rotate the cube
 		if (objectId == 1) {
-			blCube.rotateCubeTo(nextCubeSide);	
+			blCube.rotateCubeTo(nextCubeSide);
 		}
 
 		globals.setCurrentMap(nextMap);
 
 		// add player to new map
-		object.appendTo(toMap);
+		if (object && toMap) toMap.appendChild(object);
 
 		blUtil.teleportObjectToBlock(1, nextMap, nextBlock);
 	};
@@ -475,6 +480,7 @@ export class Movement {
 			case "left": this.moveObject("left", 1, "player"); break;
 			case "right": this.moveObject("right", 1, "player"); break;
 		}
+		
 		// this.ridingbike = setTimeout(function() {
 		// 	this.startBiking(direction);
 		// }, globals.bikespeed); // repeat movement
@@ -507,6 +513,7 @@ export class Movement {
 		// 		this.moveBike(direction);
 		// 	}.bind(this), globals.bikespeed);
 		// }
+
 	};
 
 	stopMap() { 
@@ -518,10 +525,13 @@ export class Movement {
 		blUtil.log("animating the map!");
 		var mapspeed = 500;
 		this.mapanimate = setTimeout(scrollMap, mapspeed);
-		
+
 		function scrollMap() {
-			var toprow = $('.the-fucking-winter-map div').slice(0,globals.mapwidth).remove();
-			$('.the-fucking-winter-map').append(toprow);
+			var winterMap = document.querySelector('.the-fucking-winter-map');
+			var allDivs = [...winterMap.querySelectorAll('div')];
+			var toprow = allDivs.slice(0, globals.mapwidth);
+			toprow.forEach(function(el) { el.parentNode.removeChild(el); });
+			toprow.forEach(function(el) { winterMap.appendChild(el); });
 			this.mapanimate = setTimeout(scrollMap, mapspeed); // repeat thought
 		}
 	};

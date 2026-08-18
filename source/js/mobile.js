@@ -77,8 +77,8 @@ export class Mobile {
 	//save map
 	websql_saveMap() {
 		var username = "username";
-		var mapdata = $('.maps-wrap').html();
-		var invdata = $('.the-fucking-inventory').html();
+		var mapdata = document.querySelector('.maps-wrap').innerHTML;
+		var invdata = document.querySelector('.the-fucking-inventory').innerHTML;
 
 		var achievements = [];
 		// $('.item-achievements .status-completed').each(function(index){
@@ -109,12 +109,12 @@ export class Mobile {
 					[],
 					function (transaction, result) {
 						for (var i=0; i < result.rows.length; i++) {
-							$('.maps-wrap').html("");
-							$('.the-fucking-inventory').html("");
+							document.querySelector('.maps-wrap').innerHTML = "";
+							document.querySelector('.the-fucking-inventory').innerHTML = "";
 							var row = result.rows.item(i);
 							//// console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
-							$('.maps-wrap').html(row.mapdata);
-							$('.the-fucking-inventory').html(row.invdata);
+							document.querySelector('.maps-wrap').innerHTML = row.mapdata;
+							document.querySelector('.the-fucking-inventory').innerHTML = row.invdata;
 							
 							// achievements = row.achievements;
 							// achievements = achievements.split(',');

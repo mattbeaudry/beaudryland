@@ -399,5 +399,14 @@ background: url(../img/deer-right.png) no-repeat;
 	background: url("../svg/item-heart.svg") no-repeat;
 }
 .block-musical-note { background-image:url(../items/musical-note.svg); }
-.player-direction-down-guitar  { background-image:url(../items/guitar-holding.svg); }
-.player-direction-down-guitar-swing  { background-image:url(../items/guitar-strum.svg); }
+.player-direction-down-guitar { background-image:url(../items/guitar-holding.svg); }
+.player-direction-down-guitar-swing { background-image:url(../items/guitar-strum.svg); }
+.player-direction-down-piano { background-image:url(../items/piano-holding.svg); }
+.player-direction-down-piano-swing { background-image:url(../items/piano-strum.svg); }
+.player-direction-down-trumpet { background-image:url(../items/trumpet-holding.svg); }
+.player-direction-down-trumpet-swing { background-image:url(../items/trumpet-strum.svg); }
+.player-direction-down-bass { background-image:url(../items/bass-holding.svg); }
+.player-direction-down-bass-swing { background-image:url(../items/bass-strum.svg); }
+.player-direction-down-drumsticks { background-image:url(../items/drumsticks-holding.svg); }
+.player-direction-down-drumsticks-swing { background-image:url(../items/drumsticks-strum.svg); }
+.block-drum-strum { background-image:url(../items/drum-strum.svg); }

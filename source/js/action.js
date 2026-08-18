@@ -55,29 +55,29 @@ export class Action {
 		
 		if (blItems.itemIsInstrument(selecteditem)) {
 			console.log("IS INSTRUMENT");
-			
-			$(".the-fucking-player").addClass("player-direction-"+direction+"-"+selecteditem+"-swing");
+
+			document.querySelector(".the-fucking-player").classList.add("player-direction-"+direction+"-"+selecteditem+"-swing");
 			setTimeout(removeSwingClass, 100);
 			function removeSwingClass() {
-				$(".the-fucking-player").removeClass("player-direction-"+direction+"-"+selecteditem+"-swing");
+				document.querySelector(".the-fucking-player").classList.remove("player-direction-"+direction+"-"+selecteditem+"-swing");
 			}
 		}
 
 		if (blItems.itemIsUseable(selecteditem)) {
 
 			console.log("IS USEBLE");
-			
-			$(".the-fucking-player").addClass("player-direction-"+direction+"-"+selecteditem+"-swing");
+
+			document.querySelector(".the-fucking-player").classList.add("player-direction-"+direction+"-"+selecteditem+"-swing");
 			setTimeout(removeSwingClass, 100);
 			function removeSwingClass() {
-				$(".the-fucking-player").removeClass("player-direction-"+direction+"-"+selecteditem+"-swing");
-			}	
+				document.querySelector(".the-fucking-player").classList.remove("player-direction-"+direction+"-"+selecteditem+"-swing");
+			}
 			var playerblock = blUtil.getObjectCurrentBlock(this.id);
 
 			// killing the enemy
-			if ($('.the-fucking-enemy').length != 0) {
-				$('.the-fucking-enemy').each(function(index) {
-					var enemyid = $(this).attr('data-id');
+			if (document.querySelectorAll('.the-fucking-enemy').length != 0) {
+				[...document.querySelectorAll('.the-fucking-enemy')].forEach(function(el) {
+					var enemyid = el.getAttribute('data-id');
 					var enemyblock = blUtil.getObjectCurrentBlock(enemyid);
 					if (block == enemyblock || enemyblock == playerblock) {
 						blUtil.log("killed an enemy!");
@@ -86,10 +86,9 @@ export class Action {
 				});
 			}
 		}
-		
-		$(blockClass).animate({ opacity: 0.9 }, 50, function() {
-			
-			$(blockClass).css("opacity","1");
+
+		// TODO: replace with CSS transition
+		{
 			var selecteditem = blUtil.getSelectedItem();
 
 			// using axe to collect doors, signs and other mechnism objects 
@@ -246,18 +245,16 @@ export class Action {
 
 				// PORTALS
 				if (selecteditem == "portal-a") {
-					$('.maps-wrap .block-portal-a').each(function(index) {
-						var id = $(this).attr("data-blockid");
-						blMap.changeBlockType(this.id, "grass", currentMap);
-
+					[...document.querySelectorAll('.maps-wrap .block-portal-a')].forEach(function(el) {
+						var id = el.getAttribute("data-blockid");
+						blMap.changeBlockType(el.dataset.blockid, "grass", currentMap);
 					});
 					blInventory.removeFromInventory(selecteditem);
 					blMap.changeBlockType(block, selecteditem, currentMap);
 				} else if (selecteditem == "portal-b") {
-					$('.maps-wrap .block-portal-b').each(function(index) {
-						var id = $(this).attr("data-blockid");
-						blMap.changeBlockType(this.id, "grass", currentMap);
-
+					[...document.querySelectorAll('.maps-wrap .block-portal-b')].forEach(function(el) {
+						var id = el.getAttribute("data-blockid");
+						blMap.changeBlockType(el.dataset.blockid, "grass", currentMap);
 					});
 					blInventory.removeFromInventory(selecteditem);
 					blMap.changeBlockType(block, selecteditem, currentMap);
@@ -319,7 +316,7 @@ export class Action {
 				}
 			}
 
-		});
+		}
 	}
 
 }

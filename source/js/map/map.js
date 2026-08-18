@@ -8,7 +8,7 @@ var blTerrain = new Terrain();
 export class Map {
 
 	constructor() {
-		this.mapsContainer = $('.maps-wrap');
+		this.mapsContainer = document.querySelector('.maps-wrap');
 		this.overlayhtml = '';
 		this.mapHeightPx;
 		this.mapWidthPx;
@@ -36,140 +36,161 @@ export class Map {
 		console.log("setupMap");
 		console.log("this.mapTotalBlocks"+globals.totalmapblocks);
 
-		$('.the-fucking-forest-map').css("width", this.mapWidthPx+"px");
-		$('.the-fucking-forest-map').css("height", this.mapHeightPx+"px");
+		document.querySelector('.the-fucking-forest-map').style.width = this.mapWidthPx+"px";
+		document.querySelector('.the-fucking-forest-map').style.height = this.mapHeightPx+"px";
 	}
 
 	loadExistingMap(maptype) {
-		$.post('php/loadmap.php', {maptype:maptype}, function(data) {
+		fetch('php/loadmap.php', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: new URLSearchParams({maptype: maptype})
+		}).then(r => r.text()).then(function(data) {
 			blUtil.log("existing user");
 			var mapblocks = JSON.parse(data);
 			var mapdata = "";
 			var total = globals.totalmapblocks;
 			for (var i=0; i<total; i++) {
-				mapdata += '<div data-blockid="'+this.globalMapBlockCount+'" data-blocktype="'+mapblocks[i]+'" data-blockhealth="10" class="block block-'+mapblocks[i]+'"></div>';
-				this.globalMapBlockCount++;
+				mapdata += '<div data-blockid="'+i+'" data-blocktype="'+mapblocks[i]+'" data-blockhealth="10" class="block block-'+mapblocks[i]+'"></div>';
 			}
 			if (maptype == 'forest') {
-				$('.maps-wrap').append('<div class="the-fucking-forest-map cube-side cube-front" data-maptype="forest"></div>');
-				$('.the-fucking-forest-map').html(mapdata);
+				document.querySelector('.maps-wrap').insertAdjacentHTML('beforeend', '<div class="the-fucking-forest-map cube-side cube-front" data-maptype="forest"></div>');
+				document.querySelector('.the-fucking-forest-map').innerHTML = mapdata;
 			} else if (maptype == 'winter') {
-				$('.maps-wrap').append('<div class="the-fucking-winter-map cube-side cube-right" data-maptype="winter"></div>');
-				$('.the-fucking-winter-map').html(mapdata);
+				document.querySelector('.maps-wrap').insertAdjacentHTML('beforeend', '<div class="the-fucking-winter-map cube-side cube-right" data-maptype="winter"></div>');
+				document.querySelector('.the-fucking-winter-map').innerHTML = mapdata;
 			} else if (maptype == 'beach') {
-				$('.maps-wrap').append('<div class="the-fucking-beach-map cube-side cube-back" data-maptype="beach"></div>');
-				$('.the-fucking-beach-map').html(mapdata);
-			} else if (maptype == 'jungle') { 
-				$('.maps-wrap').append('<div class="the-fucking-jungle-map cube-side cube-left" data-maptype="jungle"></div>');
-				$('.the-fucking-jungle-map').html(mapdata);
+				document.querySelector('.maps-wrap').insertAdjacentHTML('beforeend', '<div class="the-fucking-beach-map cube-side cube-back" data-maptype="beach"></div>');
+				document.querySelector('.the-fucking-beach-map').innerHTML = mapdata;
+			} else if (maptype == 'jungle') {
+				document.querySelector('.maps-wrap').insertAdjacentHTML('beforeend', '<div class="the-fucking-jungle-map cube-side cube-left" data-maptype="jungle"></div>');
+				document.querySelector('.the-fucking-jungle-map').innerHTML = mapdata;
 			} else if (maptype == 'desert') {
-				$('.maps-wrap').append('<div class="the-fucking-desert-map cube-side cube-bottom" data-maptype="desert"></div>');
-				$('.the-fucking-desert-map').html(mapdata);
+				document.querySelector('.maps-wrap').insertAdjacentHTML('beforeend', '<div class="the-fucking-desert-map cube-side cube-bottom" data-maptype="desert"></div>');
+				document.querySelector('.the-fucking-desert-map').innerHTML = mapdata;
 			} else if (maptype == 'islands') {
-				$('.maps-wrap').append('<div class="the-fucking-islands-map cube-side cube-top" data-maptype="islands"></div>');
-				$('.the-fucking-islands-map').html(mapdata);
+				document.querySelector('.maps-wrap').insertAdjacentHTML('beforeend', '<div class="the-fucking-islands-map cube-side cube-top" data-maptype="islands"></div>');
+				document.querySelector('.the-fucking-islands-map').innerHTML = mapdata;
 			}
 		});
 	}
 
 	saveMap() {
 		blUtil.log("save map");
-		var playerdiv = $('.the-fucking-player').prop("outerHTML");
-		$('.the-fucking-player').remove();
+		var playerEl = document.querySelector('.the-fucking-player');
+		var playerdiv = playerEl ? playerEl.outerHTML : '';
+		if (playerEl) playerEl.remove();
 		//save forest map
 		var mapblocks = new Array();
 		var total = globals.totalmapblocks;
+		var forestDivs = document.querySelectorAll('.the-fucking-forest-map div');
 	    for (var i=0; i<=total; i++){
-	    	var blocktype = $('.the-fucking-forest-map div:eq('+i+')').attr('data-blocktype');
+	    	var blocktype = forestDivs[i] ? forestDivs[i].getAttribute('data-blocktype') : undefined;
 			mapblocks[i] = blocktype;
 		}
 		var jsonmapblocks = JSON.stringify(mapblocks);
-	    $.post('php/savemap.php', {mapdata: jsonmapblocks, maptype:'forest'}, function(data) {
-	        //$('body').append(data);
+	    fetch('php/savemap.php', {
+	        method: 'POST',
+	        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+	        body: new URLSearchParams({mapdata: jsonmapblocks, maptype: 'forest'})
+	    }).then(r => r.text()).then(function(data) {
 	        blUtil.log("save mapdata: "+data);
 	    });
 		//save winter map
-	    if ($('.the-fucking-winter-map').length) {
+	    if (document.querySelectorAll('.the-fucking-winter-map').length) {
 			var wintermapblocks = new Array();
+			var winterDivs = document.querySelectorAll('.the-fucking-winter-map div');
 			for (var i=0; i<=globals.totalmapblocks; i++){
-				var blocktype = $('.the-fucking-winter-map div:eq('+i+')').attr('data-blocktype');
-				//snowing on blocks and cleaning up map
-				/*if (blocktype == "dirt") { blocktype = "snow"; }
-				if (blocktype == "hole") { blocktype = "snow"; }
-				if (blocktype == "frozendirt") { blocktype = "snow"; }
-				if (blocktype == "icehole") { blocktype = "snow"; }*/
-
+				var blocktype = winterDivs[i] ? winterDivs[i].getAttribute('data-blocktype') : undefined;
 				wintermapblocks[i] = blocktype;
 			}
 	    	//alert("winter map exists");
 			var jsonwintermapblocks = JSON.stringify(wintermapblocks);
-		    $.post('php/savemap.php', {mapdata: jsonwintermapblocks, maptype:'winter'}, function(data) {
-		        //$('body').append(data);
+		    fetch('php/savemap.php', {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		        body: new URLSearchParams({mapdata: jsonwintermapblocks, maptype: 'winter'})
+		    }).then(r => r.text()).then(function(data) {
 		        blUtil.log("save mapdata: "+data);
 		    });
 		}
 		//save beach map
-		if ($('.the-fucking-beach-map').length) {
-			//save winter map
+		if (document.querySelectorAll('.the-fucking-beach-map').length) {
 			var beachmapblocks = new Array();
+			var beachDivs = document.querySelectorAll('.the-fucking-beach-map div');
 			for (var i=0; i<=this.mapTotalBlocks; i++){
-				var blocktype = $('.the-fucking-beach-map div:eq('+i+')').attr('data-blocktype');
+				var blocktype = beachDivs[i] ? beachDivs[i].getAttribute('data-blocktype') : undefined;
 				beachmapblocks[i] = blocktype;
 			}
 			var jsonbeachmapblocks = JSON.stringify(beachmapblocks);
-		    $.post('php/savemap.php', {mapdata: jsonbeachmapblocks, maptype:'beach'}, function(data) {
-		        //$('body').append(data);
+		    fetch('php/savemap.php', {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		        body: new URLSearchParams({mapdata: jsonbeachmapblocks, maptype: 'beach'})
+		    }).then(r => r.text()).then(function(data) {
 		        blUtil.log("save mapdata: "+data);
 		    });
 		}
 		//save jungle map
-		if ($('.the-fucking-jungle-map').length) {
+		if (document.querySelectorAll('.the-fucking-jungle-map').length) {
 			var junglemapblocks = new Array();
+			var jungleDivs = document.querySelectorAll('.the-fucking-jungle-map div');
 			for (var i=0; i<=this.mapTotalBlocks; i++){
-				var blocktype = $('.the-fucking-jungle-map div:eq('+i+')').attr('data-blocktype');
+				var blocktype = jungleDivs[i] ? jungleDivs[i].getAttribute('data-blocktype') : undefined;
 				junglemapblocks[i] = blocktype;
 			}
 			var jsonjunglemapblocks = JSON.stringify(junglemapblocks);
-		    $.post('php/savemap.php', {mapdata: jsonjunglemapblocks, maptype:'jungle'}, function(data) {
-		        //$('body').append(data);
+		    fetch('php/savemap.php', {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		        body: new URLSearchParams({mapdata: jsonjunglemapblocks, maptype: 'jungle'})
+		    }).then(r => r.text()).then(function(data) {
 		        blUtil.log("save mapdata: "+data);
 		    });
 		}
 		//save desert map
-		if ($('.the-fucking-desert-map').length) {
+		if (document.querySelectorAll('.the-fucking-desert-map').length) {
 			var desertmapblocks = new Array();
+			var desertDivs = document.querySelectorAll('.the-fucking-desert-map div');
 			for (var i=0; i<=this.mapTotalBlocks; i++){
-				var blocktype = $('.the-fucking-desert-map div:eq('+i+')').attr('data-blocktype');
+				var blocktype = desertDivs[i] ? desertDivs[i].getAttribute('data-blocktype') : undefined;
 				desertmapblocks[i] = blocktype;
 			}
 			var jsondesertmapblocks = JSON.stringify(desertmapblocks);
-		    $.post('php/savemap.php', {mapdata: jsondesertmapblocks, maptype:'desert'}, function(data) {
-		        //$('body').append(data);
+		    fetch('php/savemap.php', {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		        body: new URLSearchParams({mapdata: jsondesertmapblocks, maptype: 'desert'})
+		    }).then(r => r.text()).then(function(data) {
 		        blUtil.log("save mapdata: "+data);
 		    });
 		}
 		//save islands map
-		if ($('.the-fucking-islands-map').length) {
+		if (document.querySelectorAll('.the-fucking-islands-map').length) {
 			var islandsmapblocks = new Array();
+			var islandsDivs = document.querySelectorAll('.the-fucking-islands-map div');
 			for (var i=0; i<=this.mapTotalBlocks; i++){
-				var blocktype = $('.the-fucking-islands-map div:eq('+i+')').attr('data-blocktype');
+				var blocktype = islandsDivs[i] ? islandsDivs[i].getAttribute('data-blocktype') : undefined;
 				islandsmapblocks[i] = blocktype;
 			}
-			//alert("winter map exists");
 			var jsonislandsmapblocks = JSON.stringify(islandsmapblocks);
-		    $.post('php/savemap.php', {mapdata: jsonislandsmapblocks, maptype:'islands'}, function(data) {
-		        //$('body').append(data);
+		    fetch('php/savemap.php', {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		        body: new URLSearchParams({mapdata: jsonislandsmapblocks, maptype: 'islands'})
+		    }).then(r => r.text()).then(function(data) {
 		        blUtil.log("save mapdata: "+data);
 		    });
 		}
-	    $('.the-fucking-forest-map').append(playerdiv);
+	    document.querySelector('.the-fucking-forest-map').insertAdjacentHTML('beforeend', playerdiv);
 	}
 
 	changeBlockType(block, newtype, map) {
-		var blockClass = '.the-fucking-'+map+'-map .block:eq('+block+')';
-		$(blockClass).removeClass(globals.allblockclasses);
-		$(blockClass).addClass("block block-"+newtype);
-		$(blockClass).attr("data-blocktype", newtype);
+		var blockEl = document.querySelectorAll('.the-fucking-'+map+'-map .block')[block];
+		if (!blockEl) return;
+		blockEl.className = blockEl.className.replace(new RegExp('\\b' + globals.allblockclasses().trim().split(' ').join('\\b|\\b') + '\\b', 'g'), '').trim();
+		blockEl.classList.add("block", "block-"+newtype);
+		blockEl.setAttribute("data-blocktype", newtype);
 	}
 
 	loadNewMap(maptype, cubeside) {
@@ -180,9 +201,9 @@ export class Map {
 		var cabin = false;
 
 		if (cubeside == 'background'){
-			$('.space-container').prepend('<div class="the-fucking-'+maptype+'-map" data-maptype="'+maptype+'"></div>');
+			document.querySelector('.space-container').insertAdjacentHTML('afterbegin', '<div class="the-fucking-'+maptype+'-map" data-maptype="'+maptype+'"></div>');
 		} else {
-			this.mapsContainer.append('<div class="the-fucking-'+maptype+'-map cube-side cube-'+cubeside+'" data-maptype="'+maptype+'"></div>');
+			this.mapsContainer.insertAdjacentHTML('beforeend', '<div class="the-fucking-'+maptype+'-map cube-side cube-'+cubeside+'" data-maptype="'+maptype+'"></div>');
 		}
 		
 		// var map = $('.the-fucking-'+maptype+'-map');
@@ -340,7 +361,7 @@ export class Map {
 				break;
 		}
 
-		$('.the-fucking-'+maptype+'-map').append(maphtml);
+		document.querySelector('.the-fucking-'+maptype+'-map').insertAdjacentHTML('beforeend', maphtml);
 
 		for (var i = 0; i<lakeBlocks.length; i++) {
 		    var randomBlockId = blUtil.randomBlockID();
@@ -415,11 +436,11 @@ export class Map {
 	}
 
 	mapPerspective() {
-		$('.cube-container').toggleClass("map-view-perspective");
+		document.querySelector('.cube-container').classList.toggle("map-view-perspective");
 	}
 
 	hallucinate() {
-		$('body').toggleClass("mushrooms");
+		document.body.classList.toggle("mushrooms");
 	}
 
 };

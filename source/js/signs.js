@@ -32,11 +32,11 @@ export class Signs {
 			  	html += '<span class="bubble-hangdown-4"></span>';
 			html += '</div>';
 
-		$('.objectId-'+objectId).append(html);
+		document.querySelector('.objectId-'+objectId).insertAdjacentHTML('beforeend', html);
 
-		$('.bubble-form').submit(function(e) {
+		document.querySelector('.bubble-form').addEventListener('submit', function(e) {
 
-			var message = $('.bubble-text').val();
+			var message = document.querySelector('.bubble-text').value;
 
 			//find block that the player is facing
 			var id = 1;
@@ -48,14 +48,16 @@ export class Signs {
 				case "left": block = block - 2; break;
 				case "right": block = block; break;
 			}
-			
-			$('.the-fucking-'+map+'-map .block:eq('+block+')').attr("data-text", message);
+
+			var blockEl = document.querySelectorAll('.the-fucking-'+map+'-map .block')[block];
+			if (blockEl) blockEl.setAttribute("data-text", message);
 			//$('.maps-wrap .block:eq('+block+')').remove();
 
 			// console.log('write message to block #: ' + block);
 			// console.log('write message: ' + message);
 
-			$('.bubble-wrap').remove();
+			var bubbleWrap = document.querySelector('.bubble-wrap');
+			if (bubbleWrap) bubbleWrap.remove();
 			globals.disablekeyboardevents = false;
 
 			e.preventDefault();
@@ -64,7 +66,7 @@ export class Signs {
 
 		globals.disablekeyboardevents = true;
 
-		$('.bubble-text').focus();
+		document.querySelector('.bubble-text').focus();
 	}
 
 	readSign(block, map) {
@@ -72,7 +74,8 @@ export class Signs {
 		console.log({block});
 		console.log({map});
 
-		var message = $('.the-fucking-'+map+'-map .block:eq('+block+')').attr("data-text");
+		var blockEl = document.querySelectorAll('.the-fucking-'+map+'-map .block')[block];
+		var message = blockEl ? blockEl.getAttribute("data-text") : '';
 		//alert(message);
 		var html = '<div class="bubble-wrap">';
 					html += '<div class="bubble-link">';
@@ -89,11 +92,11 @@ export class Signs {
 			  	html += '<span class="bubble-hangdown-4"></span>';
 			html += '</div>';
 
-		$('.objectId-'+1).append(html);
+		document.querySelector('.objectId-1').insertAdjacentHTML('beforeend', html);
 
-		$('.bubble-form').submit(function(e) {
+		document.querySelector('.bubble-form').addEventListener('submit', function(e) {
 
-			//var message = $('.bubble-text').val();
+			//var message = document.querySelector('.bubble-text').value;
 
 			//find block that the player is facing
 			var id = 1;
@@ -105,16 +108,18 @@ export class Signs {
 				case "left": block = block - 2; break;
 				case "right": block = block; break;
 			}
-			
-			$('.the-fucking-'+map+'-map .block:eq('+block+')').attr("data-text", message);
+
+			var signBlockEl = document.querySelectorAll('.the-fucking-'+map+'-map .block')[block];
+			if (signBlockEl) signBlockEl.setAttribute("data-text", message);
 			//$('.maps-wrap .block:eq('+block+')').remove();
 
 			//// console.log('write message to block #: ' + block);
 			//// console.log('write message: ' + message);
 
-			$('.bubble-wrap').remove();
+			var bubbleWrap = document.querySelector('.bubble-wrap');
+			if (bubbleWrap) bubbleWrap.remove();
 
-			event.preventDefault();
+			e.preventDefault();
 
 		});
 	}

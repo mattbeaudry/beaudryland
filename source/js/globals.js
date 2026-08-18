@@ -68,15 +68,15 @@ export var mapheight = mapSize;
 export var mapWidthPx = mapwidth * gridunitpx;
 export var mapHeightPx = mapheight * gridunitpx;
 
-export function setCurrentMap(map) { $('.maps-container').data('currentMap', map); }
-export function getCurrentMap() { 
-	return $('.maps-container').data('currentMap');
+export function setCurrentMap(map) { document.querySelector('.maps-container').dataset.currentMap = map; }
+export function getCurrentMap() {
+	return document.querySelector('.maps-container').dataset.currentMap;
 };
 setCurrentMap('forest');
 
-export function setCurrentCubeSide(map) { $('.cube-container').data('currentCubeSide', map); }
-export function getCurrentCubeSide() { 
-	return $('.cube-container').data('currentCubeSide');
+export function setCurrentCubeSide(map) { document.querySelector('.cube-container').dataset.currentCubeSide = map; }
+export function getCurrentCubeSide() {
+	return document.querySelector('.cube-container').dataset.currentCubeSide;
 };
 setCurrentCubeSide('front');
 
@@ -106,17 +106,17 @@ export const WEBDB_displayName = 'beaudryland';
 export const WEBDB_maxSize = 65536;
 
 export const allblockclasses = function() {
-	var allblockclasses = ""; 
-	$.each(blocktypes, function(i, v) { 
-		allblockclasses += "block-"+v+" "; 
+	var allblockclasses = "";
+	blocktypes.forEach(function(v) {
+		allblockclasses += "block-"+v+" ";
 	});
 	return allblockclasses;
 };
 
 export const objectshtml = function() {
-	var objectshtml = ""; 
-	$.each(objecttypes, function(i, v) { 
-	    objectshtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>'; 
+	var objectshtml = "";
+	objecttypes.forEach(function(v) {
+	    objectshtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>';
 	});
 	return objectshtml;
 };

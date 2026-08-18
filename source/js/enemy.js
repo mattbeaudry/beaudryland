@@ -17,18 +17,19 @@ export class Enemy {
 		var id = globals.uniqueObjectID();
 		blUtil.log("Create Enemy "+id);
 		//var enemystartblock = 0;
-		$('.the-fucking-forest-map').append('<div data-id="'+id+'" class="objectId-'+id+' the-fucking-enemy enemy-direction-down"></div>');
+		document.querySelector('.the-fucking-forest-map').insertAdjacentHTML('beforeend', '<div data-id="'+id+'" class="objectId-'+id+' the-fucking-enemy enemy-direction-down"></div>');
 		this.initEnemyBrain(id);
 	}
 
 	killEnemy(id) {
 		blUtil.log("Kill Enemy id: "+id);
-		$('.objectId-'+id).remove();
+		var el = document.querySelector('.objectId-'+id);
+		if (el) el.remove();
 	}
 
 	killEnemies() {
 		blUtil.log("Kill Enemies");
-		$('.the-fucking-enemy').remove();
+		[...document.querySelectorAll('.the-fucking-enemy')].forEach(el => el.remove());
 	}
 
 	initEnemyBrain(id) {
@@ -37,13 +38,13 @@ export class Enemy {
 		var maxthoughts = 100;
 		var enemybrain = setTimeout(anEnemyThought, globals.enemyspeed);
 		
-		//collection of thoughts
+		// collection of thoughts
 		var enemyPath = Array();
 		
 		function anEnemyThought() {
 
 			//check if enemy isnt dead
-			if ($('.objectId-'+id).length != 0) {
+			if (document.querySelectorAll('.objectId-'+id).length != 0) {
 		
 				var enemyrandom = Math.random();
 				var enemyX = blUtil.getObjectCurrentCol(id); var enemyY = blUtil.getObjectCurrentRow(id);
@@ -90,7 +91,7 @@ export class Enemy {
 					}
 				}
 				
-				//limit
+				// limit
 				if (t > maxthoughts) {
 					blUtil.log("Enemy terminated");
 					this.stopEnemyBrain();

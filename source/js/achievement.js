@@ -128,9 +128,9 @@ gotospace
 	// scientist - build all tech items
 
 	achievementCompleted(achievementname) {
-		if (!$('.item-achievements .achievement-'+achievementname).hasClass('status-completed')) {
+		if (!document.querySelector('.item-achievements .achievement-'+achievementname).classList.contains('status-completed')) {
 
-			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+			document.querySelector('.item-achievements .achievement-'+achievementname).classList.add("status-completed");
 
 			this.updateStats();
 			this.displayAchievementMessage("You got the "+achievementname+" achievement!");
@@ -139,7 +139,7 @@ gotospace
 
 			switch (achievementname) {
 				case 'playtheguitar':
-					if (globals.guitarFirstNote == true && $('.the-fucking-winter-map').length == 0) {
+					if (globals.guitarFirstNote == true && document.querySelectorAll('.the-fucking-winter-map').length == 0) {
 						blUtil.log('Jam out!'); 
 						// globals.guitarFirstNote = false;
 						blStory.demolishMapBorder('forest', 'right');
@@ -150,7 +150,7 @@ gotospace
 					}
 					break;
 				case 'playthekeys':
-					if (globals.keyboardFirstNote == true && $('.the-fucking-beach-map').length == 0) {
+					if (globals.keyboardFirstNote == true && document.querySelectorAll('.the-fucking-beach-map').length == 0) {
 						blUtil.log('Play keys!'); 
 						// globals.keyboardFirstNote = false; 
 						blStory.demolishMapBorder('winter', 'right');
@@ -161,7 +161,7 @@ gotospace
 					}
 					break;
 				case 'playthetrumpet':
-					if (globals.trumpetFirstNote == true && $('.the-fucking-jungle-map').length == 0) {
+					if (globals.trumpetFirstNote == true && document.querySelectorAll('.the-fucking-jungle-map').length == 0) {
 						blUtil.log('Play keys!');
 						// globals.trumpetFirstNote = false;
 						blStory.demolishMapBorder('beach', 'right');
@@ -174,7 +174,7 @@ gotospace
 					}
 					break;
 				case 'playthebass':
-					if (globals.bassFirstNote == true && $('.the-fucking-desert-map').length == 0) {
+					if (globals.bassFirstNote == true && document.querySelectorAll('.the-fucking-desert-map').length == 0) {
 						blUtil.log('Play bass!'); 
 						// globals.bassFirstNote = false; 
 						blStory.demolishMapBorder('forest', 'bottom');
@@ -186,7 +186,7 @@ gotospace
 					}
 					break;
 				case 'bringinthebeat':
-					if (globals.drumsFirstNote == true && $('.the-fucking-islands-map').length == 0) {
+					if (globals.drumsFirstNote == true && document.querySelectorAll('.the-fucking-islands-map').length == 0) {
 						blUtil.log('Play drums!');
 						// globals.drumsFirstNote = false;
 						blStory.demolishMapBorder('forest', 'top');
@@ -198,27 +198,27 @@ gotospace
 					}
 					break;
 				case 'gotospace':
-					if (globals.rocketFirstFlight == true && $('.the-fucking-space-map').length == 0) {
+					if (globals.rocketFirstFlight == true && document.querySelectorAll('.the-fucking-space-map').length == 0) {
 						// globals.rocketFirstFlight = false;
-						var object = $('.objectId-1');
+						var object = document.querySelector('.objectId-1');
 
 						// create space map
 						blMap.loadNewMap('space', 'background');
 
 						// change ui theme to night mode
-						$('body').removeClass('theme-day');
-						$('body').addClass('theme-night');
+						document.body.classList.remove('theme-day');
+						document.body.classList.add('theme-night');
 
 						// zoom out from cube
-						$('.maps-container').addClass('maps-zoomout');
+						document.querySelector('.maps-container').classList.add('maps-zoomout');
 
 						// hide cube, show earth blocks
 						setTimeout(function(){
-							$('.maps-wrap').hide();
+							document.querySelector('.maps-wrap').style.display = 'none';
 							blMap.changeBlockType(135, 'earth', 'space');
 							// move player to space
-							object.detach();
-							$('.the-fucking-space-map').append(object);
+							object.parentNode.removeChild(object);
+							document.querySelector('.the-fucking-space-map').appendChild(object);
 							blUtil.teleportObjectToBlock(1, 'space', 136);
 						}, 5000);
 					}
@@ -229,36 +229,36 @@ gotospace
 	}
 
 	updateStats() {
-		var achievementsTotal = $('.item-achievements li').length;
-		var achievementsComplete = $('.item-achievements li.status-completed').length;
+		var achievementsTotal = document.querySelectorAll('.item-achievements li').length;
+		var achievementsComplete = document.querySelectorAll('.item-achievements li.status-completed').length;
 		var mapsTotal = 6;
-		var mapsUnlocked = $('.maps-wrap .cube-side').length;
+		var mapsUnlocked = document.querySelectorAll('.maps-wrap .cube-side').length;
 		var itemsTotal = 89;
-		var itemsCollected = $('.the-fucking-inventory .block').length;
+		var itemsCollected = document.querySelectorAll('.the-fucking-inventory .block').length;
 
 		var gameTotal = achievementsTotal + mapsTotal + itemsTotal;
 		var completionTotal = achievementsComplete + mapsUnlocked + itemsCollected;
 		var completionPercentage = Math.floor(completionTotal / gameTotal * 100);
 
-		$('.completion-percentage').html(completionPercentage);
-		$('.achievements-complete').html(achievementsComplete);
-		$('.achievements-total').html(achievementsTotal);
-		$('.items-collected').html(itemsCollected);
-		$('.items-total').html(itemsTotal);
-		$('.maps-unlocked').html(mapsUnlocked);
-		$('.maps-total').html(mapsTotal);
+		document.querySelector('.completion-percentage').innerHTML = completionPercentage;
+		document.querySelector('.achievements-complete').innerHTML = achievementsComplete;
+		document.querySelector('.achievements-total').innerHTML = achievementsTotal;
+		document.querySelector('.items-collected').innerHTML = itemsCollected;
+		document.querySelector('.items-total').innerHTML = itemsTotal;
+		document.querySelector('.maps-unlocked').innerHTML = mapsUnlocked;
+		document.querySelector('.maps-total').innerHTML = mapsTotal;
 	}
 
 	displayAchievementMessage(text) {
 		blUtil.log("displayDialog");
 
-		var completionPercentage = $('.completion-percentage').html();
-		var achievementsComplete = $('.achievements-complete').html();
-		var achievementsTotal = $('.achievements-total').html();
-		var itemsCollected = $('.items-collected').html();
-		var itemsTotal = $('.items-total').html();
-		var mapsUnlocked = $('.maps-unlocked').html();
-		var mapsTotal = $('.maps-total').html();
+		var completionPercentage = document.querySelector('.completion-percentage').innerHTML;
+		var achievementsComplete = document.querySelector('.achievements-complete').innerHTML;
+		var achievementsTotal = document.querySelector('.achievements-total').innerHTML;
+		var itemsCollected = document.querySelector('.items-collected').innerHTML;
+		var itemsTotal = document.querySelector('.items-total').innerHTML;
+		var mapsUnlocked = document.querySelector('.maps-unlocked').innerHTML;
+		var mapsTotal = document.querySelector('.maps-total').innerHTML;
 
 		var html = '<div class="bubble-wrap bubble-dialog">';
 					html += '<div class="bubble-link">';
@@ -297,12 +297,12 @@ gotospace
 			  		html += '</div>';
 			html += '</div>';
 
-		$('.page-game').append(html);
+		document.querySelector('.page-game').insertAdjacentHTML('beforeend', html);
 
-		$('.bubble-dialog .bubble-form').submit(function(e) {
+		document.querySelector('.bubble-dialog .bubble-form').addEventListener('submit', function(e) {
 
-			$('.bubble-wrap').remove();
-			event.preventDefault();
+			document.querySelector('.bubble-wrap').remove();
+			e.preventDefault();
 
 		});
 	}

@@ -25,7 +25,7 @@ function isBlockOnEdgeOfCube(blockid) {
 function renderSignsOnMap(signText, map) {
 	var previousSignBlockIds = [];
 
-	$.each(signText,function(index,value){
+	signText.forEach(function(value, index){
 		let blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
 		let signAlreadyThere = previousSignBlockIds.includes(blockid);
 		let invalidBlock = isBlockOnEdgeOfCube(blockid);
@@ -37,7 +37,8 @@ function renderSignsOnMap(signText, map) {
 		}
 		
 		blMap.changeBlockType(blockid, "sign", map);
-		$('.the-fucking-'+map+'-map .block:eq('+blockid+')').attr("data-text", value);
+		var signEl = document.querySelectorAll('.the-fucking-'+map+'-map .block')[blockid];
+		if (signEl) signEl.setAttribute("data-text", value);
 
 		previousSignBlockIds.push(blockid);
 	});
