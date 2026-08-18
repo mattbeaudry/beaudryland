@@ -22,15 +22,15 @@ export class Dev {
 
 	getAllItems() {
 		var inventoryhtml = '';
-		$.each(globals.blocktypes, function(index, value) {
+		globals.blocktypes.forEach(function(value, index) {
 			{
 				inventoryhtml += '<div class="slot-'+index+' block block-'+value+' ';
 				if(index==0) { inventoryhtml += 'selected-item'; }
 				inventoryhtml += '" data-blocktype="'+value+'">99</div>';
 			}
 		});
-		$('.the-fucking-inventory').html(inventoryhtml);
-		$('.the-fucking-inventory').show();
+		document.querySelector('.the-fucking-inventory').innerHTML = inventoryhtml;
+		document.querySelector('.the-fucking-inventory').style.display = '';
 		blHCI.setupMouseEvents();
 	}
 
@@ -107,28 +107,29 @@ export class Dev {
 			},
 		];
 
-		var devconsole = $('.dev-console');
+		var devconsole = document.querySelector('.dev-console');
 		var _self = this;
 
-		$.each(consoleItems, function(index, value) {
-			var container = $('<li />');
+		consoleItems.forEach(function(value, index) {
+			var container = document.createElement('li');
 			var function_name = '';
 			if (value.function_val) {
 				function_name = value.function_name + '("' + value.function_val + '")';
 			} else {
 				function_name = value.function_name + '()';
 			}
-			container.append('<a href="javascript:void(0);">/'+value.text+'</a>');
-			container.on("click", function() {
+			container.insertAdjacentHTML('beforeend', '<a href="javascript:void(0);">/'+value.text+'</a>');
+			container.addEventListener("click", function() {
 				eval(function_name);
 			});
-			devconsole.append(container); 
+			devconsole.appendChild(container);
 		});
 
 	}
 
 	changeOverlayBlockOpacity(block, opacity) {
-		$('.the-fucking-map-overlay .block:eq('+block+')').css("opacity",opacity);
+		var el = document.querySelectorAll('.the-fucking-map-overlay .block')[block];
+		if (el) el.style.opacity = opacity;
 	}
 
 	nightTime() {
@@ -137,8 +138,8 @@ export class Dev {
 	    for (var f = 0; f <= (globals.totalmapblocks - 1); f++) {
 			overlayhtml += '<div data-overlayblockid="'+f+'" class="block block-dark"></div>';
 		}
-		$('.the-fucking-map-overlay').fadeIn();
-		$('.the-fucking-map-overlay').append(overlayhtml);
+		document.querySelector('.the-fucking-map-overlay').style.display = '';
+		document.querySelector('.the-fucking-map-overlay').insertAdjacentHTML('beforeend', overlayhtml);
 
 		globals.isnightime = true;
 
@@ -151,12 +152,12 @@ export class Dev {
 
 	//end night time e.g. morning
 	morningTime() {
-		$('.the-fucking-map-overlay').empty();
+		document.querySelector('.the-fucking-map-overlay').innerHTML = '';
 		globals.isnightime = false;
 	}
 
 	clearLighting() {
-		$('.the-fucking-map-overlay .block-dark').css("opacity",1);
+		[...document.querySelectorAll('.the-fucking-map-overlay .block-dark')].forEach(el => el.style.opacity = 1);
 	}
 
 	lightUpBlock() {

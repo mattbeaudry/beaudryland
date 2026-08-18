@@ -1,6 +1,3 @@
-require('jquery');
-require('jquery-ui-bundle');
-
 import './sass/main.scss';
 import * as globals from './js/globals';
 import * as blNavigation from './js/navigation';
@@ -44,17 +41,17 @@ blUI.setupUI();
 blNavigation.initializeNavigation();
 blInventory.setupInventorySlots();
 
-if ($('.bui-synth').length) {
+if (document.querySelectorAll('.bui-synth').length) {
 	blSound.setupSynth();
 	blSound.setupDrums();
 }
 
-if ($('.bl-character-editor').length) {
+if (document.querySelectorAll('.bl-character-editor').length) {
 	blCharacter.setupCharacterBuilder();
 	blCharacter.drawCharacter();
 }
 
-if ($('.page-itemworkshop').length) {
+if (document.querySelectorAll('.page-itemworkshop').length) {
 	blItems.initItemBuilder();
 }
 
@@ -63,65 +60,64 @@ if ($('.page-itemworkshop').length) {
 // MOBILE GAME INIT
 ////////////////////////////
 
-if ( $('body').hasClass("version-phonegap") ) {
-	
-	$('.inventory-close').on("click", function() { toggleInventory(); });
-	var toggleInventory = function() { $('.sticky-inventory').fadeToggle(0); }; 
-	//var hideControlPad = function() { $('.the-fucking-controller').fadeToggle(); };
+if ( document.body.classList.contains("version-phonegap") ) {
 
-	$(document).ready(function() {
-		//console.log("MOBILE VERSION");
-		
-		// globals.mapwidth = globals.mapWidthMobile;
-		// globals.mapheight = globals.mapHeightMobile;
-		
-		blMap.setupMap('mobile');
-		blMap.loadNewMap('forest', 'front');
-		blPlayer.createPlayer();
-		blMobile.websql_openDatabase();
-		blMobile.websql_createTable();
-		blMobile.loadGameMobile();
-		//blAnimal.createAnimal();
-		//blStory.setupMapBorders('forest');
-		blMap.loadNewMap('winter', 'right');
-		blMap.loadNewMap('beach', 'back');
-		blMap.loadNewMap('jungle', 'left');
-		blMap.loadNewMap('desert', 'bottom');
-		blMap.loadNewMap('islands', 'top');
-		blStory.createForestSigns();
-		blStory.createWinterSigns();
-		blStory.createBeachSigns();
-		blDev.getAllItems();
-		blHCI.setupKeyboardEvents();
-		blHCI.setupMouseEvents();
-		blHCI.setupControlPadEvents();
-		blDev.loadDevConsole();
-		blTime.startTime();
-	});
+	var inventoryCloseEl = document.querySelector('.inventory-close');
+	if (inventoryCloseEl) inventoryCloseEl.addEventListener("click", function() { toggleInventory(); });
+	var toggleInventory = function() {
+		var stickyInv = document.querySelector('.sticky-inventory');
+		if (stickyInv) stickyInv.style.display = stickyInv.style.display === 'none' ? '' : 'none';
+	};
+	//var hideControlPad = function() { document.querySelector('.the-fucking-controller').style.display = ...; };
+
+	// MOBILE VERSION
+	// globals.mapwidth = globals.mapWidthMobile;
+	// globals.mapheight = globals.mapHeightMobile;
+
+	blMap.setupMap('mobile');
+	blMap.loadNewMap('forest', 'front');
+	blPlayer.createPlayer();
+	blMobile.websql_openDatabase();
+	blMobile.websql_createTable();
+	blMobile.loadGameMobile();
+	//blAnimal.createAnimal();
+	//blStory.setupMapBorders('forest');
+	blMap.loadNewMap('winter', 'right');
+	blMap.loadNewMap('beach', 'back');
+	blMap.loadNewMap('jungle', 'left');
+	blMap.loadNewMap('desert', 'bottom');
+	blMap.loadNewMap('islands', 'top');
+	blStory.createForestSigns();
+	blStory.createWinterSigns();
+	blStory.createBeachSigns();
+	blDev.getAllItems();
+	blHCI.setupKeyboardEvents();
+	blHCI.setupMouseEvents();
+	blHCI.setupControlPadEvents();
+	blDev.loadDevConsole();
+	blTime.startTime();
 
 
 ////////////////////////////
 // DESKTOP GAME INIT
 ////////////////////////////
 
-} else if ( $('body').hasClass("version-desktop") ) {
+} else if ( document.body.classList.contains("version-desktop") ) {
 
-	$(document).ready(function() {
-		// console.log("DESKTOP VERSION");
+	// console.log("DESKTOP VERSION");
 
-		// globals.mapwidth = globals.mapWidthDesktop;
-		// globals.mapheight = globals.mapHeightDesktop;
-		
-		blMap.setupMap('desktop');
+	// globals.mapwidth = globals.mapWidthDesktop;
+	// globals.mapheight = globals.mapHeightDesktop;
 
-		loadGame();
+	blMap.setupMap('desktop');
 
-		blHCI.setupKeyboardEvents();
-		blHCI.setupMouseEvents();
-		blHCI.setupControlPadEvents();
-		blDev.loadDevConsole();
-		blTime.startTime();
-	});
+	loadGame();
+
+	blHCI.setupKeyboardEvents();
+	blHCI.setupMouseEvents();
+	blHCI.setupControlPadEvents();
+	blDev.loadDevConsole();
+	blTime.startTime();
 
 	//alert/ask player to save before they close the page
 	function confirmExit() {
@@ -138,43 +134,67 @@ if ( $('body').hasClass("version-phonegap") ) {
 var loadGame = function() {
 	//blUtil.log("load game");
 
-	$.post('php/loadmap.php', {maptype:'forest'}, function(data) {
+	fetch('php/loadmap.php', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		body: new URLSearchParams({maptype: 'forest'})
+	}).then(r => r.text()).then(function(data) {
 		if (data == false) {
 			loadNewGame();
 		} else {
 			blMap.loadExistingMap('forest');
-			$.post('php/loadmap.php', {maptype:'winter'}, function(data) {
+			fetch('php/loadmap.php', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: new URLSearchParams({maptype: 'winter'})
+			}).then(r => r.text()).then(function(data) {
 				if (data) {
 					blUtil.log("loadwintermap");
 					blMap.loadExistingMap('winter');
 				}
 			});
-			$.post('php/loadmap.php', {maptype:'beach'}, function(data) {
+			fetch('php/loadmap.php', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: new URLSearchParams({maptype: 'beach'})
+			}).then(r => r.text()).then(function(data) {
 				if (data) {
 					blUtil.log("loadbeachmap");
 					blMap.loadExistingMap('beach');
 				}
 			});
-			$.post('php/loadmap.php', {maptype:'jungle'}, function(data) {
+			fetch('php/loadmap.php', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: new URLSearchParams({maptype: 'jungle'})
+			}).then(r => r.text()).then(function(data) {
 				if (data) {
 					blUtil.log("loadjunglemap");
 					blMap.loadExistingMap('jungle');
 				}
 			});
-			$.post('php/loadmap.php', {maptype:'desert'}, function(data) {
+			fetch('php/loadmap.php', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: new URLSearchParams({maptype: 'desert'})
+			}).then(r => r.text()).then(function(data) {
 				if (data) {
 					blUtil.log("loaddesertmap");
 					blMap.loadExistingMap('desert');
 				}
 			});
-			$.post('php/loadmap.php', {maptype:'islands'}, function(data) {
+			fetch('php/loadmap.php', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: new URLSearchParams({maptype: 'islands'})
+			}).then(r => r.text()).then(function(data) {
 				if (data) {
 					blUtil.log("loadislandsmap");
 					blMap.loadExistingMap('islands');
 				}
 			});
 			blPlayer.loadPlayer();
-		}	
+		}
 	});
 };
 

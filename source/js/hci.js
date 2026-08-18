@@ -47,8 +47,8 @@ export class HCI {
 					break;
 				case "Space":
 					if (globals.disablekeyboardevents == false) {
-						if ($('.speech-bubble').length == 0) {
-							blAction.playerPrimaryAction(); 
+						if (document.querySelectorAll('.speech-bubble').length == 0) {
+							blAction.playerPrimaryAction();
 							event.preventDefault();
 						} else {
 							event.preventDefault();
@@ -56,25 +56,25 @@ export class HCI {
 					}
 					break;
 				case "Enter":
-					if ($('.speech-bubble').length == 0) {
-						$('.bubble-form').submit();
+					if (document.querySelectorAll('.speech-bubble').length == 0) {
+						document.querySelector('.bubble-form').dispatchEvent(new Event('submit'));
 						event.preventDefault();
-					} 
+					}
 					break;
 				case "Digit1":
-					$('.the-fucking-inventory > div:eq(0)').trigger("click");
+					document.querySelectorAll('.the-fucking-inventory > div')[0].dispatchEvent(new Event('click'));
 					break;
 				case "Digit2":
-					$('.the-fucking-inventory > div:eq(1)').trigger("click");
+					document.querySelectorAll('.the-fucking-inventory > div')[1].dispatchEvent(new Event('click'));
 					break;
 				case "Digit3":
-					$('.the-fucking-inventory > div:eq(2)').trigger("click");
+					document.querySelectorAll('.the-fucking-inventory > div')[2].dispatchEvent(new Event('click'));
 					break;
 				case "Digit4":
-					$('.the-fucking-inventory > div:eq(3)').trigger("click");
+					document.querySelectorAll('.the-fucking-inventory > div')[3].dispatchEvent(new Event('click'));
 					break;
 				case "Digit5":
-					$('.the-fucking-inventory > div:eq(4)').trigger("click");
+					document.querySelectorAll('.the-fucking-inventory > div')[4].dispatchEvent(new Event('click'));
 					break;
 
 				// case 69: // E 
@@ -103,15 +103,15 @@ export class HCI {
 			function playInstrument(instrument) {
 				// make noise
 				blSound.playInstrumentNote(instrument, direction);
-				
+
 				// show music note
 				blInstruments.showMusicNote();
 
 				// animate strumming guitar or playing instrument
-				$(".the-fucking-player").addClass("player-direction-down-"+selecteditem+"-swing");
+				document.querySelector(".the-fucking-player").classList.add("player-direction-down-"+selecteditem+"-swing");
 				setTimeout(removeSwingClass, 100);
 				function removeSwingClass() {
-					$(".the-fucking-player").removeClass("player-direction-down-"+selecteditem+"-swing");
+					document.querySelector(".the-fucking-player").classList.remove("player-direction-down-"+selecteditem+"-swing");
 				}
 			}
 
@@ -165,7 +165,7 @@ export class HCI {
 		}, false);
 
 		//prevent keys from scrolling page
-		$(document).keydown(function (e) {
+		document.addEventListener('keydown', function (e) {
 		    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
 		    if ( ((key == 37) || (key == 38) || (key == 39) || (key == 40) /*|| (key == 32)*/) && (e.target.className != null))
 		       e.preventDefault();
@@ -228,20 +228,20 @@ export class HCI {
 					break;
 			}
 		};
-		$('.btn-up').on("touchstart", function() { 
+		document.querySelector('.btn-up').addEventListener("touchstart", function() {
 			controlMove('up');
 		});
-		$('.btn-down').on("touchstart", function() { 
+		document.querySelector('.btn-down').addEventListener("touchstart", function() {
 			controlMove('down');
 		});
-		$('.btn-left').on("touchstart", function() { 
+		document.querySelector('.btn-left').addEventListener("touchstart", function() {
 			controlMove('left');
 		});
-		$('.btn-right').on("touchstart", function() { 
+		document.querySelector('.btn-right').addEventListener("touchstart", function() {
 			controlMove('right');
 		});
-		$('.btn-a').on("touchstart", function() { 
-			blAction.playerPrimaryAction(); 
+		document.querySelector('.btn-a').addEventListener("touchstart", function() {
+			blAction.playerPrimaryAction();
 		});
 	}
 
@@ -250,91 +250,97 @@ export class HCI {
 		var directions = ["up","down","left","right"];
 
 		// SELECT AN ITEM IN THE INVENTORY
-		$('.the-fucking-inventory div').on("click", function() {
-			var blocktype = $(this).attr('data-blocktype');
-			// items that are crafting ingredients
-			if ( $.inArray(blocktype, globals.isingredient) > -1 ) {
-			    if ( $(this).attr('data-blocktype') != "empty" ) {
-			    	var blocktype = $(this).attr('data-blocktype');
-			    	blInventory.moveItemToCraftingTable(blocktype);
-			    }
-			} else {
-				$('.tabs .tab').hide();
-				$('.tab-game').show();
-				$('.tabs-close').hide();
-			}
-			var playerdirection = blUtil.getObjectDirection(1, "player");
-			$('.the-fucking-inventory > div').removeClass("selected-item");
-			$(this).addClass('selected-item');
-			var selecteditem = $(this).attr('data-blocktype');
-			
-			// clear animation classes
-			$.each(directions, function(i, v) {
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-sword");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-shovel");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-axe");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-sword-swing");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-shovel-swing");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-axe-swing");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-bike");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-skiis");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-car");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-canoe");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-rocket");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-guitar");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-guitar-swing");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-piano");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-piano-swing");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-trumpet");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-trumpet-swing");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-bass");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-bass-swing");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-drumsticks");
-				$('.the-fucking-player').removeClass("player-direction-"+v+"-drumsticks-swing");
+		[...document.querySelectorAll('.the-fucking-inventory div')].forEach(function(el) {
+			el.addEventListener("click", function() {
+				var blocktype = el.getAttribute('data-blocktype');
+				// items that are crafting ingredients
+				if ( globals.isingredient.indexOf(blocktype) > -1 ) {
+				    if ( el.getAttribute('data-blocktype') != "empty" ) {
+				    	var blocktype = el.getAttribute('data-blocktype');
+				    	blInventory.moveItemToCraftingTable(blocktype);
+				    }
+				} else {
+					[...document.querySelectorAll('.tabs .tab')].forEach(t => t.style.display = 'none');
+					document.querySelector('.tab-game').style.display = '';
+					document.querySelector('.tabs-close').style.display = 'none';
+				}
+				var playerdirection = blUtil.getObjectDirection(1, "player");
+				[...document.querySelectorAll('.the-fucking-inventory > div')].forEach(d => d.classList.remove("selected-item"));
+				el.classList.add('selected-item');
+				var selecteditem = el.getAttribute('data-blocktype');
+
+				// clear animation classes
+				directions.forEach(function(v) {
+					var player = document.querySelector('.the-fucking-player');
+					player.classList.remove("player-direction-"+v+"-sword");
+					player.classList.remove("player-direction-"+v+"-shovel");
+					player.classList.remove("player-direction-"+v+"-axe");
+					player.classList.remove("player-direction-"+v+"-sword-swing");
+					player.classList.remove("player-direction-"+v+"-shovel-swing");
+					player.classList.remove("player-direction-"+v+"-axe-swing");
+					player.classList.remove("player-direction-"+v+"-bike");
+					player.classList.remove("player-direction-"+v+"-skiis");
+					player.classList.remove("player-direction-"+v+"-car");
+					player.classList.remove("player-direction-"+v+"-canoe");
+					player.classList.remove("player-direction-"+v+"-rocket");
+					player.classList.remove("player-direction-"+v+"-guitar");
+					player.classList.remove("player-direction-"+v+"-guitar-swing");
+					player.classList.remove("player-direction-"+v+"-piano");
+					player.classList.remove("player-direction-"+v+"-piano-swing");
+					player.classList.remove("player-direction-"+v+"-trumpet");
+					player.classList.remove("player-direction-"+v+"-trumpet-swing");
+					player.classList.remove("player-direction-"+v+"-bass");
+					player.classList.remove("player-direction-"+v+"-bass-swing");
+					player.classList.remove("player-direction-"+v+"-drumsticks");
+					player.classList.remove("player-direction-"+v+"-drumsticks-swing");
+				});
+
+				if ( globals.isequipable.indexOf(selecteditem) > -1 ) {
+					blUtil.log("selected item has animation");
+					document.querySelector('.the-fucking-player').classList.add("player-direction-"+playerdirection+"-"+selecteditem);
+				}
+
+				console.log("HCI");
+				console.log({selecteditem});
+				console.log(globals.isinstrument);
+
+				if ( globals.isinstrument.indexOf(selecteditem) > -1 ) {
+					blUtil.log("selected item in an instrument");
+					// document.querySelector('.the-fucking-player').classList.add("player-direction-down-"+selecteditem);
+					blMovement.changeObjectDirection(1, 'down', 'player');
+					document.querySelector('.the-fucking-player').classList.add("player-direction-down-"+selecteditem);
+				}
+
+				document.querySelector('.nav-selected-item span').className = document.querySelector('.nav-selected-item span').className.replace(new RegExp('\\b' + globals.allblockclasses().trim().split(' ').join('\\b|\\b') + '\\b', 'g'), '').trim();
+				document.querySelector('.nav-selected-item span').classList.add('block-'+blocktype);
 			});
-			
-			if ( $.inArray(selecteditem, globals.isequipable) > -1 ) {
-				blUtil.log("selected item has animation");
-				$('.the-fucking-player').addClass("player-direction-"+playerdirection+"-"+selecteditem);
-			}
-
-			console.log("HCI");
-			console.log({selecteditem});
-			console.log(globals.isinstrument);
-
-			if ( $.inArray(selecteditem, globals.isinstrument) > -1 ) {
-				blUtil.log("selected item in an instrument");
-				// $('.the-fucking-player').addClass("player-direction-down-"+selecteditem);
-				blMovement.changeObjectDirection(1, 'down', 'player');
-				$('.the-fucking-player').addClass("player-direction-down-"+selecteditem);
-			}
-
-			$('.nav-selected-item span').removeClass(globals.allblockclasses);
-			$('.nav-selected-item span').addClass('block-'+blocktype);
 		});
 
 		// REMOVE ITEMS FROM CRAFTING TABLE
-		$('.the-fucking-crafting-table > div').on("click", function() {
-			var blocktype = $(this).attr('data-blocktype');
-			if (blocktype != "empty") {
-				blUtil.log("crafting slot not empty");
-				$(this).removeClass("block-"+blocktype);
-				$(this).addClass("empty");
-				$(this).attr('data-blocktype', "empty");
-				$(this).html("0");
-				blInventory.addToInventory(blocktype,"1");
-				blInventory.checkCraftingTableForItem();
-			}
+		[...document.querySelectorAll('.the-fucking-crafting-table > div')].forEach(function(el) {
+			el.addEventListener("click", function() {
+				var blocktype = el.getAttribute('data-blocktype');
+				if (blocktype != "empty") {
+					blUtil.log("crafting slot not empty");
+					el.classList.remove("block-"+blocktype);
+					el.classList.add("empty");
+					el.setAttribute('data-blocktype', "empty");
+					el.innerHTML = "0";
+					blInventory.addToInventory(blocktype,"1");
+					blInventory.checkCraftingTableForItem();
+				}
+			});
 		});
 
 		// MOVE THE CRAFTED ITEM TO INVENTORY
-		$('.the-fucking-crafted-item > div').on("click", function() {
-			if (!$('.the-fucking-crafted-item > div').hasClass("empty")) {
-				var blocktype = $(this).attr('data-blocktype');
-				var itemquantity = $(this).html();
+		document.querySelector('.the-fucking-crafted-item > div').addEventListener("click", function() {
+			var craftedDiv = document.querySelector('.the-fucking-crafted-item > div');
+			if (!craftedDiv.classList.contains("empty")) {
+				var blocktype = craftedDiv.getAttribute('data-blocktype');
+				var itemquantity = craftedDiv.innerHTML;
 				blUtil.log("You crafted" + itemquantity + " " + blocktype);
-				$('.the-fucking-crafted-item > div').removeClass(globals.allblockclasses);
-				$('.the-fucking-crafted-item > div').html("0");
+				craftedDiv.className = craftedDiv.className.replace(new RegExp('\\b' + globals.allblockclasses().trim().split(' ').join('\\b|\\b') + '\\b', 'g'), '').trim();
+				craftedDiv.innerHTML = "0";
 				blInventory.removeAllItemsFromCraftingTable();
 				blInventory.addToInventory(blocktype, itemquantity);
 				blInventory.checkCraftingTableForItem();
@@ -342,11 +348,11 @@ export class HCI {
 		});
 
 		// SAVE THE MAPS AND PLAYER DATA
-		$('.link-savemap').on("mousedown", function() {
+		document.querySelector('.link-savemap').addEventListener("mousedown", function() {
 			blAchievement.achievementCompleted("saveyourgame");
-			$('.link-savemap a').html('Saving');
+			document.querySelector('.link-savemap a').innerHTML = 'Saving';
 			var enableSaving = function() {
-				$('.link-savemap div').html('<a>Save</a>');
+				document.querySelector('.link-savemap div').innerHTML = '<a>Save</a>';
 			};
 			setTimeout(enableSaving, 2500);
 			blPlayer.savePlayer();

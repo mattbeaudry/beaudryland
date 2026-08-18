@@ -30,7 +30,7 @@ export class Time {
 			if ((count%60) == 0) {
 				seconds++;
 				console.log('time: '+seconds+'s');
-				//animateWaves(); 
+				animateWaves(); 
 			}
 
 			// run every half second
@@ -54,47 +54,54 @@ export class Time {
 		// spears
 		var animateSpears = function() {
 
-			$('.the-fucking-spear').each(function(index) {
-				var direction = $(this).attr("data-direction");
-				var id = $(this).attr("data-id");
+			[...document.querySelectorAll('.the-fucking-spear')].forEach(function(el) {
+				var direction = el.getAttribute("data-direction");
+				var id = el.getAttribute("data-id");
 				var stillmoving;
 				switch (direction) {
-					case "up": var stillmoving = blMovement.moveObject("up", id, "spear"); break;
-					case "down": var stillmoving = blMovement.moveObject("down", id, "spear"); break;
-					case "left": var stillmoving = blMovement.moveObject("left", id, "spear"); break;
-					case "right": var stillmoving = blMovement.moveObject("right", id, "spear"); break;
-				} 
+					case "up": stillmoving = blMovement.moveObject("up", id, "spear"); break;
+					case "down": stillmoving = blMovement.moveObject("down", id, "spear"); break;
+					case "left": stillmoving = blMovement.moveObject("left", id, "spear"); break;
+					case "right": stillmoving = blMovement.moveObject("right", id, "spear"); break;
+				}
 				// stop animation if spear collides with something
 				if (stillmoving == false) {
-					$('.objectId-'+id).remove();
+					var objEl = document.querySelector('.objectId-'+id);
+					if (objEl) objEl.remove();
 				}
 			});
 		};
 
+		var waveBlockClasses = "block-grass block-rock block-dirt block-fire block-water block-tree block-hole block-wood block-door-closed block-door-open block-diamond-hole block-diamond block-gold-hole block-gold block-pinetree block-icerock block-ice block-snow block-snowhole block-frozendirt block-palmtree block-sandstone block-sand block-wave";
+
 		// waves
 		var animateWaves = function() {
-			$('.the-fucking-beach-map .block').each( function(index, value) {
-				if ($(this).hasClass('block-wave')) {
-					if ($('.the-fucking-beach-map .block:eq('+(index-1)+')').hasClass('block-water')) {
+			var islandsBlocks = document.querySelectorAll('.the-fucking-islands-map .block');
+			[...islandsBlocks].forEach(function(el, index) {
+				if (el.classList.contains('block-wave')) {
+					var prevEl = islandsBlocks[index-1];
+					if (prevEl && prevEl.classList.contains('block-water')) {
 						//wave has not reached the shore yet
 						var newtype = 'wave';
-						$('.the-fucking-beach-map .block:eq('+(index-1)+')').removeClass("block-grass block-rock block-dirt block-fire block-water block-tree block-hole block-wood block-door-closed block-door-open block-diamond-hole block-diamond block-gold-hole block-gold block-pinetree block-icerock block-ice block-snow block-snowhole block-frozendirt block-palmtree block-sandstone block-sand block-wave");
-						$('.the-fucking-beach-map .block:eq('+(index-1)+')').addClass("block block-"+newtype);
-						$('.the-fucking-beach-map .block:eq('+(index-1)+')').attr("data-blocktype", newtype);						
+						prevEl.className = prevEl.className.replace(new RegExp('\\b(' + waveBlockClasses.trim().split(' ').join('|') + ')\\b', 'g'), '').trim();
+						prevEl.classList.add("block", "block-"+newtype);
+						prevEl.setAttribute("data-blocktype", newtype);
 					} else {
 						//wave has reached the shore, create new wave at edge of map
-						//var rowremainder = (index-1) % globals.mapwidth;
 						var r = parseInt(Math.random() * globals.mapheight);
 						var newwaveposition = (r * globals.mapwidth) - 1;
 						var newtype = "wave";
-						$('.the-fucking-beach-map .block:eq('+newwaveposition+')').removeClass("block-grass block-rock block-dirt block-fire block-water block-tree block-hole block-wood block-door-closed block-door-open block-diamond-hole block-diamond block-gold-hole block-gold block-pinetree block-icerock block-ice block-snow block-snowhole block-frozendirt block-palmtree block-sandstone block-sand block-wave");
-						$('.the-fucking-beach-map .block:eq('+newwaveposition+')').addClass("block block-"+newtype);
-						$('.the-fucking-beach-map .block:eq('+newwaveposition+')').attr("data-blocktype", newtype);
+						var newWaveEl = islandsBlocks[newwaveposition];
+						if (newWaveEl) {
+							newWaveEl.className = newWaveEl.className.replace(new RegExp('\\b(' + waveBlockClasses.trim().split(' ').join('|') + ')\\b', 'g'), '').trim();
+							newWaveEl.classList.add("block", "block-"+newtype);
+							newWaveEl.setAttribute("data-blocktype", newtype);
+						}
 					}
-					newtype = 'water';
-					$('.the-fucking-beach-map .block:eq('+index+')').removeClass("block-grass block-rock block-dirt block-fire block-water block-tree block-hole block-wood block-door-closed block-door-open block-diamond-hole block-diamond block-gold-hole block-gold block-pinetree block-icerock block-ice block-snow block-snowhole block-frozendirt block-palmtree block-sandstone block-sand block-wave");
-					$('.the-fucking-beach-map .block:eq('+index+')').addClass("block block-"+newtype);
-					$('.the-fucking-beach-map .block:eq('+index+')').attr("data-blocktype", newtype);
+					var newtype = 'water';
+					el.className = el.className.replace(new RegExp('\\b(' + waveBlockClasses.trim().split(' ').join('|') + ')\\b', 'g'), '').trim();
+					el.classList.add("block", "block-"+newtype);
+					el.setAttribute("data-blocktype", newtype);
 				}
 			});
 		};

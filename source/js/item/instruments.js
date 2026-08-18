@@ -9,13 +9,15 @@ export class Instruments {
         console.log("showMusicNote")
 		var rid = globals.uniqueObjectID();
 		var healthlabelhtml = '<div class="musical-note music-note-id-'+rid+' block-musical-note"></div>';
-		$('.objectId-1').append(healthlabelhtml);
-        
-        $('.musical-note-id-'+rid).addClass("musical-note-animate");
+		document.querySelector('.objectId-1').insertAdjacentHTML('beforeend', healthlabelhtml);
+
+        var noteEl = document.querySelector('.music-note-id-'+rid);
+        if (noteEl) noteEl.classList.add("musical-note-animate");
 
         setTimeout(() => {
             console.log("remove note");
-            $('.musical-note-id-'+rid).remove();
+            var el = document.querySelector('.music-note-id-'+rid);
+            if (el) el.remove();
         }, 300);
 	}
 

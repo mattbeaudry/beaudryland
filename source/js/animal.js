@@ -15,18 +15,19 @@ export class Animal {
 		var id = globals.uniqueObjectID();
 		blUtil.log("Create Animal "+id);
 		//var enemystartblock = 0;
-		$('.the-fucking-forest-map').append('<div data-id="'+id+'" class="objectId-'+id+' the-fucking-deer deer-direction-down"></div>');
+		document.querySelector('.the-fucking-forest-map').insertAdjacentHTML('beforeend', '<div data-id="'+id+'" class="objectId-'+id+' the-fucking-deer deer-direction-down"></div>');
 		this.initAnimalBrain(id);
 	}
 
 	killAnimal(id) {
 		blUtil.log("Kill Animal id: "+id);
-		$('.objectId-'+id).remove();
+		var el = document.querySelector('.objectId-'+id);
+		if (el) el.remove();
 	}
 
 	killAnimals() {
 		blUtil.log("Kill Animals");
-		$('.the-fucking-deer').remove();
+		[...document.querySelectorAll('.the-fucking-deer')].forEach(el => el.remove());
 	}
 
 	initAnimalBrain(id) {
@@ -40,7 +41,7 @@ export class Animal {
 		function anAnimalThought() {
 
 			//check if enemy isnt dead
-			if ($('.objectId-'+id).length != 0) {
+			if (document.querySelectorAll('.objectId-'+id).length != 0) {
 		
 				var animalrandom = Math.random();
 				//var enemydirection;

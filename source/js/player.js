@@ -14,24 +14,24 @@ export class Player {
 		//blMap.changeBlockType(playerstartblock, "grass"); //make sure player doesn't start overtop an obstacle
 		//var id = globals.uniqueObjectID();
 		var id = 1;
-		$('.the-fucking-forest-map').append('<div data-id='+id+' data-blockhealth="5" class=" objectId-'+id+' the-fucking-player player-direction-down"></div>');
+		document.querySelector('.the-fucking-forest-map').insertAdjacentHTML('beforeend', '<div data-id='+id+' data-blockhealth="5" class=" objectId-'+id+' the-fucking-player player-direction-down"></div>');
 	}
 
 	savePlayer() {
 		blUtil.log("SAVE PLAYER");
-		var playerdiv = $('.the-fucking-player').prop("outerHTML");
-		//playerdiv = playerdiv.toString();
-		var selecteditem = $('.the-fucking-inventory .selected-item').attr("data-blocktype");
-		//var selecteditem = "sword";
+		var playerEl = document.querySelector('.the-fucking-player');
+		var playerdiv = playerEl ? playerEl.outerHTML : '';
+		var selectedItemEl = document.querySelector('.the-fucking-inventory .selected-item');
+		var selecteditem = selectedItemEl ? selectedItemEl.getAttribute("data-blocktype") : '';
 		blUtil.log("playerdiv"+playerdiv);
 		blUtil.log("selected item"+selecteditem);
 	    var inventoryItems = new Array();
-		for (var i=1; i<=globals.inventoryslots; i++) { 
+		for (var i=1; i<=globals.inventoryslots; i++) {
 			inventoryItems[i]=new Object();
 		}
-		$('.the-fucking-inventory > div').each(function(index) {
-			var amount = $(this).html();
-			var blocktype = $(this).attr('data-blocktype');
+		[...document.querySelectorAll('.the-fucking-inventory > div')].forEach(function(el, index) {
+			var amount = el.innerHTML;
+			var blocktype = el.getAttribute('data-blocktype');
 			blUtil.log("inventory slot "+index+" = "+amount+blocktype);
 			inventoryItems[index] = {type:blocktype, amount:amount};
 		});
@@ -40,9 +40,9 @@ export class Player {
 
 		//saving signs
 		var signs = [];
-		$('.maps-wrap .block-sign').each(function(index) {
-			var blockid = $(this).attr('data-blockid');
-			var signmessage = $(this).attr('data-text');
+		[...document.querySelectorAll('.maps-wrap .block-sign')].forEach(function(el, index) {
+			var blockid = el.getAttribute('data-blockid');
+			var signmessage = el.getAttribute('data-text');
 			blUtil.log("signid:"+blockid+"---"+signmessage);
 			signs[index] = {id:blockid, text:signmessage};
 		});
@@ -51,9 +51,9 @@ export class Player {
 
 		//saving achievements
 		var achievements = [];
-		$('.item-achievements .status-completed').each(function(index) {
-			var achievementid = $(this).attr('data-achievementid');
-			var achievementname = $(this).attr('data-achievementname');
+		[...document.querySelectorAll('.item-achievements .status-completed')].forEach(function(el, index) {
+			var achievementid = el.getAttribute('data-achievementid');
+			var achievementname = el.getAttribute('data-achievementname');
 			achievements[index] = {achievementid:achievementid, achievementname:achievementname};
 			blUtil.log(achievementname);
 		});
@@ -77,7 +77,11 @@ export class Player {
 
 		blUtil.log("before send player div to db:"+playerdiv);
 
-		$.post('php/saveplayer.php', {inventory: inventoryItems, playerdiv: playerdiv, selecteditem: selecteditem, signs: signs, achievements: achievements}, function(data) {
+		fetch('php/saveplayer.php', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: new URLSearchParams({inventory: inventoryItems, playerdiv: playerdiv, selecteditem: selecteditem, signs: signs, achievements: achievements})
+		}).then(r => r.text()).then(function(data) {
 	        blUtil.log("saved player: "+data);
 	    });
 
@@ -85,24 +89,34 @@ export class Player {
 
 	loadPlayer(id) {
 		blUtil.log("loadplayer");
-		$.post('php/loadplayer.php', {}, function(data) {
+		fetch('php/loadplayer.php', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: new URLSearchParams({})
+		}).then(r => r.json()).then(function(data) {
 	    	var inventoryitems = JSON.parse(data.inventory);
 	    	var playerdiv = data.playerdiv;
 	    	var selecteditem = data.selecteditem;
 	    	blUtil.log("loading playerdiv="+playerdiv);
-	    	$('.the-fucking-forest-map').append(playerdiv);
+	    	document.querySelector('.the-fucking-forest-map').insertAdjacentHTML('beforeend', playerdiv);
 	        blUtil.log("loading inv");
+	    	var invDivs = document.querySelectorAll('.the-fucking-inventory > div');
 	    	for (var i = 0; i < (inventoryitems.length-1); i++) {
-	    		$('.the-fucking-inventory > div:eq('+i+')').html(inventoryitems[i].amount);
-	    		if (inventoryitems[i].amount !== "0") {
-	    			$('.the-fucking-inventory > div:eq('+i+')').attr('data-blocktype', inventoryitems[i].type);
-	    			$('.the-fucking-inventory > div:eq('+i+')').removeClass('empty');
-	    			$('.the-fucking-inventory > div:eq('+i+')').addClass('block block-'+inventoryitems[i].type);
+	    		if (invDivs[i]) {
+	    			invDivs[i].innerHTML = inventoryitems[i].amount;
+	    			if (inventoryitems[i].amount !== "0") {
+	    				invDivs[i].setAttribute('data-blocktype', inventoryitems[i].type);
+	    				invDivs[i].classList.remove('empty');
+	    				invDivs[i].classList.add('block', 'block-'+inventoryitems[i].type);
+	    			}
 	    		}
 			}
 			blUtil.log("loading selected item");
-	    	$('.the-fucking-inventory div').not('.the-fucking-inventory .block-'+selecteditem).removeClass('selected-item');
-	    	$('.the-fucking-inventory .block-'+selecteditem).addClass('selected-item');
+	    	[...document.querySelectorAll('.the-fucking-inventory div')].forEach(function(el) {
+	    		if (!el.classList.contains('block-'+selecteditem)) el.classList.remove('selected-item');
+	    	});
+	    	var selEl = document.querySelector('.the-fucking-inventory .block-'+selecteditem);
+	    	if (selEl) selEl.classList.add('selected-item');
 
 	    	// LOADING SIGNS
 	    	var signs = JSON.parse(data.signs);
@@ -113,34 +127,27 @@ export class Player {
 	    		var signid = signs[j].id;
 	    		var signtext = signs[j].text;
 	    		if (signtext!=null) {
-	    			//blUtil.log($(".maps-wrap").find("[data-blockid='"+signid+"']"));
 	    			blUtil.log(signid+'--'+signtext);
-	    			//blUtil.log($('.block').find("[data-blockid='"+signid+"']").data("text",signtext) );
-
-	    			$('.maps-wrap').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
-
-	    			//// console.log(sign);
-	    			//sign[0].attr('data-blocktype',signtext);
-	    			//$('.block').find("[data-blockid='"+signid+"']").attr("data-text",signtext);
-	    			//blUtil.log('');
+	    			var signEl = document.querySelector('.maps-wrap [data-blockid="'+signid+'"]');
+	    			if (signEl) signEl.setAttribute("data-text", signtext);
 	    		}
-	    		//$("ul").find("[data-slide='" + current + "']");
-	    		
+
 	    	}
 
 	    	// LOADING ACHIEVEMENTS
 	    	var achievements = JSON.parse(data.achievements);
-	    	
+
 	    	for (var k=0;k<achievements.length;k++) {
 	    		var achievementid = achievements[k].achievementid;
 	    		var achievementname = achievements[k].achievementname;
 	    		blUtil.log(achievementname);
 	    		if (achievementname!=null) {
-	    			$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+	    			var achEl = document.querySelector('.item-achievements .achievement-'+achievementname);
+	    			if (achEl) achEl.classList.add("status-completed");
 	    		}
 	    	}
-	    
-	    }, "json");
+
+	    });
 	}
 
 	walkPlayerToBlock(id, destinationblock) {

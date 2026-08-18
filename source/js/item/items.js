@@ -79,43 +79,35 @@ export class Items {
 		this.setupCanvas();
 	}
 
-	itemHasAnimation(item) { return $.inArray(item, globals.hasanimation) > -1; }
-	itemIsCraftable(item) { return $.inArray(item, globals.iscraftable) > -1; }
-	itemIsCollectable(item) { return $.inArray(item, globals.iscollectable) > -1; }
-	itemIsCutable(item) { return $.inArray(item, globals.iscutable) > -1; }
-	itemIsEdible(item) { return $.inArray(item, globals.isedible) > -1; }
-	itemIsPlaceable(item) { return $.inArray(item, globals.isplaceable) > -1; }
-	itemIsBlocking(item) { return $.inArray(item, globals.isblocking) > -1; }
-	itemIsIngredient(item) { return $.inArray(item, globals.isingredient) > -1; }
-	itemIsGround(item) { return $.inArray(item, globals.isground) > -1; }
-	itemIsDiggable(item) { return $.inArray(item, globals.isdiggable) > -1; }
-	itemIsLifeform(item) { return $.inArray(item, globals.islifeform) > -1; }
-	itemIsEquipable(item) { return $.inArray(item, globals.isequipable) > -1; }
-	itemIsUseable(item) { return $.inArray(item, globals.isuseable) > -1; }
-	itemIsInstrument(item) { return $.inArray(item, globals.isinstrument) > -1; }
+	itemHasAnimation(item) { return globals.hasanimation.indexOf(item) > -1; }
+	itemIsCraftable(item) { return globals.iscraftable.indexOf(item) > -1; }
+	itemIsCollectable(item) { return globals.iscollectable.indexOf(item) > -1; }
+	itemIsCutable(item) { return globals.iscutable.indexOf(item) > -1; }
+	itemIsEdible(item) { return globals.isedible.indexOf(item) > -1; }
+	itemIsPlaceable(item) { return globals.isplaceable.indexOf(item) > -1; }
+	itemIsBlocking(item) { return globals.isblocking.indexOf(item) > -1; }
+	itemIsIngredient(item) { return globals.isingredient.indexOf(item) > -1; }
+	itemIsGround(item) { return globals.isground.indexOf(item) > -1; }
+	itemIsDiggable(item) { return globals.isdiggable.indexOf(item) > -1; }
+	itemIsLifeform(item) { return globals.islifeform.indexOf(item) > -1; }
+	itemIsEquipable(item) { return globals.isequipable.indexOf(item) > -1; }
+	itemIsUseable(item) { return globals.isuseable.indexOf(item) > -1; }
+	itemIsInstrument(item) { return globals.isinstrument.indexOf(item) > -1; }
 
 	updateItemsJSONFile() {
 		console.log("updateItemsJSONFile");
-		$.ajax({
-			url: 'php/saveItemsToJSON.php',
-			dataType: 'json'
-		});
+		fetch('php/saveItemsToJSON.php').then(r => r.json());
 	}
 
 	getItemsJSONFile() {
-		var json = (function() {
-			var json = null;
-			$.ajax({
-				'async': false,
-				'global': false,
-				'url': "../json/items.json",
-				'dataType': "json",
-				'success': function (data) {
-					json = data;
-				}
-			});
-			return json;
-		})();
+		// TODO: convert to async fetch
+		var json = null;
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', '../json/items.json', false); // synchronous
+		xhr.send(null);
+		if (xhr.status === 200) {
+			json = JSON.parse(xhr.responseText);
+		}
 		return json;
 	}
 
@@ -140,14 +132,21 @@ export class Items {
 	}
 
 	loadItemSelects() {
-		$.post('php/loaditemsJSON.php', {}, function(data) {
+		fetch('php/loaditemsJSON.php', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: new URLSearchParams({})
+		}).then(r => r.json()).then(function(data) {
 			if (data == false) {
 			} else {
 				for (var i=0; i < data.length; i++) {
-					$('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c').append('<option value="'+data[i].slug+'">'+data[i].name+'</option>');
+					var optionHtml = '<option value="'+data[i].slug+'">'+data[i].name+'</option>';
+					[...document.querySelectorAll('.form-recipe-1a, .form-recipe-1b, .form-recipe-1c')].forEach(function(el) {
+						el.insertAdjacentHTML('beforeend', optionHtml);
+					});
 				}
-			}   
-		}, "json");
+			}
+		});
 	}
 
 	itemPreview() {
@@ -189,7 +188,7 @@ export class Items {
 		var pixelwidth = 4;
 
 		console.log('renderPreviewSVG');
-		$('#'+name+' svg').remove();
+		[...document.querySelectorAll('#'+name+' svg')].forEach(el => el.remove());
 		
 		var previewSVG;
 		var pixels = [];
@@ -200,8 +199,8 @@ export class Items {
 		//previewSVG.canvas.setAttribute('preserveAspectRatio', 'none');
 		console.log('renderPreviewSVG');
 		
-		$('.canvas-'+name+' .canvas-pixel').each(function(i) {
-			var color = $(this).attr("data-color");
+		[...document.querySelectorAll('.canvas-'+name+' .canvas-pixel')].forEach(function(el, i) {
+			var color = el.getAttribute("data-color");
 			console.log(color);
 			console.log('renderPreviewSVG');
 			if (i == 0) {
@@ -224,8 +223,8 @@ export class Items {
 		if (is_animated) {
 			previewSVG.canvas.setAttribute("class","svg_animated");
 
-			$('.canvas-image .canvas-pixel').each(function(i) {
-				var color = $(this).attr("data-color");
+			[...document.querySelectorAll('.canvas-image .canvas-pixel')].forEach(function(el, i) {
+				var color = el.getAttribute("data-color");
 				var offset = w;
 				if (i == 0) {
 					x = 0;
@@ -253,68 +252,68 @@ export class Items {
 			style += 'animation: svgAnimate 2s steps(1) infinite;';
 			style += '}';
 			style += '</style>';
-			$('#image_animated svg').append(style);
+			document.querySelector('#image_animated svg').insertAdjacentHTML('beforeend', style);
 		}
 	}
 
 	initItemBuilderForm() {
 		var _self = this;
 
-		$('.form-has_animation').change(function() {
+		document.querySelector('.form-has_animation').addEventListener('change', function() {
 			if(this.checked) {
 				_self.has_animation = true;
-				$('.canvas-image_animated').show();
+				document.querySelector('.canvas-image_animated').style.display = '';
 			} else {
 				_self.has_animation = false;
-				$('.canvas-image_animated').hide();
-				$('.canvas-image_animated .svg-preview svg').remove();
+				document.querySelector('.canvas-image_animated').style.display = 'none';
+				[...document.querySelectorAll('.canvas-image_animated .svg-preview svg')].forEach(el => el.remove());
 			}
 			_self.itemPreview();
 		});
 
-		$('.form-is_craftable').change(function() {
+		document.querySelector('.form-is_craftable').addEventListener('change', function() {
 			if(this.checked) {
 				_self.is_craftable = true;
-				$('.is_craftable-recipe').show();
+				document.querySelector('.is_craftable-recipe').style.display = '';
 			} else {
 				_self.is_craftable = false;
-				$('.is_craftable-recipe').hide();
+				document.querySelector('.is_craftable-recipe').style.display = 'none';
 			}
 			_self.itemPreview();
 		});
 
-		$('.form-is_lifeform').change(function() {
+		document.querySelector('.form-is_lifeform').addEventListener('change', function() {
 			if(this.checked) {
 				_self.is_lifeform = true;
-				$('.is_lifeform-images').show();
+				document.querySelector('.is_lifeform-images').style.display = '';
 			} else {
 				_self.is_lifeform = false;
-				$('.is_lifeform-images').hide();
-				$('.is_lifeform-images .svg-preview svg').remove();
+				document.querySelector('.is_lifeform-images').style.display = 'none';
+				[...document.querySelectorAll('.is_lifeform-images .svg-preview svg')].forEach(el => el.remove());
 			}
 			_self.itemPreview();
 		});
 
-		$('.form-is_equipable').change(function() {
+		document.querySelector('.form-is_equipable').addEventListener('change', function() {
 			if(this.checked) {
 				_self.is_equipable = true;
-				$('.is_equipable-images').show();
+				document.querySelector('.is_equipable-images').style.display = '';
 			} else {
 				_self.is_equipable = false;
-				$('.is_equipable-images').hide();
-				$('.is_equipable-images .svg-preview svg').remove();
+				document.querySelector('.is_equipable-images').style.display = 'none';
+				[...document.querySelectorAll('.is_equipable-images .svg-preview svg')].forEach(el => el.remove());
 			}
 			_self.itemPreview();
 		});
 
-		$('.form-is_useable').change(function() {
+		document.querySelector('.form-is_useable').addEventListener('change', function() {
 			if(this.checked) {
 				_self.is_useable = true;
-				$('.is_useable-images').show();
+				document.querySelector('.is_useable-images').style.display = '';
 			} else {
 				_self.is_craftable = false;
-				$('.is_useable-images').hide();
-				$('.is_useable-images .svg-preview svg').remove();
+				document.querySelector('.is_useable-images').style.display = 'none';
+				[...document.querySelectorAll('.is_useable-images .svg-preview svg')].forEach(el => el.remove());
 			}
 			_self.itemPreview();
 		});
@@ -322,95 +321,99 @@ export class Items {
 
 	itemSubmitForm() {
 		var _self = this;
-		$('.item-builder').submit(function(e) {
+		document.querySelector('.item-builder').addEventListener('submit', function(e) {
 			//itemPreview();
-			var image = $('#image').html();
-			var name = $('.item-builder .form-name').val();
-			var slug = $('.item-builder .form-slug').val();
-			var description = $('.item-builder .form-description').val();
-			var user = $('.item-builder .form-user').val();
-			var has_animation = Number($('.form-has_animation').is(":checked"));
-			var image_animated = $('#image_animated').html();
-			var is_craftable = Number($('.item-builder .form-is_craftable').is(":checked"));
-			var recipe1a = $('.item-builder .form-recipe-1a').val();
-			var recipe1b = $('.item-builder .form-recipe-1b').val();
-			var recipe1c = $('.item-builder .form-recipe-1c').val();
+			var image = document.querySelector('#image').innerHTML;
+			var name = document.querySelector('.item-builder .form-name').value;
+			var slug = document.querySelector('.item-builder .form-slug').value;
+			var description = document.querySelector('.item-builder .form-description').value;
+			var user = document.querySelector('.item-builder .form-user').value;
+			var has_animation = Number(document.querySelector('.form-has_animation').checked);
+			var image_animated = document.querySelector('#image_animated').innerHTML;
+			var is_craftable = Number(document.querySelector('.item-builder .form-is_craftable').checked);
+			var recipe1a = document.querySelector('.item-builder .form-recipe-1a').value;
+			var recipe1b = document.querySelector('.item-builder .form-recipe-1b').value;
+			var recipe1c = document.querySelector('.item-builder .form-recipe-1c').value;
 			var recipe = recipe1a+recipe1b+recipe1c;
-			var is_collectable = Number($('.item-builder .form-is_collectable').is(":checked"));
-			var is_cutable = Number($('.item-builder .form-is_cutable').is(":checked"));
-			var is_edible = Number($('.item-builder .form-is_edible').is(":checked"));
-			var is_placeable = Number($('.item-builder .form-is_placeable').is(":checked"));
-			var is_blocking = Number($('.item-builder .form-is_blocking').is(":checked"));
-			var is_ingredient = Number($('.item-builder .form-is_ingredient').is(":checked"));
-			var is_ground = Number($('.item-builder .form-is_ground').is(":checked"));
-			var is_diggable = Number($('.item-builder .form-is_diggable').is(":checked"));
-			var is_instrument = Number($('.item-builder .form-is_instrument').is(":checked"));
+			var is_collectable = Number(document.querySelector('.item-builder .form-is_collectable').checked);
+			var is_cutable = Number(document.querySelector('.item-builder .form-is_cutable').checked);
+			var is_edible = Number(document.querySelector('.item-builder .form-is_edible').checked);
+			var is_placeable = Number(document.querySelector('.item-builder .form-is_placeable').checked);
+			var is_blocking = Number(document.querySelector('.item-builder .form-is_blocking').checked);
+			var is_ingredient = Number(document.querySelector('.item-builder .form-is_ingredient').checked);
+			var is_ground = Number(document.querySelector('.item-builder .form-is_ground').checked);
+			var is_diggable = Number(document.querySelector('.item-builder .form-is_diggable').checked);
+			var is_instrument = Number(document.querySelector('.item-builder .form-is_instrument').checked);
 
-			var is_lifeform = Number($('.form-is_lifeform').is(":checked"));
-			var is_equipable = Number($('.form-is_equipable').is(":checked"));
-			var is_useable = Number($(' .form-is_useable').is(":checked"));
-			var image_lifeform_front = $('#image_lifeform_front').html();
-			var image_lifeform_back = $('#image_lifeform_back').html();
-			var image_lifeform_left = $('#image_lifeform_left').html();
-			var image_lifeform_right = $('#image_lifeform_right').html();
-			var image_item_front = $('#image_item_front').html();
-			var image_item_back = $('#image_item_back').html();
-			var image_item_left = $('#image_item_left').html();
-			var image_item_right = $('#image_item_right').html();
-			var image_item_swing_front = $('#image_item_swing_front').html();
-			var image_item_swing_back = $('#image_item_swing_back').html();
-			var image_item_swing_left = $('#image_item_swing_left').html();
-			var image_item_swing_right = $('#image_item_swing_right').html();
+			var is_lifeform = Number(document.querySelector('.form-is_lifeform').checked);
+			var is_equipable = Number(document.querySelector('.form-is_equipable').checked);
+			var is_useable = Number(document.querySelector('.form-is_useable').checked);
+			var image_lifeform_front = document.querySelector('#image_lifeform_front').innerHTML;
+			var image_lifeform_back = document.querySelector('#image_lifeform_back').innerHTML;
+			var image_lifeform_left = document.querySelector('#image_lifeform_left').innerHTML;
+			var image_lifeform_right = document.querySelector('#image_lifeform_right').innerHTML;
+			var image_item_front = document.querySelector('#image_item_front').innerHTML;
+			var image_item_back = document.querySelector('#image_item_back').innerHTML;
+			var image_item_left = document.querySelector('#image_item_left').innerHTML;
+			var image_item_right = document.querySelector('#image_item_right').innerHTML;
+			var image_item_swing_front = document.querySelector('#image_item_swing_front').innerHTML;
+			var image_item_swing_back = document.querySelector('#image_item_swing_back').innerHTML;
+			var image_item_swing_left = document.querySelector('#image_item_swing_left').innerHTML;
+			var image_item_swing_right = document.querySelector('#image_item_swing_right').innerHTML;
 
-			$.post('php/createnewitem.php', {
-				image: image,
-				name: name,
-				slug: slug,
-				description: description,
-				user: user,
-				has_animation: has_animation,
-				image_animated: image_animated,
-				is_craftable: is_craftable,
-				recipe: recipe,
-				is_collectable: is_collectable,
-				is_cutable: is_cutable,
-				is_edible: is_edible,
-				is_placeable: is_placeable,
-				is_blocking: is_blocking,
-				is_ingredient: is_ingredient,
-				is_ground: is_ground,
-				is_diggable: is_diggable,
-				is_lifeform: is_lifeform,
-				is_equipable: is_equipable,
-				is_useable: is_useable,
-				is_instrument: is_instrument,
-				image_lifeform_front: image_lifeform_front,
-				image_lifeform_back: image_lifeform_back,
-				image_lifeform_left: image_lifeform_left,
-				image_lifeform_right: image_lifeform_right,
-				image_item_front: image_item_front,
-				image_item_back: image_item_back,
-				image_item_left: image_item_left,
-				image_item_right: image_item_right,
-				image_item_swing_front: image_item_swing_front,
-				image_item_swing_back: image_item_swing_back,
-				image_item_swing_left: image_item_swing_left,
-				image_item_swing_right: image_item_swing_right
-			}, function() {
+			fetch('php/createnewitem.php', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: new URLSearchParams({
+					image: image,
+					name: name,
+					slug: slug,
+					description: description,
+					user: user,
+					has_animation: has_animation,
+					image_animated: image_animated,
+					is_craftable: is_craftable,
+					recipe: recipe,
+					is_collectable: is_collectable,
+					is_cutable: is_cutable,
+					is_edible: is_edible,
+					is_placeable: is_placeable,
+					is_blocking: is_blocking,
+					is_ingredient: is_ingredient,
+					is_ground: is_ground,
+					is_diggable: is_diggable,
+					is_lifeform: is_lifeform,
+					is_equipable: is_equipable,
+					is_useable: is_useable,
+					is_instrument: is_instrument,
+					image_lifeform_front: image_lifeform_front,
+					image_lifeform_back: image_lifeform_back,
+					image_lifeform_left: image_lifeform_left,
+					image_lifeform_right: image_lifeform_right,
+					image_item_front: image_item_front,
+					image_item_back: image_item_back,
+					image_item_left: image_item_left,
+					image_item_right: image_item_right,
+					image_item_swing_front: image_item_swing_front,
+					image_item_swing_back: image_item_swing_back,
+					image_item_swing_left: image_item_swing_left,
+					image_item_swing_right: image_item_swing_right
+				})
+			}).then(function() {
 				_self.updateItemsJSONFile();
 			});
 			// location.reload();
 			// header("location:itemcreator.php");
-			event.preventDefault();
+			e.preventDefault();
 		});
 	}
 
 	getAllItemImages() {
 		// draw small preview ofall items above items tables
 		const blocktypes = this.getItemSlugs();
-		var blockhtml = ""; 
-		$.each(blocktypes, function(i, v) { 
-			blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>'; 
+		var blockhtml = "";
+		blocktypes.forEach(function(v) {
+			blockhtml += '<div class="block block-'+v+'" data-blocktype="'+v+'"></div>';
 		});
 		var objecttypes = new Array (
 			"player-direction-up","player-direction-down","player-direction-left","player-direction-right",
@@ -428,10 +431,10 @@ export class Items {
 			"enemy-direction-up","enemy-direction-down","enemy-direction-left","enemy-direction-right",
 			"deer-direction-up","deer-direction-down","deer-direction-left","deer-direction-right"
 		);
-		$.each(objecttypes, function(i, v) { 
-			blockhtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>'; 
+		objecttypes.forEach(function(v) {
+			blockhtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>';
 		});
-		$('.block-palette').append(blockhtml);
+		document.querySelector('.block-palette').insertAdjacentHTML('beforeend', blockhtml);
 	}
 
 	// might need to move to paint.js
@@ -439,21 +442,25 @@ export class Items {
 		console.log('setup-canvas');
 		var _self = this;
 		// COLOR PALETTE
-		$('.canvas-pixel').on("click", function() { 
-			console.log('canvas-pixelclick');
-			//var pixelID = $(this).attr("data-pixel");
-			var colorCode = $('.bui-colorpicker .bui-colorpicker-input').val();
-			console.log(colorCode);
-			// validate hex code
-			$(this).css("background-color", colorCode);
-			$(this).attr("data-color", colorCode);
-			_self.itemPreview();
+		[...document.querySelectorAll('.canvas-pixel')].forEach(function(el) {
+			el.addEventListener("click", function() {
+				console.log('canvas-pixelclick');
+				//var pixelID = el.getAttribute("data-pixel");
+				var colorCode = document.querySelector('.bui-colorpicker .bui-colorpicker-input').value;
+				console.log(colorCode);
+				// validate hex code
+				el.style.backgroundColor = colorCode;
+				el.setAttribute("data-color", colorCode);
+				_self.itemPreview();
+			});
 		});
 
 		// RESET BUTTON
-		$('.button-reset').on("click", function(){
-			$('.canvas-pixel').css("background-color","transparent");
-			$('.canvas-pixel').attr("data-color","transparent");
+		document.querySelector('.button-reset').addEventListener("click", function(){
+			[...document.querySelectorAll('.canvas-pixel')].forEach(function(el) {
+				el.style.backgroundColor = "transparent";
+				el.setAttribute("data-color","transparent");
+			});
 			_self.itemPreview();
 		});
 	}

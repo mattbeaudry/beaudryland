@@ -10,64 +10,66 @@ export class Health {
 	showObjectHealth(objectId, number) {
 		var rid = globals.uniqueObjectID();
 		var healthlabelhtml = '<div class="damage-label damage-label-id-'+rid+'">'+number+'</div>';
-		$('.objectId-'+objectId).append(healthlabelhtml);
-		$('.damage-label-id-'+rid).css("top","-50px");
-		$('.damage-label-id-'+rid).animate("top","-120px");
-		$('.damage-label-id-'+rid).fadeOut(300, function() {
-			$(this).remove();
-		});
+		document.querySelector('.objectId-'+objectId).insertAdjacentHTML('beforeend', healthlabelhtml);
+		var labelEl = document.querySelector('.damage-label-id-'+rid);
+		labelEl.style.top = "-50px";
+		// TODO: replace with CSS transition
+		setTimeout(function() { labelEl.remove(); }, 300);
 	}
 
 	setObjectHealth(objectId, value) {
-		$('.objectId-'+objectId).attr("data-blockhealth",value);
+		document.querySelector('.objectId-'+objectId).setAttribute("data-blockhealth", value);
 	}
 
 	reduceObjectHealth(objectId, amount) {
-		var blockhealth = $('.objectId-'+objectId).attr("data-blockhealth");
+		var blockhealth = document.querySelector('.objectId-'+objectId).getAttribute("data-blockhealth");
 		blockhealth = blockhealth - amount;
-		$('.objectId-'+objectId).attr("data-blockhealth",blockhealth);
+		document.querySelector('.objectId-'+objectId).setAttribute("data-blockhealth", blockhealth);
 		this.showObjectHealth(1,blockhealth);
 	}
 
 	increaseObjectHealth(objectId, amount) {
-		var blockhealth = $('.objectId-'+objectId).attr("data-blockhealth");
+		var blockhealth = document.querySelector('.objectId-'+objectId).getAttribute("data-blockhealth");
 		blockhealth = blockhealth + amount;
-		$('.objectId-'+objectId).attr("data-blockhealth",blockhealth);
+		document.querySelector('.objectId-'+objectId).setAttribute("data-blockhealth", blockhealth);
 	}
 
 	reduceBlockHealth(blockid, amount) {
-		var blockhealth = $(".block").find("[data-blockid='" + blockid + "']").attr("data-blockhealth");
+		var blockEl = document.querySelector(".block [data-blockid='" + blockid + "']");
+		var blockhealth = blockEl ? blockEl.getAttribute("data-blockhealth") : null;
 		blockhealth = blockhealth - amount;
-		$(".block").find("[data-blockid='" + blockid + "']").attr("data-blockhealth");
+		if (blockEl) blockEl.setAttribute("data-blockhealth", blockhealth);
 	}
 
 	refillHearts() {
-		$('.the-fucking-hearts ul .empty').removeClass();
+		[...document.querySelectorAll('.the-fucking-hearts ul .empty')].forEach(el => el.className = '');
 		this.setObjectHealth(1,globals.totalhearts);
 	}
 
 	addHeart() {
-		var emptyhearts = $('.the-fucking-hearts ul .empty').length;
-		$('.the-fucking-hearts .empty').first().removeClass("empty");
+		var emptyhearts = document.querySelectorAll('.the-fucking-hearts ul .empty').length;
+		var firstEmpty = document.querySelector('.the-fucking-hearts .empty');
+		if (firstEmpty) firstEmpty.classList.remove("empty");
 		this.increaseObjectHealth(1,1);
 	}
 
 	removeHeart() {
 		var hearts = this.totalHearts();
+		var notEmpty = [...document.querySelectorAll('.the-fucking-hearts li')].filter(el => !el.classList.contains('empty'));
 		if (hearts > 1) {
-			$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
+			if (notEmpty.length > 0) notEmpty[notEmpty.length - 1].classList.add("empty");
 			this.reduceObjectHealth(1,1);
 		} else if (hearts == globals.totalhearts) {
 			// don't add a heart, max 8
 		} else {
-			$('.the-fucking-hearts li').not('.empty').last().addClass("empty");
+			if (notEmpty.length > 0) notEmpty[notEmpty.length - 1].classList.add("empty");
 			this.reduceObjectHealth(1,1);
 			// gameOver();
 		}
 	}
 
 	totalHearts() {
-		var hearts = $('.the-fucking-hearts li.empty').length;
+		var hearts = document.querySelectorAll('.the-fucking-hearts li.empty').length;
 		hearts = globals.totalhearts - hearts;
 		return hearts;
 	}
