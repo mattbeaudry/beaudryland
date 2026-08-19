@@ -1,294 +1,294 @@
-import { WavyJones } from "./vendor/wavy-jones.js";
-var Reverb = require("soundbank-reverb");
-import * as globals from "./globals";
-import { Utility } from "./utility";
-import { Achievement } from "./achievement";
+import { WavyJones } from './vendor/wavy-jones.js';
+var Reverb = require('soundbank-reverb');
+import * as globals from './globals';
+import { Utility } from './utility';
+import { Achievement } from './achievement';
 var blUtil = new Utility();
 
 export class Sound {
-  constructor() {
-    this.guitarFirstNote = true;
-    this.keyboardFirstNote = true;
-    this.drumsFirstNote = true;
-    this.sound = new AudioContext();
-    this.drumToggle = false;
-  }
+	constructor() {
+		this.guitarFirstNote = true;
+		this.keyboardFirstNote = true;
+		this.drumsFirstNote = true;
+		this.sound = new AudioContext();
+		this.drumToggle = false;
+	}
 
-  playInstrumentNote(instrument, direction) {
-    console.log("playInstrumentNote");
-    let pitch = 880;
+	playInstrumentNote(instrument, direction) {
+		console.log('playInstrumentNote');
+		let pitch = 880;
 
-    switch (direction) {
-      case "up":
-        pitch = 440;
-        break;
-      case "down":
-        pitch = 523;
-        break;
-      case "right":
-        pitch = 587;
-        break;
-      case "left":
-        pitch = 659;
-        break;
-    }
+		switch (direction) {
+			case 'up':
+				pitch = 440;
+				break;
+			case 'down':
+				pitch = 523;
+				break;
+			case 'right':
+				pitch = 587;
+				break;
+			case 'left':
+				pitch = 659;
+				break;
+		}
 
-    switch (instrument) {
-      case "guitar":
-        this.playGuitar(pitch);
-        break;
-      case "piano":
-        this.playSound(pitch);
-        break;
-      case "trumpet":
-        this.playTrumpet(pitch);
-        break;
-      case "bass":
-        this.playBass(pitch);
-        break;
-      case "drumsticks":
-        this.playDrums();
-        break;
-    }
-  }
+		switch (instrument) {
+			case 'guitar':
+				this.playGuitar(pitch);
+				break;
+			case 'piano':
+				this.playSound(pitch);
+				break;
+			case 'trumpet':
+				this.playTrumpet(pitch);
+				break;
+			case 'bass':
+				this.playBass(pitch);
+				break;
+			case 'drumsticks':
+				this.playDrums();
+				break;
+		}
+	}
 
-  playSound(freq) {
-    console.log("playSound");
-    var time = this.sound.currentTime;
-    var maxDelayTime = 5;
-    this.sound.osc = this.sound.createOscillator();
-    this.sound.gain = this.sound.createGain();
-    //this.sound.delay = this.sound.createDelay(maxDelayTime);
+	playSound(freq) {
+		console.log('playSound');
+		var time = this.sound.currentTime;
+		var maxDelayTime = 5;
+		this.sound.osc = this.sound.createOscillator();
+		this.sound.gain = this.sound.createGain();
+		//this.sound.delay = this.sound.createDelay(maxDelayTime);
 
-    this.sound.osc.connect(this.sound.gain);
-    this.sound.gain.connect(this.sound.destination);
+		this.sound.osc.connect(this.sound.gain);
+		this.sound.gain.connect(this.sound.destination);
 
-    this.sound.osc.frequency.setValueAtTime(freq, time);
-    this.sound.gain.gain.setValueAtTime(0.05, time);
+		this.sound.osc.frequency.setValueAtTime(freq, time);
+		this.sound.gain.gain.setValueAtTime(0.05, time);
 
-    this.sound.osc.start(time);
-    //this.sound.delay.connect(this.sound.destination);
-    this.sound.osc.stop(time + 0.2);
-  }
+		this.sound.osc.start(time);
+		//this.sound.delay.connect(this.sound.destination);
+		this.sound.osc.stop(time + 0.2);
+	}
 
-  // playPiano(freq) {
-  // 	sin = T("sin", freq);
-  // 	env = T("adsr", 10, 500);
-  // 	syn = T("*", sin, env).play();
-  // 	sin.bang();
-  // 	env.bang();
-  // }
+	// playPiano(freq) {
+	// 	sin = T("sin", freq);
+	// 	env = T("adsr", 10, 500);
+	// 	syn = T("*", sin, env).play();
+	// 	sin.bang();
+	// 	env.bang();
+	// }
 
-  playGuitar(freq) {
-    // Create an oscillator to generate the guitar string sound
-    const oscillator = this.sound.createOscillator();
+	playGuitar(freq) {
+		// Create an oscillator to generate the guitar string sound
+		const oscillator = this.sound.createOscillator();
 
-    // Create an envelope generator for the volume
-    const envelope = this.sound.createGain();
+		// Create an envelope generator for the volume
+		const envelope = this.sound.createGain();
 
-    // Connect the oscillator to the envelope and the envelope to the destination (speakers)
-    oscillator.connect(envelope);
-    envelope.connect(this.sound.destination);
+		// Connect the oscillator to the envelope and the envelope to the destination (speakers)
+		oscillator.connect(envelope);
+		envelope.connect(this.sound.destination);
 
-    // Set the oscillator type to a "sawtooth" wave for a guitar-like sound
-    oscillator.type = "sawtooth";
+		// Set the oscillator type to a "sawtooth" wave for a guitar-like sound
+		oscillator.type = 'sawtooth';
 
-    // Set the initial frequency and detune it slightly for a more natural sound
-    oscillator.frequency.setValueAtTime(220, this.sound.currentTime);
-    oscillator.detune.setValueAtTime(5, this.sound.currentTime);
+		// Set the initial frequency and detune it slightly for a more natural sound
+		oscillator.frequency.setValueAtTime(220, this.sound.currentTime);
+		oscillator.detune.setValueAtTime(5, this.sound.currentTime);
 
-    // Set the envelope parameters (attack, decay, sustain, release)
-    envelope.gain.setValueAtTime(0, this.sound.currentTime);
-    envelope.gain.linearRampToValueAtTime(0.1, this.sound.currentTime + 0.01); // Attack
-    envelope.gain.linearRampToValueAtTime(0.05, this.sound.currentTime + 0.2); // Decay
-    envelope.gain.setValueAtTime(0.025, this.sound.currentTime + 0.5); // Sustain
-    envelope.gain.linearRampToValueAtTime(0, this.sound.currentTime + 1); // Release
-    // Start the oscillator
-    oscillator.start();
+		// Set the envelope parameters (attack, decay, sustain, release)
+		envelope.gain.setValueAtTime(0, this.sound.currentTime);
+		envelope.gain.linearRampToValueAtTime(0.1, this.sound.currentTime + 0.01); // Attack
+		envelope.gain.linearRampToValueAtTime(0.05, this.sound.currentTime + 0.2); // Decay
+		envelope.gain.setValueAtTime(0.025, this.sound.currentTime + 0.5); // Sustain
+		envelope.gain.linearRampToValueAtTime(0, this.sound.currentTime + 1); // Release
+		// Start the oscillator
+		oscillator.start();
 
-    // Stop the oscillator after the desired duration (in seconds)
-    const duration = 1; // Adjust this to control the duration of the plucking sound
-    oscillator.stop(this.sound.currentTime + duration);
-  }
+		// Stop the oscillator after the desired duration (in seconds)
+		const duration = 1; // Adjust this to control the duration of the plucking sound
+		oscillator.stop(this.sound.currentTime + duration);
+	}
 
-  playBass(freq) {
-    // Create an oscillator to generate the bass guitar string sound
-    const oscillator = this.sound.createOscillator();
+	playBass(freq) {
+		// Create an oscillator to generate the bass guitar string sound
+		const oscillator = this.sound.createOscillator();
 
-    // Create an envelope generator for the volume
-    const envelope = this.sound.createGain();
+		// Create an envelope generator for the volume
+		const envelope = this.sound.createGain();
 
-    // Connect the oscillator to the envelope and the envelope to the destination (speakers)
-    oscillator.connect(envelope);
-    envelope.connect(this.sound.destination);
+		// Connect the oscillator to the envelope and the envelope to the destination (speakers)
+		oscillator.connect(envelope);
+		envelope.connect(this.sound.destination);
 
-    // Set the oscillator type to a "sine" wave for a deep bass-like sound
-    oscillator.type = "sine";
+		// Set the oscillator type to a "sine" wave for a deep bass-like sound
+		oscillator.type = 'sine';
 
-    // Set the initial frequency and detune it slightly for a more natural sound
-    oscillator.frequency.setValueAtTime(80, this.sound.currentTime); // Adjust this value for the desired bass pitch
-    oscillator.detune.setValueAtTime(0, this.sound.currentTime);
+		// Set the initial frequency and detune it slightly for a more natural sound
+		oscillator.frequency.setValueAtTime(80, this.sound.currentTime); // Adjust this value for the desired bass pitch
+		oscillator.detune.setValueAtTime(0, this.sound.currentTime);
 
-    // Set the envelope parameters (attack, decay, sustain, release)
-    envelope.gain.setValueAtTime(0, this.sound.currentTime);
-    envelope.gain.linearRampToValueAtTime(0.1, this.sound.currentTime + 0.01); // Attack
-    envelope.gain.linearRampToValueAtTime(0.05, this.sound.currentTime + 0.2); // Decay
-    envelope.gain.setValueAtTime(0.05, this.sound.currentTime + 0.5); // Sustain
-    envelope.gain.linearRampToValueAtTime(0, this.sound.currentTime + 1); // Release
+		// Set the envelope parameters (attack, decay, sustain, release)
+		envelope.gain.setValueAtTime(0, this.sound.currentTime);
+		envelope.gain.linearRampToValueAtTime(0.1, this.sound.currentTime + 0.01); // Attack
+		envelope.gain.linearRampToValueAtTime(0.05, this.sound.currentTime + 0.2); // Decay
+		envelope.gain.setValueAtTime(0.05, this.sound.currentTime + 0.5); // Sustain
+		envelope.gain.linearRampToValueAtTime(0, this.sound.currentTime + 1); // Release
 
-    // Start the oscillator
-    oscillator.start();
+		// Start the oscillator
+		oscillator.start();
 
-    // Stop the oscillator after the desired duration (in seconds)
-    const duration = 1; // Adjust this to control the duration of the plucking sound
-    oscillator.stop(this.sound.currentTime + duration);
-  }
+		// Stop the oscillator after the desired duration (in seconds)
+		const duration = 1; // Adjust this to control the duration of the plucking sound
+		oscillator.stop(this.sound.currentTime + duration);
+	}
 
-  playTrumpet(freq) {
-    // Create an oscillator to generate the main trumpet tone
-    const mainOscillator = this.sound.createOscillator();
-    mainOscillator.type = "sawtooth"; // Adjust the type for the desired tone
+	playTrumpet(freq) {
+		// Create an oscillator to generate the main trumpet tone
+		const mainOscillator = this.sound.createOscillator();
+		mainOscillator.type = 'sawtooth'; // Adjust the type for the desired tone
 
-    // Create an oscillator for the trumpet-like timbre
-    const timbreOscillator = this.sound.createOscillator();
-    timbreOscillator.type = "sine"; // Adjust the type for the desired timbre
+		// Create an oscillator for the trumpet-like timbre
+		const timbreOscillator = this.sound.createOscillator();
+		timbreOscillator.type = 'sine'; // Adjust the type for the desired timbre
 
-    // Create an envelope generator for the volume
-    const envelope = this.sound.createGain();
+		// Create an envelope generator for the volume
+		const envelope = this.sound.createGain();
 
-    // Connect the oscillators to the envelope and the envelope to the destination (speakers)
-    mainOscillator.connect(envelope);
-    timbreOscillator.connect(envelope);
-    envelope.connect(this.sound.destination);
+		// Connect the oscillators to the envelope and the envelope to the destination (speakers)
+		mainOscillator.connect(envelope);
+		timbreOscillator.connect(envelope);
+		envelope.connect(this.sound.destination);
 
-    // Set the initial frequencies and detune for both oscillators
-    mainOscillator.frequency.setValueAtTime(220, this.sound.currentTime); // Adjust the frequency as needed
-    mainOscillator.detune.setValueAtTime(0, this.sound.currentTime);
-    timbreOscillator.frequency.setValueAtTime(880, this.sound.currentTime); // Adjust the frequency as needed
-    timbreOscillator.detune.setValueAtTime(0, this.sound.currentTime);
+		// Set the initial frequencies and detune for both oscillators
+		mainOscillator.frequency.setValueAtTime(220, this.sound.currentTime); // Adjust the frequency as needed
+		mainOscillator.detune.setValueAtTime(0, this.sound.currentTime);
+		timbreOscillator.frequency.setValueAtTime(880, this.sound.currentTime); // Adjust the frequency as needed
+		timbreOscillator.detune.setValueAtTime(0, this.sound.currentTime);
 
-    // Set the envelope parameters (attack, decay, sustain, release)
-    envelope.gain.setValueAtTime(0, this.sound.currentTime);
-    envelope.gain.linearRampToValueAtTime(0.1, this.sound.currentTime + 0.1); // Attack
-    envelope.gain.linearRampToValueAtTime(0.07, this.sound.currentTime + 0.3); // Decay
-    envelope.gain.setValueAtTime(0.05, this.sound.currentTime + 0.5); // Sustain (adjust as needed)
-    envelope.gain.linearRampToValueAtTime(0, this.sound.currentTime + 0.7); // Release
+		// Set the envelope parameters (attack, decay, sustain, release)
+		envelope.gain.setValueAtTime(0, this.sound.currentTime);
+		envelope.gain.linearRampToValueAtTime(0.1, this.sound.currentTime + 0.1); // Attack
+		envelope.gain.linearRampToValueAtTime(0.07, this.sound.currentTime + 0.3); // Decay
+		envelope.gain.setValueAtTime(0.05, this.sound.currentTime + 0.5); // Sustain (adjust as needed)
+		envelope.gain.linearRampToValueAtTime(0, this.sound.currentTime + 0.7); // Release
 
-    // Start the oscillators
-    mainOscillator.start();
-    timbreOscillator.start();
+		// Start the oscillators
+		mainOscillator.start();
+		timbreOscillator.start();
 
-    // Stop the oscillators after the desired duration (in seconds)
-    const duration = 0.7; // Adjust this to control the duration of the trumpet-like sound
-    mainOscillator.stop(this.sound.currentTime + duration);
-    timbreOscillator.stop(this.sound.currentTime + duration);
-  }
+		// Stop the oscillators after the desired duration (in seconds)
+		const duration = 0.7; // Adjust this to control the duration of the trumpet-like sound
+		mainOscillator.stop(this.sound.currentTime + duration);
+		timbreOscillator.stop(this.sound.currentTime + duration);
+	}
 
-  playSnare() {
-    // Create a noise generator using a buffer source
-    const noiseBuffer = this.sound.createBuffer(
-      1,
-      this.sound.sampleRate * 0.1,
-      this.sound.sampleRate,
-    );
-    const noiseData = noiseBuffer.getChannelData(0);
-    for (let i = 0; i < noiseData.length; i++) {
-      noiseData[i] = Math.random() * 2 - 1; // Generate white noise
-    }
-    const noiseSource = this.sound.createBufferSource();
-    noiseSource.buffer = noiseBuffer;
+	playSnare() {
+		// Create a noise generator using a buffer source
+		const noiseBuffer = this.sound.createBuffer(
+			1,
+			this.sound.sampleRate * 0.1,
+			this.sound.sampleRate
+		);
+		const noiseData = noiseBuffer.getChannelData(0);
+		for (let i = 0; i < noiseData.length; i++) {
+			noiseData[i] = Math.random() * 2 - 1; // Generate white noise
+		}
+		const noiseSource = this.sound.createBufferSource();
+		noiseSource.buffer = noiseBuffer;
 
-    // Create an envelope generator for the volume
-    const envelope = this.sound.createGain();
+		// Create an envelope generator for the volume
+		const envelope = this.sound.createGain();
 
-    // Connect the noise source to the envelope and the envelope to the destination (speakers)
-    noiseSource.connect(envelope);
-    envelope.connect(this.sound.destination);
+		// Connect the noise source to the envelope and the envelope to the destination (speakers)
+		noiseSource.connect(envelope);
+		envelope.connect(this.sound.destination);
 
-    // Set the envelope parameters (fast attack and decay for a short, snappy sound)
-    envelope.gain.setValueAtTime(0.1, this.sound.currentTime);
-    envelope.gain.exponentialRampToValueAtTime(0.001, this.sound.currentTime + 0.02); // Fast decay
+		// Set the envelope parameters (fast attack and decay for a short, snappy sound)
+		envelope.gain.setValueAtTime(0.1, this.sound.currentTime);
+		envelope.gain.exponentialRampToValueAtTime(0.001, this.sound.currentTime + 0.02); // Fast decay
 
-    // Start the noise source
-    noiseSource.start();
+		// Start the noise source
+		noiseSource.start();
 
-    // Stop the noise source after the desired duration (in seconds)
-    const duration = 0.2; // Adjust this to control the duration of the snare drum sound
-    noiseSource.stop(this.sound.currentTime + duration);
-  }
+		// Stop the noise source after the desired duration (in seconds)
+		const duration = 0.2; // Adjust this to control the duration of the snare drum sound
+		noiseSource.stop(this.sound.currentTime + duration);
+	}
 
-  playKick() {
-    // Create an oscillator to generate the bass drum sound (sine wave for a thud-like sound)
-    const oscillator = this.sound.createOscillator();
-    oscillator.type = "sine";
+	playKick() {
+		// Create an oscillator to generate the bass drum sound (sine wave for a thud-like sound)
+		const oscillator = this.sound.createOscillator();
+		oscillator.type = 'sine';
 
-    // Create an envelope generator for the volume
-    const envelope = this.sound.createGain();
+		// Create an envelope generator for the volume
+		const envelope = this.sound.createGain();
 
-    // Connect the oscillator to the envelope and the envelope to the destination (speakers)
-    oscillator.connect(envelope);
-    envelope.connect(this.sound.destination);
+		// Connect the oscillator to the envelope and the envelope to the destination (speakers)
+		oscillator.connect(envelope);
+		envelope.connect(this.sound.destination);
 
-    // Set the oscillator frequency (adjust as needed for the desired pitch)
-    oscillator.frequency.setValueAtTime(80, this.sound.currentTime); // Adjust the frequency as needed
+		// Set the oscillator frequency (adjust as needed for the desired pitch)
+		oscillator.frequency.setValueAtTime(80, this.sound.currentTime); // Adjust the frequency as needed
 
-    // Set the envelope parameters (fast attack and decay for a short, punchy sound)
-    envelope.gain.setValueAtTime(0.1, this.sound.currentTime);
-    envelope.gain.exponentialRampToValueAtTime(0.001, this.sound.currentTime + 0.2); // Fast decay
+		// Set the envelope parameters (fast attack and decay for a short, punchy sound)
+		envelope.gain.setValueAtTime(0.1, this.sound.currentTime);
+		envelope.gain.exponentialRampToValueAtTime(0.001, this.sound.currentTime + 0.2); // Fast decay
 
-    // Start the oscillator
-    oscillator.start();
+		// Start the oscillator
+		oscillator.start();
 
-    // Stop the oscillator after the desired duration (in seconds)
-    const duration = 0.2; // Adjust this to control the duration of the bass drum sound
-    oscillator.stop(this.sound.currentTime + duration);
-  }
+		// Stop the oscillator after the desired duration (in seconds)
+		const duration = 0.2; // Adjust this to control the duration of the bass drum sound
+		oscillator.stop(this.sound.currentTime + duration);
+	}
 
-  playDrums() {
-    if (this.drumToggle) {
-      this.playSnare();
-    } else {
-      this.playKick();
-    }
-    this.drumToggle = !this.drumToggle;
-    // achievementCompleted("jammingout");
-    //unlock beach map
-    // if ((this.drumsFirstNote == true) && ($('.the-fucking-space-map').length == 0)){
-    // 	drawNewSpaceMap();
-    // 	//createBeachSigns();
-    // 	this.keyboardFirstNote = false;
-    // }
-    // sin = T("sin", freq);
-    // env = T("adsr", 10, 500);
-    // syn = T("*", sin, env).play();
-    // sin.bang();
-    // env.bang();
-  }
+	playDrums() {
+		if (this.drumToggle) {
+			this.playSnare();
+		} else {
+			this.playKick();
+		}
+		this.drumToggle = !this.drumToggle;
+		// achievementCompleted("jammingout");
+		//unlock beach map
+		// if ((this.drumsFirstNote == true) && ($('.the-fucking-space-map').length == 0)){
+		// 	drawNewSpaceMap();
+		// 	//createBeachSigns();
+		// 	this.keyboardFirstNote = false;
+		// }
+		// sin = T("sin", freq);
+		// env = T("adsr", 10, 500);
+		// syn = T("*", sin, env).play();
+		// sin.bang();
+		// env.bang();
+	}
 
-  playMusic() {
-    var mml = T(
-      "mml",
-      "t100 o3 $ l2 a l1 <b0<d0g+>> l2 d l1 <a0<c+0f+>> l2 a l1 <b0<d0g+>> l2 f l1 <a0<c+0f+>>",
-    );
-    mml.synth = T("efx.reverb");
-    mml.synthdef = function (freq, opts) {
-      var synth = T("*", T("+", T("tri", freq - 1, 0.25)), T("adsr", "24db", 100, 2500, 0.6, 1500));
-      synth.keyon = function (opts) {
-        synth.args[1].bang();
-      };
-      synth.keyoff = function (opts) {
-        synth.args[1].keyoff();
-      };
-      return synth;
-    };
-    mml.synth.onplay = function () {
-      mml.on().bang();
-    };
-    mml.synth.onpause = function () {
-      mml.off();
-    };
-    mml.synth.play();
-  }
+	playMusic() {
+		var mml = T(
+			'mml',
+			't100 o3 $ l2 a l1 <b0<d0g+>> l2 d l1 <a0<c+0f+>> l2 a l1 <b0<d0g+>> l2 f l1 <a0<c+0f+>>'
+		);
+		mml.synth = T('efx.reverb');
+		mml.synthdef = function (freq, opts) {
+			var synth = T('*', T('+', T('tri', freq - 1, 0.25)), T('adsr', '24db', 100, 2500, 0.6, 1500));
+			synth.keyon = function (opts) {
+				synth.args[1].bang();
+			};
+			synth.keyoff = function (opts) {
+				synth.args[1].keyoff();
+			};
+			return synth;
+		};
+		mml.synth.onplay = function () {
+			mml.on().bang();
+		};
+		mml.synth.onpause = function () {
+			mml.off();
+		};
+		mml.synth.play();
+	}
 }
 
 // todo move to synth.js

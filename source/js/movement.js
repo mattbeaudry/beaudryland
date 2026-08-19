@@ -33,30 +33,30 @@ export class Movement {
 
 		if (!this.objectCollisionDetection(id, direction, currentMap)) {
 			switch (direction) {
-				case "up":
+				case 'up':
 					y = y - globals.gridunitpx;
 					y = blUtil.addPX(y);
-					document.querySelector(".objectId-"+id).style.top = y;
+					document.querySelector('.objectId-' + id).style.top = y;
 					break;
-				case "down":
+				case 'down':
 					y = y + globals.gridunitpx;
 					y = blUtil.addPX(y);
-					document.querySelector(".objectId-"+id).style.top = y;
+					document.querySelector('.objectId-' + id).style.top = y;
 					break;
-				case "left":
+				case 'left':
 					x = x - globals.gridunitpx;
 					x = blUtil.addPX(x);
-					document.querySelector(".objectId-"+id).style.left = x;
+					document.querySelector('.objectId-' + id).style.left = x;
 					break;
-				case "right":
+				case 'right':
 					x = x + globals.gridunitpx;
 					x = blUtil.addPX(x);
-					document.querySelector(".objectId-"+id).style.left = x;
+					document.querySelector('.objectId-' + id).style.left = x;
 					break;
 			}
 			success = true;
 		} else {
-			blUtil.log("Can't move object id:"+id+" "+direction);	
+			blUtil.log("Can't move object id:" + id + ' ' + direction);
 			success = false;
 		}
 
@@ -78,64 +78,78 @@ export class Movement {
 		var movingObject_id = id;
 
 		switch (direction) {
-			case "up": nextblock = currentblock - (globals.mapwidth); break;
-			case "down": nextblock = currentblock + (globals.mapwidth); break;
-			case "left": nextblock = currentblock - 1; break;
-			case "right": nextblock = currentblock + 1; break;
+			case 'up':
+				nextblock = currentblock - globals.mapwidth;
+				break;
+			case 'down':
+				nextblock = currentblock + globals.mapwidth;
+				break;
+			case 'left':
+				nextblock = currentblock - 1;
+				break;
+			case 'right':
+				nextblock = currentblock + 1;
+				break;
 		}
 
 		var movingObject_nextblock = nextblock;
-		var nextBlockClass = '.the-fucking-'+map+'-map .block:eq('+nextblock+')';
+		var nextBlockClass = '.the-fucking-' + map + '-map .block:eq(' + nextblock + ')';
 		var nextBlockType = blUtil.getBlockType(nextblock, globals.getCurrentMap());
 
 		// TELEPORTING
-		var nextBlockEl = document.querySelectorAll('.the-fucking-'+map+'-map .block')[nextblock];
+		var nextBlockEl = document.querySelectorAll('.the-fucking-' + map + '-map .block')[nextblock];
 		if (id == 1 && nextBlockEl && nextBlockEl.classList.contains('block-portal-a')) {
 			var portalBEl = document.querySelector('.maps-wrap .block-portal-b');
-			var destinationblock = portalBEl ? portalBEl.getAttribute("data-blockid") : null;
+			var destinationblock = portalBEl ? portalBEl.getAttribute('data-blockid') : null;
 			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
 
-		// TELEPORTING
+			// TELEPORTING
 		} else if (id == 1 && nextBlockEl && nextBlockEl.classList.contains('block-portal-b')) {
 			var portalAEl = document.querySelector('.maps-wrap .block-portal-a');
-			var destinationblock = portalAEl ? portalAEl.getAttribute("data-blockid") : null;
+			var destinationblock = portalAEl ? portalAEl.getAttribute('data-blockid') : null;
 			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
 
-		// MAP EDGES
-		} else if ( (direction == "right" ) && (col>=globals.mapwidth-1) ) {
+			// MAP EDGES
+		} else if (direction == 'right' && col >= globals.mapwidth - 1) {
 			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;
-		} else if ( (direction == "left" ) && (col==0) ) {
+		} else if (direction == 'left' && col == 0) {
 			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;
-		} else if ( (direction == "up" ) && (row<=1) ) {
+		} else if (direction == 'up' && row <= 1) {
 			this.moveObjectToMap(movingObject_id, currentblock, direction);
 			collide = true;
-		} else if ( (direction == "down" ) && (row>=globals.mapheight) ) {
+		} else if (direction == 'down' && row >= globals.mapheight) {
 			this.moveObjectToMap(movingObject_id, currentblock, direction);
-			collide = true;	
+			collide = true;
 
-		// ROCKET
-		} else if (selecteditem == "rocket" && nextBlockEl && nextBlockEl.classList.contains('block-space')) {
+			// ROCKET
+		} else if (
+			selecteditem == 'rocket' &&
+			nextBlockEl &&
+			nextBlockEl.classList.contains('block-space')
+		) {
 			collide = false;
-		// } else if (selecteditem == "rocket") {
-		// 	collide = true;
+			// } else if (selecteditem == "rocket") {
+			// 	collide = true;
 
-		// CANOEING
-		} else if (selecteditem == "canoe" && nextBlockEl && nextBlockEl.classList.contains('block-water')) {
+			// CANOEING
+		} else if (
+			selecteditem == 'canoe' &&
+			nextBlockEl &&
+			nextBlockEl.classList.contains('block-water')
+		) {
 			collide = false;
-		} else if (selecteditem == "canoe") {
+		} else if (selecteditem == 'canoe') {
 			collide = true;
 
-		// PLAYING INSTRUMENTS
-		} else if (selecteditem === "guitar") {
+			// PLAYING INSTRUMENTS
+		} else if (selecteditem === 'guitar') {
 			collide = true;
-
 		} else if (blItems.itemIsBlocking(nextBlockType)) {
 			collide = true;
-
 		} else {
 			// PLAYER
 			if (id != 1) {
@@ -148,28 +162,30 @@ export class Movement {
 					collide = true;
 				}
 
-			// ANIMAL
+				// ANIMAL
 			} else if (document.querySelectorAll('.the-fucking-deer').length != 0) {
-				[...document.querySelectorAll('.the-fucking-deer')].forEach(function(el) {
+				[...document.querySelectorAll('.the-fucking-deer')].forEach(function (el) {
 					var blockingObject_id = el.getAttribute('data-id');
 					var blockingObject_block = blUtil.getObjectCurrentBlock(blockingObject_id);
 
-					if (movingObject_nextblock == blockingObject_block && movingObject_id != blockingObject_id) {
+					if (
+						movingObject_nextblock == blockingObject_block &&
+						movingObject_id != blockingObject_id
+					) {
 						collide = true;
 					}
 				});
 
-			// WALK TO NEXT BLOCK
+				// WALK TO NEXT BLOCK
 			} else {
 				collide = false;
 			}
-
-		}	
+		}
 
 		// ICE
 		//} else if ( $(nextBlockClass).hasClass('block-ice') ) {
-			//slidePlayer();
-			//return true;
+		//slidePlayer();
+		//return true;
 
 		// Bike Riding?
 		// Skiiing?
@@ -180,38 +196,65 @@ export class Movement {
 	}
 
 	changeObjectDirection(id, direction, name) {
-		blUtil.log("changing object:"+id+" direction to "+direction);
+		blUtil.log('changing object:' + id + ' direction to ' + direction);
 		var selecteditem = blUtil.getSelectedItem();
 		// animated items
 		var playergraphic;
-		if ( selecteditem == "sword" || selecteditem == "shovel" || selecteditem == "axe" || selecteditem == "bike" || selecteditem == "skiis" || selecteditem == "car" || selecteditem == "canoe" || selecteditem == "rocket" && name == "player" ) { 
-			playergraphic = "-"+selecteditem;
+		if (
+			selecteditem == 'sword' ||
+			selecteditem == 'shovel' ||
+			selecteditem == 'axe' ||
+			selecteditem == 'bike' ||
+			selecteditem == 'skiis' ||
+			selecteditem == 'car' ||
+			selecteditem == 'canoe' ||
+			(selecteditem == 'rocket' && name == 'player')
+		) {
+			playergraphic = '-' + selecteditem;
 		} else {
-			playergraphic = "";
+			playergraphic = '';
 		}
 
 		//clear direction and animation classes
-		var objEl = document.querySelector('.objectId-'+id);
+		var objEl = document.querySelector('.objectId-' + id);
 		if (!objEl) return;
-		objEl.classList.remove(name+"-direction-down", name+"-direction-left", name+"-direction-right", name+"-direction-up");
-		objEl.classList.remove(name+"-direction-down"+playergraphic, name+"-direction-left"+playergraphic, name+"-direction-right"+playergraphic, name+"-direction-up"+playergraphic);
+		objEl.classList.remove(
+			name + '-direction-down',
+			name + '-direction-left',
+			name + '-direction-right',
+			name + '-direction-up'
+		);
+		objEl.classList.remove(
+			name + '-direction-down' + playergraphic,
+			name + '-direction-left' + playergraphic,
+			name + '-direction-right' + playergraphic,
+			name + '-direction-up' + playergraphic
+		);
 
 		switch (direction) {
-			case "up":
-				objEl.classList.add(name+"-direction-up");
-				if (playergraphic!="") { objEl.classList.add(name+"-direction-up"+playergraphic); }
+			case 'up':
+				objEl.classList.add(name + '-direction-up');
+				if (playergraphic != '') {
+					objEl.classList.add(name + '-direction-up' + playergraphic);
+				}
 				break;
-			case "down":
-				objEl.classList.add(name+"-direction-down");
-				if (playergraphic!="") { objEl.classList.add(name+"-direction-down"+playergraphic); }
+			case 'down':
+				objEl.classList.add(name + '-direction-down');
+				if (playergraphic != '') {
+					objEl.classList.add(name + '-direction-down' + playergraphic);
+				}
 				break;
-			case "left":
-				objEl.classList.add(name+"-direction-left");
-				if (playergraphic!="") { objEl.classList.add(name+"-direction-left"+playergraphic); }
+			case 'left':
+				objEl.classList.add(name + '-direction-left');
+				if (playergraphic != '') {
+					objEl.classList.add(name + '-direction-left' + playergraphic);
+				}
 				break;
-			case "right":
-				objEl.classList.add(name+"-direction-right");
-				if (playergraphic!="") { objEl.classList.add(name+"-direction-right"+playergraphic); }
+			case 'right':
+				objEl.classList.add(name + '-direction-right');
+				if (playergraphic != '') {
+					objEl.classList.add(name + '-direction-right' + playergraphic);
+				}
 				break;
 		}
 
@@ -233,16 +276,16 @@ export class Movement {
 		// run the player action function on that block
 
 		// if (playerblock == destinationblock) {
-		// 	blAction.playerPrimaryAction(destinationblock); 
+		// 	blAction.playerPrimaryAction(destinationblock);
 		// 	return;
 		// } else if ((playerblock-globals.mapwidth-1) == destinationblock) {
-		// 	blAction.playerPrimaryAction(destinationblock); 
+		// 	blAction.playerPrimaryAction(destinationblock);
 		// 	return;
 		// } else if ((playerblock+globals.mapwidth-1) == destinationblock) {
-		// 	blAction.playerPrimaryAction(destinationblock); 
+		// 	blAction.playerPrimaryAction(destinationblock);
 		// 	return;
 		// } else if ((playerblock-2) == destinationblock) {
-		// 	blAction.playerPrimaryAction(destinationblock); 
+		// 	blAction.playerPrimaryAction(destinationblock);
 		// 	return;
 		// }
 
@@ -254,12 +297,12 @@ export class Movement {
 	stopObjectMovement() {
 		clearTimeout(this.objectbrain);
 	}
-	
+
 	anObjectMovement(id) {
-		var objectX = blUtil.getObjectCurrentCol(id) - 1; 
+		var objectX = blUtil.getObjectCurrentCol(id) - 1;
 		var objectY = blUtil.getObjectCurrentRow(id) - 1;
 		var n = this.objectPath.length;
-		this.objectPath.push(objectX+"-"+objectY);
+		this.objectPath.push(objectX + '-' + objectY);
 
 		var xDifference = this.destinationblockColumn - objectX;
 		var yDifference = objectY - this.destinationblockRow;
@@ -272,24 +315,24 @@ export class Movement {
 		// 	stopObjectMovement();
 		// 	return;
 		// }
-		
-		if ( (xDifference == 0) && (yDifference == 0) ) {
-			blUtil.log("reached destination block, stop moving");
+
+		if (xDifference == 0 && yDifference == 0) {
+			blUtil.log('reached destination block, stop moving');
 			this.stopObjectMovement();
 		} else if (POSxDifference >= POSyDifference) {
-			if (xDifference >= 0) { 
-				this.moveObject("right", id, "player");
-			} else { 
-				this.moveObject("left", id, "player");
+			if (xDifference >= 0) {
+				this.moveObject('right', id, 'player');
+			} else {
+				this.moveObject('left', id, 'player');
 			}
 		} else {
-			if (yDifference >= 0) { 
-				this.moveObject("up", id, "player");
-			} else { 
-				this.moveObject("down", id, "player");
+			if (yDifference >= 0) {
+				this.moveObject('up', id, 'player');
+			} else {
+				this.moveObject('down', id, 'player');
 			}
 		}
-		
+
 		//limit
 		if (this.t > 10) {
 			//blUtil.log("Enemy terminated");
@@ -299,13 +342,12 @@ export class Movement {
 			this.t++;
 			this.objectbrain = setTimeout(this.anObjectMovement(id), globals.playerspeed); // repeat thought
 		}
-	
 	}
 
 	moveObjectToMap(objectId, objectCurrentBlock, objectDirection) {
-		console.log("")
-		console.log("")
-		console.log("moveObjectToMap")
+		console.log('');
+		console.log('');
+		console.log('moveObjectToMap');
 
 		const currentMap = globals.getCurrentMap();
 		const currentCubeSide = globals.getCurrentCubeSide();
@@ -329,13 +371,13 @@ export class Movement {
 				break;
 		}
 
-		var object = document.querySelector('.objectId-'+objectId);
+		var object = document.querySelector('.objectId-' + objectId);
 		var currentBlock = objectCurrentBlock;
 
 		// find out what map and side of cube is next
 		var nextCubeSide = globals.cubeSidesArray[globals.getCurrentCubeSide()][objectDirection];
 		var nextMap = globals.cubeSidesArray[nextCubeSide].map;
-		var toMap = document.querySelector('.the-fucking-'+nextMap+'-map');
+		var toMap = document.querySelector('.the-fucking-' + nextMap + '-map');
 
 		// find out what block on next map to move to
 		var mapwidth = globals.mapwidth;
@@ -349,7 +391,7 @@ export class Movement {
 				top: 'bottom',
 				bottom: 'top',
 			},
-			left: { 
+			left: {
 				back: 'right',
 				front: 'left',
 				top: 'left',
@@ -385,61 +427,62 @@ export class Movement {
 		if (nextCubeSide === 'top') {
 			switch (currentCubeSide) {
 				case 'front':
-					nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
+					nextBlock = currentBlock + mapwidth * mapheight - mapwidth;
 					break;
 				case 'left':
-					nextBlock = currentBlock * mapwidth; 
+					nextBlock = currentBlock * mapwidth;
 					break;
 				case 'back':
 					nextBlock = mapwidth - currentBlock - 1;
 					break;
 				case 'right':
-					nextBlock = (mapwidth * 10) - (currentBlock * mapwidth) -1;
+					nextBlock = mapwidth * 10 - currentBlock * mapwidth - 1;
 					break;
 			}
 		} else if (currentCubeSide === 'top') {
 			switch (nextCubeSide) {
 				case 'front':
-					nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;
+					nextBlock = currentBlock - mapwidth * mapheight + mapwidth;
 					break;
 				case 'left':
-					nextBlock = (currentBlock / mapwidth);
+					nextBlock = currentBlock / mapwidth;
 					break;
 				case 'back':
 					nextBlock = mapwidth - currentBlock - 1;
 					break;
 				case 'right':
-					nextBlock = mapwidth - (currentBlock / mapwidth);
+					nextBlock = mapwidth - currentBlock / mapwidth;
 					break;
 			}
 		} else if (nextCubeSide === 'bottom') {
 			switch (currentCubeSide) {
 				case 'front':
-					nextBlock = currentBlock - (mapwidth * mapheight) + mapwidth;	
+					nextBlock = currentBlock - mapwidth * mapheight + mapwidth;
 					break;
 				case 'left':
-					nextBlock = (mapwidth - (currentBlock - ((mapwidth * mapwidth) - mapwidth))) * mapwidth - mapwidth;
+					nextBlock =
+						(mapwidth - (currentBlock - (mapwidth * mapwidth - mapwidth))) * mapwidth - mapwidth;
 					break;
 				case 'back':
-					nextBlock = ((mapwidth * mapwidth) - mapwidth) + (mapwidth - currentBlock % mapwidth) - 1;
+					nextBlock = mapwidth * mapwidth - mapwidth + (mapwidth - (currentBlock % mapwidth)) - 1;
 					break;
 				case 'right':
-					nextBlock = ((currentBlock % mapwidth) * mapwidth) + mapwidth + mapwidth - 1;
+					nextBlock = (currentBlock % mapwidth) * mapwidth + mapwidth + mapwidth - 1;
 					break;
 			}
 		} else if (currentCubeSide === 'bottom') {
 			switch (nextCubeSide) {
 				case 'front':
-					nextBlock = currentBlock + (mapwidth * mapheight) - mapwidth;
+					nextBlock = currentBlock + mapwidth * mapheight - mapwidth;
 					break;
 				case 'left':
-					nextBlock = ((mapwidth - (currentBlock / mapwidth)) + ((mapwidth * mapheight) - mapwidth)) - 1;
+					nextBlock = mapwidth - currentBlock / mapwidth + (mapwidth * mapheight - mapwidth) - 1;
 					break;
 				case 'back':
-					nextBlock = (mapwidth - (currentBlock % mapwidth)) + ((mapwidth * mapwidth) - mapwidth) - 1;
+					nextBlock = mapwidth - (currentBlock % mapwidth) + (mapwidth * mapwidth - mapwidth) - 1;
 					break;
 				case 'right':
-					nextBlock = (currentBlock / mapwidth) + ((mapwidth * mapheight) - mapwidth) - 1;
+					nextBlock = currentBlock / mapwidth + (mapwidth * mapheight - mapwidth) - 1;
 					break;
 			}
 		} else if (objectDirection === 'left') {
@@ -467,62 +510,72 @@ export class Movement {
 		if (object && toMap) toMap.appendChild(object);
 
 		blUtil.teleportObjectToBlock(1, nextMap, nextBlock);
-	};
+	}
 
 	moveBike(direction) {
-		blUtil.log("move bike "+direction);
-		var playerdirection = blUtil.getObjectDirection(1, "player");
-		blUtil.log("player current direction: "+playerdirection);
+		blUtil.log('move bike ' + direction);
+		var playerdirection = blUtil.getObjectDirection(1, 'player');
+		blUtil.log('player current direction: ' + playerdirection);
 
 		switch (direction) {
-			case "up": this.moveObject("up", 1, "player"); break;
-			case "down": this.moveObject("down", 1, "player"); break;
-			case "left": this.moveObject("left", 1, "player"); break;
-			case "right": this.moveObject("right", 1, "player"); break;
+			case 'up':
+				this.moveObject('up', 1, 'player');
+				break;
+			case 'down':
+				this.moveObject('down', 1, 'player');
+				break;
+			case 'left':
+				this.moveObject('left', 1, 'player');
+				break;
+			case 'right':
+				this.moveObject('right', 1, 'player');
+				break;
 		}
-		
+
 		// this.ridingbike = setTimeout(function() {
 		// 	this.startBiking(direction);
 		// }, globals.bikespeed); // repeat movement
-	};
+	}
 
 	stopBike() {
 		clearTimeout(this.ridingbike);
-	};
+	}
 
 	rideBike(direction) {
-		blUtil.log("rideBike");
+		blUtil.log('rideBike');
 		this.stopBike();
 
-		this.ridingbike = setInterval(function() {
-			this.moveBike(direction);
-		}.bind(this), globals.bikespeed);
+		this.ridingbike = setInterval(
+			function () {
+				this.moveBike(direction);
+			}.bind(this),
+			globals.bikespeed
+		);
 
 		// var playerdirection = blUtil.getObjectDirection(1, "player");
 
-		// if (playerdirection == "left" && direction == "right") { 
+		// if (playerdirection == "left" && direction == "right") {
 		// 	this.changeObjectDirection(1, "right", "player");
-		// } else if (playerdirection == "right" && direction == "left") { 
+		// } else if (playerdirection == "right" && direction == "left") {
 		// 	this.changeObjectDirection(1, "left", "player");
-		// } else if (playerdirection == "up" && direction == "down") { 
+		// } else if (playerdirection == "up" && direction == "down") {
 		// 	this.changeObjectDirection(1, "down", "player");
-		// } else if (playerdirection == "down" && direction == "up") { 
+		// } else if (playerdirection == "down" && direction == "up") {
 		// 	this.changeObjectDirection(1, "up", "player");
 		// } else {
 		// 	this.ridingbike = setTimeout(function() {
 		// 		this.moveBike(direction);
 		// 	}.bind(this), globals.bikespeed);
 		// }
+	}
 
-	};
-
-	stopMap() { 
-		clearTimeout(this.mapanimate); 
+	stopMap() {
+		clearTimeout(this.mapanimate);
 		this.mapanimate = null;
-	};
+	}
 
 	moveMap() {
-		blUtil.log("animating the map!");
+		blUtil.log('animating the map!');
 		var mapspeed = 500;
 		this.mapanimate = setTimeout(scrollMap, mapspeed);
 
@@ -530,28 +583,39 @@ export class Movement {
 			var winterMap = document.querySelector('.the-fucking-winter-map');
 			var allDivs = [...winterMap.querySelectorAll('div')];
 			var toprow = allDivs.slice(0, globals.mapwidth);
-			toprow.forEach(function(el) { el.parentNode.removeChild(el); });
-			toprow.forEach(function(el) { winterMap.appendChild(el); });
+			toprow.forEach(function (el) {
+				el.parentNode.removeChild(el);
+			});
+			toprow.forEach(function (el) {
+				winterMap.appendChild(el);
+			});
 			this.mapanimate = setTimeout(scrollMap, mapspeed); // repeat thought
 		}
-	};
+	}
 
 	rideSkiis(direction) {
-		if (direction == "up") {
-			this.moveObject("up", 1, "player");
-			this.changeObjectDirection(1,"up", "player");
+		if (direction == 'up') {
+			this.moveObject('up', 1, 'player');
+			this.changeObjectDirection(1, 'up', 'player');
 			this.stopMap();
 		} else {
 			switch (direction) {
-				case "up": this.moveObject("up",1, "player"); break;
-				case "down": this.moveObject("down", 1, "player"); break;
-				case "left": this.moveObject("left", 1, "player"); break;
-				case "right": this.moveObject("right", 1, "player"); break;
+				case 'up':
+					this.moveObject('up', 1, 'player');
+					break;
+				case 'down':
+					this.moveObject('down', 1, 'player');
+					break;
+				case 'left':
+					this.moveObject('left', 1, 'player');
+					break;
+				case 'right':
+					this.moveObject('right', 1, 'player');
+					break;
 			}
 			if (this.mapanimate == null) {
 				this.moveMap();
 			}
 		}
-	};
-
+	}
 }

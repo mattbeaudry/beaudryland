@@ -1,451 +1,447 @@
+@use 'color' as *;
+@use 'variables' as *;
+@use 'sass:math';
+
 .bui-color--green {
-  color: #00cc00;
+	color: #00cc00;
 }
 
 .bui-color--red {
-  color: #cc0000;
+	color: #cc0000;
 }
 
 .bl-table-container {
-  overflow-x: scroll;
+	overflow-x: scroll;
 }
 
 .bl-table {
-  width: 100%;
-  background-color: #fff;
+	width: 100%;
+	background-color: #fff;
 
-  thead {
-    border-top: solid 2px #000;
-    border-bottom: solid 2px #000;
-  }
+	thead {
+		border-top: solid 2px #000;
+		border-bottom: solid 2px #000;
+	}
 
-  tbody {
-    tr {
-      border-bottom: solid 2px #ddd;
-    }
-  }
+	tbody {
+		tr {
+			border-bottom: solid 2px #ddd;
+		}
+	}
 
-  td {
-    padding: 0 8px;
-  }
+	td {
+		padding: 0 8px;
+	}
 
-  img {
-    width: 30px;
-    height: 30px;
-    margin: 0;
-  }
+	img {
+		width: 30px;
+		height: 30px;
+		margin: 0;
+	}
 }
 
 .bui-button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 16px 0px;
-  min-height: 40px;
-  border: none;
-  margin: 0 12px 12px 0px;
-  color: #fff;
-  background-color: #000;
-  font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
-  font-weight: 400;
-  text-transform: uppercase;
-  text-decoration: none;
-  text-wrap: nowrap;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	padding: 7px 16px 0px;
+	min-height: 40px;
+	border: none;
+	margin: 0 12px 12px 0px;
+	color: #fff;
+	background-color: #000;
+	font-family: 'Beaudryland', 'Press Start 2P', Helvetica, Verdana;
+	font-weight: 400;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-wrap: nowrap;
 
-  &:before,
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 4px;
-    height: 32px;
-    background-color: #000;
-  }
+	&:before,
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		width: 4px;
+		height: 32px;
+		background-color: #000;
+	}
 
-  &:before {
-    top: 4px;
-    left: -4px;
-  }
+	&:before {
+		top: 4px;
+		left: -4px;
+	}
 
-  &:after {
-    top: 4px;
-    right: -4px;
-  }
+	&:after {
+		top: 4px;
+		right: -4px;
+	}
 
-  &:hover {
-    color: #fff;
-    text-decoration: none;
-    background-color: #333;
-    cursor: pointer;
+	&:hover {
+		color: #fff;
+		text-decoration: none;
+		background-color: #333;
+		cursor: pointer;
 
-    &:before,
-    &:after {
-      background-color: #333;
-    }
-  }
+		&:before,
+		&:after {
+			background-color: #333;
+		}
+	}
 
-  &.bui-button-nav {
-    height: 64px;
-    min-width: 64px;
-    justify-content: space-around;
-    padding: 0 16px;
-  
-    &:before,
-    &:after {
-      height: 56px;
-    }
-  }
+	&.bui-button-nav {
+		height: 64px;
+		min-width: 64px;
+		justify-content: space-around;
+		padding: 0 16px;
 
-  &.nav-selected-item > span {
-    width: 48px;
-    height: 48px;
-  }
+		&:before,
+		&:after {
+			height: 56px;
+		}
+	}
+
+	&.nav-selected-item > span {
+		width: 48px;
+		height: 48px;
+	}
 }
 
 .bui-label {
-  display: block;
-  width: 100%;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 600;
+	display: block;
+	width: 100%;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: 600;
 }
 
 .bui-textinput {
-  border: solid 2px #000;
-  height: 40px;
-  width: 100%;
+	border: solid 2px #000;
+	height: 40px;
+	width: 100%;
 }
 
 .bui-textarea {
-  border: solid 2px #000;
-  height: 40px;
-  width: 100%;
+	border: solid 2px #000;
+	height: 40px;
+	width: 100%;
 }
 
 .bui-checkbox {
-  float: left;
-  margin-right: 8px;
+	float: left;
+	margin-right: 8px;
 }
 
 .bui-radio {
-  float: left;
-  margin-right: 8px;
+	float: left;
+	margin-right: 8px;
 }
 
 .bui-select {
-  position: relative;
-  border: solid 2px #000;
-  margin: 0 4px;
-  background-color: #fff;
+	position: relative;
+	border: solid 2px #000;
+	margin: 0 4px;
+	background-color: #fff;
 
-  &:before,
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 3px;
-    width: 6px;
-    height: 34px;
-    border: solid #000;
-    background-color: #fff;
-    z-index: 1;
-  }
+	&:before,
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 3px;
+		width: 6px;
+		height: 34px;
+		border: solid #000;
+		background-color: #fff;
+		z-index: 1;
+	}
 
-  &:before {
-    left: -6px;
-    border-width: 2px 0px 2px 2px;
-  }
+	&:before {
+		left: -6px;
+		border-width: 2px 0px 2px 2px;
+	}
 
-  &:after {
-    right: -6px;
-    border-width: 2px 2px 2px 0px;
-  }
+	&:after {
+		right: -6px;
+		border-width: 2px 2px 2px 0px;
+	}
 
-  select {
-    height: 40px;
-    border: none;
-    border-radius: 0 !important;
-    width: 100%;
-    background-color: transparent;
-  }
+	select {
+		height: 40px;
+		border: none;
+		border-radius: 0 !important;
+		width: 100%;
+		background-color: transparent;
+	}
 }
 
 .bui-section {
-  margin-bottom: 64px;
+	margin-bottom: 64px;
 
-  .bui-sectiontitle {
-    border-bottom: solid 4px #000;
-  }
+	.bui-sectiontitle {
+		border-bottom: solid 4px #000;
+	}
 }
 
 .bui-field {
-  margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 
 .bui-colorpalette {
-  width: 204px;
-  height: 224px;
+	width: 204px;
+	height: 224px;
 }
 
 .bui-colorpicker {
-  position: relative;
-  width: 204px;
-  height: 44px;
+	position: relative;
+	width: 204px;
+	height: 44px;
 
-  .bui-colorpalette {
-    display: none;
-    position: absolute;
-    top: 47px;
-    border: solid 2px #000;
-    box-shadow: 4px 4px 0 #000;
-    z-index: 10;
+	.bui-colorpalette {
+		display: none;
+		position: absolute;
+		top: 47px;
+		border: solid 2px #000;
+		box-shadow: 4px 4px 0 #000;
+		z-index: 10;
 
-    .bui-swatch {
-      &:hover {
-        border: solid 1px #fff;
-      }
-    }
-  }
+		.bui-swatch {
+			&:hover {
+				border: solid 1px #fff;
+			}
+		}
+	}
 }
 
 .bui-swatch {
-  display: inline-block;
-  float: left;
-  width: 20px;
-  height: 20px;
+	display: inline-block;
+	float: left;
+	width: 20px;
+	height: 20px;
 }
-    
+
 .bui-colorpicker-input {
-  float: left;
-  width: 154px;
-  margin-right: 8px;
-  cursor: pointer;
+	float: left;
+	width: 154px;
+	margin-right: 8px;
+	cursor: pointer;
 }
 
 .bui-colorpicker-eraser {
-  float: left;
-  height: 40px;
-  width: 40px;
-  border: dashed 2px #000;
+	float: left;
+	height: 40px;
+	width: 40px;
+	border: dashed 2px #000;
 }
 
 .bui-colorpicker-palette {
-  position: absolute;
-  top: 44px;
-  border: solid 2px #000;
-  padding: 8px;
-  width: 261px;
+	position: absolute;
+	top: 44px;
+	border: solid 2px #000;
+	padding: 8px;
+	width: 261px;
 }
-
 
 /* SLIDER */
 
 .bui-slider {
-    width: 100%;
+	width: 100%;
 }
 
 .bui-slider-input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 16px;
-    background: bui-c(gray40);
-    outline: none;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 16px;
+	background: bui-c(gray40);
+	outline: none;
 }
 
 .bui-slider-input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    background: bui-c(black);
-    cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 24px;
+	height: 24px;
+	background: bui-c(black);
+	cursor: pointer;
 }
 
 .bui-slider-input::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    background: bui-c(black);
-    cursor: pointer;
+	width: 24px;
+	height: 24px;
+	background: bui-c(black);
+	cursor: pointer;
 }
-
 
 /* KNOB */
 
 $knobSize: 4em;
-$handW : .2em;
+$handW: 0.2em;
 
 knob-input {
-  width: auto;
-  height: auto;
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-  margin: 0 1em;
-  font-size: .4em;
+	width: auto;
+	height: auto;
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	margin: 0 1em;
+	font-size: 0.4em;
 }
 
 knob-hand {
-  width: $handW;
-  background-color: transparent;
-  box-sizing: border-box;
-  border-bottom: $knobSize / 2 solid bui-c(white);
-  height: 100%;
-  position: absolute;
-  left: 50%;
-  margin-left: -$handW / 2;
+	width: $handW;
+	background-color: transparent;
+	box-sizing: border-box;
+	border-bottom: math.div($knobSize, 2) solid bui-c(white);
+	height: 100%;
+	position: absolute;
+	left: 50%;
+	margin-left: math.div(-$handW, 2);
 }
 
 knob-face {
- display: inline-block;
-  width: $knobSize;
-  height: $knobSize;
-  box-sizing: border-box;
-  border-radius: $knobSize;
-  cursor: pointer;
-  position: absolute;
-  background-color: bui-c(gray80);
-  z-index: 2;
+	display: inline-block;
+	width: $knobSize;
+	height: $knobSize;
+	box-sizing: border-box;
+	border-radius: $knobSize;
+	cursor: pointer;
+	position: absolute;
+	background-color: bui-c(gray80);
+	z-index: 2;
 }
 
 .knobInput-label {
-  display: block;
-  text-align: center;
-  font-size: 1em;
+	display: block;
+	text-align: center;
+	font-size: 1em;
 }
 
 .knob-progress {
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 1;
+	position: relative;
+	top: 0;
+	left: 0;
+	z-index: 1;
 }
-
 
 /* FLEX */
 
 .bui-iflex {
-  display: inline-flex !important;
+	display: inline-flex !important;
 }
 
 .bui-flex {
-  display: flex !important;
+	display: flex !important;
 }
-
 
 /* FONT */
 
 .bui-font {
-  font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
+	font-family: 'Beaudryland', 'Press Start 2P', Helvetica, Verdana;
 }
-
 
 /* MENU */
 
 .bui-menu {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .bui-menu-button {
-
 }
 
 .bui-menu-dropdown {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  border: solid 3px #000;
-  box-shadow: $buiShadow;
-  padding: 4px;
-  width: 200px;
-  z-index: 1;
+	display: none;
+	position: absolute;
+	background-color: #fff;
+	border: solid 3px #000;
+	box-shadow: $buiShadow;
+	padding: 4px;
+	width: 200px;
+	z-index: 1;
 
-  &.bui-menu-left {
-    right: 11px;
-  }
+	&.bui-menu-left {
+		right: 11px;
+	}
 }
 
 .bui-menu-item {
-  a {
-    font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
-    display: block;
-    padding: 4px;
-  }
+	a {
+		font-family: 'Beaudryland', 'Press Start 2P', Helvetica, Verdana;
+		display: block;
+		padding: 4px;
+	}
 }
-
 
 /* SHADOW */
 
 .bui-shadow {
-  width: 40px;
-  height: 40px;
-  border: solid 3px #000;
-  box-shadow: $buiShadow;
+	width: 40px;
+	height: 40px;
+	border: solid 3px #000;
+	box-shadow: $buiShadow;
 }
-
 
 /* TOAST */
 
 .bui-toast {
-  position: relative;
-  background-color: #000;
-  color: #fff;
-  font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
-  width: 320px;
-  height: 80px;
-  padding: 16px;
-  box-shadow: $buiShadow;
+	position: relative;
+	background-color: #000;
+	color: #fff;
+	font-family: 'Beaudryland', 'Press Start 2P', Helvetica, Verdana;
+	width: 320px;
+	height: 80px;
+	padding: 16px;
+	box-shadow: $buiShadow;
 
-  &.bui-toast-bottomright {
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-  }
+	&.bui-toast-bottomright {
+		position: fixed;
+		right: 16px;
+		bottom: 16px;
+	}
 
-  &.bui-toast-white {
-    background-color: #fff;
-    color: #000;
-    border: solid 3px #000;
-  }
+	&.bui-toast-white {
+		background-color: #fff;
+		color: #000;
+		border: solid 3px #000;
+	}
 
-  .bui-toast-close {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    cursor: pointer;
-  }
+	.bui-toast-close {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		cursor: pointer;
+	}
 
-  p {
-    margin: 0;
-  }
+	p {
+		margin: 0;
+	}
 }
 
 .bui-list-bullets {
-  list-style: inherit;
+	list-style: inherit;
 }
 
 .the-fucking-console {
-  position: fixed;
-  right: 16px;
-  height: 40%;
-  bottom: 16px;
-  width: 400px;
-  padding: 5px 10px;
-  z-index: 1;
-  text-align: right;
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column-reverse;
+	position: fixed;
+	right: 16px;
+	height: 40%;
+	bottom: 16px;
+	width: 400px;
+	padding: 5px 10px;
+	z-index: 1;
+	text-align: right;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column-reverse;
 
-  > ul {
-    list-style: none;
-    padding: 0;
-  }
+	> ul {
+		list-style: none;
+		padding: 0;
+	}
 }
 
 .bui-truncate {
-  max-width: 160px;
-  text-overflow: ellipsis;
-  overflow: hidden;
+	max-width: 160px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }

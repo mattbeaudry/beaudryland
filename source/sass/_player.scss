@@ -1,12 +1,12 @@
-@import "variables";
+@use 'variables' as *;
 
 /* THE PLAYER */
 
 .the-fucking-player {
-  width: $gridunitpx;
-  height: $gridunitpx;
-  position: relative;
-  left: $gridunitpx * 4;
-  top: $gridunitpx * 4;
-  background-size: contain !important;
+	width: $gridunitpx;
+	height: $gridunitpx;
+	position: relative;
+	left: $gridunitpx * 4;
+	top: $gridunitpx * 4;
+	background-size: contain !important;
 }

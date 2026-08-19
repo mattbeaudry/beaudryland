@@ -4,7 +4,6 @@ import { Utility } from '../utility';
 var blUtil = new Utility();
 
 export class Cube {
-
 	constructor() {
 		this.currentRotation = { x: 0, y: 0, z: 0 };
 	}
@@ -12,14 +11,26 @@ export class Cube {
 	cubifyMap() {
 		document.querySelector('.maps-container').classList.add('cube-container');
 		document.querySelector('.maps-wrap').classList.add('cube', 'cube-show-front');
-		[...document.querySelectorAll('.maps-wrap > div')].forEach(function(el, index) {
+		[...document.querySelectorAll('.maps-wrap > div')].forEach(function (el, index) {
 			switch (index) {
-				case 0: el.classList.add("cube-side", "side-front"); break;
-				case 1: el.classList.add("cube-side", "side-right"); break;
-				case 2: el.classList.add("cube-side", "side-back"); break;
-				case 3: el.classList.add("cube-side", "side-left"); break;
-				case 4: el.classList.add("cube-side", "side-top"); break;
-				case 5: el.classList.add("cube-side", "side-bottom"); break;
+				case 0:
+					el.classList.add('cube-side', 'side-front');
+					break;
+				case 1:
+					el.classList.add('cube-side', 'side-right');
+					break;
+				case 2:
+					el.classList.add('cube-side', 'side-back');
+					break;
+				case 3:
+					el.classList.add('cube-side', 'side-left');
+					break;
+				case 4:
+					el.classList.add('cube-side', 'side-top');
+					break;
+				case 5:
+					el.classList.add('cube-side', 'side-bottom');
+					break;
 			}
 		});
 	}
@@ -29,7 +40,7 @@ export class Cube {
 		var mapsWrap = document.querySelector('.maps-wrap');
 		mapsWrap.classList.remove('cube');
 		mapsWrap.className = mapsWrap.className.replace(/(^|\s)cube-show-\S+/g, ' ').trim();
-		[...document.querySelectorAll('.maps-wrap > div')].forEach(function(el) {
+		[...document.querySelectorAll('.maps-wrap > div')].forEach(function (el) {
 			el.className = el.className.replace(/(^|\s)cube-\S+/g, ' ').trim();
 		});
 	}
@@ -48,16 +59,16 @@ export class Cube {
 		const rotationString = `translateZ(-100px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) rotateZ(${rotation.z}deg)`;
 		return rotationString;
 	}
-	  
+
 	rotateCubeTo(side) {
-		console.log("rotate cube to "+side);
+		console.log('rotate cube to ' + side);
 		const currentCubeSide = globals.getCurrentCubeSide();
-		console.log('moving from '+currentCubeSide+' to '+side);
+		console.log('moving from ' + currentCubeSide + ' to ' + side);
 		const rotationCSS = this.calculateRotation(currentCubeSide, side);
-		console.log({rotationCSS});
+		console.log({ rotationCSS });
 
 		document.querySelector('.maps-wrap').style.transform = rotationCSS;
-		
+
 		globals.setCurrentCubeSide(side);
 	}
 }

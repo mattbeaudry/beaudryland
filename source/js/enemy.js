@@ -1,108 +1,122 @@
 import * as globals from './globals';
 
-import { Utility } from './utility'; 
-import { Movement } from './movement'; 
-import { Health } from './health'; 
+import { Utility } from './utility';
+import { Movement } from './movement';
+import { Health } from './health';
 var blUtil = new Utility();
 var blMovement = new Movement();
 var blHealth = new Health();
 
 export class Enemy {
-
-	constructor() {
-
-	}
+	constructor() {}
 
 	createEnemy() {
 		var id = globals.uniqueObjectID();
-		blUtil.log("Create Enemy "+id);
+		blUtil.log('Create Enemy ' + id);
 		//var enemystartblock = 0;
-		document.querySelector('.the-fucking-forest-map').insertAdjacentHTML('beforeend', '<div data-id="'+id+'" class="objectId-'+id+' the-fucking-enemy enemy-direction-down"></div>');
+		document
+			.querySelector('.the-fucking-forest-map')
+			.insertAdjacentHTML(
+				'beforeend',
+				'<div data-id="' +
+					id +
+					'" class="objectId-' +
+					id +
+					' the-fucking-enemy enemy-direction-down"></div>'
+			);
 		this.initEnemyBrain(id);
 	}
 
 	killEnemy(id) {
-		blUtil.log("Kill Enemy id: "+id);
-		var el = document.querySelector('.objectId-'+id);
+		blUtil.log('Kill Enemy id: ' + id);
+		var el = document.querySelector('.objectId-' + id);
 		if (el) el.remove();
 	}
 
 	killEnemies() {
-		blUtil.log("Kill Enemies");
-		[...document.querySelectorAll('.the-fucking-enemy')].forEach(el => el.remove());
+		blUtil.log('Kill Enemies');
+		[...document.querySelectorAll('.the-fucking-enemy')].forEach((el) => el.remove());
 	}
 
 	initEnemyBrain(id) {
-		blUtil.log("start brain program for enemy #"+id);
+		blUtil.log('start brain program for enemy #' + id);
 		var t = 0;
 		var maxthoughts = 100;
 		var enemybrain = setTimeout(anEnemyThought, globals.enemyspeed);
-		
+
 		// collection of thoughts
 		var enemyPath = Array();
-		
-		function anEnemyThought() {
 
+		function anEnemyThought() {
 			//check if enemy isnt dead
-			if (document.querySelectorAll('.objectId-'+id).length != 0) {
-		
+			if (document.querySelectorAll('.objectId-' + id).length != 0) {
 				var enemyrandom = Math.random();
-				var enemyX = blUtil.getObjectCurrentCol(id); var enemyY = blUtil.getObjectCurrentRow(id);
-				var playerX = blUtil.getObjectCurrentCol(1); var playerY = blUtil.getObjectCurrentRow(1);
-				
+				var enemyX = blUtil.getObjectCurrentCol(id);
+				var enemyY = blUtil.getObjectCurrentRow(id);
+				var playerX = blUtil.getObjectCurrentCol(1);
+				var playerY = blUtil.getObjectCurrentRow(1);
+
 				var n = enemyPath.length;
-				enemyPath.push(enemyX+"-"+enemyY);
+				enemyPath.push(enemyX + '-' + enemyY);
 
 				//is player stuck? move random direction
-				if (enemyPath[n-1]==enemyPath[n]) {
-					blUtil.log("ENEMY STUCK");
+				if (enemyPath[n - 1] == enemyPath[n]) {
+					blUtil.log('ENEMY STUCK');
 					var randomDirection = Math.floor(Math.random() * 4) + 1;
-					switch(randomDirection) {
-						case 1: blMovement.moveObject("up", id, "enemy"); break;
-						case 2: blMovement.moveObject("down", id, "enemy"); break;
-						case 3: blMovement.moveObject("left", id, "enemy"); break;
-						case 4: blMovement.moveObject("right", id, "enemy"); break;
+					switch (randomDirection) {
+						case 1:
+							blMovement.moveObject('up', id, 'enemy');
+							break;
+						case 2:
+							blMovement.moveObject('down', id, 'enemy');
+							break;
+						case 3:
+							blMovement.moveObject('left', id, 'enemy');
+							break;
+						case 4:
+							blMovement.moveObject('right', id, 'enemy');
+							break;
 					}
 				}
 
 				//blUtil.log("-----");
-				var PEx = playerX - enemyX; var PEy = enemyY - playerY;
-				var posPEx = Math.abs(PEx); var posPEy = Math.abs(PEy);
-				
-				if ( (PEx == 0) && (PEy == 0)) {
+				var PEx = playerX - enemyX;
+				var PEy = enemyY - playerY;
+				var posPEx = Math.abs(PEx);
+				var posPEy = Math.abs(PEy);
+
+				if (PEx == 0 && PEy == 0) {
 					//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" found the player, kill player!");
-					blUtil.log("found the player, kill player!");
+					blUtil.log('found the player, kill player!');
 					blHealth.removeHeart();
 				} else if (posPEx >= posPEy) {
-					if (PEx >= 0) { 
-						//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy); 
-						blMovement.moveObject("right", id, "enemy");
-					} else { 
-						//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy); 
-						blMovement.moveObject("left", id, "enemy");
+					if (PEx >= 0) {
+						//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is east"+posPEx+"<"+posPEy);
+						blMovement.moveObject('right', id, 'enemy');
+					} else {
+						//blUtil.log("PEx:"+PEx+" PEy:"+PEy+" player is west"+posPEx+"<"+posPEy);
+						blMovement.moveObject('left', id, 'enemy');
 					}
 				} else {
-					if (PEy >= 0) { 
-						//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy); 
-						blMovement.moveObject("up", id, "enemy");
-					} else { 
-						//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy); 
-						blMovement.moveObject("down", id, "enemy");
+					if (PEy >= 0) {
+						//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is north"+posPEx+">"+posPEy);
+						blMovement.moveObject('up', id, 'enemy');
+					} else {
+						//blUtil.log("PEx:"+PEx+" PEy:"+PEy+"player is south"+posPEx+">"+posPEy);
+						blMovement.moveObject('down', id, 'enemy');
 					}
 				}
-				
+
 				// limit
 				if (t > maxthoughts) {
-					blUtil.log("Enemy terminated");
+					blUtil.log('Enemy terminated');
 					this.stopEnemyBrain();
 					this.killEnemyCall(id);
 				} else {
 					t++;
 					enemybrain = setTimeout(anEnemyThought, globals.enemyspeed); // repeat thought
 				}
-
 			}
-			
 		}
 
 		function killEnemyCall(id) {
@@ -112,8 +126,5 @@ export class Enemy {
 		function stopEnemyBrain() {
 			clearTimeout(enemybrain);
 		}
-
-		
 	}
-
 }

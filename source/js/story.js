@@ -7,7 +7,7 @@ var blUtil = new Utility();
 var blMap = new Map();
 
 function isBlockOnEdgeOfCube(blockid) {
-	if ((blockid) % globals.mapwidth === 0) {
+	if (blockid % globals.mapwidth === 0) {
 		return true;
 	}
 	if ((blockid + 1) % globals.mapwidth === 0) {
@@ -16,7 +16,7 @@ function isBlockOnEdgeOfCube(blockid) {
 	if (blockid < globals.mapwidth) {
 		return true;
 	}
-	if (blockid > (globals.totalmapblocks - globals.mapwidth)) {
+	if (blockid > globals.totalmapblocks - globals.mapwidth) {
 		return true;
 	}
 	return false;
@@ -25,20 +25,20 @@ function isBlockOnEdgeOfCube(blockid) {
 function renderSignsOnMap(signText, map) {
 	var previousSignBlockIds = [];
 
-	signText.forEach(function(value, index){
-		let blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
+	signText.forEach(function (value, index) {
+		let blockid = Math.floor(Math.random() * globals.totalmapblocks + 1);
 		let signAlreadyThere = previousSignBlockIds.includes(blockid);
 		let invalidBlock = isBlockOnEdgeOfCube(blockid);
 
-		while(invalidBlock || signAlreadyThere) {
-			blockid = Math.floor((Math.random() * globals.totalmapblocks) + 1);
+		while (invalidBlock || signAlreadyThere) {
+			blockid = Math.floor(Math.random() * globals.totalmapblocks + 1);
 			signAlreadyThere = previousSignBlockIds.includes(blockid);
 			invalidBlock = isBlockOnEdgeOfCube(blockid);
 		}
-		
-		blMap.changeBlockType(blockid, "sign", map);
-		var signEl = document.querySelectorAll('.the-fucking-'+map+'-map .block')[blockid];
-		if (signEl) signEl.setAttribute("data-text", value);
+
+		blMap.changeBlockType(blockid, 'sign', map);
+		var signEl = document.querySelectorAll('.the-fucking-' + map + '-map .block')[blockid];
+		if (signEl) signEl.setAttribute('data-text', value);
 
 		previousSignBlockIds.push(blockid);
 	});
@@ -47,70 +47,70 @@ function renderSignsOnMap(signText, map) {
 export class Story {
 	createForestSigns() {
 		var forestSigns = [
-			"You shall collect trees and rocks to create wood and other items.",
-			"You shall build a shovel in order to find treasure.",
-			"You shall build a guitar in order to unlock a new area."
+			'You shall collect trees and rocks to create wood and other items.',
+			'You shall build a shovel in order to find treasure.',
+			'You shall build a guitar in order to unlock a new area.',
 		];
-		renderSignsOnMap(forestSigns, "forest");
+		renderSignsOnMap(forestSigns, 'forest');
 	}
 
 	createWinterSigns() {
 		var winterSigns = [
-			"Dig to find gold and silver in the snow.",
-			"Build and play the keyboard to unlock another map.",
-			"Build the skiis to go for rip in the snow!"
+			'Dig to find gold and silver in the snow.',
+			'Build and play the keyboard to unlock another map.',
+			'Build the skiis to go for rip in the snow!',
 		];
-		renderSignsOnMap(winterSigns, "winter");
+		renderSignsOnMap(winterSigns, 'winter');
 	}
 
 	createBeachSigns() {
 		var beachSigns = [
-			"Build and play the trumpet to unlock another map.",
-			"Dig for oil and clay on the beach.",
-			"Build and ride the bike for speedy transport."
+			'Build and play the trumpet to unlock another map.',
+			'Dig for oil and clay on the beach.',
+			'Build and ride the bike for speedy transport.',
 		];
-		renderSignsOnMap(beachSigns, "beach");
+		renderSignsOnMap(beachSigns, 'beach');
 	}
 
 	createJungleSigns() {
 		var jungleSigns = [
-			"Build and play the instrument to unlock another map.",
-			"Eat a blue mushroom to gain some PERSPECTIVE.",
-			"Eat a red mushroom for a psychedelic experience."
+			'Build and play the instrument to unlock another map.',
+			'Eat a blue mushroom to gain some PERSPECTIVE.',
+			'Eat a red mushroom for a psychedelic experience.',
 		];
-		renderSignsOnMap(jungleSigns, "jungle");
+		renderSignsOnMap(jungleSigns, 'jungle');
 	}
 
 	createDesertSigns() {
 		var desertSigns = [
-			"Build and play the instrument to unlock another map.",
-			"Eat a green mushroom to fight an enemy, get your sword out!",
-			"Build the 2D printer to invent something."
+			'Build and play the instrument to unlock another map.',
+			'Eat a green mushroom to fight an enemy, get your sword out!',
+			'Build the 2D printer to invent something.',
 		];
-		renderSignsOnMap(desertSigns, "desert");
+		renderSignsOnMap(desertSigns, 'desert');
 	}
 
 	createIslandsSigns() {
 		var islandSigns = [
-			"Build and play the instrument to unlock another map.",
-			"Build a rocket to go to space and fly to another planet.",
-			"Eat a yellow mushroom to meet an animal."
+			'Build and play the instrument to unlock another map.',
+			'Build a rocket to go to space and fly to another planet.',
+			'Eat a yellow mushroom to meet an animal.',
 		];
-		renderSignsOnMap(islandSigns, "island");
+		renderSignsOnMap(islandSigns, 'island');
 	}
 
 	setupMapBorders(map) {
 		// top
-		for (var i=0; i<globals.mapwidth; i++) {
+		for (var i = 0; i < globals.mapwidth; i++) {
 			blMap.changeBlockType(i, 'fence-metal', map);
 		}
 		// bottom
-		for (var i=(globals.totalmapblocks-globals.mapwidth ); i<globals.totalmapblocks; i++) {
+		for (var i = globals.totalmapblocks - globals.mapwidth; i < globals.totalmapblocks; i++) {
 			blMap.changeBlockType(i, 'fence-metal', map);
 		}
 		// right+left
-		for (var i=0; i<globals.totalmapblocks; i++) {
-			if (i%globals.mapwidth == 0 || i%globals.mapwidth == (globals.mapwidth-1)) {
+		for (var i = 0; i < globals.totalmapblocks; i++) {
+			if (i % globals.mapwidth == 0 || i % globals.mapwidth == globals.mapwidth - 1) {
 				blMap.changeBlockType(i, 'fence-metal', map);
 			}
 		}
@@ -121,7 +121,7 @@ export class Story {
 		var totalBlocks = globals.totalmapblocks;
 		var mapWidthBlocks = globals.mapwidth;
 
-		switch(map) {
+		switch (map) {
 			case 'forest':
 				bgBlock = 'grass';
 				break;
@@ -142,40 +142,39 @@ export class Story {
 				break;
 		}
 
-		switch(side) {
+		switch (side) {
 			case 'right':
-				for (var i=0; i<totalBlocks; i++) {
-					if (i%mapWidthBlocks == mapWidthBlocks-1 
-						&& i != mapWidthBlocks-1 
-						&& i != totalBlocks-1) {
+				for (var i = 0; i < totalBlocks; i++) {
+					if (
+						i % mapWidthBlocks == mapWidthBlocks - 1 &&
+						i != mapWidthBlocks - 1 &&
+						i != totalBlocks - 1
+					) {
 						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;
 			case 'left':
-				for (var i=0; i<totalBlocks; i++) {
-					if (i%mapWidthBlocks == 0
-						&& i != 0
-						&& i != totalBlocks-mapWidthBlocks) {
+				for (var i = 0; i < totalBlocks; i++) {
+					if (i % mapWidthBlocks == 0 && i != 0 && i != totalBlocks - mapWidthBlocks) {
 						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;
 			case 'top':
-				for (var i=0; i<totalBlocks; i++) {
+				for (var i = 0; i < totalBlocks; i++) {
 					if (i < mapWidthBlocks) {
 						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;
 			case 'bottom':
-				for (var i=0; i<totalBlocks; i++) {
-					if (i > totalBlocks-mapWidthBlocks-1) {
+				for (var i = 0; i < totalBlocks; i++) {
+					if (i > totalBlocks - mapWidthBlocks - 1) {
 						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;
 		}
 	}
-
 }

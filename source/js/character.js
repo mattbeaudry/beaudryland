@@ -1,12 +1,9 @@
 import * as globals from './globals';
-import { Utility } from './utility'; 
+import { Utility } from './utility';
 var blUtil = new Utility();
 
 export class Character {
-
-	constructor() {
-
-	}
+	constructor() {}
 
 	setupCharacterBuilder() {
 		// $('.character-hair-style').on("change", { yo: this }, function(event) {
@@ -14,7 +11,7 @@ export class Character {
 		// 	event.data.yo.drawCharacter();
 		// });
 		var that = this;
-		document.querySelector('#character-draw').addEventListener("click", function(event) {
+		document.querySelector('#character-draw').addEventListener('click', function (event) {
 			that.drawCharacter();
 		});
 	}
@@ -67,7 +64,5 @@ export class Character {
 			hairPixel3.style.backgroundColor = hairColor;
 			hairPixel4.style.backgroundColor = hairColor;
 		}
-
 	}
-
 }

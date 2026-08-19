@@ -1,5 +1,4 @@
-export var initializeNavigation = function(testVar, testObject) {
-
+export var initializeNavigation = function (testVar, testObject) {
 	// console.log("** INIT NAVIGATION **");
 
 	// $('.nav-toggle-inventory').on("click", function() {
@@ -19,25 +18,24 @@ export var initializeNavigation = function(testVar, testObject) {
 	// 		$('.nav-extra').toggle();
 	// 	}
 	// });
-	
+
 	document.querySelector('.tabs-close').style.display = 'none';
-	[...document.querySelectorAll('.tabs .tab')].forEach(t => t.style.display = 'none');
+	[...document.querySelectorAll('.tabs .tab')].forEach((t) => (t.style.display = 'none'));
 	document.querySelector('.tab-game').style.display = '';
 
-	[...document.querySelectorAll('.tab-menuitem')].forEach(function(el) {
-		el.addEventListener("click", function() {
-			var tabName = el.getAttribute("data-tabmenu");
+	[...document.querySelectorAll('.tab-menuitem')].forEach(function (el) {
+		el.addEventListener('click', function () {
+			var tabName = el.getAttribute('data-tabmenu');
 			// console.log("tabName:"+tabName);
-			[...document.querySelectorAll('.tabs .tab')].forEach(t => t.style.display = 'none');
-			document.querySelector('.'+tabName).style.display = '';
+			[...document.querySelectorAll('.tabs .tab')].forEach((t) => (t.style.display = 'none'));
+			document.querySelector('.' + tabName).style.display = '';
 			document.querySelector('.tabs-close').style.display = '';
 		});
 	});
 
-	document.querySelector('.tabs-close').addEventListener("click", function() {
-		[...document.querySelectorAll('.tabs .tab')].forEach(t => t.style.display = 'none');
+	document.querySelector('.tabs-close').addEventListener('click', function () {
+		[...document.querySelectorAll('.tabs .tab')].forEach((t) => (t.style.display = 'none'));
 		document.querySelector('.tab-game').style.display = '';
 		document.querySelector('.tabs-close').style.display = 'none';
 	});
-
 };

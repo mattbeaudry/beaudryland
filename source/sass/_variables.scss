@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 $mapSize: 16;
 $gridunitpx: 32px;
 
@@ -6,16 +8,16 @@ $mapHeightBlocks: $mapSize;
 
 $mapWidthPX: $mapWidthBlocks * $gridunitpx;
 $mapHeightPX: $mapHeightBlocks * $gridunitpx;
-$mapHalfWidthPX: $mapWidthPX / 2;
+$mapHalfWidthPX: math.div($mapWidthPX, 2);
 $mapPerspectivePX: $mapWidthPX - 100;
 
 $mapMobileWidthBlocks: $mapSize;
 $mapMobileHeightBlocks: $mapSize;
 $mapMobileWidthPX: $mapMobileWidthBlocks * $gridunitpx;
 $mapMobileHeightPX: $mapMobileHeightBlocks * $gridunitpx;
-$mapMobileHalfWidthPX: $mapMobileWidthPX / 2;
+$mapMobileHalfWidthPX: math.div($mapMobileWidthPX, 2);
 $mapMobilePerspectivePX: $mapMobileWidthPX - 100;
 
-$blockFont: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
+$blockFont: 'Beaudryland', 'Press Start 2P', Helvetica, Verdana;
 
 $buiShadow: 4px 4px 0 #000;
