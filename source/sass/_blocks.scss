@@ -1,73 +1,74 @@
-@import "variables";
+@use 'variables' as *;
+@use 'color' as *;
 
 // Beaudryland Block Graphics
 
 /* THE BLOCKS */
 
 .block {
-  display: inline-block;
-  width: $gridunitpx;
-  height: $gridunitpx;
-  background-size: contain !important;
-  background-repeat: no-repeat;
-  font-size: 8px;
-  color: transparent;
+	display: inline-block;
+	width: $gridunitpx;
+	height: $gridunitpx;
+	background-size: contain !important;
+	background-repeat: no-repeat;
+	font-size: 8px;
+	color: transparent;
 }
 
 .space-container {
-  .block {
-    float: left;
-    background-size: $gridunitpx $gridunitpx !important;
-  }
+	.block {
+		float: left;
+		background-size: $gridunitpx $gridunitpx !important;
+	}
 }
 
 /* map backgrounds */
 
 .the-fucking-forest-map {
-  background: $c-ground-grass;
+	background: $c-ground-grass;
 }
 
 .the-fucking-winter-map {
-  background: $c-ground-snow;
+	background: $c-ground-snow;
 }
 
 .the-fucking-beach-map {
-  background: $c-ground-sand;
+	background: $c-ground-sand;
 }
 
 .the-fucking-space-map {
-  background: $c-ground-space;
-  position: absolute;
+	background: $c-ground-space;
+	position: absolute;
 }
 
 .the-fucking-jungle-map {
-  background: $c-ground-grass;
+	background: $c-ground-grass;
 }
 
 .the-fucking-desert-map {
-  background: $c-ground-sand;
+	background: $c-ground-sand;
 }
 
 .the-fucking-islands-map {
-  background: $c-ground-water;
+	background: $c-ground-water;
 }
 
 /* projectiles */
 
 .the-fucking-spear {
-  position: absolute;
-  width: $gridunitpx;
-  height: $gridunitpx;
-  background-size: contain !important;
-  background-repeat: no-repeat;
+	position: absolute;
+	width: $gridunitpx;
+	height: $gridunitpx;
+	background-size: contain !important;
+	background-repeat: no-repeat;
 }
 
 .the-fucking-frisbee {
-  width: $gridunitpx;
-  height: $gridunitpx;
-  position: relative;
-  margin-top: -$gridunitpx;
-  background-size: contain;
+	width: $gridunitpx;
+	height: $gridunitpx;
+	position: relative;
+	margin-top: -$gridunitpx;
+	background-size: contain;
 }
 
 // /* animations */
@@ -84,41 +85,40 @@
 // }
 
 @-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
 }
-
 
 /* Experiments */
 
 .test-satelite {
-  position: absolute;
-  width: $gridunitpx;
-  height: $gridunitpx;
-  top: $mapHalfWidthPX;
-  left: $mapHalfWidthPX;
-  transform-style: preserve-3d;
-  transition: all 5s;
-  transform: rotateY(0deg) translateZ($mapHalfWidthPX + 200);
-  transform-origin: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  animation: orbit 20s linear infinite;
+	position: absolute;
+	width: $gridunitpx;
+	height: $gridunitpx;
+	top: $mapHalfWidthPX;
+	left: $mapHalfWidthPX;
+	transform-style: preserve-3d;
+	transition: all 5s;
+	transform: rotateY(0deg) translateZ($mapHalfWidthPX + 200);
+	transform-origin: center center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	animation: orbit 20s linear infinite;
 
-  &:before {
-    content: "";
-    position: absolute;
-    width: $gridunitpx;
-    height: $gridunitpx;
-    background-size: contain;
-    background-repeat: no-repeat;
-    transform: rotateX(90deg);
-  }
+	&:before {
+		content: '';
+		position: absolute;
+		width: $gridunitpx;
+		height: $gridunitpx;
+		background-size: contain;
+		background-repeat: no-repeat;
+		transform: rotateX(90deg);
+	}
 }
 
 @keyframes orbit {
-  100% {
-    transform: rotateY(360deg) translateZ($mapHalfWidthPX + 200);
-  }
+	100% {
+		transform: rotateY(360deg) translateZ($mapHalfWidthPX + 200);
+	}
 }

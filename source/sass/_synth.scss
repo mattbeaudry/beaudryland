@@ -1,8 +1,10 @@
+@use 'color' as *;
+@use 'variables' as *;
 
 .bui-synth {
 	background-color: bui-c(gray80);
 	padding: 32px;
-	font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
+	font-family: 'Beaudryland', 'Press Start 2P', Helvetica, Verdana;
 	font-weight: 400;
 }
 
@@ -13,7 +15,7 @@
 	border-radius: 6px;
 	padding: 20px 30px 0 30px;
 	margin: 0 20px 20px 0;
-	border: solid 3px #000; 
+	border: solid 3px #000;
 	text-align: center;
 	vertical-align: top;
 	background-color: #000;
@@ -37,10 +39,10 @@
 		border: solid 1px #000;
 	}
 
-    span {
+	span {
 		position: absolute;
 		bottom: 2px;
-    	left: 5px;
+		left: 5px;
 	}
 
 	&.key-cs,
@@ -54,13 +56,13 @@
 
 .bui-key-black {
 	position: absolute;
-    width: 30px;
-    height: 70px;
-    margin-left: -15px;
-    margin-top: -4px;
-    background-color: #000;
-    z-index: 1;
-    border-radius: 4px;
+	width: 30px;
+	height: 70px;
+	margin-left: -15px;
+	margin-top: -4px;
+	background-color: #000;
+	z-index: 1;
+	border-radius: 4px;
 
 	&:active {
 		width: 14px;
@@ -74,13 +76,13 @@
 	margin: 0 8px;
 
 	.knobInput-label {
-		color: bui-c(white); 
+		color: bui-c(white);
 	}
 }
 
 .bui-knob-title {
 	font-size: 16px;
-	color: bui-c(white); 
+	color: bui-c(white);
 	margin-top: 0;
 }
 
@@ -97,7 +99,7 @@
 		padding: 0 8px;
 		line-height: 1;
 		border: none;
-		font-family: "Beaudryland", "Press Start 2P", Helvetica, Verdana;
+		font-family: 'Beaudryland', 'Press Start 2P', Helvetica, Verdana;
 
 		&:active {
 			border: solid 2px #000;
@@ -121,7 +123,6 @@
 }
 
 .drummachine-drum {
-
 }
 
 .drummachine-steps {
@@ -152,21 +153,20 @@
 	cursor: pointer;
 
 	span {
-
 	}
 }
 
 .drummachine-position {
 	width: 2px;
-    height: 50px;
-    position: absolute;
-    background-color: #fff;
-    left: 7px;
-    top: -5px;
+	height: 50px;
+	position: absolute;
+	background-color: #fff;
+	left: 7px;
+	top: -5px;
 }
 
 .bui-synth-controls {
 	position: absolute;
 	top: 20px;
-    right: -8px;
+	right: -8px;
 }

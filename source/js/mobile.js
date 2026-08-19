@@ -1,10 +1,9 @@
 import * as globals from './globals';
-// import { HCI } from './hci'; 
+// import { HCI } from './hci';
 
 // var blHCI = new HCI();
 
 export class Mobile {
-
 	constructor() {
 		this.db = '';
 	}
@@ -28,55 +27,49 @@ export class Mobile {
 	}
 
 	websql_createTable() {
-		this.db.transaction(
-			function(transaction) {
-				transaction.executeSql(
-		            'CREATE TABLE IF NOT EXISTS beaudryland_maps ' +
+		this.db.transaction(function (transaction) {
+			transaction.executeSql(
+				'CREATE TABLE IF NOT EXISTS beaudryland_maps ' +
 					' (mapid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' +
 					' username TEXT NOT NULL, ' +
 					' mapdata TEXT NOT NULL, ' +
 					' invdata TEXT NOT NULL, ' +
 					' achievements TEXT NOT NULL);'
-				);
-			}
-		);
+			);
+		});
 	}
 
 	websql_insertRow() {
-		 var username = "matt";
-		 var mapdata = '<div class="block block-grass" data-blocktype="grass"></div>';
-		 this.db.transaction(
-			function(transaction) {
-				// console.log('Attempting to insert ' + username + ' and mapdata');
-				transaction.executeSql(
-					'INSERT INTO beaudryland_maps (username,mapdata) VALUES (?,?);',
-					[username,mapdata],
-					null
-				);
-			}
-		 );
+		var username = 'matt';
+		var mapdata = '<div class="block block-grass" data-blocktype="grass"></div>';
+		this.db.transaction(function (transaction) {
+			// console.log('Attempting to insert ' + username + ' and mapdata');
+			transaction.executeSql(
+				'INSERT INTO beaudryland_maps (username,mapdata) VALUES (?,?);',
+				[username, mapdata],
+				null
+			);
+		});
 	}
 
 	websql_selectRow() {
-		 this.db.transaction(
-			function(transaction) {
-				transaction.executeSql(
-					'SELECT mapid, username, mapdata FROM beaudryland_maps;',
-					[],
-					function (transaction, result) {
-						for (var i=0; i < result.rows.length; i++) {
-							var row = result.rows.item(i);
-							// console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
-						}
+		this.db.transaction(function (transaction) {
+			transaction.executeSql(
+				'SELECT mapid, username, mapdata FROM beaudryland_maps;',
+				[],
+				function (transaction, result) {
+					for (var i = 0; i < result.rows.length; i++) {
+						var row = result.rows.item(i);
+						// console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
 					}
-				);
-			}
-		 );
+				}
+			);
+		});
 	}
 
 	//save map
 	websql_saveMap() {
-		var username = "username";
+		var username = 'username';
 		var mapdata = document.querySelector('.maps-wrap').innerHTML;
 		var invdata = document.querySelector('.the-fucking-inventory').innerHTML;
 
@@ -88,47 +81,42 @@ export class Mobile {
 		// });s
 		// achievements = JSON.stringify(achievements);
 
-		this.db.transaction(
-			function(transaction) {
-				// console.log('Attempting to insert ' + username + ' and mapdata');
-				transaction.executeSql(
-					'INSERT INTO beaudryland_maps (username,mapdata,invdata,achievements) VALUES (?,?,?,?);',
-					[username,mapdata,invdata,achievements],
-					null
-				);
-			}
-		);
+		this.db.transaction(function (transaction) {
+			// console.log('Attempting to insert ' + username + ' and mapdata');
+			transaction.executeSql(
+				'INSERT INTO beaudryland_maps (username,mapdata,invdata,achievements) VALUES (?,?,?,?);',
+				[username, mapdata, invdata, achievements],
+				null
+			);
+		});
 	}
 
 	//load map
 	websql_loadMap() {
-		this.db.transaction(
-			function(transaction) {
-				transaction.executeSql(
-					'SELECT mapid, username, mapdata, invdata, achievements FROM beaudryland_maps;',
-					[],
-					function (transaction, result) {
-						for (var i=0; i < result.rows.length; i++) {
-							document.querySelector('.maps-wrap').innerHTML = "";
-							document.querySelector('.the-fucking-inventory').innerHTML = "";
-							var row = result.rows.item(i);
-							//// console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
-							document.querySelector('.maps-wrap').innerHTML = row.mapdata;
-							document.querySelector('.the-fucking-inventory').innerHTML = row.invdata;
-							
-							// achievements = row.achievements;
-							// achievements = achievements.split(',');
-					    	// for (var k=0;k<achievements.length;k++){
-					    	// 	var achievementname = achievements[k];
-					    	// 	trace(achievementname);
-					    	// 	$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
-					    	// }
-						}
-						//blHCI.setupMouseEvents();
-					}
-				);
-			}
-		);
-	}
+		this.db.transaction(function (transaction) {
+			transaction.executeSql(
+				'SELECT mapid, username, mapdata, invdata, achievements FROM beaudryland_maps;',
+				[],
+				function (transaction, result) {
+					for (var i = 0; i < result.rows.length; i++) {
+						document.querySelector('.maps-wrap').innerHTML = '';
+						document.querySelector('.the-fucking-inventory').innerHTML = '';
+						var row = result.rows.item(i);
+						//// console.log('mapid is ' + row.mapid + ', username is ' + row.username + ' Map Data is ' + row.mapdata);
+						document.querySelector('.maps-wrap').innerHTML = row.mapdata;
+						document.querySelector('.the-fucking-inventory').innerHTML = row.invdata;
 
+						// achievements = row.achievements;
+						// achievements = achievements.split(',');
+						// for (var k=0;k<achievements.length;k++){
+						// 	var achievementname = achievements[k];
+						// 	trace(achievementname);
+						// 	$('.item-achievements .achievement-'+achievementname).addClass("status-completed");
+						// }
+					}
+					//blHCI.setupMouseEvents();
+				}
+			);
+		});
+	}
 }

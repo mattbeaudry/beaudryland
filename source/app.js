@@ -32,7 +32,6 @@ var blTime = new Time();
 var blCharacter = new Character();
 var blItems = new Items();
 
-
 ////////////////////////////
 // INIT
 ////////////////////////////
@@ -55,16 +54,17 @@ if (document.querySelectorAll('.page-itemworkshop').length) {
 	blItems.initItemBuilder();
 }
 
-
 ////////////////////////////
 // MOBILE GAME INIT
 ////////////////////////////
 
-if ( document.body.classList.contains("version-phonegap") ) {
-
+if (document.body.classList.contains('version-phonegap')) {
 	var inventoryCloseEl = document.querySelector('.inventory-close');
-	if (inventoryCloseEl) inventoryCloseEl.addEventListener("click", function() { toggleInventory(); });
-	var toggleInventory = function() {
+	if (inventoryCloseEl)
+		inventoryCloseEl.addEventListener('click', function () {
+			toggleInventory();
+		});
+	var toggleInventory = function () {
 		var stickyInv = document.querySelector('.sticky-inventory');
 		if (stickyInv) stickyInv.style.display = stickyInv.style.display === 'none' ? '' : 'none';
 	};
@@ -97,13 +97,10 @@ if ( document.body.classList.contains("version-phonegap") ) {
 	blDev.loadDevConsole();
 	blTime.startTime();
 
-
-////////////////////////////
-// DESKTOP GAME INIT
-////////////////////////////
-
-} else if ( document.body.classList.contains("version-desktop") ) {
-
+	////////////////////////////
+	// DESKTOP GAME INIT
+	////////////////////////////
+} else if (document.body.classList.contains('version-desktop')) {
 	// console.log("DESKTOP VERSION");
 
 	// globals.mapwidth = globals.mapWidthDesktop;
@@ -126,84 +123,94 @@ if ( document.body.classList.contains("version-phonegap") ) {
 	window.onbeforeunload = confirmExit;
 }
 
-
 ////////////////////////////
 // LOAD EXISTING GAME
 ////////////////////////////
 
-var loadGame = function() {
+var loadGame = function () {
 	//blUtil.log("load game");
 
 	fetch('php/loadmap.php', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		body: new URLSearchParams({maptype: 'forest'})
-	}).then(r => r.text()).then(function(data) {
-		if (data == false) {
-			loadNewGame();
-		} else {
-			blMap.loadExistingMap('forest');
-			fetch('php/loadmap.php', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: new URLSearchParams({maptype: 'winter'})
-			}).then(r => r.text()).then(function(data) {
-				if (data) {
-					blUtil.log("loadwintermap");
-					blMap.loadExistingMap('winter');
-				}
-			});
-			fetch('php/loadmap.php', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: new URLSearchParams({maptype: 'beach'})
-			}).then(r => r.text()).then(function(data) {
-				if (data) {
-					blUtil.log("loadbeachmap");
-					blMap.loadExistingMap('beach');
-				}
-			});
-			fetch('php/loadmap.php', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: new URLSearchParams({maptype: 'jungle'})
-			}).then(r => r.text()).then(function(data) {
-				if (data) {
-					blUtil.log("loadjunglemap");
-					blMap.loadExistingMap('jungle');
-				}
-			});
-			fetch('php/loadmap.php', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: new URLSearchParams({maptype: 'desert'})
-			}).then(r => r.text()).then(function(data) {
-				if (data) {
-					blUtil.log("loaddesertmap");
-					blMap.loadExistingMap('desert');
-				}
-			});
-			fetch('php/loadmap.php', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: new URLSearchParams({maptype: 'islands'})
-			}).then(r => r.text()).then(function(data) {
-				if (data) {
-					blUtil.log("loadislandsmap");
-					blMap.loadExistingMap('islands');
-				}
-			});
-			blPlayer.loadPlayer();
-		}
-	});
+		body: new URLSearchParams({ maptype: 'forest' }),
+	})
+		.then((r) => r.text())
+		.then(function (data) {
+			if (data == false) {
+				loadNewGame();
+			} else {
+				blMap.loadExistingMap('forest');
+				fetch('php/loadmap.php', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: new URLSearchParams({ maptype: 'winter' }),
+				})
+					.then((r) => r.text())
+					.then(function (data) {
+						if (data) {
+							blUtil.log('loadwintermap');
+							blMap.loadExistingMap('winter');
+						}
+					});
+				fetch('php/loadmap.php', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: new URLSearchParams({ maptype: 'beach' }),
+				})
+					.then((r) => r.text())
+					.then(function (data) {
+						if (data) {
+							blUtil.log('loadbeachmap');
+							blMap.loadExistingMap('beach');
+						}
+					});
+				fetch('php/loadmap.php', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: new URLSearchParams({ maptype: 'jungle' }),
+				})
+					.then((r) => r.text())
+					.then(function (data) {
+						if (data) {
+							blUtil.log('loadjunglemap');
+							blMap.loadExistingMap('jungle');
+						}
+					});
+				fetch('php/loadmap.php', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: new URLSearchParams({ maptype: 'desert' }),
+				})
+					.then((r) => r.text())
+					.then(function (data) {
+						if (data) {
+							blUtil.log('loaddesertmap');
+							blMap.loadExistingMap('desert');
+						}
+					});
+				fetch('php/loadmap.php', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: new URLSearchParams({ maptype: 'islands' }),
+				})
+					.then((r) => r.text())
+					.then(function (data) {
+						if (data) {
+							blUtil.log('loadislandsmap');
+							blMap.loadExistingMap('islands');
+						}
+					});
+				blPlayer.loadPlayer();
+			}
+		});
 };
-
 
 ////////////////////////////
 // LOAD NEW GAME
 ////////////////////////////
 
-var loadNewGame = function() {
+var loadNewGame = function () {
 	if (maptype == 'creative') {
 		blMap.loadNewMap('forest', 'front');
 		blMap.loadNewMap('winter', 'right');

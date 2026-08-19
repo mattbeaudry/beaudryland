@@ -4,7 +4,7 @@ var blItems = new Items();
 export const blocktypes = blItems.getItemSlugs();
 export const hasanimation = blItems.getItemSlugsByProperty('has_animation');
 export const iscraftable = blItems.getItemSlugsByProperty('is_craftable');
-export const iscollectable =  blItems.getItemSlugsByProperty('is_collectable');
+export const iscollectable = blItems.getItemSlugsByProperty('is_collectable');
 export const iscutable = blItems.getItemSlugsByProperty('is_cutable');
 export const isedible = blItems.getItemSlugsByProperty('is_edible');
 export const isplaceable = blItems.getItemSlugsByProperty('is_placeable');
@@ -18,42 +18,80 @@ export const isuseable = blItems.getItemSlugsByProperty('is_useable');
 export const isinstrument = blItems.getItemSlugsByProperty('is_instrument');
 export const issymbol = blItems.getItemSlugsByProperty('is_symbol');
 
-console.log({isinstrument});
+console.log({ isinstrument });
 
-export const mobtypes = new Array (
-	"player",
-	"enemy",
-	"deer"
-);
+export const mobtypes = new Array('player', 'enemy', 'deer');
 
-export const objecttypes = new Array (
-    "player-direction-up","player-direction-down","player-direction-left","player-direction-right",
-    "player-direction-up-sword","player-direction-down-sword","player-direction-left-sword ","player-direction-right-sword",
-    "player-direction-up-sword-swing","player-direction-down-sword-swing","player-direction-left-sword-swing","player-direction-right-sword-swing",
-    "player-direction-up-shovel","player-direction-down-shovel","player-direction-left-shovel","player-direction-right-shovel",
-    "player-direction-up-shovel-swing","player-direction-down-shovel-swing","player-direction-left-shovel-swing","player-direction-right-shovel-swing",
-    "player-direction-up-axe","player-direction-down-axe","player-direction-left-axe","player-direction-right-axe",
-    "player-direction-up-axe-swing","player-direction-down-axe-swing","player-direction-left-axe-swing","player-direction-right-axe-swing",
-    "player-direction-up-bike","player-direction-down-bike","player-direction-left-bike","player-direction-right-bike",
-    "player-direction-up-skiis","player-direction-down-skiis","player-direction-left-skiis","player-direction-right-skiis",
-    "player-direction-up-canoe","player-direction-down-canoe","player-direction-left-canoe","player-direction-right-canoe",
-    "player-direction-up-car","player-direction-down-car", "player-direction-left-car","player-direction-right-car",
-    "player-direction-up-rocket","player-direction-down-rocket","player-direction-left-rocket","player-direction-right-rocket",
-    "enemy-direction-up","enemy-direction-down","enemy-direction-left","enemy-direction-right",
-    "deer-direction-up","deer-direction-down","deer-direction-left","deer-direction-right"
+export const objecttypes = new Array(
+	'player-direction-up',
+	'player-direction-down',
+	'player-direction-left',
+	'player-direction-right',
+	'player-direction-up-sword',
+	'player-direction-down-sword',
+	'player-direction-left-sword ',
+	'player-direction-right-sword',
+	'player-direction-up-sword-swing',
+	'player-direction-down-sword-swing',
+	'player-direction-left-sword-swing',
+	'player-direction-right-sword-swing',
+	'player-direction-up-shovel',
+	'player-direction-down-shovel',
+	'player-direction-left-shovel',
+	'player-direction-right-shovel',
+	'player-direction-up-shovel-swing',
+	'player-direction-down-shovel-swing',
+	'player-direction-left-shovel-swing',
+	'player-direction-right-shovel-swing',
+	'player-direction-up-axe',
+	'player-direction-down-axe',
+	'player-direction-left-axe',
+	'player-direction-right-axe',
+	'player-direction-up-axe-swing',
+	'player-direction-down-axe-swing',
+	'player-direction-left-axe-swing',
+	'player-direction-right-axe-swing',
+	'player-direction-up-bike',
+	'player-direction-down-bike',
+	'player-direction-left-bike',
+	'player-direction-right-bike',
+	'player-direction-up-skiis',
+	'player-direction-down-skiis',
+	'player-direction-left-skiis',
+	'player-direction-right-skiis',
+	'player-direction-up-canoe',
+	'player-direction-down-canoe',
+	'player-direction-left-canoe',
+	'player-direction-right-canoe',
+	'player-direction-up-car',
+	'player-direction-down-car',
+	'player-direction-left-car',
+	'player-direction-right-car',
+	'player-direction-up-rocket',
+	'player-direction-down-rocket',
+	'player-direction-left-rocket',
+	'player-direction-right-rocket',
+	'enemy-direction-up',
+	'enemy-direction-down',
+	'enemy-direction-left',
+	'enemy-direction-right',
+	'deer-direction-up',
+	'deer-direction-down',
+	'deer-direction-left',
+	'deer-direction-right'
 );
 
 export const buiColor = {
-	white: "#FFFFFF",
-	black: "#000000",
-	red50: "#FA694A",
-	orange50: "#E08F33",
-	yellow50: "#E7DB57",
-	green50: "#37DB2F",
-	forest50: "#61A461",
-	blue50: "#329ADB",
-	cyan50: "#06C7D9",
-	purple50: "#A247A6"
+	white: '#FFFFFF',
+	black: '#000000',
+	red50: '#FA694A',
+	orange50: '#E08F33',
+	yellow50: '#E7DB57',
+	green50: '#37DB2F',
+	forest50: '#61A461',
+	blue50: '#329ADB',
+	cyan50: '#06C7D9',
+	purple50: '#A247A6',
 };
 
 export const mapSize = 16;
@@ -68,16 +106,20 @@ export var mapheight = mapSize;
 export var mapWidthPx = mapwidth * gridunitpx;
 export var mapHeightPx = mapheight * gridunitpx;
 
-export function setCurrentMap(map) { document.querySelector('.maps-container').dataset.currentMap = map; }
+export function setCurrentMap(map) {
+	document.querySelector('.maps-container').dataset.currentMap = map;
+}
 export function getCurrentMap() {
 	return document.querySelector('.maps-container').dataset.currentMap;
-};
+}
 setCurrentMap('forest');
 
-export function setCurrentCubeSide(map) { document.querySelector('.cube-container').dataset.currentCubeSide = map; }
+export function setCurrentCubeSide(map) {
+	document.querySelector('.cube-container').dataset.currentCubeSide = map;
+}
 export function getCurrentCubeSide() {
 	return document.querySelector('.cube-container').dataset.currentCubeSide;
-};
+}
 setCurrentCubeSide('front');
 
 export const inventoryslots = 74;
@@ -105,25 +147,25 @@ export const WEBDB_version = '0.1';
 export const WEBDB_displayName = 'beaudryland';
 export const WEBDB_maxSize = 65536;
 
-export const allblockclasses = function() {
-	var allblockclasses = "";
-	blocktypes.forEach(function(v) {
-		allblockclasses += "block-"+v+" ";
+export const allblockclasses = function () {
+	var allblockclasses = '';
+	blocktypes.forEach(function (v) {
+		allblockclasses += 'block-' + v + ' ';
 	});
 	return allblockclasses;
 };
 
-export const objectshtml = function() {
-	var objectshtml = "";
-	objecttypes.forEach(function(v) {
-	    objectshtml += '<div class="block '+v+'" data-blocktype="'+v+'"></div>';
+export const objectshtml = function () {
+	var objectshtml = '';
+	objecttypes.forEach(function (v) {
+		objectshtml += '<div class="block ' + v + '" data-blocktype="' + v + '"></div>';
 	});
 	return objectshtml;
 };
 
-export const objectsArray = [0,2,3];
+export const objectsArray = [0, 2, 3];
 
-export const uniqueObjectID = function() {
+export const uniqueObjectID = function () {
 	var id = objectsArray.length + 1;
 	objectsArray.push(id);
 	return id;
@@ -135,41 +177,41 @@ export const cubeSidesArray = {
 		right: 'right',
 		down: 'bottom',
 		left: 'left',
-		map: 'forest'
+		map: 'forest',
 	},
 	right: {
 		up: 'top',
 		right: 'back',
 		down: 'bottom',
 		left: 'front',
-		map: 'winter'
+		map: 'winter',
 	},
 	back: {
 		up: 'top',
 		right: 'left',
 		down: 'bottom',
 		left: 'right',
-		map: 'beach'
+		map: 'beach',
 	},
 	left: {
 		up: 'top',
 		right: 'front',
 		down: 'bottom',
 		left: 'back',
-		map: 'jungle'
+		map: 'jungle',
 	},
 	bottom: {
 		up: 'front',
 		right: 'right',
 		down: 'back',
 		left: 'left',
-		map: 'desert'
+		map: 'desert',
 	},
 	top: {
 		up: 'back',
 		right: 'right',
 		down: 'front',
 		left: 'left',
-		map: 'islands'
-	}
-}
+		map: 'islands',
+	},
+};

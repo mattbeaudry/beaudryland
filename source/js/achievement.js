@@ -11,12 +11,9 @@ var blMap = new Map();
 var blUI = new UI();
 
 export class Achievement {
+	constructor() {}
 
-	constructor() {
-
-	}
-
-/*
+	/*
 
 MAKE THIS JSON
 
@@ -128,40 +125,54 @@ gotospace
 	// scientist - build all tech items
 
 	achievementCompleted(achievementname) {
-		if (!document.querySelector('.item-achievements .achievement-'+achievementname).classList.contains('status-completed')) {
-
-			document.querySelector('.item-achievements .achievement-'+achievementname).classList.add("status-completed");
+		if (
+			!document
+				.querySelector('.item-achievements .achievement-' + achievementname)
+				.classList.contains('status-completed')
+		) {
+			document
+				.querySelector('.item-achievements .achievement-' + achievementname)
+				.classList.add('status-completed');
 
 			this.updateStats();
-			this.displayAchievementMessage("You got the "+achievementname+" achievement!");
+			this.displayAchievementMessage('You got the ' + achievementname + ' achievement!');
 
-			blUtil.log('ACHIEVEMENT COMPLETED'); 
+			blUtil.log('ACHIEVEMENT COMPLETED');
 
 			switch (achievementname) {
 				case 'playtheguitar':
-					if (globals.guitarFirstNote == true && document.querySelectorAll('.the-fucking-winter-map').length == 0) {
-						blUtil.log('Jam out!'); 
+					if (
+						globals.guitarFirstNote == true &&
+						document.querySelectorAll('.the-fucking-winter-map').length == 0
+					) {
+						blUtil.log('Jam out!');
 						// globals.guitarFirstNote = false;
 						blStory.demolishMapBorder('forest', 'right');
-						blMap.loadNewMap('winter', 'right'); 
+						blMap.loadNewMap('winter', 'right');
 						blStory.createWinterSigns();
 						blStory.setupMapBorders('winter');
 						blStory.demolishMapBorder('winter', 'left');
 					}
 					break;
 				case 'playthekeys':
-					if (globals.keyboardFirstNote == true && document.querySelectorAll('.the-fucking-beach-map').length == 0) {
-						blUtil.log('Play keys!'); 
-						// globals.keyboardFirstNote = false; 
+					if (
+						globals.keyboardFirstNote == true &&
+						document.querySelectorAll('.the-fucking-beach-map').length == 0
+					) {
+						blUtil.log('Play keys!');
+						// globals.keyboardFirstNote = false;
 						blStory.demolishMapBorder('winter', 'right');
-						blMap.loadNewMap('beach', 'back'); 
+						blMap.loadNewMap('beach', 'back');
 						blStory.createBeachSigns();
 						blStory.setupMapBorders('beach');
 						blStory.demolishMapBorder('beach', 'left');
 					}
 					break;
 				case 'playthetrumpet':
-					if (globals.trumpetFirstNote == true && document.querySelectorAll('.the-fucking-jungle-map').length == 0) {
+					if (
+						globals.trumpetFirstNote == true &&
+						document.querySelectorAll('.the-fucking-jungle-map').length == 0
+					) {
 						blUtil.log('Play keys!');
 						// globals.trumpetFirstNote = false;
 						blStory.demolishMapBorder('beach', 'right');
@@ -174,19 +185,25 @@ gotospace
 					}
 					break;
 				case 'playthebass':
-					if (globals.bassFirstNote == true && document.querySelectorAll('.the-fucking-desert-map').length == 0) {
-						blUtil.log('Play bass!'); 
-						// globals.bassFirstNote = false; 
+					if (
+						globals.bassFirstNote == true &&
+						document.querySelectorAll('.the-fucking-desert-map').length == 0
+					) {
+						blUtil.log('Play bass!');
+						// globals.bassFirstNote = false;
 						blStory.demolishMapBorder('forest', 'bottom');
 						blStory.demolishMapBorder('winter', 'bottom');
 						blStory.demolishMapBorder('beach', 'bottom');
-						blStory.demolishMapBorder('jungle', 'bottom'); 
+						blStory.demolishMapBorder('jungle', 'bottom');
 						blMap.loadNewMap('desert', 'bottom');
 						blStory.createDesertSigns();
 					}
 					break;
 				case 'bringinthebeat':
-					if (globals.drumsFirstNote == true && document.querySelectorAll('.the-fucking-islands-map').length == 0) {
+					if (
+						globals.drumsFirstNote == true &&
+						document.querySelectorAll('.the-fucking-islands-map').length == 0
+					) {
 						blUtil.log('Play drums!');
 						// globals.drumsFirstNote = false;
 						blStory.demolishMapBorder('forest', 'top');
@@ -198,7 +215,10 @@ gotospace
 					}
 					break;
 				case 'gotospace':
-					if (globals.rocketFirstFlight == true && document.querySelectorAll('.the-fucking-space-map').length == 0) {
+					if (
+						globals.rocketFirstFlight == true &&
+						document.querySelectorAll('.the-fucking-space-map').length == 0
+					) {
 						// globals.rocketFirstFlight = false;
 						var object = document.querySelector('.objectId-1');
 
@@ -213,7 +233,7 @@ gotospace
 						document.querySelector('.maps-container').classList.add('maps-zoomout');
 
 						// hide cube, show earth blocks
-						setTimeout(function(){
+						setTimeout(function () {
 							document.querySelector('.maps-wrap').style.display = 'none';
 							blMap.changeBlockType(135, 'earth', 'space');
 							// move player to space
@@ -224,13 +244,14 @@ gotospace
 					}
 					break;
 			}
-
 		}
 	}
 
 	updateStats() {
 		var achievementsTotal = document.querySelectorAll('.item-achievements li').length;
-		var achievementsComplete = document.querySelectorAll('.item-achievements li.status-completed').length;
+		var achievementsComplete = document.querySelectorAll(
+			'.item-achievements li.status-completed'
+		).length;
 		var mapsTotal = 6;
 		var mapsUnlocked = document.querySelectorAll('.maps-wrap .cube-side').length;
 		var itemsTotal = 89;
@@ -238,7 +259,7 @@ gotospace
 
 		var gameTotal = achievementsTotal + mapsTotal + itemsTotal;
 		var completionTotal = achievementsComplete + mapsUnlocked + itemsCollected;
-		var completionPercentage = Math.floor(completionTotal / gameTotal * 100);
+		var completionPercentage = Math.floor((completionTotal / gameTotal) * 100);
 
 		document.querySelector('.completion-percentage').innerHTML = completionPercentage;
 		document.querySelector('.achievements-complete').innerHTML = achievementsComplete;
@@ -250,7 +271,7 @@ gotospace
 	}
 
 	displayAchievementMessage(text) {
-		blUtil.log("displayDialog");
+		blUtil.log('displayDialog');
 
 		var completionPercentage = document.querySelector('.completion-percentage').innerHTML;
 		var achievementsComplete = document.querySelector('.achievements-complete').innerHTML;
@@ -261,22 +282,22 @@ gotospace
 		var mapsTotal = document.querySelector('.maps-total').innerHTML;
 
 		var html = '<div class="bubble-wrap bubble-dialog">';
-					html += '<div class="bubble-link">';
-			  			html += '<form class="bubble-form" action="#">';
-			  				html += '<h3>'+text+'</h3>';
-			  				html += '<h3>'+completionPercentage+'% game completion</h3>';
-			  				html += '<h3>'+achievementsComplete+'/'+achievementsTotal+' achievements</h3>';
-			  				html += '<h3>'+itemsCollected+'/'+itemsTotal+' items collected</h3>';
-			  				html += '<h3>'+mapsUnlocked+'/'+mapsTotal+' maps unlocked</h3>';
-			    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
-			    			//html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
-			    			html += '<input type="submit" value="Okay!" >';
-			  			html += '</form>';
-			  		html += '</div>';
-			html += '</div>';
+		html += '<div class="bubble-link">';
+		html += '<form class="bubble-form" action="#">';
+		html += '<h3>' + text + '</h3>';
+		html += '<h3>' + completionPercentage + '% game completion</h3>';
+		html += '<h3>' + achievementsComplete + '/' + achievementsTotal + ' achievements</h3>';
+		html += '<h3>' + itemsCollected + '/' + itemsTotal + ' items collected</h3>';
+		html += '<h3>' + mapsUnlocked + '/' + mapsTotal + ' maps unlocked</h3>';
+		//html += '<input class="bubble-input" type="text" placeholder="Text">';
+		//html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
+		html += '<input type="submit" value="Okay!" >';
+		html += '</form>';
+		html += '</div>';
+		html += '</div>';
 
 		// disabled for dev
-		
+
 		//$('.page-game').append(html);
 		// $('.bubble-dialog .bubble-form').submit(function(e) {
 		// 	$('.bubble-wrap').remove();
@@ -285,27 +306,23 @@ gotospace
 	}
 
 	displayDialog(text) {
-		blUtil.log("displayDialog");
+		blUtil.log('displayDialog');
 		var html = '<div class="bubble-wrap bubble-dialog">';
-					html += '<div class="bubble-link">';
-			  			html += '<form class="bubble-form" action="#">';
-			  				html += '<h3>'+text+'</h3>';
-			    			//html += '<input class="bubble-input" type="text" placeholder="Text">';
-			    			//html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
-			    			html += '<input type="submit" value="Okay!" >';
-			  			html += '</form>';
-			  		html += '</div>';
-			html += '</div>';
+		html += '<div class="bubble-link">';
+		html += '<form class="bubble-form" action="#">';
+		html += '<h3>' + text + '</h3>';
+		//html += '<input class="bubble-input" type="text" placeholder="Text">';
+		//html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
+		html += '<input type="submit" value="Okay!" >';
+		html += '</form>';
+		html += '</div>';
+		html += '</div>';
 
 		document.querySelector('.page-game').insertAdjacentHTML('beforeend', html);
 
-		document.querySelector('.bubble-dialog .bubble-form').addEventListener('submit', function(e) {
-
+		document.querySelector('.bubble-dialog .bubble-form').addEventListener('submit', function (e) {
 			document.querySelector('.bubble-wrap').remove();
 			e.preventDefault();
-
 		});
 	}
-
-
 }
