@@ -168,6 +168,7 @@ export class Items {
 			.then((r) => r.json())
 			.then(function (data) {
 				if (data == false) {
+				/* intentionally empty */
 				} else {
 					for (var i = 0; i < data.length; i++) {
 						var optionHtml = '<option value="' + data[i].slug + '">' + data[i].name + '</option>';

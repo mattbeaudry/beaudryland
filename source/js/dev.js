@@ -1,4 +1,5 @@
 import * as globals from './globals';
+import { setIsnightime } from './globals';
 
 import { Utility } from './utility';
 import { HCI } from './hci';
@@ -141,7 +142,7 @@ export class Dev {
 		document.querySelector('.the-fucking-map-overlay').style.display = '';
 		document.querySelector('.the-fucking-map-overlay').insertAdjacentHTML('beforeend', overlayhtml);
 
-		globals.isnightime = true;
+		setIsnightime(true);
 
 		setTimeout(function () {
 			morningTime();
@@ -151,7 +152,7 @@ export class Dev {
 	//end night time e.g. morning
 	morningTime() {
 		document.querySelector('.the-fucking-map-overlay').innerHTML = '';
-		globals.isnightime = false;
+		setIsnightime(false);
 	}
 
 	clearLighting() {

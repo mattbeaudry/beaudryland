@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 export function WavyJones(context, elem) {
 	var analyser = context.createAnalyser();
 	var elem = document.getElementById(elem);

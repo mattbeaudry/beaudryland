@@ -127,7 +127,7 @@ if (document.body.classList.contains('version-phonegap')) {
 // LOAD EXISTING GAME
 ////////////////////////////
 
-var loadGame = function () {
+function loadGame() {
 	//blUtil.log("load game");
 
 	fetch('php/loadmap.php', {
@@ -204,7 +204,7 @@ var loadGame = function () {
 				blPlayer.loadPlayer();
 			}
 		});
-};
+}
 
 ////////////////////////////
 // LOAD NEW GAME

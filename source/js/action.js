@@ -86,7 +86,7 @@ export class Action {
 					.querySelector('.the-fucking-player')
 					.classList.remove('player-direction-' + direction + '-' + selecteditem + '-swing');
 			}
-			var playerblock = blUtil.getObjectCurrentBlock(this.id);
+			let playerblock = blUtil.getObjectCurrentBlock(this.id);
 
 			// killing the enemy
 			if (document.querySelectorAll('.the-fucking-enemy').length != 0) {
@@ -103,7 +103,7 @@ export class Action {
 
 		// TODO: replace with CSS transition
 		{
-			var selecteditem = blUtil.getSelectedItem();
+			let selecteditem = blUtil.getSelectedItem();
 
 			// using axe to collect doors, signs and other mechnism objects
 			// that have a function instead of being collecable

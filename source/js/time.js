@@ -24,6 +24,7 @@ export class Time {
 
 			// run every 10 seconds
 			if (count % 600 == 0) {
+				/* intentionally empty */
 			}
 
 			// run every second
@@ -41,6 +42,7 @@ export class Time {
 
 			// run every 200 miliseconds
 			if (count % 10 == 0) {
+				/* intentionally empty */
 			}
 
 			// call loop again
@@ -89,7 +91,7 @@ export class Time {
 					var prevEl = islandsBlocks[index - 1];
 					if (prevEl && prevEl.classList.contains('block-water')) {
 						//wave has not reached the shore yet
-						var newtype = 'wave';
+						let newtype = 'wave';
 						prevEl.className = prevEl.className
 							.replace(
 								new RegExp('\\b(' + waveBlockClasses.trim().split(' ').join('|') + ')\\b', 'g'),
@@ -102,7 +104,7 @@ export class Time {
 						//wave has reached the shore, create new wave at edge of map
 						var r = parseInt(Math.random() * globals.mapheight);
 						var newwaveposition = r * globals.mapwidth - 1;
-						var newtype = 'wave';
+						let newtype = 'wave';
 						var newWaveEl = islandsBlocks[newwaveposition];
 						if (newWaveEl) {
 							newWaveEl.className = newWaveEl.className
@@ -115,7 +117,7 @@ export class Time {
 							newWaveEl.setAttribute('data-blocktype', newtype);
 						}
 					}
-					var newtype = 'water';
+					let newtype = 'water';
 					el.className = el.className
 						.replace(
 							new RegExp('\\b(' + waveBlockClasses.trim().split(' ').join('|') + ')\\b', 'g'),

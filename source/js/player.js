@@ -10,7 +10,7 @@ export class Player {
 		//var playerstartblock = 466;
 		//blMap.changeBlockType(playerstartblock, "grass"); //make sure player doesn't start overtop an obstacle
 		//var id = globals.uniqueObjectID();
-		var id = 1;
+		id = 1;
 		document
 			.querySelector('.the-fucking-forest-map')
 			.insertAdjacentHTML(

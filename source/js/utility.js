@@ -31,7 +31,7 @@ export class Utility {
 
 	getBlockLeftByID(block) {
 		var column = block % globals.mapwidth;
-		column = column;
+		column = parseInt(column);
 		var leftpx = column * globals.gridunitpx;
 		console.log('getBlockLeftByID');
 		console.log({ column });
@@ -85,8 +85,6 @@ export class Utility {
 	getObjectCurrentCol(id) {
 		var x = this.getObjectCurrentPositionX(id);
 		x = this.stripPX(x);
-		var y = this.getObjectCurrentPositionY(id);
-		y = this.stripPX(y);
 		var col = x / globals.gridunitpx;
 		col = parseInt(col);
 		return col;

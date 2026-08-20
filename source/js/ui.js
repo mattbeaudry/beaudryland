@@ -132,7 +132,7 @@ export class UI {
 				var face = document.createElement(tagBase + '-face');
 				face.className = 'knobInput-face';
 				rotate(face, min);
-				var label = document.createElement('label');
+				label = document.createElement('label');
 				label.className = 'knobInput-label';
 				var progress = document.createElement('canvas');
 				progress.className = 'knob-progress';

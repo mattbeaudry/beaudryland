@@ -20,7 +20,7 @@ export class Movement {
 	}
 
 	moveObject(direction, id, name) {
-		var success = false;
+		let success;
 		var x = blUtil.getObjectCurrentPositionX(id);
 		var y = blUtil.getObjectCurrentPositionY(id);
 		x = blUtil.stripPX(x);
@@ -107,7 +107,7 @@ export class Movement {
 			// TELEPORTING
 		} else if (id == 1 && nextBlockEl && nextBlockEl.classList.contains('block-portal-b')) {
 			var portalAEl = document.querySelector('.maps-wrap .block-portal-a');
-			var destinationblock = portalAEl ? portalAEl.getAttribute('data-blockid') : null;
+			let destinationblock = portalAEl ? portalAEl.getAttribute('data-blockid') : null;
 			blUtil.teleportObjectToBlock(1, destinationblock);
 			collide = true;
 

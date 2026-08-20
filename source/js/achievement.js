@@ -281,23 +281,19 @@ gotospace
 		var mapsUnlocked = document.querySelector('.maps-unlocked').innerHTML;
 		var mapsTotal = document.querySelector('.maps-total').innerHTML;
 
-		var html = '<div class="bubble-wrap bubble-dialog">';
-		html += '<div class="bubble-link">';
-		html += '<form class="bubble-form" action="#">';
-		html += '<h3>' + text + '</h3>';
-		html += '<h3>' + completionPercentage + '% game completion</h3>';
-		html += '<h3>' + achievementsComplete + '/' + achievementsTotal + ' achievements</h3>';
-		html += '<h3>' + itemsCollected + '/' + itemsTotal + ' items collected</h3>';
-		html += '<h3>' + mapsUnlocked + '/' + mapsTotal + ' maps unlocked</h3>';
-		//html += '<input class="bubble-input" type="text" placeholder="Text">';
-		//html += '<textarea class="bubble-text bubble-input" rows="2" cols="30" placeholder="type message"></textarea>';
-		html += '<input type="submit" value="Okay!" >';
-		html += '</form>';
-		html += '</div>';
-		html += '</div>';
-
-		// disabled for dev
-
+		// html building disabled for dev
+		// var html = '<div class="bubble-wrap bubble-dialog">';
+		// html += '<div class="bubble-link">';
+		// html += '<form class="bubble-form" action="#">';
+		// html += '<h3>' + text + '</h3>';
+		// html += '<h3>' + completionPercentage + '% game completion</h3>';
+		// html += '<h3>' + achievementsComplete + '/' + achievementsTotal + ' achievements</h3>';
+		// html += '<h3>' + itemsCollected + '/' + itemsTotal + ' items collected</h3>';
+		// html += '<h3>' + mapsUnlocked + '/' + mapsTotal + ' maps unlocked</h3>';
+		// html += '<input type="submit" value="Okay!" >';
+		// html += '</form>';
+		// html += '</div>';
+		// html += '</div>';
 		//$('.page-game').append(html);
 		// $('.bubble-dialog .bubble-form').submit(function(e) {
 		// 	$('.bubble-wrap').remove();

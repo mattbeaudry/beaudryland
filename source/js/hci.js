@@ -1,4 +1,5 @@
 import * as globals from './globals';
+import { setDisablekeyboardevents } from './globals';
 
 import { Utility } from './utility';
 import { Player } from './player';
@@ -187,11 +188,11 @@ export class HCI {
 	}
 
 	enableKeyboardEvents() {
-		globals.disablekeyboardevents = false;
+		setDisablekeyboardevents(false);
 	}
 
 	disableKeyboardEvents() {
-		globals.disablekeyboardevents = true;
+		setDisablekeyboardevents(true);
 	}
 
 	setupControlPadEvents() {
@@ -269,7 +270,7 @@ export class HCI {
 				// items that are crafting ingredients
 				if (globals.isingredient.indexOf(blocktype) > -1) {
 					if (el.getAttribute('data-blocktype') != 'empty') {
-						var blocktype = el.getAttribute('data-blocktype');
+						let blocktype = el.getAttribute('data-blocktype');
 						blInventory.moveItemToCraftingTable(blocktype);
 					}
 				} else {

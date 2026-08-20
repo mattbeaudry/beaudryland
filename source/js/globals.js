@@ -135,6 +135,13 @@ export var disablekeyboardevents = false;
 export var globalmapblockcount = 0;
 export var isnightime = false;
 
+export function setDisablekeyboardevents(value) {
+	disablekeyboardevents = value;
+}
+export function setIsnightime(value) {
+	isnightime = value;
+}
+
 export var guitarFirstNote = true;
 export var keyboardFirstNote = true;
 export var trumpetFirstNote = true;

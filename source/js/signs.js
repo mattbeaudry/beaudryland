@@ -1,4 +1,5 @@
 import * as globals from './globals';
+import { setDisablekeyboardevents } from './globals';
 
 import { Utility } from './utility';
 var blUtil = new Utility();
@@ -49,7 +50,6 @@ export class Signs {
 					block = block - 2;
 					break;
 				case 'right':
-					block = block;
 					break;
 			}
 
@@ -62,12 +62,12 @@ export class Signs {
 
 			var bubbleWrap = document.querySelector('.bubble-wrap');
 			if (bubbleWrap) bubbleWrap.remove();
-			globals.disablekeyboardevents = false;
+			setDisablekeyboardevents(false);
 
 			e.preventDefault();
 		});
 
-		globals.disablekeyboardevents = true;
+		setDisablekeyboardevents(true);
 
 		document.querySelector('.bubble-text').focus();
 	}
@@ -115,7 +115,6 @@ export class Signs {
 					block = block - 2;
 					break;
 				case 'right':
-					block = block;
 					break;
 			}
 

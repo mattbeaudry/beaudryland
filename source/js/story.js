@@ -105,11 +105,11 @@ export class Story {
 			blMap.changeBlockType(i, 'fence-metal', map);
 		}
 		// bottom
-		for (var i = globals.totalmapblocks - globals.mapwidth; i < globals.totalmapblocks; i++) {
+		for (let i = globals.totalmapblocks - globals.mapwidth; i < globals.totalmapblocks; i++) {
 			blMap.changeBlockType(i, 'fence-metal', map);
 		}
 		// right+left
-		for (var i = 0; i < globals.totalmapblocks; i++) {
+		for (let i = 0; i < globals.totalmapblocks; i++) {
 			if (i % globals.mapwidth == 0 || i % globals.mapwidth == globals.mapwidth - 1) {
 				blMap.changeBlockType(i, 'fence-metal', map);
 			}
@@ -155,21 +155,21 @@ export class Story {
 				}
 				break;
 			case 'left':
-				for (var i = 0; i < totalBlocks; i++) {
+				for (let i = 0; i < totalBlocks; i++) {
 					if (i % mapWidthBlocks == 0 && i != 0 && i != totalBlocks - mapWidthBlocks) {
 						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;
 			case 'top':
-				for (var i = 0; i < totalBlocks; i++) {
+				for (let i = 0; i < totalBlocks; i++) {
 					if (i < mapWidthBlocks) {
 						blMap.changeBlockType(i, bgBlock, map);
 					}
 				}
 				break;
 			case 'bottom':
-				for (var i = 0; i < totalBlocks; i++) {
+				for (let i = 0; i < totalBlocks; i++) {
 					if (i > totalBlocks - mapWidthBlocks - 1) {
 						blMap.changeBlockType(i, bgBlock, map);
 					}
